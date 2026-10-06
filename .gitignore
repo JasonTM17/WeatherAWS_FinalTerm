@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+venv/
+.venv/
+
+# AWS & Credentials (CRITICAL)
+credentials
+credentials.ini
+*.pem
+*.key
+.aws/
+token_*.txt
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Deployment artifacts
+lambda_package.zip
+*.tmp

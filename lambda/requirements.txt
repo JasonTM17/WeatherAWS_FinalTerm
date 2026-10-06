@@ -1,0 +1,7 @@
+# AWS Lambda Python 3.12/3.13 Runtime already includes:
+# - boto3
+# - urllib
+# - json
+# - datetime
+# Zero external dependencies required for Lambda execution.
+boto3>=1.34.0
