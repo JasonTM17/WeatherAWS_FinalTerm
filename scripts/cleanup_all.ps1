@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Resource Cleanup Script: cleanup_all.ps1
 # Dọn dẹp và xóa sạch tài nguyên sau mỗi buổi thực hành theo yêu cầu của GVHD:
 # "dừng/xóa tài nguyên sau mỗi buổi; báo cáo chi phí sử dụng cuối kỳ"

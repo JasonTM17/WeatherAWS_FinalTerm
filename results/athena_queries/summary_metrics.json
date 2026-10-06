@@ -2,54 +2,54 @@
   {
     "name": "avg_aqi_by_city",
     "description": "Thống kê chỉ số ô nhiễm và thời tiết trung bình theo từng thành phố",
-    "query_id": "8bf827a7-e2c6-4b43-a971-eb05369ff9ba",
+    "query_id": "b07478d6-40d8-4923-9f32-3337adc3389d",
     "status": "SUCCEEDED",
-    "execution_time_ms": 873,
-    "bytes_scanned": 84119,
+    "execution_time_ms": 749,
+    "bytes_scanned": 87551,
     "row_count": 3,
     "rows": [
       {
         "city": "HoChiMinh",
-        "total_records": "50",
-        "avg_aqi": "108.02",
+        "total_records": "52",
+        "avg_aqi": "108.37",
         "min_aqi": "95",
         "max_aqi": "172",
-        "avg_pm2_5": "37.9",
-        "avg_pm10": "38.14",
-        "avg_temp": "27.65",
-        "avg_humidity": "85.38"
+        "avg_pm2_5": "38.1",
+        "avg_pm10": "38.34",
+        "avg_temp": "27.57",
+        "avg_humidity": "85.79"
       },
       {
         "city": "DaNang",
-        "total_records": "50",
-        "avg_aqi": "77.72",
+        "total_records": "52",
+        "avg_aqi": "77.62",
         "min_aqi": "41",
         "max_aqi": "155",
-        "avg_pm2_5": "14.95",
-        "avg_pm10": "18.19",
-        "avg_temp": "28.97",
-        "avg_humidity": "74.44"
+        "avg_pm2_5": "14.73",
+        "avg_pm10": "17.97",
+        "avg_temp": "28.79",
+        "avg_humidity": "75.31"
       },
       {
         "city": "HaNoi",
-        "total_records": "50",
-        "avg_aqi": "68.16",
+        "total_records": "52",
+        "avg_aqi": "67.96",
         "min_aqi": "56",
         "max_aqi": "80",
-        "avg_pm2_5": "16.47",
-        "avg_pm10": "17.17",
-        "avg_temp": "24.5",
-        "avg_humidity": "78.22"
+        "avg_pm2_5": "17.36",
+        "avg_pm10": "18.14",
+        "avg_temp": "24.41",
+        "avg_humidity": "77.94"
       }
     ]
   },
   {
     "name": "peak_pollution_hours",
     "description": "Phân tích khung giờ ô nhiễm trong ngày",
-    "query_id": "07e51006-9871-42d2-9090-438a5552c57d",
+    "query_id": "f0c992c3-c598-4e31-b483-1cf367774f02",
     "status": "SUCCEEDED",
-    "execution_time_ms": 967,
-    "bytes_scanned": 84119,
+    "execution_time_ms": 1065,
+    "bytes_scanned": 87551,
     "row_count": 24,
     "rows": [
       {
@@ -159,10 +159,10 @@
       },
       {
         "hour": "15",
-        "avg_pm2_5": "26.63",
-        "avg_pm10": "28.21",
-        "avg_aqi": "84.5",
-        "sample_count": "12"
+        "avg_pm2_5": "27.98",
+        "avg_pm10": "29.68",
+        "avg_aqi": "84.67",
+        "sample_count": "18"
       },
       {
         "hour": "16",
@@ -225,88 +225,88 @@
   {
     "name": "aqi_category_distribution",
     "description": "Phân bố cấp độ chất lượng không khí",
-    "query_id": "2c06cfd8-9774-445e-b6cf-cec4eb58d17d",
+    "query_id": "09715d2d-6b8f-4f34-88e5-fa4ae8aa7216",
     "status": "SUCCEEDED",
-    "execution_time_ms": 1191,
-    "bytes_scanned": 84119,
+    "execution_time_ms": 872,
+    "bytes_scanned": 87551,
     "row_count": 8,
     "rows": [
       {
         "city": "DaNang",
         "aqi_category": "Moderate",
-        "occurrence_count": "41",
-        "percentage": "82.0"
+        "occurrence_count": "43",
+        "percentage": "82.7"
       },
       {
         "city": "DaNang",
         "aqi_category": "Unhealthy for Sensitive Groups",
         "occurrence_count": "4",
-        "percentage": "8.0"
+        "percentage": "7.7"
       },
       {
         "city": "DaNang",
         "aqi_category": "Unhealthy",
         "occurrence_count": "3",
-        "percentage": "6.0"
+        "percentage": "5.8"
       },
       {
         "city": "DaNang",
         "aqi_category": "Good",
         "occurrence_count": "2",
-        "percentage": "4.0"
+        "percentage": "3.8"
       },
       {
         "city": "HaNoi",
         "aqi_category": "Moderate",
-        "occurrence_count": "50",
+        "occurrence_count": "52",
         "percentage": "100.0"
       },
       {
         "city": "HoChiMinh",
         "aqi_category": "Unhealthy for Sensitive Groups",
-        "occurrence_count": "33",
-        "percentage": "66.0"
+        "occurrence_count": "35",
+        "percentage": "67.3"
       },
       {
         "city": "HoChiMinh",
         "aqi_category": "Moderate",
         "occurrence_count": "13",
-        "percentage": "26.0"
+        "percentage": "25.0"
       },
       {
         "city": "HoChiMinh",
         "aqi_category": "Unhealthy",
         "occurrence_count": "4",
-        "percentage": "8.0"
+        "percentage": "7.7"
       }
     ]
   },
   {
     "name": "weather_correlation",
     "description": "Tương quan giữa Nhiệt độ, Độ ẩm và Bụi mịn PM2.5",
-    "query_id": "217683c0-0a46-4d5e-964d-303250cc3b88",
+    "query_id": "5704da34-ff6f-4f1e-8a1d-d9f983417231",
     "status": "SUCCEEDED",
-    "execution_time_ms": 800,
-    "bytes_scanned": 84119,
+    "execution_time_ms": 747,
+    "bytes_scanned": 87551,
     "row_count": 3,
     "rows": [
       {
-        "city": "HaNoi",
-        "corr_temp_pm25": "0.3714",
-        "corr_humidity_pm25": "0.0849",
-        "corr_wind_pm25": "-0.6424"
+        "city": "HoChiMinh",
+        "corr_temp_pm25": "-0.7105",
+        "corr_humidity_pm25": "0.6768",
+        "corr_wind_pm25": "-0.2117"
       },
       {
         "city": "DaNang",
-        "corr_temp_pm25": "0.4148",
-        "corr_humidity_pm25": "-0.2582",
-        "corr_wind_pm25": "-0.2967"
+        "corr_temp_pm25": "0.4274",
+        "corr_humidity_pm25": "-0.279",
+        "corr_wind_pm25": "-0.281"
       },
       {
-        "city": "HoChiMinh",
-        "corr_temp_pm25": "-0.7065",
-        "corr_humidity_pm25": "0.6721",
-        "corr_wind_pm25": "-0.2031"
+        "city": "HaNoi",
+        "corr_temp_pm25": "0.1929",
+        "corr_humidity_pm25": "0.0094",
+        "corr_wind_pm25": "-0.7084"
       }
     ]
   }

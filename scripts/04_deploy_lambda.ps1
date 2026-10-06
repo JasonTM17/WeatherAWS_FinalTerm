@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Script 04: Package and Deploy AWS Lambda Function
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí
 # Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng | SV: 24110054

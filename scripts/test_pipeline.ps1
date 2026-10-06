@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Pipeline Verification Script: test_pipeline.ps1
 # Kiểm thử toàn diện luồng dữ liệu End-to-End từ Lambda đến Athena & Charts
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí
@@ -40,11 +40,19 @@ Write-Host "  -> Athena Repair Status: $repairStatus" -ForegroundColor Green
 
 # 4. Test Athena Analytics Queries & Export
 Write-Host "`n[TEST 4/5] Chạy bộ 4 câu truy vấn phân tích Athena & trích xuất metrics..." -ForegroundColor Magenta
-py -3.13 (Join-Path $rootPath "analytics\export_metrics.py")
+if (Get-Command "py" -ErrorAction SilentlyContinue) {
+    & py -3.13 (Join-Path $rootPath "analytics\export_metrics.py")
+} else {
+    & python (Join-Path $rootPath "analytics\export_metrics.py")
+}
 
 # 5. Test Visual Charts Generation
 Write-Host "`n[TEST 5/5] Sinh biểu đồ phân tích và trực quan hóa xu hướng..." -ForegroundColor Magenta
-py -3.13 (Join-Path $rootPath "analytics\generate_charts.py")
+if (Get-Command "py" -ErrorAction SilentlyContinue) {
+    & py -3.13 (Join-Path $rootPath "analytics\generate_charts.py")
+} else {
+    & python (Join-Path $rootPath "analytics\generate_charts.py")
+}
 
 Write-Host "`n========================================================================" -ForegroundColor Cyan
 Write-Host "  TẤT CẢ 5 BƯỚC KIỂM THỬ PIPELINE ĐỀU ĐẠT CHUẨN 100%!" -ForegroundColor Green

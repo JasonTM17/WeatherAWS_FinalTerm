@@ -197,11 +197,17 @@ aws cloudwatch put-metric-alarm --alarm-name "WeatherCollector-Errors-Alarm" \
 aws cloudwatch put-dashboard --dashboard-name "WeatherAirQuality-Monitoring-Dashboard" --dashboard-body file://...
 ```
 
+### 3.8. Bộ kiểm thử đơn vị & Xử lý ngoại lệ (Unit Testing & Fault Tolerance)
+Hệ thống được thiết kế với tính kháng lỗi cao (Fault-Tolerant):
+* **Hàm chuyển đổi an toàn (`safe_float`, `safe_int`):** Ngăn chặn lỗi runtime `TypeError` khi API trả về trường dữ liệu rỗng (`null` trong JSON).
+* **Giải thuật căn chỉnh chuỗi lịch sử:** Khắc phục triệt để nguy cơ trượt lệch chỉ mục thời gian khi chuỗi trả về từ trạm quan trắc ít hơn số giờ yêu cầu (`len(times) < past_hours`), bảo toàn 100% dữ liệu không bị thất thoát.
+* **Bộ 16 ca kiểm thử tự động (`tests/`):** Bao phủ toàn bộ trường hợp biên theo tiêu chuẩn US EPA, định dạng ghi tệp NDJSON phân vùng S3 và cơ chế ngắt cảnh báo an toàn của Amazon SNS. Toàn bộ 16 ca kiểm thử đều đạt chuẩn 100%.
+
 ---
 
 ## CHƯƠNG 4: KẾT QUẢ THỰC NGHIỆM & PHÂN TÍCH DỮ LIỆU ATHENA
 
-Hệ thống đã thu thập thực tế dữ liệu từ Open-Meteo Air Quality & Weather API và nạp vào Data Lake S3 với **147 bản ghi** (bao gồm dữ liệu realtime và chuỗi lịch sử 48 giờ cho 3 đô thị). Dưới đây là kết quả thực thi các truy vấn SQL trên Amazon Athena:
+Hệ thống đã thu thập thực tế dữ liệu từ Open-Meteo Air Quality & Weather API và nạp vào Data Lake S3 với **150 bản ghi** (bao gồm dữ liệu realtime và chuỗi lịch sử 48 giờ cho 3 đô thị). Dưới đây là kết quả thực thi các truy vấn SQL trên Amazon Athena:
 
 ### 4.1. Bảng 1: So sánh chất lượng không khí giữa các đô thị
 **Câu truy vấn SQL:**

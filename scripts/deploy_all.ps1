@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Master Deployment Script: deploy_all.ps1
 # Tự động hóa triển khai toàn bộ hệ thống qua AWS CLI
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí (Nhóm: Domain Apps)
@@ -43,7 +43,11 @@ $scripts = @(
 foreach ($s in $scripts) {
     $path = Join-Path $PSScriptRoot $s
     Write-Host "`n>>> Thực thi script: $s..." -ForegroundColor Magenta
-    & $path -Region $Region
+    if ($s -eq "03_setup_sns.ps1") {
+        & $path -Region $Region -AlertEmail $AlertEmail
+    } else {
+        & $path -Region $Region
+    }
     if ($LASTEXITCODE -ne 0) {
         Write-Error "Script $s thất bại với mã lỗi $LASTEXITCODE!"
         exit 1

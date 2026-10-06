@@ -57,7 +57,13 @@ Chạy script kiểm thử để kích hoạt Lambda, đồng bộ phân vùng A
 .\scripts\test_pipeline.ps1 -Region "us-east-1"
 ```
 
-### 3.4. Dọn dẹp tài nguyên sau buổi thực hành (Bảo toàn $100 Lab)
+### 3.4. Chạy bộ kiểm thử tự động (Unit Test Suite)
+Dự án trang bị bộ 16 kiểm thử đơn vị (`unittest`) bao quát các trường hợp biên, giá trị null từ cảm biến, giải thuật chuỗi lịch sử và logic cảnh báo:
+```powershell
+py -3.13 -m unittest discover -s tests -v
+```
+
+### 3.5. Dọn dẹp tài nguyên sau buổi thực hành (Bảo toàn $100 Lab)
 Theo đúng chỉ đạo của GVHD: *"dừng/xóa tài nguyên sau mỗi buổi; báo cáo chi phí sử dụng cuối kỳ"*:
 ```powershell
 .\scripts\cleanup_all.ps1 -Region "us-east-1"
@@ -117,6 +123,9 @@ d:/AWS_Final_Term/
 │   ├── export_metrics.py               # Chạy Athena qua Python SDK, xuất CSV & JSON metrics
 │   ├── generate_charts.py              # Vẽ 4 biểu đồ xu hướng chuyên sâu (Matplotlib/Pandas)
 │   └── requirements.txt                # Thư viện phân tích dữ liệu
+├── tests/
+│   ├── test_lambda_function.py         # Unit tests cho Lambda (xử lý None, biên AQI, căn chỉnh mảng)
+│   └── test_analytics.py               # Unit tests cho trực quan hóa dữ liệu và biểu đồ
 ├── docs/
 │   ├── ARCHITECTURE.md                 # Tài liệu thiết kế kiến trúc chi tiết
 │   ├── WORKLOG.md                      # Nhật ký công việc 4 tuần chi tiết (mỗi SV >= 8h/tuần)

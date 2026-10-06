@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Script 06: Setup AWS Glue Catalog & Amazon Athena Table
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí
 # Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng | SV: 24110054
@@ -35,6 +35,7 @@ Write-Host "    Đang thực thi DDL Athena External Table..."
 $rootPath = Split-Path -Parent $PSScriptRoot
 $sqlPath = Join-Path $rootPath "athena\create_table.sql"
 $ddlSql = Get-Content $sqlPath -Raw
+$ddlSql = $ddlSql -replace "weather-aqi-[0-9a-zA-Z_-]+", $bucketName
 
 $execDdl = aws athena start-query-execution `
     --query-string "$ddlSql" `

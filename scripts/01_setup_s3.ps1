@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Script 01: Setup Amazon S3 Storage Bucket
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí
 # Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng | SV: 24110054
@@ -19,11 +19,15 @@ Write-Host "    Account ID : $accountId"
 Write-Host "    Bucket Name: $bucketName"
 Write-Host "    Region     : $Region"
 
-# Tạo Bucket (Region us-east-1 không cần LocationConstraint)
+# Tạo Bucket (Region us-east-1 không cần LocationConstraint, các region khác như us-west-2 cần LocationConstraint)
 $exists = aws s3api head-bucket --bucket $bucketName 2>&1
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "    Đang tạo bucket $bucketName..." -ForegroundColor Yellow
-    aws s3api create-bucket --bucket $bucketName --region $Region
+    Write-Host "    Đang tạo bucket $bucketName tại $Region..." -ForegroundColor Yellow
+    if ($Region -eq "us-east-1") {
+        aws s3api create-bucket --bucket $bucketName --region $Region
+    } else {
+        aws s3api create-bucket --bucket $bucketName --region $Region --create-bucket-configuration LocationConstraint=$Region
+    }
 } else {
     Write-Host "    Bucket $bucketName đã tồn tại." -ForegroundColor Green
 }

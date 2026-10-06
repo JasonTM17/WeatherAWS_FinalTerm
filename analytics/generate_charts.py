@@ -108,7 +108,7 @@ def plot_category_distribution():
 
     pivot_df = df.pivot(index='city', columns='aqi_category', values='percentage').fillna(0)
     # Ensure standard order
-    desired_cols = ['Good', 'Moderate', 'Unhealthy for Sensitive Groups', 'Unhealthy']
+    desired_cols = ['Good', 'Moderate', 'Unhealthy for Sensitive Groups', 'Unhealthy', 'Very Unhealthy', 'Hazardous']
     cols = [c for c in desired_cols if c in pivot_df.columns]
     pivot_df = pivot_df[cols]
 
@@ -116,7 +116,9 @@ def plot_category_distribution():
         'Good': '#10b981',
         'Moderate': '#fbbf24',
         'Unhealthy for Sensitive Groups': '#f97316',
-        'Unhealthy': '#ef4444'
+        'Unhealthy': '#ef4444',
+        'Very Unhealthy': '#8b5cf6',
+        'Hazardous': '#7f1d1d'
     }
     plot_colors = [colors[c] for c in cols]
 
@@ -136,7 +138,7 @@ def plot_category_distribution():
                 # Calculate cumulative bottom
                 bottom = sum(pivot_df[cols[j]].iloc[i] for j in range(n))
                 ax.text(i, bottom + val / 2, f'{val:.0f}%', ha='center', va='center',
-                        color='white' if c in ['Unhealthy', 'Good'] else 'black',
+                        color='white' if c in ['Unhealthy', 'Very Unhealthy', 'Hazardous', 'Good'] else 'black',
                         fontweight='bold', fontsize=10)
 
     plt.tight_layout()

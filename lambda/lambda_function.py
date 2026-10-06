@@ -26,12 +26,37 @@ SECRET_NAME = os.environ.get('SECRET_NAME', 'weather/api_config')
 SNS_TOPIC_ARN = os.environ.get('SNS_TOPIC_ARN', 'arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts')
 
 
+def safe_float(val, default=0.0):
+    """Chuyển đổi an toàn sang float, xử lý None, rỗng hoặc giá trị không hợp lệ."""
+    if val is None:
+        return float(default)
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        return float(default)
+
+
+def safe_int(val, default=0):
+    """Chuyển đổi an toàn sang int, xử lý None, rỗng hoặc giá trị không hợp lệ."""
+    if val is None:
+        return int(default)
+    try:
+        return int(float(val))
+    except (ValueError, TypeError):
+        return int(default)
+
+
 def get_aqi_category(us_aqi):
     """Phân loại cấp độ chất lượng không khí theo tiêu chuẩn US EPA."""
     if us_aqi is None:
         return "Unknown"
-    val = float(us_aqi)
-    if val <= 50:
+    try:
+        val = float(us_aqi)
+    except (ValueError, TypeError):
+        return "Unknown"
+    if val < 0:
+        return "Unknown"
+    elif val <= 50:
         return "Good"
     elif val <= 100:
         return "Moderate"
@@ -107,28 +132,28 @@ def fetch_city_data(city_info):
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     now_vn = now_utc + datetime.timedelta(hours=7)
 
-    us_aqi = aq_current.get('us_aqi', 0)
-    pm2_5 = aq_current.get('pm2_5', 0.0)
-    pm10 = aq_current.get('pm10', 0.0)
+    us_aqi = aq_current.get('us_aqi')
+    pm2_5 = aq_current.get('pm2_5')
+    pm10 = aq_current.get('pm10')
 
     record = {
         "record_id": f"{city}_{now_utc.strftime('%Y%m%d%H%M%S')}_{uuid.uuid4().hex[:6]}",
         "city": city,
-        "latitude": lat,
-        "longitude": lon,
+        "latitude": safe_float(lat),
+        "longitude": safe_float(lon),
         "timestamp_utc": now_utc.strftime('%Y-%m-%d %H:%M:%S'),
         "timestamp_vn": now_vn.strftime('%Y-%m-%d %H:%M:%S'),
-        "temperature_2m": float(w_current.get('temperature_2m', 0.0)),
-        "relative_humidity_2m": float(w_current.get('relative_humidity_2m', 0.0)),
-        "surface_pressure": float(w_current.get('surface_pressure', 0.0)),
-        "wind_speed_10m": float(w_current.get('wind_speed_10m', 0.0)),
-        "pm2_5": float(pm2_5 if pm2_5 is not None else 0.0),
-        "pm10": float(pm10 if pm10 is not None else 0.0),
-        "carbon_monoxide": float(aq_current.get('carbon_monoxide', 0.0) or 0.0),
-        "nitrogen_dioxide": float(aq_current.get('nitrogen_dioxide', 0.0) or 0.0),
-        "sulphur_dioxide": float(aq_current.get('sulphur_dioxide', 0.0) or 0.0),
-        "ozone": float(aq_current.get('ozone', 0.0) or 0.0),
-        "us_aqi": int(us_aqi if us_aqi is not None else 0),
+        "temperature_2m": safe_float(w_current.get('temperature_2m')),
+        "relative_humidity_2m": safe_float(w_current.get('relative_humidity_2m')),
+        "surface_pressure": safe_float(w_current.get('surface_pressure')),
+        "wind_speed_10m": safe_float(w_current.get('wind_speed_10m')),
+        "pm2_5": safe_float(pm2_5),
+        "pm10": safe_float(pm10),
+        "carbon_monoxide": safe_float(aq_current.get('carbon_monoxide')),
+        "nitrogen_dioxide": safe_float(aq_current.get('nitrogen_dioxide')),
+        "sulphur_dioxide": safe_float(aq_current.get('sulphur_dioxide')),
+        "ozone": safe_float(aq_current.get('ozone')),
+        "us_aqi": safe_int(us_aqi),
         "aqi_category": get_aqi_category(us_aqi),
         "year": now_utc.strftime('%Y'),
         "month": now_utc.strftime('%m'),
@@ -147,10 +172,12 @@ def fetch_historical_series(city_info, past_hours=48):
     lat = city_info['lat']
     lon = city_info['lon']
 
+    past_days = max(1, (past_hours + 23) // 24)
+
     aq_url = (
         f"https://air-quality-api.open-meteo.com/v1/air-quality?"
         f"latitude={lat}&longitude={lon}&hourly=pm10,pm2_5,carbon_monoxide,"
-        f"nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&past_days=2&forecast_days=0"
+        f"nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&past_days={past_days}&forecast_days=0"
     )
     aq_json = http_get_json(aq_url)
     hourly_aq = aq_json.get('hourly', {})
@@ -158,7 +185,7 @@ def fetch_historical_series(city_info, past_hours=48):
     w_url = (
         f"https://api.open-meteo.com/v1/forecast?"
         f"latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,"
-        f"surface_pressure,wind_speed_10m&past_days=2&forecast_days=0"
+        f"surface_pressure,wind_speed_10m&past_days={past_days}&forecast_days=0"
     )
     w_json = http_get_json(w_url)
     hourly_w = w_json.get('hourly', {})
@@ -166,10 +193,11 @@ def fetch_historical_series(city_info, past_hours=48):
     times = hourly_aq.get('time', [])
     records = []
 
-    for i, t_str in enumerate(times[-past_hours:]):
-        idx = len(times) - past_hours + i
-        if idx < 0 or idx >= len(times):
-            continue
+    total_times = len(times)
+    start_idx = max(0, total_times - past_hours)
+
+    for idx in range(start_idx, total_times):
+        t_str = times[idx]
         try:
             dt = datetime.datetime.fromisoformat(t_str)
         except Exception:
@@ -178,38 +206,38 @@ def fetch_historical_series(city_info, past_hours=48):
         dt_utc = dt.replace(tzinfo=datetime.timezone.utc)
         dt_vn = dt_utc + datetime.timedelta(hours=7)
 
-        us_aqi = hourly_aq.get('us_aqi', [])[idx] if idx < len(hourly_aq.get('us_aqi', [])) else 0
-        pm2_5 = hourly_aq.get('pm2_5', [])[idx] if idx < len(hourly_aq.get('pm2_5', [])) else 0.0
-        pm10 = hourly_aq.get('pm10', [])[idx] if idx < len(hourly_aq.get('pm10', [])) else 0.0
-        co = hourly_aq.get('carbon_monoxide', [])[idx] if idx < len(hourly_aq.get('carbon_monoxide', [])) else 0.0
-        no2 = hourly_aq.get('nitrogen_dioxide', [])[idx] if idx < len(hourly_aq.get('nitrogen_dioxide', [])) else 0.0
-        so2 = hourly_aq.get('sulphur_dioxide', [])[idx] if idx < len(hourly_aq.get('sulphur_dioxide', [])) else 0.0
-        o3 = hourly_aq.get('ozone', [])[idx] if idx < len(hourly_aq.get('ozone', [])) else 0.0
+        us_aqi_raw = hourly_aq.get('us_aqi', [])[idx] if idx < len(hourly_aq.get('us_aqi', [])) else None
+        pm2_5_raw = hourly_aq.get('pm2_5', [])[idx] if idx < len(hourly_aq.get('pm2_5', [])) else None
+        pm10_raw = hourly_aq.get('pm10', [])[idx] if idx < len(hourly_aq.get('pm10', [])) else None
+        co_raw = hourly_aq.get('carbon_monoxide', [])[idx] if idx < len(hourly_aq.get('carbon_monoxide', [])) else None
+        no2_raw = hourly_aq.get('nitrogen_dioxide', [])[idx] if idx < len(hourly_aq.get('nitrogen_dioxide', [])) else None
+        so2_raw = hourly_aq.get('sulphur_dioxide', [])[idx] if idx < len(hourly_aq.get('sulphur_dioxide', [])) else None
+        o3_raw = hourly_aq.get('ozone', [])[idx] if idx < len(hourly_aq.get('ozone', [])) else None
 
-        temp = hourly_w.get('temperature_2m', [])[idx] if idx < len(hourly_w.get('temperature_2m', [])) else 0.0
-        rh = hourly_w.get('relative_humidity_2m', [])[idx] if idx < len(hourly_w.get('relative_humidity_2m', [])) else 0.0
-        press = hourly_w.get('surface_pressure', [])[idx] if idx < len(hourly_w.get('surface_pressure', [])) else 0.0
-        wind = hourly_w.get('wind_speed_10m', [])[idx] if idx < len(hourly_w.get('wind_speed_10m', [])) else 0.0
+        temp_raw = hourly_w.get('temperature_2m', [])[idx] if idx < len(hourly_w.get('temperature_2m', [])) else None
+        rh_raw = hourly_w.get('relative_humidity_2m', [])[idx] if idx < len(hourly_w.get('relative_humidity_2m', [])) else None
+        press_raw = hourly_w.get('surface_pressure', [])[idx] if idx < len(hourly_w.get('surface_pressure', [])) else None
+        wind_raw = hourly_w.get('wind_speed_10m', [])[idx] if idx < len(hourly_w.get('wind_speed_10m', [])) else None
 
         record = {
             "record_id": f"{city}_{dt_utc.strftime('%Y%m%d%H%M')}_{uuid.uuid4().hex[:6]}",
             "city": city,
-            "latitude": lat,
-            "longitude": lon,
+            "latitude": safe_float(lat),
+            "longitude": safe_float(lon),
             "timestamp_utc": dt_utc.strftime('%Y-%m-%d %H:%M:%S'),
             "timestamp_vn": dt_vn.strftime('%Y-%m-%d %H:%M:%S'),
-            "temperature_2m": float(temp or 0.0),
-            "relative_humidity_2m": float(rh or 0.0),
-            "surface_pressure": float(press or 0.0),
-            "wind_speed_10m": float(wind or 0.0),
-            "pm2_5": float(pm2_5 or 0.0),
-            "pm10": float(pm10 or 0.0),
-            "carbon_monoxide": float(co or 0.0),
-            "nitrogen_dioxide": float(no2 or 0.0),
-            "sulphur_dioxide": float(so2 or 0.0),
-            "ozone": float(o3 or 0.0),
-            "us_aqi": int(us_aqi or 0),
-            "aqi_category": get_aqi_category(us_aqi),
+            "temperature_2m": safe_float(temp_raw),
+            "relative_humidity_2m": safe_float(rh_raw),
+            "surface_pressure": safe_float(press_raw),
+            "wind_speed_10m": safe_float(wind_raw),
+            "pm2_5": safe_float(pm2_5_raw),
+            "pm10": safe_float(pm10_raw),
+            "carbon_monoxide": safe_float(co_raw),
+            "nitrogen_dioxide": safe_float(no2_raw),
+            "sulphur_dioxide": safe_float(so2_raw),
+            "ozone": safe_float(o3_raw),
+            "us_aqi": safe_int(us_aqi_raw),
+            "aqi_category": get_aqi_category(us_aqi_raw),
             "year": dt_utc.strftime('%Y'),
             "month": dt_utc.strftime('%m'),
             "day": dt_utc.strftime('%d'),
@@ -223,6 +251,10 @@ def fetch_historical_series(city_info, past_hours=48):
 
 def send_sns_alert(record, threshold_pm25, threshold_aqi):
     """Gửi cảnh báo qua Amazon SNS khi AQI hoặc PM2.5 vượt ngưỡng."""
+    if not SNS_TOPIC_ARN:
+        print("[WARN] SNS_TOPIC_ARN is not configured. Skipping alert.")
+        return False
+
     subject = f"[AWS ALERT] Cảnh báo AQI cao tại {record['city']} - {record['aqi_category']} ({record['us_aqi']})"
     message = f"""======================================================
 HỆ THỐNG CẢNH BÁO CHẤT LƯỢNG KHÔNG KHÍ TỰ ĐỘNG (AWS CLOUD)
@@ -273,6 +305,14 @@ def save_records_to_s3(records):
     s3://{BUCKET}/raw/year=YYYY/month=MM/day=DD/{filename}.json
     Dữ liệu được lưu dạng NDJSON (Newline Delimited JSON) để Athena đọc dễ dàng.
     """
+    if not records:
+        print("[INFO] No records to save to S3.")
+        return []
+
+    if not BUCKET_NAME:
+        print("[WARN] BUCKET_NAME is not configured. Skipping S3 upload.")
+        return []
+
     grouped_by_partition = {}
     for r in records:
         key = (r['year'], r['month'], r['day'])
@@ -310,13 +350,16 @@ def lambda_handler(event, context):
     Điểm vào chính của Lambda function.
     Hỗ trợ chế độ realtime (mặc định theo EventBridge) hoặc backfill (truyền qua event).
     """
+    if not isinstance(event, dict):
+        event = {}
+
     print(f"[INFO] Lambda execution started. Event: {json.dumps(event)}")
     config = fetch_secrets()
     locations = config.get('locations', [])
     threshold_pm25 = float(config.get('aqi_threshold_pm25', 35.5))
     threshold_aqi = int(config.get('aqi_threshold_us_aqi', 100))
 
-    backfill_hours = event.get('backfill_hours') if isinstance(event, dict) else None
+    backfill_hours = event.get('backfill_hours')
 
     all_records = []
     alerts_sent = 0
@@ -324,8 +367,11 @@ def lambda_handler(event, context):
     if backfill_hours:
         print(f"[INFO] Backfill mode requested for past {backfill_hours} hours.")
         for loc in locations:
-            recs = fetch_historical_series(loc, past_hours=int(backfill_hours))
-            all_records.extend(recs)
+            try:
+                recs = fetch_historical_series(loc, past_hours=int(backfill_hours))
+                all_records.extend(recs)
+            except Exception as e:
+                print(f"[ERROR] Failed historical fetch for {loc.get('city', 'unknown')}: {e}")
     else:
         for loc in locations:
             try:

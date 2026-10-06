@@ -16,11 +16,19 @@ import sys
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-athena = boto3.client('athena', region_name='us-east-1')
-s3 = boto3.client('s3', region_name='us-east-1')
+REGION = os.environ.get('AWS_DEFAULT_REGION', 'us-east-1')
+athena = boto3.client('athena', region_name=REGION)
+s3 = boto3.client('s3', region_name=REGION)
 
-DATABASE = 'weather_aqi_db'
-OUTPUT_LOCATION = 's3://weather-aqi-873674852386/athena-results/'
+DATABASE = os.environ.get('ATHENA_DATABASE', 'weather_aqi_db')
+try:
+    sts = boto3.client('sts', region_name=REGION)
+    _acc = sts.get_caller_identity()['Account']
+    BUCKET_NAME = os.environ.get('S3_BUCKET_NAME', f'weather-aqi-{_acc}')
+except Exception:
+    BUCKET_NAME = os.environ.get('S3_BUCKET_NAME', 'weather-aqi-873674852386')
+
+OUTPUT_LOCATION = f"s3://{BUCKET_NAME}/athena-results/"
 RESULTS_DIR = os.path.abspath('results/athena_queries')
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
