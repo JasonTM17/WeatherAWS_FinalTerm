@@ -61,9 +61,13 @@ Chạy script kiểm thử để kích hoạt Lambda, đồng bộ phân vùng A
 ```
 
 ### 3.4. Xuất toàn bộ file CSV phân tích & dữ liệu thô qua AWS CLI
-Thực thi các câu truy vấn Athena trực tiếp từ terminal, theo dõi tiến độ qua AWS CLI và tải tệp CSV từ S3 về thư mục `results/aws_cli_exports/` (đồng bộ với `results/athena_queries/`):
+Thực thi các câu truy vấn Athena trực tiếp từ terminal, theo dõi tiến độ qua AWS CLI và tải tệp CSV về thư mục `results/aws_cli_exports/` (đồng bộ với `results/athena_queries/`):
 ```powershell
+# Chạy xuất mặc định (tự động nhận diện bảng vietnam_weather_aqi / weather_airquality_records)
 pwsh -File .\scripts\export_csv_via_cli.ps1 -Region "us-east-1"
+
+# Tùy chọn nâng cao: chỉ định tên bảng, phương thức tải (Auto / S3Cp / AthenaGetResults), hoặc thư mục xuất riêng
+pwsh -File .\scripts\export_csv_via_cli.ps1 -Region "us-east-1" -TableName "vietnam_weather_aqi" -DownloadMethod "Auto" -OutputDir "results/aws_cli_exports"
 ```
 Bộ tệp CSV xuất ra bao gồm:
 - `avg_aqi_by_city.csv`: So sánh AQI, PM2.5, PM10 và thời tiết 3 thành phố.
@@ -74,7 +78,7 @@ Bộ tệp CSV xuất ra bao gồm:
 - `query_metrics.csv`: Bảng thống kê mã Query Execution ID, thời gian chạy và dung lượng quét.
 
 ### 3.5. Chạy bộ kiểm thử tự động (Unit Test Suite)
-Dự án trang bị bộ 24 kiểm thử đơn vị (`unittest`) bao quát các trường hợp biên, giá trị null từ cảm biến, giải thuật chuỗi lịch sử, logic cảnh báo và tính toàn vẹn của dữ liệu CSV xuất từ Athena:
+Dự án trang bị bộ **28 kiểm thử đơn vị** (`unittest`) bao quát các trường hợp biên, giá trị null từ cảm biến, giải thuật chuỗi lịch sử, logic cảnh báo, tính toàn vẹn của dữ liệu CSV xuất từ Athena qua AWS CLI, và khả năng thích ứng với cả 2 tên bảng `vietnam_weather_aqi` và `weather_airquality_records`:
 ```powershell
 py -3.13 -m unittest discover -s tests -v
 ```
@@ -150,7 +154,9 @@ WeatherAWS_FinalTerm/
 │   ├── test_pipeline.ps1               # Master script kiểm thử luồng End-to-End
 │   └── cleanup_all.ps1                 # Script dọn dẹp sạch tài nguyên (bảo vệ $100 Lab)
 ├── athena/
-│   ├── create_table.sql                # DDL tạo External Table phân vùng Hive-style
+│   ├── create_table.sql                # DDL tạo External Table phân vùng Hive-style (weather_airquality_records)
+│   ├── create_table_vietnam_weather_aqi.sql # DDL tạo External Table theo đặc tả vietnam_weather_aqi
+│   ├── create_view_vietnam_weather_aqi.sql  # DDL View hoán đổi truy vấn giữa 2 tên bảng
 │   ├── query_avg_aqi_by_city.sql       # Query 1: So sánh AQI, PM2.5 trung bình theo TP
 │   ├── query_peak_pollution_hours.sql  # Query 2: Xác định khung giờ ô nhiễm cao nhất
 │   ├── query_aqi_category_distribution.sql # Query 3: Phân bố tỷ lệ cấp độ ô nhiễm

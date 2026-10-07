@@ -1,7 +1,7 @@
 [
   {
     "name": "avg_aqi_by_city",
-    "description": "Thống kê chỉ số ô nhiễm và thời tiết trung bình theo từng thành phố",
+    "description": "Thong ke chi so o nhiem va thoi tiet trung binh theo tung thanh pho",
     "query_id": "b07478d6-40d8-4923-9f32-3337adc3389d",
     "status": "SUCCEEDED",
     "execution_time_ms": 749,
@@ -45,7 +45,7 @@
   },
   {
     "name": "peak_pollution_hours",
-    "description": "Phân tích khung giờ ô nhiễm trong ngày",
+    "description": "Phan tich khung gio cao diem o nhiem trong ngay",
     "query_id": "f0c992c3-c598-4e31-b483-1cf367774f02",
     "status": "SUCCEEDED",
     "execution_time_ms": 1065,
@@ -224,7 +224,7 @@
   },
   {
     "name": "aqi_category_distribution",
-    "description": "Phân bố cấp độ chất lượng không khí",
+    "description": "Phan bo cap do chat luong khong khi US EPA",
     "query_id": "09715d2d-6b8f-4f34-88e5-fa4ae8aa7216",
     "status": "SUCCEEDED",
     "execution_time_ms": 872,
@@ -283,7 +283,7 @@
   },
   {
     "name": "weather_correlation",
-    "description": "Tương quan giữa Nhiệt độ, Độ ẩm và Bụi mịn PM2.5",
+    "description": "Tuong quan giua Nhiet do, Do am va Bui min PM2.5",
     "query_id": "5704da34-ff6f-4f1e-8a1d-d9f983417231",
     "status": "SUCCEEDED",
     "execution_time_ms": 747,

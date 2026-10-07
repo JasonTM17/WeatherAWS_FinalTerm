@@ -212,6 +212,8 @@ $ aws cloudwatch get-dashboard --dashboard-name "WeatherAirQuality-Monitoring-Da
 
 ## 10. XUẤT TOÀN BỘ KẾT QUẢ VÀ DỮ LIỆU THÔ RA FILE CSV TRỰC TIẾP QUA AWS CLI
 
+Script PowerShell chuyên dụng `scripts/export_csv_via_cli.ps1` hỗ trợ cả 2 phương thức tải CSV qua AWS CLI (`aws s3 cp` từ bucket output và `aws athena get-query-results` trực tiếp từ Athena API), hỗ trợ linh hoạt 2 tên bảng (`vietnam_weather_aqi` và `weather_airquality_records`), cùng cơ chế Offline Fallback tự động khi phiên AWS Learner Lab hết hạn:
+
 ```bash
 $ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
 
@@ -221,6 +223,7 @@ $ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
   Sinh vien thuc hien: 24110054 | Region: us-east-1
   Thu muc dau ra: D:\AWS_Final_Term\results\aws_cli_exports
 ========================================================================
+[INFO] Su dung Database: weather_aqi_db | Table: weather_airquality_records
 
 >>> [Truy van 1/5] avg_aqi_by_city...
     Mo ta: Thong ke chi so o nhiem va thoi tiet trung binh theo tung thanh pho
@@ -232,6 +235,7 @@ $ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
     [2/3] aws athena get-query-execution --query-execution-id b07478d6-40d8-4923-9f32-3337adc3389d --region us-east-1
     -> State = SUCCEEDED | ExecutionTime = 749 ms | DataScanned = 87551 bytes
     [3/3] aws s3 cp s3://weather-aqi-873674852386/athena-results/b07478d6-40d8-4923-9f32-3337adc3389d.csv results/aws_cli_exports/avg_aqi_by_city.csv
+          (Hoac fallback qua: aws athena get-query-results --query-execution-id b07478d6-40d8-4923-9f32-3337adc3389d --output json)
     [XAC THUC] Tep: avg_aqi_by_city.csv | Dong du lieu: 3 | Kich thuoc: 298 bytes
 
 >>> [Truy van 2/5] peak_pollution_hours...
@@ -283,4 +287,12 @@ query_metrics.csv               717
 raw_weather_aqi_records.csv   38873
 weather_correlation.csv         175
 ```
+
+### Kết quả chạy bộ 28 Unit Tests toàn dự án:
+```bash
+$ py -3.13 -m unittest discover -s tests -v
+Ran 28 tests in 22.29s
+OK
+```
+
 
