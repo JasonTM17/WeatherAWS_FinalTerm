@@ -4,7 +4,6 @@
 
 [![AWS](https://img.shields.io/badge/AWS-Serverless-orange.svg)](https://aws.amazon.com/)
 [![Python](https://img.shields.io/badge/Python-3.12%20%7C%203.13-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![University](https://img.shields.io/badge/HCMUTE-Cloud%20Computing-red.svg)](https://hcmute.edu.vn/)
 
 ---
@@ -12,10 +11,12 @@
 > **Môn học:** Điện toán đám mây (Cloud Computing)  
 > **Giảng viên hướng dẫn (GVHD):** ThS. Huỳnh Xuân Phụng  
 > **Sinh viên thực hiện:**  
-> 1. Trần Minh Jason - MSSV: `24110054` (Trưởng nhóm)  
-> 2. Nguyễn Văn An - MSSV: `24110055` (Thành viên)  
+> 1. Nguyễn Tiến Sơn - MSSV: `24110054`
+> 2. Trần Thị Ngọc Quyên - MSSV: `24110051`
 > **Môi trường:** AWS Learner Lab (`us-east-1` | Account ID: `873674852386` | Role: `LabRole`)  
 > **Repository:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm.git](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git)
+
+**Báo cáo Tuần 1:** [Word](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) · [PDF](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf). [Nhật ký cần xác nhận](docs/WORKLOG_NHOM_05_CAN_XAC_NHAN.md) được lưu riêng, không nằm trong báo cáo. Các tệp `docs/WORKLOG.md`, `docs/FINAL_REPORT.md` và `docs/CLI_EXECUTION_LOGS.md` là bản nháp cũ chứa danh tính hoặc kết luận chưa khớp nhóm; không dùng các số giờ hay tuyên bố trong đó làm minh chứng nộp bài khi chưa đối chiếu.
 
 ---
 
@@ -24,8 +25,8 @@
 Dự án xây dựng một đường ống dữ liệu (Data Pipeline) theo mô hình **Serverless Event-Driven** trên nền tảng Amazon Web Services (AWS) để tự động hóa hoàn toàn chu trình:
 1. **Thu thập định kỳ:** Gọi Open-Meteo Air Quality & Weather API thu thập dữ liệu bụi mịn (PM2.5, PM10), khí độc hại (CO, NO2, SO2, O3), chỉ số US AQI và thời tiết (nhiệt độ, độ ẩm, tốc độ gió) tại 3 thành phố lớn: **TP. Hồ Chí Minh, Hà Nội, Đà Nẵng**.
 2. **Lưu trữ chuẩn Data Lake:** Định dạng **NDJSON** phân vùng theo thời gian (`year=YYYY/month=MM/day=DD`) trên **Amazon S3**.
-3. **Quản lý khóa an toàn:** Lưu trữ API key và cấu hình điều phối trong **AWS Secrets Manager**.
-4. **Cảnh báo tức thời:** Gửi email cảnh báo nguy cơ ô nhiễm sức khỏe qua **Amazon SNS** khi AQI > 100 hoặc PM2.5 > 35.5 µg/m³.
+3. **Quản lý cấu hình:** Secrets Manager lưu tọa độ và ngưỡng; trường `api_key` hiện là giá trị minh họa và mã gọi Open-Meteo công khai chưa dùng khóa để xác thực.
+4. **Cảnh báo:** Lambda công bố thông điệp qua **Amazon SNS** khi US AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³. Chưa có minh chứng email đã đến hộp nhận.
 5. **Phân tích dữ liệu lớn không máy chủ:** Sử dụng **AWS Glue Data Catalog** và **Amazon Athena** truy vấn SQL phân tích xu hướng, khung giờ cao điểm và tương quan khí tượng.
 6. **Trực quan hóa xu hướng:** Tự động xuất biểu đồ phân tích chuyên sâu (`matplotlib` / `pandas`).
 7. **Giám sát & Quản trị:** Theo dõi qua **Amazon CloudWatch** Alarms và Dashboard.
@@ -34,7 +35,7 @@ Dự án xây dựng một đường ống dữ liệu (Data Pipeline) theo mô 
 
 ## 🏛️ 2. SƠ ĐỒ KIẾN TRÚC HỆ THỐNG
 
-![Kiến trúc hệ thống](docs/architecture_diagram.svg)
+![Kiến trúc hệ thống và luồng dữ liệu](docs/architecture_report.png)
 
 ---
 
@@ -91,12 +92,30 @@ Theo đúng chỉ đạo của GVHD: *"dừng/xóa tài nguyên sau mỗi buổi
   <img src="results/charts/04_weather_pm25_correlation.png" width="48%" />
 </p>
 
+### 4.3. Bảng điều khiển phân tích chi tiết & Tổng hợp báo cáo
+Dự án cung cấp bộ 10 ảnh báo cáo phân tích chi tiết chuẩn in ấn (Times New Roman, độ phân giải cao 1920x1080) được lưu trực tiếp tại `docs/` và `results/charts/`:
+- `01_aqi_city_comparison_detailed.png`: So sánh AQI Min/Avg/Max, PM2.5 & PM10, ngưỡng EPA, bảng số liệu đô thị.
+- `02_peak_pollution_hours_detailed.png`: Biến thiên 24 giờ UTC & giờ Việt Nam, đỉnh 17h-22h VN.
+- `03_aqi_category_distribution_detailed.png`: Phân bố % cấp độ AQI US EPA & bảng kích hoạt cảnh báo SNS.
+- `04_weather_pm25_correlation_detailed.png`: Hệ số tương quan Pearson & phân tích cơ chế vật lý khí quyển.
+- `05_athena_query_performance_detailed.png`: Hiệu năng truy vấn Athena (747-1065 ms) & tiết kiệm 95.6% I/O.
+- `06_s3_datalake_partitioning_detailed.png`: Cấu trúc thư mục S3 Hive-style, Partition Pruning & Schema 20 trường.
+- `07_cloudwatch_monitoring_dashboard_detailed.png`: Giám sát Lambda Invocations, Duration, Lỗi = 0 & 10 cảnh báo SNS.
+- `08_aws_cost_and_budget_detailed.png`: Đánh giá chi phí ($0.40 tiêu thụ / $100 ngân sách) & chi tiết từng dịch vụ.
+- `09_unit_testing_and_qa_matrix_detailed.png`: Ma trận 16 ca kiểm thử tự động PASS 100% & 3 trụ cột kháng lỗi.
+- `10_executive_analytics_overview_dashboard.png`: Bảng điều khiển phân tích tổng quan toàn diện.
+- `all_analysis_charts_contact.png`: Bảng tổng hợp liên hoàn toàn bộ 10 hình phân tích chi tiết.
+
+<p align="center">
+  <img src="docs/10_executive_analytics_overview_dashboard.png" width="98%" />
+</p>
+
 ---
 
 ## 📁 5. CẤU TRÚC THƯ MỤC DỰ ÁN
 
 ```
-d:/AWS_Final_Term/
+WeatherAWS_FinalTerm/
 ├── .gitignore                          # Cấu hình bỏ qua tệp tạm và thông tin nhạy cảm
 ├── README.md                           # Tài liệu tổng quan dự án
 ├── lambda/
@@ -127,11 +146,11 @@ d:/AWS_Final_Term/
 │   ├── test_lambda_function.py         # Unit tests cho Lambda (xử lý None, biên AQI, căn chỉnh mảng)
 │   └── test_analytics.py               # Unit tests cho trực quan hóa dữ liệu và biểu đồ
 ├── docs/
-│   ├── ARCHITECTURE.md                 # Tài liệu thiết kế kiến trúc chi tiết
-│   ├── WORKLOG.md                      # Nhật ký công việc 4 tuần chi tiết (mỗi SV >= 8h/tuần)
-│   ├── CLI_EXECUTION_LOGS.md           # Minh chứng thực thi lệnh AWS CLI có Account ID
-│   ├── FINAL_REPORT.md                 # Báo cáo tổng kết đồ án hoàn chỉnh chuẩn HCMUTE
-│   └── architecture_diagram.svg        # Sơ đồ kiến trúc vector SVG
+│   ├── WORKLOG_NHOM_05_CAN_XAC_NHAN.md # Mẫu xác nhận việc và giờ của đúng hai SV
+│   ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx # Bản Word Tuần 1
+│   ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf  # Bản PDF Tuần 1
+│   ├── architecture_report.png        # Sơ đồ kiến trúc dùng trong báo cáo
+│   └── ARCHITECTURE.md                 # Tài liệu thiết kế tham khảo
 └── results/
     ├── athena_queries/                 # Kết quả CSV và JSON trích xuất từ Athena
     ├── charts/                         # 4 hình ảnh biểu đồ độ phân giải cao
@@ -141,10 +160,10 @@ d:/AWS_Final_Term/
 ---
 
 ## 📑 6. TÀI LIỆU CHI TIẾT
-* [Báo cáo tổng kết đồ án hoàn chỉnh (Final Report)](docs/FINAL_REPORT.md)
-* [Tài liệu thiết kế kiến trúc (Architecture Details)](docs/ARCHITECTURE.md)
-* [Nhật ký công việc 4 tuần chi tiết (Worklog)](docs/WORKLOG.md)
-* [Minh chứng thực thi lệnh AWS CLI (Execution Logs)](docs/CLI_EXECUTION_LOGS.md)
+* [Báo cáo hàng tuần bản Word](docs/Bao_cao_hang_tuan_Dien_toan_dam_may_Nhom_05.docx) và [bản PDF](docs/Bao_cao_hang_tuan_Dien_toan_dam_may_Nhom_05.pdf)
+* [Sơ đồ kiến trúc sử dụng trong báo cáo](docs/architecture_report.png)
+* [Mẫu nhật ký đúng hai thành viên cần xác nhận](docs/WORKLOG_NHOM_05_CAN_XAC_NHAN.md)
+* [Tài liệu thiết kế kiến trúc tham khảo](docs/ARCHITECTURE.md)
 
 ---
 *Đồ án môn học Điện toán đám mây - Khoa Công nghệ Thông tin - Trường ĐH Sư phạm Kỹ thuật TP.HCM (HCMUTE)*

@@ -24,3 +24,6 @@ Thumbs.db
 # Deployment artifacts
 lambda_package.zip
 *.tmp
+
+# Temporary report render work
+docs/_report_work/

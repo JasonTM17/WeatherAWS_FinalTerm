@@ -1,8 +1,10 @@
 # KIẾN TRÚC HỆ THỐNG THU THẬP VÀ PHÂN TÍCH DỮ LIỆU THỜI TIẾT / KHÔNG KHÍ (AWS CLOUD)
 
+> **CẬP NHẬT HỒ SƠ 07/10/2026:** Nhóm gồm 24110054 Nguyễn Tiến Sơn và 24110051 Trần Thị Ngọc Quyên. Sơ đồ kiến trúc dùng trong báo cáo hàng tuần là [Hình 1.1](architecture_report.png). Phần mô tả API key bên dưới là thiết kế/giá trị minh họa; mã Lambda hiện gọi Open-Meteo công khai mà không dùng khóa để xác thực.
+
 > **Môn học:** Điện toán đám mây (Cloud Computing) - Đợt 1 (2026-2027)  
 > **Giảng viên hướng dẫn (GVHD):** ThS. Huỳnh Xuân Phụng  
-> **Sinh viên thực hiện:** 24110054 (Trường ĐH Sư Phạm Kỹ Thuật TP.HCM - HCMUTE)  
+> **Sinh viên thực hiện:** 24110054 Nguyễn Tiến Sơn; 24110051 Trần Thị Ngọc Quyên
 > **AWS Account ID:** `873674852386` | **Region:** `us-east-1` (N. Virginia)  
 > **IAM Role sử dụng:** `arn:aws:iam::873674852386:role/LabRole`  
 

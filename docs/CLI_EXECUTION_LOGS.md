@@ -1,5 +1,7 @@
 # MINH CHỨNG THỰC THI AWS CLI THỰC TẾ (CLI EXECUTION EVIDENCE)
 
+> **LƯU Ý 07/10/2026 – BẢN NHÁP CŨ, KHÔNG DÙNG ĐỂ QUY CÔNG:** Tệp này ghi tên sinh viên khác nhóm 24110054 Nguyễn Tiến Sơn, 24110051 Trần Thị Ngọc Quyên. Một số lệnh và số đo dưới đây là bản ghi biên soạn, không phải ảnh terminal gốc có thể xác minh. Báo cáo [Word](Bao_cao_hang_tuan_Dien_toan_dam_may_Nhom_05.docx) chỉ dùng số liệu đã đối chiếu tại mốc 06/10 và công khai giới hạn của chúng.
+
 > **Môn học:** Cloud - Đợt 1 - 2026-2027 | **GVHD:** ThS. Huỳnh Xuân Phụng  
 > **Sinh viên:** Trần Minh Jason - MSSV: `24110054`  
 > **AWS Account ID:** `873674852386` | **Region:** `us-east-1`  

@@ -1,5 +1,7 @@
 # NHẬT KÝ CÔNG VIỆC DỰ ÁN (PROJECT WORKLOG - 4 TUẦN)
 
+> **LƯU Ý 07/10/2026 – BẢN NHÁP CŨ, KHÔNG DÙNG ĐỂ NỘP:** Danh tính và MSSV dưới đây không khớp nhóm thực tế 24110054 Nguyễn Tiến Sơn, 24110051 Trần Thị Ngọc Quyên. Các ngày, phân công và số giờ chưa được hai thành viên xác nhận; không thay tên để suy diễn công việc. Nhóm cần điền [nhật ký đúng danh sách](WORKLOG_NHOM_05_CAN_XAC_NHAN.md) bằng bằng chứng gốc.
+
 > **Học phần:** Điện toán đám mây (Cloud Computing) - Đợt 1 (2026-2027)  
 > **Giảng viên hướng dẫn (GVHD):** ThS. Huỳnh Xuân Phụng  
 > **Đề tài:** Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí (Nhóm: Domain Apps)  
