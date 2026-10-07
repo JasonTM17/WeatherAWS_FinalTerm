@@ -29,7 +29,7 @@ aws cloudwatch put-metric-alarm `
     --period 300 `
     --threshold 1 `
     --comparison-operator "GreaterThanOrEqualToThreshold" `
-    --dimensions Name=FunctionName,Value=$functionName `
+    --dimensions "Name=FunctionName,Value=$functionName" `
     --evaluation-periods 1 `
     --alarm-actions $snsTopicArn `
     --tags Key=Project,Value=WeatherAWS_FinalTerm Key=Owner,Value=24110054 Key=Course,Value=Cloud_FinalTerm `
@@ -73,12 +73,21 @@ $dashboardBody = @{
             type = "text"
             x = 0; y = 6; width = 24; height = 3
             properties = @{
-                markdown = "# Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí`n**Môn học:** Cloud - Đợt 1 - 2026-2027 | **GVHD:** Huỳnh Xuân Phụng | **SV:** 24110054`n**Account ID:** $accountId | **Region:** $Region | **Pipeline:** EventBridge -> Lambda -> S3 -> Glue/Athena -> SNS"
+                markdown = "# He thong thu thap va phan tich du lieu thoi tiet / khong khi`n**Mon hoc:** Cloud - Dot 1 - 2026-2027 | **GVHD:** Huynh Xuan Phung | **SV:** 24110054`n**Account ID:** $accountId | **Region:** $Region | **Pipeline:** EventBridge -> Lambda -> S3 -> Glue/Athena -> SNS"
             }
         }
     )
-} | ConvertTo-Json -Depth 10 -Compress
+} | ConvertTo-Json -Depth 10
 
-aws cloudwatch put-dashboard --dashboard-name $dashboardName --dashboard-body "$dashboardBody" --region $Region
+$tempDashboardFile = [System.IO.Path]::GetTempFileName()
+try {
+    $utf8NoBom = New-Object System.Text.UTF8Encoding $false
+    [System.IO.File]::WriteAllText($tempDashboardFile, $dashboardBody, $utf8NoBom)
+    aws cloudwatch put-dashboard --dashboard-name $dashboardName --dashboard-body "file://$tempDashboardFile" --region $Region
+} finally {
+    if (Test-Path $tempDashboardFile) {
+        Remove-Item $tempDashboardFile -Force -ErrorAction SilentlyContinue
+    }
+}
 
 Write-Host "==> [07/07] CloudWatch Monitoring hoàn tất!" -ForegroundColor Green

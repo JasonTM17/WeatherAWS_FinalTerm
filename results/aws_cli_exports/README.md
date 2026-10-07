@@ -1,4 +1,4 @@
-# DANH MUC TEP DU LIEU CSV XUAT TU AMAZON ATHENA QUA AWS CLI
+﻿# DANH MUC TEP DU LIEU CSV XUAT TU AMAZON ATHENA QUA AWS CLI
 **He thong thu thap & phan tich du lieu thoi tiet / khong khi (AWS Cloud)**
 - Mon hoc: Dien toan dam may - Dot 1 - Nam hoc 2026-2027
 - GVHD: ThS. Huynh Xuan Phung

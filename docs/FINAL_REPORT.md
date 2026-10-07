@@ -18,9 +18,9 @@
   1. Nguyễn Tiến Sơn - MSSV: `24110054` (Trưởng nhóm)
   2. Trần Thị Ngọc Quyên - MSSV: `24110051` (Thành viên)
 * **Môi trường triển khai:** AWS Academy Learner Lab
-  * AWS Account ID: `873674852386`
+  * AWS Account ID: `134987931868` (Tài khoản thực nghiệm chính) / `873674852386`
   * Region: `us-east-1` (US East - N. Virginia)
-  * IAM Role: `arn:aws:iam::873674852386:role/LabRole`
+  * IAM Role: `arn:aws:iam::134987931868:role/LabRole`
 * **Mã nguồn GitHub:** [WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git)
 
 ![Bảng điều khiển phân tích tổng quan](./10_executive_analytics_overview_dashboard.png)

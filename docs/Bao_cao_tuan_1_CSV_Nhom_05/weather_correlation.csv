@@ -1,4 +1,4 @@
-﻿city,corr_temp_pm25,corr_humidity_pm25,corr_wind_pm25
-DaNang,0.4798,-0.3183,-0.2291
-HaNoi,0.6462,0.2486,-0.4846
-HoChiMinh,-0.6977,0.6627,-0.1536
+"city","corr_temp_pm25","corr_humidity_pm25","corr_wind_pm25"
+"DaNang","0.4798","-0.3183","-0.2291"
+"HaNoi","0.6462","0.2486","-0.4846"
+"HoChiMinh","-0.6977","0.6627","-0.1536"

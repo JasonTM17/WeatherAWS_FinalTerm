@@ -1,27 +1,26 @@
 BỘ CSV KẾT QUẢ ATHENA – BÁO CÁO TUẦN 1, NHÓM 05
 
-Nguồn: bốn tệp kết quả và summary_metrics.json đã lưu trong results/athena_queries.
-Đây là bản đóng gói từ dữ liệu đã lưu, không phải lượt tải mới từ AWS.
-AWS CLI trả kết quả GetQueryResults dạng JSON; các tệp dưới đây là bảng CSV
-được chuẩn hóa từ kết quả Athena đã lưu, không phải stdout nguyên gốc của CLI.
-Nếu Excel trên máy mở CSV thành một cột, xem bản trình bày .xlsx nộp kèm.
+Nguồn: năm kết quả truy vấn Athena và query_metrics.csv đã lưu trong results/athena_queries.
+Đây là bản sao nguyên vẹn của các CSV đã lưu, không phải lượt tải AWS mới.
+Nếu Excel trên máy mở CSV thành một cột, dùng bản .xlsx trình bày nộp kèm.
 
 QUY CÁCH CSV
-UTF-8 BOM; dấu phẩy phân cột; xuống dòng CRLF; dòng đầu là tên cột.
-Tên cột, thứ tự cột, thứ tự dòng và từng giá trị giữ đúng tập kết quả đã lưu.
-Số dùng dấu chấm thập phân, không thêm dấu phân nhóm hay đơn vị vào ô dữ liệu.
+Giữ nguyên byte của bản CSV xuất đã lưu: dấu phẩy phân cột, dòng đầu là tên cột.
+Các CSV kết quả Athena dùng dấu ngoặc kép và LF; query_metrics dùng UTF-8 BOM và CRLF.
+Tên cột, thứ tự cột, thứ tự dòng và giá trị không bị đổi khi đóng gói.
+CSV thuần không lưu màu hay kiểu chữ; bản Excel đi kèm có trình bày đen–trắng.
 
 DANH MỤC TỆP
-1. avg_aqi_by_city.csv – 3 dòng kết quả; QueryExecutionId: 57e9d139-1a73-422d-adb4-e0b006f740c6.
-2. peak_pollution_hours.csv – 24 dòng kết quả; QueryExecutionId: f77e7656-bb51-4cb1-9ba8-117bce879d57.
-3. aqi_category_distribution.csv – 8 dòng kết quả; QueryExecutionId: f1e2d2a8-dc47-4afb-98e6-30f4de8b096f.
-4. weather_correlation.csv – 3 dòng kết quả; QueryExecutionId: 25272532-19a7-405f-b803-91244e1c946a.
-5. query_metrics.csv – bảng đối chiếu bốn truy vấn với các trường trạng thái,
-   thời gian chạy (ms), dung lượng quét (byte) và tên tệp kết quả.
-   ResultRows là số dòng kết quả trong CSV, không phải số bản ghi raw.
+1. avg_aqi_by_city.csv – 3 dòng kết quả; QueryExecutionId: 834239d3-ba12-495f-8ac7-673abb95f025.
+2. peak_pollution_hours.csv – 24 dòng kết quả; QueryExecutionId: 96035c95-2d2f-4b62-96b8-aa08db990976.
+3. aqi_category_distribution.csv – 8 dòng kết quả; QueryExecutionId: e5b23e62-5259-401c-a6a1-9d691caa1fd5.
+4. weather_correlation.csv – 3 dòng kết quả; QueryExecutionId: efae4537-970d-452c-b3fc-665713a9d424.
+5. raw_weather_aqi_records.csv – 156 bản ghi, 23 cột; QueryExecutionId: 1e473ab6-4d52-4ec2-9412-5aa66626b05f.
+6. query_metrics.csv – metadata của cả năm truy vấn: trạng thái, thời gian chạy,
+   dung lượng quét và tên CSV. result_rows là số dòng dữ liệu của từng CSV.
 
 ĐƠN VỊ VÀ CÁCH ĐỌC
 avg_pm2_5, avg_pm10: µg/m³; avg_temp: °C; avg_humidity, percentage: %.
 hour: giờ UTC; corr_*: hệ số tương quan Pearson, không có đơn vị.
 Tổng total_records theo đô thị và tổng sample_count theo giờ đều là 156.
-Bốn CSV là các bảng tổng hợp, không chứa 156 bản ghi quan trắc gốc.
+Bốn CSV tổng hợp đi kèm CSV raw chứa đủ 156 bản ghi quan trắc gốc.

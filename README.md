@@ -13,7 +13,7 @@
 > **Sinh viên thực hiện:**  
 > 1. Nguyễn Tiến Sơn - MSSV: `24110054`
 > 2. Trần Thị Ngọc Quyên - MSSV: `24110051`
-> **Môi trường:** AWS Learner Lab (`us-east-1` | Account ID: `873674852386` | Role: `LabRole`)  
+> **Môi trường:** AWS Learner Lab (`us-east-1` | Account ID: `134987931868` (Active) / `873674852386` | Role: `LabRole`)  
 > **Repository:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm.git](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git)
 
 **Báo cáo Tuần 1:** [Word](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) · [PDF](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf). [Nhật ký cần xác nhận](docs/WORKLOG_NHOM_05_CAN_XAC_NHAN.md) được lưu riêng, không nằm trong báo cáo. Các tệp `docs/WORKLOG.md`, `docs/FINAL_REPORT.md` và `docs/CLI_EXECUTION_LOGS.md` là bản nháp cũ chứa danh tính hoặc kết luận chưa khớp nhóm; không dùng các số giờ hay tuyên bố trong đó làm minh chứng nộp bài khi chưa đối chiếu.

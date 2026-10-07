@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Script: export_csv_via_cli.ps1
 # Tự động hóa thực thi truy vấn Amazon Athena và xuất kết quả ra file CSV qua AWS CLI
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí (AWS Cloud)
@@ -52,13 +52,13 @@ if (!(Test-Path $AthenaDir)) {
 Write-Host "========================================================================" -ForegroundColor Cyan
 Write-Host "  XUAT KET QUA TRUY VAN ATHENA RA CSV TRUC TIEP QUA AWS CLI" -ForegroundColor Yellow
 Write-Host "  Mon hoc: Cloud - GVHD: ThS. Huynh Xuan Phung" -ForegroundColor Yellow
-Write-Host "  Sinh vien thuc hien: 24110054 | Region: $Region" -ForegroundColor Yellow
+Write-Host "  Sinh vien thuc hien: 24110051 (Nguyen Van An) & 24110054 (Tran Minh Jason) | Region: $Region" -ForegroundColor Yellow
 Write-Host "  Thu muc dau ra: $OutputDir" -ForegroundColor Yellow
 Write-Host "========================================================================" -ForegroundColor Cyan
 
 # 1. Kiem tra xac thuc AWS CLI (Caller Identity)
 $activeSession = $false
-$accountId = "873674852386"
+$accountId = "134987931868"
 $executionMode = "OFFLINE_FALLBACK"
 
 try {

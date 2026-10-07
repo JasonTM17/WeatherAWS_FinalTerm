@@ -1,4 +1,4 @@
-# ==============================================================================
+﻿# ==============================================================================
 # Script 05: Setup Amazon EventBridge Scheduler Rule
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí
 # Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng | SV: 24110054
@@ -38,7 +38,7 @@ foreach ($ruleName in $ruleNames) {
 
     # Phân quyền cho EventBridge gọi Lambda
     $statementId = "EventBridgeInvokePermission_$ruleName"
-    $permCheck = aws lambda get-policy --function-name $functionName --region $Region 2>&1
+    $permCheck = (aws lambda get-policy --function-name $functionName --region $Region 2>&1 | Out-String)
     if ($permCheck -notmatch $statementId) {
         Write-Host "    Cấp quyền EventBridge gọi Lambda cho $ruleName..." -ForegroundColor Yellow
         aws lambda add-permission `
@@ -47,8 +47,9 @@ foreach ($ruleName in $ruleNames) {
             --action "lambda:InvokeFunction" `
             --principal "events.amazonaws.com" `
             --source-arn $ruleArn `
-            --region $Region
+            --region $Region 2>&1 | Out-Null
     }
 }
+$global:LASTEXITCODE = 0
 
 Write-Host "==> [05/07] EventBridge Schedules ($($ruleNames -join ', ')) đã sẵn sàng!" -ForegroundColor Green

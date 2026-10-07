@@ -2,7 +2,7 @@
 -- Tên bảng: vietnam_weather_aqi (Hỗ trợ truy vấn đồng nhất theo đặc tả đề tài)
 -- Định dạng: JSON (phân vùng theo year, month, day)
 -- Database: weather_aqi_db
--- Bucket: s3://weather-aqi-873674852386/raw/
+-- Bucket: s3://weather-aqi-134987931868/raw/
 
 CREATE EXTERNAL TABLE IF NOT EXISTS weather_aqi_db.vietnam_weather_aqi (
     record_id STRING,
@@ -35,5 +35,5 @@ ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
 WITH SERDEPROPERTIES (
     'ignore.malformed.json' = 'true'
 )
-LOCATION 's3://weather-aqi-873674852386/raw/'
+LOCATION 's3://weather-aqi-134987931868/raw/'
 TBLPROPERTIES ('has_encrypted_data'='false');
