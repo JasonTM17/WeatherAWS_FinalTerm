@@ -2,9 +2,9 @@
     {
         "name":  "avg_aqi_by_city",
         "description":  "Thong ke chi so o nhiem va thoi tiet trung binh theo tung thanh pho",
-        "query_id":  "834239d3-ba12-495f-8ac7-673abb95f025",
+        "query_id":  "c2fddbda-2bad-424f-b9f9-02773d5b3df4",
         "status":  "SUCCEEDED",
-        "execution_time_ms":  872,
+        "execution_time_ms":  744,
         "bytes_scanned":  87250,
         "row_count":  3,
         "rows":  [
@@ -46,9 +46,9 @@
     {
         "name":  "peak_pollution_hours",
         "description":  "Phan tich khung gio cao diem o nhiem trong ngay",
-        "query_id":  "96035c95-2d2f-4b62-96b8-aa08db990976",
+        "query_id":  "8018524b-c34e-47ed-bb89-c05e7db88bd1",
         "status":  "SUCCEEDED",
-        "execution_time_ms":  748,
+        "execution_time_ms":  936,
         "bytes_scanned":  87250,
         "row_count":  24,
         "rows":  [
@@ -225,9 +225,9 @@
     {
         "name":  "aqi_category_distribution",
         "description":  "Phan bo cap do chat luong khong khi US EPA",
-        "query_id":  "e5b23e62-5259-401c-a6a1-9d691caa1fd5",
+        "query_id":  "ec8641a0-c706-45fb-bc8c-4f1d72d1978a",
         "status":  "SUCCEEDED",
-        "execution_time_ms":  836,
+        "execution_time_ms":  776,
         "bytes_scanned":  87250,
         "row_count":  8,
         "rows":  [
@@ -284,23 +284,23 @@
     {
         "name":  "weather_correlation",
         "description":  "Tuong quan giua Nhiet do, Do am va Bui min PM2.5",
-        "query_id":  "efae4537-970d-452c-b3fc-665713a9d424",
+        "query_id":  "14bb410d-4725-45f3-bb5d-59ddf4c962cb",
         "status":  "SUCCEEDED",
-        "execution_time_ms":  777,
+        "execution_time_ms":  930,
         "bytes_scanned":  87250,
         "row_count":  3,
         "rows":  [
-                     {
-                         "city":  "DaNang",
-                         "corr_temp_pm25":  "0.4798",
-                         "corr_humidity_pm25":  "-0.3183",
-                         "corr_wind_pm25":  "-0.2291"
-                     },
                      {
                          "city":  "HaNoi",
                          "corr_temp_pm25":  "0.6462",
                          "corr_humidity_pm25":  "0.2486",
                          "corr_wind_pm25":  "-0.4846"
+                     },
+                     {
+                         "city":  "DaNang",
+                         "corr_temp_pm25":  "0.4798",
+                         "corr_humidity_pm25":  "-0.3183",
+                         "corr_wind_pm25":  "-0.2291"
                      },
                      {
                          "city":  "HoChiMinh",
@@ -313,9 +313,9 @@
     {
         "name":  "raw_weather_aqi_records",
         "description":  "Toan bo 156 ban ghi du lieu tho (23 thuoc tinh do dac thuc te)",
-        "query_id":  "1e473ab6-4d52-4ec2-9412-5aa66626b05f",
+        "query_id":  "d67cd503-1d5a-487a-98dd-b46a111b2f43",
         "status":  "SUCCEEDED",
-        "execution_time_ms":  766,
+        "execution_time_ms":  1192,
         "bytes_scanned":  87250,
         "row_count":  156,
         "rows":  [

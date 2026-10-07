@@ -18,7 +18,7 @@
 
 **Báo cáo Tuần 1:** [Word](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) · [PDF](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf). [Nhật ký cần xác nhận](docs/WORKLOG_NHOM_05_CAN_XAC_NHAN.md) được lưu riêng, không nằm trong báo cáo. Các tệp `docs/WORKLOG.md`, `docs/FINAL_REPORT.md` và `docs/CLI_EXECUTION_LOGS.md` là bản nháp cũ chứa danh tính hoặc kết luận chưa khớp nhóm; không dùng các số giờ hay tuyên bố trong đó làm minh chứng nộp bài khi chưa đối chiếu.
 
-**Dữ liệu nộp kèm:** [Bộ CSV Tuần 1](docs/Bao_cao_tuan_1_CSV_Nhom_05.zip) và [bản Excel trình bày](docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx). CSV dùng UTF-8 BOM, dấu phẩy và xuống dòng CRLF; giữ nguyên tên cột, thứ tự dòng và giá trị nguồn. Excel hiển thị cùng số liệu trên năm trang tính để dễ xem khi máy dùng dấu phân cách CSV khác. Đây là các bảng tổng hợp đã lưu, không phải bản xuất mới từ AWS hay toàn bộ bản ghi raw.
+**Dữ liệu nộp kèm:** [Bộ CSV Tuần 1](docs/Bao_cao_tuan_1_CSV_Nhom_05.zip) và [bản Excel trình bày](docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx). ZIP chứa nguyên byte sáu CSV đã lưu: bốn bảng tổng hợp, 156 bản ghi gốc và metadata của năm truy vấn. Excel có sáu trang tính cùng số liệu, trình bày trắng đen và không có dòng phụ dưới tiêu đề. CSV thuần không chứa màu hay kiểu chữ; định dạng BOM và xuống dòng được giữ đúng theo từng tệp nguồn. Đây là bản đóng gói dữ liệu đã lưu, không phải lượt xuất mới từ AWS.
 
 ---
 

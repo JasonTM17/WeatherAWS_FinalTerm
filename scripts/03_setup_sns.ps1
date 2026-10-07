@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # Script 03: Setup Amazon SNS Alerting Topic
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí
 # Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng | SV: 24110054
@@ -6,7 +6,7 @@
 
 param(
     [string]$Region = "us-east-1",
-    [string]$AlertEmail = "24110054@student.hcmute.edu.vn"
+    [string]$AlertEmail = "24110051@student.hcmute.edu.vn"
 )
 
 $ErrorActionPreference = "Stop"

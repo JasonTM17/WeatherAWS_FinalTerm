@@ -234,51 +234,51 @@ $ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
 >>> [Truy van 1/5] avg_aqi_by_city...
     Mo ta: Thong ke chi so o nhiem va thoi tiet trung binh theo tung thanh pho
     [1/3] aws athena start-query-execution...
-          QueryExecutionId = 834239d3-ba12-495f-8ac7-673abb95f025
+          QueryExecutionId = c2fddbda-2bad-424f-b9f9-02773d5b3df4
     [2/3] aws athena get-query-execution (Dang doi ket qua)...
-          Trang thai = SUCCEEDED | Thoi gian = 872 ms | Da quet = 87250 bytes
+          Trang thai = SUCCEEDED | Thoi gian = 744 ms | Da quet = 87250 bytes
     [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
-          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/834239d3-ba12-495f-8ac7-673abb95f025.csv -> D:\AWS_Final_Term\results\aws_cli_exports\avg_aqi_by_city.csv
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/c2fddbda-2bad-424f-b9f9-02773d5b3df4.csv -> D:\AWS_Final_Term\results\aws_cli_exports\avg_aqi_by_city.csv
     [XAC THUC] Tep: avg_aqi_by_city.csv | Dong du lieu: 3 | Kich thuoc: 299 bytes
 
 >>> [Truy van 2/5] peak_pollution_hours...
     Mo ta: Phan tich khung gio cao diem o nhiem trong ngay
     [1/3] aws athena start-query-execution...
-          QueryExecutionId = 96035c95-2d2f-4b62-96b8-aa08db990976
+          QueryExecutionId = 8018524b-c34e-47ed-bb89-c05e7db88bd1
     [2/3] aws athena get-query-execution (Dang doi ket qua)...
-          Trang thai = SUCCEEDED | Thoi gian = 748 ms | Da quet = 87250 bytes
+          Trang thai = SUCCEEDED | Thoi gian = 936 ms | Da quet = 87250 bytes
     [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
-          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/96035c95-2d2f-4b62-96b8-aa08db990976.csv -> D:\AWS_Final_Term\results\aws_cli_exports\peak_pollution_hours.csv
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/8018524b-c34e-47ed-bb89-c05e7db88bd1.csv -> D:\AWS_Final_Term\results\aws_cli_exports\peak_pollution_hours.csv
     [XAC THUC] Tep: peak_pollution_hours.csv | Dong du lieu: 24 | Kich thuoc: 828 bytes
 
 >>> [Truy van 3/5] aqi_category_distribution...
     Mo ta: Phan bo cap do chat luong khong khi US EPA
     [1/3] aws athena start-query-execution...
-          QueryExecutionId = e5b23e62-5259-401c-a6a1-9d691caa1fd5
+          QueryExecutionId = ec8641a0-c706-45fb-bc8c-4f1d72d1978a
     [2/3] aws athena get-query-execution (Dang doi ket qua)...
-          Trang thai = SUCCEEDED | Thoi gian = 836 ms | Da quet = 87250 bytes
+          Trang thai = SUCCEEDED | Thoi gian = 776 ms | Da quet = 87250 bytes
     [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
-          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/e5b23e62-5259-401c-a6a1-9d691caa1fd5.csv -> D:\AWS_Final_Term\results\aws_cli_exports\aqi_category_distribution.csv
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/ec8641a0-c706-45fb-bc8c-4f1d72d1978a.csv -> D:\AWS_Final_Term\results\aws_cli_exports\aqi_category_distribution.csv
     [XAC THUC] Tep: aqi_category_distribution.csv | Dong du lieu: 8 | Kich thuoc: 354 bytes
 
 >>> [Truy van 4/5] weather_correlation...
     Mo ta: Tuong quan giua Nhiet do, Do am va Bui min PM2.5
     [1/3] aws athena start-query-execution...
-          QueryExecutionId = efae4537-970d-452c-b3fc-665713a9d424
+          QueryExecutionId = 14bb410d-4725-45f3-bb5d-59ddf4c962cb
     [2/3] aws athena get-query-execution (Dang doi ket qua)...
-          Trang thai = SUCCEEDED | Thoi gian = 777 ms | Da quet = 87250 bytes
+          Trang thai = SUCCEEDED | Thoi gian = 930 ms | Da quet = 87250 bytes
     [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
-          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/efae4537-970d-452c-b3fc-665713a9d424.csv -> D:\AWS_Final_Term\results\aws_cli_exports\weather_correlation.csv
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/14bb410d-4725-45f3-bb5d-59ddf4c962cb.csv -> D:\AWS_Final_Term\results\aws_cli_exports\weather_correlation.csv
     [XAC THUC] Tep: weather_correlation.csv | Dong du lieu: 3 | Kich thuoc: 177 bytes
 
 >>> [Truy van 5/5] raw_weather_aqi_records...
     Mo ta: Toan bo 156 ban ghi du lieu tho (23 thuoc tinh do dac thuc te)
     [1/3] aws athena start-query-execution...
-          QueryExecutionId = 1e473ab6-4d52-4ec2-9412-5aa66626b05f
+          QueryExecutionId = d67cd503-1d5a-487a-98dd-b46a111b2f43
     [2/3] aws athena get-query-execution (Dang doi ket qua)...
-          Trang thai = SUCCEEDED | Thoi gian = 766 ms | Da quet = 87250 bytes
+          Trang thai = SUCCEEDED | Thoi gian = 1192 ms | Da quet = 87250 bytes
     [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
-          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/1e473ab6-4d52-4ec2-9412-5aa66626b05f.csv -> D:\AWS_Final_Term\results\aws_cli_exports\raw_weather_aqi_records.csv
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/d67cd503-1d5a-487a-98dd-b46a111b2f43.csv -> D:\AWS_Final_Term\results\aws_cli_exports\raw_weather_aqi_records.csv
     [XAC THUC] Tep: raw_weather_aqi_records.csv | Dong du lieu: 156 | Kich thuoc: 38716 bytes
 
 >>> [XUAT METRICS] Da tao tep query_metrics.csv thanh cong tai D:\AWS_Final_Term\results\aws_cli_exports\query_metrics.csv!
@@ -289,7 +289,7 @@ $ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
 Packaged 4 saved Athena results, query metrics, and README: D:\AWS_Final_Term\docs\Bao_cao_tuan_1_CSV_Nhom_05.zip
 
 ========================================================================
-  HOAN THANH XUAT TOAN BO FILE CSV TU AWS CLI TRONG 50.6 GIAY!
+  HOAN THANH XUAT TOAN BO FILE CSV TU AWS CLI TRONG 55.9 GIAY!
   - Thu muc xuat chinh : D:\AWS_Final_Term\results\aws_cli_exports
   - Thu muc dong bo    : D:\AWS_Final_Term\results\athena_queries
   - Tong so tep CSV    : 6 (4 bang phan tich + 1 bang raw 156 dong + 1 tep metrics)

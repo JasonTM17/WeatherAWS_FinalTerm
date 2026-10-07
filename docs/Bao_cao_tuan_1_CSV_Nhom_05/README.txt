@@ -11,11 +11,11 @@ Tên cột, thứ tự cột, thứ tự dòng và giá trị không bị đổi
 CSV thuần không lưu màu hay kiểu chữ; bản Excel đi kèm có trình bày đen–trắng.
 
 DANH MỤC TỆP
-1. avg_aqi_by_city.csv – 3 dòng kết quả; QueryExecutionId: 834239d3-ba12-495f-8ac7-673abb95f025.
-2. peak_pollution_hours.csv – 24 dòng kết quả; QueryExecutionId: 96035c95-2d2f-4b62-96b8-aa08db990976.
-3. aqi_category_distribution.csv – 8 dòng kết quả; QueryExecutionId: e5b23e62-5259-401c-a6a1-9d691caa1fd5.
-4. weather_correlation.csv – 3 dòng kết quả; QueryExecutionId: efae4537-970d-452c-b3fc-665713a9d424.
-5. raw_weather_aqi_records.csv – 156 bản ghi, 23 cột; QueryExecutionId: 1e473ab6-4d52-4ec2-9412-5aa66626b05f.
+1. avg_aqi_by_city.csv – 3 dòng kết quả; QueryExecutionId: c2fddbda-2bad-424f-b9f9-02773d5b3df4.
+2. peak_pollution_hours.csv – 24 dòng kết quả; QueryExecutionId: 8018524b-c34e-47ed-bb89-c05e7db88bd1.
+3. aqi_category_distribution.csv – 8 dòng kết quả; QueryExecutionId: ec8641a0-c706-45fb-bc8c-4f1d72d1978a.
+4. weather_correlation.csv – 3 dòng kết quả; QueryExecutionId: 14bb410d-4725-45f3-bb5d-59ddf4c962cb.
+5. raw_weather_aqi_records.csv – 156 bản ghi, 23 cột; QueryExecutionId: d67cd503-1d5a-487a-98dd-b46a111b2f43.
 6. query_metrics.csv – metadata của cả năm truy vấn: trạng thái, thời gian chạy,
    dung lượng quét và tên CSV. result_rows là số dòng dữ liệu của từng CSV.
 
