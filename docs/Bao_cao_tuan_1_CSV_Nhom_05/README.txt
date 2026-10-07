@@ -12,10 +12,10 @@ Tên cột, thứ tự cột, thứ tự dòng và từng giá trị giữ đún
 Số dùng dấu chấm thập phân, không thêm dấu phân nhóm hay đơn vị vào ô dữ liệu.
 
 DANH MỤC TỆP
-1. avg_aqi_by_city.csv – 3 dòng kết quả; QueryExecutionId: b07478d6-40d8-4923-9f32-3337adc3389d.
-2. peak_pollution_hours.csv – 24 dòng kết quả; QueryExecutionId: f0c992c3-c598-4e31-b483-1cf367774f02.
-3. aqi_category_distribution.csv – 8 dòng kết quả; QueryExecutionId: 09715d2d-6b8f-4f34-88e5-fa4ae8aa7216.
-4. weather_correlation.csv – 3 dòng kết quả; QueryExecutionId: 5704da34-ff6f-4f1e-8a1d-d9f983417231.
+1. avg_aqi_by_city.csv – 3 dòng kết quả; QueryExecutionId: 57e9d139-1a73-422d-adb4-e0b006f740c6.
+2. peak_pollution_hours.csv – 24 dòng kết quả; QueryExecutionId: f77e7656-bb51-4cb1-9ba8-117bce879d57.
+3. aqi_category_distribution.csv – 8 dòng kết quả; QueryExecutionId: f1e2d2a8-dc47-4afb-98e6-30f4de8b096f.
+4. weather_correlation.csv – 3 dòng kết quả; QueryExecutionId: 25272532-19a7-405f-b803-91244e1c946a.
 5. query_metrics.csv – bảng đối chiếu bốn truy vấn với các trường trạng thái,
    thời gian chạy (ms), dung lượng quét (byte) và tên tệp kết quả.
    ResultRows là số dòng kết quả trong CSV, không phải số bản ghi raw.

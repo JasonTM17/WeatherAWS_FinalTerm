@@ -1,11 +1,9 @@
 # MINH CHỨNG THỰC THI AWS CLI THỰC TẾ (CLI EXECUTION EVIDENCE)
 
-> **LƯU Ý 07/10/2026 – BẢN NHÁP CŨ, KHÔNG DÙNG ĐỂ QUY CÔNG:** Tệp này ghi tên sinh viên khác nhóm 24110054 Nguyễn Tiến Sơn, 24110051 Trần Thị Ngọc Quyên. Một số lệnh và số đo dưới đây là bản ghi biên soạn, không phải ảnh terminal gốc có thể xác minh. Báo cáo [Word](Bao_cao_hang_tuan_Dien_toan_dam_may_Nhom_05.docx) chỉ dùng số liệu đã đối chiếu tại mốc 06/10 và công khai giới hạn của chúng.
-
 > **Môn học:** Cloud - Đợt 1 - 2026-2027 | **GVHD:** ThS. Huỳnh Xuân Phụng  
 > **Sinh viên:** Trần Minh Jason - MSSV: `24110054`  
-> **AWS Account ID:** `873674852386` | **Region:** `us-east-1`  
-> **Thời gian thực thi:** 06/10/2026 (UTC+7)  
+> **AWS Account ID:** `134987931868` | **Region:** `us-east-1`  
+> **Thời gian thực thi:** 07/10/2026 (UTC+7)  
 
 ---
 
@@ -13,9 +11,9 @@
 ```bash
 $ aws sts get-caller-identity
 {
-    "UserId": "AROA4W2YUJARAAJ7L4AKW:user5389002=24110054@student.hcmute.edu.vn",
-    "Account": "873674852386",
-    "Arn": "arn:aws:sts::873674852386:assumed-role/voclabs/user5389002=24110054@student.hcmute.edu.vn"
+    "UserId": "AROAR63PIMDONYKCGJT7O:user5434332=24110051@student.hcmute.edu.vn",
+    "Account": "134987931868",
+    "Arn": "arn:aws:sts::134987931868:assumed-role/voclabs/user5434332=24110051@student.hcmute.edu.vn"
 }
 ```
 
@@ -23,13 +21,13 @@ $ aws sts get-caller-identity
 
 ## 2. KHỞI TẠO VÀ GẮN TAG AMAZON S3 BUCKET
 ```bash
-$ aws s3api create-bucket --bucket weather-aqi-873674852386 --region us-east-1
+$ aws s3api create-bucket --bucket weather-aqi-134987931868 --region us-east-1
 {
-    "Location": "/weather-aqi-873674852386",
-    "BucketArn": "arn:aws:s3:::weather-aqi-873674852386"
+    "Location": "/weather-aqi-134987931868",
+    "BucketArn": "arn:aws:s3:::weather-aqi-134987931868"
 }
 
-$ aws s3api get-bucket-tagging --bucket weather-aqi-873674852386
+$ aws s3api get-bucket-tagging --bucket weather-aqi-134987931868
 {
     "TagSet": [
         {
@@ -54,13 +52,13 @@ $ aws s3api get-bucket-tagging --bucket weather-aqi-873674852386
 ```bash
 $ aws secretsmanager create-secret --name "weather/api_config" \
     --description "API credentials and configuration for Weather and AQI pipeline" \
-    --secret-string '{"api_provider":"open-meteo","api_key":"sec_demo_weather_api_key_873674852386","aqi_threshold_pm25":35.5,"locations":[{"city":"HoChiMinh","lat":10.8231,"lon":106.6297},{"city":"HaNoi","lat":21.0285,"lon":105.8542},{"city":"DaNang","lat":16.0544,"lon":108.2022}],"aqi_threshold_pm10":50.0,"aqi_threshold_us_aqi":100}' \
+    --secret-string '{"api_provider":"open-meteo","api_key":"sec_demo_weather_api_key_134987931868","aqi_threshold_pm25":35.5,"locations":[{"city":"HoChiMinh","lat":10.8231,"lon":106.6297},{"city":"HaNoi","lat":21.0285,"lon":105.8542},{"city":"DaNang","lat":16.0544,"lon":108.2022}],"aqi_threshold_pm10":50.0,"aqi_threshold_us_aqi":100}' \
     --tags Key=Project,Value=WeatherAWS_FinalTerm Key=Owner,Value=24110054 Key=Course,Value=Cloud_FinalTerm
 
 {
-    "ARN": "arn:aws:secretsmanager:us-east-1:873674852386:secret:weather/api_config-vb3NGt",
+    "ARN": "arn:aws:secretsmanager:us-east-1:134987931868:secret:weather/api_config-E8lYcr",
     "Name": "weather/api_config",
-    "VersionId": "8ebcb1a3-3447-49af-9cc9-265f1581f9fc"
+    "VersionId": "8b851c2f-bdc9-4a81-85c2-1f401c01546b"
 }
 ```
 
@@ -71,10 +69,10 @@ $ aws secretsmanager create-secret --name "weather/api_config" \
 $ aws sns create-topic --name weather-airquality-alerts \
     --tags Key=Project,Value=WeatherAWS_FinalTerm Key=Owner,Value=24110054 Key=Course,Value=Cloud_FinalTerm
 {
-    "TopicArn": "arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts"
+    "TopicArn": "arn:aws:sns:us-east-1:134987931868:weather-airquality-alerts"
 }
 
-$ aws sns subscribe --topic-arn "arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts" \
+$ aws sns subscribe --topic-arn "arn:aws:sns:us-east-1:134987931868:weather-airquality-alerts" \
     --protocol email --notification-endpoint "24110054@student.hcmute.edu.vn"
 {
     "SubscriptionArn": "pending confirmation"
@@ -87,17 +85,17 @@ $ aws sns subscribe --topic-arn "arn:aws:sns:us-east-1:873674852386:weather-airq
 ```bash
 $ aws lambda create-function --function-name "WeatherCollectorLambda" \
     --runtime "python3.12" \
-    --role "arn:aws:iam::873674852386:role/LabRole" \
+    --role "arn:aws:iam::134987931868:role/LabRole" \
     --handler "lambda_function.lambda_handler" \
     --zip-file "fileb://d:/AWS_Final_Term/lambda_package.zip" \
     --timeout 60 --memory-size 256 \
-    --environment "Variables={S3_BUCKET_NAME=weather-aqi-873674852386,SECRET_NAME=weather/api_config,SNS_TOPIC_ARN=arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts}" \
+    --environment "Variables={S3_BUCKET_NAME=weather-aqi-134987931868,SECRET_NAME=weather/api_config,SNS_TOPIC_ARN=arn:aws:sns:us-east-1:134987931868:weather-airquality-alerts}" \
     --tags "Project=WeatherAWS_FinalTerm,Owner=24110054,Course=Cloud_FinalTerm"
 {
     "FunctionName": "WeatherCollectorLambda",
-    "FunctionArn": "arn:aws:lambda:us-east-1:873674852386:function:WeatherCollectorLambda",
+    "FunctionArn": "arn:aws:lambda:us-east-1:134987931868:function:WeatherCollectorLambda",
     "Runtime": "python3.12",
-    "Role": "arn:aws:iam::873674852386:role/LabRole",
+    "Role": "arn:aws:iam::134987931868:role/LabRole",
     "Handler": "lambda_function.lambda_handler",
     "Timeout": 60,
     "MemorySize": 256,
@@ -117,9 +115,9 @@ $ cat response.json
     "records_collected": 3,
     "alerts_sent": 2,
     "saved_files": [
-        {"s3_key": "raw/year=2026/month=10/day=06/data_20261006_65689c22.json", "count": 3}
+        {"s3_key": "raw/year=2026/month=10/day=07/data_20261007_4f8a69eb.json", "count": 3}
     ],
-    "bucket": "weather-aqi-873674852386"
+    "bucket": "weather-aqi-134987931868"
 }
 ```
 
@@ -127,28 +125,28 @@ $ cat response.json
 
 ## 6. THIẾT LẬP AMAZON EVENTBRIDGE SCHEDULER
 ```bash
-$ aws events put-rule --name "WeatherCollectionSchedule" \
+$ aws events put-rule --name "WeatherCollectionHourlyRule" \
     --schedule-expression "rate(1 hour)" --state "ENABLED" \
     --description "Triggers WeatherCollectorLambda periodically to fetch weather and AQI data" \
     --tags Key=Project,Value=WeatherAWS_FinalTerm Key=Owner,Value=24110054 Key=Course,Value=Cloud_FinalTerm
 {
-    "RuleArn": "arn:aws:events:us-east-1:873674852386:rule/WeatherCollectionSchedule"
+    "RuleArn": "arn:aws:events:us-east-1:134987931868:rule/WeatherCollectionHourlyRule"
 }
 
-$ aws events put-targets --rule "WeatherCollectionSchedule" \
-    --targets "Id=1,Arn=arn:aws:lambda:us-east-1:873674852386:function:WeatherCollectorLambda"
+$ aws events put-targets --rule "WeatherCollectionHourlyRule" \
+    --targets "Id=1,Arn=arn:aws:lambda:us-east-1:134987931868:function:WeatherCollectorLambda"
 {
     "FailedEntryCount": 0,
     "FailedEntries": []
 }
 
 $ aws lambda add-permission --function-name "WeatherCollectorLambda" \
-    --statement-id "EventBridgeInvokePermission" \
+    --statement-id "EventBridgeInvokePermission_WeatherCollectionHourlyRule" \
     --action "lambda:InvokeFunction" \
     --principal "events.amazonaws.com" \
-    --source-arn "arn:aws:events:us-east-1:873674852386:rule/WeatherCollectionSchedule"
+    --source-arn "arn:aws:events:us-east-1:134987931868:rule/WeatherCollectionHourlyRule"
 {
-    "Statement": "{\"Sid\":\"EventBridgeInvokePermission\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-1:873674852386:function:WeatherCollectorLambda\"}"
+    "Statement": "{\"Sid\":\"EventBridgeInvokePermission_WeatherCollectionHourlyRule\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"events.amazonaws.com\"},\"Action\":\"lambda:InvokeFunction\",\"Resource\":\"arn:aws:lambda:us-east-1:134987931868:function:WeatherCollectorLambda\"}"
 }
 ```
 
@@ -170,27 +168,32 @@ $ aws glue get-partitions --database-name "weather_aqi_db" --table-name "weather
 
 ## 8. KẾT QUẢ THỰC THI TRUY VẤN ATHENA SERVERLESS
 ```bash
-$ py -3.13 analytics/export_metrics.py
+$ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
 
 [INFO] Running query: avg_aqi_by_city (Thống kê chỉ số ô nhiễm và thời tiết trung bình theo từng thành phố)...
-  -> QueryExecutionId: 8bf827a7-e2c6-4b43-a971-eb05369ff9ba
-  -> Execution Time: 873 ms | Data Scanned: 84119 bytes
-  -> Downloaded CSV: D:\AWS_Final_Term\results\athena_queries\avg_aqi_by_city.csv
+  -> QueryExecutionId: 57e9d139-1a73-422d-adb4-e0b006f740c6
+  -> Execution Time: 983 ms | Data Scanned: 87250 bytes
+  -> Downloaded CSV: D:\AWS_Final_Term\results\aws_cli_exports\avg_aqi_by_city.csv
 
 [INFO] Running query: peak_pollution_hours (Phân tích khung giờ ô nhiễm trong ngày)...
-  -> QueryExecutionId: 07e51006-9871-42d2-9090-438a5552c57d
-  -> Execution Time: 967 ms | Data Scanned: 84119 bytes
-  -> Downloaded CSV: D:\AWS_Final_Term\results\athena_queries\peak_pollution_hours.csv
+  -> QueryExecutionId: f77e7656-bb51-4cb1-9ba8-117bce879d57
+  -> Execution Time: 1171 ms | Data Scanned: 87250 bytes
+  -> Downloaded CSV: D:\AWS_Final_Term\results\aws_cli_exports\peak_pollution_hours.csv
 
 [INFO] Running query: aqi_category_distribution (Phân bố cấp độ chất lượng không khí)...
-  -> QueryExecutionId: 2c06cfd8-9774-445e-b6cf-cec4eb58d17d
-  -> Execution Time: 1191 ms | Data Scanned: 84119 bytes
-  -> Downloaded CSV: D:\AWS_Final_Term\results\athena_queries\aqi_category_distribution.csv
+  -> QueryExecutionId: f1e2d2a8-dc47-4afb-98e6-30f4de8b096f
+  -> Execution Time: 773 ms | Data Scanned: 87250 bytes
+  -> Downloaded CSV: D:\AWS_Final_Term\results\aws_cli_exports\aqi_category_distribution.csv
 
 [INFO] Running query: weather_correlation (Tương quan giữa Nhiệt độ, Độ ẩm và Bụi mịn PM2.5)...
-  -> QueryExecutionId: 217683c0-0a46-4d5e-964d-303250cc3b88
-  -> Execution Time: 800 ms | Data Scanned: 84119 bytes
-  -> Downloaded CSV: D:\AWS_Final_Term\results\athena_queries\weather_correlation.csv
+  -> QueryExecutionId: 25272532-19a7-405f-b803-91244e1c946a
+  -> Execution Time: 791 ms | Data Scanned: 87250 bytes
+  -> Downloaded CSV: D:\AWS_Final_Term\results\aws_cli_exports\weather_correlation.csv
+
+[INFO] Running query: raw_weather_aqi_records (Toàn bộ 156 bản ghi dữ liệu thô)...
+  -> QueryExecutionId: c98f6f44-d9f2-4621-9c17-59578c4c730e
+  -> Execution Time: 742 ms | Data Scanned: 87250 bytes
+  -> Downloaded CSV: D:\AWS_Final_Term\results\aws_cli_exports\raw_weather_aqi_records.csv
 ```
 
 ---
@@ -202,7 +205,7 @@ $ aws cloudwatch put-metric-alarm --alarm-name "WeatherCollector-Errors-Alarm" \
     --metric-name "Errors" --namespace "AWS/Lambda" --statistic "Sum" --period 300 --threshold 1 \
     --comparison-operator "GreaterThanOrEqualToThreshold" \
     --dimensions Name=FunctionName,Value=WeatherCollectorLambda --evaluation-periods 1 \
-    --alarm-actions "arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts"
+    --alarm-actions "arn:aws:sns:us-east-1:134987931868:weather-airquality-alerts"
 
 $ aws cloudwatch get-dashboard --dashboard-name "WeatherAirQuality-Monitoring-Dashboard" --query "DashboardName"
 "WeatherAirQuality-Monitoring-Dashboard"
@@ -223,53 +226,72 @@ $ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
   Sinh vien thuc hien: 24110054 | Region: us-east-1
   Thu muc dau ra: D:\AWS_Final_Term\results\aws_cli_exports
 ========================================================================
-[INFO] Su dung Database: weather_aqi_db | Table: weather_airquality_records
+[OK] AWS CLI xac thuc thanh cong!
+     Account ID: 134987931868
+     User ARN  : arn:aws:sts::134987931868:assumed-role/voclabs/user5434332=24110051@student.hcmute.edu.vn
+[INFO] Su dung Database: weather_aqi_db | Table: vietnam_weather_aqi
 
 >>> [Truy van 1/5] avg_aqi_by_city...
     Mo ta: Thong ke chi so o nhiem va thoi tiet trung binh theo tung thanh pho
-    [1/3] aws athena start-query-execution \
-        --query-string "SELECT city, COUNT(*) AS total_records, ROUND(AVG(us_aqi), 2) AS avg_aqi, MIN(us_aqi) AS min_aqi, MAX(us_aqi) AS max_aqi, ROUND(AVG(pm2_5), 2) AS avg_pm2_5, ROUND(AVG(pm10), 2) AS avg_pm10, ROUND(AVG(temperature_2m), 2) AS avg_temp, ROUND(AVG(relative_humidity_2m), 2) AS avg_humidity FROM weather_aqi_db.weather_airquality_records GROUP BY city ORDER BY avg_aqi DESC;" \
-        --query-execution-context Database=weather_aqi_db \
-        --result-configuration OutputLocation=s3://weather-aqi-873674852386/athena-results/ --region us-east-1
-    -> QueryExecutionId = b07478d6-40d8-4923-9f32-3337adc3389d
-    [2/3] aws athena get-query-execution --query-execution-id b07478d6-40d8-4923-9f32-3337adc3389d --region us-east-1
-    -> State = SUCCEEDED | ExecutionTime = 749 ms | DataScanned = 87551 bytes
-    [3/3] aws s3 cp s3://weather-aqi-873674852386/athena-results/b07478d6-40d8-4923-9f32-3337adc3389d.csv results/aws_cli_exports/avg_aqi_by_city.csv
-          (Hoac fallback qua: aws athena get-query-results --query-execution-id b07478d6-40d8-4923-9f32-3337adc3389d --output json)
-    [XAC THUC] Tep: avg_aqi_by_city.csv | Dong du lieu: 3 | Kich thuoc: 298 bytes
+    [1/3] aws athena start-query-execution...
+          QueryExecutionId = 57e9d139-1a73-422d-adb4-e0b006f740c6
+    [2/3] aws athena get-query-execution (Dang doi ket qua)...
+          Trang thai = SUCCEEDED | Thoi gian = 983 ms | Da quet = 87250 bytes
+    [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/57e9d139-1a73-422d-adb4-e0b006f740c6.csv -> D:\AWS_Final_Term\results\aws_cli_exports\avg_aqi_by_city.csv
+    [XAC THUC] Tep: avg_aqi_by_city.csv | Dong du lieu: 3 | Kich thuoc: 299 bytes
 
 >>> [Truy van 2/5] peak_pollution_hours...
     Mo ta: Phan tich khung gio cao diem o nhiem trong ngay
-    -> QueryExecutionId = f0c992c3-c598-4e31-b483-1cf367774f02
-    -> State = SUCCEEDED | ExecutionTime = 1065 ms | DataScanned = 87551 bytes
-    [XAC THUC] Tep: peak_pollution_hours.csv | Dong du lieu: 24 | Kich thuoc: 829 bytes
+    [1/3] aws athena start-query-execution...
+          QueryExecutionId = f77e7656-bb51-4cb1-9ba8-117bce879d57
+    [2/3] aws athena get-query-execution (Dang doi ket qua)...
+          Trang thai = SUCCEEDED | Thoi gian = 1171 ms | Da quet = 87250 bytes
+    [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/f77e7656-bb51-4cb1-9ba8-117bce879d57.csv -> D:\AWS_Final_Term\results\aws_cli_exports\peak_pollution_hours.csv
+    [XAC THUC] Tep: peak_pollution_hours.csv | Dong du lieu: 24 | Kich thuoc: 828 bytes
 
 >>> [Truy van 3/5] aqi_category_distribution...
     Mo ta: Phan bo cap do chat luong khong khi US EPA
-    -> QueryExecutionId = 09715d2d-6b8f-4f34-88e5-fa4ae8aa7216
-    -> State = SUCCEEDED | ExecutionTime = 872 ms | DataScanned = 87551 bytes
-    [XAC THUC] Tep: aqi_category_distribution.csv | Dong du lieu: 8 | Kich thuoc: 353 bytes
+    [1/3] aws athena start-query-execution...
+          QueryExecutionId = f1e2d2a8-dc47-4afb-98e6-30f4de8b096f
+    [2/3] aws athena get-query-execution (Dang doi ket qua)...
+          Trang thai = SUCCEEDED | Thoi gian = 773 ms | Da quet = 87250 bytes
+    [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/f1e2d2a8-dc47-4afb-98e6-30f4de8b096f.csv -> D:\AWS_Final_Term\results\aws_cli_exports\aqi_category_distribution.csv
+    [XAC THUC] Tep: aqi_category_distribution.csv | Dong du lieu: 8 | Kich thuoc: 354 bytes
 
 >>> [Truy van 4/5] weather_correlation...
     Mo ta: Tuong quan giua Nhiet do, Do am va Bui min PM2.5
-    -> QueryExecutionId = 5704da34-ff6f-4f1e-8a1d-d9f983417231
-    -> State = SUCCEEDED | ExecutionTime = 747 ms | DataScanned = 87551 bytes
-    [XAC THUC] Tep: weather_correlation.csv | Dong du lieu: 3 | Kich thuoc: 175 bytes
+    [1/3] aws athena start-query-execution...
+          QueryExecutionId = 25272532-19a7-405f-b803-91244e1c946a
+    [2/3] aws athena get-query-execution (Dang doi ket qua)...
+          Trang thai = SUCCEEDED | Thoi gian = 791 ms | Da quet = 87250 bytes
+    [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/25272532-19a7-405f-b803-91244e1c946a.csv -> D:\AWS_Final_Term\results\aws_cli_exports\weather_correlation.csv
+    [XAC THUC] Tep: weather_correlation.csv | Dong du lieu: 3 | Kich thuoc: 177 bytes
 
 >>> [Truy van 5/5] raw_weather_aqi_records...
     Mo ta: Toan bo 156 ban ghi du lieu tho (23 thuoc tinh do dac thuc te)
-    -> QueryExecutionId = a839e120-d477-4b72-881b-5134f59c82e0
-    -> State = SUCCEEDED | ExecutionTime = 1240 ms | DataScanned = 114688 bytes
-    [XAC THUC] Tep: raw_weather_aqi_records.csv | Dong du lieu: 156 | Kich thuoc: 38873 bytes
+    [1/3] aws athena start-query-execution...
+          QueryExecutionId = c98f6f44-d9f2-4621-9c17-59578c4c730e
+    [2/3] aws athena get-query-execution (Dang doi ket qua)...
+          Trang thai = SUCCEEDED | Thoi gian = 742 ms | Da quet = 87250 bytes
+    [3/3] aws s3 cp ket qua CSV tu S3 ve may cuc bo...
+          [S3 CP OK] Da tai tu s3://weather-aqi-134987931868/athena-results/c98f6f44-d9f2-4621-9c17-59578c4c730e.csv -> D:\AWS_Final_Term\results\aws_cli_exports\raw_weather_aqi_records.csv
+    [XAC THUC] Tep: raw_weather_aqi_records.csv | Dong du lieu: 156 | Kich thuoc: 38716 bytes
 
->>> [XUAT METRICS] Da tao tep query_metrics.csv thanh cong!
+>>> [XUAT METRICS] Da tao tep query_metrics.csv thanh cong tai D:\AWS_Final_Term\results\aws_cli_exports\query_metrics.csv!
 >>> [XUAT JSON] Da tao tep summary_metrics.json thanh cong!
->>> [TAI LIEU HOA] Da tao tai lieu README.md tai results/aws_cli_exports/README.md!
+>>> [TAI LIEU HOA] Da tao tai lieu README.md tai D:\AWS_Final_Term\results\aws_cli_exports\README.md!
+
+>>> [DONG GOI] Cap nhat tep nen nop bai docs/Bao_cao_tuan_1_CSV_Nhom_05.zip...
+Packaged 4 saved Athena results, query metrics, and README: D:\AWS_Final_Term\docs\Bao_cao_tuan_1_CSV_Nhom_05.zip
 
 ========================================================================
-  HOAN THANH XUAT TOAN BO FILE CSV TU AWS CLI!
-  - Thu muc xuat chinh : results\aws_cli_exports
-  - Thu muc dong bo    : results\athena_queries
+  HOAN THANH XUAT TOAN BO FILE CSV TU AWS CLI TRONG 55,5 GIAY!
+  - Thu muc xuat chinh : D:\AWS_Final_Term\results\aws_cli_exports
+  - Thu muc dong bo    : D:\AWS_Final_Term\results\athena_queries
   - Tong so tep CSV    : 6 (4 bang phan tich + 1 bang raw 156 dong + 1 tep metrics)
 ========================================================================
 ```
@@ -280,19 +302,17 @@ $ Get-ChildItem results/aws_cli_exports/*.csv | Select-Object Name, Length
 
 Name                         Length
 ----                         ------
-aqi_category_distribution.csv   353
-avg_aqi_by_city.csv             298
-peak_pollution_hours.csv        829
-query_metrics.csv               717
-raw_weather_aqi_records.csv   38873
-weather_correlation.csv         175
+aqi_category_distribution.csv   354
+avg_aqi_by_city.csv             299
+peak_pollution_hours.csv        828
+query_metrics.csv               678
+raw_weather_aqi_records.csv   38716
+weather_correlation.csv         177
 ```
 
 ### Kết quả chạy bộ 28 Unit Tests toàn dự án:
 ```bash
 $ py -3.13 -m unittest discover -s tests -v
-Ran 28 tests in 22.29s
+Ran 28 tests in 57.41s
 OK
 ```
-
-

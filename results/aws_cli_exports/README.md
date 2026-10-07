@@ -4,9 +4,9 @@
 - GVHD: ThS. Huynh Xuan Phung
 - Sinh vien thuc hien: 24110054 (Nguyen Tien Son) & 24110051 (Tran Thi Ngoc Quyen)
 - Co so du lieu Athena: `weather_aqi_db`
-- Bang du lieu Athena: `weather_airquality_records` (hoac view dong `vietnam_weather_aqi`)
-- Moi truong: AWS Learner Lab (us-east-1 | Account: 873674852386)
-- Che do thuc thi: OFFLINE_FALLBACK
+- Bang du lieu Athena: `vietnam_weather_aqi` (hoac view dong `vietnam_weather_aqi`)
+- Moi truong: AWS Learner Lab (us-east-1 | Account: 134987931868)
+- Che do thuc thi: LIVE_AWS_CLI
 
 ---
 
@@ -28,9 +28,9 @@
 ### Buoc 1: Bat dau thuc thi truy van tren Amazon Athena
 ```bash
 aws athena start-query-execution \
-    --query-string "SELECT * FROM weather_aqi_db.weather_airquality_records LIMIT 10;" \
+    --query-string "SELECT * FROM weather_aqi_db.vietnam_weather_aqi LIMIT 10;" \
     --query-execution-context Database="weather_aqi_db" \
-    --result-configuration OutputLocation="s3://weather-aqi-873674852386/athena-results/" \
+    --result-configuration OutputLocation="s3://weather-aqi-134987931868/athena-results/" \
     --region "us-east-1"
 ```
 
@@ -44,7 +44,7 @@ aws athena get-query-execution \
 ### Buoc 3: Phuong thuc 1 - Tai tep CSV ket qua tu S3 ve may cuc bo
 ```bash
 aws s3 cp \
-    "s3://weather-aqi-873674852386/athena-results/b07478d6-40d8-4923-9f32-3337adc3389d.csv" \
+    "s3://weather-aqi-134987931868/athena-results/b07478d6-40d8-4923-9f32-3337adc3389d.csv" \
     "results/aws_cli_exports/avg_aqi_by_city.csv" \
     --region "us-east-1"
 ```

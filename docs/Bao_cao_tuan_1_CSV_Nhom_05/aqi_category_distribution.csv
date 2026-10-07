@@ -1,8 +1,8 @@
 ﻿city,aqi_category,occurrence_count,percentage
-DaNang,Moderate,43,82.7
+DaNang,Moderate,39,75.0
+DaNang,Good,6,11.5
 DaNang,Unhealthy for Sensitive Groups,4,7.7
 DaNang,Unhealthy,3,5.8
-DaNang,Good,2,3.8
 HaNoi,Moderate,52,100.0
 HoChiMinh,Unhealthy for Sensitive Groups,35,67.3
 HoChiMinh,Moderate,13,25.0

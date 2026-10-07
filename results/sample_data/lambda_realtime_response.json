@@ -1,1 +1,1 @@
-{"statusCode": 200, "message": "Weather & Air Quality data collection completed successfully.", "records_collected": 3, "alerts_sent": 2, "saved_files": [{"s3_key": "raw/year=2026/month=10/day=06/data_20261006_65689c22.json", "count": 3}], "bucket": "weather-aqi-873674852386"}
+{"statusCode": 200, "message": "Weather & Air Quality data collection completed successfully.", "records_collected": 3, "alerts_sent": 2, "saved_files": [{"s3_key": "raw/year=2026/month=10/day=07/data_20261007_4f8a69eb.json", "count": 3}], "bucket": "weather-aqi-134987931868"}

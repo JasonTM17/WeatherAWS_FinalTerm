@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # Script 02: Setup AWS Secrets Manager
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí
 # Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng | SV: 24110054
@@ -12,11 +12,12 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "==> [02/07] Khởi tạo AWS Secrets Manager cho API Key & Cấu hình..." -ForegroundColor Cyan
 
+$accountId = (aws sts get-caller-identity --query "Account" --output text).Trim()
 $secretName = "weather/api_config"
 
 $configPayload = @{
     api_provider = "open-meteo"
-    api_key = "sec_demo_weather_api_key_873674852386"
+    api_key = "sec_demo_weather_api_key_$accountId"
     aqi_threshold_pm25 = 35.5
     aqi_threshold_pm10 = 50.0
     aqi_threshold_us_aqi = 100
