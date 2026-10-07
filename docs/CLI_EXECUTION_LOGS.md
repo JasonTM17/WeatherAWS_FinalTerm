@@ -207,3 +207,80 @@ $ aws cloudwatch put-metric-alarm --alarm-name "WeatherCollector-Errors-Alarm" \
 $ aws cloudwatch get-dashboard --dashboard-name "WeatherAirQuality-Monitoring-Dashboard" --query "DashboardName"
 "WeatherAirQuality-Monitoring-Dashboard"
 ```
+
+---
+
+## 10. XUẤT TOÀN BỘ KẾT QUẢ VÀ DỮ LIỆU THÔ RA FILE CSV TRỰC TIẾP QUA AWS CLI
+
+```bash
+$ pwsh -File scripts/export_csv_via_cli.ps1 -Region "us-east-1"
+
+========================================================================
+  XUAT KET QUA TRUY VAN ATHENA RA CSV TRUC TIEP QUA AWS CLI
+  Mon hoc: Cloud - GVHD: ThS. Huynh Xuan Phung
+  Sinh vien thuc hien: 24110054 | Region: us-east-1
+  Thu muc dau ra: D:\AWS_Final_Term\results\aws_cli_exports
+========================================================================
+
+>>> [Truy van 1/5] avg_aqi_by_city...
+    Mo ta: Thong ke chi so o nhiem va thoi tiet trung binh theo tung thanh pho
+    [1/3] aws athena start-query-execution \
+        --query-string "SELECT city, COUNT(*) AS total_records, ROUND(AVG(us_aqi), 2) AS avg_aqi, MIN(us_aqi) AS min_aqi, MAX(us_aqi) AS max_aqi, ROUND(AVG(pm2_5), 2) AS avg_pm2_5, ROUND(AVG(pm10), 2) AS avg_pm10, ROUND(AVG(temperature_2m), 2) AS avg_temp, ROUND(AVG(relative_humidity_2m), 2) AS avg_humidity FROM weather_aqi_db.weather_airquality_records GROUP BY city ORDER BY avg_aqi DESC;" \
+        --query-execution-context Database=weather_aqi_db \
+        --result-configuration OutputLocation=s3://weather-aqi-873674852386/athena-results/ --region us-east-1
+    -> QueryExecutionId = b07478d6-40d8-4923-9f32-3337adc3389d
+    [2/3] aws athena get-query-execution --query-execution-id b07478d6-40d8-4923-9f32-3337adc3389d --region us-east-1
+    -> State = SUCCEEDED | ExecutionTime = 749 ms | DataScanned = 87551 bytes
+    [3/3] aws s3 cp s3://weather-aqi-873674852386/athena-results/b07478d6-40d8-4923-9f32-3337adc3389d.csv results/aws_cli_exports/avg_aqi_by_city.csv
+    [XAC THUC] Tep: avg_aqi_by_city.csv | Dong du lieu: 3 | Kich thuoc: 298 bytes
+
+>>> [Truy van 2/5] peak_pollution_hours...
+    Mo ta: Phan tich khung gio cao diem o nhiem trong ngay
+    -> QueryExecutionId = f0c992c3-c598-4e31-b483-1cf367774f02
+    -> State = SUCCEEDED | ExecutionTime = 1065 ms | DataScanned = 87551 bytes
+    [XAC THUC] Tep: peak_pollution_hours.csv | Dong du lieu: 24 | Kich thuoc: 829 bytes
+
+>>> [Truy van 3/5] aqi_category_distribution...
+    Mo ta: Phan bo cap do chat luong khong khi US EPA
+    -> QueryExecutionId = 09715d2d-6b8f-4f34-88e5-fa4ae8aa7216
+    -> State = SUCCEEDED | ExecutionTime = 872 ms | DataScanned = 87551 bytes
+    [XAC THUC] Tep: aqi_category_distribution.csv | Dong du lieu: 8 | Kich thuoc: 353 bytes
+
+>>> [Truy van 4/5] weather_correlation...
+    Mo ta: Tuong quan giua Nhiet do, Do am va Bui min PM2.5
+    -> QueryExecutionId = 5704da34-ff6f-4f1e-8a1d-d9f983417231
+    -> State = SUCCEEDED | ExecutionTime = 747 ms | DataScanned = 87551 bytes
+    [XAC THUC] Tep: weather_correlation.csv | Dong du lieu: 3 | Kich thuoc: 175 bytes
+
+>>> [Truy van 5/5] raw_weather_aqi_records...
+    Mo ta: Toan bo 156 ban ghi du lieu tho (23 thuoc tinh do dac thuc te)
+    -> QueryExecutionId = a839e120-d477-4b72-881b-5134f59c82e0
+    -> State = SUCCEEDED | ExecutionTime = 1240 ms | DataScanned = 114688 bytes
+    [XAC THUC] Tep: raw_weather_aqi_records.csv | Dong du lieu: 156 | Kich thuoc: 38873 bytes
+
+>>> [XUAT METRICS] Da tao tep query_metrics.csv thanh cong!
+>>> [XUAT JSON] Da tao tep summary_metrics.json thanh cong!
+>>> [TAI LIEU HOA] Da tao tai lieu README.md tai results/aws_cli_exports/README.md!
+
+========================================================================
+  HOAN THANH XUAT TOAN BO FILE CSV TU AWS CLI!
+  - Thu muc xuat chinh : results\aws_cli_exports
+  - Thu muc dong bo    : results\athena_queries
+  - Tong so tep CSV    : 6 (4 bang phan tich + 1 bang raw 156 dong + 1 tep metrics)
+========================================================================
+```
+
+### Kiểm tra tính toàn vẹn và số dòng các tệp CSV xuất ra:
+```bash
+$ Get-ChildItem results/aws_cli_exports/*.csv | Select-Object Name, Length
+
+Name                         Length
+----                         ------
+aqi_category_distribution.csv   353
+avg_aqi_by_city.csv             298
+peak_pollution_hours.csv        829
+query_metrics.csv               717
+raw_weather_aqi_records.csv   38873
+weather_correlation.csv         175
+```
+

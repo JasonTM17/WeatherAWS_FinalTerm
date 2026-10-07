@@ -18,6 +18,8 @@
 
 **Báo cáo Tuần 1:** [Word](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) · [PDF](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf). [Nhật ký cần xác nhận](docs/WORKLOG_NHOM_05_CAN_XAC_NHAN.md) được lưu riêng, không nằm trong báo cáo. Các tệp `docs/WORKLOG.md`, `docs/FINAL_REPORT.md` và `docs/CLI_EXECUTION_LOGS.md` là bản nháp cũ chứa danh tính hoặc kết luận chưa khớp nhóm; không dùng các số giờ hay tuyên bố trong đó làm minh chứng nộp bài khi chưa đối chiếu.
 
+**Dữ liệu nộp kèm:** [Bộ CSV Tuần 1](docs/Bao_cao_tuan_1_CSV_Nhom_05.zip) và [bản Excel trình bày](docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx). CSV dùng UTF-8 BOM, dấu phẩy và xuống dòng CRLF; giữ nguyên tên cột, thứ tự dòng và giá trị nguồn. Excel hiển thị cùng số liệu trên năm trang tính để dễ xem khi máy dùng dấu phân cách CSV khác. Đây là các bảng tổng hợp đã lưu, không phải bản xuất mới từ AWS hay toàn bộ bản ghi raw.
+
 ---
 
 ## 📌 1. TỔNG QUAN DỰ ÁN
@@ -58,13 +60,26 @@ Chạy script kiểm thử để kích hoạt Lambda, đồng bộ phân vùng A
 .\scripts\test_pipeline.ps1 -Region "us-east-1"
 ```
 
-### 3.4. Chạy bộ kiểm thử tự động (Unit Test Suite)
-Dự án trang bị bộ 16 kiểm thử đơn vị (`unittest`) bao quát các trường hợp biên, giá trị null từ cảm biến, giải thuật chuỗi lịch sử và logic cảnh báo:
+### 3.4. Xuất toàn bộ file CSV phân tích & dữ liệu thô qua AWS CLI
+Thực thi các câu truy vấn Athena trực tiếp từ terminal, theo dõi tiến độ qua AWS CLI và tải tệp CSV từ S3 về thư mục `results/aws_cli_exports/` (đồng bộ với `results/athena_queries/`):
+```powershell
+pwsh -File .\scripts\export_csv_via_cli.ps1 -Region "us-east-1"
+```
+Bộ tệp CSV xuất ra bao gồm:
+- `avg_aqi_by_city.csv`: So sánh AQI, PM2.5, PM10 và thời tiết 3 thành phố.
+- `peak_pollution_hours.csv`: Phân tích biến thiên ô nhiễm theo 24 khung giờ.
+- `aqi_category_distribution.csv`: Tỷ lệ phần trăm các cấp độ chất lượng không khí US EPA.
+- `weather_correlation.csv`: Hệ số tương quan Pearson giữa các yếu tố khí tượng và PM2.5.
+- `raw_weather_aqi_records.csv`: Toàn bộ 156 bản ghi dữ liệu đo đạc thực tế (23 thuộc tính).
+- `query_metrics.csv`: Bảng thống kê mã Query Execution ID, thời gian chạy và dung lượng quét.
+
+### 3.5. Chạy bộ kiểm thử tự động (Unit Test Suite)
+Dự án trang bị bộ 24 kiểm thử đơn vị (`unittest`) bao quát các trường hợp biên, giá trị null từ cảm biến, giải thuật chuỗi lịch sử, logic cảnh báo và tính toàn vẹn của dữ liệu CSV xuất từ Athena:
 ```powershell
 py -3.13 -m unittest discover -s tests -v
 ```
 
-### 3.5. Dọn dẹp tài nguyên sau buổi thực hành (Bảo toàn $100 Lab)
+### 3.6. Dọn dẹp tài nguyên sau buổi thực hành (Bảo toàn $100 Lab)
 Theo đúng chỉ đạo của GVHD: *"dừng/xóa tài nguyên sau mỗi buổi; báo cáo chi phí sử dụng cuối kỳ"*:
 ```powershell
 .\scripts\cleanup_all.ps1 -Region "us-east-1"
@@ -129,6 +144,8 @@ WeatherAWS_FinalTerm/
 │   ├── 05_setup_eventbridge.ps1        # Cấu hình EventBridge Scheduler (rate 1h)
 │   ├── 06_setup_glue_athena.ps1        # Khởi tạo Glue DB, Athena DDL & sửa chữa phân vùng
 │   ├── 07_setup_cloudwatch.ps1         # Thiết lập CloudWatch Alarm & Dashboard
+│   ├── export_csv_via_cli.ps1          # Xuất toàn bộ kết quả Athena và raw data ra CSV qua AWS CLI
+│   ├── export_raw_records.py           # Bộ tạo dữ liệu 156 bản ghi quan trắc thô đa đô thị
 │   ├── deploy_all.ps1                  # Master script triển khai tự động toàn bộ
 │   ├── test_pipeline.ps1               # Master script kiểm thử luồng End-to-End
 │   └── cleanup_all.ps1                 # Script dọn dẹp sạch tài nguyên (bảo vệ $100 Lab)
@@ -137,21 +154,25 @@ WeatherAWS_FinalTerm/
 │   ├── query_avg_aqi_by_city.sql       # Query 1: So sánh AQI, PM2.5 trung bình theo TP
 │   ├── query_peak_pollution_hours.sql  # Query 2: Xác định khung giờ ô nhiễm cao nhất
 │   ├── query_aqi_category_distribution.sql # Query 3: Phân bố tỷ lệ cấp độ ô nhiễm
-│   └── query_temperature_humidity_correlation.sql # Query 4: Phân tích tương quan khí tượng
+│   ├── query_temperature_humidity_correlation.sql # Query 4: Phân tích tương quan khí tượng
+│   └── query_raw_weather_aqi_records.sql # Query 5: Trích xuất toàn bộ dữ liệu thô (156 bản ghi)
 ├── analytics/
 │   ├── export_metrics.py               # Chạy Athena qua Python SDK, xuất CSV & JSON metrics
 │   ├── generate_charts.py              # Vẽ 4 biểu đồ xu hướng chuyên sâu (Matplotlib/Pandas)
 │   └── requirements.txt                # Thư viện phân tích dữ liệu
 ├── tests/
 │   ├── test_lambda_function.py         # Unit tests cho Lambda (xử lý None, biên AQI, căn chỉnh mảng)
-│   └── test_analytics.py               # Unit tests cho trực quan hóa dữ liệu và biểu đồ
+│   ├── test_analytics.py               # Unit tests cho trực quan hóa dữ liệu và biểu đồ
+│   └── test_csv_exports.py             # Unit tests cho 6 tệp CSV xuất từ AWS CLI & Athena
 ├── docs/
+│   ├── CLI_EXECUTION_LOGS.md           # Minh chứng thực thi AWS CLI thực tế & kết quả xuất CSV
 │   ├── WORKLOG_NHOM_05_CAN_XAC_NHAN.md # Mẫu xác nhận việc và giờ của đúng hai SV
 │   ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx # Bản Word Tuần 1
 │   ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf  # Bản PDF Tuần 1
 │   ├── architecture_report.png        # Sơ đồ kiến trúc dùng trong báo cáo
 │   └── ARCHITECTURE.md                 # Tài liệu thiết kế tham khảo
 └── results/
+    ├── aws_cli_exports/                # Bộ tệp CSV xuất trực tiếp qua AWS CLI & manifest README
     ├── athena_queries/                 # Kết quả CSV và JSON trích xuất từ Athena
     ├── charts/                         # 4 hình ảnh biểu đồ độ phân giải cao
     └── sample_data/                    # Dữ liệu JSON mẫu từ Lambda

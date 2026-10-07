@@ -1,0 +1,6 @@
+"query_name","query_execution_id","status","result_rows","execution_time_ms","bytes_scanned","output_csv"
+"avg_aqi_by_city","b07478d6-40d8-4923-9f32-3337adc3389d","SUCCEEDED","3","749","87551","avg_aqi_by_city.csv"
+"peak_pollution_hours","f0c992c3-c598-4e31-b483-1cf367774f02","SUCCEEDED","24","1065","87551","peak_pollution_hours.csv"
+"aqi_category_distribution","09715d2d-6b8f-4f34-88e5-fa4ae8aa7216","SUCCEEDED","8","872","87551","aqi_category_distribution.csv"
+"weather_correlation","5704da34-ff6f-4f1e-8a1d-d9f983417231","SUCCEEDED","3","747","87551","weather_correlation.csv"
+"raw_weather_aqi_records","a839e120-d477-4b72-881b-5134f59c82e0","SUCCEEDED","156","1240","114688","raw_weather_aqi_records.csv"
