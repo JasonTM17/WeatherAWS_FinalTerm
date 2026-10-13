@@ -6,7 +6,7 @@ Báo cáo Tuần 2 trình bày việc hoàn thiện các chức năng thu thập
 
 Hệ thống thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng, chuẩn hóa bản ghi gồm 23 trường và lưu theo phân vùng thời gian trên Amazon S3. EventBridge kích hoạt Lambda định kỳ; Secrets Manager quản lý cấu hình; SNS tiếp nhận thông báo vượt ngưỡng; Glue và Athena cung cấp lược đồ và truy vấn phân tích.
 
-Báo cáo Tuần 2 tiếp tục sử dụng bộ CSV Athena đã lưu ở Tuần 1, gồm 156 bản ghi và 52 mẫu mỗi đô thị. Năm tệp kết quả truy vấn và bốn biểu đồ mô tả AQI, nồng độ bụi, biến thiên theo giờ và tương quan khí tượng. Đây là bộ dữ liệu dùng đối chiếu, không phải kết quả của một lượt thu thập mới ở Tuần 2. Nội dung Tuần 2 tập trung vào hoàn thiện chức năng và kiểm tra bộ source cục bộ.
+Báo cáo Tuần 2 dùng bộ CSV Athena đã lưu, gồm 156 bản ghi và 52 mẫu mỗi đô thị. Năm kết quả truy vấn và bốn biểu đồ mô tả AQI, nồng độ bụi, biến thiên theo giờ và tương quan khí tượng. Hồ sơ vận hành đã lưu ghi nhận một lượt Lambda thu thập 3 bản ghi và gửi 2 cảnh báo; năm mã truy vấn trong hồ sơ khớp các CSV đang sử dụng. Báo cáo phân biệt kết quả vận hành tại mốc đã lưu với phần hoàn thiện mã nguồn và kiểm tra cục bộ sau đó.
 
 ## LỜI MỞ ĐẦU
 
@@ -427,6 +427,21 @@ Cấu hình giám sát theo dõi các chỉ số do dịch vụ Lambda cung cấ
 - CloudWatch Dashboard hiển thị số lượt gọi, số lỗi và thời gian thực thi. Các giá trị chỉ xuất hiện khi có dữ liệu dịch vụ được ghi nhận; hình cấu hình không được dùng như bằng chứng của một lượt chạy.
 
 Invocations đếm số lượt hàm được gọi, Errors đếm lượt kết thúc với lỗi và Duration đo thời gian thực thi. Dashboard hiển thị tổng lượt gọi, tổng lỗi, thời gian trung bình và lớn nhất trong từng chu kỳ 300 giây. Chỉ số Errors không tự xác nhận chất lượng bản ghi; việc đối chiếu CSV được thực hiện riêng.
+
+### 5.5 Kết quả vận hành từ hồ sơ đã lưu
+
+Hồ sơ vận hành của dự án ghi nhận cấu hình Lambda, phản hồi thu thập và năm lượt truy vấn Athena. Mã thực thi, trạng thái, số dòng, thời gian và byte quét được đối chiếu với query_metrics.csv. Các kết quả dưới đây thuộc mốc vận hành đã lưu.
+
+Bảng 5.2 Kết quả xử lý và truy vấn trong hồ sơ vận hành
+
+| Hạng mục | Kết quả đã lưu | Nguồn đối chiếu |
+| --- | --- | --- |
+| Lambda | WeatherCollectorLambda; Active; Python 3.12; 256 MB; 60 giây. | Cấu hình hàm trong hồ sơ. |
+| Phản hồi | Mã 200; thu thập 3 bản ghi. | Phản hồi xử lý đã lưu. |
+| Cảnh báo | Hàm ghi nhận 2 cảnh báo gửi tới SNS. | Trường alerts_sent. |
+| Athena | 5 truy vấn SUCCEEDED; 87.250 byte quét/lượt; 744–1.192 ms. | Hồ sơ và query_metrics.csv. |
+
+Ba bản ghi của một lượt thu thập và 156 bản ghi của tập phân tích tích lũy là hai đại lượng khác nhau. Hồ sơ đăng ký email ghi pending confirmation, nên số cảnh báo không được diễn giải thành số email đã nhận. Bộ source hiện tại đã được chỉnh sửa sau mốc vận hành này; hồ sơ đã lưu không tự xác nhận một lần triển khai mới.
 
 ## Chương 6 Đánh giá kết quả và sử dụng tài nguyên Tuần 2
 

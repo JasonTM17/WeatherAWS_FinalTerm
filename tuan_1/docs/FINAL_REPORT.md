@@ -87,12 +87,12 @@ Mục tiêu Tuần 1 là dựng luồng dữ liệu ban đầu cho ba đô thị
 
 Bảng 2.1. Phân công công việc Tuần 1 do nhóm xác nhận
 
-| Thành viên | Phần việc phụ trách | Phần phối hợp |
-| --- | --- | --- |
-| Nguyễn Tiến Sơn<br>24110054 | S3, Secrets Manager, Lambda và SNS. | Kiến trúc, tích hợp và báo cáo. |
-| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu. | Kiến trúc, tích hợp và báo cáo. |
+| Thành viên | Phần việc phụ trách | Phần phối hợp | Giờ |
+| --- | --- | --- | --- |
+| Nguyễn Tiến Sơn<br>24110054 | S3, Secrets Manager, Lambda và SNS. | Kiến trúc, tích hợp và báo cáo. | 9,5 |
+| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu. | Kiến trúc, tích hợp và báo cáo. | 9,0 |
 
-Hai thành viên cùng thiết kế kiến trúc, tích hợp các dịch vụ và rà soát báo cáo. Mỗi thành viên phụ trách một nhóm chức năng và cùng đối chiếu số liệu với kết quả truy vấn Athena.
+Hai thành viên cùng thiết kế kiến trúc, tích hợp các dịch vụ và rà soát báo cáo. Theo nhật ký nhóm xác nhận, Nguyễn Tiến Sơn thực hiện 9,5 giờ và Trần Thị Ngọc Quyên thực hiện 9,0 giờ trong Tuần 1, tổng cộng 18,5 giờ. Phần việc chính được trình bày tại Bảng 2.1.
 
 ### 2.2 Phạm vi và luồng dữ liệu đo
 

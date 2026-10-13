@@ -16,5 +16,6 @@ Lớp 261CLCO332779_05 — Điện toán đám mây.
 - [Lược đồ và truy vấn](../athena/): mô hình dữ liệu và phép tổng hợp.
 - [Kết quả Athena đã lưu](../results/athena_queries/) và [bốn biểu đồ](../results/charts/): cùng bộ CSV 156 bản ghi đã sử dụng ở Tuần 1.
 - [Excel tổng hợp](../../tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx): bảng dữ liệu và các biểu đồ tương ứng.
+- [Hồ sơ vận hành đã lưu](../../docs/saved-evidence.md): phản hồi Lambda 3 bản ghi, 2 cảnh báo và năm mã truy vấn khớp CSV.
 
-Các CSV, Excel và biểu đồ thể hiện bộ kết quả đã lưu. Chúng không xác nhận một lượt chạy mới của phiên bản mã nguồn Tuần 2.
+Hồ sơ vận hành đã lưu được phân biệt với các lần sửa mã nguồn sau đó. CSV, Excel và biểu đồ dùng cùng bộ kết quả; chúng không tự xác nhận một lượt chạy mới của phiên bản hiện tại.

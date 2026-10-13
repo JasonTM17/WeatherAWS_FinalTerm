@@ -1,0 +1,63 @@
+{
+  "scope": "Saved service operation evidence; later source revisions have not been redeployed in this review.",
+  "source_commit": "dbe7dd59fbde6f890126ce55241c0c6b0ea911c9",
+  "region": "us-east-1",
+  "account_id": "134987931868",
+  "lambda_configuration": {
+    "FunctionName": "WeatherCollectorLambda",
+    "Runtime": "python3.12",
+    "Handler": "lambda_function.lambda_handler",
+    "Timeout": 60,
+    "MemorySize": 256,
+    "State": "Active"
+  },
+  "lambda_response": {
+    "statusCode": 200,
+    "records_collected": 3,
+    "alerts_sent": 2
+  },
+  "saved_object_record_count": 3,
+  "sns_subscription_state": "pending confirmation",
+  "athena_queries": [
+    {
+      "name": "avg_aqi_by_city",
+      "query_execution_id": "c2fddbda-2bad-424f-b9f9-02773d5b3df4",
+      "status": "SUCCEEDED",
+      "execution_time_ms": 744,
+      "bytes_scanned": 87250,
+      "result_rows": 3
+    },
+    {
+      "name": "peak_pollution_hours",
+      "query_execution_id": "8018524b-c34e-47ed-bb89-c05e7db88bd1",
+      "status": "SUCCEEDED",
+      "execution_time_ms": 936,
+      "bytes_scanned": 87250,
+      "result_rows": 24
+    },
+    {
+      "name": "aqi_category_distribution",
+      "query_execution_id": "ec8641a0-c706-45fb-bc8c-4f1d72d1978a",
+      "status": "SUCCEEDED",
+      "execution_time_ms": 776,
+      "bytes_scanned": 87250,
+      "result_rows": 8
+    },
+    {
+      "name": "weather_correlation",
+      "query_execution_id": "14bb410d-4725-45f3-bb5d-59ddf4c962cb",
+      "status": "SUCCEEDED",
+      "execution_time_ms": 930,
+      "bytes_scanned": 87250,
+      "result_rows": 3
+    },
+    {
+      "name": "raw_weather_aqi_records",
+      "query_execution_id": "d67cd503-1d5a-487a-98dd-b46a111b2f43",
+      "status": "SUCCEEDED",
+      "execution_time_ms": 1192,
+      "bytes_scanned": 87250,
+      "result_rows": 156
+    }
+  ]
+}
