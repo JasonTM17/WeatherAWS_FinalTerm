@@ -37,3 +37,5 @@ tuan_2/docs/_report_work/
 # Agent metadata & original prompt
 .agents/
 ORIGINAL_REQUEST.md
+# Local report plans and audit evidence are outside the submission source.
+/plans/
