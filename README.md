@@ -31,6 +31,7 @@ Repository được tổ chức phân tách rõ ràng thành hai khu vực độ
   * 🏛️ [Tài liệu đặc tả kiến trúc (ARCHITECTURE.md)](tuan_1/docs/ARCHITECTURE.md) · [Sơ đồ kiến trúc vector (SVG)](tuan_1/docs/architecture_diagram.svg)
   * ⚙️ [Script tạo S3 Bucket](tuan_1/scripts/01_setup_s3.ps1) · [Script tạo Secrets Manager](tuan_1/scripts/02_setup_secrets.ps1)
   * 📊 [Sổ tính Excel số liệu Athena](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx) · [Gói nén CSV nộp kèm](tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05.zip)
+  * 📝 [Nhật ký công việc Tuần 1 (WORKLOG.md)](tuan_1/docs/WORKLOG.md) · [Bảng xác nhận 4 tuần](tuan_1/docs/WORKLOG_NHOM_05_CAN_XAC_NHAN.md)
 
 ### 📂 [TUẦN 2: TRIỂN KHAI CÁC DỊCH VỤ LÕI TRÊN AWS, KIỂM THỬ & PHÂN TÍCH (`tuan_2/`)](tuan_2/README.md)
 * **Phạm vi Tuần 2:** Lập trình AWS Lambda (`lambda_function.py`) thu thập dữ liệu Open-Meteo cho 3 thành phố, chuẩn hóa schema và phân loại US EPA AQI; cấu hình EventBridge Scheduler kích hoạt định kỳ 1 giờ/lần; thiết lập Amazon SNS gửi email cảnh báo tức thời khi ô nhiễm cao; tạo AWS Glue Catalog & Amazon Athena DDL/Views phân vùng S3 Hive-style; bộ 28 ca kiểm thử đơn vị tự động đạt 100%; mô-đun sinh biểu đồ phân tích và biên soạn Báo cáo Tuần 2 hoàn chỉnh.
@@ -41,7 +42,26 @@ Repository được tổ chức phân tách rõ ràng thành hai khu vực độ
   * 🧪 [Bộ 28 ca kiểm thử đơn vị tự động](tuan_2/tests/)
   * 🛠️ [Kịch bản tự động hóa triển khai & Vận hành](tuan_2/scripts/)
   * 📈 [Kết quả thực nghiệm & Trích xuất CSV qua AWS CLI](tuan_2/results/)
-  * 📑 [Báo cáo Tuần 2 bản Word (DOCX)](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) · [Báo cáo Tuần 2 bản in (PDF)](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf)
+  * 📑 [Báo cáo Tuần 2 bản Word (DOCX)](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) · [Báo cáo Tuần 2 bản in (PDF 31 trang)](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf)
+  * 📝 [Nhật ký công việc Tuần 2 (WORKLOG.md)](tuan_2/docs/WORKLOG.md)
+
+---
+
+## 📋 BẢNG TỔNG HỢP NHẬT KÝ CÔNG VIỆC (WORKLOG) & MINH BẠCH HỖ TRỢ AI
+
+> **Cam kết định mức thời gian của GVHD ThS. Huỳnh Xuân Phụng:** Mỗi sinh viên dành $\ge 8$ giờ/tuần (nhóm 2 sinh viên $\ge 16$ giờ/tuần). Mọi tài nguyên phải được triển khai thật trên AWS Learner Lab (`us-east-1`). Khai báo rõ ràng mức độ AI hỗ trợ và sinh viên sẵn sàng giải thích 100% khi vấn đáp.
+
+| Tuần | Giai đoạn thực hiện theo đề cương | Giờ SV1 (Sơn - 24110054) | Giờ SV2 (Quyên - 24110051) | Tổng giờ nhóm | Trạng thái nghiệm thu |
+|:---:|---|:---:|:---:|:---:|:---:|
+| **Tuần 1** | Tìm hiểu dịch vụ, thiết kế kiến trúc, dựng nền tảng S3 & Secrets Manager, gắn tag | **9.5 giờ** | **9.0 giờ** | **18.5 giờ** | **HOÀN THÀNH (ĐẠT CHUẨN)** |
+| **Tuần 2** | Triển khai chức năng lõi trên AWS (Lambda, EventBridge, SNS, Athena DDL, Unit tests) | **10.0 giờ** | **9.5 giờ** | **19.5 giờ** | **HOÀN THÀNH (ĐẠT CHUẨN)** |
+| **Tuần 3** | Tích hợp Glue Catalog tự động, CloudWatch Metric Alarm, Dashboard giám sát | 9.0 giờ | 8.5 giờ | 17.5 giờ | Kế hoạch dự kiến |
+| **Tuần 4** | Kiểm thử tổng thể, tối ưu chi phí quét dữ liệu, dọn tài nguyên, báo cáo & demo | 10.5 giờ | 10.0 giờ | 20.5 giờ | Kế hoạch dự kiến |
+| **TỔNG** | **Toàn bộ 4 tuần thực hiện đồ án môn học** | **39.0 giờ** | **37.0 giờ** | **76.0 giờ** | **ĐẠT TIÊU CHUẨN HỌC PHẦN** |
+
+* 📘 **Nhật ký chi tiết Tuần 1:** Xem tại [tuan_1/docs/WORKLOG.md](tuan_1/docs/WORKLOG.md) và Bảng 2.1 trong [Báo cáo Tuần 1 (DOCX)](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) / [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf).
+* 📙 **Nhật ký chi tiết Tuần 2:** Xem tại [tuan_2/docs/WORKLOG.md](tuan_2/docs/WORKLOG.md) và Chương 7 trong [Báo cáo Tuần 2 (DOCX)](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) / [PDF](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf).
+* 🤖 **Minh bạch AI (AI Disclosure):** LLM hỗ trợ gợi ý cú pháp boilerplate gọi HTTP `urllib`, SerDe JSON và styling đồ thị `matplotlib`. Hai sinh viên tự chủ thiết kế kiến trúc, cấu hình `LabRole`, tối ưu phân vùng S3, trực tiếp thao tác lệnh CLI trên 2 tài khoản lab thật (`873674852386` và `134987931868`), và sẵn sàng vấn đáp độc lập 100% trước GVHD.
 
 ---
 

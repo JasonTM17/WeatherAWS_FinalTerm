@@ -97,8 +97,9 @@ tuan_2/
     ├── 10_executive_analytics_overview_dashboard.png  # Hình 10: Bảng điều khiển phân tích tổng quan
     ├── all_analysis_charts_contact.png                # Hình tổng hợp liên hoàn 10 biểu đồ
     ├── FINAL_REPORT.md                                # Thuyết minh kỹ thuật hoàn chỉnh Tuần 2
-    ├── Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx  # Báo cáo Tuần 2 hoàn chỉnh (Bản Word)
-    └── Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf   # Báo cáo Tuần 2 hoàn chỉnh (Bản PDF xuất Word COM)
+    ├── WORKLOG.md                                     # Nhật ký công việc chi tiết Tuần 2 (>= 8h/SV) & Minh bạch AI
+    ├── Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx  # Báo cáo Tuần 2 hoàn chỉnh (Bản Word có Chương 7 Worklog)
+    └── Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf   # Báo cáo Tuần 2 hoàn chỉnh (Bản PDF 31 trang xuất Word COM)
 ```
 
 ---

@@ -46,13 +46,13 @@ tuan_1/
     ├── ARCHITECTURE.md                                # Đặc tả chi tiết kiến trúc Serverless Event-Driven
     ├── architecture_diagram.svg                       # Sơ đồ kiến trúc dạng vector SVG
     ├── architecture_report.png                        # Sơ đồ kiến trúc chất lượng cao dùng trong báo cáo
-    ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx  # Báo cáo tiến độ Tuần 1 (Bản Word có mục lục native)
-    ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf   # Báo cáo tiến độ Tuần 1 (Bản PDF 20 trang chuẩn in)
+    ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx  # Báo cáo tiến độ Tuần 1 (Bản Word có mục lục native & Worklog)
+    ├── Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf   # Báo cáo tiến độ Tuần 1 (Bản PDF 21 trang chuẩn in & Worklog)
     ├── Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx     # Sổ tính Excel 6 sheet trình bày số liệu truy vấn
     ├── Bao_cao_tuan_1_CSV_Nhom_05/                    # Thư mục 6 tệp CSV dữ liệu trích xuất ban đầu
     ├── Bao_cao_tuan_1_CSV_Nhom_05.zip                 # Gói nén ZIP nộp kèm dữ liệu CSV Tuần 1
-    ├── WORKLOG_NHOM_05_CAN_XAC_NHAN.md                # Nhật ký công việc và phân công nhiệm vụ Tuần 1
-    └── WORKLOG.md                                     # Nhật ký công việc tham khảo nội bộ
+    ├── WORKLOG_NHOM_05_CAN_XAC_NHAN.md                # Bảng xác nhận nhật ký công việc 4 tuần Nhóm 05
+    └── WORKLOG.md                                     # Nhật ký công việc chi tiết Tuần 1 (>= 8h/SV) & Minh bạch AI
 ```
 
 ---
