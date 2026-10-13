@@ -13,6 +13,8 @@ import json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lambda')))
 
 import lambda_function
+lambda_function.BUCKET_NAME = 'weather-aqi-test'
+lambda_function.SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:weather-test'
 
 
 class TestWeatherCollectorLambda(unittest.TestCase):

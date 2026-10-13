@@ -1,407 +1,511 @@
-# TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT THÀNH PHỐ HỒ CHÍ MINH
-
-> **LƯU Ý 07/10/2026 – BẢN NHÁP CŨ:** Danh sách sinh viên và một số khẳng định về API key, email, giờ công trong tệp này chưa khớp hoặc chưa được xác minh cho nhóm 24110054 Nguyễn Tiến Sơn, 24110051 Trần Thị Ngọc Quyên. Bản báo cáo hàng tuần dùng để rà soát là [Word](Bao_cao_hang_tuan_Dien_toan_dam_may_Nhom_05.docx) và [PDF](Bao_cao_hang_tuan_Dien_toan_dam_may_Nhom_05.pdf); các mục còn thiếu được ghi rõ trong đó.
-
-## KHOA CÔNG NGHỆ THÔNG TIN
----
-
-# BÁO CÁO ĐỒ ÁN CUỐI KỲ
-### MÔN HỌC: ĐIỆN TOÁN ĐÁM MÂY (CLOUD COMPUTING) - ĐỢT 1 (2026-2027)
-
----
-
-### **ĐỀ TÀI: HỆ THỐNG THU THẬP VÀ PHÂN TÍCH DỮ LIỆU THỜI TIẾT / CHẤT LƯỢNG KHÔNG KHÍ**
-**(Nhóm: Domain Apps)**
-
-* **Giảng viên hướng dẫn (GVHD):** ThS. Huỳnh Xuân Phụng  
-* **Sinh viên thực hiện:**
-  1. Nguyễn Tiến Sơn - MSSV: `24110054` (Trưởng nhóm)
-  2. Trần Thị Ngọc Quyên - MSSV: `24110051` (Thành viên)
-* **Môi trường triển khai:** AWS Academy Learner Lab
-  * AWS Account ID: `134987931868` (Tài khoản thực nghiệm chính) / `873674852386`
-  * Region: `us-east-1` (US East - N. Virginia)
-  * IAM Role: `arn:aws:iam::134987931868:role/LabRole`
-* **Mã nguồn GitHub:** [WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git)
-
-![Bảng điều khiển phân tích tổng quan](./10_executive_analytics_overview_dashboard.png)
-
----
-
-## MỤC LỤC
-1. [CHƯƠNG 1: GIỚI THIỆU ĐỀ TÀI & TỔNG QUAN HỆ THỐNG](#chương-1-giới-thiệu-đề-tài--tổng-quan-hệ-thống)
-2. [CHƯƠNG 2: THIẾT KẾ KIẾN TRÚC SERVERLESS EVENT-DRIVEN](#chương-2-thiết-kế-kiến-trúc-serverless-event-driven)
-3. [CHƯƠNG 3: TRIỂN KHAI CHI TIẾT TỪNG THÀNH PHẦN QUA AWS CLI](#chương-3-triển-khai-chi-tiết-từng-thành-phần-qua-aws-cli)
-4. [CHƯƠNG 4: KẾT QUẢ THỰC NGHIỆM & PHÂN TÍCH DỮ LIỆU ATHENA](#chương-4-kết-quả-thực-nghiệm--phân-tích-dữ-liệu-athena)
-5. [CHƯƠNG 5: ĐÁNH GIÁ CHI PHÍ, TỐI ƯU VÀ DỌN DẸP TÀI NGUYÊN](#chương-5-đánh-giá-chi-phí-tối-ưu-và-dọn-dẹp-tài-nguyên)
-6. [CHƯƠNG 6: KẾT LUẬN & HƯỚNG PHÁT TRIỂN](#chương-6-kết-luận--hướng-phát-triển)
-
----
-
-## CHƯƠNG 1: GIỚI THIỆU ĐỀ TÀI & TỔNG QUAN HỆ THỐNG
-
-### 1.1. Bối cảnh thực tế & Tính cấp thiết
-Chất lượng không khí tại các trung tâm kinh tế - văn hóa lớn của Việt Nam (Hà Nội, TP. Hồ Chí Minh, Đà Nẵng) đang chịu tác động tiêu cực của quá trình đô thị hóa và phát triển công nghiệp. Nồng độ bụi mịn PM2.5, PM10 và các khí thải độc hại (CO, NO2, SO2, O3) thường xuyên vượt ngưỡng khuyến cáo của Tổ chức Y tế Thế giới (WHO).
-
-Một giải pháp giám sát truyền thống dựa trên máy chủ cố định (On-Premise hoặc máy chủ ảo EC2 24/7) thường gặp các nhược điểm:
-* Chi phí duy trì hạ tầng máy chủ liên tục gây lãng phí lớn khi tần suất thu thập chỉ theo từng mốc giờ.
-* Năng lực mở rộng kém khi muốn bổ sung thêm hàng chục trạm quan trắc hoặc tích hợp cảm biến IoT.
-* Khó khăn trong việc thiết lập lưu trữ phân tích dữ liệu lớn (Big Data).
-
-### 1.2. Mục tiêu đề tài
-Đề tài xây dựng một đường ống dữ liệu (Data Pipeline) hoàn chỉnh dựa trên mô hình **Serverless** trên nền tảng **Amazon Web Services (AWS)** nhằm giải quyết trọn vẹn các yêu cầu:
-1. **Thu thập định kỳ:** Sử dụng **Amazon EventBridge Scheduler** kích hoạt **AWS Lambda** gọi Open-Meteo Air Quality & Weather API.
-2. **Lưu trữ chuẩn Data Lake:** Dữ liệu được chuẩn hóa dưới định dạng **NDJSON** và phân vùng theo thời gian (`year/month/day`) trên **Amazon S3**.
-3. **Bảo mật API credentials:** Lưu cấu hình và khóa API trong **AWS Secrets Manager**, không để lộ trong mã nguồn.
-4. **Phân tích dữ liệu lớn không máy chủ:** Sử dụng **AWS Glue Data Catalog** và **Amazon Athena** để thực hiện các truy vấn SQL phân tích chuyên sâu.
-5. **Cảnh báo tức thời:** Tích hợp **Amazon SNS** gửi email cảnh báo nguy cơ ô nhiễm khi chỉ số US AQI hoặc PM2.5 vượt ngưỡng cho phép.
-6. **Giám sát & Quản trị:** Thiết lập **Amazon CloudWatch** Alarms và Dashboard theo dõi hiệu năng hệ thống.
-
----
-
-## CHƯƠNG 2: THIẾT KẾ KIẾN TRÚC SERVERLESS EVENT-DRIVEN
-
-### 2.1. Sơ đồ kiến trúc tổng thể
-Hệ thống được thiết kế theo mô hình **Event-Driven Microservices Serverless**:
-
-```
-[ Open-Meteo Public APIs ]
-        │ (HTTPS REST API)
-        ▼
-[ AWS Secrets Manager ] ──(API Config)──► [ AWS Lambda: WeatherCollectorLambda ] ◄──(Rate 1h)── [ EventBridge Scheduler ]
-                                                      │
-                       ┌──────────────────────────────┴──────────────────────────────┐
-                       ▼                                                             ▼
-          [ Amazon SNS Alert Topic ]                                     [ Amazon S3 Data Lake ]
-         (Email: 24110054@student...)                                   (s3://weather-aqi-.../raw/)
-                                                                                      │
-                                                                                      ▼
-                                                                          [ AWS Glue Data Catalog ]
-                                                                          (weather_aqi_db Database)
-                                                                                      │
-                                                                                      ▼
-                                                                          [ Amazon Athena Engine ]
-                                                                          (Serverless SQL Analytics)
-                                                                                      │
-                                                                                      ▼
-                                                                      [ Analytics & Visualizations ]
-                                                                      (Pandas & Matplotlib Charts)
-                                                                                      │
-                                                                                      ▼
-                                                                          [ Amazon CloudWatch ]
-                                                                      (Metrics, Alarms & Dashboard)
-```
-
-### 2.2. Chiến lược phân vùng dữ liệu trên S3 (Partitioning Strategy)
-Để tối ưu hóa chi phí và tốc độ truy vấn trên Amazon Athena, cấu trúc lưu trữ tuân thủ chuẩn Hive-style:
-```
-s3://weather-aqi-873674852386/
-├── raw/
-│   ├── year=2026/
-│   │   ├── month=10/
-│   │   │   ├── day=04/
-│   │   │   │   └── data_20261004_*.json
-│   │   │   ├── day=05/
-│   │   │   │   └── data_20261005_*.json
-│   │   │   └── day=06/
-│   │   │       └── data_20261006_*.json
-└── athena-results/
-    ├── *.csv
-    └── *.csv.metadata
-```
-* **Lợi ích:** Khi chạy truy vấn có điều kiện `WHERE year = '2026' AND month = '10'`, Athena chỉ duyệt dữ liệu trong thư mục tương ứng mà không phải quét toàn bộ bucket. Giúp giảm **95.6%** lượng dữ liệu quét và tiết kiệm chi phí tương ứng.
-
-![Hình 3.2: Kiến trúc lưu trữ và phân vùng Hive-style Data Lake trên S3](./06_s3_datalake_partitioning_detailed.png)
-
----
-
-## CHƯƠNG 3: TRIỂN KHAI CHI TIẾT TỪNG THÀNH PHẦN QUA AWS CLI
-
-Tất cả các tài nguyên đều được khởi tạo và kiểm thử thông qua **AWS CLI v2** trên tài khoản AWS Learner Lab (`873674852386`, Region `us-east-1`):
-
-### 3.1. Amazon S3 Bucket
-Khởi tạo bucket lưu trữ dữ liệu và gán nhãn bắt buộc:
-```bash
-aws s3api create-bucket --bucket weather-aqi-873674852386 --region us-east-1
-aws s3api put-bucket-tagging --bucket weather-aqi-873674852386 \
-    --tagging "TagSet=[{Key=Project,Value=WeatherAWS_FinalTerm},{Key=Owner,Value=24110054},{Key=Course,Value=Cloud_FinalTerm}]"
-```
-
-### 3.2. AWS Secrets Manager
-Lưu trữ cấu hình điều phối, tọa độ giám sát và ngưỡng cảnh báo an toàn:
-```bash
-aws secretsmanager create-secret --name "weather/api_config" \
-    --description "API credentials and configuration for Weather and AQI pipeline" \
-    --secret-string '{"api_provider":"open-meteo","api_key":"sec_demo_weather_api_key_873674852386","aqi_threshold_pm25":35.5,"locations":[{"city":"HoChiMinh","lat":10.8231,"lon":106.6297},{"city":"HaNoi","lat":21.0285,"lon":105.8542},{"city":"DaNang","lat":16.0544,"lon":108.2022}],"aqi_threshold_pm10":50.0,"aqi_threshold_us_aqi":100}' \
-    --tags Key=Project,Value=WeatherAWS_FinalTerm Key=Owner,Value=24110054 Key=Course,Value=Cloud_FinalTerm
-```
-
-### 3.3. Amazon SNS Alert Topic
-Tạo chủ đề thông báo và đăng ký email sinh viên:
-```bash
-aws sns create-topic --name weather-airquality-alerts \
-    --tags Key=Project,Value=WeatherAWS_FinalTerm Key=Owner,Value=24110054 Key=Course,Value=Cloud_FinalTerm
-
-aws sns subscribe --topic-arn "arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts" \
-    --protocol email --notification-endpoint "24110054@student.hcmute.edu.vn"
-```
-
-### 3.4. AWS Lambda Function
-Đóng gói mã nguồn Python và triển khai với vai trò `LabRole`:
-```bash
-Compress-Archive -Path "lambda\lambda_function.py" -DestinationPath "lambda_package.zip" -Force
-
-aws lambda create-function \
-    --function-name "WeatherCollectorLambda" \
-    --runtime "python3.12" \
-    --role "arn:aws:iam::873674852386:role/LabRole" \
-    --handler "lambda_function.lambda_handler" \
-    --zip-file "fileb://lambda_package.zip" \
-    --timeout 60 \
-    --memory-size 256 \
-    --environment "Variables={S3_BUCKET_NAME=weather-aqi-873674852386,SECRET_NAME=weather/api_config,SNS_TOPIC_ARN=arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts}" \
-    --tags "Project=WeatherAWS_FinalTerm,Owner=24110054,Course=Cloud_FinalTerm"
-```
-
-### 3.5. Amazon EventBridge Scheduler
-Thiết lập quy tắc kích hoạt định kỳ 1 giờ/lần và cấp quyền cho EventBridge:
-```bash
-aws events put-rule --name "WeatherCollectionSchedule" --schedule-expression "rate(1 hour)" --state "ENABLED" \
-    --tags Key=Project,Value=WeatherAWS_FinalTerm Key=Owner,Value=24110054 Key=Course,Value=Cloud_FinalTerm
-
-aws events put-targets --rule "WeatherCollectionSchedule" \
-    --targets "Id=1,Arn=arn:aws:lambda:us-east-1:873674852386:function:WeatherCollectorLambda"
-
-aws lambda add-permission --function-name "WeatherCollectorLambda" \
-    --statement-id "EventBridgeInvokePermission" \
-    --action "lambda:InvokeFunction" \
-    --principal "events.amazonaws.com" \
-    --source-arn "arn:aws:events:us-east-1:873674852386:rule/WeatherCollectionSchedule"
-```
-
-### 3.6. AWS Glue Data Catalog & Amazon Athena
-Tạo database và nạp bảng phân vùng:
-```bash
-aws glue create-database --database-input '{"Name":"weather_aqi_db","Description":"Database for Weather and Air Quality IoT and API Analytics"}'
-
-aws athena start-query-execution --query-string file://athena/create_table.sql \
-    --query-execution-context Database=weather_aqi_db \
-    --result-configuration OutputLocation="s3://weather-aqi-873674852386/athena-results/"
-
-aws athena start-query-execution --query-string "MSCK REPAIR TABLE weather_aqi_db.weather_airquality_records;" \
-    --query-execution-context Database=weather_aqi_db \
-    --result-configuration OutputLocation="s3://weather-aqi-873674852386/athena-results/"
-```
-
-### 3.7. Amazon CloudWatch Alarm & Dashboard
-Thiết lập báo động khi có lỗi phát sinh và dựng dashboard theo dõi:
-```bash
-aws cloudwatch put-metric-alarm --alarm-name "WeatherCollector-Errors-Alarm" \
-    --metric-name "Errors" --namespace "AWS/Lambda" --statistic "Sum" --period 300 --threshold 1 \
-    --comparison-operator "GreaterThanOrEqualToThreshold" \
-    --dimensions Name=FunctionName,Value=WeatherCollectorLambda --evaluation-periods 1 \
-    --alarm-actions "arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts"
-
-aws cloudwatch put-dashboard --dashboard-name "WeatherAirQuality-Monitoring-Dashboard" --dashboard-body file://...
-```
-
-![Hình 3.7: Bảng điều khiển giám sát CloudWatch và Báo động](./07_cloudwatch_monitoring_dashboard_detailed.png)
-
-### 3.8. Bộ kiểm thử đơn vị & Xử lý ngoại lệ (Unit Testing & Fault Tolerance)
-Hệ thống được thiết kế với tính kháng lỗi cao (Fault-Tolerant):
-* **Hàm chuyển đổi an toàn (`safe_float`, `safe_int`):** Ngăn chặn lỗi runtime `TypeError` khi API trả về trường dữ liệu rỗng (`null` trong JSON).
-* **Giải thuật căn chỉnh chuỗi lịch sử:** Khắc phục triệt để nguy cơ trượt lệch chỉ mục thời gian khi chuỗi trả về từ trạm quan trắc ít hơn số giờ yêu cầu (`len(times) < past_hours`), bảo toàn 100% dữ liệu không bị thất thoát.
-* **Bộ 16 ca kiểm thử tự động (`tests/`):** Bao phủ toàn bộ trường hợp biên theo tiêu chuẩn US EPA, định dạng ghi tệp NDJSON phân vùng S3 và cơ chế ngắt cảnh báo an toàn của Amazon SNS. Toàn bộ 16 ca kiểm thử đều đạt chuẩn 100% PASS.
-*(Chi tiết ma trận 16 ca kiểm thử và 3 trụ cột kháng lỗi được trình bày trực quan tại [Hình 4.7](#46-kiểm-thử-đơn-vị-tính-kháng-lỗi-và-bảo-đảm-độ-tin-cậy-hệ-thống-unit-testing--fault-tolerance) trong Mục 4.6).*
-
----
-
-## CHƯƠNG 4: KẾT QUẢ THỰC NGHIỆM & PHÂN TÍCH DỮ LIỆU ATHENA
-
-Hệ thống đã thu thập thực tế dữ liệu từ Open-Meteo Air Quality & Weather API và nạp vào Data Lake S3 với **156 bản ghi** (52 bản ghi cho mỗi đô thị gồm chuỗi lịch sử 48 giờ và các mốc realtime). Dưới đây là kết quả thực thi các truy vấn SQL trên Amazon Athena:
-
-### 4.1. Bảng 1: So sánh chất lượng không khí giữa các đô thị
-**Câu truy vấn SQL:**
-```sql
-SELECT 
-    city,
-    COUNT(*) AS total_records,
-    ROUND(AVG(us_aqi), 2) AS avg_aqi,
-    MIN(us_aqi) AS min_aqi,
-    MAX(us_aqi) AS max_aqi,
-    ROUND(AVG(pm2_5), 2) AS avg_pm2_5,
-    ROUND(AVG(pm10), 2) AS avg_pm10,
-    ROUND(AVG(temperature_2m), 2) AS avg_temp,
-    ROUND(AVG(relative_humidity_2m), 2) AS avg_humidity
-FROM weather_aqi_db.weather_airquality_records
-GROUP BY city
-ORDER BY avg_aqi DESC;
-```
-
-**Kết quả số liệu đo đạc thực tế:**
-
-| Đô thị (City) | Số bản ghi | AQI Trung bình | AQI Tối thiểu | AQI Tối đa | PM2.5 Trung bình (µg/m³) | PM10 Trung bình (µg/m³) | Nhiệt độ TB (°C) | Độ ẩm TB (%) |
-|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **TP. Hồ Chí Minh** | 52 | **108.37** | 95.0 | **172.0** | **38.10** | **38.34** | 27.57 | 85.79 |
-| **Đà Nẵng** | 52 | **77.62** | 41.0 | 155.0 | 14.73 | 17.97 | 28.79 | 75.31 |
-| **Hà Nội** | 52 | **67.96** | 56.0 | 80.0 | 17.36 | 18.14 | 24.41 | 77.94 |
-
-![Hình 4.1: So sánh chỉ số AQI và nồng độ bụi theo đô thị](./01_aqi_city_comparison_detailed.png)
-
-* **Nhận xét chuyên môn:**
-  * TP. Hồ Chí Minh có mức độ ô nhiễm cao nhất với chỉ số AQI trung bình đạt **108.37** (thuộc nhóm *Unhealthy for Sensitive Groups*), đỉnh điểm ghi nhận AQI chạm mức **172.0** (*Unhealthy*). Nồng độ bụi mịn PM2.5 trung bình là **38.10 µg/m³**, vượt ngưỡng an toàn của WHO và QCVN (ngưỡng 35.5 µg/m³).
-  * Đà Nẵng duy trì chất lượng không khí ở mức trung bình (**77.62** AQI), từng có thời điểm đạt mức Tốt (**41.0** AQI).
-  * Hà Nội trong chu kỳ quan trắc đạt mức trung bình khá (**67.96** AQI) nhờ tác động của các đợt gió mùa đối lưu.
-
----
-
-### 4.2. Bảng 2: Biến thiên ô nhiễm theo 24 khung giờ trong ngày (Diurnal Trend)
-**Câu truy vấn SQL:**
-```sql
-SELECT 
-    hour,
-    ROUND(AVG(pm2_5), 2) AS avg_pm2_5,
-    ROUND(AVG(pm10), 2) AS avg_pm10,
-    ROUND(AVG(us_aqi), 2) AS avg_aqi,
-    COUNT(*) AS sample_count
-FROM weather_aqi_db.weather_airquality_records
-GROUP BY hour
-ORDER BY hour ASC;
-```
-
-![Hình 4.2: Biến thiên ô nhiễm theo 24 khung giờ trong ngày](./02_peak_pollution_hours_detailed.png)
-
-* **Nhận xét chuyên môn:**
-  * Chỉ số US AQI và nồng độ PM2.5 đạt đỉnh trong khoảng thời gian từ **10:00 - 15:00 UTC** (tương ứng **17:00 - 22:00 giờ Việt Nam**), đỉnh AQI đạt 103.8 (18h VN) và PM2.5 đạt 27.98 (22h VN). Đây là khung giờ tan tầm, mật độ phương tiện giao thông cá nhân và hoạt động công nghiệp/sinh hoạt đạt mức tối đa.
-  * Trong khoảng thời gian **02:00 - 06:00 UTC** (09:00 - 13:00 tại Việt Nam), nồng độ PM2.5 duy trì ở mức thấp nhất (~20.22 µg/m³) do nhiệt độ bề mặt đất tăng, tạo đối lưu nhiệt khuếch tán bụi lên tầng khí quyển cao hơn.
-
----
-
-### 4.3. Bảng 3: Phân bố cấp độ chất lượng không khí (EPA Standard)
-**Câu truy vấn SQL:**
-```sql
-SELECT 
-    city,
-    aqi_category,
-    COUNT(*) AS occurrence_count,
-    ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (PARTITION BY city), 1) AS percentage
-FROM weather_aqi_db.weather_airquality_records
-GROUP BY city, aqi_category
-ORDER BY city, occurrence_count DESC;
-```
-
-**Kết quả số liệu đo đạc thực tế:**
-
-| Đô thị | Cấp độ chất lượng không khí (EPA) | Số lần xuất hiện | Tỷ lệ phần trăm (%) | Kích hoạt cảnh báo SNS |
-|---|---|:---:|:---:|:---:|
-| **TP. Hồ Chí Minh** | Unhealthy for Sensitive Groups (Kém) | 35 | **67.3%** | Có (AQI > 100) |
-| | Moderate (Trung bình) | 13 | 25.0% | Không |
-| | Unhealthy (Xấu / Nguy hại) | 4 | **7.7%** | Có (AQI > 150) |
-| **Đà Nẵng** | Moderate (Trung bình) | 43 | 82.7% | Không |
-| | Unhealthy for Sensitive Groups (Kém) | 4 | 7.7% | Có (AQI > 100) |
-| | Unhealthy (Xấu) | 3 | 5.8% | Có (AQI > 150) |
-| | Good (Tốt) | 2 | 3.8% | Không |
-| **Hà Nội** | Moderate (Trung bình) | 52 | **100.0%** | Không |
-
-![Hình 4.3: Phân bố cấp độ chất lượng không khí theo tiêu chuẩn US EPA](./03_aqi_category_distribution_detailed.png)
-
-* **Nhận xét chuyên môn:** Tại TP.HCM, có đến **75.0%** thời gian trong chu kỳ quan trắc không khí ở mức kém hoặc xấu đối với người nhạy cảm, kích hoạt 10 thông báo cảnh báo tức thời qua Amazon SNS về email sinh viên.
-
----
-
-### 4.4. Bảng 4: Tương quan giữa Khí tượng và Bụi mịn PM2.5 (Pearson Correlation)
-**Câu truy vấn SQL:**
-```sql
-SELECT 
-    city,
-    ROUND(corr(temperature_2m, pm2_5), 4) AS corr_temp_pm25,
-    ROUND(corr(relative_humidity_2m, pm2_5), 4) AS corr_humidity_pm25,
-    ROUND(corr(wind_speed_10m, pm2_5), 4) AS corr_wind_pm25
-FROM weather_aqi_db.weather_airquality_records
-GROUP BY city;
-```
-
-**Kết quả số liệu đo đạc thực tế:**
-
-| Đô thị | Tương quan Nhiệt độ - PM2.5 | Tương quan Độ ẩm - PM2.5 | Tương quan Tốc độ gió - PM2.5 |
-|---|:---:|:---:|:---:|
-| **TP. Hồ Chí Minh** | **-0.7105** | **+0.6768** | **-0.2117** |
-| **Đà Nẵng** | **+0.4274** | **-0.2790** | **-0.2810** |
-| **Hà Nội** | **+0.1929** | **+0.0094** | **-0.7084** |
-
-![Hình 4.4: Hệ số tương quan Pearson giữa khí tượng và bụi mịn PM2.5](./04_weather_pm25_correlation_detailed.png)
-
-* **Nhận xét chuyên môn:**
-  * Tại **TP. Hồ Chí Minh**, độ ẩm tương quan thuận rất mạnh với bụi PM2.5 ($r = +0.6768$), trong khi nhiệt độ tương quan nghịch ($r = -0.7105$). Ban đêm trời mát và độ ẩm cao giữ bụi sát mặt đất tạo sương mù quang hóa (smog).
-  * Tại **Hà Nội**, tốc độ gió tương quan nghịch rất mạnh với bụi PM2.5 ($r = -0.7084$). Gió mùa Đông Bắc tốc độ cao cuốn và làm loãng nhanh chóng nồng độ bụi đô thị.
-  * Tại **Đà Nẵng**, biên độ tương quan ôn hòa ($r_{\text{nhiệt độ}} = +0.4274$, $r_{\text{độ ẩm}} = -0.2790$, $r_{\text{gió}} = -0.2810$). Khí hậu ven biển với gió biển liên tục giúp đối lưu không khí tốt hơn, giữ nồng độ bụi PM2.5 ở mức thấp nhất trong ba đô thị (14.73 µg/m³).
-
----
-
-### 4.5. Hiệu năng thực thi và tối ưu hóa truy vấn Amazon Athena (Query Performance & Optimization)
-
-![Hình 4.6: Hiệu năng thực thi và tối ưu hóa truy vấn Amazon Athena](./05_athena_query_performance_detailed.png)
-
-* **Tối ưu hóa dung lượng quét I/O:** Nhờ kiến trúc phân vùng Hive-style theo `year/month/day`, mỗi truy vấn SQL chỉ quét trung bình **87.55 KB** thay vì quét toàn bộ Data Lake (~1.98 MB), tiết kiệm **95.6%** dữ liệu đọc và chi phí tính cước.
-* **Thời gian thực thi Serverless:** Thời gian phản hồi của Athena Engine dao động từ **747 ms** đến **1,065 ms**, đáp ứng hoàn hảo tiêu chuẩn truy vấn phân tích thời gian thực.
-
----
-
-### 4.6. Kiểm thử đơn vị, tính kháng lỗi và bảo đảm độ tin cậy hệ thống (Unit Testing & Fault Tolerance)
-Hệ thống được kiểm định nghiêm ngặt với bộ 16 ca kiểm thử tự động đạt tỷ lệ thành công 100% (16/16 Passed trên Python 3.13):
-
-* **3 trụ cột kháng lỗi:**
-  1. *Kháng lỗi cảm biến Null:* Các hàm `safe_float` và `safe_int` chuyển đổi an toàn mọi giá trị `null` hoặc chuỗi rỗng về `0.0`, triệt tiêu hoàn toàn nguy cơ dừng chương trình do `TypeError`.
-  2. *Căn chỉnh chuỗi lịch sử (Index Alignment):* Tự động đồng bộ hóa mảng thời gian và dữ liệu cảm biến khi API trả về ít hơn 48 giờ (`len(times) < past_hours`), bảo toàn 100% dữ liệu không bị trượt lệch.
-  3. *Dự phòng cấu hình (Secrets Graceful Fallback):* Tự động kích hoạt bộ cấu hình nội bộ dự phòng nếu kết nối AWS Secrets Manager bị gián đoạn.
-
-![Hình 4.7: Ma trận kiểm thử đơn vị và tính kháng lỗi hệ thống (16/16 Passed)](./09_unit_testing_and_qa_matrix_detailed.png)
-
-## CHƯƠNG 5: ĐÁNH GIÁ CHI PHÍ, TỐI ƯU VÀ DỌN DẸP TÀI NGUYÊN
-
-### 5.1. Bảng cân đối ngân sách AWS Learner Lab ($100 Budget)
-Toàn bộ hệ thống được xây dựng trên mô hình Serverless 100%, không sử dụng bất kỳ máy chủ EC2 thường trực nào:
-
-| Dịch vụ AWS | Mức tiêu thụ thực tế của đồ án | Hạn mức Free Tier khả dụng | Chi phí thực tế (USD) | Đánh giá |
-|---|---|---|:---:|---|
-| **AWS Secrets Manager** | 1 Secret lưu API config | Không có Free Tier | **$0.40** | Thành phần duy nhất tính phí |
-| **AWS Lambda** | ~720 lượt gọi / tháng | 1,000,000 lượt gọi / tháng | **$0.00** | Miễn phí hoàn toàn |
-| **Amazon EventBridge** | 720 scheduled triggers / tháng | 14,000,000 sự kiện / tháng | **$0.00** | Miễn phí hoàn toàn |
-| **Amazon S3** | 7 tệp NDJSON (89.3 KB) | 5 GB Standard Storage | **$0.00** | Miễn phí hoàn toàn |
-| **Amazon Athena** | 4 truy vấn phân tích (quét ~350 KB) | 1 TB miễn phí / $5/TB | **< $0.001** | Chi phí không đáng kể |
-| **AWS Glue Catalog** | 1 Database, 1 Table, 3 Partitions | 1,000,000 objects miễn phí | **$0.00** | Miễn phí hoàn toàn |
-| **Amazon SNS** | 10 email cảnh báo kiểm thử | 1,000 email miễn phí / tháng | **$0.00** | Miễn phí hoàn toàn |
-| **Amazon CloudWatch** | 1 Dashboard, 1 Metric Alarm | 3 Dashboard, 10 Alarms miễn phí | **$0.00** | Miễn phí hoàn toàn |
-| **TỔNG CHI PHÍ THÁNG** | **Hệ thống vận hành trọn vẹn 30 ngày liên tục** | **AWS Academy Learner Lab** | **~$0.40 USD** | **An toàn tuyệt đối (< 0.5% ngân sách)** |
-
-![Hình 5.1: Đánh giá chi phí và cân đối ngân sách AWS Learner Lab](./08_aws_cost_and_budget_detailed.png)
-
-* **Kết luận chi phí:** Với tổng chi phí chỉ khoảng **$0.40 / tháng**, đồ án chỉ tiêu thụ chưa đến **0.40%** ngân sách $100 được cấp của AWS Academy Learner Lab.
-
-### 5.2. Cơ chế dọn dẹp và thu hồi tài nguyên (`cleanup_all.ps1`)
-Để tuân thủ nghiêm ngặt chỉ đạo của GVHD: *"dừng/xóa tài nguyên sau mỗi buổi; báo cáo chi phí sử dụng cuối kỳ"*, nhóm đã phát triển script tự động hóa `scripts/cleanup_all.ps1`. Chỉ với một lệnh duy nhất:
-```powershell
-.\scripts\cleanup_all.ps1
-```
-Toàn bộ các tài nguyên S3 Bucket, Secrets Manager, SNS Topic, Lambda Function, EventBridge Rule, Glue Catalog và CloudWatch Dashboard đều được xóa sạch sẽ trong vòng 20 giây, đảm bảo không phát sinh bất kỳ chi phí ngầm nào giữa các buổi học.
-
----
-
-## CHƯƠNG 6: KẾT LUẬN & HƯỚNG PHÁT TRIỂN
-
-### 6.1. Kết quả đạt được & Bảng điều khiển phân tích tổng quan
-1. **Kiến trúc hoàn chỉnh:** Xây dựng thành công hệ thống thu thập, lưu trữ, phân tích và cảnh báo ô nhiễm không khí hoàn toàn bằng công nghệ Serverless trên nền tảng AWS.
-2. **Tự động hóa 100% qua AWS CLI:** Toàn bộ quy trình triển khai (`deploy_all.ps1`), kiểm thử (`test_pipeline.ps1`), trích xuất số liệu (`export_metrics.py`), vẽ biểu đồ (`generate_charts.py`) và dọn dẹp (`cleanup_all.ps1`) đều được tự động hóa bằng lệnh CLI.
-3. **Số liệu thực tế & Giá trị phân tích cao:** Các câu truy vấn SQL trên Amazon Athena đã chứng minh được sự khác biệt về chất lượng không khí giữa các thành phố lớn tại Việt Nam và làm sáng tỏ quy luật tương quan giữa thời tiết và nồng độ bụi mịn PM2.5.
-4. **Bảo mật & Tối ưu ngân sách:** Bí mật được mã hóa trong Secrets Manager, phân vùng S3 tối ưu dung lượng quét của Athena, chi phí chỉ $0.40/tháng, tuân thủ tuyệt đối quy định của AWS Learner Lab.
-
-![Hình 10: Bảng điều khiển phân tích tổng quan chất lượng không khí & Hệ thống AWS](./10_executive_analytics_overview_dashboard.png)
-
-![Tổng hợp các hình phân tích chi tiết](./all_analysis_charts_contact.png)
-
-### 6.2. Hướng phát triển trong tương lai
-* Kết nối trực tiếp Amazon Athena với **Amazon QuickSight** hoặc xây dựng Web Dashboard (React / Streamlit) để người dân có thể theo dõi chất lượng không khí theo thời gian thực.
-* Áp dụng mô hình Machine Learning với **Amazon SageMaker** để dự báo sớm chất lượng không khí trong 24 - 48 giờ tới dựa trên dữ liệu khí tượng.
-* Tích hợp thêm kênh cảnh báo qua tin nhắn SMS (Amazon SNS SMS) hoặc thông báo ứng dụng di động qua Telegram Bot / Zalo ZNS.
-
----
-*Báo cáo được hoàn thành và bảo vệ tại Trường Đại học Sư phạm Kỹ thuật TP.HCM, Học kỳ 1, Năm học 2026-2027.*
+# Báo cáo tiến độ Tuần 2
+
+## TÓM TẮT
+
+Báo cáo Tuần 2 trình bày việc hoàn thiện các chức năng thu thập, lưu trữ, cảnh báo và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS Learner Lab. Chúng em tiếp tục sử dụng mô hình không máy chủ đã thiết kế ở Tuần 1 và tổ chức mã nguồn theo từng nhóm chức năng.
+
+Hệ thống thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng, chuẩn hóa bản ghi gồm 23 trường và lưu theo phân vùng thời gian trên Amazon S3. EventBridge kích hoạt Lambda định kỳ; Secrets Manager quản lý cấu hình; SNS tiếp nhận thông báo vượt ngưỡng; Glue và Athena cung cấp lược đồ và truy vấn phân tích.
+
+Bộ dữ liệu dùng đối chiếu gồm 156 bản ghi, tương ứng 52 mẫu mỗi đô thị. Năm tệp kết quả truy vấn và bốn biểu đồ được sử dụng nhất quán để mô tả AQI, nồng độ bụi, biến thiên theo giờ và tương quan khí tượng. Bộ source đã được kiểm tra cục bộ; kết quả này được phân biệt với trạng thái vận hành trên AWS.
+
+## LỜI MỞ ĐẦU
+
+Học phần Điện toán đám mây giúp chúng em vận dụng các dịch vụ quản lý trên AWS vào một luồng dữ liệu cụ thể. Bài toán thời tiết và chất lượng không khí cho phép theo dõi quá trình từ thu thập qua API, chuẩn hóa bản ghi, lưu trữ đến truy vấn và trình bày kết quả.
+
+Báo cáo tập trung vào cấu hình, trình tự xử lý và số liệu đối chiếu của Tuần 2. Bộ source đi kèm gồm chức năng Lambda, lược đồ Athena, chương trình quản lý dịch vụ và chương trình xuất dữ liệu bằng Python SDK. Kho dự án: https://github.com/JasonTM17/WeatherAWS_FinalTerm.git
+
+Đề tài được thực hiện bởi nhóm sinh viên:
+
+•  Nguyễn Tiến Sơn — MSSV 24110054: S3, Secrets Manager, Lambda và SNS.
+
+•  Trần Thị Ngọc Quyên — MSSV 24110051: Glue, Athena, biểu đồ và đối chiếu dữ liệu.
+
+Các chương lần lượt trình bày mục tiêu và kiến trúc, chức năng Lambda, lịch thu thập và cảnh báo, mô hình dữ liệu và phân tích, kiểm tra kết quả, sử dụng tài nguyên và tổng hợp công việc của nhóm.
+
+## Chương 1 Tổng quan nhiệm vụ và kiến trúc Tuần 2
+
+### 1.1 Mục tiêu và phạm vi Tuần 2
+
+Thu thập dữ liệu môi trường định kỳ là bài toán phù hợp để nghiên cứu cách kết hợp lịch sự kiện, xử lý không máy chủ và lưu trữ trên đám mây. Trong phạm vi học phần, nhóm sử dụng dữ liệu công khai để xây dựng luồng thu thập và phân tích cho ba đô thị.
+
+Mục tiêu Tuần 2 là kết nối các dịch vụ nền tảng thành luồng xử lý có cấu hình rõ ràng, thống nhất lược đồ bản ghi và xuất được các kết quả truy vấn phục vụ báo cáo. Các thống kê chỉ mô tả bộ dữ liệu đã lưu, không đại diện cho chất lượng không khí dài hạn.
+
+### 1.2 Phân công thực hiện
+
+Chúng em phân công hai nhóm chức năng có quy mô tương đương. Các phần kiến trúc, tích hợp, rà soát số liệu và báo cáo được thực hiện chung; trách nhiệm chính được thể hiện tại Bảng 1.1.
+
+Bảng 1.1 Phân công thực hiện Tuần 2
+
+| Thành viên | Phụ trách chính | Phối hợp |
+| --- | --- | --- |
+| Nguyễn Tiến Sơn<br>24110054 | S3, Secrets Manager, Lambda và SNS. | Kiến trúc, tích hợp và báo cáo. |
+| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu. | Kiến trúc, tích hợp và báo cáo. |
+
+### 1.3 Kiến trúc tổng thể
+
+Luồng xử lý kết nối lịch sự kiện, hàm thu thập, lưu trữ, cảnh báo và truy vấn. Mỗi dịch vụ đảm nhiệm một chức năng; các tham số dùng chung được quản lý qua cấu hình triển khai.
+
+•  Amazon EventBridge: quy tắc lịch kích hoạt Lambda mỗi giờ với biểu thức rate(1 hour).
+
+•  AWS Secrets Manager: Kho lưu trữ bảo mật chứa thông tin cấu hình trạm quan trắc, tọa độ và các ngưỡng cảnh báo an toàn.
+
+•  AWS Lambda: nhận sự kiện, gọi API, chuẩn hóa bản ghi, xác định cấp AQI và ghi dữ liệu.
+
+•  Amazon SNS: tiếp nhận thông báo cảnh báo từ Lambda khi điều kiện cấu hình được thỏa mãn.
+
+•  Amazon S3 Data Lake: Hồ dữ liệu lưu trữ các tệp NDJSON có cấu trúc phân vùng theo thời gian (year/month/day).
+
+•  AWS Glue Data Catalog & Amazon Athena: Cơ sở dữ liệu metadata và công cụ truy vấn SQL không máy chủ cho phép phân tích dữ liệu lớn trực tiếp trên S3.
+
+•  Pandas & Matplotlib Analytics: Bộ công cụ tạo biểu đồ phân tích trực quan phục vụ báo cáo và đánh giá khoa học.
+
+•  Amazon CloudWatch: Giám sát chỉ số tài nguyên, phát hiện lỗi phát sinh và hiển thị Dashboard điều hành thời gian thực.
+
+![Hình phân tích](../../docs/architecture.png)
+
+Hình 1.1: Sơ đồ kiến trúc Serverless Event-Driven tổng thể hệ thống thu thập và phân tích dữ liệu
+
+### 1.4 Danh mục dịch vụ và cấu hình
+
+Môi trường mục tiêu là AWS Academy Learner Lab tại us-east-1, sử dụng LabRole. Trong bộ source, account được xác định từ phiên đăng nhập; tên bucket và ARN được tạo theo account, thay vì cố định theo một tài khoản cụ thể.
+
+Bảng 1.2: Danh mục tài nguyên dịch vụ AWS Learner Lab triển khai trong Tuần 2
+
+| Dịch vụ | Tài nguyên hoặc cấu hình | Vai trò |
+| --- | --- | --- |
+| Lambda | WeatherCollectorLambda; Python 3.12; 256 MB; 60 giây; LabRole. | Thu thập, chuẩn hóa và ghi dữ liệu. |
+| EventBridge | WeatherCollectionSchedule; rate(1 hour). | Kích hoạt xử lý định kỳ. |
+| Secrets Manager | weather/api_config. | Quản lý vị trí và ngưỡng cấu hình. |
+| SNS | weather-airquality-alerts; giao thức email. | Tiếp nhận thông báo từ Lambda. |
+| S3 | Bucket dự án theo account; vùng raw và athena-results. | Lưu dữ liệu và kết quả truy vấn. |
+| Glue | weather_aqi_db; weather_airquality_records. | Quản lý lược đồ và phân vùng. |
+| Athena | Năm truy vấn phân tích dữ liệu S3. | Tính thống kê và xuất CSV. |
+| CloudWatch | WeatherCollector-Errors-Alarm và dashboard của dự án. | Theo dõi lỗi, lượt gọi và thời gian xử lý. |
+
+## Chương 2 Thiết kế chức năng thu thập bằng Lambda
+
+### 2.1 Tổ chức chức năng xử lý
+
+Hàm Lambda được tổ chức thành các nhóm xử lý: đọc cấu hình, gọi API, chuyển đổi kiểu dữ liệu, phân loại AQI, thu thập chuỗi lịch sử, xuất thông báo và ghi S3. Các biến môi trường xác định bucket, secret và SNS topic; hàm nhận sự kiện để lựa chọn chế độ thu thập.
+
+### 2.2 Quản lý cấu hình bằng Secrets Manager
+
+Cấu hình weather/api_config chứa ba vị trí thu thập và các ngưỡng cảnh báo. Hàm đọc cấu hình từ Secrets Manager; nếu không đọc được, cấu hình dự phòng được sử dụng và lỗi được ghi vào log. API công khai được sử dụng trong dự án không yêu cầu khóa API.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Tên cấu hình | weather/api_config |
+| Nội dung | Ba vị trí thu thập; các ngưỡng AQI và nồng độ bụi. |
+| Dự phòng | Dùng cấu hình nội bộ và ghi log khi đọc secret thất bại. |
+
+Cấu hình dự phòng giúp hàm tiếp tục xử lý trong một số tình huống lỗi. Việc dùng cấu hình dự phòng vẫn cần được nhận biết qua log; nó không chứng minh kết nối Secrets Manager đã hoạt động bình thường.
+
+### 2.3 Thu thập và chuẩn hóa dữ liệu
+
+Mỗi đô thị cần hai lượt gọi API: một lượt lấy chất lượng không khí, một lượt lấy nhiệt độ, độ ẩm, áp suất và tốc độ gió. Mã hiện tại thực hiện các lượt gọi tuần tự, sau đó đưa kết quả vào cùng một bản ghi.
+
+Mỗi bản ghi dữ liệu sau khi thu thập được chuẩn hóa theo schema 23 trường thuộc tính chặt chẽ:
+
+Bảng 2.1: Danh mục chuẩn hóa 23 trường thuộc tính dữ liệu môi trường của hệ thống
+
+| Tên trường | Kiểu | Đơn vị | Ý nghĩa |
+| --- | --- | --- | --- |
+| record_id | string | — | Mã nhận diện bản ghi. |
+| city | string | — | Tên thành phố. |
+| latitude | double | ° | Vĩ độ vị trí thu thập. |
+| longitude | double | ° | Kinh độ vị trí thu thập. |
+| timestamp_utc | string | UTC | Thời điểm của bản ghi theo UTC. |
+| timestamp_vn | string | UTC+7 | Thời điểm quy đổi sang giờ Việt Nam. |
+| temperature_2m | double | °C | Nhiệt độ không khí ở độ cao 2 m. |
+| relative_humidity_2m | double | % | Độ ẩm tương đối ở độ cao 2 m. |
+| surface_pressure | double | hPa | Áp suất tại bề mặt. |
+| wind_speed_10m | double | km/h | Tốc độ gió ở độ cao 10 m. |
+| pm2_5 | double | µg/m³ | Nồng độ bụi PM2.5. |
+| pm10 | double | µg/m³ | Nồng độ bụi PM10. |
+| carbon_monoxide | double | µg/m³ | Nồng độ CO. |
+| nitrogen_dioxide | double | µg/m³ | Nồng độ NO2. |
+| sulphur_dioxide | double | µg/m³ | Nồng độ SO2. |
+| ozone | double | µg/m³ | Nồng độ O3. |
+| us_aqi | int | AQI | Chỉ số chất lượng không khí. |
+| aqi_category | string | — | Nhãn phân loại AQI trong hệ thống. |
+| hour | int | 0–23 | Giờ UTC dùng để nhóm dữ liệu. |
+| collected_at | string | ISO 8601 | Mốc ghi nhận có thông tin múi giờ. |
+| year | string | — | Khóa phân vùng năm. |
+| month | string | — | Khóa phân vùng tháng. |
+| day | string | — | Khóa phân vùng ngày. |
+
+### 2.4 Phân loại chỉ số AQI
+
+Hàm Lambda cài đặt giải thuật phân loại 6 cấp độ chất lượng không khí dựa trên chỉ số tổng hợp us_aqi theo đúng tiêu chuẩn United States Environmental Protection Agency (US EPA):
+
+Bảng 2.2: Bảng tiêu chuẩn phân loại 6 cấp độ chất lượng không khí US EPA AQI
+
+| Khoảng AQI | Nhãn trong dữ liệu | Diễn giải |
+| --- | --- | --- |
+| 0–50 | Good | Tốt |
+| 51–100 | Moderate | Trung bình |
+| 101–150 | Unhealthy for Sensitive Groups | Không tốt cho nhóm nhạy cảm |
+| 151–200 | Unhealthy | Không tốt |
+| 201–300 | Very Unhealthy | Rất không tốt |
+| Trên 300 | Hazardous | Nguy hại |
+
+### 2.5 Lưu trữ theo phân vùng trên S3
+
+Dữ liệu được lưu dạng NDJSON, mỗi dòng là một đối tượng JSON. Các bản ghi được gom theo năm, tháng và ngày; tệp được ghi vào phân vùng thời gian tương ứng trong vùng raw của bucket dự án.
+
+Lợi thế của định dạng NDJSON kết hợp phân vùng Hive-style:
+
+•  Phân vùng thời gian giúp truy vấn lựa chọn các ngày cần phân tích khi có điều kiện lọc trên khóa phân vùng.
+
+•  NDJSON cho phép lưu nhiều bản ghi trong một tệp và sử dụng lược đồ Glue để truy vấn bằng Athena.
+
+•  Mỗi tệp có tên riêng để bổ sung dữ liệu mà không ghi đè một tệp đã lưu.
+
+### 2.6 Thu thập hiện tại và nạp bù lịch sử
+
+Hai chế độ thu thập sử dụng chung lược đồ dữ liệu và cách ghi S3:
+
+•  Thu thập hiện tại: sự kiện không có yêu cầu nạp bù; mỗi đô thị tạo một bản ghi nếu hai lượt gọi API thành công.
+
+•  Nạp bù lịch sử: sự kiện có trường backfill_hours; hàm đọc chuỗi giờ được API trả về và chọn số giờ theo yêu cầu.
+
+Trong xử lý chuỗi lịch sử, chỉ mục của mảng cảm biến được giữ tương ứng với chỉ mục thời gian gốc. Số bản ghi thực tế phụ thuộc độ dài chuỗi API, số đô thị thành công và các giá trị sẵn có trong phản hồi.
+
+## Chương 3 Lịch thu thập và cảnh báo
+
+### 3.1 Cấu hình lịch thu thập EventBridge
+
+Quy tắc WeatherCollectionSchedule sử dụng biểu thức rate(1 hour) và trỏ tới WeatherCollectorLambda. Bộ source quản lý một lịch thu thập chính để tránh tạo hai lượt kích hoạt đồng thời cho cùng chức năng.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Quy tắc | WeatherCollectionSchedule |
+| Chu kỳ | rate(1 hour) |
+| Đích xử lý | WeatherCollectorLambda |
+
+### 3.2 Quyền gọi Lambda từ EventBridge
+
+Chính sách của Lambda cho phép dịch vụ EventBridge gọi hàm và ràng buộc nguồn gọi theo ARN của quy tắc lịch. Cấu hình này tách quyền gọi hàm khỏi quyền mà LabRole sử dụng bên trong quá trình xử lý.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Dịch vụ gọi | events.amazonaws.com |
+| Hành động được phép | lambda:InvokeFunction |
+| Giới hạn nguồn | ARN của WeatherCollectionSchedule |
+
+### 3.3 Topic SNS và đăng ký email
+
+SNS topic weather-airquality-alerts là đích nhận thông báo. Khi đăng ký một địa chỉ email, người nhận cần xác nhận đăng ký trước khi subscription có thể gửi email; việc tạo topic tự nó chưa xác nhận email đã được nhận.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Topic | weather-airquality-alerts |
+| Giao thức | Email |
+| Điều kiện hoạt động | Subscription được người nhận xác nhận. |
+
+### 3.4 Điều kiện và nội dung thông báo
+
+Trong quá trình xử lý bản ghi, hàm Lambda liên tục đối chiếu chỉ số đo được với các ngưỡng cảnh báo an toàn lưu trong Secrets Manager. Ngưỡng cảnh báo được thiết lập: us_aqi >= 100 hoặc pm2_5 >= 35.5 µg/m³.
+
+Thông điệp chứa thành phố, thời điểm, AQI, cấp phân loại, các nồng độ bụi và điều kiện khí tượng. Kết quả publish được dùng để đếm số thông báo gửi tới SNS; đây là số lần dịch vụ chấp nhận thông điệp, không phải số email người nhận đã đọc.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Nhận diện | Thành phố; thời gian UTC và Việt Nam. |
+| Chất lượng không khí | AQI, cấp phân loại, PM2.5, PM10 và ngưỡng cấu hình. |
+| Khí tượng | Nhiệt độ, độ ẩm, gió và áp suất. |
+
+## Chương 4 Mô hình dữ liệu và kết quả phân tích
+
+### 4.1 Database và bảng dữ liệu
+
+Để cho phép truy vấn không máy chủ trên hồ dữ liệu S3, nhóm khởi tạo cơ sở dữ liệu weather_aqi_db trên AWS Glue Data Catalog và khai báo bảng ngoại weather_airquality_records sử dụng OpenX JSON SerDe (org.openx.data.jsonserde.JsonSerDe). Lược đồ bảng gồm 20 cột thuộc tính dữ liệu và 3 cột khóa phân vùng:
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Database và bảng | weather_aqi_db.weather_airquality_records |
+| Lược đồ | 20 cột dữ liệu và 3 khóa phân vùng năm, tháng, ngày. |
+| Định dạng | NDJSON với OpenX JSON SerDe. |
+
+### 4.2 View dữ liệu
+
+View vietnam_weather_aqi cung cấp cách truy cập thống nhất tới bảng dữ liệu. Lược đồ và trường thời gian được giữ rõ ràng để các truy vấn tổng hợp có thể đối chiếu với bản ghi gốc.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Đối tượng | vietnam_weather_aqi |
+| Nguồn | weather_airquality_records |
+| Vai trò | Cung cấp lớp truy cập thống nhất tới các bản ghi. |
+
+### 4.3 Nạp phân vùng vào Catalog
+
+Các phân vùng được nạp vào Glue Data Catalog để Athena nhận biết vị trí dữ liệu theo ngày. Bộ dữ liệu đang dùng có ba phân vùng thời gian; truy vấn phân tích lấy dữ liệu từ bảng weather_airquality_records.
+
+### 4.4 Năm truy vấn phân tích
+
+#### Truy vấn 1 Thống kê và so sánh chất lượng không khí giữa các đô thị
+
+Truy vấn theo thành phố tính số mẫu, AQI trung bình và cực trị, cùng các đại lượng bụi và khí tượng trung bình. Bảng 4.1 và Bảng 4.2 trình bày toàn bộ các giá trị này.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Nhóm | Thành phố |
+| Đại lượng | Số mẫu, AQI trung bình và cực trị, các giá trị bụi và khí tượng trung bình. |
+
+Bảng 4.1 AQI và PM2.5 theo thành phố
+
+| Thành phố | Mẫu | AQI TB | AQI min | AQI max | PM2.5 TB |
+| --- | --- | --- | --- | --- | --- |
+| TP. Hồ Chí Minh | 52 | 107,79 | 95 | 172 | 37,03 |
+| Đà Nẵng | 52 | 74,67 | 36 | 155 | 14,23 |
+| Hà Nội | 52 | 67,56 | 56 | 80 | 15,36 |
+
+Bảng 4.2 PM10 và khí tượng trung bình theo thành phố
+
+| Thành phố | PM10 µg/m³ | Nhiệt độ °C | Độ ẩm % |
+| --- | --- | --- | --- |
+| TP. Hồ Chí Minh | 37,35 | 27,79 | 84,71 |
+| Đà Nẵng | 17,28 | 28,85 | 74,87 |
+| Hà Nội | 16,11 | 24,54 | 76,65 |
+
+![Hình phân tích](../../tuan_2/results/charts/01_aqi_city_comparison.png)
+
+Hình 4.1 AQI trung bình và cực trị của ba đô thị
+
+TP. Hồ Chí Minh có AQI trung bình 107,79, nhỏ nhất 95 và lớn nhất 172; PM2.5 trung bình 37,03 µg/m³. Đà Nẵng có AQI trung bình 74,67 và Hà Nội 67,56. Các giá trị này mô tả 52 mẫu mỗi đô thị; ngưỡng cảnh báo là tham số của hệ thống.
+
+#### Truy vấn 2 Biến thiên ô nhiễm theo 24 khung giờ UTC trong ngày
+
+Truy vấn theo giờ tạo 24 nhóm từ 00 đến 23 UTC. Mỗi nhóm chứa giá trị trung bình AQI, PM2.5, PM10 và số mẫu; số mẫu giữa các giờ không đồng đều.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Nhóm | 24 khung giờ UTC |
+| Đại lượng | AQI, PM2.5, PM10 trung bình và số mẫu của mỗi giờ. |
+
+![Hình phân tích](../../tuan_2/results/charts/02_peak_pollution_hours.png)
+
+Hình 4.2 AQI PM2.5 và PM10 trung bình theo giờ UTC
+
+AQI trung bình cao nhất tại giờ 11 UTC với 103,83 và thấp nhất tại giờ 23 với 75,83. PM2.5 cao nhất tại giờ 19 với 25,53 µg/m³ và thấp nhất tại giờ 03 với 18,03 µg/m³. Có 20 nhóm sáu mẫu và bốn nhóm chín mẫu. Dữ liệu này chưa đủ để kết luận nguyên nhân biến động hoặc chu kỳ ô nhiễm điển hình.
+
+#### Truy vấn 3 Phân bố cấp độ chất lượng không khí theo tiêu chuẩn US EPA
+
+Truy vấn phân bố đếm mẫu của từng cấp AQI trong mỗi đô thị và tính tỷ lệ trên tổng 52 mẫu của đô thị đó. Tổng số mẫu của các cấp được đối chiếu với truy vấn trung bình theo thành phố.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Nhóm | Thành phố và cấp AQI |
+| Tỷ lệ | Số mẫu của cấp chia cho tổng số mẫu trong cùng thành phố. |
+
+Bảng 4.3 Phân bố các cấp AQI theo thành phố
+
+| Thành phố | Cấp AQI | Số mẫu | Tỷ lệ % |
+| --- | --- | --- | --- |
+| Đà Nẵng | Moderate | 39 | 75,0 |
+| Đà Nẵng | Good | 6 | 11,5 |
+| Đà Nẵng | Unhealthy for Sensitive Groups | 4 | 7,7 |
+| Đà Nẵng | Unhealthy | 3 | 5,8 |
+| Hà Nội | Moderate | 52 | 100,0 |
+| TP. Hồ Chí Minh | Unhealthy for Sensitive Groups | 35 | 67,3 |
+| TP. Hồ Chí Minh | Moderate | 13 | 25,0 |
+| TP. Hồ Chí Minh | Unhealthy | 4 | 7,7 |
+
+![Hình phân tích](../../tuan_2/results/charts/03_aqi_category_distribution.png)
+
+Hình 4.3 Tỷ lệ mẫu của các cấp AQI theo thành phố
+
+TP. Hồ Chí Minh có 35 mẫu ở cấp không tốt cho nhóm nhạy cảm (67,3%), 13 mẫu trung bình (25,0%) và 4 mẫu không tốt (7,7%). Đà Nẵng có 39 mẫu trung bình (75,0%), 6 mẫu tốt (11,5%), 4 mẫu nhóm nhạy cảm (7,7%) và 3 mẫu không tốt (5,8%). Hà Nội có 52 mẫu trung bình. Đây là tỷ lệ mẫu, không phải tỷ lệ thời gian vận hành.
+
+#### Truy vấn 4 Tương quan Pearson giữa yếu tố Khí tượng và Bụi mịn PM2.5
+
+Hệ số Pearson r được tính riêng cho từng thành phố giữa PM2.5 và nhiệt độ, độ ẩm hoặc tốc độ gió. Dấu của hệ số mô tả chiều liên hệ tuyến tính trong tập mẫu; độ lớn nằm trong khoảng từ −1 đến 1.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Nhóm | Thành phố |
+| Đại lượng | Tương quan Pearson giữa PM2.5 và nhiệt độ, độ ẩm hoặc tốc độ gió. |
+
+Bảng 4.4 Hệ số tương quan Pearson với PM2.5
+
+| Thành phố | Nhiệt độ | Độ ẩm | Tốc độ gió |
+| --- | --- | --- | --- |
+| Hà Nội | 0,6462 | 0,2486 | -0,4846 |
+| Đà Nẵng | 0,4798 | -0,3183 | -0,2291 |
+| TP. Hồ Chí Minh | -0,6977 | 0,6627 | -0,1536 |
+
+![Hình phân tích](../../tuan_2/results/charts/04_weather_pm25_correlation.png)
+
+Hình 4.4 Tương quan PM2.5 với ba yếu tố khí tượng
+
+Tại TP. Hồ Chí Minh, nhiệt độ có r = −0,6977 và độ ẩm có r = 0,6627 với PM2.5. Tại Hà Nội, tốc độ gió có r = −0,4846. Các hệ số mô tả bộ mẫu hiện có; chúng không chứng minh quan hệ nhân quả hay một cơ chế khí quyển cụ thể.
+
+#### Truy vấn 5 Trích xuất 156 bản ghi dữ liệu gốc
+
+Truy vấn query_raw_weather_aqi_records.sql trích xuất toàn bộ 156 bản ghi gốc lưu ra tệp CSV để phục vụ kiểm định toàn vẹn schema, đối chiếu số liệu và nộp kèm hồ sơ nghiệm thu.
+
+### 4.5 Số liệu thực thi truy vấn Athena
+
+Các chỉ số thực thi được lấy từ tệp query_metrics.csv đã lưu. Thời gian và dung lượng quét phản ánh từng lượt truy vấn cụ thể, không phải cam kết hiệu năng cho mọi khối lượng dữ liệu.
+
+Bảng 4.5 Thời gian thực thi và dung lượng quét của năm truy vấn
+
+| Truy vấn | Dòng | Thời gian ms | Quét byte |
+| --- | --- | --- | --- |
+| avg aqi by city | 3 | 744 | 87.250 |
+| peak pollution hours | 24 | 936 | 87.250 |
+| aqi category distribution | 8 | 776 | 87.250 |
+| weather correlation | 3 | 930 | 87.250 |
+| raw weather aqi records | 156 | 1192 | 87.250 |
+
+Năm lượt truy vấn đều ghi nhận 87.250 byte quét. Thời gian thực thi nằm trong khoảng 744–1.192 ms. Bộ số liệu chưa có thử nghiệm đối chứng không phân vùng, nên không dùng để tính tỷ lệ tiết kiệm dữ liệu quét.
+
+## Chương 5 Đối chiếu dữ liệu và kiểm tra chức năng
+
+### 5.1 Cấu trúc và số lượng bản ghi
+
+Tệp raw_weather_aqi_records.csv chứa 156 dòng, 156 mã bản ghi khác nhau và 23 trường; mỗi đô thị có 52 mẫu. Các phép tổng hợp theo thành phố, giờ và cấp AQI đều có tổng số mẫu 156, giúp phát hiện thiếu hoặc đếm trùng khi đối chiếu.
+
+### 5.2 Kiểm tra chức năng và tính toàn vẹn dữ liệu
+
+Bộ kiểm tra cục bộ gồm 40 ca cho Lambda, dữ liệu CSV, biểu đồ và chương trình quản lý dịch vụ. Các ca dùng dữ liệu đã lưu và đối tượng AWS giả lập để kiểm tra logic; kết quả không thay thế việc quan sát một lần chạy thật trên AWS.
+
+Bảng 5.1 Phạm vi kiểm tra bộ source hiện tại
+
+| Nhóm kiểm tra | Số ca | Nội dung chính | Kết quả cục bộ |
+| --- | --- | --- | --- |
+| Lambda | 12 | Chuyển đổi kiểu, phân loại AQI, thu thập và ghi S3, phát thông báo. | Đạt |
+| Dữ liệu CSV | 12 | Schema, số mẫu, đồng nhất bản sao và xuất dữ liệu đã lưu. | Đạt |
+| Biểu đồ | 4 | Sinh bốn hình từ các tệp CSV. | Đạt |
+| Python SDK | 12 | Lỗi truy vấn, timeout, phân trang, nguồn ngoại tuyến và điều kiện thu hồi. | Đạt |
+
+### 5.3 Xử lý lỗi và giá trị thiếu
+
+Ba nhóm xử lý lỗi chính trong mã hiện tại gồm:
+
+•  Chuyển đổi kiểu: các hàm chuyển đổi dùng giá trị mặc định khi đầu vào không hợp lệ. Mặc định số 0 cần được phân biệt với phép đo thật bằng 0 khi đánh giá dữ liệu thiếu.
+
+•  Chuỗi lịch sử: lựa chọn dữ liệu theo chỉ mục thời gian gốc và kiểm tra độ dài mảng cảm biến trước khi lấy giá trị.
+
+•  Cấu hình và xuất dữ liệu: có cấu hình dự phòng cho Lambda; chương trình xuất Athena dừng khi truy vấn lỗi hoặc hết thời gian chờ. Chế độ ngoại tuyến chỉ sao chép CSV đã lưu và ghi rõ nguồn.
+
+### 5.4 Theo dõi bằng CloudWatch
+
+Cấu hình giám sát theo dõi các chỉ số do dịch vụ Lambda cung cấp:
+
+•  CloudWatch Metric Alarm (WeatherCollector-Errors-Alarm): Cấu hình phát hiện khi hàm Lambda phát sinh Errors >= 1 trong chu kỳ 300 giây và tự động phát cảnh báo qua SNS Topic.
+
+•  CloudWatch Dashboard hiển thị số lượt gọi, số lỗi và thời gian thực thi. Các giá trị chỉ xuất hiện khi có dữ liệu dịch vụ được ghi nhận; hình cấu hình không được dùng như bằng chứng của một lượt chạy.
+
+Invocations đếm số lượt hàm được gọi, Errors đếm lượt kết thúc với lỗi và Duration đo thời gian thực thi. Dashboard hiển thị tổng lượt gọi, tổng lỗi, thời gian trung bình và lớn nhất trong từng chu kỳ 300 giây. Chỉ số Errors không tự xác nhận chất lượng bản ghi; việc đối chiếu CSV được thực hiện riêng.
+
+## Chương 6 Đánh giá kết quả và sử dụng tài nguyên Tuần 2
+
+### 6.1 Các đại lượng theo dõi sử dụng tài nguyên
+
+Để quản lý tài nguyên trong Learner Lab, nhóm theo dõi dung lượng lưu trữ, số lượt xử lý, thời gian thực thi và dung lượng quét của truy vấn. Các đại lượng này được trình bày theo đúng nguồn quan sát, thay vì quy đổi thành chi phí tháng khi chưa có báo cáo thanh toán tương ứng.
+
+Bảng 6.1 Đại lượng sử dụng tài nguyên và nguồn theo dõi
+
+| Thành phần | Đại lượng theo dõi | Nguồn đối chiếu |
+| --- | --- | --- |
+| Amazon S3 | Số tệp và dung lượng vùng raw. | Trạng thái bucket trong phiên thực hành. |
+| AWS Lambda | Invocations, Errors và Duration. | CloudWatch metrics của hàm. |
+| Amazon Athena | 87.250 byte quét cho mỗi lượt trong bộ kết quả đã lưu. | query_metrics.csv |
+| Amazon SNS | Số thông báo được dịch vụ chấp nhận. | Phản hồi publish và metric SNS. |
+| Secrets Manager và Glue | Secret, database, bảng và phân vùng được sử dụng. | Cấu hình tài nguyên. |
+
+Quản lý chi phí dựa trên dữ liệu sử dụng và báo cáo thanh toán của tài khoản tại thời điểm quan sát. Ngân sách Learner Lab không đồng nghĩa với số tiền đã dùng; báo cáo này không suy diễn chi phí thực tế từ đơn giá hoặc mô hình tải giả định.
+
+### 6.2 Tổng hợp các kết quả phân tích
+
+Bốn nhóm kết quả cho thấy sự khác nhau giữa các đô thị, biến thiên của các chỉ số theo giờ, tỷ lệ mẫu theo cấp AQI và liên hệ thống kê với khí tượng. Mỗi hình trong báo cáo được dựng từ tệp CSV tương ứng và có bảng số liệu để đối chiếu.
+
+### 6.3 Quản lý vòng đời tài nguyên
+
+Chương trình thu hồi tài nguyên yêu cầu xác nhận account trước khi xóa. Việc xóa dữ liệu S3 là lựa chọn riêng và chỉ được thực hiện khi bucket có tag dự án phù hợp.
+
+| Thành phần | Cấu hình hoặc cách xử lý |
+| --- | --- |
+| Xác nhận | Account đăng nhập phải khớp account được xác nhận. |
+| Xóa dữ liệu | Lựa chọn riêng; kiểm tra tag dự án trước khi xóa bucket. |
+
+Quy trình thu hồi gồm gỡ lịch và đích kích hoạt, xóa các cấu hình giám sát, hàm xử lý và metadata liên quan. Secret sử dụng thời gian phục hồi; dữ liệu được giữ lại nếu chưa chọn xóa. Thời gian hoàn tất phụ thuộc trạng thái và quyền của dịch vụ.
+
+### 6.4 Đối chiếu sản phẩm Tuần 2
+
+Đối chiếu với các yêu cầu kỹ thuật của đề tài trong đề cương môn học:
+
+Bảng 6.2 Đối chiếu sản phẩm Tuần 2
+
+| Sản phẩm | Nội dung hoàn thiện | Nguồn đối chiếu |
+| --- | --- | --- |
+| Thu thập | Lambda nhận sự kiện và tạo bản ghi theo lược đồ. | lambda_function.py |
+| Lịch và cảnh báo | Cấu hình lịch định kỳ, quyền gọi và SNS topic. | Chương trình quản lý dịch vụ. |
+| Dữ liệu | Bảng, view, phân vùng và năm truy vấn. | Tệp SQL và CSV. |
+| Phân tích | Bảng thống kê và bốn biểu đồ. | Bốn CSV tổng hợp. |
+| Kiểm tra | 40 ca kiểm tra cục bộ. | Bộ kiểm tra Lambda, CSV, biểu đồ và SDK. |
+
+### 6.5 Kết luận Tuần 2
+
+Tuần 2 hoàn thiện bộ chức năng Lambda, lịch thu thập, cảnh báo, mô hình dữ liệu và các truy vấn phân tích. Bộ source tổ chức thao tác AWS qua Python SDK, giữ rõ lỗi dịch vụ và nguồn dữ liệu khi xuất kết quả.
+
+Bộ kết quả dùng trong báo cáo gồm 156 bản ghi và năm tệp truy vấn. Các bảng và biểu đồ cùng sử dụng các giá trị này; diễn giải được giới hạn trong tập mẫu đang có.
+
+Chúng em cùng rà soát luồng dữ liệu và phân công theo các nhóm chức năng. Các kết quả kiểm tra cục bộ giúp xác minh logic xử lý và tính nhất quán dữ liệu.
+
+Các chức năng liên quan gửi email, tự động kích hoạt định kỳ và sử dụng tài nguyên cần được đối chiếu bằng trạng thái dịch vụ tại phiên thực hành. Kết quả kiểm tra mã nguồn được trình bày riêng với kết quả truy vấn đã lưu.
+
+## Chương 7 Phân công và tổng hợp công việc Tuần 2
+
+### 7.1 Phân công theo nhóm chức năng
+
+Hai thành viên phụ trách các nhóm chức năng khác nhau và cùng thực hiện phần kiến trúc, tích hợp và báo cáo. Việc phân công bám theo các sản phẩm kỹ thuật được trình bày trong những chương trước.
+
+Bảng 7.1 Phân công và sản phẩm của từng thành viên
+
+| Thành viên | Sản phẩm phụ trách | Phần thực hiện chung |
+| --- | --- | --- |
+| Nguyễn Tiến Sơn<br>24110054 | Lưu trữ S3, cấu hình secret, Lambda và SNS. | Kiến trúc, tích hợp, đối chiếu và báo cáo. |
+| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, kết quả truy vấn và biểu đồ. | Kiến trúc, tích hợp, đối chiếu và báo cáo. |
+
+### 7.2 Tổng hợp các sản phẩm đã thực hiện
+
+Các sản phẩm được nhóm rà soát theo luồng từ thu thập đến phân tích; mỗi phần có đầu vào, đầu ra và vai trò cụ thể trong hệ thống.
+
+Bảng 7.2 Tổng hợp sản phẩm Tuần 2
+
+| Nhóm công việc | Sản phẩm | Cách đối chiếu |
+| --- | --- | --- |
+| Thu thập và chuẩn hóa | Bản ghi 23 trường. | Schema và CSV raw. |
+| Lưu trữ và truy vấn | Phân vùng, lược đồ và truy vấn. | Metadata và kết quả CSV. |
+| Cảnh báo và lịch | Quy tắc kích hoạt, điều kiện cảnh báo. | Cấu hình dịch vụ và logic xử lý. |
+| Phân tích và báo cáo | Bảng số liệu, bốn biểu đồ, Word/PDF. | Giá trị và cách nhóm thống nhất với CSV. |
+
+### 7.3 Phạm vi hỗ trợ AI và trách nhiệm của nhóm
+
+Nhóm sử dụng AI để tra cứu tài liệu, hỗ trợ phân tích số liệu, rà soát mã và biên tập cách trình bày. Sinh viên chịu trách nhiệm về cấu hình triển khai, dữ liệu sử dụng và nội dung báo cáo.
+
+#### 7.3.1 Các phần có hỗ trợ
+
+•  Tra cứu cách sử dụng các dịch vụ và cấu trúc dữ liệu; rà soát cú pháp truy vấn và chương trình xử lý.
+
+•  Hỗ trợ đối chiếu số liệu giữa CSV, bảng và biểu đồ.
+
+•  Rà soát bố cục, cách diễn giải và các lỗi trình bày trong tài liệu.
+
+#### 7.3.2 Trách nhiệm của sinh viên
+
+•  Giải thích kiến trúc và luồng dữ liệu của từng thành phần.
+
+•  Hiểu vai trò LabRole, chính sách cho phép EventBridge gọi Lambda và cách quản lý cấu hình.
+
+•  Đối chiếu kết quả truy vấn, hiểu cách tính trung bình, tỷ lệ mẫu và tương quan.
+
+•  Kiểm tra trạng thái dịch vụ và kết quả thực hành trong tài khoản của nhóm.
+
+•  Giải thích các điều kiện cảnh báo, cách xử lý lỗi và giới hạn của dữ liệu.
+
+### 7.4 Tổng kết trách nhiệm
+
+Chúng em chịu trách nhiệm về những nội dung trình bày và các sản phẩm đi kèm; sẵn sàng giải thích cấu hình, quá trình xử lý và các phép tính trong báo cáo. Phần công việc chung được cả hai thành viên rà soát.

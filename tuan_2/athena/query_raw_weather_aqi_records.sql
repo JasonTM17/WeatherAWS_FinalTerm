@@ -1,5 +1,5 @@
 -- Query 5: Trích xuất toàn bộ bản ghi dữ liệu thô (Raw Weather & AQI Records)
--- Mục đích: Xuất toàn bộ 156 bản ghi đo đạc từ AWS Athena ra định dạng CSV qua AWS CLI
+-- Mục đích: Xuất toàn bộ bản ghi đo đạc từ Athena ra CSV.
 
 SELECT 
     record_id,

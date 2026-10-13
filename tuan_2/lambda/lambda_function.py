@@ -3,8 +3,7 @@ AWS Lambda Function: WeatherCollectorLambda
 Hệ thống thu thập và phân tích dữ liệu thời tiết / chất lượng không khí
 Môn học: Cloud - Đợt 1 - 2026-2027
 GVHD: Huỳnh Xuân Phụng
-Sinh viên: 24110051 (Nguyễn Văn An) & 24110054 (Trần Minh Jason)
-Role: arn:aws:iam::134987931868:role/LabRole
+Sinh viên: Nguyễn Tiến Sơn (24110054) & Trần Thị Ngọc Quyên (24110051)
 """
 
 import json
@@ -16,14 +15,15 @@ import uuid
 import boto3
 
 # AWS Clients using LabRole
-s3_client = boto3.client('s3')
-sns_client = boto3.client('sns')
-secrets_client = boto3.client('secretsmanager')
+REGION = os.environ.get('AWS_REGION', os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'))
+s3_client = boto3.client('s3', region_name=REGION)
+sns_client = boto3.client('sns', region_name=REGION)
+secrets_client = boto3.client('secretsmanager', region_name=REGION)
 
-# Environment / Defaults (Dynamic & Account 134987931868)
-BUCKET_NAME = os.environ.get('S3_BUCKET_NAME', 'weather-aqi-134987931868')
+# Deployment-specific identifiers are supplied by the environment.
+BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
 SECRET_NAME = os.environ.get('SECRET_NAME', 'weather/api_config')
-SNS_TOPIC_ARN = os.environ.get('SNS_TOPIC_ARN', 'arn:aws:sns:us-east-1:134987931868:weather-airquality-alerts')
+SNS_TOPIC_ARN = os.environ.get('SNS_TOPIC_ARN')
 
 
 def safe_float(val, default=0.0):
@@ -80,7 +80,6 @@ def fetch_secrets():
         print(f"[WARN] Failed to fetch secrets from Secrets Manager ({e}). Using default config.")
         return {
             "api_provider": "open-meteo",
-            "api_key": "sec_demo_weather_api_key_134987931868",
             "aqi_threshold_pm25": 35.5,
             "aqi_threshold_pm10": 50.0,
             "aqi_threshold_us_aqi": 100,
@@ -259,7 +258,7 @@ def send_sns_alert(record, threshold_pm25, threshold_aqi):
     message = f"""======================================================
 HỆ THỐNG CẢNH BÁO CHẤT LƯỢNG KHÔNG KHÍ TỰ ĐỘNG (AWS CLOUD)
 Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng
-Nhóm: Domain Apps | Account ID: 134987931868 | Region: us-east-1
+Nhóm: Domain Apps | Region: {REGION}
 ======================================================
 
 Khu vực: {record['city']} (Tọa độ: {record['latitude']}, {record['longitude']})
@@ -310,8 +309,7 @@ def save_records_to_s3(records):
         return []
 
     if not BUCKET_NAME:
-        print("[WARN] BUCKET_NAME is not configured. Skipping S3 upload.")
-        return []
+        raise ValueError("S3_BUCKET_NAME must be configured before data can be saved.")
 
     grouped_by_partition = {}
     for r in records:

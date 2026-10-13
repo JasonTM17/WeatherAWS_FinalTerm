@@ -63,7 +63,7 @@ INSTRUCTOR_NAME = "Huỳnh Xuân Phụng"
 EXPECTED_PHYSICAL_PAGES_W1 = 20
 EXPECTED_TOC_ENTRIES_W1 = 28
 EXPECTED_RAW_RECORD_COUNT = 156
-EXPECTED_UNIT_TEST_COUNT = 28
+EXPECTED_UNIT_TEST_COUNT = 40
 
 EXPECTED_REPORT_FIGURES = [
     "architecture_report.png",
@@ -71,12 +71,6 @@ EXPECTED_REPORT_FIGURES = [
     "02_peak_pollution_hours_detailed.png",
     "03_aqi_category_distribution_detailed.png",
     "04_weather_pm25_correlation_detailed.png",
-    "05_athena_query_performance_detailed.png",
-    "06_s3_datalake_partitioning_detailed.png",
-    "07_cloudwatch_monitoring_dashboard_detailed.png",
-    "08_aws_cost_and_budget_detailed.png",
-    "09_unit_testing_and_qa_matrix_detailed.png",
-    "10_executive_analytics_overview_dashboard.png",
 ]
 
 # -----------------------------------------------------------------------------
@@ -396,7 +390,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
             "SNS",
             "Athena",
             "Open-Meteo",
-            "28",
+            "40",
         ]
         for kw in keywords:
             self.assertIn(
@@ -405,17 +399,18 @@ class TestTier1FeatureCoverage(unittest.TestCase):
                 f"Technical core concept '{kw}' not mentioned in Week 2 report",
             )
 
-    def test_r4_1_unit_test_suite_28_tests_pass(self):
-        """R4.1: Verify unit test suite runs exactly 28 tests and passes 100%."""
+    def test_r4_1_unit_test_suite_40_tests_pass(self):
+        """R4.1: Verify unit test suite runs exactly 40 tests and passes 100%."""
         test_dir = locate_dir("tuan_2/tests", "tests")
         self.assertIsNotNone(test_dir, "Tests directory not found in 'tuan_2/tests' or 'tests'")
 
         # Explicitly run unit test modules to prevent recursion with this acceptance runner
         cmd = [
-            "py", "-3.13", "-m", "unittest",
+            sys.executable, "-m", "unittest",
             "test_lambda_function",
             "test_analytics",
             "test_csv_exports",
+            "test_sdk",
         ]
 
         # Isolate environment from ambient AWS token failures during testing
@@ -594,8 +589,8 @@ class TestTier2BoundaryAndCornerCases(unittest.TestCase):
 class TestTier3CrossFeatureConsistency(unittest.TestCase):
     """Verifies consistency between reports, schemas, figures, and raw records."""
 
-    def test_report_image_assets_consistency_11_figures(self):
-        """Verifies that all 11 figures referenced in Week 2 report exist and are valid PNG images."""
+    def test_report_image_assets_consistency_real_data_figures(self):
+        """Verify the architecture and four CSV-backed report figures are valid PNGs."""
         docs_dir = locate_dir("tuan_2/docs", "docs")
         self.assertIsNotNone(docs_dir, "Docs directory not found")
 
@@ -619,8 +614,8 @@ class TestTier3CrossFeatureConsistency(unittest.TestCase):
         raw_csv = locate_file(
             "tuan_2/results/athena_queries/raw_weather_aqi_records.csv",
             "results/athena_queries/raw_weather_aqi_records.csv",
-            "tuan_2/results/aws_cli_exports/raw_weather_aqi_records.csv",
-            "results/aws_cli_exports/raw_weather_aqi_records.csv",
+            "tuan_2/results/data_exports/raw_weather_aqi_records.csv",
+            "results/data_exports/raw_weather_aqi_records.csv",
         )
         self.assertIsNotNone(raw_csv, "raw_weather_aqi_records.csv not found")
 
@@ -650,12 +645,12 @@ class TestTier3CrossFeatureConsistency(unittest.TestCase):
                 f"City '{city}' has {count} records, expected exactly 52",
             )
 
-    def test_unit_test_count_parity_28_tests(self):
-        """Verifies unit test suite defines exactly 28 test methods across 3 test modules."""
+    def test_unit_test_count_parity_40_tests(self):
+        """Verifies unit test suite defines exactly 40 test methods across 4 test modules."""
         test_dir = locate_dir("tuan_2/tests", "tests")
         self.assertIsNotNone(test_dir, "Tests directory not found")
 
-        modules = ["test_lambda_function.py", "test_analytics.py", "test_csv_exports.py"]
+        modules = ["test_lambda_function.py", "test_analytics.py", "test_csv_exports.py", "test_sdk.py"]
         total_methods = 0
         for mod in modules:
             mod_path = test_dir / mod

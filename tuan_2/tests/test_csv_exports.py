@@ -1,6 +1,6 @@
 """
 Unit Tests for CSV Exports and Data Integrity
-Kiểm tra tính toàn vẹn của các tệp CSV xuất từ AWS Athena & AWS CLI
+Kiểm tra tính toàn vẹn của các tệp CSV xuất từ AWS Athena & Python SDK
 Môn học: Cloud - Đợt 1 - 2026-2027 | GVHD: Huỳnh Xuân Phụng | SV: 24110054
 """
 
@@ -11,15 +11,16 @@ import json
 import subprocess
 import tempfile
 import shutil
+import sys
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-CLI_EXPORTS_DIR = os.path.join(REPO_ROOT, 'results', 'aws_cli_exports')
+DATA_EXPORTS_DIR = os.path.join(REPO_ROOT, 'results', 'data_exports')
 ATHENA_QUERIES_DIR = os.path.join(REPO_ROOT, 'results', 'athena_queries')
 
 
 class TestCsvExports(unittest.TestCase):
 
-    def test_all_cli_export_files_exist(self):
+    def test_all_saved_export_files_exist(self):
         expected_files = [
             'avg_aqi_by_city.csv',
             'peak_pollution_hours.csv',
@@ -31,8 +32,8 @@ class TestCsvExports(unittest.TestCase):
             'README.md'
         ]
         for fname in expected_files:
-            fpath = os.path.join(CLI_EXPORTS_DIR, fname)
-            self.assertTrue(os.path.exists(fpath), f"File {fname} does not exist in {CLI_EXPORTS_DIR}")
+            fpath = os.path.join(DATA_EXPORTS_DIR, fname)
+            self.assertTrue(os.path.exists(fpath), f"File {fname} does not exist in {DATA_EXPORTS_DIR}")
             self.assertGreater(os.path.getsize(fpath), 0, f"File {fname} is empty")
 
     def test_athena_queries_synchronized(self):
@@ -45,14 +46,14 @@ class TestCsvExports(unittest.TestCase):
             'query_metrics.csv'
         ]
         for fname in expected_csvs:
-            cli_path = os.path.join(CLI_EXPORTS_DIR, fname)
+            saved_path = os.path.join(DATA_EXPORTS_DIR, fname)
             athena_path = os.path.join(ATHENA_QUERIES_DIR, fname)
             self.assertTrue(os.path.exists(athena_path), f"File {fname} not found in {ATHENA_QUERIES_DIR}")
-            self.assertEqual(os.path.getsize(cli_path), os.path.getsize(athena_path),
-                             f"File sizes differ between CLI exports and Athena queries for {fname}")
+            with open(saved_path, 'rb') as left, open(athena_path, 'rb') as right:
+                self.assertEqual(left.read(), right.read(), f"Saved export differs from Athena CSV: {fname}")
 
     def test_city_comparison_csv_structure_and_counts(self):
-        csv_path = os.path.join(CLI_EXPORTS_DIR, 'avg_aqi_by_city.csv')
+        csv_path = os.path.join(DATA_EXPORTS_DIR, 'avg_aqi_by_city.csv')
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = list(csv.DictReader(f))
         self.assertEqual(len(reader), 3)
@@ -62,7 +63,7 @@ class TestCsvExports(unittest.TestCase):
         self.assertEqual(total_records, 156)
 
     def test_peak_hours_csv_structure_and_counts(self):
-        csv_path = os.path.join(CLI_EXPORTS_DIR, 'peak_pollution_hours.csv')
+        csv_path = os.path.join(DATA_EXPORTS_DIR, 'peak_pollution_hours.csv')
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = list(csv.DictReader(f))
         self.assertEqual(len(reader), 24)
@@ -72,7 +73,7 @@ class TestCsvExports(unittest.TestCase):
         self.assertEqual(total_samples, 156)
 
     def test_category_distribution_csv_percentages(self):
-        csv_path = os.path.join(CLI_EXPORTS_DIR, 'aqi_category_distribution.csv')
+        csv_path = os.path.join(DATA_EXPORTS_DIR, 'aqi_category_distribution.csv')
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = list(csv.DictReader(f))
         self.assertEqual(len(reader), 8)
@@ -84,7 +85,7 @@ class TestCsvExports(unittest.TestCase):
             self.assertAlmostEqual(total_pct, 100.0, delta=1.0)
 
     def test_weather_correlation_csv_bounds(self):
-        csv_path = os.path.join(CLI_EXPORTS_DIR, 'weather_correlation.csv')
+        csv_path = os.path.join(DATA_EXPORTS_DIR, 'weather_correlation.csv')
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = list(csv.DictReader(f))
         self.assertEqual(len(reader), 3)
@@ -94,7 +95,7 @@ class TestCsvExports(unittest.TestCase):
                 self.assertTrue(-1.0 <= val <= 1.0, f"Correlation {field}={val} out of bounds [-1, 1]")
 
     def test_raw_records_csv_complete_156_records(self):
-        csv_path = os.path.join(CLI_EXPORTS_DIR, 'raw_weather_aqi_records.csv')
+        csv_path = os.path.join(DATA_EXPORTS_DIR, 'raw_weather_aqi_records.csv')
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = list(csv.DictReader(f))
         self.assertEqual(len(reader), 156)
@@ -109,7 +110,7 @@ class TestCsvExports(unittest.TestCase):
         self.assertTrue(expected_columns.issubset(set(reader[0].keys())))
 
     def test_query_metrics_csv_contents(self):
-        csv_path = os.path.join(CLI_EXPORTS_DIR, 'query_metrics.csv')
+        csv_path = os.path.join(DATA_EXPORTS_DIR, 'query_metrics.csv')
         with open(csv_path, 'r', encoding='utf-8') as f:
             reader = list(csv.DictReader(f))
         self.assertEqual(len(reader), 5)
@@ -122,7 +123,7 @@ class TestCsvExports(unittest.TestCase):
     def test_csv_data_cleanliness_and_no_nans(self):
         """Verify no CSV contains corrupt 'NaN' strings or empty required values."""
         for fname in ['avg_aqi_by_city.csv', 'peak_pollution_hours.csv', 'raw_weather_aqi_records.csv']:
-            fpath = os.path.join(CLI_EXPORTS_DIR, fname)
+            fpath = os.path.join(DATA_EXPORTS_DIR, fname)
             with open(fpath, 'r', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row_idx, row in enumerate(reader):
@@ -147,7 +148,7 @@ class TestCsvExports(unittest.TestCase):
         try:
             target_file = os.path.join(temp_dir, 'offline_raw_test.csv')
             script = os.path.join(REPO_ROOT, 'scripts', 'export_raw_records.py')
-            res = subprocess.run(['py', '-3.13', script, '--offline', '--output', target_file],
+            res = subprocess.run([sys.executable, script, '--offline', '--output', target_file],
                                  capture_output=True, text=True, check=True)
             self.assertTrue(os.path.exists(target_file))
             with open(target_file, 'r', encoding='utf-8') as f:
@@ -156,12 +157,12 @@ class TestCsvExports(unittest.TestCase):
         finally:
             shutil.rmtree(temp_dir, ignore_errors=True)
 
-    def test_powershell_export_script_with_custom_output_dir(self):
-        """Test export_csv_via_cli.ps1 executes end-to-end with custom OutputDir without polluting baseline."""
+    def test_offline_export_with_custom_output_dir(self):
+        """An offline export copies saved bytes and labels their provenance."""
         temp_dir = tempfile.mkdtemp()
         try:
-            script = os.path.join(REPO_ROOT, 'scripts', 'export_csv_via_cli.ps1')
-            cmd = ['pwsh', '-File', script, '-OutputDir', temp_dir, '-TableName', 'vietnam_weather_aqi', '-AllowOfflineFallback']
+            script = os.path.join(REPO_ROOT, 'scripts', 'athena_export.py')
+            cmd = [sys.executable, script, '--output', temp_dir, '--offline']
             test_env = os.environ.copy()
             test_env['AWS_ACCESS_KEY_ID'] = 'OFFLINE_MOCK'
             test_env['AWS_SECRET_ACCESS_KEY'] = 'OFFLINE_MOCK'
@@ -174,19 +175,16 @@ class TestCsvExports(unittest.TestCase):
                 'peak_pollution_hours.csv',
                 'aqi_category_distribution.csv',
                 'weather_correlation.csv',
-                'raw_weather_aqi_records.csv',
-                'query_metrics.csv'
+                'raw_weather_aqi_records.csv'
             ]
             for c in expected_csvs:
                 p = os.path.join(temp_dir, c)
                 self.assertTrue(os.path.exists(p), f"{c} was not created in custom output dir")
                 self.assertGreater(os.path.getsize(p), 0, f"{c} is empty in custom output dir")
 
-            # Check raw_weather_aqi_records row count in query_metrics.csv
-            metrics_path = os.path.join(temp_dir, 'query_metrics.csv')
-            with open(metrics_path, 'r', encoding='utf-8') as f:
-                metrics_rows = {r['query_name']: int(r['result_rows']) for r in csv.DictReader(f)}
-            self.assertEqual(metrics_rows.get('raw_weather_aqi_records'), 156)
+            with open(os.path.join(temp_dir, 'export_manifest.json'), encoding='utf-8') as f:
+                self.assertEqual(json.load(f)['mode'], 'saved-snapshot')
+            self.assertFalse(os.path.exists(os.path.join(temp_dir, 'query_metrics.csv')))
         finally:
             shutil.rmtree(temp_dir, ignore_errors=True)
 

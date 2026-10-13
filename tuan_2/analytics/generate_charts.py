@@ -1,195 +1,167 @@
-"""
-Generate Trend and Analytical Visual Charts from Athena Query Results
-Môn học: Cloud - Đợt 1 - 2026-2027
-GVHD: Huỳnh Xuân Phụng
-Sinh viên: 24110054
-Account: 873674852386 | Region: us-east-1
-"""
+"""Render Vietnamese, print-sized charts from the saved Athena CSV snapshot."""
 
-import os
-import sys
-import pandas as pd
+from __future__ import annotations
+
+import csv
+from pathlib import Path
+
 import matplotlib
-matplotlib.use('Agg')
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-if hasattr(sys.stdout, 'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8')
 
-plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
-plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Segoe UI']
-plt.rcParams['axes.edgecolor'] = '#cccccc'
-plt.rcParams['axes.linewidth'] = 0.8
+ROOT = Path(__file__).resolve().parents[1]
+DATA_DIR = str(ROOT / "results" / "athena_queries")
+CHARTS_DIR = str(ROOT / "results" / "charts")
 
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_TUAN_2_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
-CHARTS_DIR = os.path.join(_TUAN_2_DIR, 'results', 'charts') if os.path.isdir(os.path.join(_TUAN_2_DIR, 'results')) else os.path.abspath('results/charts')
-DATA_DIR = os.path.join(_TUAN_2_DIR, 'results', 'athena_queries') if os.path.isdir(os.path.join(_TUAN_2_DIR, 'results')) else os.path.abspath('results/athena_queries')
-os.makedirs(CHARTS_DIR, exist_ok=True)
 
-# 1. Chart 1: AQI City Comparison
+def rows(name):
+    with (Path(DATA_DIR) / name).open(encoding="utf-8-sig", newline="") as handle:
+        return list(csv.DictReader(handle))
+
+
+plt.rcParams.update({
+    "font.family": "Times New Roman",
+    "font.size": 11,
+    "axes.titlesize": 14,
+    "axes.labelsize": 11,
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "figure.facecolor": "white",
+    "axes.facecolor": "white",
+    "savefig.facecolor": "white",
+})
+
+CITY = {"HoChiMinh": "TP. Hồ Chí Minh", "DaNang": "Đà Nẵng", "HaNoi": "Hà Nội"}
+
+
+def finish(fig, name):
+    fig.text(0.01, 0.01, "Nguồn dữ liệu: Open-Meteo; kết quả Athena đã lưu",
+             color="#444444", fontsize=8)
+    Path(CHARTS_DIR).mkdir(parents=True, exist_ok=True)
+    fig.savefig(Path(CHARTS_DIR) / name, dpi=260, bbox_inches="tight", pad_inches=0.15)
+    plt.close(fig)
+
+
+
 def plot_city_comparison():
-    csv_file = os.path.join(DATA_DIR, 'avg_aqi_by_city.csv')
-    df = pd.read_csv(csv_file)
+    # Figure 4.1: three comparable AQI measures for each city.
+    city = rows("avg_aqi_by_city.csv")
+    names = [CITY[r["city"]] for r in city]
+    x = np.arange(len(city))
+    w = 0.23
+    fig, ax = plt.subplots(figsize=(8.2, 4.35))
+    for offset, key, label, color in [
+        (-w, "min_aqi", "Thấp nhất", "#7A9BB7"),
+        (0, "avg_aqi", "Trung bình", "#355C7D"),
+        (w, "max_aqi", "Cao nhất", "#B85C5C"),
+    ]:
+        vals = [float(r[key]) for r in city]
+        bars = ax.bar(x + offset, vals, width=w, label=label, color=color)
+        for bar, val in zip(bars, vals):
+            ax.annotate(f"{val:.1f}", (bar.get_x() + bar.get_width() / 2, val),
+                        xytext=(0, 3), textcoords="offset points", ha="center", fontsize=9)
+    ax.set_xticks(x, names)
+    ax.set_ylim(0, 205)
+    ax.set_ylabel("Chỉ số US AQI")
+    ax.set_title("So sánh US AQI theo ba đô thị")
+    ax.grid(axis="y", alpha=0.18)
+    ax.legend(ncol=3, frameon=False, loc="upper right", fontsize=9)
+    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    finish(fig, "01_aqi_city_comparison.png")
 
-    fig, ax = plt.subplots(figsize=(10, 6), dpi=300)
-    x = np.arange(len(df))
-    width = 0.25
 
-    rects1 = ax.bar(x - width, df['avg_aqi'], width, label='Average AQI', color='#2563eb', alpha=0.9)
-    rects2 = ax.bar(x, df['min_aqi'], width, label='Minimum AQI', color='#10b981', alpha=0.9)
-    rects3 = ax.bar(x + width, df['max_aqi'], width, label='Maximum AQI', color='#ef4444', alpha=0.9)
 
-    # Reference lines for EPA categories
-    ax.axhline(50, color='#10b981', linestyle='--', linewidth=1, alpha=0.7, label='Good limit (50)')
-    ax.axhline(100, color='#f59e0b', linestyle='--', linewidth=1, alpha=0.7, label='Moderate limit (100)')
-    ax.axhline(150, color='#ef4444', linestyle='--', linewidth=1, alpha=0.7, label='Unhealthy limit (150)')
-
-    ax.set_ylabel('US Air Quality Index (AQI)', fontsize=12, fontweight='bold')
-    ax.set_title('Air Quality Index (AQI) Comparison by City in Vietnam\nAWS Learner Lab - Athena Analytics (Account: 873674852386)', fontsize=14, pad=15)
-    ax.set_xticks(x)
-    ax.set_xticklabels(df['city'], fontsize=11, fontweight='bold')
-    ax.legend(frameon=True, facecolor='white', framealpha=0.9)
-    ax.set_ylim(0, 200)
-
-    # Add data labels
-    for rects in [rects1, rects2, rects3]:
-        for rect in rects:
-            height = rect.get_height()
-            ax.annotate(f'{height:.1f}',
-                        xy=(rect.get_x() + rect.get_width() / 2, height),
-                        xytext=(0, 3), textcoords="offset points",
-                        ha='center', va='bottom', fontsize=9, fontweight='bold')
-
-    plt.tight_layout()
-    out_path = os.path.join(CHARTS_DIR, '01_aqi_city_comparison.png')
-    plt.savefig(out_path)
-    plt.close()
-    print(f"[OK] Generated: {out_path}")
-
-# 2. Chart 2: Hourly Diurnal Pollution Pattern
 def plot_hourly_trend():
-    csv_file = os.path.join(DATA_DIR, 'peak_pollution_hours.csv')
-    df = pd.read_csv(csv_file).sort_values('hour')
+    # Figure 4.2: hourly aggregate and unequal sample size.
+    hours = sorted(rows("peak_pollution_hours.csv"), key=lambda r: int(r["hour"]))
+    hh = [int(r["hour"]) for r in hours]
+    pm25 = [float(r["avg_pm2_5"]) for r in hours]
+    pm10 = [float(r["avg_pm10"]) for r in hours]
+    aqi = [float(r["avg_aqi"]) for r in hours]
+    fig, ax = plt.subplots(figsize=(8.2, 4.25))
+    ax2 = ax.twinx()
+    l1 = ax.plot(hh, pm25, color="#B54343", marker="o", markersize=3, linewidth=2, label="PM2.5")
+    l2 = ax.plot(hh, pm10, color="#C17B35", marker="s", markersize=3, linewidth=1.8, label="PM10")
+    l3 = ax2.plot(hh, aqi, color="#365E86", marker="^", markersize=3, linewidth=1.8, label="US AQI")
+    ax.set_xticks(range(0, 24, 2))
+    ax.set_xlim(0, 23)
+    ax.set_xlabel("Giờ UTC")
+    ax.set_ylabel("Nồng độ bụi (µg/m³)")
+    ax2.set_ylabel("Chỉ số US AQI")
+    ax.set_title("Biến thiên trung bình theo 24 khung giờ UTC")
+    ax.grid(alpha=0.18)
+    ax.legend(l1 + l2 + l3, [line.get_label() for line in l1 + l2 + l3],
+              ncol=3, frameon=False, loc="upper left", fontsize=9)
+    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    finish(fig, "02_peak_pollution_hours.png")
 
-    fig, ax1 = plt.subplots(figsize=(11, 6), dpi=300)
 
-    color_pm25 = '#dc2626'
-    color_pm10 = '#d97706'
-    color_aqi = '#2563eb'
 
-    ax1.plot(df['hour'], df['avg_pm2_5'], marker='o', color=color_pm25, linewidth=2.5, label='PM2.5 (ug/m3)')
-    ax1.plot(df['hour'], df['avg_pm10'], marker='s', color=color_pm10, linewidth=2, linestyle='--', label='PM10 (ug/m3)')
-    ax1.set_xlabel('Hour of Day (UTC)', fontsize=12, fontweight='bold')
-    ax1.set_ylabel('Particulate Matter (ug/m3)', color=color_pm25, fontsize=12, fontweight='bold')
-    ax1.tick_params(axis='y', labelcolor=color_pm25)
-    ax1.set_xticks(range(0, 24, 2))
-
-    ax2 = ax1.twinx()
-    ax2.plot(df['hour'], df['avg_aqi'], marker='^', color=color_aqi, linewidth=2, linestyle=':', label='US AQI')
-    ax2.set_ylabel('US AQI Index', color=color_aqi, fontsize=12, fontweight='bold')
-    ax2.tick_params(axis='y', labelcolor=color_aqi)
-
-    # Combine legends
-    lines1, labels1 = ax1.get_legend_handles_labels()
-    lines2, labels2 = ax2.get_legend_handles_labels()
-    ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper right', frameon=True, facecolor='white')
-
-    plt.title('Diurnal Air Pollution Trend (Hourly PM2.5, PM10 & AQI)\nAWS Athena Serverless Query Results', fontsize=14, pad=15)
-    plt.tight_layout()
-    out_path = os.path.join(CHARTS_DIR, '02_peak_pollution_hours.png')
-    plt.savefig(out_path)
-    plt.close()
-    print(f"[OK] Generated: {out_path}")
-
-# 3. Chart 3: AQI Category Distribution
 def plot_category_distribution():
-    csv_file = os.path.join(DATA_DIR, 'aqi_category_distribution.csv')
-    df = pd.read_csv(csv_file)
+    # Figure 4.3: category percentages; raw counts remain in the report table.
+    category = rows("aqi_category_distribution.csv")
+    cats = [
+        ("Good", "Tốt", "#5A9B78"),
+        ("Moderate", "Trung bình", "#E0B84F"),
+        ("Unhealthy for Sensitive Groups", "Nhóm nhạy cảm", "#D88744"),
+        ("Unhealthy", "Kém", "#B95555"),
+    ]
+    lookup = {(r["city"], r["aqi_category"]): float(r["percentage"]) for r in category}
+    city_order = ["HoChiMinh", "DaNang", "HaNoi"]
+    fig, ax = plt.subplots(figsize=(8.2, 4.3))
+    bottom = np.zeros(3)
+    for key, label, color in cats:
+        vals = np.array([lookup.get((city_name, key), 0) for city_name in city_order])
+        ax.bar(range(3), vals, bottom=bottom, width=0.62, color=color, label=label)
+        for j, val in enumerate(vals):
+            if val >= 6:
+                ax.text(j, bottom[j] + val / 2, f"{val:.1f}%".replace(".", ","),
+                        ha="center", va="center", fontsize=9, color="black")
+        bottom += vals
+    ax.set_xticks(range(3), [CITY[name] for name in city_order])
+    ax.set_ylim(0, 115)
+    ax.set_ylabel("Tỷ lệ mẫu (%)")
+    ax.set_title("Phân bố cấp US AQI theo đô thị (52 mẫu/thành phố)")
+    ax.legend(ncol=4, frameon=False, loc="upper center", fontsize=8.2)
+    ax.grid(axis="y", alpha=0.15)
+    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    finish(fig, "03_aqi_category_distribution.png")
 
-    pivot_df = df.pivot(index='city', columns='aqi_category', values='percentage').fillna(0)
-    # Ensure standard order
-    desired_cols = ['Good', 'Moderate', 'Unhealthy for Sensitive Groups', 'Unhealthy', 'Very Unhealthy', 'Hazardous']
-    cols = [c for c in desired_cols if c in pivot_df.columns]
-    pivot_df = pivot_df[cols]
 
-    colors = {
-        'Good': '#10b981',
-        'Moderate': '#fbbf24',
-        'Unhealthy for Sensitive Groups': '#f97316',
-        'Unhealthy': '#ef4444',
-        'Very Unhealthy': '#8b5cf6',
-        'Hazardous': '#7f1d1d'
-    }
-    plot_colors = [colors[c] for c in cols]
 
-    fig, ax = plt.subplots(figsize=(10, 6), dpi=300)
-    pivot_df.plot(kind='bar', stacked=True, color=plot_colors, ax=ax, edgecolor='white')
-    plt.title('Air Quality Category Distribution by City (%)\nAWS Athena Aggregation', fontsize=14, pad=15)
-    plt.xlabel('City', fontsize=12, fontweight='bold')
-    plt.ylabel('Percentage (%)', fontsize=12, fontweight='bold')
-    plt.legend(title='AQI Category', bbox_to_anchor=(1.02, 1), loc='upper left', frameon=True)
-    plt.xticks(rotation=0, fontsize=11, fontweight='bold')
-    plt.ylim(0, 100)
-
-    # Annotate percentage numbers
-    for n, c in enumerate(cols):
-        for i, val in enumerate(pivot_df[c]):
-            if val > 5:
-                # Calculate cumulative bottom
-                bottom = sum(pivot_df[cols[j]].iloc[i] for j in range(n))
-                ax.text(i, bottom + val / 2, f'{val:.0f}%', ha='center', va='center',
-                        color='white' if c in ['Unhealthy', 'Very Unhealthy', 'Hazardous', 'Good'] else 'black',
-                        fontweight='bold', fontsize=10)
-
-    plt.tight_layout()
-    out_path = os.path.join(CHARTS_DIR, '03_aqi_category_distribution.png')
-    plt.savefig(out_path)
-    plt.close()
-    print(f"[OK] Generated: {out_path}")
-
-# 4. Chart 4: Correlation Matrix
 def plot_correlation():
-    csv_file = os.path.join(DATA_DIR, 'weather_correlation.csv')
-    df = pd.read_csv(csv_file)
+    w = 0.23
+    city_order = ["HoChiMinh", "DaNang", "HaNoi"]
+    # Figure 4.4: signed correlation coefficients; no causal interpretation.
+    corr = rows("weather_correlation.csv")
+    by_city = {r["city"]: r for r in corr}
+    fig, ax = plt.subplots(figsize=(8.2, 4.3))
+    for offset, key, label, color in [
+        (-w, "corr_temp_pm25", "Nhiệt độ", "#C58B34"),
+        (0, "corr_humidity_pm25", "Độ ẩm", "#4477B1"),
+        (w, "corr_wind_pm25", "Tốc độ gió", "#4E9C7D"),
+    ]:
+        vals = [float(by_city[name][key]) for name in city_order]
+        bars = ax.bar(np.arange(3) + offset, vals, width=w, label=label, color=color)
+        for bar, val in zip(bars, vals):
+            ax.annotate(f"{val:+.2f}", (bar.get_x() + bar.get_width() / 2, val),
+                        xytext=(0, 3 if val >= 0 else -12), textcoords="offset points",
+                        ha="center", fontsize=8.5)
+    ax.axhline(0, color="#333333", linewidth=0.8)
+    ax.set_xticks(range(3), [CITY[name] for name in city_order])
+    ax.set_ylim(-0.9, 0.9)
+    ax.set_ylabel("Hệ số tương quan Pearson r")
+    ax.set_title("Tương quan với PM2.5 theo đô thị")
+    ax.legend(ncol=3, frameon=False, fontsize=9, loc="upper right")
+    ax.grid(axis="y", alpha=0.16)
+    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    finish(fig, "04_weather_pm25_correlation.png")
 
-    fig, ax = plt.subplots(figsize=(9, 5), dpi=300)
-    x = np.arange(len(df))
-    width = 0.25
-
-    rects1 = ax.bar(x - width, df['corr_temp_pm25'], width, label='Corr(Temp, PM2.5)', color='#f59e0b')
-    rects2 = ax.bar(x, df['corr_humidity_pm25'], width, label='Corr(Humidity, PM2.5)', color='#3b82f6')
-    rects3 = ax.bar(x + width, df['corr_wind_pm25'], width, label='Corr(WindSpeed, PM2.5)', color='#10b981')
-
-    ax.axhline(0, color='#666666', linestyle='-', linewidth=0.8)
-    ax.set_ylabel('Pearson Correlation Coefficient (r)', fontsize=12, fontweight='bold')
-    ax.set_title('Correlation Between Weather Factors and PM2.5 Concentration\nAWS Athena Analytics (Ho Chi Minh, Da Nang, Ha Noi)', fontsize=14, pad=15)
-    ax.set_xticks(x)
-    ax.set_xticklabels(df['city'], fontsize=11, fontweight='bold')
-    ax.set_ylim(-1.0, 1.0)
-    ax.legend(frameon=True, facecolor='white')
-
-    for rects in [rects1, rects2, rects3]:
-        for rect in rects:
-            height = rect.get_height()
-            y_pos = height + 0.04 if height >= 0 else height - 0.08
-            ax.annotate(f'{height:.2f}',
-                        xy=(rect.get_x() + rect.get_width() / 2, height),
-                        xytext=(0, 3 if height >= 0 else -10),
-                        textcoords="offset points",
-                        ha='center', va='bottom' if height >= 0 else 'top',
-                        fontsize=9, fontweight='bold')
-
-    plt.tight_layout()
-    out_path = os.path.join(CHARTS_DIR, '04_weather_pm25_correlation.png')
-    plt.savefig(out_path)
-    plt.close()
-    print(f"[OK] Generated: {out_path}")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     plot_city_comparison()
     plot_hourly_trend()
     plot_category_distribution()
     plot_correlation()
-    print("\n[ALL CHARTS GENERATED SUCCESSFULLY!]")
