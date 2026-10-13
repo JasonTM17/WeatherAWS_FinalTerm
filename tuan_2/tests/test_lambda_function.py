@@ -12,7 +12,14 @@ import json
 # Add lambda directory to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lambda')))
 
-import lambda_function
+with patch.dict(os.environ, {
+    'AWS_ACCESS_KEY_ID':'OFFLINE_TESTING',
+    'AWS_SECRET_ACCESS_KEY':'OFFLINE_TESTING',
+    'AWS_SESSION_TOKEN':'OFFLINE_TESTING',
+    'AWS_EC2_METADATA_DISABLED':'true',
+}):
+    os.environ.pop('AWS_PROFILE',None)
+    import lambda_function
 lambda_function.BUCKET_NAME = 'weather-aqi-test'
 lambda_function.SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:weather-test'
 
@@ -237,6 +244,33 @@ class TestWeatherCollectorLambda(unittest.TestCase):
         self.assertEqual(result["statusCode"], 200)
         self.assertEqual(result["records_collected"], 1)
         self.assertEqual(result["alerts_sent"], 0)
+
+    @patch('lambda_function.http_get_json')
+    def test_historical_weather_joins_by_timestamp(self, mock_http):
+        mock_http.side_effect = [
+            {'hourly': {'time': ['2026-10-06T00:00','2026-10-06T01:00'], 'us_aqi': [40,75]}},
+            {'hourly': {'time': ['2026-10-06T01:00','2026-10-06T00:00'], 'temperature_2m': [31,24]}},
+        ]
+        records = lambda_function.fetch_historical_series({'city':'HaNoi','lat':21,'lon':105},2)
+        self.assertEqual([r['temperature_2m'] for r in records],[24.0,31.0])
+
+    @patch('lambda_function.save_records_to_s3', return_value=[])
+    @patch('lambda_function.fetch_city_data', side_effect=RuntimeError('API unavailable'))
+    @patch('lambda_function.fetch_secrets', return_value={'locations':[{'city':'HaNoi'}]})
+    def test_all_fetch_failures_raise(self, mock_secrets, mock_city, mock_save):
+        with self.assertRaisesRegex(RuntimeError,'No records'):
+            lambda_function.lambda_handler({},None)
+        mock_save.assert_not_called()
+
+    @patch('lambda_function.save_records_to_s3', return_value=[{'count':1}])
+    @patch('lambda_function.fetch_city_data')
+    @patch('lambda_function.fetch_secrets', return_value={'locations':[{'city':'HaNoi'},{'city':'DaNang'}]})
+    def test_partial_fetch_reports_failed_city(self, mock_secrets, mock_city, mock_save):
+        mock_city.side_effect=[{'city':'HaNoi','pm2_5':10,'us_aqi':50},RuntimeError('API unavailable')]
+        result=lambda_function.lambda_handler({},None)
+        self.assertEqual(result['records_collected'],1)
+        self.assertEqual(result['collection_status'],'partial')
+        self.assertEqual(result['failed_cities'],['DaNang'])
 
 
 if __name__ == '__main__':

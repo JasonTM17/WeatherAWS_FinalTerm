@@ -61,6 +61,18 @@ class TestSdk(unittest.TestCase):
         exporter.s3.get_object.return_value = {'Body': io.BytesIO(blob)}
         self.assertEqual(exporter.csv_bytes('query-1', {'ResultConfiguration': {'OutputLocation': 's3://bucket/key.csv'}}), blob)
 
+    def test_header_only_first_page_keeps_equal_data_row(self):
+        exporter=self.exporter()
+        exporter.s3.get_object.side_effect=error('AccessDenied')
+        metadata={'ColumnInfo':[{'Name':'city'},{'Name':'value'}]}
+        row={'Data':[{'VarCharValue':'city'},{'VarCharValue':'value'}]}
+        exporter.athena.get_query_results.side_effect=[
+            {'ResultSet':{'ResultSetMetadata':metadata,'Rows':[row]},'NextToken':'page2'},
+            {'ResultSet':{'ResultSetMetadata':metadata,'Rows':[row]}},
+        ]
+        blob=exporter.csv_bytes('query-1',{'ResultConfiguration':{'OutputLocation':'s3://bucket/key.csv'}})
+        self.assertEqual(list(csv.reader(io.StringIO(blob.decode()))),[['city','value'],['city','value']])
+
     def test_invalid_credentials_do_not_trigger_fallback(self):
         exporter = self.exporter()
         exporter.s3.get_object.side_effect = error('InvalidAccessKeyId')

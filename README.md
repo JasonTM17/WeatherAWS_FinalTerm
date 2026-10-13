@@ -50,7 +50,7 @@ python tuan_2/analytics/generate_charts.py
 python -m unittest discover -s tuan_2/tests -v
 ```
 
-Chế độ `--offline` sao chép CSV đã lưu và tạo manifest ghi rõ nguồn; không tạo mã truy vấn hoặc trạng thái thực thi mới. Bộ kiểm tra cục bộ hiện gồm 40 ca, dùng dữ liệu và đối tượng dịch vụ giả lập.
+Chế độ `--offline` sao chép CSV đã lưu và tạo manifest ghi rõ nguồn; không tạo mã truy vấn hoặc trạng thái thực thi mới. Bộ kiểm tra cục bộ hiện gồm 44 ca, dùng dữ liệu và đối tượng dịch vụ giả lập.
 
 Các thao tác AWS sử dụng **boto3**, chỉ tạo client khi chạy chức năng tương ứng. Phiên đăng nhập Learner Lab được cung cấp qua biến môi trường hoặc shared credentials của AWS SDK. Không đưa thông tin đăng nhập vào repository. Xem [hướng dẫn vận hành](docs/operation.md) để triển khai, kiểm tra trạng thái và quản lý tài nguyên.
 

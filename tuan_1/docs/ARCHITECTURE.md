@@ -1,6 +1,6 @@
 # Kiến trúc Tuần 1
 
-![Kiến trúc và luồng dữ liệu](architecture_report.png)
+![Kiến trúc và luồng dữ liệu](../../docs/architecture.png)
 
 EventBridge kích hoạt Lambda theo giờ. Lambda đọc cấu hình vị trí và ngưỡng từ Secrets Manager, gọi API Open-Meteo và ghi NDJSON vào S3 theo phân vùng thời gian. SNS tiếp nhận thông báo khi vượt ngưỡng; Glue quản lý lược đồ, Athena truy vấn S3 và CloudWatch theo dõi thực thi.
 

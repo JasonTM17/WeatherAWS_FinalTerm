@@ -21,3 +21,5 @@ Các ngưỡng cảnh báo là cấu hình của dự án. SNS chấp nhận th�
 ## Xử lý lỗi
 
 Lambda có cấu hình dự phòng và ghi log khi đọc secret thất bại. Chương trình Athena có giới hạn thời gian chờ, dừng truy vấn khi timeout và giữ lại tệp cũ nếu truy vấn mới thất bại. Phân trang kết quả giữ vị trí cột và giá trị rỗng của SQL NULL.
+
+Chuỗi khí tượng lịch sử được ghép với quan trắc AQI theo timestamp. Lambda phát sinh lỗi nếu không thu được bản ghi; nếu chỉ một số đô thị thất bại, kết quả ghi `collection_status=partial` và `failed_cities`. Cách này phân biệt lỗi thu thập với một lượt hoàn tất.

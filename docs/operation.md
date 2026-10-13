@@ -36,4 +36,4 @@ Thay `ACCOUNT_ID` bằng account của phiên đăng nhập. Xác nhận account
 
 ## Kiểm tra đã thực hiện
 
-Bộ kiểm tra cục bộ gồm 40 ca: Lambda 12, CSV 12, biểu đồ 4 và SDK 12. Các ca SDK kiểm tra truy vấn lỗi, timeout/cancel, phân trang, giữ CSV nguyên trạng, nguồn ngoại tuyến và điều kiện thu hồi. Kết quả này không phải bằng chứng của một lần triển khai live phiên bản mới.
+Bộ kiểm tra cục bộ gồm 44 ca: Lambda 15, CSV 12, biểu đồ 4 và SDK 13. Các ca bổ sung kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần và phân trang có trang đầu chỉ chứa header. Kết quả này không phải bằng chứng của một lần triển khai live phiên bản mới.

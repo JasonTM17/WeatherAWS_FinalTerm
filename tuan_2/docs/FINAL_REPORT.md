@@ -16,9 +16,9 @@ Báo cáo tập trung vào cấu hình, trình tự xử lý và số liệu đ�
 
 Đề tài được thực hiện bởi nhóm sinh viên:
 
-•  Nguyễn Tiến Sơn — MSSV 24110054: S3, Secrets Manager, Lambda và SNS.
+- Nguyễn Tiến Sơn — MSSV 24110054: S3, Secrets Manager, Lambda và SNS.
 
-•  Trần Thị Ngọc Quyên — MSSV 24110051: Glue, Athena, biểu đồ và đối chiếu dữ liệu.
+- Trần Thị Ngọc Quyên — MSSV 24110051: Glue, Athena, biểu đồ và đối chiếu dữ liệu.
 
 Các chương lần lượt trình bày mục tiêu và kiến trúc, chức năng Lambda, lịch thu thập và cảnh báo, mô hình dữ liệu và phân tích, kiểm tra kết quả, sử dụng tài nguyên và tổng hợp công việc của nhóm.
 
@@ -45,21 +45,21 @@ Bảng 1.1 Phân công thực hiện Tuần 2
 
 Luồng xử lý kết nối lịch sự kiện, hàm thu thập, lưu trữ, cảnh báo và truy vấn. Mỗi dịch vụ đảm nhiệm một chức năng; các tham số dùng chung được quản lý qua cấu hình triển khai.
 
-•  Amazon EventBridge: quy tắc lịch kích hoạt Lambda mỗi giờ với biểu thức rate(1 hour).
+- Amazon EventBridge: quy tắc lịch kích hoạt Lambda mỗi giờ với biểu thức rate(1 hour).
 
-•  AWS Secrets Manager: Kho lưu trữ bảo mật chứa thông tin cấu hình trạm quan trắc, tọa độ và các ngưỡng cảnh báo an toàn.
+- AWS Secrets Manager: Kho lưu trữ bảo mật chứa thông tin cấu hình trạm quan trắc, tọa độ và các ngưỡng cảnh báo an toàn.
 
-•  AWS Lambda: nhận sự kiện, gọi API, chuẩn hóa bản ghi, xác định cấp AQI và ghi dữ liệu.
+- AWS Lambda: nhận sự kiện, gọi API, chuẩn hóa bản ghi, xác định cấp AQI và ghi dữ liệu.
 
-•  Amazon SNS: tiếp nhận thông báo cảnh báo từ Lambda khi điều kiện cấu hình được thỏa mãn.
+- Amazon SNS: tiếp nhận thông báo cảnh báo từ Lambda khi điều kiện cấu hình được thỏa mãn.
 
-•  Amazon S3 Data Lake: Hồ dữ liệu lưu trữ các tệp NDJSON có cấu trúc phân vùng theo thời gian (year/month/day).
+- Amazon S3 Data Lake: Hồ dữ liệu lưu trữ các tệp NDJSON có cấu trúc phân vùng theo thời gian (year/month/day).
 
-•  AWS Glue Data Catalog & Amazon Athena: Cơ sở dữ liệu metadata và công cụ truy vấn SQL không máy chủ cho phép phân tích dữ liệu lớn trực tiếp trên S3.
+- AWS Glue Data Catalog & Amazon Athena: Cơ sở dữ liệu metadata và công cụ truy vấn SQL không máy chủ cho phép phân tích dữ liệu lớn trực tiếp trên S3.
 
-•  Pandas & Matplotlib Analytics: Bộ công cụ tạo biểu đồ phân tích trực quan phục vụ báo cáo và đánh giá khoa học.
+- Matplotlib: tạo bốn biểu đồ từ CSV Athena để so sánh đô thị, theo dõi biến thiên theo giờ, phân bố cấp AQI và tương quan khí tượng.
 
-•  Amazon CloudWatch: Giám sát chỉ số tài nguyên, phát hiện lỗi phát sinh và hiển thị Dashboard điều hành thời gian thực.
+- Amazon CloudWatch: Giám sát chỉ số tài nguyên, phát hiện lỗi phát sinh và hiển thị Dashboard điều hành thời gian thực.
 
 ![Hình phân tích](../../docs/architecture.png)
 
@@ -155,21 +155,21 @@ Dữ liệu được lưu dạng NDJSON, mỗi dòng là một đối tượng J
 
 Lợi thế của định dạng NDJSON kết hợp phân vùng Hive-style:
 
-•  Phân vùng thời gian giúp truy vấn lựa chọn các ngày cần phân tích khi có điều kiện lọc trên khóa phân vùng.
+- Phân vùng thời gian giúp truy vấn lựa chọn các ngày cần phân tích khi có điều kiện lọc trên khóa phân vùng.
 
-•  NDJSON cho phép lưu nhiều bản ghi trong một tệp và sử dụng lược đồ Glue để truy vấn bằng Athena.
+- NDJSON cho phép lưu nhiều bản ghi trong một tệp và sử dụng lược đồ Glue để truy vấn bằng Athena.
 
-•  Mỗi tệp có tên riêng để bổ sung dữ liệu mà không ghi đè một tệp đã lưu.
+- Mỗi tệp có tên riêng để bổ sung dữ liệu mà không ghi đè một tệp đã lưu.
 
 ### 2.6 Thu thập hiện tại và nạp bù lịch sử
 
 Hai chế độ thu thập sử dụng chung lược đồ dữ liệu và cách ghi S3:
 
-•  Thu thập hiện tại: sự kiện không có yêu cầu nạp bù; mỗi đô thị tạo một bản ghi nếu hai lượt gọi API thành công.
+- Thu thập hiện tại: sự kiện không có yêu cầu nạp bù; mỗi đô thị tạo một bản ghi nếu hai lượt gọi API thành công.
 
-•  Nạp bù lịch sử: sự kiện có trường backfill_hours; hàm đọc chuỗi giờ được API trả về và chọn số giờ theo yêu cầu.
+- Nạp bù lịch sử: sự kiện có trường backfill_hours; hàm đọc chuỗi giờ được API trả về và chọn số giờ theo yêu cầu.
 
-Trong xử lý chuỗi lịch sử, chỉ mục của mảng cảm biến được giữ tương ứng với chỉ mục thời gian gốc. Số bản ghi thực tế phụ thuộc độ dài chuỗi API, số đô thị thành công và các giá trị sẵn có trong phản hồi.
+Trong xử lý chuỗi lịch sử, các cảm biến ô nhiễm được đọc theo thời gian của mảng AQI; dữ liệu khí tượng được ghép theo timestamp tương ứng. Cách ghép này giữ đúng quan trắc khi hai API trả mốc giờ khác thứ tự. Số bản ghi phụ thuộc độ dài chuỗi API và số đô thị thu thập thành công.
 
 ## Chương 3 Lịch thu thập và cảnh báo
 
@@ -368,34 +368,34 @@ Tệp raw_weather_aqi_records.csv chứa 156 dòng, 156 mã bản ghi khác nhau
 
 ### 5.2 Kiểm tra chức năng và tính toàn vẹn dữ liệu
 
-Bộ kiểm tra cục bộ gồm 40 ca cho Lambda, dữ liệu CSV, biểu đồ và chương trình quản lý dịch vụ. Các ca dùng dữ liệu đã lưu và đối tượng AWS giả lập để kiểm tra logic; kết quả không thay thế việc quan sát một lần chạy thật trên AWS.
+Bộ kiểm tra cục bộ gồm 44 ca cho Lambda, dữ liệu CSV, biểu đồ và chương trình quản lý dịch vụ. Các ca dùng dữ liệu đã lưu và đối tượng AWS giả lập để kiểm tra logic; kết quả không thay thế việc quan sát một lần chạy thật trên AWS.
 
 Bảng 5.1 Phạm vi kiểm tra bộ source hiện tại
 
 | Nhóm kiểm tra | Số ca | Nội dung chính | Kết quả cục bộ |
 | --- | --- | --- | --- |
-| Lambda | 12 | Chuyển đổi kiểu, phân loại AQI, thu thập và ghi S3, phát thông báo. | Đạt |
+| Lambda | 15 | Chuyển đổi kiểu, phân loại AQI, ghép lịch sử, thu thập, ghi S3 và thông báo. | Đạt |
 | Dữ liệu CSV | 12 | Schema, số mẫu, đồng nhất bản sao và xuất dữ liệu đã lưu. | Đạt |
 | Biểu đồ | 4 | Sinh bốn hình từ các tệp CSV. | Đạt |
-| Python SDK | 12 | Lỗi truy vấn, timeout, phân trang, nguồn ngoại tuyến và điều kiện thu hồi. | Đạt |
+| Python SDK | 13 | Lỗi truy vấn, timeout, phân trang, nguồn ngoại tuyến và điều kiện thu hồi. | Đạt |
 
 ### 5.3 Xử lý lỗi và giá trị thiếu
 
 Ba nhóm xử lý lỗi chính trong mã hiện tại gồm:
 
-•  Chuyển đổi kiểu: các hàm chuyển đổi dùng giá trị mặc định khi đầu vào không hợp lệ. Mặc định số 0 cần được phân biệt với phép đo thật bằng 0 khi đánh giá dữ liệu thiếu.
+- Chuyển đổi kiểu: các hàm chuyển đổi dùng giá trị mặc định khi đầu vào không hợp lệ. Mặc định số 0 cần được phân biệt với phép đo thật bằng 0 khi đánh giá dữ liệu thiếu.
 
-•  Chuỗi lịch sử: lựa chọn dữ liệu theo chỉ mục thời gian gốc và kiểm tra độ dài mảng cảm biến trước khi lấy giá trị.
+- Chuỗi lịch sử: ghép khí tượng theo timestamp của quan trắc AQI và kiểm tra độ dài mảng cảm biến trước khi đọc. Nếu không có bản ghi, hàm phát sinh lỗi; nếu chỉ một số đô thị thất bại, kết quả ghi rõ trạng thái thu thập một phần và danh sách đô thị bị lỗi.
 
-•  Cấu hình và xuất dữ liệu: có cấu hình dự phòng cho Lambda; chương trình xuất Athena dừng khi truy vấn lỗi hoặc hết thời gian chờ. Chế độ ngoại tuyến chỉ sao chép CSV đã lưu và ghi rõ nguồn.
+- Cấu hình và xuất dữ liệu: có cấu hình dự phòng cho Lambda; chương trình xuất Athena dừng khi truy vấn lỗi hoặc hết thời gian chờ. Chế độ ngoại tuyến chỉ sao chép CSV đã lưu và ghi rõ nguồn.
 
 ### 5.4 Theo dõi bằng CloudWatch
 
 Cấu hình giám sát theo dõi các chỉ số do dịch vụ Lambda cung cấp:
 
-•  CloudWatch Metric Alarm (WeatherCollector-Errors-Alarm): Cấu hình phát hiện khi hàm Lambda phát sinh Errors >= 1 trong chu kỳ 300 giây và tự động phát cảnh báo qua SNS Topic.
+- CloudWatch Metric Alarm (WeatherCollector-Errors-Alarm): Cấu hình phát hiện khi hàm Lambda phát sinh Errors >= 1 trong chu kỳ 300 giây và tự động phát cảnh báo qua SNS Topic.
 
-•  CloudWatch Dashboard hiển thị số lượt gọi, số lỗi và thời gian thực thi. Các giá trị chỉ xuất hiện khi có dữ liệu dịch vụ được ghi nhận; hình cấu hình không được dùng như bằng chứng của một lượt chạy.
+- CloudWatch Dashboard hiển thị số lượt gọi, số lỗi và thời gian thực thi. Các giá trị chỉ xuất hiện khi có dữ liệu dịch vụ được ghi nhận; hình cấu hình không được dùng như bằng chứng của một lượt chạy.
 
 Invocations đếm số lượt hàm được gọi, Errors đếm lượt kết thúc với lỗi và Duration đo thời gian thực thi. Dashboard hiển thị tổng lượt gọi, tổng lỗi, thời gian trung bình và lớn nhất trong từng chu kỳ 300 giây. Chỉ số Errors không tự xác nhận chất lượng bản ghi; việc đối chiếu CSV được thực hiện riêng.
 
@@ -444,7 +444,7 @@ Bảng 6.2 Đối chiếu sản phẩm Tuần 2
 | Lịch và cảnh báo | Cấu hình lịch định kỳ, quyền gọi và SNS topic. | Chương trình quản lý dịch vụ. |
 | Dữ liệu | Bảng, view, phân vùng và năm truy vấn. | Tệp SQL và CSV. |
 | Phân tích | Bảng thống kê và bốn biểu đồ. | Bốn CSV tổng hợp. |
-| Kiểm tra | 40 ca kiểm tra cục bộ. | Bộ kiểm tra Lambda, CSV, biểu đồ và SDK. |
+| Kiểm tra | 44 ca kiểm tra cục bộ. | Bộ kiểm tra Lambda, CSV, biểu đồ và SDK. |
 
 ### 6.5 Kết luận Tuần 2
 
@@ -481,31 +481,3 @@ Bảng 7.2 Tổng hợp sản phẩm Tuần 2
 | Lưu trữ và truy vấn | Phân vùng, lược đồ và truy vấn. | Metadata và kết quả CSV. |
 | Cảnh báo và lịch | Quy tắc kích hoạt, điều kiện cảnh báo. | Cấu hình dịch vụ và logic xử lý. |
 | Phân tích và báo cáo | Bảng số liệu, bốn biểu đồ, Word/PDF. | Giá trị và cách nhóm thống nhất với CSV. |
-
-### 7.3 Phạm vi hỗ trợ AI và trách nhiệm của nhóm
-
-Nhóm sử dụng AI để tra cứu tài liệu, hỗ trợ phân tích số liệu, rà soát mã và biên tập cách trình bày. Sinh viên chịu trách nhiệm về cấu hình triển khai, dữ liệu sử dụng và nội dung báo cáo.
-
-#### 7.3.1 Các phần có hỗ trợ
-
-•  Tra cứu cách sử dụng các dịch vụ và cấu trúc dữ liệu; rà soát cú pháp truy vấn và chương trình xử lý.
-
-•  Hỗ trợ đối chiếu số liệu giữa CSV, bảng và biểu đồ.
-
-•  Rà soát bố cục, cách diễn giải và các lỗi trình bày trong tài liệu.
-
-#### 7.3.2 Trách nhiệm của sinh viên
-
-•  Giải thích kiến trúc và luồng dữ liệu của từng thành phần.
-
-•  Hiểu vai trò LabRole, chính sách cho phép EventBridge gọi Lambda và cách quản lý cấu hình.
-
-•  Đối chiếu kết quả truy vấn, hiểu cách tính trung bình, tỷ lệ mẫu và tương quan.
-
-•  Kiểm tra trạng thái dịch vụ và kết quả thực hành trong tài khoản của nhóm.
-
-•  Giải thích các điều kiện cảnh báo, cách xử lý lỗi và giới hạn của dữ liệu.
-
-### 7.4 Tổng kết trách nhiệm
-
-Chúng em chịu trách nhiệm về những nội dung trình bày và các sản phẩm đi kèm; sẵn sàng giải thích cấu hình, quá trình xử lý và các phép tính trong báo cáo. Phần công việc chung được cả hai thành viên rà soát.

@@ -26,13 +26,13 @@ Bố cục gồm năm chương. Chương 1 trình bày mục tiêu và kiến tr
 
 Hệ thống theo dõi TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Open-Meteo cung cấp các trường thời tiết và chất lượng không khí; Lambda chuẩn hóa thành bản ghi có thời gian UTC, giờ Việt Nam, vị trí, AQI, PM2.5, PM10 và các yếu tố khí tượng. Dữ liệu được lưu dưới dạng NDJSON trên S3 để Glue và Athena có thể đọc bằng lược đồ bảng ngoài.
 
-•  Thu thập theo lịch một giờ; hỗ trợ gọi thử trực tiếp và nạp chuỗi lịch sử 48 giờ.
+- Thu thập theo lịch một giờ; hỗ trợ gọi thử trực tiếp và nạp chuỗi lịch sử 48 giờ.
 
-•  Lưu dữ liệu theo đường dẫn raw/year=YYYY/month=MM/day=DD; truy vấn bằng Athena.
+- Lưu dữ liệu theo đường dẫn raw/year=YYYY/month=MM/day=DD; truy vấn bằng Athena.
 
-•  Cảnh báo theo điều kiện US AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³ qua SNS (đúng phép so sánh trong mã nguồn).
+- Cảnh báo theo điều kiện US AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³ qua SNS (đúng phép so sánh trong mã nguồn).
 
-•  Giám sát lỗi Lambda bằng CloudWatch Alarm và xem tổng quan trên dashboard.
+- Giám sát lỗi Lambda bằng CloudWatch Alarm và xem tổng quan trên dashboard.
 
 ### 1.2 Yêu cầu chức năng và kết quả triển khai
 

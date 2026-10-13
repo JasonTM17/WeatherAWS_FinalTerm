@@ -63,14 +63,14 @@ INSTRUCTOR_NAME = "Huỳnh Xuân Phụng"
 EXPECTED_PHYSICAL_PAGES_W1 = 20
 EXPECTED_TOC_ENTRIES_W1 = 28
 EXPECTED_RAW_RECORD_COUNT = 156
-EXPECTED_UNIT_TEST_COUNT = 40
+EXPECTED_UNIT_TEST_COUNT = 44
 
 EXPECTED_REPORT_FIGURES = [
-    "architecture_report.png",
-    "01_aqi_city_comparison_detailed.png",
-    "02_peak_pollution_hours_detailed.png",
-    "03_aqi_category_distribution_detailed.png",
-    "04_weather_pm25_correlation_detailed.png",
+    "docs/architecture.png",
+    "tuan_2/results/charts/01_aqi_city_comparison.png",
+    "tuan_2/results/charts/02_peak_pollution_hours.png",
+    "tuan_2/results/charts/03_aqi_category_distribution.png",
+    "tuan_2/results/charts/04_weather_pm25_correlation.png",
 ]
 
 # -----------------------------------------------------------------------------
@@ -199,8 +199,8 @@ class TestTier1FeatureCoverage(unittest.TestCase):
             tuan_1 / "scripts" / "01_setup_s3.ps1",
             tuan_1 / "scripts" / "02_setup_secrets.ps1",
             tuan_1 / "docs" / "ARCHITECTURE.md",
-            tuan_1 / "docs" / "architecture_diagram.svg",
-            tuan_1 / "docs" / "architecture_report.png",
+            REPO_ROOT / "docs" / "architecture.svg",
+            REPO_ROOT / "docs" / "architecture.png",
             tuan_1 / "docs" / "Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx",
             tuan_1 / "docs" / "Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf",
             tuan_1 / "docs" / "Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx",
@@ -390,7 +390,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
             "SNS",
             "Athena",
             "Open-Meteo",
-            "40",
+            "44",
         ]
         for kw in keywords:
             self.assertIn(
@@ -399,8 +399,8 @@ class TestTier1FeatureCoverage(unittest.TestCase):
                 f"Technical core concept '{kw}' not mentioned in Week 2 report",
             )
 
-    def test_r4_1_unit_test_suite_40_tests_pass(self):
-        """R4.1: Verify unit test suite runs exactly 40 tests and passes 100%."""
+    def test_r4_1_unit_test_suite_44_tests_pass(self):
+        """R4.1: Verify unit test suite runs exactly 44 tests and passes 100%."""
         test_dir = locate_dir("tuan_2/tests", "tests")
         self.assertIsNotNone(test_dir, "Tests directory not found in 'tuan_2/tests' or 'tests'")
 
@@ -532,7 +532,8 @@ class TestTier2BoundaryAndCornerCases(unittest.TestCase):
         docx_files = list(REPO_ROOT.glob("**/*.docx"))
         valid_docxs = [
             p for p in docx_files
-            if not any(x in p.parts for x in [".agents", "_report_work", "node_modules"])
+            if not p.name.startswith('~$')
+            and not any(x in p.parts for x in [".agents", "_report_work", "node_modules"])
         ]
         self.assertGreater(len(valid_docxs), 0, "No DOCX reports found in repository")
 
@@ -591,14 +592,11 @@ class TestTier3CrossFeatureConsistency(unittest.TestCase):
 
     def test_report_image_assets_consistency_real_data_figures(self):
         """Verify the architecture and four CSV-backed report figures are valid PNGs."""
-        docs_dir = locate_dir("tuan_2/docs", "docs")
-        self.assertIsNotNone(docs_dir, "Docs directory not found")
-
         for fig_name in EXPECTED_REPORT_FIGURES:
-            fig_path = docs_dir / fig_name
+            fig_path = REPO_ROOT / fig_name
             self.assertTrue(
                 fig_path.exists(),
-                f"Required figure '{fig_name}' not found in '{docs_dir.relative_to(REPO_ROOT)}'",
+                f"Required canonical figure '{fig_name}' not found",
             )
             # Verify PNG magic bytes
             with open(fig_path, "rb") as f:
@@ -645,8 +643,8 @@ class TestTier3CrossFeatureConsistency(unittest.TestCase):
                 f"City '{city}' has {count} records, expected exactly 52",
             )
 
-    def test_unit_test_count_parity_40_tests(self):
-        """Verifies unit test suite defines exactly 40 test methods across 4 test modules."""
+    def test_unit_test_count_parity_44_tests(self):
+        """Verifies unit test suite defines exactly 44 test methods across 4 test modules."""
         test_dir = locate_dir("tuan_2/tests", "tests")
         self.assertIsNotNone(test_dir, "Tests directory not found")
 

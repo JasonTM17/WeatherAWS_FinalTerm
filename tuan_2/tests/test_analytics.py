@@ -5,7 +5,6 @@ Unit Tests for Analytics & Chart Generation
 import unittest
 import os
 import sys
-import pandas as pd
 import tempfile
 import shutil
 

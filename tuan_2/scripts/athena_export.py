@@ -70,6 +70,7 @@ class AthenaExporter:
                 raise
         # API fallback keeps column positions and SQL NULL as empty fields.
         rows, header, token = [], None, None
+        first_page = True
         while True:
             request = {'QueryExecutionId': query_id, 'MaxResults': 1000}
             if token:
@@ -80,8 +81,9 @@ class AthenaExporter:
                 header = [column['Name'] for column in page['ResultSetMetadata']['ColumnInfo']]
             page_rows = [[cell.get('VarCharValue', '') for cell in row['Data']]
                          for row in page['Rows']]
-            if not rows and page_rows and page_rows[0] == header:
+            if first_page and page_rows and page_rows[0] == header:
                 page_rows = page_rows[1:]
+            first_page = False
             rows.extend(row + [''] * (len(header) - len(row)) for row in page_rows)
             token = response.get('NextToken')
             if token is None:

@@ -71,7 +71,7 @@ def get_aqi_category(us_aqi):
 
 
 def fetch_secrets():
-    """Lấy cấu hình và API key từ AWS Secrets Manager."""
+    """Lấy vị trí thu thập và ngưỡng cảnh báo từ Secrets Manager."""
     try:
         response = secrets_client.get_secret_value(SecretId=SECRET_NAME)
         secret_str = response.get('SecretString', '{}')
@@ -194,6 +194,10 @@ def fetch_historical_series(city_info, past_hours=48):
 
     total_times = len(times)
     start_idx = max(0, total_times - past_hours)
+    weather_indices = {timestamp: index for index, timestamp in enumerate(hourly_w.get('time', []))}
+    def weather_value(name, index):
+        values = hourly_w.get(name, [])
+        return values[index] if index is not None and index < len(values) else None
 
     for idx in range(start_idx, total_times):
         t_str = times[idx]
@@ -213,10 +217,11 @@ def fetch_historical_series(city_info, past_hours=48):
         so2_raw = hourly_aq.get('sulphur_dioxide', [])[idx] if idx < len(hourly_aq.get('sulphur_dioxide', [])) else None
         o3_raw = hourly_aq.get('ozone', [])[idx] if idx < len(hourly_aq.get('ozone', [])) else None
 
-        temp_raw = hourly_w.get('temperature_2m', [])[idx] if idx < len(hourly_w.get('temperature_2m', [])) else None
-        rh_raw = hourly_w.get('relative_humidity_2m', [])[idx] if idx < len(hourly_w.get('relative_humidity_2m', [])) else None
-        press_raw = hourly_w.get('surface_pressure', [])[idx] if idx < len(hourly_w.get('surface_pressure', [])) else None
-        wind_raw = hourly_w.get('wind_speed_10m', [])[idx] if idx < len(hourly_w.get('wind_speed_10m', [])) else None
+        weather_idx = weather_indices.get(t_str)
+        temp_raw = weather_value('temperature_2m', weather_idx)
+        rh_raw = weather_value('relative_humidity_2m', weather_idx)
+        press_raw = weather_value('surface_pressure', weather_idx)
+        wind_raw = weather_value('wind_speed_10m', weather_idx)
 
         record = {
             "record_id": f"{city}_{dt_utc.strftime('%Y%m%d%H%M')}_{uuid.uuid4().hex[:6]}",
@@ -278,10 +283,6 @@ THÔNG SỐ Ô NHIỄM:
 - Tốc độ gió: {record['wind_speed_10m']} km/h
 - Áp suất: {record['surface_pressure']} hPa
 
-KHUYẾN CÁO SỨC KHỎE:
-- Nhóm nhạy cảm (trẻ em, người cao tuổi, người có bệnh hô hấp) nên hạn chế hoạt động ngoài trời.
-- Đeo khẩu trang chống bụi mịn PM2.5 khi ra đường.
-
 Thông tin lưu trữ: s3://{BUCKET_NAME}/raw/year={record['year']}/month={record['month']}/day={record['day']}/
 ======================================================
 """
@@ -333,7 +334,7 @@ def save_records_to_s3(records):
             ContentType='application/json',
             Metadata={
                 "project": "WeatherAWS_FinalTerm",
-                "owner": "24110054",
+                "owner": "24110054,24110051",
                 "record_count": str(len(part_records))
             }
         )
@@ -351,7 +352,7 @@ def lambda_handler(event, context):
     if not isinstance(event, dict):
         event = {}
 
-    print(f"[INFO] Lambda execution started. Event: {json.dumps(event)}")
+    print("[INFO] Lambda execution started.")
     config = fetch_secrets()
     locations = config.get('locations', [])
     threshold_pm25 = float(config.get('aqi_threshold_pm25', 35.5))
@@ -361,14 +362,18 @@ def lambda_handler(event, context):
 
     all_records = []
     alerts_sent = 0
+    failed_cities = []
 
     if backfill_hours:
         print(f"[INFO] Backfill mode requested for past {backfill_hours} hours.")
         for loc in locations:
             try:
                 recs = fetch_historical_series(loc, past_hours=int(backfill_hours))
+                if not recs:
+                    raise RuntimeError('No historical records returned.')
                 all_records.extend(recs)
             except Exception as e:
+                failed_cities.append(loc.get('city', 'unknown'))
                 print(f"[ERROR] Failed historical fetch for {loc.get('city', 'unknown')}: {e}")
     else:
         for loc in locations:
@@ -382,13 +387,18 @@ def lambda_handler(event, context):
                     if send_sns_alert(rec, threshold_pm25, threshold_aqi):
                         alerts_sent += 1
             except Exception as e:
+                failed_cities.append(loc.get('city', 'unknown'))
                 print(f"[ERROR] Failed to fetch data for {loc.get('city')}: {e}")
 
+    if not all_records:
+        raise RuntimeError('No records collected; check API responses and configured locations.')
     saved_files = save_records_to_s3(all_records)
 
     result = {
         "statusCode": 200,
-        "message": "Weather & Air Quality data collection completed successfully.",
+        "message": "Weather & Air Quality data collection " + ("partially completed." if failed_cities else "completed successfully."),
+        "collection_status": "partial" if failed_cities else "complete",
+        "failed_cities": failed_cities,
         "records_collected": len(all_records),
         "alerts_sent": alerts_sent,
         "saved_files": saved_files,
