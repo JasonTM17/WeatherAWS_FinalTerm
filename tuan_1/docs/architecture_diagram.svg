@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <linearGradient id="awsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9900" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="680" rx="16" fill="url(#bgGrad)"/>
+
+  <!-- Title Banner -->
+  <rect x="30" y="25" width="1040" height="70" rx="12" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <text x="50" y="55" fill="#f8fafc" font-size="20" font-weight="bold" font-family="Segoe UI, sans-serif">HỆ THỐNG THU THẬP &amp; PHÂN TÍCH DỮ LIỆU THỜI TIẾT / KHÔNG KHÍ (AWS CLOUD)</text>
+  <text x="50" y="78" fill="#94a3b8" font-size="13" font-family="Segoe UI, sans-serif">Môn: Cloud - Đợt 1 (2026-2027) | GVHD: Huỳnh Xuân Phụng | SV: 24110054 | Account ID: 873674852386 | Region: us-east-1</text>
+
+  <!-- Section 1: Ingestion & Trigger -->
+  <!-- Box EventBridge -->
+  <g transform="translate(60, 130)" filter="url(#shadow)">
+    <rect width="180" height="130" rx="10" fill="url(#cardGrad)" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="45" cy="45" r="20" fill="#0284c7" />
+    <text x="45" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="sans-serif">⏰</text>
+    <text x="75" y="42" fill="#38bdf8" font-size="14" font-weight="bold" font-family="Segoe UI, sans-serif">EventBridge</text>
+    <text x="75" y="60" fill="#94a3b8" font-size="11" font-family="Segoe UI, sans-serif">Scheduler</text>
+    <text x="20" y="95" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Rate: 1 hour / 15m</text>
+    <text x="20" y="115" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Trigger định kỳ</text>
+  </g>
+
+  <!-- Box Secrets Manager -->
+  <g transform="translate(60, 300)" filter="url(#shadow)">
+    <rect width="180" height="130" rx="10" fill="url(#cardGrad)" stroke="#f43f5e" stroke-width="1.5"/>
+    <circle cx="45" cy="45" r="20" fill="#e11d48" />
+    <text x="45" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="sans-serif">🔒</text>
+    <text x="75" y="42" fill="#fb7185" font-size="14" font-weight="bold" font-family="Segoe UI, sans-serif">Secrets Mgr</text>
+    <text x="75" y="60" fill="#94a3b8" font-size="11" font-family="Segoe UI, sans-serif">weather/api_config</text>
+    <text x="20" y="95" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• API Keys &amp; Thresh</text>
+    <text x="20" y="115" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Quản lý bảo mật</text>
+  </g>
+
+  <!-- Box Public API -->
+  <g transform="translate(60, 470)" filter="url(#shadow)">
+    <rect width="180" height="130" rx="10" fill="url(#cardGrad)" stroke="#a855f7" stroke-width="1.5"/>
+    <circle cx="45" cy="45" r="20" fill="#9333ea" />
+    <text x="45" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="sans-serif">🌐</text>
+    <text x="75" y="42" fill="#c084fc" font-size="14" font-weight="bold" font-family="Segoe UI, sans-serif">Open-Meteo</text>
+    <text x="75" y="60" fill="#94a3b8" font-size="11" font-family="Segoe UI, sans-serif">Public API</text>
+    <text x="20" y="95" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Air Quality (AQI)</text>
+    <text x="20" y="115" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Weather &amp; Wind</text>
+  </g>
+
+  <!-- Center: AWS Lambda Function -->
+  <g transform="translate(320, 240)" filter="url(#shadow)">
+    <rect width="210" height="230" rx="12" fill="url(#cardGrad)" stroke="#ff9900" stroke-width="2"/>
+    <rect x="15" y="15" width="40" height="40" rx="8" fill="#ea580c"/>
+    <text x="35" y="42" fill="#fff" font-size="22" text-anchor="middle" font-family="sans-serif">λ</text>
+    <text x="65" y="35" fill="#fbbf24" font-size="16" font-weight="bold" font-family="Segoe UI, sans-serif">AWS Lambda</text>
+    <text x="65" y="52" fill="#94a3b8" font-size="11" font-family="Segoe UI, sans-serif">WeatherCollectorLambda</text>
+    <path d="M 20 70 L 190 70" stroke="#475569" stroke-width="1"/>
+    <text x="20" y="92" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Runtime: Python 3.12</text>
+    <text x="20" y="112" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• IAM Role: LabRole</text>
+    <text x="20" y="132" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Lấy Secret &amp; Gọi API</text>
+    <text x="20" y="152" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Phân loại AQI theo EPA</text>
+    <text x="20" y="172" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• So sánh ngưỡng cảnh báo</text>
+    <text x="20" y="192" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Ghi NDJSON phân vùng</text>
+    <text x="20" y="212" fill="#10b981" font-weight="bold" font-size="12" font-family="Segoe UI, sans-serif">✓ Serverless Compute</text>
+  </g>
+
+  <!-- Upper Branch: Amazon SNS -->
+  <g transform="translate(600, 130)" filter="url(#shadow)">
+    <rect width="210" height="130" rx="10" fill="url(#cardGrad)" stroke="#ef4444" stroke-width="1.5"/>
+    <circle cx="45" cy="45" r="20" fill="#dc2626" />
+    <text x="45" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="sans-serif">🔔</text>
+    <text x="75" y="42" fill="#f87171" font-size="14" font-weight="bold" font-family="Segoe UI, sans-serif">Amazon SNS</text>
+    <text x="75" y="60" fill="#94a3b8" font-size="11" font-family="Segoe UI, sans-serif">weather-alerts</text>
+    <text x="20" y="95" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Cảnh báo khi AQI > 100</text>
+    <text x="20" y="115" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Email đến SV / Quản trị</text>
+  </g>
+
+  <!-- Main Storage Branch: Amazon S3 -->
+  <g transform="translate(600, 340)" filter="url(#shadow)">
+    <rect width="210" height="150" rx="10" fill="url(#cardGrad)" stroke="#10b981" stroke-width="1.5"/>
+    <circle cx="45" cy="45" r="20" fill="#059669" />
+    <text x="45" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="sans-serif">🪣</text>
+    <text x="75" y="42" fill="#34d399" font-size="14" font-weight="bold" font-family="Segoe UI, sans-serif">Amazon S3</text>
+    <text x="75" y="60" fill="#94a3b8" font-size="11" font-family="Segoe UI, sans-serif">Data Lake Bucket</text>
+    <text x="20" y="95" fill="#e2e8f0" font-size="11" font-family="Segoe UI, sans-serif">• raw/year=Y/month=M/day=D</text>
+    <text x="20" y="115" fill="#e2e8f0" font-size="11" font-family="Segoe UI, sans-serif">• NDJSON tối ưu Athena</text>
+    <text x="20" y="135" fill="#e2e8f0" font-size="11" font-family="Segoe UI, sans-serif">• athena-results/ query logs</text>
+  </g>
+
+  <!-- Right Branch: AWS Glue & Athena -->
+  <g transform="translate(860, 240)" filter="url(#shadow)">
+    <rect width="210" height="230" rx="12" fill="url(#cardGrad)" stroke="#6366f1" stroke-width="2"/>
+    <circle cx="45" cy="45" r="20" fill="#4f46e5" />
+    <text x="45" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="sans-serif">🔍</text>
+    <text x="75" y="38" fill="#818cf8" font-size="15" font-weight="bold" font-family="Segoe UI, sans-serif">Glue + Athena</text>
+    <text x="75" y="56" fill="#94a3b8" font-size="11" font-family="Segoe UI, sans-serif">Serverless SQL Analytics</text>
+    <path d="M 20 70 L 190 70" stroke="#475569" stroke-width="1"/>
+    <text x="20" y="92" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Glue DB: weather_aqi_db</text>
+    <text x="20" y="112" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Athena External Table</text>
+    <text x="20" y="132" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Phân tích trung bình AQI</text>
+    <text x="20" y="152" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Khung giờ ô nhiễm cao</text>
+    <text x="20" y="172" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Tương quan thời tiết</text>
+    <text x="20" y="192" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">• Xuất số liệu biểu đồ</text>
+    <text x="20" y="212" fill="#10b981" font-weight="bold" font-size="12" font-family="Segoe UI, sans-serif">✓ Serverless Analytics</text>
+  </g>
+
+  <!-- Bottom Monitoring Banner: CloudWatch -->
+  <g transform="translate(60, 520)" filter="url(#shadow)">
+    <rect width="1010" height="120" rx="10" fill="url(#cardGrad)" stroke="#eab308" stroke-width="1.5"/>
+    <circle cx="45" cy="45" r="20" fill="#ca8a04" />
+    <text x="45" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="sans-serif">📊</text>
+    <text x="75" y="42" fill="#facc15" font-size="16" font-weight="bold" font-family="Segoe UI, sans-serif">Amazon CloudWatch (Monitoring &amp; Governance)</text>
+    <text x="75" y="60" fill="#94a3b8" font-size="12" font-family="Segoe UI, sans-serif">Dashboard: WeatherAirQuality-Monitoring-Dashboard | Metric Alarm: WeatherCollector-Errors-Alarm</text>
+    <path d="M 20 75 L 990 75" stroke="#475569" stroke-width="1"/>
+    <text x="30" y="100" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">👁️ Giám sát số lần gọi Lambda (Invocations)</text>
+    <text x="320" y="100" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">⏱️ Đo thời gian thực thi (Execution Duration)</text>
+    <text x="630" y="100" fill="#e2e8f0" font-size="12" font-family="Segoe UI, sans-serif">🚨 Báo động lỗi tự động qua SNS (Error Alarm)</text>
+  </g>
+
+  <!-- Connecting Lines / Arrows -->
+  <g stroke="#94a3b8" stroke-width="2" fill="none">
+    <!-- EventBridge to Lambda -->
+    <path d="M 240 195 L 280 195 L 280 300 L 320 300" stroke="#38bdf8" stroke-dasharray="4"/>
+    <polygon points="320,300 310,295 310,305" fill="#38bdf8"/>
+
+    <!-- Secrets Manager to Lambda -->
+    <path d="M 240 365 L 320 365" stroke="#fb7185"/>
+    <polygon points="320,365 310,360 310,370" fill="#fb7185"/>
+
+    <!-- Open-Meteo to Lambda -->
+    <path d="M 240 535 L 280 535 L 280 430 L 320 430" stroke="#c084fc"/>
+    <polygon points="320,430 310,425 310,435" fill="#c084fc"/>
+
+    <!-- Lambda to SNS -->
+    <path d="M 530 300 L 565 300 L 565 195 L 600 195" stroke="#ef4444"/>
+    <polygon points="600,195 590,190 590,200" fill="#ef4444"/>
+
+    <!-- Lambda to S3 -->
+    <path d="M 530 380 L 600 380" stroke="#10b981"/>
+    <polygon points="600,380 590,375 590,385" fill="#10b981"/>
+
+    <!-- S3 to Athena -->
+    <path d="M 810 415 L 835 415 L 835 355 L 860 355" stroke="#818cf8"/>
+    <polygon points="860,355 850,350 850,360" fill="#818cf8"/>
+  </g>
+</svg>
