@@ -27,3 +27,12 @@ lambda_package.zip
 
 # Temporary report render work
 docs/_report_work/
+tuan_1/docs/_report_work/
+tuan_2/docs/_report_work/
+
+# Test cache
+.pytest_cache/
+
+# Agent metadata & original prompt
+.agents/
+ORIGINAL_REQUEST.md

@@ -22,8 +22,10 @@ plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial', 'Segoe UI']
 plt.rcParams['axes.edgecolor'] = '#cccccc'
 plt.rcParams['axes.linewidth'] = 0.8
 
-CHARTS_DIR = os.path.abspath('results/charts')
-DATA_DIR = os.path.abspath('results/athena_queries')
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_TUAN_2_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+CHARTS_DIR = os.path.join(_TUAN_2_DIR, 'results', 'charts') if os.path.isdir(os.path.join(_TUAN_2_DIR, 'results')) else os.path.abspath('results/charts')
+DATA_DIR = os.path.join(_TUAN_2_DIR, 'results', 'athena_queries') if os.path.isdir(os.path.join(_TUAN_2_DIR, 'results')) else os.path.abspath('results/athena_queries')
 os.makedirs(CHARTS_DIR, exist_ok=True)
 
 # 1. Chart 1: AQI City Comparison

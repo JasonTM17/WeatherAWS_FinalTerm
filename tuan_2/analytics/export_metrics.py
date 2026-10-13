@@ -29,7 +29,9 @@ except Exception:
     BUCKET_NAME = os.environ.get('S3_BUCKET_NAME', 'weather-aqi-873674852386')
 
 OUTPUT_LOCATION = f"s3://{BUCKET_NAME}/athena-results/"
-RESULTS_DIR = os.path.abspath('results/athena_queries')
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_TUAN_2_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+RESULTS_DIR = os.path.join(_TUAN_2_DIR, 'results', 'athena_queries') if os.path.isdir(os.path.join(_TUAN_2_DIR, 'results')) else os.path.abspath('results/athena_queries')
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 QUERIES = [

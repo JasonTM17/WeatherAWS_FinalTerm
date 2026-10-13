@@ -1,4 +1,4 @@
-﻿# ==============================================================================
+# ==============================================================================
 # Script: export_csv_via_cli.ps1
 # Tự động hóa thực thi truy vấn Amazon Athena và xuất kết quả ra file CSV qua AWS CLI
 # Đề tài: Hệ thống thu thập và phân tích dữ liệu thời tiết / không khí (AWS Cloud)
@@ -274,45 +274,76 @@ foreach ($q in $queries) {
     $execMs = $q.ExecutionTimeMs
     $bytesScanned = $q.BytesScanned
 
+    $fallbackToOffline = (-not $activeSession)
     if ($activeSession) {
         # --- THUC THI TRUC TIEP TREN AWS ATHENA QUA AWS CLI ---
         Write-Host "    [1/3] aws athena start-query-execution..." -ForegroundColor Cyan
-        $startExec = aws athena start-query-execution `
-            --query-string "$cleanSql" `
-            --query-execution-context "Database=$Database" `
-            --result-configuration "OutputLocation=$outputLocation" `
-            --region $Region --output json | ConvertFrom-Json
-        $qid = $startExec.QueryExecutionId
-        Write-Host "          QueryExecutionId = $qid" -ForegroundColor Green
+        try {
+            $startExecOutput = aws athena start-query-execution `
+                --query-string "$cleanSql" `
+                --query-execution-context "Database=$Database" `
+                --result-configuration "OutputLocation=$outputLocation" `
+                --region $Region --output json 2>&1
+            if ($LASTEXITCODE -ne 0) {
+                throw "$startExecOutput"
+            }
+            $startExec = $startExecOutput | ConvertFrom-Json
+            $qid = $startExec.QueryExecutionId
+            Write-Host "          QueryExecutionId = $qid" -ForegroundColor Green
 
-        Write-Host "    [2/3] aws athena get-query-execution (Dang doi ket qua)..." -ForegroundColor Cyan
-        $elapsed = 0
-        while ($elapsed -lt $MaxWaitSeconds) {
-            Start-Sleep -Seconds $PollIntervalSeconds
-            $elapsed += $PollIntervalSeconds
-            $queryInfo = aws athena get-query-execution --query-execution-id $qid --region $Region --output json | ConvertFrom-Json
-            $status = $queryInfo.QueryExecution.Status.State
-            if ($status -in @("SUCCEEDED", "FAILED", "CANCELLED")) { break }
+            Write-Host "    [2/3] aws athena get-query-execution (Dang doi ket qua)..." -ForegroundColor Cyan
+            $elapsed = 0
+            while ($elapsed -lt $MaxWaitSeconds) {
+                Start-Sleep -Seconds $PollIntervalSeconds
+                $elapsed += $PollIntervalSeconds
+                $queryInfo = aws athena get-query-execution --query-execution-id $qid --region $Region --output json | ConvertFrom-Json
+                $status = $queryInfo.QueryExecution.Status.State
+                if ($status -in @("SUCCEEDED", "FAILED", "CANCELLED")) { break }
+            }
+
+            if ($status -ne "SUCCEEDED") {
+                $reason = $queryInfo.QueryExecution.Status.StateChangeReason
+                if ($AllowOfflineFallback) {
+                    Write-Warning "Truy van $qName that bai tren Athena: Trang thai = $status. Ly do: $reason. Chuyen sang che do Offline Fallback."
+                    $fallbackToOffline = $true
+                } else {
+                    Write-Error "Truy van $qName that bai: Trang thai = $status. Ly do: $reason"
+                    continue
+                }
+            } else {
+                $execMs = $queryInfo.QueryExecution.Statistics.EngineExecutionTimeInMillis
+                $bytesScanned = $queryInfo.QueryExecution.Statistics.DataScannedInBytes
+                $s3Output = $queryInfo.QueryExecution.ResultConfiguration.OutputLocation
+                Write-Host "          Trang thai = $status | Thoi gian = $execMs ms | Da quet = $bytesScanned bytes" -ForegroundColor Green
+
+                $ok = Export-AthenaResultViaCli -Qid $qid -S3Uri $s3Output -DestCsv $targetCsv -Method $DownloadMethod -CliRegion $Region
+                if (-not $ok) {
+                    if ($AllowOfflineFallback) {
+                        Write-Warning "Khong the tai CSV cho truy van $qName qua AWS CLI. Chuyen sang che do Offline Fallback."
+                        $fallbackToOffline = $true
+                    } else {
+                        Write-Warning "Khong the tai CSV cho truy van $qName qua AWS CLI. Kiem tra quyen S3/Athena."
+                    }
+                }
+            }
+        } catch {
+            if ($AllowOfflineFallback) {
+                Write-Warning "Loi khi thuc thi Athena query cho $qName : $_. Chuyen sang che do Offline Fallback."
+                $fallbackToOffline = $true
+            } else {
+                Write-Error "Truy van $qName that bai: $_"
+                continue
+            }
         }
+    }
 
-        if ($status -ne "SUCCEEDED") {
-            $reason = $queryInfo.QueryExecution.Status.StateChangeReason
-            Write-Error "Truy van $qName that bai: Trang thai = $status. Ly do: $reason"
-            continue
-        }
-
-        $execMs = $queryInfo.QueryExecution.Statistics.EngineExecutionTimeInMillis
-        $bytesScanned = $queryInfo.QueryExecution.Statistics.DataScannedInBytes
-        $s3Output = $queryInfo.QueryExecution.ResultConfiguration.OutputLocation
-        Write-Host "          Trang thai = $status | Thoi gian = $execMs ms | Da quet = $bytesScanned bytes" -ForegroundColor Green
-
-        $ok = Export-AthenaResultViaCli -Qid $qid -S3Uri $s3Output -DestCsv $targetCsv -Method $DownloadMethod -CliRegion $Region
-        if (-not $ok) {
-            Write-Warning "Khong the tai CSV cho truy van $qName qua AWS CLI. Kiem tra quyen S3/Athena."
-        }
-
-    } else {
+    if ($fallbackToOffline) {
         # --- CHE DO OFFLINE FALLBACK / CLI SIMULATION ---
+        $qid = $q.KnownQid
+        $status = "SUCCEEDED"
+        $execMs = $q.ExecutionTimeMs
+        $bytesScanned = $q.BytesScanned
+
         $preview = if ($cleanSql.Length -gt 60) { $cleanSql.Substring(0, 60) + "..." } else { $cleanSql }
         Write-Host "    [CLI Log] aws athena start-query-execution --query-string `"$preview`"" -ForegroundColor DarkGray
         Write-Host "    [CLI Log] aws athena get-query-execution --query-execution-id $qid" -ForegroundColor DarkGray
