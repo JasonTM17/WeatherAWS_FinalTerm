@@ -15,4 +15,3 @@ Lớp 261CLCO332779_05 — Điện toán đám mây.
 - [Kiến trúc hệ thống](../../docs/architecture.md): luồng dữ liệu và vai trò dịch vụ.
 - [CSV Athena đã lưu](../../tuan_2/results/athena_queries/): 156 bản ghi, 52 mẫu mỗi đô thị; các phép tổng hợp và chỉ số truy vấn.
 - [Hồ sơ vận hành đã lưu](../../docs/saved-evidence.md): kết quả dịch vụ và mã truy vấn dùng đối chiếu.
-
