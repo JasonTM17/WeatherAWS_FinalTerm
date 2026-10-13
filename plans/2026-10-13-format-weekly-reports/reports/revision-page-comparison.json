@@ -1,0 +1,61 @@
+[
+  {
+    "week": 1,
+    "pixel_identical_verified_pages": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "changed_pages_to_inspect": [
+      5
+    ],
+    "removed_final_pages": 0
+  },
+  {
+    "week": 2,
+    "pixel_identical_verified_pages": [
+      1,
+      2,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      21
+    ],
+    "changed_pages_to_inspect": [
+      3,
+      4,
+      5,
+      6,
+      10,
+      19,
+      20,
+      22,
+      23
+    ],
+    "removed_final_pages": 1
+  }
+]

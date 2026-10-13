@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "files": {
+    "Bao_cao_Tuan_1_24110054_24110051.docx": "cad6f4652c8029b861ce11e2548c8b6ce159b59d9286930fd7f8791ba36b32b8",
+    "Bao_cao_Tuan_1_24110054_24110051.pdf": "a15f46df577f028a5d532ae8056a5461b18e8aaf07cafa0c3c5657de86666d07",
+    "Bao_cao_Tuan_2_24110054_24110051.docx": "6c431dfb4575ca4ee6f2cbdbe00d029a08f3a6e28cc2f4a7f0080721e8d2dbb7",
+    "Bao_cao_Tuan_2_24110054_24110051.pdf": "b5c877d1255b365825e25d4b77cb35cfa7427cdfaf44ce807c4cd0c077d40692",
+    "Du_lieu_Athena_Nhom_05.xlsx": "4d89197f92a5a9e6ce73e8a4d5f87d83741820c2b32d5f9632f51e92fb310cba",
+    "CSV/aqi_category_distribution.csv": "a56bcbe484d2eaa76cd6c3322f0aaffce846e5d0356c9385d039e833fbc4795c",
+    "CSV/avg_aqi_by_city.csv": "12e174198408285b47a9301c140ff721cf526ba12bf7fb31e12501797b260f31",
+    "CSV/peak_pollution_hours.csv": "2eb80010753af13eaa0ad821dce80202ff15debf44ca6ee5d940642af073b6c9",
+    "CSV/query_metrics.csv": "9b032eb64050540148c3052e7c67ff27f80d88bed0450f0ca42c3b3fab12d025",
+    "CSV/raw_weather_aqi_records.csv": "de0c111322c9b418058c498e71e813b76a44e3c9d6a48d0fd5216d314fb8d5b6",
+    "CSV/weather_correlation.csv": "cb4b20714c0fee3dcb39674cbaed414de7e87b322991b3b92850e20abdbf6eef",
+    "Source_WeatherAWS_Nhom_05.zip": "ee9d2ae459b624e55c67e9c91675b7bbd72154d58cce695825e329bc27cdc763"
+  },
+  "source_files": 93
+}

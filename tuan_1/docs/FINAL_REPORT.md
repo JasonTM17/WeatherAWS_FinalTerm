@@ -42,7 +42,7 @@ Bảng 1.1. Cấu hình hệ thống và kết quả định lượng tại mố
 | --- | --- | --- |
 | Thu thập định kỳ | EventBridge rate(1 hour); Lambda xử lý ba đô thị; bốn lượt gọi ghi nhận | Rule và CloudWatch, Tuần 1 |
 | Lưu trữ | NDJSON phân vùng year/month/day; 3 tệp raw, 87.250 byte | Amazon S3, Tuần 1 |
-| Cấu hình | Secrets Manager lưu tọa độ và ngưỡng; API công khai không dùng api_key minh họa | Secret và mã Lambda |
+| Cấu hình | Secrets Manager lưu tọa độ và ngưỡng cảnh báo; Open-Meteo sử dụng API công khai. | Secret và mã Lambda |
 | Phân tích | Glue có ba phân vùng; Athena có 5/5 truy vấn thành công, 156 dòng gốc | Glue, Athena CSV, Tuần 1 |
 | Cảnh báo, giám sát | 6 MessageId trong log; CloudWatch Alarm ở trạng thái INSUFFICIENT_DATA | CloudWatch Logs/Alarm, Tuần 1 |
 | Chi phí | Cost Explorer trả 0 USD tại các mốc đã quan sát | UnblendedCost tại lần đọc |
@@ -53,11 +53,11 @@ Bảng 1.1. Cấu hình hệ thống và kết quả định lượng tại mố
 
 Hình 1.1. Luồng xử lý của hệ thống theo mã nguồn và cấu hình AWS
 
-Open-Meteo là nguồn dữ liệu bên ngoài AWS; các khối còn lại thuộc luồng xử lý trong Learner Lab tại us-east-1. EventBridge phát lệnh theo rate(1 hour) tới Lambda. Lambda đọc cấu hình từ Secrets Manager, gọi API công khai, kiểm tra ngưỡng, ghi dữ liệu S3 và công bố cảnh báo qua SNS khi cần. Glue Catalog mô tả bảng ngoài trên vùng raw của S3, còn Athena đọc dữ liệu để tổng hợp và xuất kết quả. CloudWatch ghi chỉ số vận hành của Lambda. Secrets Manager hiện chứa cấu hình và một khóa minh họa; URL Open-Meteo trong mã nguồn không sử dụng khóa đó để xác thực.
+Open-Meteo là nguồn dữ liệu bên ngoài AWS; các khối còn lại thuộc luồng xử lý trong Learner Lab tại us-east-1. EventBridge kích hoạt Lambda theo rate(1 hour). Lambda đọc cấu hình từ Secrets Manager, gọi API công khai, kiểm tra ngưỡng, ghi dữ liệu S3 và công bố cảnh báo qua SNS khi cần. Glue Catalog mô tả bảng ngoài trên vùng raw của S3, còn Athena đọc dữ liệu để tổng hợp và xuất kết quả. CloudWatch ghi chỉ số vận hành của Lambda. Secrets Manager quản lý tọa độ và ngưỡng cấu hình; các lời gọi Open-Meteo trong dự án sử dụng API công khai không yêu cầu khóa của nhà cung cấp.
 
 ### 1.4 Nguồn số liệu và mốc đo
 
-Các bảng phân tích sử dụng bốn CSV tổng hợp, CSV chứa 156 bản ghi gốc và bảng chỉ số truy vấn đã lưu trong Tuần 1. Số liệu S3, Lambda và CloudWatch được đọc ở các mốc quan sát riêng. Báo cáo đối chiếu độc lập số dòng giữa bảng đô thị, bảng giờ, bảng cấp AQI và dữ liệu gốc.
+Các bảng phân tích sử dụng bốn CSV tổng hợp, CSV chứa 156 bản ghi gốc và bảng chỉ số truy vấn đã lưu trong Tuần 1. Số liệu S3, Lambda và CloudWatch được đọc ở các mốc quan sát riêng. Báo cáo đối chiếu số dòng giữa bảng đô thị, bảng giờ, bảng cấp AQI và dữ liệu gốc. Dữ liệu chất lượng không khí được lấy từ Open-Meteo Air Quality API, dựa trên sản phẩm mô hình khí quyển CAMS, không phải phép đo trực tiếp tại một trạm. Nguồn dữ liệu: https://open-meteo.com/en/docs/air-quality-api.
 
 Bảng 1.2. Nguồn và đại lượng dùng trong phân tích
 
@@ -72,7 +72,7 @@ Bảng 1.3. Đối chiếu từng luồng trong sơ đồ kiến trúc với b�
 
 | Luồng trong Hình 1.1 | Trách nhiệm kỹ thuật | Bằng chứng và giới hạn |
 | --- | --- | --- |
-| EventBridge / Secret → Lambda | Lịch gọi theo giờ và cấu hình ngưỡng | Rule Enabled, Lambda Active trong Tuần 1; khóa API trong Secret chưa được mã nguồn dùng |
+| EventBridge / Secret → Lambda | Lịch gọi theo giờ và cấu hình ngưỡng | Rule Enabled; Lambda Active trong Tuần 1. |
 | Open-Meteo → Lambda → S3 | Lấy, chuẩn hóa NDJSON và phân vùng theo ngày | S3 có 3 tệp raw, 87.250 byte; CSV gốc có 156 dòng |
 | S3 → Glue → Athena | Catalog bảng ngoài và tổng hợp bằng SQL | 20 cột, 3 phân vùng; 5 truy vấn SUCCEEDED, 156 dòng gốc |
 | Lambda → SNS / CloudWatch | Phát cảnh báo và giám sát lỗi | 6 MessageId trong log; chưa xác nhận email đến, Alarm còn INSUFFICIENT_DATA |
@@ -132,7 +132,7 @@ Bảng 3.1. Thành phần triển khai tại us-east-1
 | Dịch vụ | Tên hoặc cấu hình | Vai trò |
 | --- | --- | --- |
 | Lambda | WeatherCollectorLambda, Python 3.12, 256 MB, 60 s; role LabRole | Thu thập và chuẩn hóa |
-| EventBridge | WeatherCollectionHourlyRule, rate(1 hour) | Kích hoạt theo lịch |
+| EventBridge | rate(1 hour); kích hoạt Lambda theo giờ | Kích hoạt theo lịch |
 | S3 | weather-aqi-<account>/raw | Lưu NDJSON phân vùng |
 | Secrets Manager | weather/api_config | Lưu cấu hình thu thập |
 | SNS | weather-airquality-alerts | Phát cảnh báo email |
@@ -149,13 +149,13 @@ Mỗi bản ghi gồm định danh, thành phố, tọa độ, thời gian UTC v
 
 ### 3.3 An toàn cấu hình và vận hành
 
-Lambda lấy tên bucket, secret và SNS topic từ biến môi trường; quyền thực thi sử dụng LabRole của Learner Lab. Mã nguồn không lưu khóa truy cập AWS trong repository. Secret hiện lưu các ngưỡng và tọa độ; trường api_key là giá trị minh họa, không được truyền trong URL truy vấn Open-Meteo. Tình huống đọc Secret lỗi có nhánh cấu hình mặc định, nhưng lỗi cần được ghi log và xử lý khi vận hành thật.
+Lambda lấy tên bucket, secret và SNS topic từ biến môi trường; quyền thực thi sử dụng LabRole của Learner Lab. Mã nguồn không lưu khóa truy cập AWS trong repository. Secret quản lý các ngưỡng cảnh báo và tọa độ thu thập. Khi đọc secret thất bại, hàm ghi log và sử dụng cấu hình dự phòng đã định nghĩa trong mã nguồn.
 
 ### 3.4 Trình tự xử lý của Lambda
 
 Khi được kích hoạt, Lambda đọc cấu hình, duyệt danh sách ba thành phố, yêu cầu dữ liệu chất lượng không khí và thời tiết qua HTTPS, rồi ghép các trường từ hai nguồn vào một bản ghi thống nhất. Các hàm safe_float và safe_int chặn lỗi kiểu dữ liệu khi API trả null hoặc chuỗi không hợp lệ; hàm get_aqi_category chia US AQI thành sáu mức từ Good đến Hazardous. Sau bước chuẩn hóa, logic so sánh từng bản ghi với ngưỡng; các bản ghi vượt ngưỡng được chuyển thành thông điệp SNS có địa điểm, thời gian và chỉ số đo.
 
-Đối với nạp dữ liệu lịch sử, mã dùng past_hours=48, tính số ngày cần truy vấn rồi lấy tối đa 48 mốc cuối trong mảng thời gian. Mã căn chỉnh theo chỉ số gốc của mảng khi nguồn trả ít mốc hơn dự kiến để tránh lệch dữ liệu giữa thời gian và cảm biến. Mỗi bản ghi được gắn record_id có phần ngẫu nhiên; vì vậy một lần chạy lặp có thể tạo bản ghi trùng ý nghĩa quan trắc.
+Phiên bản Tuần 1 nạp dữ liệu lịch sử với past_hours=48, tính số ngày cần truy vấn rồi lấy tối đa 48 mốc cuối trong mảng thời gian. Hàm dùng chỉ số gốc của mảng khi nguồn trả ít mốc hơn dự kiến để giữ thời gian cùng vị trí với giá trị cảm biến. Mỗi bản ghi được gắn record_id có phần ngẫu nhiên; vì vậy một lần chạy lặp có thể tạo bản ghi trùng ý nghĩa dữ liệu.
 
 Đường dẫn phân vùng dùng ngày UTC lấy từ bản ghi. Trường timestamp_vn là giờ hiển thị cho người đọc ở Việt Nam; vì vậy một quan trắc gần nửa đêm có thể mang ngày Việt Nam khác với ngày trong thư mục S3. Đây là lựa chọn nhất quán của mã hiện tại, cần giải thích rõ khi lọc dữ liệu theo ngày địa phương trong Athena.
 
@@ -185,16 +185,16 @@ Bảng 3.2. Đường đi của trường dữ liệu từ API tới Athena
 | year, month, day, hour | Tách từ thời gian UTC của bản ghi | Ba trường đầu là khóa phân vùng; hour dùng trong Bảng 4.4 |
 | us_aqi, aqi_category | AQI từ Open-Meteo; safe_int và get_aqi_category | Giá trị thiếu có thể thành AQI 0 nhưng cấp Unknown |
 | pm2_5, pm10, CO, NO2, SO2, O3 | Air Quality API; safe_float trước khi ghi JSON | Giá trị thiếu/không hợp lệ bị đổi thành 0, có thể lệch trung bình |
-| nhiệt độ, độ ẩm, áp suất, gió | Weather Forecast API; safe_float | Mảng lịch sử ghép theo cùng chỉ số, chưa xác nhận hai trục thời gian luôn khớp |
+| nhiệt độ, độ ẩm, áp suất, gió | Weather Forecast API; safe_float | Phiên bản Tuần 1 ghép theo vị trí trong mảng; phiên bản Tuần 2 ghép theo timestamp. |
 | record_id, collected_at | ID có hậu tố ngẫu nhiên; collected_at gắn thời điểm trong bản ghi | Chưa có cơ chế chống ghi lặp theo city + timestamp |
 
-Việc đổi null thành 0 giúp hàm không lỗi kiểu dữ liệu nhưng khiến AVG coi số 0 là một phép đo thật. Chưa có thống kê tỷ lệ giá trị thiếu trong toàn bộ đối tượng S3, nên các kết luận khí tượng ở Chương 4 chỉ mô tả tệp CSV đã xuất. Muốn dùng cho phân tích khoa học, cần giữ NULL, kiểm tra độ đầy đủ từng trường và ghép thời gian API theo timestamp thay vì giả định hai mảng có cùng vị trí.
+Việc đổi null thành 0 giúp hàm không lỗi kiểu dữ liệu nhưng khiến AVG coi số 0 là một phép đo thật. Chưa có thống kê tỷ lệ giá trị thiếu trong toàn bộ đối tượng S3, nên các kết luận khí tượng ở Chương 4 chỉ mô tả tệp CSV đã xuất. Phiên bản được đối chiếu ở Tuần 1 ghép hai chuỗi lịch sử theo vị trí trong mảng; bộ source hoàn thiện ở Tuần 2 đã ghép theo timestamp. Sự thay đổi mã nguồn này không làm thay đổi các giá trị trong bộ CSV đã lưu dùng cho hai báo cáo.
 
 ### 3.7 Tần suất gọi Open-Meteo và yêu cầu khóa API
 
 Mỗi lượt realtime duyệt ba đô thị và gọi hai endpoint (Air Quality, Weather Forecast) cho mỗi đô thị: tối đa 6 HTTP GET/lượt thành công. Lịch rate(1 hour) tương ứng 24 lượt/ngày và ước tính 144 yêu cầu/ngày nếu không tính gọi thử, backfill hoặc lần chạy lại. Đây là phép tính từ cấu hình, không phải số yêu cầu đã được nhà cung cấp đo. Theo điều khoản Free API phi thương mại của Open-Meteo tại https://open-meteo.com/en/terms, giới hạn công bố là 10.000 yêu cầu/ngày, 5.000/giờ và 600/phút; nhịp thiết kế nằm dưới các ngưỡng đó.
 
-Open-Meteo công bố Free API không cần đăng ký hay khóa API tại https://open-meteo.com/. Secret weather/api_config của dự án chứa tọa độ, ngưỡng và một chuỗi api_key minh họa; URL công khai trong mã nguồn không dùng chuỗi này để xác thực. Cấu hình hiện tại vì vậy dựa trên API công khai và không sử dụng khóa API của nhà cung cấp bên ngoài.
+Các lời gọi Open-Meteo trong dự án sử dụng API công khai không yêu cầu khóa của nhà cung cấp. Secret weather/api_config quản lý tọa độ ba đô thị và ngưỡng cảnh báo; cấu hình này được Lambda đọc khi xử lý dữ liệu. Báo cáo phân biệt cấu hình của hệ thống với bộ số liệu được lưu để phân tích.
 
 ## Chương 4 Kết quả kiểm tra và phân tích dữ liệu
 

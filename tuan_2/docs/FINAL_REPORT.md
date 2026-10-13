@@ -6,7 +6,7 @@ Báo cáo Tuần 2 trình bày việc hoàn thiện các chức năng thu thập
 
 Hệ thống thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng, chuẩn hóa bản ghi gồm 23 trường và lưu theo phân vùng thời gian trên Amazon S3. EventBridge kích hoạt Lambda định kỳ; Secrets Manager quản lý cấu hình; SNS tiếp nhận thông báo vượt ngưỡng; Glue và Athena cung cấp lược đồ và truy vấn phân tích.
 
-Bộ dữ liệu dùng đối chiếu gồm 156 bản ghi, tương ứng 52 mẫu mỗi đô thị. Năm tệp kết quả truy vấn và bốn biểu đồ được sử dụng nhất quán để mô tả AQI, nồng độ bụi, biến thiên theo giờ và tương quan khí tượng. Bộ source đã được kiểm tra cục bộ; kết quả này được phân biệt với trạng thái vận hành trên AWS.
+Báo cáo Tuần 2 tiếp tục sử dụng bộ CSV Athena đã lưu ở Tuần 1, gồm 156 bản ghi và 52 mẫu mỗi đô thị. Năm tệp kết quả truy vấn và bốn biểu đồ mô tả AQI, nồng độ bụi, biến thiên theo giờ và tương quan khí tượng. Đây là bộ dữ liệu dùng đối chiếu, không phải kết quả của một lượt thu thập mới ở Tuần 2. Nội dung Tuần 2 tập trung vào hoàn thiện chức năng và kiểm tra bộ source cục bộ.
 
 ## LỜI MỞ ĐẦU
 
@@ -32,14 +32,14 @@ Mục tiêu Tuần 2 là kết nối các dịch vụ nền tảng thành luồn
 
 ### 1.2 Phân công thực hiện
 
-Chúng em phân công hai nhóm chức năng có quy mô tương đương. Các phần kiến trúc, tích hợp, rà soát số liệu và báo cáo được thực hiện chung; trách nhiệm chính được thể hiện tại Bảng 1.1.
+Chúng em phân công hai nhóm chức năng và cùng thực hiện kiến trúc, tích hợp, rà soát số liệu và báo cáo. Theo nhật ký nhóm xác nhận, Nguyễn Tiến Sơn thực hiện 10,0 giờ và Trần Thị Ngọc Quyên thực hiện 9,5 giờ trong Tuần 2, tổng cộng 19,5 giờ. Phần việc và thời gian được trình bày tại Bảng 1.1.
 
 Bảng 1.1 Phân công thực hiện Tuần 2
 
-| Thành viên | Phụ trách chính | Phối hợp |
-| --- | --- | --- |
-| Nguyễn Tiến Sơn<br>24110054 | S3, Secrets Manager, Lambda và SNS. | Kiến trúc, tích hợp và báo cáo. |
-| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu. | Kiến trúc, tích hợp và báo cáo. |
+| Thành viên | Phụ trách chính | Phối hợp | Giờ |
+| --- | --- | --- | --- |
+| Nguyễn Tiến Sơn<br>24110054 | S3, Secrets Manager, Lambda và SNS. | Kiến trúc, tích hợp và báo cáo. | 10,0 |
+| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu. | Kiến trúc, tích hợp và báo cáo. | 9,5 |
 
 ### 1.3 Kiến trúc tổng thể
 
@@ -47,7 +47,7 @@ Luồng xử lý kết nối lịch sự kiện, hàm thu thập, lưu trữ, c�
 
 - Amazon EventBridge: quy tắc lịch kích hoạt Lambda mỗi giờ với biểu thức rate(1 hour).
 
-- AWS Secrets Manager: Kho lưu trữ bảo mật chứa thông tin cấu hình trạm quan trắc, tọa độ và các ngưỡng cảnh báo an toàn.
+- AWS Secrets Manager: quản lý vị trí thu thập, tọa độ và ngưỡng cảnh báo của dự án.
 
 - AWS Lambda: nhận sự kiện, gọi API, chuẩn hóa bản ghi, xác định cấp AQI và ghi dữ liệu.
 
@@ -63,13 +63,13 @@ Luồng xử lý kết nối lịch sự kiện, hàm thu thập, lưu trữ, c�
 
 ![Hình phân tích](../../docs/architecture.png)
 
-Hình 1.1: Sơ đồ kiến trúc Serverless Event-Driven tổng thể hệ thống thu thập và phân tích dữ liệu
+Hình 1.1 Kiến trúc và luồng dữ liệu của hệ thống
 
 ### 1.4 Danh mục dịch vụ và cấu hình
 
 Môi trường mục tiêu là AWS Academy Learner Lab tại us-east-1, sử dụng LabRole. Trong bộ source, account được xác định từ phiên đăng nhập; tên bucket và ARN được tạo theo account, thay vì cố định theo một tài khoản cụ thể.
 
-Bảng 1.2: Danh mục tài nguyên dịch vụ AWS Learner Lab triển khai trong Tuần 2
+Bảng 1.2 Danh mục dịch vụ và cấu hình trong bộ source Tuần 2
 
 | Dịch vụ | Tài nguyên hoặc cấu hình | Vai trò |
 | --- | --- | --- |
@@ -205,7 +205,7 @@ SNS topic weather-airquality-alerts là đích nhận thông báo. Khi đăng k�
 
 ### 3.4 Điều kiện và nội dung thông báo
 
-Trong quá trình xử lý bản ghi, hàm Lambda liên tục đối chiếu chỉ số đo được với các ngưỡng cảnh báo an toàn lưu trong Secrets Manager. Ngưỡng cảnh báo được thiết lập: us_aqi >= 100 hoặc pm2_5 >= 35.5 µg/m³.
+Hàm Lambda đối chiếu chỉ số đo được với các ngưỡng cảnh báo cấu hình của dự án: us_aqi ≥ 100 hoặc pm2_5 ≥ 35,5 µg/m³. Khi thỏa một trong hai điều kiện, hàm gửi thông báo tới SNS topic đã cấu hình.
 
 Thông điệp chứa thành phố, thời điểm, AQI, cấp phân loại, các nồng độ bụi và điều kiện khí tượng. Kết quả publish được dùng để đếm số thông báo gửi tới SNS; đây là số lần dịch vụ chấp nhận thông điệp, không phải số email người nhận đã đọc.
 
@@ -289,6 +289,35 @@ Hình 4.2 AQI PM2.5 và PM10 trung bình theo giờ UTC
 
 AQI trung bình cao nhất tại giờ 11 UTC với 103,83 và thấp nhất tại giờ 23 với 75,83. PM2.5 cao nhất tại giờ 19 với 25,53 µg/m³ và thấp nhất tại giờ 03 với 18,03 µg/m³. Có 20 nhóm sáu mẫu và bốn nhóm chín mẫu. Dữ liệu này chưa đủ để kết luận nguyên nhân biến động hoặc chu kỳ ô nhiễm điển hình.
 
+Bảng 4.3 AQI PM2.5 và PM10 trung bình theo 24 giờ UTC
+
+| Giờ UTC | AQI TB | PM2.5 µg/m³ | PM10 µg/m³ | Số mẫu |
+| --- | --- | --- | --- | --- |
+| 00 | 77,00 | 22,81 | 24,06 | 9 |
+| 01 | 76,78 | 22,09 | 23,66 | 9 |
+| 02 | 76,67 | 18,87 | 20,77 | 9 |
+| 03 | 76,67 | 18,03 | 20,04 | 9 |
+| 04 | 80,17 | 20,30 | 22,32 | 6 |
+| 05 | 80,00 | 20,45 | 22,15 | 6 |
+| 06 | 79,67 | 21,17 | 22,77 | 6 |
+| 07 | 81,67 | 21,18 | 22,70 | 6 |
+| 08 | 86,17 | 21,15 | 22,85 | 6 |
+| 09 | 93,50 | 20,55 | 22,05 | 6 |
+| 10 | 101,00 | 22,33 | 23,72 | 6 |
+| 11 | 103,83 | 25,22 | 26,48 | 6 |
+| 12 | 103,67 | 21,67 | 22,92 | 6 |
+| 13 | 99,67 | 22,38 | 23,53 | 6 |
+| 14 | 93,17 | 22,15 | 23,32 | 6 |
+| 15 | 84,00 | 22,60 | 23,78 | 6 |
+| 16 | 78,50 | 23,72 | 24,88 | 6 |
+| 17 | 78,00 | 24,28 | 25,35 | 6 |
+| 18 | 78,00 | 24,38 | 25,48 | 6 |
+| 19 | 77,50 | 25,53 | 26,52 | 6 |
+| 20 | 77,67 | 25,32 | 26,32 | 6 |
+| 21 | 77,33 | 23,77 | 24,68 | 6 |
+| 22 | 76,83 | 23,07 | 23,98 | 6 |
+| 23 | 75,83 | 23,52 | 24,48 | 6 |
+
 #### Truy vấn 3 Phân bố cấp độ chất lượng không khí theo tiêu chuẩn US EPA
 
 Truy vấn phân bố đếm mẫu của từng cấp AQI trong mỗi đô thị và tính tỷ lệ trên tổng 52 mẫu của đô thị đó. Tổng số mẫu của các cấp được đối chiếu với truy vấn trung bình theo thành phố.
@@ -298,7 +327,7 @@ Truy vấn phân bố đếm mẫu của từng cấp AQI trong mỗi đô thị
 | Nhóm | Thành phố và cấp AQI |
 | Tỷ lệ | Số mẫu của cấp chia cho tổng số mẫu trong cùng thành phố. |
 
-Bảng 4.3 Phân bố các cấp AQI theo thành phố
+Bảng 4.4 Phân bố các cấp AQI theo thành phố
 
 | Thành phố | Cấp AQI | Số mẫu | Tỷ lệ % |
 | --- | --- | --- | --- |
@@ -326,7 +355,7 @@ Hệ số Pearson r được tính riêng cho từng thành phố giữa PM2.5 v
 | Nhóm | Thành phố |
 | Đại lượng | Tương quan Pearson giữa PM2.5 và nhiệt độ, độ ẩm hoặc tốc độ gió. |
 
-Bảng 4.4 Hệ số tương quan Pearson với PM2.5
+Bảng 4.5 Hệ số tương quan Pearson với PM2.5
 
 | Thành phố | Nhiệt độ | Độ ẩm | Tốc độ gió |
 | --- | --- | --- | --- |
@@ -348,7 +377,7 @@ Truy vấn query_raw_weather_aqi_records.sql trích xuất toàn bộ 156 bản 
 
 Các chỉ số thực thi được lấy từ tệp query_metrics.csv đã lưu. Thời gian và dung lượng quét phản ánh từng lượt truy vấn cụ thể, không phải cam kết hiệu năng cho mọi khối lượng dữ liệu.
 
-Bảng 4.5 Thời gian thực thi và dung lượng quét của năm truy vấn
+Bảng 4.6 Thời gian thực thi và dung lượng quét của năm truy vấn
 
 | Truy vấn | Dòng | Thời gian ms | Quét byte |
 | --- | --- | --- | --- |
@@ -364,7 +393,7 @@ Năm lượt truy vấn đều ghi nhận 87.250 byte quét. Thời gian thực 
 
 ### 5.1 Cấu trúc và số lượng bản ghi
 
-Tệp raw_weather_aqi_records.csv chứa 156 dòng, 156 mã bản ghi khác nhau và 23 trường; mỗi đô thị có 52 mẫu. Các phép tổng hợp theo thành phố, giờ và cấp AQI đều có tổng số mẫu 156, giúp phát hiện thiếu hoặc đếm trùng khi đối chiếu.
+Tệp raw_weather_aqi_records.csv chứa 156 dòng, 156 mã bản ghi khác nhau và 23 trường; mỗi đô thị có 52 mẫu. Các phép tổng hợp theo thành phố, giờ và cấp AQI đều có tổng số mẫu 156, giúp phát hiện thiếu hoặc đếm trùng khi đối chiếu. Dữ liệu chất lượng không khí từ Open-Meteo Air Quality API dựa trên sản phẩm mô hình khí quyển CAMS, không phải phép đo trực tiếp tại một trạm. Nguồn dữ liệu: https://open-meteo.com/en/docs/air-quality-api.
 
 ### 5.2 Kiểm tra chức năng và tính toàn vẹn dữ liệu
 
@@ -454,20 +483,18 @@ Bộ kết quả dùng trong báo cáo gồm 156 bản ghi và năm tệp truy v
 
 Chúng em cùng rà soát luồng dữ liệu và phân công theo các nhóm chức năng. Các kết quả kiểm tra cục bộ giúp xác minh logic xử lý và tính nhất quán dữ liệu.
 
-Các chức năng liên quan gửi email, tự động kích hoạt định kỳ và sử dụng tài nguyên cần được đối chiếu bằng trạng thái dịch vụ tại phiên thực hành. Kết quả kiểm tra mã nguồn được trình bày riêng với kết quả truy vấn đã lưu.
-
 ## Chương 7 Phân công và tổng hợp công việc Tuần 2
 
 ### 7.1 Phân công theo nhóm chức năng
 
-Hai thành viên phụ trách các nhóm chức năng khác nhau và cùng thực hiện phần kiến trúc, tích hợp và báo cáo. Việc phân công bám theo các sản phẩm kỹ thuật được trình bày trong những chương trước.
+Hai thành viên phụ trách các nhóm chức năng khác nhau và cùng thực hiện kiến trúc, tích hợp và báo cáo. Nhật ký Tuần 2 ghi nhận 10,0 giờ của Nguyễn Tiến Sơn và 9,5 giờ của Trần Thị Ngọc Quyên; tổng thời gian là 19,5 giờ. Phần việc bám theo các sản phẩm kỹ thuật đã trình bày trong những chương trước.
 
 Bảng 7.1 Phân công và sản phẩm của từng thành viên
 
-| Thành viên | Sản phẩm phụ trách | Phần thực hiện chung |
-| --- | --- | --- |
-| Nguyễn Tiến Sơn<br>24110054 | Lưu trữ S3, cấu hình secret, Lambda và SNS. | Kiến trúc, tích hợp, đối chiếu và báo cáo. |
-| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, kết quả truy vấn và biểu đồ. | Kiến trúc, tích hợp, đối chiếu và báo cáo. |
+| Thành viên | Sản phẩm phụ trách | Phần thực hiện chung | Giờ |
+| --- | --- | --- | --- |
+| Nguyễn Tiến Sơn<br>24110054 | Lưu trữ S3, cấu hình secret, Lambda và SNS. | Kiến trúc, tích hợp, đối chiếu và báo cáo. | 10,0 |
+| Trần Thị Ngọc Quyên<br>24110051 | Glue, Athena, kết quả truy vấn và biểu đồ. | Kiến trúc, tích hợp, đối chiếu và báo cáo. | 9,5 |
 
 ### 7.2 Tổng hợp các sản phẩm đã thực hiện
 

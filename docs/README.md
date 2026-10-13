@@ -5,6 +5,7 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [Kiến trúc và trách nhiệm dịch vụ](architecture.md)
 - [Mô hình dữ liệu và cách phân tích](data-analysis.md)
 - [Cài đặt và vận hành](operation.md)
+- [Nhật ký và số giờ của nhóm](WORKLOG.md)
 - [Báo cáo Tuần 1 Word](../tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) · [PDF](../tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf)
 - [Báo cáo Tuần 2 Word](../tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) · [PDF](../tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf)
 - [Bộ CSV dùng đối chiếu](../tuan_2/results/athena_queries/)

@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "raw_records": 156,
+  "unique_records": 156,
+  "schema_fields": 23,
+  "reports": [
+    {
+      "week": 1,
+      "pages": 20,
+      "toc_links": 28,
+      "data_figures": [
+        "e9779ccac538d7d24a3a9193b8dd2f59358e3cd79e8b0837fdbde74a57cf0f1b",
+        "a1fac680f2cfb9db367da3093414f3c7d5f86f2bf760f803c11083600ed67bb6",
+        "13f5598320b15e89826f0f3e46441d15fb5077134e64d83bc68dea48321537ef",
+        "05eb60f5d36a07c5c885a8581fa82b82d094c908b00afab04e5dc4d291fdedd3"
+      ]
+    },
+    {
+      "week": 2,
+      "pages": 25,
+      "toc_links": 37,
+      "data_figures": [
+        "e9779ccac538d7d24a3a9193b8dd2f59358e3cd79e8b0837fdbde74a57cf0f1b",
+        "a1fac680f2cfb9db367da3093414f3c7d5f86f2bf760f803c11083600ed67bb6",
+        "13f5598320b15e89826f0f3e46441d15fb5077134e64d83bc68dea48321537ef",
+        "05eb60f5d36a07c5c885a8581fa82b82d094c908b00afab04e5dc4d291fdedd3"
+      ]
+    }
+  ],
+  "workbook_csv_parity": "PASS",
+  "four_shared_chart_hashes": "PASS",
+  "local_doc_links": 53,
+  "live_aws": "NOT_RUN"
+}

@@ -4,6 +4,8 @@
 
 156 mã bản ghi khác nhau, 52 mẫu cho mỗi đô thị TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Mỗi bản ghi có 23 trường, gồm nhận diện, tọa độ, thời gian UTC/VN, khí tượng, các nồng độ ô nhiễm, AQI và ba khóa phân vùng. Xem [CSV gốc](../tuan_2/results/athena_queries/raw_weather_aqi_records.csv) và [lược đồ Athena](../tuan_2/athena/create_table.sql).
 
+Dữ liệu chất lượng không khí được cung cấp qua [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api), dựa trên sản phẩm mô hình khí quyển CAMS. Bộ số liệu API đã lưu không được coi là phép đo trực tiếp tại một trạm.
+
 | Kết quả | Cách nhóm | Số dòng |
 | --- | --- | ---: |
 | avg_aqi_by_city.csv | Thành phố | 3 |
