@@ -546,9 +546,9 @@ Bảng 5.4 Chi phí ghi nhận trong phạm vi Tuần 2 làm tròn đến cent
 | Tiến Sơn | 0,00 | USD | Có |
 | Ngọc Quyên | 0,03 | USD | Có |
 
-Chi phí UnblendedCost hiển thị đến cent là 0,00 USD trong báo cáo dữ liệu của sinh viên Tiến Sơn và 0,03 USD trong báo cáo của sinh viên Ngọc Quyên. Phản hồi gốc của sinh viên Tiến Sơn chứa tổng −0,0000000764 USD từ các dòng rất nhỏ ở Secrets Manager và CloudWatch; tổng này làm tròn thành 0,00 USD. Bộ dữ liệu hiện không có loại khoản phí để xác định nguyên nhân cụ thể của phần âm. CSV giữ nguyên giá trị gốc, không đổi số âm thành số dương hoặc xóa khoản đó.
+Trong phạm vi Tuần 2, UnblendedCost được trình bày đến cent là 0,00 USD trong báo cáo dữ liệu của sinh viên Tiến Sơn và 0,03 USD trong báo cáo dữ liệu của sinh viên Ngọc Quyên. Tổng giá trị trước khi làm tròn của sinh viên Tiến Sơn có độ lớn dưới 0,000001 USD, nên được hiển thị 0,00 USD ở độ chính xác này. Mức hiển thị 0,00 USD không đồng nghĩa với kết luận dự án hoàn toàn miễn phí.
 
-Kết quả có cờ Estimated và được tổng hợp theo môi trường AWS của từng sinh viên, dịch vụ và ngày. Các số này mô tả chi phí ghi nhận trong từng báo cáo dữ liệu, chưa phải hóa đơn cuối cùng hoặc chi phí phân bổ riêng bằng tag dự án. CSV giữ giá trị gốc, đơn vị và cờ ước tính.
+Cả hai kết quả đều có cờ Estimated. Đây là số liệu ước tính tại thời điểm trích xuất Cost Explorer, được tổng hợp theo dịch vụ và ngày trong môi trường AWS của từng sinh viên; chưa phải hóa đơn cuối cùng hoặc chi phí riêng của dự án được phân bổ bằng tag. Các tệp CSV lưu nguyên giá trị trước khi làm tròn, đơn vị và trạng thái ước tính để đối chiếu.
 
 ## Chương 6 Tổng hợp kết quả Tuần 2
 

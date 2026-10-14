@@ -32,7 +32,18 @@
 
 [week1_week2_extended_comparison.csv](../tuan_2/results/week2_analysis/week1_week2_extended_comparison.csv) giữ số đếm, mẫu số, tỷ lệ cấp AQI và Pearson khí tượng–PM2.5 của bộ Tuần 1 cùng hai mẫu Tuần 2. Hai hình đối chiếu mới sử dụng trực tiếp bảng này. Chạy `generate_week2_charts.py` tạo các hình và hai CSV bổ sung sau bộ 25 CSV nền tảng của `analyze_week2_accounts.py`.
 
-Chi phí trong bảng báo cáo được làm tròn đến cent; dữ liệu Cost Explorer gốc được giữ nguyên. Tổng −0,0000000764 USD của sinh viên Tiến Sơn hiển thị 0,00 USD; tổng 0,0267146366 USD của sinh viên Ngọc Quyên hiển thị 0,03 USD. Metadata đã lưu không có RecordType nên chưa xác định được nguyên nhân cụ thể của các khoản âm rất nhỏ.
+### Đối chiếu số liệu chi phí
+
+Chi phí trong bảng báo cáo được làm tròn đến cent; dữ liệu Cost Explorer gốc được giữ nguyên. Đối chiếu từng nhóm dịch vụ bằng số thập phân chính xác cho tổng −0,0000000764 USD của sinh viên Tiến Sơn và 0,0267146366 USD của sinh viên Ngọc Quyên, lần lượt hiển thị 0,00 USD và 0,03 USD. Số âm đã nằm trong các chuỗi Amount của phản hồi JSON, không phát sinh từ việc cộng tổng hoặc làm tròn ở báo cáo.
+
+| Bộ báo cáo dữ liệu | AWS Secrets Manager (USD) | Amazon CloudWatch (USD) | Amazon S3 (USD) | Tổng UnblendedCost (USD) | Hiển thị đến cent (USD) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Sinh viên Tiến Sơn | −0,0000000608 | −0,0000000156 | 0 | −0,0000000764 | 0,00 |
+| Sinh viên Ngọc Quyên | 0,0210227416 | 0,0056163440 | 0,0000755510 | 0,0267146366 | 0,03 |
+
+Các dịch vụ khác trong phạm vi đã xuất có giá trị 0; cả hai kết quả có cờ Estimated. Phản hồi nhóm theo SERVICE và không có RECORD_TYPE, nên không xác định được các mục âm này là credit, refund hay một loại điều chỉnh khác. Không dùng độ lớn rất nhỏ của số âm để kết luận nguyên nhân là lỗi làm tròn. Mức 0,00 USD trong bảng là độ chính xác trình bày, không chứng minh dự án miễn phí hoặc số tiền trên hóa đơn bằng 0.
+
+AWS phân biệt số liệu Cost Explorer với hóa đơn, có thể có khác biệt do thời điểm cập nhật, độ chi tiết, làm tròn và cách phản ánh khoản hoàn tiền. Đây là mô tả chung của dịch vụ, không phải bằng chứng về nguyên nhân trong hai bộ dữ liệu này. Xem [tài liệu AWS Billing](https://docs.aws.amazon.com/us_en/awsaccountbilling/latest/aboutv2/differences-billing-data-cost-explorer-data.html) và [GetCostAndUsage về nhóm RECORD_TYPE](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html).
 
 ## Hai phạm vi đối chiếu tuần
 
