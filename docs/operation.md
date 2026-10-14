@@ -2,7 +2,7 @@
 
 Chạy từ thư mục gốc repository với Python 3.12 trở lên.
 
-[tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt) cài boto3, NumPy và Matplotlib cho SDK, phân tích và biểu đồ. Tệp phụ thuộc trong `tuan_2/lambda/` mô tả phạm vi phát triển Lambda. Xem [sơ đồ source](repository-layout.md).
+[tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt) cài boto3, NumPy và Matplotlib cho SDK, phân tích và biểu đồ. Tệp phụ thuộc trong `tuan_2/lambda/` mô tả phạm vi phát triển Lambda. Xem [sơ đồ mã nguồn](repository-layout.md).
 
 ```powershell
 python -m pip install -r tuan_2/analytics/requirements.txt
@@ -13,7 +13,7 @@ python -m unittest discover -s tuan_2/tests -v
 
 ## Phiên AWS
 
-Boto3 dùng thông tin đăng nhập từ biến môi trường `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` hoặc shared credentials. Phiên Learner Lab phải còn hiệu lực. Không ghi khóa vào source, commit hoặc báo cáo. Vùng mặc định là `us-east-1`; các lệnh dưới dùng `--region` để thay đổi khi cần.
+Boto3 dùng thông tin đăng nhập từ biến môi trường `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_SESSION_TOKEN` hoặc shared credentials. Phiên Learner Lab phải còn hiệu lực. Không ghi khóa vào mã nguồn, commit hoặc báo cáo. Vùng mặc định là `us-east-1`; các lệnh dưới dùng `--region` để thay đổi khi cần.
 
 ## Triển khai và kiểm tra trạng thái
 
@@ -40,6 +40,6 @@ Thay `ACCOUNT_ID` bằng account của phiên đăng nhập. Xác nhận account
 
 ## Kiểm tra đã thực hiện
 
-Bộ kiểm tra cục bộ gồm 52 ca: Lambda 22, CSV 12, biểu đồ 4 và SDK 14. Các ca bổ sung kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, khối phản hồi API bị thiếu, thời gian chờ khi API chậm, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Kết quả này không phải bằng chứng của một lần triển khai live phiên bản mới.
+Bộ kiểm tra cục bộ gồm 52 ca: Lambda 22, CSV 12, biểu đồ 4 và SDK 14. Các ca bổ sung kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, khối phản hồi API bị thiếu, thời gian chờ khi API chậm, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Kết quả này không phải bằng chứng của một lần triển khai phiên bản mới trên AWS.
 
-Ba hồi quy bổ sung kiểm tra số không hữu hạn trong chuẩn hóa và phân loại AQI. Các kiểm tra biểu đồ đối chiếu trực tiếp dùng cỡ mẫu thực tế, đơn vị và giá trị từng cột từ CSV. Xem [hướng dẫn đọc source](source-guide.md).
+Ba hồi quy bổ sung kiểm tra số không hữu hạn trong chuẩn hóa và phân loại AQI. Các kiểm tra biểu đồ đối chiếu trực tiếp dùng cỡ mẫu thực tế, đơn vị và giá trị từng cột từ CSV. Xem [hướng dẫn đọc mã nguồn](source-guide.md).

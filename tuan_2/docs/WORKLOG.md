@@ -1,4 +1,4 @@
-# Nhật ký công việc Tuần 2 — Nhóm 05
+# Nhật ký công việc Tuần 2
 
 Lớp 261CLCO332779_05 — Điện toán đám mây.
 
@@ -11,11 +11,11 @@ Lớp 261CLCO332779_05 — Điện toán đám mây.
 
 ## Sản phẩm và nguồn đối chiếu
 
-- [Báo cáo Word](Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) và [PDF](Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf): chức năng, cấu hình, bảng số liệu và phân tích.
+- [Báo cáo Word](Bao_cao_Tuan_2_24110054_24110051.docx) và [PDF](Bao_cao_Tuan_2_24110054_24110051.pdf): chức năng, cấu hình, bảng số liệu và phân tích.
 - [Mã nguồn Lambda](../lambda/lambda_function.py) và [chương trình quản lý dịch vụ](../scripts/aws_project.py): thu thập, chuẩn hóa, lưu trữ, lịch và cảnh báo.
 - [Lược đồ và truy vấn](../athena/): mô hình dữ liệu và phép tổng hợp.
 - [Kết quả Athena mới](../results/week2_live/) và [18 biểu đồ](../results/week2_charts/): hai bộ báo cáo dữ liệu được trình bày riêng, 27/57 bản ghi thuộc Tuần 2.
-- [Excel Tuần 2](Du_lieu_phan_tich_Tuan_2_Nhom_05.xlsx): bảng nguồn, kết quả và các biểu đồ cùng dữ liệu với báo cáo.
+- [Excel Tuần 2](Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx): bảng nguồn, kết quả và các biểu đồ cùng dữ liệu với báo cáo.
 - [Hồ sơ vận hành đã lưu](../../docs/saved-evidence.md): phản hồi Lambda 3 bản ghi, 2 cảnh báo và năm mã truy vấn khớp CSV.
 
 Hồ sơ vận hành đã lưu được phân biệt với các lần sửa mã nguồn sau đó. CSV, Excel và biểu đồ dùng cùng bộ kết quả; chúng không tự xác nhận một lượt chạy mới của phiên bản hiện tại.

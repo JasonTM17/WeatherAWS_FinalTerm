@@ -41,7 +41,7 @@ ORIGINAL_REQUEST.md
 /plans/
 
 # Retain the old CSV archive locally; publish the expanded data folder only.
-/tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05.zip
+/tuan_1/docs/Bao_cao_tuan_1_CSV_*.zip
 
 # Separate ad-hoc exports from the saved report inputs.
 /output/

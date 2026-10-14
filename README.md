@@ -1,6 +1,6 @@
 # Hệ thống thu thập và phân tích thời tiết và chất lượng không khí
 
-Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**, Nhóm 05. GVHD **ThS. Huỳnh Xuân Phụng**.
+Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**.
 
 [Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git)
 
@@ -15,10 +15,10 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 
 | Tuần | Phạm vi | Word | PDF | Excel |
 | --- | --- | --- | --- | --- |
-| 1 | Bộ dữ liệu đã nộp: 156 bản ghi và bốn biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx) |
-| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 18 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) | [PDF](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_Nhom_05.xlsx) |
+| 1 | Bộ dữ liệu đã nộp: 156 bản ghi và bốn biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
+| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 18 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 
-[Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc source](docs/source-guide.md).
+[Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc mã nguồn](docs/source-guide.md).
 
 ## Cấu trúc repository
 
@@ -29,11 +29,11 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 | `tuan_2/lambda/` | Chương trình thu thập chính | [lambda_function.py](tuan_2/lambda/lambda_function.py) |
 | `tuan_2/scripts/` | Quản lý dịch vụ và xuất CSV bằng Python SDK; PowerShell chuyển tham số | [Hướng dẫn vận hành](docs/operation.md) |
 | `tuan_2/athena/` | Một bảng dữ liệu, một view và các truy vấn phân tích | [Thứ tự dùng SQL](tuan_2/athena/README.md) |
-| `tuan_2/analytics/` | Phân tích CSV và dựng biểu đồ của từng tuần | [Hướng dẫn đọc source](docs/source-guide.md) |
+| `tuan_2/analytics/` | Phân tích CSV và dựng biểu đồ của từng tuần | [Hướng dẫn đọc mã nguồn](docs/source-guide.md) |
 | `tuan_2/results/` | Các tập dữ liệu đã lưu, metadata và hình từ dữ liệu | [Danh mục dữ liệu](tuan_2/results/README.md) |
 | `tuan_2/tests/` | Kiểm tra Lambda, SDK, CSV và biểu đồ của dự án | [Kiểm tra chức năng](tuan_2/tests/) |
 
-Hai tuần dùng chung một bộ triển khai tại `tuan_2/`; các script nền tảng Tuần 1 gọi bộ này. Chi tiết tệp chuẩn, bản sao dữ liệu và các điểm vào tương thích nằm trong [sơ đồ source](docs/repository-layout.md).
+Hai tuần dùng chung một bộ triển khai tại `tuan_2/`; các script nền tảng Tuần 1 gọi bộ này. Chi tiết tệp chuẩn, bản sao dữ liệu và các điểm vào tương thích nằm trong [sơ đồ mã nguồn](docs/repository-layout.md).
 
 ## Kết quả Tuần 2
 

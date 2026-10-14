@@ -1,4 +1,4 @@
-BỘ CSV KẾT QUẢ ATHENA – BÁO CÁO TUẦN 1, NHÓM 05
+BỘ CSV KẾT QUẢ ATHENA – BÁO CÁO TUẦN 1
 
 Nguồn: năm kết quả truy vấn Athena và query_metrics.csv đã lưu trong results/athena_queries.
 Đây là bản sao nguyên vẹn của các CSV đã lưu, không phải lượt tải AWS mới.

@@ -13,7 +13,7 @@
 
 ## Bộ nộp Tuần 1
 
-Bản CSV đi cùng báo cáo nằm tại [tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05/](../../tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05/). Sáu CSV có cùng cột, thứ tự dòng và giá trị với bộ dùng đối chiếu ở đây. Năm tệp giống hoàn toàn về bytes; CSV raw chỉ khác kiểu xuống dòng LF/CRLF. Giữ nguyên định dạng từng bản đã lưu. Các vị trí này giúp báo cáo đã nộp và chương trình đọc dữ liệu có đường dẫn rõ ràng; chúng không phải những quan trắc độc lập.
+Bản CSV đi cùng báo cáo nằm tại [tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/](../../tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/). Sáu CSV có cùng cột, thứ tự dòng và giá trị với bộ dùng đối chiếu ở đây. Năm tệp giống hoàn toàn về bytes; CSV raw chỉ khác kiểu xuống dòng LF/CRLF. Giữ nguyên định dạng từng bản đã lưu. Các vị trí này giúp báo cáo đã nộp và chương trình đọc dữ liệu có đường dẫn rõ ràng; chúng không phải những quan trắc độc lập.
 
 ## Phạm vi Tuần 2
 

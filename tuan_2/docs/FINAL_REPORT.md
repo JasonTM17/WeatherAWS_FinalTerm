@@ -93,11 +93,11 @@ Bảng 2.2 Đối chiếu chất lượng trong tập Tuần 2
 | Tiến Sơn | 27 | 11 | 0 | 0 |
 | Ngọc Quyên | 57 | 11 | 0 | 0 |
 
-Trong 11 trường số kiểm tra của mẫu Tuần 2, không có NULL, giá trị không hữu hạn hoặc số 0. Kết quả này mô tả giá trị đã lưu; nó không chứng minh nguồn API chưa từng thiếu dữ liệu, vì source có nhánh chuyển đầu vào không hợp lệ sang giá trị mặc định. Không ghi đè bản ghi gốc trong quá trình phân tích.
+Trong 11 trường số kiểm tra của mẫu Tuần 2, không có NULL, giá trị không hữu hạn hoặc số 0. Kết quả này mô tả giá trị đã lưu; nó không chứng minh nguồn API chưa từng thiếu dữ liệu, vì mã nguồn có nhánh chuyển đầu vào không hợp lệ sang giá trị mặc định. Không ghi đè bản ghi gốc trong quá trình phân tích.
 
 ### 2.3 Hai bộ báo cáo dữ liệu của nhóm
 
-Nhóm trình bày hai bộ báo cáo dữ liệu do sinh viên Tiến Sơn và sinh viên Ngọc Quyên cung cấp. Mỗi bộ giữ riêng mã bản ghi, đô thị, thời gian quan trắc và các chỉ số môi trường. Có 144 quan trắc lịch sử cùng đô thị và thời điểm xuất hiện trong cả hai bộ, với giá trị cảm biến tương ứng bằng nhau; các thống kê được tính riêng cho từng bộ dữ liệu.
+Chúng em trình bày hai bộ báo cáo dữ liệu do sinh viên Tiến Sơn và sinh viên Ngọc Quyên cung cấp. Mỗi bộ giữ riêng mã bản ghi, đô thị, thời gian quan trắc và các chỉ số môi trường. Có 144 quan trắc lịch sử cùng đô thị và thời điểm xuất hiện trong cả hai bộ, với giá trị cảm biến tương ứng bằng nhau; các thống kê được tính riêng cho từng bộ dữ liệu.
 
 Đối chiếu số liệu Tuần 2 dựa trên các nhóm cùng đô thị và giờ UTC trong hai báo cáo dữ liệu. Có 21 nhóm đối chiếu, tương ứng 7 giờ chung cho mỗi đô thị. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ giá trị của sinh viên Tiến Sơn, với trọng số mỗi giờ như nhau. Các thống kê theo từng sinh viên vẫn sử dụng toàn bộ mẫu thuộc bộ dữ liệu tương ứng.
 
@@ -116,9 +116,9 @@ Bảng 2.3 Cách tính các nhóm chỉ số
 
 ### 2.5 Thiết kế chức năng thu thập bằng Lambda
 
-Source Lambda được tổ chức thành các nhóm chức năng: đọc cấu hình, chuyển đổi kiểu, gọi API, phân loại AQI, thu thập hiện tại hoặc lịch sử, kiểm tra ngưỡng, gửi SNS và ghi S3. Mỗi đô thị có hai lượt gọi API: chất lượng không khí và thời tiết. Các biến môi trường chỉ định bucket, tên secret và topic; LabRole cung cấp quyền thực thi trong Learner Lab.
+Mã nguồn Lambda được tổ chức thành các nhóm chức năng: đọc cấu hình, chuyển đổi kiểu, gọi API, phân loại AQI, thu thập hiện tại hoặc lịch sử, kiểm tra ngưỡng, gửi SNS và ghi S3. Mỗi đô thị có hai lượt gọi API: chất lượng không khí và thời tiết. Các biến môi trường chỉ định bucket, tên secret và topic; LabRole cung cấp quyền thực thi trong Learner Lab.
 
-Cấu hình weather/api_config quản lý tọa độ ba đô thị và ngưỡng cảnh báo. Khi đọc cấu hình thất bại, source có nhánh dự phòng và ghi log. Các hàm chuyển đổi dùng mặc định khi dữ liệu không hợp lệ; vì thế việc đánh giá chất lượng CSV phân biệt số 0 với dữ liệu thiếu. Các khoảng phân loại AQI được xác định trong source; nhãn cấp AQI đi cùng chỉ số trong bản ghi.
+Cấu hình weather/api_config quản lý tọa độ ba đô thị và ngưỡng cảnh báo. Khi đọc cấu hình thất bại, mã nguồn có nhánh dự phòng và ghi log. Các hàm chuyển đổi dùng mặc định khi dữ liệu không hợp lệ; vì thế việc đánh giá chất lượng CSV phân biệt số 0 với dữ liệu thiếu. Các khoảng phân loại AQI được xác định trong mã nguồn; nhãn cấp AQI đi cùng chỉ số trong bản ghi.
 
 Mã nguồn ghép chuỗi lịch sử khí tượng và AQI theo timestamp, kiểm tra độ dài mảng trước khi đọc, phát sinh lỗi khi không thu được bản ghi và ghi rõ trạng thái thu thập một phần khi chỉ một số đô thị thất bại.
 
@@ -388,7 +388,7 @@ Bảng 3.11 Đối chiếu PM2.5 trung bình (µg/m³) với bộ báo cáo Tu�
 | Hà Nội | 15,36 | 76,66 | 75,11 | 61,29 | 59,74 |
 | Đà Nẵng | 14,23 | 6,38 | 6,46 | -7,85 | -7,77 |
 
-So với bộ báo cáo Tuần 1, AQI trung bình mẫu Hà Nội cao hơn 96,00 điểm ở nguồn Tiến Sơn và 95,49 điểm ở nguồn Ngọc Quyên; PM2.5 cao hơn 61,29 và 59,74 µg/m³. TP. Hồ Chí Minh và Đà Nẵng có trung bình AQI, PM2.5 thấp hơn trong mẫu Tuần 2. Thứ tự AQI trung bình đổi từ TP. Hồ Chí Minh – Đà Nẵng – Hà Nội sang Hà Nội – TP. Hồ Chí Minh – Đà Nẵng. Đây là khác biệt giữa các tập mẫu có độ phủ không bằng nhau, chưa đủ kết luận xu hướng của toàn bộ hai tuần.
+So với bộ báo cáo Tuần 1, AQI trung bình mẫu Hà Nội cao hơn 96,00 điểm trong bộ dữ liệu của sinh viên Tiến Sơn và 95,49 điểm trong bộ dữ liệu của sinh viên Ngọc Quyên; PM2.5 cao hơn 61,29 và 59,74 µg/m³. TP. Hồ Chí Minh và Đà Nẵng có trung bình AQI, PM2.5 thấp hơn trong mẫu Tuần 2. Thứ tự AQI trung bình đổi từ TP. Hồ Chí Minh – Đà Nẵng – Hà Nội sang Hà Nội – TP. Hồ Chí Minh – Đà Nẵng. Đây là khác biệt giữa các tập mẫu có độ phủ không bằng nhau, chưa đủ kết luận xu hướng của toàn bộ hai tuần.
 
 ![AQI trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2](../results/week2_charts/17_submitted_week1_aqi.png)
 

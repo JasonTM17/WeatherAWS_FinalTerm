@@ -1,4 +1,4 @@
-# Nhật ký Nhóm 05
+# Nhật ký thực hiện
 
 | Tuần | Nhật ký | Số giờ đã được nhóm xác nhận |
 | --- | --- | --- |

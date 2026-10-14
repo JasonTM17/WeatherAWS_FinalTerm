@@ -1,4 +1,4 @@
-# Nhật ký công việc Tuần 1 — Nhóm 05
+# Nhật ký công việc Tuần 1
 
 Lớp 261CLCO332779_05 — Điện toán đám mây.
 
@@ -11,7 +11,7 @@ Lớp 261CLCO332779_05 — Điện toán đám mây.
 
 ## Sản phẩm và nguồn đối chiếu
 
-- [Báo cáo Word](Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) và [PDF](Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf): kiến trúc, nền tảng và số liệu phân tích Tuần 1.
+- [Báo cáo Word](Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) và [PDF](Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf): kiến trúc, nền tảng và số liệu phân tích Tuần 1.
 - [Kiến trúc hệ thống](../../docs/architecture.md): luồng dữ liệu và vai trò dịch vụ.
 - [CSV Athena đã lưu](../../tuan_2/results/athena_queries/): 156 bản ghi, 52 mẫu mỗi đô thị; các phép tổng hợp và chỉ số truy vấn.
 - [Hồ sơ vận hành đã lưu](../../docs/saved-evidence.md): kết quả dịch vụ và mã truy vấn dùng đối chiếu.

@@ -1,8 +1,8 @@
-# Sơ đồ source và tệp chuẩn
+# Sơ đồ mã nguồn và tệp chuẩn
 
 ## Cách tổ chức
 
-Repository trình bày theo tuần học. Tuần 1 giữ hồ sơ nền tảng và bộ báo cáo đã nộp; Tuần 2 chứa bộ source dùng chung, dữ liệu của hai sinh viên và phân tích bổ sung. Việc gọi lại module chuẩn giúp hai tuần dùng cùng cách triển khai và kiểm tra.
+Repository trình bày theo tuần học. Tuần 1 giữ hồ sơ nền tảng và bộ báo cáo đã nộp; Tuần 2 chứa bộ mã nguồn dùng chung, dữ liệu của hai sinh viên và phân tích bổ sung. Việc gọi lại module chuẩn giúp hai tuần dùng cùng cách triển khai và kiểm tra.
 
 ```text
 WeatherAWS_FinalTerm/
@@ -36,7 +36,7 @@ WeatherAWS_FinalTerm/
 | 18 hình Tuần 2 | [generate_week2_charts.py](../tuan_2/analytics/generate_week2_charts.py) | Đọc `results/week2_analysis/`; dùng helper so sánh tuần |
 | Kiểm tra chức năng | [tuan_2/tests/](../tuan_2/tests/) | Bốn module kiểm tra Lambda, SDK, CSV và biểu đồ |
 
-`lambda` được giữ làm tên thư mục chứa gói triển khai, không dùng làm tên Python package để import. Chạy các chương trình bằng đường dẫn tệp từ thư mục gốc, như [hướng dẫn source](source-guide.md).
+`lambda` được giữ làm tên thư mục chứa gói triển khai, không dùng làm tên Python package để import. Chạy các chương trình bằng đường dẫn tệp từ thư mục gốc, như [hướng dẫn mã nguồn](source-guide.md).
 
 ## Dữ liệu và tệp tạo ra
 
@@ -47,7 +47,7 @@ Các lượt xuất tùy chọn nên ghi vào `output/`, được Git bỏ qua. 
 ## Phụ thuộc và kiểm tra
 
 - [tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt): boto3, NumPy và Matplotlib để chạy SDK, phân tích, biểu đồ và các kiểm tra chức năng.
-- `tuan_2/lambda/requirements.txt`: boto3 để phát triển cục bộ; runtime Lambda cung cấp SDK và các thư viện chuẩn được source sử dụng.
-- Các lệnh kiểm tra nằm trong [hướng dẫn đọc source](source-guide.md). Kiểm tra SDK/API giả lập xác nhận cách xử lý cục bộ; phạm vi vận hành được đối chiếu riêng từ hồ sơ dữ liệu đã lưu.
+- `tuan_2/lambda/requirements.txt`: boto3 để phát triển cục bộ; runtime Lambda cung cấp SDK và các thư viện chuẩn được mã nguồn sử dụng.
+- Các lệnh kiểm tra nằm trong [hướng dẫn đọc mã nguồn](source-guide.md). Kiểm tra SDK/API giả lập xác nhận cách xử lý cục bộ; phạm vi vận hành được đối chiếu riêng từ hồ sơ dữ liệu đã lưu.
 
 [Trở về tài liệu dự án](README.md) · [Nhật ký và số giờ](WORKLOG.md)

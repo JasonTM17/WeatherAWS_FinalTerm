@@ -16,7 +16,7 @@ class Week2AnalysisTests(unittest.TestCase):
             self.assertEqual(actual['path_kind'],'external_filename')
             self.assertEqual(actual['sha256'],hashlib.sha256(path.read_bytes()).hexdigest())
             self.assertEqual(actual['records'],1)
-            canonical=module.ROOT.parent/'tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05/raw_weather_aqi_records.csv'
+            canonical=module.ROOT.parent/'tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv'
             self.assertEqual(module.submission_baseline(canonical)['file'],canonical.relative_to(module.ROOT.parent).as_posix())
             self.assertEqual(module.submission_baseline(canonical)['path_kind'],'repository_relative')
 
