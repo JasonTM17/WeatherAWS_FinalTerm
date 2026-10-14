@@ -24,7 +24,15 @@
 
 ## Tệp kết quả
 
-[25 CSV phân tích](../tuan_2/results/week2_analysis/) có bảng phân bố, giờ/ngày, cấp AQI, vượt ngưỡng, tương quan, so sánh ghép giờ, chất lượng, vận hành, query metrics, chi phí và đối chiếu với báo cáo Tuần 1. [Manifest hình](../tuan_2/results/week2_charts/chart_manifest.json) chỉ rõ CSV nguồn của cả 18 hình. Word và Excel nhúng cùng các ảnh, bên cạnh dữ liệu và các công thức tổng hợp trong Excel.
+[27 CSV phân tích](../tuan_2/results/week2_analysis/) có bảng phân bố, giờ/ngày, cấp AQI, vượt ngưỡng, tương quan, so sánh ghép giờ, chất lượng, vận hành, query metrics, chi phí và đối chiếu với báo cáo Tuần 1. [Manifest hình](../tuan_2/results/week2_charts/chart_manifest.json) chỉ rõ CSV nguồn của cả 20 hình. Word và Excel nhúng cùng các ảnh, bên cạnh dữ liệu và các công thức tổng hợp trong Excel.
+
+[Thống kê bổ sung Tuần 1](../tuan_2/results/charts/week1_extended_statistics.csv) tính trên đúng 156 dòng của bộ báo cáo đã lưu, gồm 52 mẫu mỗi đô thị. Năm hình bổ sung mô tả nồng độ bụi, khí tượng, phân bố, các cặp nhiệt độ–PM2.5 và hiệu năng truy vấn; [manifest Tuần 1](../tuan_2/results/charts/week1_chart_manifest.json) giữ các mảng vẽ và hash nguồn.
+
+[matched_hour_summary.csv](../tuan_2/results/week2_analysis/matched_hour_summary.csv) tổng hợp bảy giờ chung cho mỗi đô thị với mỗi giờ cùng trọng số. AQI, PM2.5 và PM10 bằng nhau trước khi làm tròn trong cả 21 nhóm; Hình 3.8 trình bày mức thực tế, bảng kèm chênh lệch khí tượng. Phạm vi này khác trung bình toàn bộ 9/19 mẫu Tuần 2.
+
+[week1_week2_extended_comparison.csv](../tuan_2/results/week2_analysis/week1_week2_extended_comparison.csv) giữ số đếm, mẫu số, tỷ lệ cấp AQI và Pearson khí tượng–PM2.5 của bộ Tuần 1 cùng hai mẫu Tuần 2. Hai hình đối chiếu mới sử dụng trực tiếp bảng này. Chạy `generate_week2_charts.py` tạo các hình và hai CSV bổ sung sau bộ 25 CSV nền tảng của `analyze_week2_accounts.py`.
+
+Chi phí trong bảng báo cáo được làm tròn đến cent; dữ liệu Cost Explorer gốc được giữ nguyên. Tổng −0,0000000764 USD của sinh viên Tiến Sơn hiển thị 0,00 USD; tổng 0,0267146366 USD của sinh viên Ngọc Quyên hiển thị 0,03 USD. Metadata đã lưu không có RecordType nên chưa xác định được nguyên nhân cụ thể của các khoản âm rất nhỏ.
 
 ## Hai phạm vi đối chiếu tuần
 

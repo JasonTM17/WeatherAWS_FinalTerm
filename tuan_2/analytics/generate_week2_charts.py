@@ -8,6 +8,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 from weekly_comparison_charts import make_comparison_figure
+from report_chart_extensions import matched_summary, matched_figure, generate_extensions
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'results/week2_analysis';OUT=ROOT/'results/week2_charts'
@@ -123,12 +124,8 @@ for i,condition in enumerate(['AQI >= 100','PM2.5 >= 35.5','AQI OR PM2.5']):
 ax.set_xticks(range(6),[f'{CITY[c]}\n{LABEL[p]}' for c in CITIES for p in PROFILES],fontsize=9);ax.set_ylim(0,120);ax.set_ylabel('Tỷ lệ mẫu thỏa điều kiện (%)');ax.legend(frameon=False,fontsize=9,ncol=3)
 finish(fig,'exceedance','Tỷ lệ mẫu vượt các ngưỡng cấu hình cảnh báo','threshold_exceedance.csv')
 
-paired=rows('matched_account_hours');fig,axes=plt.subplots(1,2,figsize=(10.2,4.8))
-for ax,metric,label in zip(axes,['delta_us_aqi','delta_pm2_5'],['Chênh lệch AQI','Chênh lệch PM2.5 (µg/m³)']):
-    for i,c in enumerate(CITIES):
-        data=[value(r,metric) for r in paired if r['city']==c];ax.scatter([i]*len(data),data,color=CITY_COLOR[c],alpha=.75,s=38);ax.plot([i-.2,i+.2],[np.mean(data)]*2,color=CITY_COLOR[c],linewidth=2)
-    ax.set_xticks(range(3),['TP. HCM','Hà Nội','Đà Nẵng']);ax.axhline(0,color='#999999',linestyle='--');ax.set_ylabel(label)
-finish(fig,'matched_account_difference','Chênh lệch Sinh viên Ngọc Quyên trừ Sinh viên Tiến Sơn','matched_account_hours.csv')
+paired=rows('matched_account_hours');fig=matched_figure(matched_summary(paired));fig.shared_legend=True
+finish(fig,'matched_account_difference','AQI và PM2.5 trung bình tại các giờ quan trắc chung','matched_account_hours.csv; matched_hour_summary.csv')
 
 corr=rows('correlations');fig,axes=plt.subplots(1,2,figsize=(10.5,5.6))
 for ax,key,title in zip(axes,['pearson_r','spearman_r'],['Pearson','Spearman']):
@@ -198,4 +195,5 @@ for metric,name,title in [
     manifest[-1]['series']=series
 
 (OUT/'chart_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-print(json.dumps({'charts':len(manifest),'output':str(OUT)},ensure_ascii=False))
+generate_extensions()
+print(json.dumps({'charts':len(json.loads((OUT/'chart_manifest.json').read_text(encoding='utf-8'))),'output':str(OUT)},ensure_ascii=False))

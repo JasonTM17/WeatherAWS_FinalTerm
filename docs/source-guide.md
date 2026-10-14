@@ -13,7 +13,7 @@
 | Lược đồ | [DDL Athena](../tuan_2/athena/create_table.sql) | 20 cột dữ liệu và ba khóa phân vùng year/month/day |
 | Xuất dữ liệu | [Athena exporter](../tuan_2/scripts/athena_export.py) | Chờ truy vấn thành công, tải CSV đúng bytes, xử lý phân trang khi cần |
 | Phân tích | [Bộ phân tích Tuần 2](../tuan_2/analytics/analyze_week2_accounts.py) | Giữ riêng hai bộ sinh viên, lọc thời gian, tính thống kê, đối chiếu và lưu nguồn |
-| Biểu đồ | [Chương trình dựng hình](../tuan_2/analytics/generate_week2_charts.py) | 18 hình từ đúng các CSV phân tích |
+| Biểu đồ | [Chương trình dựng hình](../tuan_2/analytics/generate_week2_charts.py) | 20 hình từ đúng các CSV phân tích |
 | So sánh tuần | [Module đối chiếu trực tiếp](../tuan_2/analytics/weekly_comparison_charts.py) | Kiểm tra phạm vi đầu vào, dựng cột AQI và PM2.5 với cỡ mẫu, đơn vị rõ ràng |
 | Kiểm tra | [Kiểm tra chức năng](../tuan_2/tests/) và [kiểm tra phân tích](../tuan_2/analytics/) | API/SDK giả lập và đối chiếu dữ liệu đã lưu, không gọi tài nguyên thật |
 
@@ -52,6 +52,7 @@ python -m pip install -r tuan_2/analytics/requirements.txt
 python -m unittest discover -s tuan_2/tests -v
 python -m unittest discover -s tuan_2/analytics -p "test_*.py" -v
 python tuan_2/analytics/analyze_week2_accounts.py
+python tuan_2/analytics/generate_week1_supplement.py
 python tuan_2/analytics/generate_week2_charts.py
 ```
 

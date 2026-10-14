@@ -4,7 +4,7 @@
 
 Báo cáo trình bày kết quả Tuần 1 của đề tài Hệ thống thu thập và phân tích dữ liệu thời tiết và chất lượng không khí trên AWS. Hệ thống dùng Open-Meteo, EventBridge, Lambda, Secrets Manager, S3, Glue, Athena, SNS và CloudWatch để thu thập dữ liệu ba đô thị, lưu theo ngày, truy vấn AQI và PM2.5, đồng thời cảnh báo khi vượt ngưỡng.
 
-Trong Tuần 1, Lambda ở trạng thái Active, lịch EventBridge đang Enabled, S3 có ba đối tượng raw với tổng 87.250 byte và Glue có ba phân vùng dữ liệu. Năm truy vấn Athena đều SUCCEEDED, gồm bốn truy vấn phân tích và một truy vấn xuất 156 bản ghi gốc; mỗi truy vấn quét 87.250 byte. Báo cáo trình bày bốn biểu đồ từ CSV, 24 nhóm giờ UTC, phân bố AQI và tương quan khí tượng.
+Trong Tuần 1, Lambda ở trạng thái Active, lịch EventBridge đang Enabled, S3 có ba đối tượng raw với tổng 87.250 byte và Glue có ba phân vùng dữ liệu. Năm truy vấn Athena đều SUCCEEDED, gồm bốn truy vấn phân tích và một truy vấn xuất 156 bản ghi gốc; mỗi truy vấn quét 87.250 byte. Báo cáo trình bày chín biểu đồ từ CSV, 24 nhóm giờ UTC, phân bố AQI và tương quan khí tượng.
 
 Theo phân công nhóm xác nhận, sinh viên Tiến Sơn phụ trách S3, Secrets Manager, Lambda và SNS; sinh viên Ngọc Quyên phụ trách Glue, Athena và phân tích biểu đồ. Hai thành viên cùng thực hiện kiến trúc, tích hợp và báo cáo. Các số liệu trong tài liệu thuộc tập dữ liệu và các lượt quan sát của Tuần 1.
 
@@ -66,7 +66,7 @@ Bảng 1.2. Nguồn và đại lượng dùng trong phân tích
 | Athena CSV / metrics | 156 dòng gốc, năm truy vấn, thời gian và byte quét | Lượt xuất Tuần 1 |
 | Amazon S3 | 3 tệp raw, tổng 87.250 byte | Lượt quan sát Tuần 1 |
 | CloudWatch Logs / Metrics | 4 lượt gọi, 0 lỗi, 6 MessageId trong log | Log Tuần 1 |
-| Biểu đồ | Bốn hình từ tập CSV Athena | Dữ liệu Tuần 1 |
+| Biểu đồ | Chín hình từ tập CSV Athena | Dữ liệu Tuần 1 |
 
 Bảng 1.3. Đối chiếu từng luồng trong sơ đồ kiến trúc với bằng chứng
 
@@ -119,9 +119,9 @@ Bảng 2.3. Sản phẩm và số liệu quan sát của Tuần 1
 | Lambda / EventBridge | Lambda Active; Rule Enabled; 4 lượt gọi, 0 lỗi | Cấu hình và CloudWatch Metrics, Tuần 1 |
 | Log / SNS | 6 MessageId riêng biệt trong log | Publish không chứng minh email đã tới |
 | Glue / Athena | 3 phân vùng dữ liệu; 5/5 truy vấn SUCCEEDED; 87.250 byte/truy vấn | Glue, Athena QueryExecution, Tuần 1 |
-| Phân tích dữ liệu | 156 dòng ở lượt xuất, 52 dòng/đô thị; 4 biểu đồ | CSV và metrics, Tuần 1 |
+| Phân tích dữ liệu | 156 dòng ở lượt xuất, 52 dòng/đô thị; 9 biểu đồ | CSV và metrics, Tuần 1 |
 
-Lượt xuất Athena trong Tuần 1 có 156 dòng gốc và bốn bảng phân tích. Năm truy vấn gồm so sánh đô thị, nhóm giờ UTC, phân bố cấp AQI, tương quan khí tượng và xuất bản ghi gốc đều hoàn thành. Số dòng theo ba góc nhìn tổng hợp đều khớp dữ liệu gốc; Chương 4 trình bày chi tiết từng bảng và bốn biểu đồ từ CSV của lượt xuất này.
+Lượt xuất Athena trong Tuần 1 có 156 dòng gốc và bốn bảng phân tích. Năm truy vấn gồm so sánh đô thị, nhóm giờ UTC, phân bố cấp AQI, tương quan khí tượng và xuất bản ghi gốc đều hoàn thành. Số dòng theo ba góc nhìn tổng hợp đều khớp dữ liệu gốc; Chương 4 trình bày chi tiết từng bảng và chín biểu đồ từ CSV của lượt xuất này.
 
 ## Chương 3 Thiết kế và triển khai trên AWS Learner Lab
 
@@ -248,11 +248,23 @@ Trong 52 mẫu của mỗi đô thị, TP. Hồ Chí Minh có AQI trung bình 10
 
 Hiệu AQI trung bình giữa TP. Hồ Chí Minh và Đà Nẵng là 33,12 điểm; giữa TP. Hồ Chí Minh và Hà Nội là 40,23 điểm. Tỷ số PM2.5 tương ứng là 2,60 và 2,41. Đây là so sánh mô tả của 52 dòng mỗi nơi, không phải ước lượng dài hạn; Bảng 4.5 thể hiện phân bố từng cấp AQI.
 
+![Hình 4.2. PM2.5 và PM10 trung bình theo đô thị](../../tuan_2/results/charts/05_particulates_by_city.png)
+
+Hình 4.2. PM2.5 và PM10 trung bình theo đô thị
+
+Trên cùng 52 mẫu mỗi đô thị, PM2.5 và PM10 trung bình của TP. Hồ Chí Minh là 37,03 và 37,35 µg/m³; Hà Nội là 15,36 và 16,11 µg/m³; Đà Nẵng là 14,23 và 17,28 µg/m³. Hai dãy nồng độ được trình bày chung đơn vị để đối chiếu mức bụi trong bộ dữ liệu Tuần 1.
+
+![Hình 4.3. Các yếu tố khí tượng trung bình theo đô thị](../../tuan_2/results/charts/06_weather_by_city.png)
+
+Hình 4.3. Các yếu tố khí tượng trung bình theo đô thị
+
+Nhiệt độ trung bình của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng lần lượt là 27,79; 24,54; 28,85 °C. Độ ẩm tương ứng là 84,71; 76,65; 74,87%, tốc độ gió là 4,12; 12,08; 8,41 km/h. Mỗi yếu tố được vẽ trên trục riêng để giữ đúng đơn vị và tránh so sánh trực tiếp các đại lượng khác nhau.
+
 ### 4.3 Biến thiên theo 24 giờ UTC
 
 ![Hình phân tích](../../tuan_2/results/charts/02_peak_pollution_hours.png)
 
-Hình 4.2. AQI, PM2.5 và PM10 trung bình theo giờ UTC từ Athena
+Hình 4.4. AQI, PM2.5 và PM10 trung bình theo giờ UTC từ Athena
 
 Truy vấn theo hour có đủ 24 nhóm từ 00 đến 23 UTC. AQI trung bình cao nhất tại giờ 11 (103,83) và thấp nhất tại giờ 23 (75,83). PM2.5 cao nhất tại giờ 19 (25,53 µg/m³) và thấp nhất tại giờ 03 (18,03 µg/m³). Có 20 nhóm sáu mẫu và bốn nhóm chín mẫu; do cỡ mẫu không đều, đồ thị chỉ mô tả tập dữ liệu Tuần 1 và không đủ để suy ra chu kỳ ô nhiễm điển hình.
 
@@ -289,7 +301,7 @@ Bảng 4.4. Toàn bộ 24 nhóm giờ từ peak_pollution_hours.csv
 
 ![Hình phân tích](../../tuan_2/results/charts/03_aqi_category_distribution.png)
 
-Hình 4.3. Tỷ lệ cấp AQI theo thành phố từ Athena CSV
+Hình 4.5. Tỷ lệ cấp AQI theo thành phố từ Athena CSV
 
 Bảng 4.5. Số mẫu và tỷ lệ từng cấp AQI
 
@@ -305,7 +317,7 @@ TP. Hồ Chí Minh có 35/52 mẫu (67,3%) ở mức không tốt cho nhóm nh�
 
 ![Hình phân tích](../../tuan_2/results/charts/04_weather_pm25_correlation.png)
 
-Hình 4.4. Hệ số tương quan Pearson theo thành phố từ Athena CSV
+Hình 4.6. Hệ số tương quan Pearson theo thành phố từ Athena CSV
 
 Bảng 4.6. Hệ số tương quan r với PM2.5
 
@@ -316,6 +328,12 @@ Bảng 4.6. Hệ số tương quan r với PM2.5
 | TP. Hồ Chí Minh | -0,6977 | 0,6627 | -0,1536 |
 
 Tại TP. Hồ Chí Minh, r(nhiệt độ, PM2.5) = -0,6977 và r(độ ẩm, PM2.5) = 0,6627; ở Hà Nội, r(tốc độ gió, PM2.5) = -0,4846. Các hệ số mô tả 52 mẫu mỗi đô thị, không chứng minh quan hệ nhân quả.
+
+![Hình 4.7. Nhiệt độ và PM2.5 trên các bản ghi Tuần 1](../../tuan_2/results/charts/08_temperature_pm25_scatter.png)
+
+Hình 4.7. Nhiệt độ và PM2.5 trên các bản ghi Tuần 1
+
+Hình sử dụng đủ 52 cặp nhiệt độ và PM2.5 của từng đô thị. Tại TP. Hồ Chí Minh, Pearson r = −0,6977; Hà Nội r = 0,6462; Đà Nẵng r = 0,4798. Các điểm thể hiện độ phân tán của quan trắc và giúp đọc hệ số tương quan cùng dữ liệu gốc; đây là liên hệ trong tập mẫu, không xác lập quan hệ nhân quả.
 
 ### 4.6 Thời gian và dung lượng quét của năm truy vấn
 
@@ -334,6 +352,20 @@ Trong bộ kết quả này, truy vấn trung bình theo thành phố có thời
 Mỗi lượt có cùng dung lượng quét 87.250 byte dù số dòng trả về khác nhau: truy vấn đô thị và tương quan trả 3 dòng, nhóm giờ trả 24 dòng, phân bố cấp AQI trả 8 dòng và dữ liệu gốc trả 156 dòng. Số dòng kết quả mô tả cách tổng hợp; nó không trực tiếp phản ánh số byte phải đọc từ S3.
 
 Các truy vấn phân tích trong bộ này không có điều kiện lọc một phân vùng ngày cụ thể. Vì vậy, cùng đọc tập dữ liệu hiện có không chứng minh mức tiết kiệm nhờ phân vùng. Để so sánh hiệu năng ở những lần quan sát khác, cần sử dụng cùng câu hỏi phân tích, phạm vi dữ liệu và điều kiện thực thi.
+
+![Hình 4.8. Thời gian và dung lượng quét của năm truy vấn Athena](../../tuan_2/results/charts/09_query_performance.png)
+
+Hình 4.8. Thời gian và dung lượng quét của năm truy vấn Athena
+
+Năm lượt truy vấn có thời gian thực thi từ 744 đến 1.192 ms, chênh 448 ms. Mỗi lượt quét đúng 87.250 byte dù số dòng kết quả khác nhau. Hình tách thời gian và dung lượng quét thành hai khung; cùng dung lượng quét cho thấy các truy vấn đọc cùng phạm vi dữ liệu trong lượt xuất này.
+
+### 4.7 Phân bố và độ phân tán của AQI và PM2.5
+
+![Hình 4.9. Trung vị và khoảng tứ phân vị của AQI và PM2.5](../../tuan_2/results/charts/07_aqi_pm25_distribution.png)
+
+Hình 4.9. Trung vị và khoảng tứ phân vị của AQI và PM2.5
+
+Các hộp được dựng từ 52 giá trị của mỗi đô thị. AQI trung vị của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng lần lượt là 102,00; 65,50; 69,00; độ lệch chuẩn mẫu là 17,85; 9,95; 28,85. PM2.5 trung vị tương ứng là 36,50; 12,85; 8,80 µg/m³. Hộp biểu diễn khoảng Q1–Q3 và đường trung vị; râu theo quy tắc 1,5 lần IQR. Các điểm ngoài râu vẫn được giữ trong tính toán, không bị loại khỏi bộ dữ liệu.
 
 ## Chương 5 Tổng hợp kết quả và chi phí Tuần 1
 
@@ -359,4 +391,4 @@ Dung lượng lưu trữ và số lượt gọi ở mốc quan sát đều nhỏ
 
 ### 5.3 Kết luận
 
-Trong Tuần 1, bộ kết quả Athena dùng trong báo cáo gồm 156 bản ghi gốc, năm truy vấn thành công và bốn biểu đồ từ CSV. Chúng em đã xây dựng kiến trúc, cấu hình các dịch vụ nền tảng và phân tích số liệu của ba đô thị. Phân công của chúng em được trình bày tại Bảng 2.1; các kết quả được đánh giá trong phạm vi bộ dữ liệu đã lưu.
+Trong Tuần 1, bộ kết quả Athena dùng trong báo cáo gồm 156 bản ghi gốc, năm truy vấn thành công và chín biểu đồ từ CSV. Chúng em đã xây dựng kiến trúc, cấu hình các dịch vụ nền tảng và phân tích số liệu của ba đô thị. Phân công của chúng em được trình bày tại Bảng 2.1; các kết quả được đánh giá trong phạm vi bộ dữ liệu đã lưu.

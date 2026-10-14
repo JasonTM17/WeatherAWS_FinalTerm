@@ -15,8 +15,8 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 
 | Tuần | Phạm vi | Word | PDF | Excel |
 | --- | --- | --- | --- | --- |
-| 1 | Bộ dữ liệu đã nộp: 156 bản ghi và bốn biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
-| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 18 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
+| 1 | Bộ dữ liệu đã nộp: 156 bản ghi và chín biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
+| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 20 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 
 [Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc mã nguồn](docs/source-guide.md).
 
@@ -48,8 +48,8 @@ Báo cáo dữ liệu của sinh viên Tiến Sơn có 204 bản ghi raw, báo c
 Mẫu mới bao phủ hai ngày và 9 giờ riêng trong bộ dữ liệu của mỗi sinh viên, chưa đủ toàn bộ tuần. Tương quan mô tả tập mẫu, không chứng minh quan hệ nhân quả. Dữ liệu API chất lượng không khí dựa trên sản phẩm CAMS, không phải phép đo trực tiếp tại trạm.
 
 - [CSV Athena trong hai báo cáo dữ liệu](tuan_2/results/week2_live/)
-- [25 CSV phân tích và đối chiếu](tuan_2/results/week2_analysis/)
-- [18 biểu đồ và bảng nguồn](tuan_2/results/week2_charts/)
+- [27 CSV phân tích và đối chiếu](tuan_2/results/week2_analysis/)
+- [20 biểu đồ và bảng nguồn](tuan_2/results/week2_charts/)
 - [Tệp raw và metadata dịch vụ đã đọc](tuan_2/results/week2_evidence/)
 - [SQL của 12 phép phân tích](tuan_2/athena/week2_analysis/)
 
@@ -68,6 +68,7 @@ Yêu cầu Python 3.12 trở lên và các thư viện trong [tuan_2/analytics/r
 ```powershell
 python -m pip install -r tuan_2/analytics/requirements.txt
 python tuan_2/analytics/analyze_week2_accounts.py
+python tuan_2/analytics/generate_week1_supplement.py
 python tuan_2/analytics/generate_week2_charts.py
 python -m unittest discover -s tuan_2/analytics -p "test_*.py" -v
 ```

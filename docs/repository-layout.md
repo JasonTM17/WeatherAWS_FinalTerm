@@ -32,8 +32,9 @@ WeatherAWS_FinalTerm/
 | Xuất năm SELECT | [athena_export.py](../tuan_2/scripts/athena_export.py) | `export_csv.ps1`, `export_metrics.py`; `export_raw_records.py` xuất riêng raw |
 | Lược đồ | [Danh mục Athena](../tuan_2/athena/README.md) | SDK đọc đúng một DDL bảng gốc và một DDL view |
 | Bốn hình Tuần 1 | [generate_charts.py](../tuan_2/analytics/generate_charts.py) | Đọc `results/athena_queries/` |
+| Năm hình bổ sung Tuần 1 | [generate_week1_supplement.py](../tuan_2/analytics/generate_week1_supplement.py) | Đọc bộ CSV của báo cáo Tuần 1; tạo thống kê và manifest có mảng vẽ |
 | Phân tích Tuần 2 | [analyze_week2_accounts.py](../tuan_2/analytics/analyze_week2_accounts.py) | Đọc CSV và hồ sơ nguồn của từng sinh viên |
-| 18 hình Tuần 2 | [generate_week2_charts.py](../tuan_2/analytics/generate_week2_charts.py) | Đọc `results/week2_analysis/`; dùng helper so sánh tuần |
+| 20 hình Tuần 2 | [generate_week2_charts.py](../tuan_2/analytics/generate_week2_charts.py) | Đọc `results/week2_analysis/`; dùng helper so sánh tuần và [phần đối chiếu bổ sung](../tuan_2/analytics/report_chart_extensions.py) |
 | Kiểm tra chức năng | [tuan_2/tests/](../tuan_2/tests/) | Bốn module kiểm tra Lambda, SDK, CSV và biểu đồ |
 
 `lambda` được giữ làm tên thư mục chứa gói triển khai, không dùng làm tên Python package để import. Chạy các chương trình bằng đường dẫn tệp từ thư mục gốc, như [hướng dẫn mã nguồn](source-guide.md).

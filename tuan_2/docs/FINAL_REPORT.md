@@ -6,7 +6,7 @@ Báo cáo Tuần 2 tổng hợp hai bộ báo cáo dữ liệu do sinh viên Ti�
 
 Hai bộ báo cáo dữ liệu gồm 435 bản ghi: 204 trong bộ của sinh viên Tiến Sơn và 231 trong bộ của sinh viên Ngọc Quyên. Theo ranh giới tuần ở Việt Nam quy đổi sang UTC, mẫu Tuần 2 có 27 và 57 bản ghi, tương ứng 9 và 19 mẫu mỗi đô thị. Các thống kê được trình bày riêng theo từng sinh viên.
 
-Hà Nội có AQI trung bình Tuần 2 đạt 163,56 và 163,05; TP. Hồ Chí Minh đạt 78,00 và 79,05; Đà Nẵng đạt 35,44 và 35,37. Báo cáo trình bày 18 biểu đồ từ dữ liệu thực tế, 24 truy vấn Athena mới thành công, phân bố mẫu, biến thiên theo giờ, ngưỡng cảnh báo, tương quan khí tượng và mức sử dụng tài nguyên. Các kết luận giới hạn trong mẫu đã thu thập.
+Hà Nội có AQI trung bình Tuần 2 đạt 163,56 và 163,05; TP. Hồ Chí Minh đạt 78,00 và 79,05; Đà Nẵng đạt 35,44 và 35,37. Báo cáo trình bày 20 biểu đồ từ dữ liệu thực tế, 24 truy vấn Athena mới thành công, phân bố mẫu, biến thiên theo giờ, ngưỡng cảnh báo, tương quan khí tượng và mức sử dụng tài nguyên. Các kết luận giới hạn trong mẫu đã thu thập.
 
 ## LỜI MỞ ĐẦU
 
@@ -302,19 +302,21 @@ Số mẫu vượt điều kiện và số thông điệp SNS là hai đại lư
 
 ### 3.8 Đối chiếu hai báo cáo dữ liệu theo đô thị và giờ
 
-![Chênh lệch Sinh viên Ngọc Quyên trừ Sinh viên Tiến Sơn](../results/week2_charts/09_matched_account_difference.png)
+![AQI và PM2.5 trung bình tại các giờ quan trắc chung](../results/week2_charts/09_matched_account_difference.png)
 
-Hình 3.8 Chênh lệch Sinh viên Ngọc Quyên trừ Sinh viên Tiến Sơn
+Hình 3.8 AQI và PM2.5 trung bình tại các giờ quan trắc chung
 
-Bảng 3.7 Chênh lệch Ngọc Quyên trừ Tiến Sơn tại các giờ đối chiếu
+Bảng 3.7 Giá trị trung bình và chênh lệch tại bảy giờ quan trắc chung
 
-| Đô thị | Giờ ghép | ΔAQI TB | ΔPM2.5 TB | \|ΔAQI\| max |
-| --- | --- | --- | --- | --- |
-| TP. Hồ Chí Minh | 7 | 0,00 | 0,00 | 0,00 |
-| Hà Nội | 7 | 0,00 | 0,00 | 0,00 |
-| Đà Nẵng | 7 | 0,00 | 0,00 | 0,00 |
+| Đô thị | Giờ chung | AQI TB hai báo cáo | PM2.5 TB hai báo cáo | Δ nhiệt độ °C | Δ độ ẩm điểm % |
+| --- | --- | --- | --- | --- | --- |
+| TP. Hồ Chí Minh | 7 | 78,71 | 23,17 | -0,19 | +0,57 |
+| Hà Nội | 7 | 163,29 | 73,66 | -0,19 | +1,29 |
+| Đà Nẵng | 7 | 35,43 | 6,34 | 0,00 | -0,57 |
 
-Mỗi giờ đối chiếu có trọng số như nhau, giúp trình bày cân bằng hai bộ báo cáo có mật độ lấy mẫu khác nhau. Chênh lệch mô tả số liệu của sinh viên Ngọc Quyên so với sinh viên Tiến Sơn tại cùng đô thị và giờ; có thể chịu ảnh hưởng của thời điểm gọi API trong giờ.
+Hai bộ báo cáo có bảy giờ quan trắc chung cho mỗi đô thị, tổng cộng 21 nhóm đối chiếu. Tại từng nhóm, AQI, PM2.5 và PM10 bằng nhau trước khi làm tròn; vì vậy chênh lệch của các chỉ số ô nhiễm bằng 0. Hình 3.8 trình bày giá trị thực để thể hiện mức ô nhiễm trong phạm vi giờ chung. Các giá trị này khác trung bình toàn bộ mẫu Tuần 2 vì phạm vi tính chỉ gồm bảy giờ chung.
+
+Nhiệt độ và độ ẩm vẫn có khác biệt. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ sinh viên Tiến Sơn, sau khi lấy trung bình riêng trong từng giờ và cho mỗi giờ cùng trọng số. Δ độ ẩm dùng điểm phần trăm; số gần 0 được hiển thị 0,00 ở độ chính xác hai chữ số thập phân. Số liệu gốc và số mẫu của từng giờ được giữ trong CSV đối chiếu.
 
 ### 3.9 Tương quan Pearson và Spearman
 
@@ -400,9 +402,21 @@ Hình 3.13 PM2.5 trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2
 
 Hình 3.12 và Hình 3.13 sử dụng bộ 156 bản ghi của báo cáo Tuần 1 (52 mẫu mỗi đô thị) làm mốc chung. Mẫu Tuần 2 có 9 mẫu của sinh viên Tiến Sơn và 19 mẫu của sinh viên Ngọc Quyên cho mỗi đô thị. Hai nguồn được trình bày riêng; chênh lệch giữa các tập mẫu không đại diện cho xu hướng toàn bộ tuần.
 
+![Hình 3.14 Phân bố cấp AQI trong báo cáo Tuần 1 và mẫu Tuần 2](../results/week2_charts/19_week1_category_comparison.png)
+
+Hình 3.14 Phân bố cấp AQI trong báo cáo Tuần 1 và mẫu Tuần 2
+
+Bộ báo cáo Tuần 1 của TP. Hồ Chí Minh có 25,0% mẫu mức trung bình, 67,3% mức không tốt cho nhóm nhạy cảm và 7,7% mức không tốt. Trong mẫu Tuần 2, toàn bộ mẫu TP. Hồ Chí Minh ở mức trung bình; Hà Nội ở mức không tốt và Đà Nẵng ở mức tốt. Mẫu số là 52 cho Tuần 1, 9 cho sinh viên Tiến Sơn và 19 cho sinh viên Ngọc Quyên ở Tuần 2. Các tỷ lệ mô tả từng tập mẫu đã lưu.
+
+![Hình 3.15 Tương quan PM2.5 với khí tượng trong hai phạm vi tuần](../results/week2_charts/20_week1_weather_correlation_comparison.png)
+
+Hình 3.15 Tương quan PM2.5 với khí tượng trong hai phạm vi tuần
+
+Hình giữ cùng cách tính Pearson cho nhiệt độ, độ ẩm và tốc độ gió với PM2.5 trong từng đô thị. Bộ Tuần 1 dùng 52 cặp mỗi đô thị; hai bộ Tuần 2 lần lượt dùng 9 và 19 cặp. Các hệ số được đọc cùng cỡ mẫu và phạm vi thời gian; sự thay đổi dấu hoặc độ lớn của r chưa đủ kết luận một cơ chế tác động hay xu hướng dài hạn.
+
 b) Đối chiếu theo ranh giới tuần trong cùng lần xuất mới
 
-Phép đối chiếu tiếp theo lọc hai tuần từ cùng lần xuất mới trong bộ dữ liệu của từng sinh viên. Mẫu Tuần 1 có 42 dòng mỗi đô thị trong bộ của sinh viên Tiến Sơn và 41 trong bộ của sinh viên Ngọc Quyên. Phạm vi này khác mốc 52 mẫu trong hai bảng trên; Hình 3.14 minh họa riêng phép lọc này.
+Phép đối chiếu tiếp theo lọc hai tuần từ cùng lần xuất mới trong bộ dữ liệu của từng sinh viên. Mẫu Tuần 1 có 42 dòng mỗi đô thị trong bộ của sinh viên Tiến Sơn và 41 trong bộ của sinh viên Ngọc Quyên. Phạm vi này khác mốc 52 mẫu trong hai bảng trên; Hình 3.16 minh họa riêng phép lọc này.
 
 Bảng 3.12 AQI theo ranh giới tuần trong lần xuất mới
 
@@ -417,11 +431,11 @@ Bảng 3.12 AQI theo ranh giới tuần trong lần xuất mới
 
 ![So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải](../results/week2_charts/16_week_comparison.png)
 
-Hình 3.14 So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải
+Hình 3.16 So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải
 
 Các mẫu thuộc Tuần 1 trong dữ liệu vừa tải có 42 mẫu mỗi đô thị ở bộ dữ liệu của sinh viên Tiến Sơn và 41 ở bộ dữ liệu của sinh viên Ngọc Quyên; Tuần 2 có 9 và 19. Mẫu Hà Nội tăng AQI trung bình, còn TP. Hồ Chí Minh và Đà Nẵng giảm trong cả hai nguồn. Đây là so sánh mô tả hai tập mẫu với độ phủ khác nhau, chưa xác lập xu hướng dài hạn.
 
-Bảng 3.12 và Hình 3.14 dùng mẫu lọc theo ranh giới tuần trong lần xuất mới. Bảng 3.10 và Bảng 3.11 dùng bộ báo cáo Tuần 1 đã lưu, bao gồm phần lịch sử nạp bổ sung. Hai phạm vi được giữ riêng để giải thích rõ sự khác biệt về số mẫu và giá trị trung bình.
+Bảng 3.12 và Hình 3.16 dùng mẫu lọc theo ranh giới tuần trong lần xuất mới. Bảng 3.10 và Bảng 3.11 dùng bộ báo cáo Tuần 1 đã lưu, bao gồm phần lịch sử nạp bổ sung. Hai phạm vi được giữ riêng để giải thích rõ sự khác biệt về số mẫu và giá trị trung bình.
 
 ## Chương 4 Phân tích vận hành Lambda và SNS
 
@@ -525,14 +539,14 @@ Lịch sử ghi nhận 52 lượt truy vấn trong báo cáo dữ liệu của s
 
 ### 5.4 Chi phí từ Cost Explorer
 
-Bảng 5.4 UnblendedCost do Cost Explorer trả về cho phạm vi Tuần 2
+Bảng 5.4 Chi phí ghi nhận trong phạm vi Tuần 2 làm tròn đến cent
 
-| Sinh viên | Giá trị gốc | Đơn vị | Estimated |
+| Sinh viên | Hiển thị đến cent | Đơn vị | Estimated |
 | --- | --- | --- | --- |
-| Tiến Sơn | -0,0000000764 | USD | Có |
-| Ngọc Quyên | 0,0267146366 | USD | Có |
+| Tiến Sơn | 0,00 | USD | Có |
+| Ngọc Quyên | 0,03 | USD | Có |
 
-Báo cáo dữ liệu của sinh viên Tiến Sơn ghi nhận UnblendedCost là −0,0000000764 USD; báo cáo của sinh viên Ngọc Quyên ghi nhận 0,0267146366 USD trong phạm vi Tuần 2. Giá trị gốc được giữ nguyên. Khi làm tròn đến cent, các giá trị lần lượt xấp xỉ 0,00 USD và 0,03 USD.
+Chi phí UnblendedCost hiển thị đến cent là 0,00 USD trong báo cáo dữ liệu của sinh viên Tiến Sơn và 0,03 USD trong báo cáo của sinh viên Ngọc Quyên. Phản hồi gốc của sinh viên Tiến Sơn chứa tổng −0,0000000764 USD từ các dòng rất nhỏ ở Secrets Manager và CloudWatch; tổng này làm tròn thành 0,00 USD. Bộ dữ liệu hiện không có loại khoản phí để xác định nguyên nhân cụ thể của phần âm. CSV giữ nguyên giá trị gốc, không đổi số âm thành số dương hoặc xóa khoản đó.
 
 Kết quả có cờ Estimated và được tổng hợp theo môi trường AWS của từng sinh viên, dịch vụ và ngày. Các số này mô tả chi phí ghi nhận trong từng báo cáo dữ liệu, chưa phải hóa đơn cuối cùng hoặc chi phí phân bổ riêng bằng tag dự án. CSV giữ giá trị gốc, đơn vị và cờ ước tính.
 
@@ -547,8 +561,8 @@ Bảng 6.1 Sản phẩm đi kèm và phạm vi
 | Dữ liệu nguồn | 435 bản ghi raw trong hai báo cáo dữ liệu; CSV và tệp NDJSON được lưu riêng theo sinh viên. |
 | Mẫu Tuần 2 | 84 dòng nguồn: 27 của sinh viên Tiến Sơn và 57 của sinh viên Ngọc Quyên; phân tích riêng từng bộ dữ liệu. |
 | Kết quả truy vấn | 24 truy vấn mới thành công; CSV gốc, mã thực thi và metadata theo nguồn. |
-| Phân tích | 25 CSV tổng hợp và đối chiếu về môi trường, chất lượng, dịch vụ, truy vấn và chi phí. |
-| Trực quan hóa | 18 biểu đồ được dựng từ các CSV tương ứng; cùng dữ liệu trong Excel và báo cáo. |
+| Phân tích | 27 CSV tổng hợp và đối chiếu về môi trường, chất lượng, dịch vụ, truy vấn và chi phí. |
+| Trực quan hóa | 20 biểu đồ được dựng từ các CSV tương ứng; cùng dữ liệu trong Excel và báo cáo. |
 | Báo cáo | Word có mục lục liên kết và bản PDF đã kiểm tra bố cục. |
 
 ### 6.2 Kết luận trong phạm vi mẫu đã thu thập

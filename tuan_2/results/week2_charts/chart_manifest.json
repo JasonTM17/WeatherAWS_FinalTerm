@@ -105,8 +105,8 @@
   },
   {
     "file": "09_matched_account_difference.png",
-    "title": "Chênh lệch Sinh viên Ngọc Quyên trừ Sinh viên Tiến Sơn",
-    "source_csv": "matched_account_hours.csv",
+    "title": "AQI và PM2.5 trung bình tại các giờ quan trắc chung",
+    "source_csv": "matched_account_hours.csv; matched_hour_summary.csv",
     "student_labels": {
       "default": "Sinh viên Tiến Sơn",
       "quyen": "Sinh viên Ngọc Quyên"
@@ -114,7 +114,75 @@
     "account_colors": {
       "default": "#2563EB",
       "quyen": "#F59E0B"
-    }
+    },
+    "source_sha256": {
+      "tuan_2/results/week2_analysis/matched_account_hours.csv": "832e23065c1d51eea4f4e8d1868ee1ea8e3e381ef9001f602c52559f62be6806"
+    },
+    "plotted_data": [
+      {
+        "city": "HoChiMinh",
+        "common_hours": 7,
+        "son_records_in_common_hours": 7,
+        "quyen_records_in_common_hours": 15,
+        "son_us_aqi": 78.71428571428571,
+        "quyen_us_aqi": 78.71428571428571,
+        "delta_us_aqi": 0.0,
+        "son_pm2_5": 23.17142857142857,
+        "quyen_pm2_5": 23.17142857142857,
+        "delta_pm2_5": 0.0,
+        "son_pm10": 24.385714285714286,
+        "quyen_pm10": 24.385714285714286,
+        "delta_pm10": 0.0,
+        "son_temperature_2m": 27.0,
+        "quyen_temperature_2m": 26.814285714285713,
+        "delta_temperature_2m": -0.1857142857142853,
+        "son_relative_humidity_2m": 86.71428571428571,
+        "quyen_relative_humidity_2m": 87.28571428571429,
+        "delta_relative_humidity_2m": 0.5714285714285714
+      },
+      {
+        "city": "HaNoi",
+        "common_hours": 7,
+        "son_records_in_common_hours": 7,
+        "quyen_records_in_common_hours": 15,
+        "son_us_aqi": 163.28571428571428,
+        "quyen_us_aqi": 163.28571428571428,
+        "delta_us_aqi": 0.0,
+        "son_pm2_5": 73.65714285714286,
+        "quyen_pm2_5": 73.65714285714286,
+        "delta_pm2_5": 0.0,
+        "son_pm10": 75.48571428571428,
+        "quyen_pm10": 75.48571428571428,
+        "delta_pm10": 0.0,
+        "son_temperature_2m": 28.385714285714286,
+        "quyen_temperature_2m": 28.2,
+        "delta_temperature_2m": -0.1857142857142858,
+        "son_relative_humidity_2m": 72.42857142857143,
+        "quyen_relative_humidity_2m": 73.71428571428571,
+        "delta_relative_humidity_2m": 1.2857142857142858
+      },
+      {
+        "city": "DaNang",
+        "common_hours": 7,
+        "son_records_in_common_hours": 7,
+        "quyen_records_in_common_hours": 15,
+        "son_us_aqi": 35.42857142857143,
+        "quyen_us_aqi": 35.42857142857143,
+        "delta_us_aqi": 0.0,
+        "son_pm2_5": 6.3428571428571425,
+        "quyen_pm2_5": 6.3428571428571425,
+        "delta_pm2_5": 0.0,
+        "son_pm10": 8.5,
+        "quyen_pm10": 8.5,
+        "delta_pm10": 0.0,
+        "son_temperature_2m": 25.65714285714286,
+        "quyen_temperature_2m": 25.65714285714286,
+        "delta_temperature_2m": 5.075305255429287e-16,
+        "son_relative_humidity_2m": 90.0,
+        "quyen_relative_humidity_2m": 89.42857142857143,
+        "delta_relative_humidity_2m": -0.5714285714285714
+      }
+    ]
   },
   {
     "file": "10_correlations.png",
@@ -352,6 +420,737 @@
           19,
           19
         ]
+      }
+    ]
+  },
+  {
+    "file": "19_week1_category_comparison.png",
+    "title": "Phân bố cấp AQI trong báo cáo Tuần 1 và mẫu Tuần 2",
+    "source_csv": "week1_week2_extended_comparison.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    },
+    "source_sha256": {
+      "tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv": "0dc2147362519701c70cceb53daf268837bc41d4076ea5edec00c1c956e4b102",
+      "tuan_2/results/week2_analysis/raw_week2_both_accounts.csv": "ccbd76299f0b932c73c529ab08f6fe8f91b6400c72be5141529d8214d3a840d7"
+    },
+    "plotted_data": [
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Good",
+        "n": 52,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Moderate",
+        "n": 52,
+        "count": 13,
+        "value": 25.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 52,
+        "count": 35,
+        "value": 67.3076923076923,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Unhealthy",
+        "n": 52,
+        "count": 4,
+        "value": 7.6923076923076925,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Good",
+        "n": 52,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Moderate",
+        "n": 52,
+        "count": 52,
+        "value": 100.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 52,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Unhealthy",
+        "n": 52,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Good",
+        "n": 52,
+        "count": 6,
+        "value": 11.538461538461538,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Moderate",
+        "n": 52,
+        "count": 39,
+        "value": 75.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 52,
+        "count": 4,
+        "value": 7.6923076923076925,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "Unhealthy",
+        "n": 52,
+        "count": 3,
+        "value": 5.769230769230769,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Good",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Moderate",
+        "n": 9,
+        "count": 9,
+        "value": 100.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Unhealthy",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Good",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Moderate",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Unhealthy",
+        "n": 9,
+        "count": 9,
+        "value": 100.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Good",
+        "n": 9,
+        "count": 9,
+        "value": 100.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Moderate",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "Unhealthy",
+        "n": 9,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Good",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Moderate",
+        "n": 19,
+        "count": 19,
+        "value": 100.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HoChiMinh",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Unhealthy",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Good",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Moderate",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "HaNoi",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Unhealthy",
+        "n": 19,
+        "count": 19,
+        "value": 100.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Good",
+        "n": 19,
+        "count": 19,
+        "value": 100.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Moderate",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Unhealthy for Sensitive Groups",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      },
+      {
+        "kind": "aqi_category",
+        "city": "DaNang",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "Unhealthy",
+        "n": 19,
+        "count": 0,
+        "value": 0.0,
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "file": "20_week1_weather_correlation_comparison.png",
+    "title": "Tương quan PM2.5 với khí tượng trong hai phạm vi tuần",
+    "source_csv": "week1_week2_extended_comparison.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    },
+    "source_sha256": {
+      "tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv": "0dc2147362519701c70cceb53daf268837bc41d4076ea5edec00c1c956e4b102",
+      "tuan_2/results/week2_analysis/raw_week2_both_accounts.csv": "ccbd76299f0b932c73c529ab08f6fe8f91b6400c72be5141529d8214d3a840d7"
+    },
+    "plotted_data": [
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "temperature_2m",
+        "n": 52,
+        "count": "",
+        "value": -0.6977387661815306,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "relative_humidity_2m",
+        "n": 52,
+        "count": "",
+        "value": 0.6627086063443471,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "wind_speed_10m",
+        "n": 52,
+        "count": "",
+        "value": -0.1535964887795929,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "temperature_2m",
+        "n": 52,
+        "count": "",
+        "value": 0.646181883679886,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "relative_humidity_2m",
+        "n": 52,
+        "count": "",
+        "value": 0.2486022736861401,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "wind_speed_10m",
+        "n": 52,
+        "count": "",
+        "value": -0.48462311621929105,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "temperature_2m",
+        "n": 52,
+        "count": "",
+        "value": 0.4797674242404333,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "relative_humidity_2m",
+        "n": 52,
+        "count": "",
+        "value": -0.3182920823797298,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "week1",
+        "student_label": "Báo cáo Tuần 1 (n=52)",
+        "variable": "wind_speed_10m",
+        "n": 52,
+        "count": "",
+        "value": -0.2291046157747858,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "temperature_2m",
+        "n": 9,
+        "count": "",
+        "value": -0.7892936257182132,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "relative_humidity_2m",
+        "n": 9,
+        "count": "",
+        "value": 0.7743842850903087,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "wind_speed_10m",
+        "n": 9,
+        "count": "",
+        "value": -0.45884324717565944,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "temperature_2m",
+        "n": 9,
+        "count": "",
+        "value": -0.9918090015354514,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "relative_humidity_2m",
+        "n": 9,
+        "count": "",
+        "value": 0.985699706089304,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "wind_speed_10m",
+        "n": 9,
+        "count": "",
+        "value": -0.5904142774656628,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "temperature_2m",
+        "n": 9,
+        "count": "",
+        "value": 0.8073601390913021,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "relative_humidity_2m",
+        "n": 9,
+        "count": "",
+        "value": -0.7120606385602819,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "default",
+        "student_label": "Sinh viên Tiến Sơn Tuần 2 (n=9)",
+        "variable": "wind_speed_10m",
+        "n": 9,
+        "count": "",
+        "value": 0.12201307231463947,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "temperature_2m",
+        "n": 19,
+        "count": "",
+        "value": -0.7461696203710115,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "relative_humidity_2m",
+        "n": 19,
+        "count": "",
+        "value": 0.7263200024260417,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HoChiMinh",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "wind_speed_10m",
+        "n": 19,
+        "count": "",
+        "value": -0.6262446007924514,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "temperature_2m",
+        "n": 19,
+        "count": "",
+        "value": -0.9684999150381678,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "relative_humidity_2m",
+        "n": 19,
+        "count": "",
+        "value": 0.9601290612442541,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "HaNoi",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "wind_speed_10m",
+        "n": 19,
+        "count": "",
+        "value": -0.4372933996025964,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "temperature_2m",
+        "n": 19,
+        "count": "",
+        "value": 0.8227384655719363,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "relative_humidity_2m",
+        "n": 19,
+        "count": "",
+        "value": -0.6786632325241462,
+        "unit": "r"
+      },
+      {
+        "kind": "pearson_pm25",
+        "city": "DaNang",
+        "series": "quyen",
+        "student_label": "Sinh viên Ngọc Quyên Tuần 2 (n=19)",
+        "variable": "wind_speed_10m",
+        "n": 19,
+        "count": "",
+        "value": 0.20801753436354242,
+        "unit": "r"
       }
     ]
   }
