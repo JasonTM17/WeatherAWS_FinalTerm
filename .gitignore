@@ -45,3 +45,9 @@ ORIGINAL_REQUEST.md
 
 # Separate ad-hoc exports from the saved report inputs.
 /output/
+
+# Local QA helpers and former root dependency file are not submission source.
+/tests/
+/requirements.txt
+/TEST_READY.md
+/docs/testing.md

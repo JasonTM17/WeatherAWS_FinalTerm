@@ -7,10 +7,7 @@ Repository trình bày theo tuần học. Tuần 1 giữ hồ sơ nền tảng v
 ```text
 WeatherAWS_FinalTerm/
   README.md                  Điểm bắt đầu và liên kết báo cáo
-  requirements.txt           SDK, phân tích và kiểm tra tài liệu
-  TEST_READY.md              Các lệnh kiểm tra và phạm vi kết quả
   docs/                      Tài liệu chung, kiến trúc, phương pháp, nhật ký
-  tests/                     Điểm vào kiểm tra ở gốc và kiểm tra hồ sơ
   tuan_1/
     README.md
     docs/                    Báo cáo Word/PDF/Excel, CSV, phân công, nhật ký
@@ -37,8 +34,7 @@ WeatherAWS_FinalTerm/
 | Bốn hình Tuần 1 | [generate_charts.py](../tuan_2/analytics/generate_charts.py) | Đọc `results/athena_queries/` |
 | Phân tích Tuần 2 | [analyze_week2_accounts.py](../tuan_2/analytics/analyze_week2_accounts.py) | Đọc CSV và hồ sơ nguồn của từng sinh viên |
 | 18 hình Tuần 2 | [generate_week2_charts.py](../tuan_2/analytics/generate_week2_charts.py) | Đọc `results/week2_analysis/`; dùng helper so sánh tuần |
-| Kiểm tra chức năng | [tuan_2/tests/](../tuan_2/tests/) | Bốn wrapper ở `tests/` nạp các lớp kiểm tra chuẩn |
-| Kiểm tra hồ sơ | [test_e2e_acceptance.py](../tests/test_e2e_acceptance.py) | Kiểm tra source/tài liệu cục bộ; một mục đọc Git nếu có checkout |
+| Kiểm tra chức năng | [tuan_2/tests/](../tuan_2/tests/) | Bốn module kiểm tra Lambda, SDK, CSV và biểu đồ |
 
 `lambda` được giữ làm tên thư mục chứa gói triển khai, không dùng làm tên Python package để import. Chạy các chương trình bằng đường dẫn tệp từ thư mục gốc, như [hướng dẫn source](source-guide.md).
 
@@ -50,9 +46,8 @@ Các lượt xuất tùy chọn nên ghi vào `output/`, được Git bỏ qua. 
 
 ## Phụ thuộc và kiểm tra
 
-- `requirements.txt`: boto3, NumPy, Matplotlib và thư viện đọc Word/PDF cho kiểm tra hồ sơ.
-- `tuan_2/analytics/requirements.txt`: tập nhỏ để chạy SDK và biểu đồ.
+- [tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt): boto3, NumPy và Matplotlib để chạy SDK, phân tích, biểu đồ và các kiểm tra chức năng.
 - `tuan_2/lambda/requirements.txt`: boto3 để phát triển cục bộ; runtime Lambda cung cấp SDK và các thư viện chuẩn được source sử dụng.
-- Các lệnh và giới hạn kiểm tra nằm tại [TEST_READY.md](../TEST_READY.md). Kiểm tra SDK/API giả lập không tự xác nhận chạy AWS; kiểm tra nội dung tài liệu không thay thế việc xem bố cục Word/PDF.
+- Các lệnh kiểm tra nằm trong [hướng dẫn đọc source](source-guide.md). Kiểm tra SDK/API giả lập xác nhận cách xử lý cục bộ; phạm vi vận hành được đối chiếu riêng từ hồ sơ dữ liệu đã lưu.
 
 [Trở về tài liệu dự án](README.md) · [Nhật ký và số giờ](WORKLOG.md)

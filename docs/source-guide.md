@@ -17,7 +17,7 @@
 | So sánh tuần | [Module đối chiếu trực tiếp](../tuan_2/analytics/weekly_comparison_charts.py) | Kiểm tra phạm vi đầu vào, dựng cột AQI và PM2.5 với cỡ mẫu, đơn vị rõ ràng |
 | Kiểm tra | [Kiểm tra chức năng](../tuan_2/tests/) và [kiểm tra phân tích](../tuan_2/analytics/) | API/SDK giả lập và đối chiếu dữ liệu đã lưu, không gọi tài nguyên thật |
 
-Các entry point PowerShell trong tuan_1/scripts và tuan_2/scripts chuyển tham số tới chương trình Python chung. Tuần 1 dùng lại phần thiết lập nền tảng; mã Lambda và phân tích chính nằm tại Tuần 2. Các wrapper trong tests/ giữ đường chạy kiểm tra ở thư mục gốc; bản kiểm tra chức năng chuẩn nằm trong tuan_2/tests/.
+Các entry point PowerShell trong tuan_1/scripts và tuan_2/scripts chuyển tham số tới chương trình Python chung. Tuần 1 dùng lại phần thiết lập nền tảng; mã Lambda và phân tích chính nằm tại Tuần 2. Bộ kiểm tra chức năng nằm trong tuan_2/tests/; các hồi quy phân tích nằm trong tuan_2/analytics/.
 
 `export_metrics.py` là điểm vào tương thích để xuất năm truy vấn SELECT. Khi xuất kết quả mới, chỉ định `--output output/athena` để giữ riêng dữ liệu báo cáo đã lưu; điểm vào chính là `scripts/athena_export.py`. Các chương trình dựng hình ghi vào thư mục kết quả của tuần tương ứng, nên việc tái lập hình có thể làm thay đổi tệp PNG/manifest được Git theo dõi.
 
@@ -48,7 +48,7 @@ Khi được gọi trong Lambda, thời gian chờ HTTP được tính lại tr�
 Chạy từ thư mục gốc với Python 3.12 trở lên:
 
 ```powershell
-python -m pip install -r requirements.txt
+python -m pip install -r tuan_2/analytics/requirements.txt
 python -m unittest discover -s tuan_2/tests -v
 python -m unittest discover -s tuan_2/analytics -p "test_*.py" -v
 python tuan_2/analytics/analyze_week2_accounts.py

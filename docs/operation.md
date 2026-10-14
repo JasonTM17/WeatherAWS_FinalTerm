@@ -2,10 +2,10 @@
 
 Chạy từ thư mục gốc repository với Python 3.12 trở lên.
 
-`requirements.txt` cài thư viện cho SDK, phân tích và kiểm tra tài liệu. Bộ phụ thuộc trong `tuan_2/analytics/` dành cho chạy SDK/biểu đồ; tệp trong `tuan_2/lambda/` mô tả phạm vi Lambda. Xem [sơ đồ source](repository-layout.md).
+[tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt) cài boto3, NumPy và Matplotlib cho SDK, phân tích và biểu đồ. Tệp phụ thuộc trong `tuan_2/lambda/` mô tả phạm vi phát triển Lambda. Xem [sơ đồ source](repository-layout.md).
 
 ```powershell
-python -m pip install -r requirements.txt
+python -m pip install -r tuan_2/analytics/requirements.txt
 python tuan_2/scripts/athena_export.py --offline --output output/csv
 python tuan_2/analytics/generate_charts.py
 python -m unittest discover -s tuan_2/tests -v
