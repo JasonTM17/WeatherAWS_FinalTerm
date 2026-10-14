@@ -56,3 +56,7 @@ AWS phân biệt số liệu Cost Explorer với hóa đơn, có thể có khác
 Dữ liệu chất lượng không khí được cung cấp qua [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api), dựa trên CAMS. Bộ API đã lưu không được coi là phép đo trực tiếp tại một trạm.
 
 Hai hình đối chiếu trực tiếp AQI và PM2.5 (Hình 3.12 và 3.13) dùng submitted_week1_comparison.csv, mốc 52 mẫu/đô thị của báo cáo Tuần 1 và mẫu Tuần 2 riêng 9/19. Word và Excel nhúng cùng tệp PNG; manifest ghi cả dãy số dùng cho từng cột.
+
+## Dữ liệu gốc trong báo cáo Tuần 2
+
+Mục 2.8 đối chiếu 27/57 dòng Tuần 2 với 204/231 dòng toàn bộ và trích sáu bản ghi gốc. Phụ lục dữ liệu gốc trình bày đủ 84 dòng Tuần 2, mỗi dòng đủ 23 trường qua hai bảng nối bằng mã TS/NQ; city là giá trị cố định trong tiêu đề nhóm. Timestamp, định danh và giá trị số giữ nguyên chuỗi từ CSV. Mức dự kiến 0,05 USD và số liệu Cost Explorer không thuộc dữ liệu cảm biến. Xem [báo cáo đầy đủ](../tuan_2/docs/FINAL_REPORT.md), [CSV của sinh viên Tiến Sơn](../tuan_2/results/week2_live/default/raw_week2.csv) và [CSV của sinh viên Ngọc Quyên](../tuan_2/results/week2_live/quyen/raw_week2.csv).

@@ -16,7 +16,7 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 | Tuần | Phạm vi | Word | PDF | Excel |
 | --- | --- | --- | --- | --- |
 | 1 | Bộ dữ liệu đã nộp: 156 bản ghi và chín biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
-| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 20 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
+| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 20 biểu đồ và 24 truy vấn mới, phụ lục đủ 84 bản ghi gốc Tuần 2 | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 
 [Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc mã nguồn](docs/source-guide.md).
 
