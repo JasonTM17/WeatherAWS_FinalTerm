@@ -49,7 +49,7 @@ Bảng 1.1. Cấu hình hệ thống và kết quả định lượng tại mố
 
 ### 1.3 Kiến trúc tổng thể
 
-![Hình phân tích](../../docs/architecture.png)
+![Kiến trúc hệ thống](../../docs/architecture.png)
 
 Hình 1.1. Luồng xử lý của hệ thống theo mã nguồn và cấu hình AWS
 
@@ -155,7 +155,7 @@ Lambda lấy tên bucket, secret và SNS topic từ biến môi trường; quy�
 
 Khi được kích hoạt, Lambda đọc cấu hình, duyệt danh sách ba thành phố, yêu cầu dữ liệu chất lượng không khí và thời tiết qua HTTPS, rồi ghép các trường từ hai nguồn vào một bản ghi thống nhất. Các hàm safe_float và safe_int chặn lỗi kiểu dữ liệu khi API trả null hoặc chuỗi không hợp lệ; hàm get_aqi_category chia US AQI thành sáu mức từ Good đến Hazardous. Sau bước chuẩn hóa, logic so sánh từng bản ghi với ngưỡng; các bản ghi vượt ngưỡng được chuyển thành thông điệp SNS có địa điểm, thời gian và chỉ số đo.
 
-Phiên bản Tuần 1 nạp dữ liệu lịch sử với past_hours=48, tính số ngày cần truy vấn rồi lấy tối đa 48 mốc cuối trong mảng thời gian. Hàm dùng chỉ số gốc của mảng khi nguồn trả ít mốc hơn dự kiến để giữ thời gian cùng vị trí với giá trị cảm biến. Mỗi bản ghi được gắn record_id có phần ngẫu nhiên; vì vậy một lần chạy lặp có thể tạo bản ghi trùng ý nghĩa dữ liệu.
+Phiên bản Tuần 1 nạp dữ liệu lịch sử với past_hours=48, tính số ngày cần truy vấn rồi lấy tối đa 48 mốc cuối trong mảng thời gian. Hàm dùng chỉ số gốc của mảng khi nguồn trả ít mốc hơn dự kiến để giữ thời gian cùng vị trí với giá trị cảm biến. Mỗi bản ghi được gắn record_id có phần ngẫu nhiên; khi thu thập lại cùng thời điểm, cần đối chiếu thành phố và timestamp để xác định phạm vi quan trắc.
 
 Đường dẫn phân vùng dùng ngày UTC lấy từ bản ghi. Trường timestamp_vn là giờ hiển thị cho người đọc ở Việt Nam; vì vậy một quan trắc gần nửa đêm có thể mang ngày Việt Nam khác với ngày trong thư mục S3. Đây là lựa chọn nhất quán của mã hiện tại, cần giải thích rõ khi lọc dữ liệu theo ngày địa phương trong Athena.
 

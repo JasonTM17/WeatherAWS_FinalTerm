@@ -27,7 +27,7 @@
   },
   {
     "file": "03_particulates.png",
-    "title": "PM2.5 và PM10 trung bình theo đô thị và tài khoản",
+    "title": "PM2.5 và PM10 trung bình theo đô thị và nguồn dữ liệu",
     "source_csv": "city_statistics.csv",
     "student_labels": {
       "default": "Sinh viên Tiến Sơn",
@@ -66,7 +66,7 @@
   },
   {
     "file": "06_sampling_coverage.png",
-    "title": "Mật độ lấy mẫu theo đô thị tài khoản và giờ",
+    "title": "Mật độ lấy mẫu theo đô thị, sinh viên và giờ",
     "source_csv": "hourly_city.csv",
     "student_labels": {
       "default": "Sinh viên Tiến Sơn",
@@ -144,7 +144,7 @@
   },
   {
     "file": "12_gaseous_pollutants.png",
-    "title": "CO NO₂ và O₃ trung bình theo đô thị và tài khoản",
+    "title": "CO NO₂ và O₃ trung bình theo đô thị và nguồn dữ liệu",
     "source_csv": "distribution_statistics.csv",
     "student_labels": {
       "default": "Sinh viên Tiến Sơn",
@@ -183,7 +183,7 @@
   },
   {
     "file": "15_query_time.png",
-    "title": "Thời gian thực thi của 24 truy vấn mới trên hai tài khoản",
+    "title": "Thời gian thực thi 24 truy vấn trong hai báo cáo dữ liệu",
     "source_csv": "query_metrics.csv",
     "student_labels": {
       "default": "Sinh viên Tiến Sơn",

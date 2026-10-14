@@ -12,10 +12,10 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [CSV của báo cáo Tuần 1](../tuan_2/results/athena_queries/)
 - [CSV Athena Tuần 2](../tuan_2/results/week2_live/) và [phân tích Tuần 2](../tuan_2/results/week2_analysis/)
 
-Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng tuần, Word, PDF, Excel và biểu đồ dùng cùng dữ liệu nguồn. Tuần 1 giữ bộ xuất 156 dòng, bao gồm dữ liệu lịch sử nạp bổ sung; Tuần 2 phân tích riêng 27/57 dòng của hai tài khoản. Mục 3.12 trong báo cáo Tuần 2 đối chiếu trực tiếp với bộ Tuần 1 đã lưu và phân biệt phép lọc lại theo ranh giới tuần.
+Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng tuần, Word, PDF, Excel và biểu đồ dùng cùng dữ liệu nguồn. Tuần 1 giữ bộ xuất 156 dòng, bao gồm dữ liệu lịch sử nạp bổ sung; Tuần 2 phân tích riêng 27/57 dòng trong hai báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Mục 3.12 trong báo cáo Tuần 2 đối chiếu trực tiếp với bộ Tuần 1 đã lưu và phân biệt phép lọc lại theo ranh giới tuần.
 
 ## Phân tích sâu Tuần 2
 
 - [Excel mới](../tuan_2/docs/Du_lieu_phan_tich_Tuan_2_Nhom_05.xlsx)
-- [CSV từ hai tài khoản](../tuan_2/results/week2_live/) và [bảng phân tích](../tuan_2/results/week2_analysis/)
+- [CSV trong hai báo cáo dữ liệu](../tuan_2/results/week2_live/) và [bảng phân tích](../tuan_2/results/week2_analysis/)
 - [16 biểu đồ](../tuan_2/results/week2_charts/) và [hồ sơ dữ liệu nguồn](../tuan_2/results/week2_evidence/)

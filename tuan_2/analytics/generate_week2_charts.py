@@ -22,7 +22,7 @@ def rows(name):
 def value(row,key):return float(row[key])
 def finish(fig,name,title,source):
     fig.suptitle(title,fontsize=14,y=.99)
-    fig.text(.02,.01,'Nguồn: dữ liệu AWS của hai tài khoản; phân tích riêng từng tài khoản',fontsize=8,color='#444444')
+    fig.text(.02,.01,'Nguồn: báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên',fontsize=8,color='#444444')
     if name!='correlations':fig.tight_layout(rect=(0,.035,1,.865 if getattr(fig,'shared_legend',False) else .96))
     filename=f'{len(manifest)+1:02d}_{name}.png';fig.savefig(OUT/filename,dpi=250,bbox_inches='tight',pad_inches=.16);plt.close(fig)
     manifest.append({'file':filename,'title':title,'source_csv':source,'student_labels':LABEL,'account_colors':COLOR})
@@ -60,7 +60,7 @@ for ax,metric,title in zip(axes,['avg_pm2_5','avg_pm10'],['PM2.5','PM10']):
     ax.set_xticks(x,['TP. HCM','Hà Nội','Đà Nẵng']);ax.set_title(title);ax.set_ylim(0,95)
 shared_legend(fig,axes[0])
 axes[0].set_ylabel('Nồng độ trung bình (µg/m³)')
-finish(fig,'particulates','PM2.5 và PM10 trung bình theo đô thị và tài khoản','city_statistics.csv')
+finish(fig,'particulates','PM2.5 và PM10 trung bình theo đô thị và nguồn dữ liệu','city_statistics.csv')
 
 raw=rows('raw_week2_both_accounts')
 fig,ax=plt.subplots(figsize=(9.2,4.8));values=[];labels=[]
@@ -102,7 +102,7 @@ for i in range(6):
     for j in range(grid.shape[1]):
         if not np.isnan(grid[i,j]):ax.text(j,i,str(int(grid[i,j])),ha='center',va='center',color='white' if grid[i,j]>1.5 else 'black',fontsize=9)
 ax.set_yticks(range(6),[f'{CITY[c]}\n{LABEL[p]}' for c in CITIES for p in PROFILES],fontsize=9);ax.set_xticks(range(0,grid.shape[1],2));ax.set_xlabel('Số giờ kể từ mốc đầu tiên có dữ liệu');fig.colorbar(im,ax=ax,label='Số mẫu trong giờ',ticks=[0,1,2,3])
-finish(fig,'sampling_coverage','Mật độ lấy mẫu theo đô thị tài khoản và giờ','hourly_city.csv')
+finish(fig,'sampling_coverage','Mật độ lấy mẫu theo đô thị, sinh viên và giờ','hourly_city.csv')
 
 cat=rows('category_distribution');fig,ax=plt.subplots(figsize=(9.8,4.8));labels=[];positions=range(6);colors={'Good':'#16A34A','Moderate':'#EAB308','Unhealthy':'#DC2626'}
 for label in ['Good','Moderate','Unhealthy']:
@@ -156,7 +156,7 @@ for ax,v,title in zip(axes,['carbon_monoxide','nitrogen_dioxide','ozone'],['CO',
     ax.set_xticks(range(3),['TP.HCM','Hà Nội','Đà Nẵng']);ax.set_title(title);ax.set_ylim(0,ax.get_ylim()[1]*1.2)
 shared_legend(fig,axes[0])
 axes[0].set_ylabel('Nồng độ trung bình (µg/m³)')
-finish(fig,'gaseous_pollutants','CO NO₂ và O₃ trung bình theo đô thị và tài khoản','distribution_statistics.csv')
+finish(fig,'gaseous_pollutants','CO NO₂ và O₃ trung bình theo đô thị và nguồn dữ liệu','distribution_statistics.csv')
 
 runtime=[r for r in rows('lambda_runtime') if r['scope']=='week2'];fig,axes=plt.subplots(1,2,figsize=(9.3,4.5))
 for ax,key,label in zip(axes,['duration_ms','billed_duration_ms'],['Thời gian xử lý (ms)','Thời gian tính phí (ms)']):
@@ -175,7 +175,7 @@ query=rows('query_metrics');names=[r['name'] for r in query if r['profile']=='de
 for i,p in enumerate(PROFILES):
     y=[value(next(r for r in query if r['profile']==p and r['name']==name),'execution_time_ms') for name in names];ax.barh(np.arange(len(names))+(i-.5)*.34,y,.34,color=COLOR[p],label=LABEL[p])
 ax.set_yticks(range(len(names)),[name.replace('_',' ') for name in names]);ax.invert_yaxis();ax.set_xlabel('EngineExecutionTime (ms)');ax.legend(frameon=False)
-finish(fig,'query_time','Thời gian thực thi của 24 truy vấn mới trên hai tài khoản','query_metrics.csv')
+finish(fig,'query_time','Thời gian thực thi 24 truy vấn trong hai báo cáo dữ liệu','query_metrics.csv')
 
 comparison=rows('weekly_comparison');fig,axes=plt.subplots(1,2,figsize=(10.2,4.8))
 for ax,p in zip(axes,PROFILES):

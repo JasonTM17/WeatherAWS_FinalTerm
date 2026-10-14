@@ -14,23 +14,23 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 | Tuần | Phạm vi | Word | PDF | Excel |
 | --- | --- | --- | --- | --- |
 | 1 | Bộ dữ liệu đã nộp: 156 bản ghi và bốn biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx) |
-| 2 | Phân tích mới từ hai tài khoản, 16 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) | [PDF](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_Nhom_05.xlsx) |
+| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 16 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) | [PDF](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_Nhom_05.xlsx) |
 
 [Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md).
 
 ## Kết quả Tuần 2
 
-Đã tải 204 bản ghi raw từ tài khoản Sơn và 231 từ tài khoản Quyên. Sau lọc ranh giới Tuần 2 theo UTC+7, có **27 và 57 dòng nguồn**, tương ứng **9 và 19 mẫu mỗi đô thị**. Hai tài khoản được phân tích riêng; 144 quan trắc lịch sử trùng thành phố/thời gian và cùng giá trị cảm biến được nhận diện.
+Báo cáo dữ liệu của sinh viên Tiến Sơn có 204 bản ghi raw, báo cáo của sinh viên Ngọc Quyên có 231 bản ghi raw. Sau lọc ranh giới Tuần 2 theo UTC+7, có **27 và 57 dòng nguồn**, tương ứng **9 và 19 mẫu mỗi đô thị**. Hai bộ báo cáo dữ liệu được trình bày riêng; 144 quan trắc lịch sử cùng đô thị và thời điểm có giá trị cảm biến tương ứng bằng nhau được nhận diện khi đối chiếu.
 
-| Đô thị | AQI TB Sơn | AQI TB Quyên | PM2.5 TB Sơn µg/m³ | PM2.5 TB Quyên µg/m³ |
+| Đô thị | AQI TB Tiến Sơn | AQI TB Ngọc Quyên | PM2.5 TB Tiến Sơn µg/m³ | PM2.5 TB Ngọc Quyên µg/m³ |
 | --- | ---: | ---: | ---: | ---: |
 | TP. Hồ Chí Minh | 78,00 | 79,05 | 23,38 | 22,92 |
 | Hà Nội | 163,56 | 163,05 | 76,66 | 75,11 |
 | Đà Nẵng | 35,44 | 35,37 | 6,38 | 6,46 |
 
-Mẫu mới bao phủ hai ngày và 9 giờ riêng mỗi tài khoản, chưa đủ toàn bộ tuần. Tương quan mô tả tập mẫu, không chứng minh quan hệ nhân quả. Dữ liệu API chất lượng không khí dựa trên sản phẩm CAMS, không phải phép đo trực tiếp tại trạm.
+Mẫu mới bao phủ hai ngày và 9 giờ riêng trong bộ dữ liệu của mỗi sinh viên, chưa đủ toàn bộ tuần. Tương quan mô tả tập mẫu, không chứng minh quan hệ nhân quả. Dữ liệu API chất lượng không khí dựa trên sản phẩm CAMS, không phải phép đo trực tiếp tại trạm.
 
-- [CSV Athena mới theo tài khoản](tuan_2/results/week2_live/)
+- [CSV Athena trong hai báo cáo dữ liệu](tuan_2/results/week2_live/)
 - [25 CSV phân tích và đối chiếu](tuan_2/results/week2_analysis/)
 - [16 biểu đồ và bảng nguồn](tuan_2/results/week2_charts/)
 - [Tệp raw và metadata dịch vụ đã đọc](tuan_2/results/week2_evidence/)
@@ -42,7 +42,7 @@ Mẫu mới bao phủ hai ngày và 9 giờ riêng mỗi tài khoản, chưa đ�
 
 EventBridge gọi Lambda; Lambda đọc cấu hình Secrets Manager, thu thập Open-Meteo, ghi NDJSON vào S3 và gửi SNS. Glue quản lý lược đồ, Athena phân tích dữ liệu và CloudWatch ghi chỉ số/log. Các thao tác quản lý và xuất dữ liệu dùng boto3.
 
-Source Lambda trên máy khác bản đang triển khai ở cả hai tài khoản; hash được lưu trong metadata. Tài khoản Quyên có hai quy tắc lịch đang bật và hai đăng ký email xác nhận, Sơn có một lịch và một đăng ký. Các tổng Errors lớn hơn Invocations được giữ nguyên và tỷ lệ lỗi để trống trong bộ phân tích; không suy diễn trạng thái chạy ổn định từ một Alarm OK.
+Source Lambda trên máy khác bản đang triển khai ở môi trường AWS của hai sinh viên; hash được lưu trong metadata. Môi trường AWS của sinh viên Ngọc Quyên có hai quy tắc lịch đang bật và hai đăng ký email xác nhận, sinh viên Tiến Sơn có một lịch và một đăng ký. Các tổng Errors lớn hơn Invocations được giữ nguyên và tỷ lệ lỗi để trống trong bộ phân tích; không suy diễn trạng thái chạy ổn định từ một Alarm OK.
 
 ## Tái lập phân tích
 
@@ -55,4 +55,4 @@ python tuan_2/analytics/generate_week2_charts.py
 python -m unittest discover -s tuan_2/analytics -p test_week2_analysis.py -v
 ```
 
-Phân tích dùng tệp đã xuất cùng metadata và không cần thông tin đăng nhập. Để chạy các chức năng quản lý dịch vụ hoặc xuất dữ liệu mới, xem [hướng dẫn vận hành](docs/operation.md). Không đưa credentials vào repository. Bộ 44 kiểm tra chức năng cũ và 7 hồi quy phân tích sâu có phạm vi riêng; kết quả cục bộ không phải một lần triển khai AWS mới.
+Phân tích dùng tệp đã xuất cùng metadata và không cần thông tin đăng nhập. Để chạy các chức năng quản lý dịch vụ hoặc xuất dữ liệu mới, xem [hướng dẫn vận hành](docs/operation.md). Không đưa credentials vào repository. Bộ 44 kiểm tra chức năng cũ và các hồi quy phân tích dữ liệu có phạm vi riêng; kết quả cục bộ không phải một lần triển khai AWS mới.
