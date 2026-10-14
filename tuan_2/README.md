@@ -13,4 +13,4 @@ Báo cáo dữ liệu của sinh viên Tiến Sơn có 204 bản ghi toàn bộ,
 
 Mục 3.12 trong báo cáo đối chiếu AQI và PM2.5 với đúng bộ 156 bản ghi của báo cáo Tuần 1 đã lưu. Phép lọc hai tuần từ lần xuất mới được trình bày riêng, vì cỡ mẫu Tuần 1 khi lọc lại là 42/41 mỗi đô thị. Excel có sheet So_sanh_tuan và hai CSV riêng cho hai phạm vi này.
 
-Chi tiết phương pháp và cách tái lập nằm trong [README gốc](../README.md) và [tài liệu dữ liệu](../docs/data-analysis.md). Mã source hiện tại được phân biệt với mã đang triển khai; không thay credentials trong quá trình lấy dữ liệu.
+Chi tiết phương pháp và cách tái lập nằm trong [README gốc](../README.md) và [tài liệu dữ liệu](../docs/data-analysis.md). Xem [sơ đồ source](../docs/repository-layout.md), [thứ tự dùng SQL](athena/README.md) và [danh mục dữ liệu](results/README.md) để đọc đúng từng thành phần.

@@ -1,6 +1,6 @@
 -- Tạo Athena View: vietnam_weather_aqi
--- Cho phép truy vấn song song và hoán đổi trong suốt giữa 2 tên bảng:
--- 'vietnam_weather_aqi' và 'weather_airquality_records'
+-- View đọc bảng gốc weather_airquality_records.
+-- Tạo bảng gốc và đăng ký phân vùng trước khi tạo view này.
 -- Database: weather_aqi_db
 
 CREATE OR REPLACE VIEW weather_aqi_db.vietnam_weather_aqi AS

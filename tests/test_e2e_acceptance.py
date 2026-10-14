@@ -1,8 +1,8 @@
 """
 E2E Acceptance Test Suite for WeatherAWS_FinalTerm Repository
 ============================================================
-Independent, opaque-box, requirement-driven end-to-end acceptance tests
-covering user requirements R1 to R4 across four verification tiers:
+Local source and submission checks across four groups. These inspect saved
+artifacts and run mocked functional tests; they do not call AWS or verify deployment.
 
 - Tier 1: Feature Coverage (R1.1 - R4.2)
 - Tier 2: Boundary & Corner Cases (non-empty files, format validity, schema integrity)
@@ -149,50 +149,24 @@ def extract_pdf_info(pdf_path: Path) -> Tuple[int, str, List]:
         except Exception:
             pass
 
-    # Subprocess fallback via Python 3.14 if pypdf is installed there
-    try:
-        py_code = (
-            "import json, pypdf; "
-            f"r = pypdf.PdfReader(r'{pdf_path}'); "
-            "pages = r.pages; "
-            "txt = ' '.join((p.extract_text() or '') for p in pages); "
-            "links = len(pages[3].get('/Annots', [])) if len(pages) > 3 else 0; "
-            "print(json.dumps({'count': len(pages), 'text': txt, 'links_count': links}))"
-        )
-        proc = subprocess.run(
-            ["py", "-3.14", "-c", py_code],
-            capture_output=True,
-            text=True,
-            timeout=10,
-        )
-        if proc.returncode == 0:
-            data = json.loads(proc.stdout.strip())
-            return data["count"], data["text"], [1] * data["links_count"]
-    except Exception:
-        pass
-
-    # Basic binary check fallback
-    try:
-        content = pdf_path.read_bytes()
-        page_markers = len(re.findall(rb"/Type\s*/Page\b", content))
-        text_estimate = content.decode("latin1", errors="ignore")
-        return page_markers, text_estimate, []
-    except Exception:
-        return 0, "", []
+    raise RuntimeError(
+        "Cannot inspect PDF text and links. Install requirements.txt in the current "
+        "Python environment and check that the PDF can be opened."
+    )
 
 
 # =============================================================================
 # Tier 1: Feature Coverage (User Requirements R1 to R4)
 # =============================================================================
 class TestTier1FeatureCoverage(unittest.TestCase):
-    """Verifies all direct feature requirements R1 to R4 from ORIGINAL_REQUEST.md."""
+    """Checks the published source layout and saved weekly submissions."""
 
     def test_r1_1_tuan_1_directory_structure_and_assets(self):
         """R1.1: Verify tuan_1/ directory exists with foundation scripts, architecture docs, and Week 1 reports."""
         tuan_1 = REPO_ROOT / "tuan_1"
         self.assertTrue(
             tuan_1.exists() and tuan_1.is_dir(),
-            "Directory 'tuan_1' does not exist at repository root (pending Milestone 1: Repo Reorganization)",
+            "Directory 'tuan_1' does not exist at repository root",
         )
 
         expected_files = [
@@ -204,7 +178,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
             tuan_1 / "docs" / "Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx",
             tuan_1 / "docs" / "Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf",
             tuan_1 / "docs" / "Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx",
-            tuan_1 / "docs" / "WORKLOG_NHOM_05_CAN_XAC_NHAN.md",
+            tuan_1 / "docs" / "PHAN_CONG_NHOM_05.md",
             tuan_1 / "README.md",
         ]
         for path in expected_files:
@@ -218,7 +192,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         tuan_2 = REPO_ROOT / "tuan_2"
         self.assertTrue(
             tuan_2.exists() and tuan_2.is_dir(),
-            "Directory 'tuan_2' does not exist at repository root (pending Milestone 1: Repo Reorganization)",
+            "Directory 'tuan_2' does not exist at repository root",
         )
 
         # Core directories
@@ -251,8 +225,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         self.assertEqual(
             len(repo_matches),
             0,
-            f"Found forbidden raw CLI execution log file(s): {[str(p.relative_to(REPO_ROOT)) for p in repo_matches]} "
-            f"(pending Milestone 1: CLI Log Cleanup)",
+            f"Found forbidden raw CLI execution log file(s): {[str(p.relative_to(REPO_ROOT)) for p in repo_matches]}",
         )
 
     def test_r2_1_week_1_docx_contains_github_url(self):
@@ -270,8 +243,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         self.assertIn(
             GITHUB_REPO_URL,
             text,
-            f"GitHub URL '{GITHUB_REPO_URL}' not found in Week 1 DOCX: {w1_docx.relative_to(REPO_ROOT)} "
-            f"(pending Milestone 3: Week 1 Report Update)",
+            f"GitHub URL '{GITHUB_REPO_URL}' not found in Week 1 DOCX: {w1_docx.relative_to(REPO_ROOT)}",
         )
 
     def test_r2_2_week_1_pdf_contains_github_url(self):
@@ -289,8 +261,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         self.assertIn(
             GITHUB_REPO_URL,
             text,
-            f"GitHub URL '{GITHUB_REPO_URL}' not found in Week 1 PDF: {w1_pdf.relative_to(REPO_ROOT)} "
-            f"(pending Milestone 3: Week 1 Report Update)",
+            f"GitHub URL '{GITHUB_REPO_URL}' not found in Week 1 PDF: {w1_pdf.relative_to(REPO_ROOT)}",
         )
 
     def test_r2_3_week_1_pdf_layout_integrity(self):
@@ -321,7 +292,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         )
         self.assertIsNotNone(
             w2_docx,
-            "Week 2 DOCX report file not found (pending Milestone 4: Week 2 Report Creation)",
+            "Week 2 DOCX report file not found",
         )
 
         text = extract_docx_text(w2_docx)
@@ -364,7 +335,7 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         )
         self.assertIsNotNone(
             w2_pdf,
-            "Week 2 PDF report file not found (pending Milestone 4: Week 2 Report PDF Conversion)",
+            "Week 2 PDF report file not found",
         )
 
         page_count, text, _ = extract_pdf_info(w2_pdf)
@@ -443,12 +414,13 @@ class TestTier1FeatureCoverage(unittest.TestCase):
         self.assertEqual(
             proc.returncode,
             0,
-            f"Unit test suite had failures or errors (return code {proc.returncode}):\n{output} "
-            f"(pending Milestone 2: Test Determinism)",
+            f"Unit test suite had failures or errors (return code {proc.returncode}):\n{output}",
         )
 
     def test_r4_2_git_commits_and_remote_tracking(self):
         """R4.2: Verify Git commits exist and remote origin tracks repository."""
+        if not (REPO_ROOT / '.git').exists():
+            self.skipTest('Source archive has no Git metadata; remote check requires a checkout.')
         proc_url = subprocess.run(
             ["git", "config", "--get", "remote.origin.url"],
             cwd=str(REPO_ROOT),
@@ -670,9 +642,6 @@ class TestTier3CrossFeatureConsistency(unittest.TestCase):
 
         ddl_table = locate_file(
             "tuan_2/athena/create_table.sql",
-            "athena/create_table.sql",
-            "tuan_2/athena/create_table_vietnam_weather_aqi.sql",
-            "athena/create_table_vietnam_weather_aqi.sql",
         )
         self.assertIsNotNone(ddl_table, "Athena table DDL SQL file not found")
         content = ddl_table.read_text(encoding="utf-8")
@@ -721,8 +690,8 @@ class TestTier4ProjectReadiness(unittest.TestCase):
                 f"Potential plaintext AWS secret key in '{path.relative_to(REPO_ROOT)}'",
             )
 
-    def test_week_modules_self_contained(self):
-        """Verifies both tuan_1 and tuan_2 contain individual READMEs and setup scripts."""
+    def test_week_navigation_and_shared_sdk(self):
+        """Both weekly indexes exist; foundation wrappers resolve to the shared SDK."""
         tuan_1 = REPO_ROOT / "tuan_1"
         tuan_2 = REPO_ROOT / "tuan_2"
 
@@ -736,6 +705,11 @@ class TestTier4ProjectReadiness(unittest.TestCase):
                 (tuan_2 / "README.md").exists(),
                 "tuan_2/README.md is missing",
             )
+        sdk = tuan_2 / 'scripts' / 'aws_project.py'
+        self.assertTrue(sdk.is_file(), 'Shared Python SDK is missing')
+        for name in ('01_setup_s3.ps1', '02_setup_secrets.ps1'):
+            wrapper = tuan_1 / 'scripts' / name
+            self.assertIn('../../tuan_2/scripts/aws_project.py', wrapper.read_text(encoding='utf-8'))
 
 
 # =============================================================================
@@ -769,7 +743,8 @@ if __name__ == "__main__":
     print(f"  SUMMARY: {result.testsRun} tests executed | "
           f"{len(result.failures)} failures | "
           f"{len(result.errors)} errors | "
-          f"{'PASSED 100%' if result.wasSuccessful() else 'IN PROGRESS / PENDING MILESTONES'}")
+          f"{'PASS' if result.wasSuccessful() else 'FAIL'} | "
+          f"{len(result.skipped)} skipped")
     print("=" * 80)
 
     sys.exit(0 if result.wasSuccessful() else 1)

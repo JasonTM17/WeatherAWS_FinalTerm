@@ -39,3 +39,9 @@ tuan_2/docs/_report_work/
 ORIGINAL_REQUEST.md
 # Local report plans and audit evidence are outside the submission source.
 /plans/
+
+# Retain the old CSV archive locally; publish the expanded data folder only.
+/tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05.zip
+
+# Separate ad-hoc exports from the saved report inputs.
+/output/

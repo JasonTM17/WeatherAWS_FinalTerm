@@ -2,6 +2,8 @@
 
 Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**, Nhóm 05. GVHD **ThS. Huỳnh Xuân Phụng**.
 
+[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git)
+
 | Sinh viên | MSSV | Phụ trách chính |
 | --- | --- | --- |
 | Nguyễn Tiến Sơn | 24110054 | S3, Secrets Manager, Lambda và SNS |
@@ -17,6 +19,21 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 | 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 18 biểu đồ và 24 truy vấn mới | [Word](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) | [PDF](tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_Nhom_05.xlsx) |
 
 [Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc source](docs/source-guide.md) · [Kiểm tra source](TEST_READY.md).
+
+## Cấu trúc repository
+
+| Thư mục | Vai trò | Điểm bắt đầu |
+| --- | --- | --- |
+| `docs/` | Tài liệu chung, kiến trúc, phương pháp và nhật ký | [Mục lục tài liệu](docs/README.md) |
+| `tuan_1/` | Báo cáo, dữ liệu đã nộp và script nền tảng của Tuần 1 | [Tuần 1](tuan_1/README.md) |
+| `tuan_2/lambda/` | Chương trình thu thập chính | [lambda_function.py](tuan_2/lambda/lambda_function.py) |
+| `tuan_2/scripts/` | Quản lý dịch vụ và xuất CSV bằng Python SDK; PowerShell chuyển tham số | [Hướng dẫn vận hành](docs/operation.md) |
+| `tuan_2/athena/` | Một bảng dữ liệu, một view và các truy vấn phân tích | [Thứ tự dùng SQL](tuan_2/athena/README.md) |
+| `tuan_2/analytics/` | Phân tích CSV và dựng biểu đồ của từng tuần | [Hướng dẫn đọc source](docs/source-guide.md) |
+| `tuan_2/results/` | Các tập dữ liệu đã lưu, metadata và hình từ dữ liệu | [Danh mục dữ liệu](tuan_2/results/README.md) |
+| `tests/`, `tuan_2/tests/` | Kiểm tra cấu trúc/tài liệu ở gốc và kiểm tra chức năng chuẩn | [Các lệnh kiểm tra](TEST_READY.md) |
+
+Hai tuần dùng chung một bộ triển khai tại `tuan_2/`; các script nền tảng Tuần 1 gọi bộ này. Chi tiết tệp chuẩn, bản sao dữ liệu và các điểm vào tương thích nằm trong [sơ đồ source](docs/repository-layout.md).
 
 ## Kết quả Tuần 2
 

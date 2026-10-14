@@ -6,6 +6,7 @@ Lớp 261CLCO332779_05 — Nhóm 05. Nguyễn Tiến Sơn (24110054) và Trần 
 - [Báo cáo PDF](docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf)
 - [Tài liệu chung](../docs/README.md)
 - [Source chức năng và quản lý dịch vụ](../tuan_2/)
-- [Dữ liệu dùng đối chiếu](../tuan_2/results/athena_queries/)
+- [CSV của bộ báo cáo đã nộp](docs/Bao_cao_tuan_1_CSV_Nhom_05/)
+- [Phân công đã xác nhận](docs/PHAN_CONG_NHOM_05.md)
 
 Tuần 1 trình bày mục tiêu, kiến trúc, dịch vụ nền tảng và phân tích số liệu của bộ mẫu đã lưu. Hai entry point thiết lập S3/Secrets Manager dùng lại chương trình SDK chung tại tuan_2/scripts/aws_project.py.

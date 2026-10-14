@@ -4,6 +4,8 @@
 
 ## Thứ tự đọc
 
+[Sơ đồ source](repository-layout.md) xác định tệp chuẩn và các điểm vào dùng lại giữa hai tuần. [Danh mục SQL](../tuan_2/athena/README.md) nêu thứ tự tạo bảng và view; [danh mục dữ liệu](../tuan_2/results/README.md) phân biệt các bộ đầu vào đã lưu.
+
 | Khu vực | Tệp chính | Trách nhiệm |
 | --- | --- | --- |
 | Thu thập | [Lambda](../tuan_2/lambda/lambda_function.py) | Đọc cấu hình, gọi Open-Meteo, chuẩn hóa bản ghi, cảnh báo SNS và lưu NDJSON trên S3 |
@@ -16,6 +18,8 @@
 | Kiểm tra | [Kiểm tra chức năng](../tuan_2/tests/) và [kiểm tra phân tích](../tuan_2/analytics/) | API/SDK giả lập và đối chiếu dữ liệu đã lưu, không gọi tài nguyên thật |
 
 Các entry point PowerShell trong tuan_1/scripts và tuan_2/scripts chuyển tham số tới chương trình Python chung. Tuần 1 dùng lại phần thiết lập nền tảng; mã Lambda và phân tích chính nằm tại Tuần 2. Các wrapper trong tests/ giữ đường chạy kiểm tra ở thư mục gốc; bản kiểm tra chức năng chuẩn nằm trong tuan_2/tests/.
+
+`export_metrics.py` là điểm vào tương thích để xuất năm truy vấn SELECT. Khi xuất kết quả mới, chỉ định `--output output/athena` để giữ riêng dữ liệu báo cáo đã lưu; điểm vào chính là `scripts/athena_export.py`. Các chương trình dựng hình ghi vào thư mục kết quả của tuần tương ứng, nên việc tái lập hình có thể làm thay đổi tệp PNG/manifest được Git theo dõi.
 
 ## Luồng dữ liệu và hợp đồng đầu vào
 

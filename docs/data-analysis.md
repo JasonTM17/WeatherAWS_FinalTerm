@@ -2,7 +2,7 @@
 
 ## Bộ báo cáo Tuần 1
 
-[CSV của báo cáo Tuần 1](../tuan_2/results/athena_queries/) gồm 156 bản ghi/52 mẫu mỗi đô thị, bốn bảng tổng hợp và chỉ số truy vấn. Bộ này giữ nguyên các giá trị trong báo cáo và Excel Tuần 1. Mỗi đô thị có 52 mốc giờ liên tiếp, được gom thành 24 nhóm giờ trong ngày. Có 51 dòng lịch sử nạp bổ sung trước ranh giới Tuần 1 và 105 dòng trong ranh giới tuần theo UTC+7; bộ 156 dòng là phạm vi của lần xuất dùng làm báo cáo.
+[CSV của báo cáo Tuần 1](../tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05/) gồm 156 bản ghi/52 mẫu mỗi đô thị, bốn bảng tổng hợp và chỉ số truy vấn. Bộ này giữ nguyên các giá trị trong báo cáo và Excel Tuần 1. Mỗi đô thị có 52 mốc giờ liên tiếp, được gom thành 24 nhóm giờ trong ngày. Có 51 dòng lịch sử nạp bổ sung trước ranh giới Tuần 1 và 105 dòng trong ranh giới tuần theo UTC+7; bộ 156 dòng là phạm vi của lần xuất dùng làm báo cáo. Các chương trình dựng hình Tuần 1 đọc bản sao cùng dữ liệu tại [athena_queries](../tuan_2/results/athena_queries/); vai trò các thư mục được giải thích trong [danh mục dữ liệu](../tuan_2/results/README.md).
 
 ## Bộ dữ liệu mới Tuần 2
 

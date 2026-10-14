@@ -2,6 +2,8 @@
 
 Chạy từ thư mục gốc repository với Python 3.12 trở lên.
 
+`requirements.txt` cài thư viện cho SDK, phân tích và kiểm tra tài liệu. Bộ phụ thuộc trong `tuan_2/analytics/` dành cho chạy SDK/biểu đồ; tệp trong `tuan_2/lambda/` mô tả phạm vi Lambda. Xem [sơ đồ source](repository-layout.md).
+
 ```powershell
 python -m pip install -r requirements.txt
 python tuan_2/scripts/athena_export.py --offline --output output/csv
@@ -22,6 +24,8 @@ python tuan_2/scripts/athena_export.py --region us-east-1 --output output/athena
 ```
 
 Tùy chọn `--email` của `deploy` hoặc `setup-sns` đăng ký địa chỉ nhận thông báo; người nhận cần xác nhận. Các entry point PowerShell trong `tuan_1/scripts` và `tuan_2/scripts` chuyển tham số tới chương trình Python; tùy chọn `-Python` chọn đường dẫn Python khi máy có nhiều phiên bản.
+
+Thư mục `output/` được Git bỏ qua để lưu các lượt xuất tùy chọn. Luôn chỉ định `--output` khi cần giữ riêng kết quả mới; các mặc định tương thích vẫn trỏ tới thư mục kết quả trong `tuan_2/`. Không dùng thư mục dữ liệu đã nộp làm đích xuất mới.
 
 `verify` đọc trạng thái Lambda, lịch, S3 và bảng Glue; không tự kích hoạt thu thập. Chức năng Lambda xử lý hiện tại theo sự kiện mặc định; sự kiện có `backfill_hours` yêu cầu nạp bù lịch sử.
 

@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 import shutil
 import sys
+import re
 
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATA_EXPORTS_DIR = os.path.join(REPO_ROOT, 'results', 'data_exports')
@@ -131,16 +132,26 @@ class TestCsvExports(unittest.TestCase):
                         self.assertIsNotNone(v, f"Null field {k} in {fname} row {row_idx}")
                         self.assertNotEqual(v.lower(), 'nan', f"NaN in {fname} field {k} row {row_idx}")
 
-    def test_ddl_and_view_files_exist(self):
-        """Verify DDL and View scripts for vietnam_weather_aqi exist and are non-empty."""
-        tbl_path = os.path.join(REPO_ROOT, 'athena', 'create_table_vietnam_weather_aqi.sql')
+    def test_canonical_table_and_view_have_distinct_names(self):
+        """Only the base table is external; the public alias must remain a view."""
+        tbl_path = os.path.join(REPO_ROOT, 'athena', 'create_table.sql')
         view_path = os.path.join(REPO_ROOT, 'athena', 'create_view_vietnam_weather_aqi.sql')
-        self.assertTrue(os.path.exists(tbl_path), "create_table_vietnam_weather_aqi.sql missing")
+        self.assertTrue(os.path.exists(tbl_path), "create_table.sql missing")
         self.assertTrue(os.path.exists(view_path), "create_view_vietnam_weather_aqi.sql missing")
         with open(tbl_path, 'r', encoding='utf-8') as f:
-            self.assertIn("vietnam_weather_aqi", f.read())
+            table_sql = f.read()
         with open(view_path, 'r', encoding='utf-8') as f:
-            self.assertIn("vietnam_weather_aqi", f.read())
+            view_sql = f.read()
+        self.assertRegex(table_sql, r'(?i)CREATE\s+EXTERNAL\s+TABLE\s+IF\s+NOT\s+EXISTS\s+weather_aqi_db\.weather_airquality_records')
+        self.assertRegex(view_sql, r'(?i)CREATE\s+OR\s+REPLACE\s+VIEW\s+weather_aqi_db\.vietnam_weather_aqi')
+        self.assertRegex(view_sql, r'(?i)FROM\s+weather_aqi_db\.weather_airquality_records')
+        for name in os.listdir(os.path.join(REPO_ROOT, 'athena')):
+            if name.endswith('.sql'):
+                with open(os.path.join(REPO_ROOT, 'athena', name), encoding='utf-8') as f:
+                    sql = f.read()
+                self.assertIsNone(re.search(
+                    r'(?i)CREATE\s+(?:EXTERNAL\s+)?TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?weather_aqi_db\.vietnam_weather_aqi\b', sql),
+                    f'{name} creates a table with the view name')
 
     def test_export_raw_records_offline_resilience(self):
         """Test export_raw_records.py --offline flag generates 156 records to custom destination."""
