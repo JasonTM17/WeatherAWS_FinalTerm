@@ -20,7 +20,7 @@ Báo cáo trình bày chức năng hệ thống, dữ liệu và kết quả ph�
 
 - Trần Thị Ngọc Quyên — MSSV 24110051: Glue, Athena, biểu đồ và đối chiếu dữ liệu.
 
-Báo cáo gồm sáu chương: phạm vi hệ thống và phân công; nguồn dữ liệu và phương pháp phân tích; dữ liệu môi trường; vận hành Lambda và SNS; truy vấn và sử dụng tài nguyên; tổng hợp kết quả Tuần 2.
+Báo cáo gồm bảy chương: phạm vi hệ thống và phân công; nguồn dữ liệu và phương pháp phân tích; dữ liệu môi trường; vận hành Lambda và SNS; truy vấn và sử dụng tài nguyên; giải thích mã nguồn gắn với kết quả; tổng hợp kết quả Tuần 2.
 
 ## Chương 1 Phạm vi và hệ thống thực hành Tuần 2
 
@@ -563,26 +563,79 @@ Bảng 5.3 Lịch sử truy vấn của dự án trước đợt phân tích m�
 
 Lịch sử ghi nhận 52 lượt truy vấn trong báo cáo dữ liệu của sinh viên Tiến Sơn và 92 lượt trong báo cáo của sinh viên Ngọc Quyên, trước đợt 24 truy vấn mới. Số lượt FAILED tương ứng là 21 và 1. Lịch sử có cả truy vấn cấu hình và phân tích; các số này được trình bày riêng với kết quả của đợt truy vấn vừa xuất.
 
-### 5.4 Chi phí từ Cost Explorer
+### 5.4 Chi phí dự kiến và số liệu Cost Explorer
 
-Bảng 5.4 Chi phí ghi nhận trong phạm vi Tuần 2 làm tròn đến cent
+Bảng 5.4 Mức dự kiến của nhóm và chi phí Cost Explorer trong phạm vi Tuần 2
 
-| Sinh viên | Hiển thị đến cent | Đơn vị | Estimated |
+| Sinh viên | Dự kiến nhóm đề xuất (USD) | Cost Explorer đến cent (USD) | Estimated |
 | --- | --- | --- | --- |
-| Tiến Sơn | 0,00 | USD | Có |
-| Ngọc Quyên | 0,03 | USD | Có |
+| Sinh viên Tiến Sơn | 0,05 | 0,00 | Có |
+| Sinh viên Ngọc Quyên | — | 0,03 | Có |
 
-Trong phạm vi Tuần 2, UnblendedCost được trình bày đến cent là 0,00 USD trong báo cáo dữ liệu của sinh viên Tiến Sơn và 0,03 USD trong báo cáo dữ liệu của sinh viên Ngọc Quyên. Tổng giá trị trước khi làm tròn của sinh viên Tiến Sơn có độ lớn dưới 0,000001 USD, nên được hiển thị 0,00 USD ở độ chính xác này. Mức hiển thị 0,00 USD không đồng nghĩa với kết luận dự án hoàn toàn miễn phí.
+Mức 0,05 USD ở dòng sinh viên Tiến Sơn là chi phí dự kiến do nhóm đề xuất cho phần thực hành Tuần 2; nhóm chưa đặt mức dự kiến riêng cho sinh viên Ngọc Quyên. Cột Cost Explorer là số liệu AWS đã lưu và được làm tròn đến cent: 0,00 USD đối với sinh viên Tiến Sơn và 0,03 USD đối với sinh viên Ngọc Quyên. Hai loại số liệu được đặt cạnh nhau để người đọc đối chiếu, không được cộng gộp hoặc coi 0,05 USD là kết quả Cost Explorer.
 
-Chi phí dự kiến: 0,05 USD cho phần thực hành của sinh viên Tiến Sơn trong Tuần 2. Đây là mức dự kiến do nhóm đề xuất; số liệu ghi nhận từ Cost Explorer được trình bày riêng trong Bảng 5.4.
+Tổng UnblendedCost gốc trước khi làm tròn trong CSV lần lượt là −0,0000000764 USD và 0,0267146366 USD. Giá trị đầu tiên có độ lớn dưới 0,000001 USD nên hiển thị 0,00 USD ở độ chính xác cent; số liệu không đủ để xác định vì sao phản hồi chứa giá trị âm rất nhỏ. Mức hiển thị 0,00 USD không đồng nghĩa với kết luận dự án hoàn toàn miễn phí.
 
-Cả hai kết quả đều có cờ Estimated. Đây là số liệu ước tính tại thời điểm trích xuất Cost Explorer, được tổng hợp theo dịch vụ và ngày trong môi trường AWS của từng sinh viên; chưa phải hóa đơn cuối cùng hoặc chi phí riêng của dự án được phân bổ bằng tag. Các tệp CSV lưu nguyên giá trị trước khi làm tròn, đơn vị và trạng thái ước tính để đối chiếu.
+Cả hai kết quả Cost Explorer đều có cờ Estimated. Chúng được tổng hợp theo dịch vụ và ngày trong môi trường AWS của từng sinh viên; chưa phải hóa đơn cuối cùng hoặc chi phí riêng của dự án được phân bổ bằng tag. Các tệp CSV lưu nguyên giá trị trước khi làm tròn, đơn vị và trạng thái ước tính để đối chiếu.
 
-## Chương 6 Tổng hợp kết quả Tuần 2
+## Chương 6 Giải thích mã nguồn và cơ sở hình thành kết quả
 
-### 6.1 Sản phẩm dữ liệu và phân tích
+Chương này đối chiếu các lựa chọn trong source với dữ liệu Tuần 2 đã lưu. Mã nguồn cho biết hệ thống được thiết kế để xử lý dữ liệu như thế nào; các con số trong báo cáo được kiểm chứng từ CSV, JSON và metadata của từng sinh viên. Chúng em không suy ra số lần chạy hoặc chi phí chỉ từ một dòng cấu hình. Các tệp chính gồm `tuan_2/scripts/aws_project.py`, `tuan_2/lambda/lambda_function.py`, SQL trong `tuan_2/athena/`, `tuan_2/scripts/athena_export.py` và hai chương trình phân tích, dựng hình trong `tuan_2/analytics/`.
 
-Bảng 6.1 Sản phẩm đi kèm và phạm vi
+### 6.1 Thiết lập tài nguyên và lý do lựa chọn
+
+Trong `aws_project.py`, lớp `AwsProject` tạo tên bucket từ định danh tài khoản, sau đó chặn truy cập công khai và bật mã hóa SSE-S3. Cách đặt tên giúp mỗi môi trường thực hành có một vùng lưu trữ riêng; chính sách truy cập và mã hóa bảo vệ tệp dữ liệu gốc. Cấu hình `weather/api_config` chứa tọa độ của TP. Hồ Chí Minh, Hà Nội, Đà Nẵng và các ngưỡng cảnh báo. Đưa các tham số này vào Secrets Manager giúp Lambda đọc chung một cấu hình thay vì sửa trực tiếp trong hàm khi đổi vị trí hoặc ngưỡng. Tọa độ trong 84 dòng CSV Tuần 2 tương ứng với ba đô thị được khai báo.
+
+Hàm `deploy_lambda` đóng gói `lambda_function.py`, khai báo handler, Python 3.12, bộ nhớ 256 MB, giới hạn 60 giây và truyền tên bucket, tên secret, ARN SNS qua biến môi trường. Giới hạn tài nguyên làm rõ điều kiện thực thi để diễn giải chỉ số Duration và Max Memory Used; nó không tự bảo đảm từng lượt gọi API sẽ hoàn thành. Metadata đã lưu xác nhận cả hai môi trường có cấu hình 256 MB và 60 giây. Mã thiết lập EventBridge mặc định `rate(1 hour)` và cấp quyền cho đúng rule gọi Lambda. Trạng thái đã lưu ghi nhận một lịch bật ở môi trường sinh viên Tiến Sơn và hai lịch bật ở môi trường sinh viên Ngọc Quyên; vì vậy không suy số mẫu 9/19 chỉ từ lịch mặc định trong source.
+
+`setup_sns` tạo topic thông báo, còn `setup_cloudwatch` đặt Alarm cho tổng Errors của Lambda trong cửa sổ 5 phút và dựng dashboard Invocations, Errors, Duration. Thiết kế này tách việc thu thập dữ liệu, gửi thông báo và quan sát vận hành. Email chỉ nhận được thông báo sau khi đăng ký xác nhận; số dòng thỏa ngưỡng trong CSV không phải bằng chứng email đã tới người nhận. Một trạng thái Alarm OK tại thời điểm đọc cũng không giải thích được chuỗi Errors và Invocations bất nhất ở Bảng 4.3.
+
+### 6.2 Thu thập, chuẩn hóa và cảnh báo trong Lambda
+
+`lambda_handler` nhận sự kiện định kỳ để thu thập hiện tại, hoặc dùng `backfill_hours` khi cần nạp chuỗi lịch sử. Với dữ liệu hiện tại, `fetch_city_data` gọi hai endpoint Open-Meteo cho mỗi đô thị: một cho AQI và các chất ô nhiễm, một cho nhiệt độ, độ ẩm, áp suất và gió. Hàm `_api_section` từ chối phản hồi thiếu khối đo; `safe_float` và `safe_int` chuyển trường có tên nhưng null, rỗng hoặc không hợp lệ về giá trị mặc định. Vì mặc định số là 0, kết quả “không có số 0 trong mẫu” ở mục 2.2 chỉ nói về bản ghi đã lưu, không chứng minh nguồn API chưa từng thiếu dữ liệu.
+
+Mỗi bản ghi có `record_id`, tọa độ, `timestamp_utc`, `timestamp_vn`, các chỉ số đo, giờ UTC và khóa ngày. `get_aqi_category` gán nhãn theo dải AQI; do đó AQI của các mẫu Hà Nội từ 160 đến 169 ở sinh viên Tiến Sơn và 160 đến 168 ở sinh viên Ngọc Quyên xuất hiện ở cấp Unhealthy. Trong chế độ thu thập hiện tại, điều kiện gửi SNS là AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³. Cả 9 mẫu Hà Nội của sinh viên Tiến Sơn và 19 mẫu Hà Nội của sinh viên Ngọc Quyên thỏa điều kiện phân tích này; các đô thị còn lại không có mẫu thỏa. Đây là số bản ghi theo ngưỡng, không phải số thông báo SNS thực sự được giao.
+
+Trước mỗi yêu cầu HTTP, `_fetch_api_json` lấy thời gian Lambda còn lại, giữ tối đa 15 giây cho yêu cầu và dự trữ 10 giây cho phần kết thúc. Khi một đô thị lỗi, handler giữ các đô thị đã thu thập và trả `collection_status=partial`; khi không có bản ghi nào, hàm báo lỗi. Cơ chế này giải thích vì sao chương trình có thể lưu một phần dữ liệu thay vì loại toàn bộ lần thu thập, song số mẫu thực tế vẫn phải đọc từ CSV. Chế độ `backfill_hours` ghép hai chuỗi hourly theo cùng timestamp để bổ sung dữ liệu lịch sử; phép phân tích Tuần 2 chỉ lấy các bản ghi nằm trong cửa sổ thời gian đã quy định.
+
+### 6.3 Phân vùng S3, lược đồ và truy vấn Athena
+
+`save_records_to_s3` nhóm bản ghi theo ngày UTC và ghi NDJSON vào khóa `raw/year=YYYY/month=MM/day=DD/`. Một dòng JSON tương ứng một bản ghi; khóa ngày giúp truy vấn loại bớt những vùng không liên quan. `create_table.sql` khai báo bảng ngoài với 20 cột dữ liệu và ba khóa phân vùng `year`, `month`, `day`; `setup_catalog` tạo database, dùng Athena thực thi DDL rồi đồng bộ phân vùng. Các tệp dữ liệu vẫn ở S3, còn Glue/Athena dùng lược đồ và vị trí lưu trữ để đọc chúng.
+
+`raw_week2.sql` và các truy vấn tổng hợp chọn cả khóa phân vùng lẫn khoảng `timestamp_utc` từ 17:00 ngày 11/10 đến trước 17:00 ngày 18/10 theo UTC, tương ứng ranh giới tuần theo UTC+7. Khóa phân vùng giảm vùng phải đọc; điều kiện timestamp quyết định bản ghi có thật sự thuộc Tuần 2 hay không. Vì vậy 204/231 dòng toàn bộ được phân biệt với 27/57 dòng Tuần 2, đúng 9/19 mẫu mỗi đô thị. Hai truy vấn đối chứng ở mục 5.1 trả cùng 27 và 57 dòng; số byte quét giảm 86,76% và 75,28% khi thêm điều kiện phân vùng. Thời gian engine trong lần đo này không giảm, nên kết luận hiệu quả chỉ áp dụng cho dung lượng quét đã ghi nhận.
+
+### 6.4 Xuất CSV và đối chiếu phép tính
+
+`AthenaExporter` theo dõi trạng thái truy vấn đến khi `SUCCEEDED`, sau đó lấy CSV từ vị trí kết quả trên S3. Khi không lấy được đối tượng kết quả, nhánh `GetQueryResults` đọc đủ các trang và giữ ô NULL ở vị trí cột tương ứng. Tệp đích chỉ được thay sau khi có kết quả đọc được; lỗi hoặc quá hạn không được ghi đè một CSV cũ như thể đó là lần xuất thành công. Kết quả 24 truy vấn thành công ở mục 5.2 được xác nhận từ các tệp `query_metrics.csv` đã lưu của hai sinh viên, mỗi bên 12 loại truy vấn.
+
+Để kiểm tra trực tiếp đầu vào của các phép tính, Phụ lục Dữ liệu gốc Tuần 2 ở cuối báo cáo chép đủ 27 bản ghi của sinh viên Tiến Sơn và 57 bản ghi của sinh viên Ngọc Quyên, mỗi bản ghi có 23 trường. Mỗi đô thị dùng hai bảng a/b nối bằng mã dòng TS hoặc NQ; ghép hai nửa của cùng mã dòng sẽ đọc được một bản ghi nguyên vẹn, gồm `record_id`, thời điểm, chỉ số đo và khóa phân vùng. Bản CSV riêng đi kèm bộ nộp nằm tại `CSV/Tuan_2/Son/raw_week2.csv` và `CSV/Tuan_2/Quyen/raw_week2.csv`; các giá trị trong phụ lục được giữ nguyên độ chính xác của hai tệp này.
+
+`analyze_week2_accounts.py` giữ riêng hai bộ dữ liệu, so từng `record_id` và 11 trường đo giữa S3 và CSV Athena, rồi kiểm tra tập bản ghi Tuần 2 bằng ranh giới UTC. Chương trình nhóm theo đô thị, giờ và ngày; tính trung bình, độ lệch chuẩn mẫu với mẫu số n−1, phân vị nội suy tuyến tính và hệ số tương quan Pearson/Spearman. Trung bình AQI Hà Nội từ 9 mẫu của sinh viên Tiến Sơn là 163,555… nên trình bày 163,56; từ 19 mẫu của sinh viên Ngọc Quyên là 163,052… nên trình bày 163,05. Phép so với `city_week2.csv` và `correlation_week2.csv` kiểm tra lại các thống kê Python bằng kết quả SQL.
+
+Phép tái tính trên bản sao dữ liệu đã lưu cho kết quả: 24 trong 25 CSV nền tảng trùng từng byte với bản công bố; CSV tương quan còn một chênh lệch 5×10⁻¹⁷ ở chữ số cuối của một hệ số, không làm thay đổi giá trị làm tròn trong báo cáo. Dữ liệu thô 84 dòng và các tổng hợp chính không thay đổi. Phép ghép theo đô thị và giờ tạo 21 nhóm cùng giờ quan trắc để so hai sinh viên; các trung bình AQI, PM2.5 và PM10 bằng nhau trong phạm vi ghép này, nhưng trung bình toàn bộ 9/19 mẫu vẫn khác do số mẫu ở các giờ khác nhau.
+
+### 6.5 Tạo biểu đồ và liên hệ số liệu với source
+
+`generate_week2_charts.py` đọc trực tiếp các CSV phân tích, dùng nhãn đầy đủ của hai sinh viên, màu khác nhau và xuất hình 250 dpi. `chart_manifest.json` ghi tên CSV nguồn cho từng hình. Vì vậy Hình 3.1 lấy trung bình và độ lệch chuẩn từ `city_statistics.csv`; Hình 5.1 lấy số byte quét từ `partition_scan_comparison.csv`; Hình 5.2 lấy thời gian từ `query_metrics.csv`. Cơ chế giữ cùng một bảng số liệu cho hình, Excel và phần diễn giải trong Word/PDF.
+
+Bảng 6.1 Liên hệ lựa chọn mã nguồn với dữ liệu Tuần 2
+
+| Lựa chọn trong source | Lý do thiết lập | Kết quả đối chiếu trong báo cáo |
+| --- | --- | --- |
+| Ba đô thị trong secret và Lambda | Thu thập cùng bộ chỉ số theo vị trí xác định | Mỗi đô thị có 9 mẫu của sinh viên Tiến Sơn và 19 mẫu của sinh viên Ngọc Quyên. |
+| Ngưỡng AQI 100 hoặc PM2.5 35,5 | Đánh dấu bản ghi cần cảnh báo theo một quy tắc cố định | Hà Nội có 9/9 và 19/19 mẫu thỏa điều kiện; không suy ra số email được nhận. |
+| NDJSON và phân vùng S3 theo ngày UTC | Lưu nguyên bản ghi, giảm dung lượng đọc ngoài phạm vi | 84 dòng gốc giữ 23 trường; thêm điều kiện phân vùng giảm 86,76% và 75,28% byte quét. |
+| Lọc timestamp sau lọc phân vùng | Cắt đúng ranh giới tuần UTC+7 | 27 và 57 dòng Tuần 2 được tách khỏi 204 và 231 dòng toàn bộ. |
+| Tính thống kê riêng cho từng sinh viên | Giữ đúng mẫu số và tránh gộp hai bộ thành một mẫu độc lập | AQI trung bình Hà Nội là 163,56 và 163,05 với cỡ mẫu 9 và 19. |
+| Dựng hình từ CSV có manifest | Giữ đường dẫn dữ liệu từ bảng số đến biểu đồ | 20 hình trong báo cáo có thể đối chiếu với CSV nguồn; 0,05 USD là mức dự kiến của nhóm, không phải đầu ra của mã. |
+
+Mã trong repository mô tả thiết kế và phép phân tích; trạng thái dịch vụ và chi phí được xác nhận từ bộ bằng chứng đã lưu. Một cấu hình trong source không tự chứng minh có bao nhiêu lịch, lượt chạy, email nhận được hoặc phí phải thanh toán trong từng môi trường. Vì vậy báo cáo nêu rõ số liệu quan sát, số liệu tính từ CSV và mức dự kiến 0,05 USD ở những vị trí khác nhau.
+
+## Chương 7 Tổng hợp kết quả Tuần 2
+
+### 7.1 Sản phẩm dữ liệu và phân tích
+
+Bảng 7.1 Sản phẩm đi kèm và phạm vi
 
 | Sản phẩm | Nội dung |
 | --- | --- |
@@ -593,7 +646,7 @@ Bảng 6.1 Sản phẩm đi kèm và phạm vi
 | Trực quan hóa | 20 biểu đồ được dựng từ các CSV tương ứng; cùng dữ liệu trong Excel và báo cáo. |
 | Báo cáo | Word có mục lục liên kết và bản PDF đã kiểm tra bố cục. |
 
-### 6.2 Kết luận trong phạm vi mẫu đã thu thập
+### 7.2 Kết luận trong phạm vi mẫu đã thu thập
 
 Hai báo cáo dữ liệu Tuần 2 của sinh viên Tiến Sơn và sinh viên Ngọc Quyên cùng ghi nhận Hà Nội có AQI và PM2.5 cao nhất trong ba đô thị; các mẫu Hà Nội đều thỏa ngưỡng cảnh báo của dự án. Đà Nẵng có AQI thấp nhất, TP. Hồ Chí Minh nằm giữa. Phân bố mẫu, trung vị, diễn biến theo giờ và đối chiếu cùng giờ được trình bày riêng để giải thích kết quả của từng bộ dữ liệu.
 

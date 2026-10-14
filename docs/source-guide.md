@@ -19,6 +19,16 @@
 
 Các entry point PowerShell trong tuan_1/scripts và tuan_2/scripts chuyển tham số tới chương trình Python chung. Tuần 1 dùng lại phần thiết lập nền tảng; mã Lambda và phân tích chính nằm tại Tuần 2. Bộ kiểm tra chức năng nằm trong tuan_2/tests/; các hồi quy phân tích nằm trong tuan_2/analytics/.
 
+## Vì sao cấu hình này tạo ra các bảng kết quả
+
+Thiết kế trong [aws_project.py](../tuan_2/scripts/aws_project.py) tạo bucket riêng theo tài khoản, chặn truy cập công khai, mã hóa đối tượng, đặt cấu hình ba đô thị và ngưỡng cảnh báo trong Secrets Manager, rồi nối EventBridge với Lambda, SNS và CloudWatch. Lambda được cấu hình Python 3.12, 256 MB và 60 giây. Đây là lựa chọn để lưu bản ghi riêng theo môi trường, chạy theo lịch và quan sát lỗi; số lịch thực tế của mỗi sinh viên được đọc từ metadata đã lưu, không suy ra từ tham số lịch mặc định trong source.
+
+[lambda_function.py](../tuan_2/lambda/lambda_function.py) lấy dữ liệu khí tượng và chất lượng không khí bằng hai yêu cầu cho từng đô thị, chuẩn hóa 23 trường, gắn cả giờ UTC và giờ Việt Nam, rồi ghi NDJSON theo ngày UTC. Nhánh `backfill_hours` phục vụ chuỗi lịch sử; nhánh hiện tại kiểm tra AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³ để yêu cầu gửi thông báo. Giá trị mặc định 0 cho đầu vào không hợp lệ chỉ là quy tắc chuẩn hóa, nên bảng kiểm tra chất lượng dữ liệu không chứng minh API chưa từng thiếu số đo.
+
+[Bảng Athena](../tuan_2/athena/create_table.sql) khai báo 20 cột dữ liệu và ba khóa phân vùng. [Truy vấn raw Tuần 2](../tuan_2/athena/week2_analysis/raw_week2.sql) vừa lọc phân vùng vừa kiểm tra thời điểm UTC để khớp ranh giới UTC+7. Bởi vậy 27/57 dòng thuộc Tuần 2 được tách ra khỏi 204/231 dòng toàn bộ. Cặp [truy vấn chỉ lọc thời gian](../tuan_2/athena/week2_analysis/scan_week2_time_only.sql) và [truy vấn thêm phân vùng](../tuan_2/athena/week2_analysis/scan_week2_partition.sql) trả cùng số dòng nhưng có số byte quét khác nhau; thời gian thực thi được diễn giải theo từng lần đo.
+
+[AthenaExporter](../tuan_2/scripts/athena_export.py) chỉ thay CSV đích sau khi truy vấn thành công và lấy được kết quả. [Bộ phân tích](../tuan_2/analytics/analyze_week2_accounts.py) đối chiếu bản ghi S3 với CSV Athena, giữ mẫu hai sinh viên riêng, tính trung bình và độ lệch chuẩn theo từng đô thị, rồi so với bảng SQL. [Chương trình dựng hình](../tuan_2/analytics/generate_week2_charts.py) dùng chính các CSV này và ghi đường dẫn nguồn trong manifest. Mối liên hệ từ quyết định trong mã đến các giá trị 9/19 mẫu, AQI Hà Nội 163,56/163,05 và mức giảm byte quét được giải thích đầy đủ tại Chương 6 của [báo cáo Tuần 2](../tuan_2/docs/FINAL_REPORT.md). Mức dự kiến 0,05 USD của sinh viên Tiến Sơn do nhóm đề xuất, không phải phép tính của mã nguồn hoặc giá trị Cost Explorer.
+
 `export_metrics.py` là điểm vào tương thích để xuất năm truy vấn SELECT. Khi xuất kết quả mới, chỉ định `--output output/athena` để giữ riêng dữ liệu báo cáo đã lưu; điểm vào chính là `scripts/athena_export.py`. Các chương trình dựng hình ghi vào thư mục kết quả của tuần tương ứng, nên việc tái lập hình có thể làm thay đổi tệp PNG/manifest được Git theo dõi.
 
 ## Luồng dữ liệu và hợp đồng đầu vào
