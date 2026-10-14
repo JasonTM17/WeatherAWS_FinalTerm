@@ -1,0 +1,20 @@
+{
+  "MetricAlarms": [
+    {
+      "AlarmName": "WeatherCollector-Errors-Alarm",
+      "StateValue": "OK",
+      "MetricName": "Errors",
+      "Namespace": "AWS/Lambda",
+      "Dimensions": [
+        {
+          "Name": "FunctionName",
+          "Value": "WeatherCollectorLambda"
+        }
+      ],
+      "Period": 300,
+      "Statistic": "Sum",
+      "Threshold": 1.0,
+      "EvaluationPeriods": 1
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "correlation_week2",
+  "query_id": "8a5f9676-3c96-4026-a084-0e90c9034f3d",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1326,
+  "bytes_scanned": 15193,
+  "row_count": 3,
+  "profile": "default",
+  "account_id": "873674852386",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:40.344981+00:00",
+  "csv_sha256": "4d502149556505d266f27eced25cf705c05fdb63c8da8632659f34f881b5c087"
+}

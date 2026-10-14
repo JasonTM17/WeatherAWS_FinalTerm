@@ -1,0 +1,351 @@
+[
+  {
+    "query_id": "07e51006-9871-42d2-9090-438a5552c57d",
+    "rows": 24,
+    "columns": [
+      "hour",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_aqi",
+      "sample_count"
+    ],
+    "sha256": "096283c82071621445b4a85235a6325b310e7f048ce6bc2cad8c8eb2334f98ac",
+    "bytes": 828
+  },
+  {
+    "query_id": "09715d2d-6b8f-4f34-88e5-fa4ae8aa7216",
+    "rows": 8,
+    "columns": [
+      "city",
+      "aqi_category",
+      "occurrence_count",
+      "percentage"
+    ],
+    "sha256": "10358a9ec4c45ece836e33dc0e3cc11cedc65e50106c4cb40c7a56c4764a4273",
+    "bytes": 353
+  },
+  {
+    "query_id": "20d067bf-a262-49ad-9477-6a9a17dc575f",
+    "rows": 24,
+    "columns": [
+      "hour",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_aqi",
+      "sample_count"
+    ],
+    "sha256": "35db9987103f8fcf5fbae9091695dfa03a7b6f5b6df184194ec730166c1e689b",
+    "bytes": 828
+  },
+  {
+    "query_id": "217683c0-0a46-4d5e-964d-303250cc3b88",
+    "rows": 3,
+    "columns": [
+      "city",
+      "corr_temp_pm25",
+      "corr_humidity_pm25",
+      "corr_wind_pm25"
+    ],
+    "sha256": "90c823ac31a98f0382a2308fa49f252ba5829fccdf9abd8006e1ee5735aa39cb",
+    "bytes": 177
+  },
+  {
+    "query_id": "2c06cfd8-9774-445e-b6cf-cec4eb58d17d",
+    "rows": 8,
+    "columns": [
+      "city",
+      "aqi_category",
+      "occurrence_count",
+      "percentage"
+    ],
+    "sha256": "a5bce76b1dbd57e5d4685e23cdce88c15cb135a7bbc960aeaa8464bfbba61c0c",
+    "bytes": 353
+  },
+  {
+    "query_id": "349d1865-e39f-412d-8a8e-1dc207e80adc",
+    "rows": 24,
+    "columns": [
+      "hour",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_aqi",
+      "sample_count"
+    ],
+    "sha256": "9b8ac686497285ea022536c9cdb9e2f8ea2c3a7f65ffc99ccc6d7820a63f5a8a",
+    "bytes": 829
+  },
+  {
+    "query_id": "49509107-bf65-4448-b27d-ab16a411b892",
+    "rows": 3,
+    "columns": [
+      "city",
+      "corr_temp_pm25",
+      "corr_humidity_pm25",
+      "corr_wind_pm25"
+    ],
+    "sha256": "51fd051bdf7313d4932bf35337dcb46c259100c074b11bddeca477bfa75e4faa",
+    "bytes": 174
+  },
+  {
+    "query_id": "52a3b042-e89a-4977-b0cf-8503a035966a",
+    "rows": 8,
+    "columns": [
+      "city",
+      "aqi_category",
+      "occurrence_count",
+      "percentage"
+    ],
+    "sha256": "51b9f7a7caa41e4a16b1199ca501f1bffa41c2d59e642068256ed45e6f5119c2",
+    "bytes": 353
+  },
+  {
+    "query_id": "5704da34-ff6f-4f1e-8a1d-d9f983417231",
+    "rows": 3,
+    "columns": [
+      "city",
+      "corr_temp_pm25",
+      "corr_humidity_pm25",
+      "corr_wind_pm25"
+    ],
+    "sha256": "ac0a1ce1c14ff37db3375cc08055d39c747e58ecd00fcfb07b4e5b3f72c20f70",
+    "bytes": 175
+  },
+  {
+    "query_id": "696b6823-60f7-4141-b427-397197aed852",
+    "rows": 3,
+    "columns": [
+      "city",
+      "total_records",
+      "avg_aqi",
+      "min_aqi",
+      "max_aqi",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_temp",
+      "avg_humidity"
+    ],
+    "sha256": "af4a6eb86aff8e354458ce56763b0348fcd99c1c561209e6330090c093906333",
+    "bytes": 300
+  },
+  {
+    "query_id": "77a261fe-e3a4-4452-a691-4d6f363e5c00",
+    "rows": 3,
+    "columns": [
+      "city",
+      "corr_temp_pm25",
+      "corr_humidity_pm25",
+      "corr_wind_pm25"
+    ],
+    "sha256": "a8a07955ffa65234936d198de77a16378ad0f6e944598decf058fc8e60ccb650",
+    "bytes": 176
+  },
+  {
+    "query_id": "8bf827a7-e2c6-4b43-a971-eb05369ff9ba",
+    "rows": 3,
+    "columns": [
+      "city",
+      "total_records",
+      "avg_aqi",
+      "min_aqi",
+      "max_aqi",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_temp",
+      "avg_humidity"
+    ],
+    "sha256": "2e84ea746360886741f19bd56ed6b064e80b6b2fc5ca8a1a3011807c2f753444",
+    "bytes": 297
+  },
+  {
+    "query_id": "9925449c-e279-44aa-bc4e-57a9bc6b322a",
+    "rows": 165,
+    "columns": [
+      "record_id",
+      "city",
+      "latitude",
+      "longitude",
+      "timestamp_utc",
+      "timestamp_vn",
+      "temperature_2m",
+      "relative_humidity_2m",
+      "surface_pressure",
+      "wind_speed_10m",
+      "pm2_5",
+      "pm10",
+      "carbon_monoxide",
+      "nitrogen_dioxide",
+      "sulphur_dioxide",
+      "ozone",
+      "us_aqi",
+      "aqi_category",
+      "hour",
+      "collected_at",
+      "year",
+      "month",
+      "day"
+    ],
+    "sha256": "a549ce26cd6b1196bf527ebad9304b7a9366d8d617fed10671aaffd4e4bbe90d",
+    "bytes": 41348
+  },
+  {
+    "query_id": "b0047134-f182-4a95-b626-a44c27f7c0ff",
+    "rows": 8,
+    "columns": [
+      "city",
+      "aqi_category",
+      "occurrence_count",
+      "percentage"
+    ],
+    "sha256": "0e52592fd6c43337e0a68eee7e98cdb7ba664e63d6323903086efc61b4b55c83",
+    "bytes": 353
+  },
+  {
+    "query_id": "b07478d6-40d8-4923-9f32-3337adc3389d",
+    "rows": 3,
+    "columns": [
+      "city",
+      "total_records",
+      "avg_aqi",
+      "min_aqi",
+      "max_aqi",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_temp",
+      "avg_humidity"
+    ],
+    "sha256": "acd611a0529ae3a85bd76c97b68258e006d73156f918e97e618d6dac87ffd1d2",
+    "bytes": 298
+  },
+  {
+    "query_id": "bc2593b6-16c1-4c5a-8e36-4df0730bac80",
+    "rows": 9,
+    "columns": [
+      "city",
+      "aqi_category",
+      "occurrence_count",
+      "percentage"
+    ],
+    "sha256": "49aa54db68d23e06215915e504625b16f67488fccb99eaf885a166ec953afc31",
+    "bytes": 384
+  },
+  {
+    "query_id": "bf0ed2da-392d-49d1-af60-8c21f2e3acf6",
+    "rows": 3,
+    "columns": [
+      "city",
+      "total_records",
+      "avg_aqi",
+      "min_aqi",
+      "max_aqi",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_temp",
+      "avg_humidity"
+    ],
+    "sha256": "5128e3b14ea3f3d82ac1ca1236f78330cfc83854edd80ace718557490fa8a88e",
+    "bytes": 297
+  },
+  {
+    "query_id": "c912516b-02f8-4cdc-8a07-d524115d3d27",
+    "rows": 189,
+    "columns": [
+      "record_id",
+      "city",
+      "latitude",
+      "longitude",
+      "timestamp_utc",
+      "timestamp_vn",
+      "temperature_2m",
+      "relative_humidity_2m",
+      "surface_pressure",
+      "wind_speed_10m",
+      "pm2_5",
+      "pm10",
+      "carbon_monoxide",
+      "nitrogen_dioxide",
+      "sulphur_dioxide",
+      "ozone",
+      "us_aqi",
+      "aqi_category",
+      "hour",
+      "collected_at",
+      "year",
+      "month",
+      "day"
+    ],
+    "sha256": "b0d4389e1cf49de3ad15b7b3d9d75db49d215aa8db1378348b9532a16ebc4342",
+    "bytes": 47426
+  },
+  {
+    "query_id": "cc4523ed-2f2e-46cb-ac16-bf6930d7c430",
+    "rows": 24,
+    "columns": [
+      "hour",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_aqi",
+      "sample_count"
+    ],
+    "sha256": "96d1c47d81954206c9f2866009ccf50220f3f0b7c848d767e67b1f028c76d972",
+    "bytes": 832
+  },
+  {
+    "query_id": "de933b52-2e81-4760-9f70-1a334b7008b6",
+    "rows": 3,
+    "columns": [
+      "city",
+      "total_records",
+      "avg_us_aqi",
+      "min_us_aqi",
+      "max_us_aqi",
+      "avg_pm25",
+      "avg_pm10",
+      "avg_temp",
+      "avg_humidity"
+    ],
+    "sha256": "c6ac12858744e1d4d8674194c2abbe1d54c982a97fe50ae425c6ae1db81e4630",
+    "bytes": 306
+  },
+  {
+    "query_id": "e4771176-f6c8-402a-8cb9-a20ad863becc",
+    "rows": 3,
+    "columns": [
+      "city",
+      "corr_temp_pm25",
+      "corr_humidity_pm25",
+      "corr_wind_pm25"
+    ],
+    "sha256": "92eedae94632df523629b458bebe15e4bc017c13cf8a38c924228ccde6ab1d75",
+    "bytes": 179
+  },
+  {
+    "query_id": "e62cd2b9-719f-4192-bdfd-f6ccf07f3053",
+    "rows": 3,
+    "columns": [
+      "city",
+      "total_records",
+      "avg_aqi",
+      "min_aqi",
+      "max_aqi",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_temp",
+      "avg_humidity"
+    ],
+    "sha256": "bc8582894008f21865544b9363ed228f6693e404506522b155b588be993b9813",
+    "bytes": 299
+  },
+  {
+    "query_id": "f0c992c3-c598-4e31-b483-1cf367774f02",
+    "rows": 24,
+    "columns": [
+      "hour",
+      "avg_pm2_5",
+      "avg_pm10",
+      "avg_aqi",
+      "sample_count"
+    ],
+    "sha256": "4baeb2af2c049db915e3c2e185bec4e84597c02e847b1a8c35ad48b372bf8bfa",
+    "bytes": 829
+  }
+]

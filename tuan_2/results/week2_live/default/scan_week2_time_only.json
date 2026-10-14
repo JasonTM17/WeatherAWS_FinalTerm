@@ -1,0 +1,13 @@
+{
+  "name": "scan_week2_time_only",
+  "query_id": "855c2a09-7617-47e7-a311-f2342fd7ec98",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1213,
+  "bytes_scanned": 114736,
+  "row_count": 1,
+  "profile": "default",
+  "account_id": "873674852386",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:50.160522+00:00",
+  "csv_sha256": "4dd96616b7e197f9b2129e62ca780cb667a66102875cc30fb99215f275ab384b"
+}

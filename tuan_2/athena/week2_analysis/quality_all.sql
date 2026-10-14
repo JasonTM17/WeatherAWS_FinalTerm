@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS total_records, COUNT(DISTINCT record_id) AS unique_record_ids, SUM(CASE WHEN city IS NULL THEN 1 ELSE 0 END) AS null_city, SUM(CASE WHEN timestamp_utc IS NULL THEN 1 ELSE 0 END) AS null_time, SUM(CASE WHEN us_aqi IS NULL THEN 1 ELSE 0 END) AS null_aqi, SUM(CASE WHEN pm2_5 IS NULL THEN 1 ELSE 0 END) AS null_pm25 FROM weather_airquality_records;

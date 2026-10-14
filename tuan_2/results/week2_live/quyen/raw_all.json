@@ -1,0 +1,13 @@
+{
+  "name": "raw_all",
+  "query_id": "3f98b486-96ca-4e9c-be0b-cc4d30b89ba9",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1297,
+  "bytes_scanned": 129715,
+  "row_count": 231,
+  "profile": "quyen",
+  "account_id": "134987931868",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:23.670356+00:00",
+  "csv_sha256": "c29f678b8e59c842e91509a782fb61e3e716c4a035358fbb323f1ff88f85e9da"
+}

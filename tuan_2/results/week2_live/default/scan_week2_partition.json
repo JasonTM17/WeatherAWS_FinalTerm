@@ -1,0 +1,13 @@
+{
+  "name": "scan_week2_partition",
+  "query_id": "4997f1f8-0bfb-4243-b260-9f42dfd2fbcb",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1402,
+  "bytes_scanned": 15193,
+  "row_count": 1,
+  "profile": "default",
+  "account_id": "873674852386",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:53.564708+00:00",
+  "csv_sha256": "4dd96616b7e197f9b2129e62ca780cb667a66102875cc30fb99215f275ab384b"
+}

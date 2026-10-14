@@ -1,0 +1,13 @@
+{
+  "name": "scan_week2_partition",
+  "query_id": "7dce8128-bfd2-4c2f-8cab-1751df9b5f24",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1194,
+  "bytes_scanned": 32067,
+  "row_count": 1,
+  "profile": "quyen",
+  "account_id": "134987931868",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:49.708647+00:00",
+  "csv_sha256": "bf72c56b71ab80920d3ea822f068eb51577919a05722c50a636963871e1b536b"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "city_week2",
+  "query_id": "baa87500-dc2c-4e69-821f-5c54a73da902",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1196,
+  "bytes_scanned": 32067,
+  "row_count": 3,
+  "profile": "quyen",
+  "account_id": "134987931868",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:27.977268+00:00",
+  "csv_sha256": "f3c01ddf234ad25f581552a02fa7e47201ae1a9735537089d4856a02840225f3"
+}

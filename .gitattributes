@@ -1,0 +1,5 @@
+# Keep downloaded AWS bytes and manifest hashes unchanged on every platform.
+tuan_2/results/week2_live/** -text
+tuan_2/results/week2_evidence/** -text
+tuan_2/results/week2_analysis/** -text
+tuan_2/results/week2_charts/** -text

@@ -1,0 +1,3 @@
+"profile","lambda_state","runtime","memory_mb","timeout_s","enabled_schedules","schedule_names","confirmed_email_subscriptions","alarm_state","deployed_source_sha256","local_source_matches_deployed"
+"default","Active","python3.12","256","60","1","WeatherCollectionSchedule","1","OK","da371a3aa71f7d8e3f4b7e4de8debd4919132d9c69232620e5a48777da5594f9","False"
+"quyen","Active","python3.12","256","60","2","WeatherCollectionHourlyRule; WeatherCollectionSchedule","2","OK","ca4550dbd1a906ed4c3117835863d25e9e76826e6be46631a800f3e504515ed9","False"

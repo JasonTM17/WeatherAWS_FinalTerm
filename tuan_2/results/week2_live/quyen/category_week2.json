@@ -1,0 +1,13 @@
+{
+  "name": "category_week2",
+  "query_id": "1b405ec8-bad2-4518-b7f6-8f8671cc42b7",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1380,
+  "bytes_scanned": 32067,
+  "row_count": 3,
+  "profile": "quyen",
+  "account_id": "134987931868",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:36.909319+00:00",
+  "csv_sha256": "8df1990be9b7ecd85b6f227678aa4990978ef0d16dd362bd8a60870441309beb"
+}

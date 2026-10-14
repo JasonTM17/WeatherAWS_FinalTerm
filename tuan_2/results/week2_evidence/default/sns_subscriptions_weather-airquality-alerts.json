@@ -1,0 +1,6 @@
+[
+  {
+    "Protocol": "email",
+    "SubscriptionArn": "arn:aws:sns:us-east-1:873674852386:weather-airquality-alerts:40f692de-8224-436d-a01c-f1773d9e449f"
+  }
+]

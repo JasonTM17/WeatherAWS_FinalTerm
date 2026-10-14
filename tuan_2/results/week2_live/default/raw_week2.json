@@ -1,0 +1,13 @@
+{
+  "name": "raw_week2",
+  "query_id": "63dd5b0f-7442-45f8-be9b-304bd9cf114e",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1458,
+  "bytes_scanned": 15193,
+  "row_count": 27,
+  "profile": "default",
+  "account_id": "873674852386",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:25.713381+00:00",
+  "csv_sha256": "3da8d2fafa6ffafa20803114f6acfab8b6d997482fb88c8ec13fd5df5b14ea49"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "partition_all",
+  "query_id": "cf23b7c1-c4ef-4872-9c6e-feaf4f99bcb3",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 866,
+  "bytes_scanned": 114736,
+  "row_count": 6,
+  "profile": "default",
+  "account_id": "873674852386",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:42.472154+00:00",
+  "csv_sha256": "57397b10d3e4db291baf1d38fb381db77cdf00cc3455fb24eab333cce0e7649a"
+}

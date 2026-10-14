@@ -1,0 +1,264 @@
+[
+  {
+    "Name": "vietnam_weather_aqi",
+    "DatabaseName": "weather_aqi_db",
+    "CreateTime": "2026-10-13 22:58:22+07:00",
+    "UpdateTime": "2026-10-13 22:58:22+07:00",
+    "Retention": 0,
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        },
+        {
+          "Name": "year",
+          "Type": "string"
+        },
+        {
+          "Name": "month",
+          "Type": "string"
+        },
+        {
+          "Name": "day",
+          "Type": "string"
+        }
+      ],
+      "Location": "",
+      "Compressed": false,
+      "NumberOfBuckets": 0,
+      "SerdeInfo": {},
+      "SortColumns": [],
+      "StoredAsSubDirectories": false
+    },
+    "ViewOriginalText": "/* Presto View: eyJvcmlnaW5hbFNxbCI6IlNFTEVDVFxuICByZWNvcmRfaWRcbiwgY2l0eVxuLCBsYXRpdHVkZVxuLCBsb25naXR1ZGVcbiwgdGltZXN0YW1wX3V0Y1xuLCB0aW1lc3RhbXBfdm5cbiwgdGVtcGVyYXR1cmVfMm1cbiwgcmVsYXRpdmVfaHVtaWRpdHlfMm1cbiwgc3VyZmFjZV9wcmVzc3VyZVxuLCB3aW5kX3NwZWVkXzEwbVxuLCBwbTJfNVxuLCBwbTEwXG4sIGNhcmJvbl9tb25veGlkZVxuLCBuaXRyb2dlbl9kaW94aWRlXG4sIHN1bHBodXJfZGlveGlkZVxuLCBvem9uZVxuLCB1c19hcWlcbiwgYXFpX2NhdGVnb3J5XG4sIGhvdXJcbiwgY29sbGVjdGVkX2F0XG4sIHllYXJcbiwgbW9udGhcbiwgZGF5XG5GUk9NXG4gIHdlYXRoZXJfYXFpX2RiLndlYXRoZXJfYWlycXVhbGl0eV9yZWNvcmRzXG4iLCJjYXRhbG9nIjoiYXdzZGF0YWNhdGFsb2ciLCJzY2hlbWEiOiJ3ZWF0aGVyX2FxaV9kYiIsImNvbHVtbnMiOlt7Im5hbWUiOiJyZWNvcmRfaWQiLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6ImNpdHkiLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6ImxhdGl0dWRlIiwidHlwZSI6ImRvdWJsZSJ9LHsibmFtZSI6ImxvbmdpdHVkZSIsInR5cGUiOiJkb3VibGUifSx7Im5hbWUiOiJ0aW1lc3RhbXBfdXRjIiwidHlwZSI6InZhcmNoYXIifSx7Im5hbWUiOiJ0aW1lc3RhbXBfdm4iLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6InRlbXBlcmF0dXJlXzJtIiwidHlwZSI6ImRvdWJsZSJ9LHsibmFtZSI6InJlbGF0aXZlX2h1bWlkaXR5XzJtIiwidHlwZSI6ImRvdWJsZSJ9LHsibmFtZSI6InN1cmZhY2VfcHJlc3N1cmUiLCJ0eXBlIjoiZG91YmxlIn0seyJuYW1lIjoid2luZF9zcGVlZF8xMG0iLCJ0eXBlIjoiZG91YmxlIn0seyJuYW1lIjoicG0yXzUiLCJ0eXBlIjoiZG91YmxlIn0seyJuYW1lIjoicG0xMCIsInR5cGUiOiJkb3VibGUifSx7Im5hbWUiOiJjYXJib25fbW9ub3hpZGUiLCJ0eXBlIjoiZG91YmxlIn0seyJuYW1lIjoibml0cm9nZW5fZGlveGlkZSIsInR5cGUiOiJkb3VibGUifSx7Im5hbWUiOiJzdWxwaHVyX2Rpb3hpZGUiLCJ0eXBlIjoiZG91YmxlIn0seyJuYW1lIjoib3pvbmUiLCJ0eXBlIjoiZG91YmxlIn0seyJuYW1lIjoidXNfYXFpIiwidHlwZSI6ImludGVnZXIifSx7Im5hbWUiOiJhcWlfY2F0ZWdvcnkiLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6ImhvdXIiLCJ0eXBlIjoiaW50ZWdlciJ9LHsibmFtZSI6ImNvbGxlY3RlZF9hdCIsInR5cGUiOiJ2YXJjaGFyIn0seyJuYW1lIjoieWVhciIsInR5cGUiOiJ2YXJjaGFyIn0seyJuYW1lIjoibW9udGgiLCJ0eXBlIjoidmFyY2hhciJ9LHsibmFtZSI6ImRheSIsInR5cGUiOiJ2YXJjaGFyIn1dLCJvd25lciI6Ijg3MzY3NDg1MjM4NiIsInJ1bkFzSW52b2tlciI6ZmFsc2UsInByb3BlcnRpZXMiOnt9LCJpc1Byb3RlY3RlZCI6ZmFsc2UsImlzTXVsdGlEaWFsZWN0IjpmYWxzZX0= */",
+    "ViewExpandedText": "/* Presto View */",
+    "TableType": "VIRTUAL_VIEW",
+    "Parameters": {
+      "presto_view": "true",
+      "comment": "Presto View"
+    },
+    "CreatedBy": "arn:aws:sts::873674852386:assumed-role/voclabs/user5389002=24110054@student.hcmute.edu.vn",
+    "IsRegisteredWithLakeFormation": false,
+    "CatalogId": "873674852386",
+    "VersionId": "0",
+    "IsMultiDialectView": false,
+    "IsMaterializedView": false
+  },
+  {
+    "Name": "weather_airquality_records",
+    "DatabaseName": "weather_aqi_db",
+    "Owner": "hadoop",
+    "CreateTime": "2026-10-06 22:16:10+07:00",
+    "UpdateTime": "2026-10-06 22:16:10+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "Retention": 0,
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-873674852386/raw",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "PartitionKeys": [
+      {
+        "Name": "year",
+        "Type": "string"
+      },
+      {
+        "Name": "month",
+        "Type": "string"
+      },
+      {
+        "Name": "day",
+        "Type": "string"
+      }
+    ],
+    "TableType": "EXTERNAL_TABLE",
+    "Parameters": {
+      "has_encrypted_data": "false",
+      "EXTERNAL": "TRUE",
+      "transient_lastDdlTime": "1791299770"
+    },
+    "CreatedBy": "arn:aws:sts::873674852386:assumed-role/voclabs/user5389002=24110054@student.hcmute.edu.vn",
+    "IsRegisteredWithLakeFormation": false,
+    "CatalogId": "873674852386",
+    "VersionId": "0",
+    "IsMultiDialectView": false,
+    "IsMaterializedView": false
+  }
+]

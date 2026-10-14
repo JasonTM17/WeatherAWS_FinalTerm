@@ -1,0 +1,156 @@
+[
+  {
+    "key": "raw/year=2026/month=10/day=04/data_20261004_95f5f5f2.json",
+    "bytes": 40561,
+    "sha256": "93d60e7c083b1aedc8dcea828ec6dd6707d2f5ff20aa19383e42ff975f9dc9b4",
+    "records": 72,
+    "last_modified": "2026-10-06 15:14:50+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=05/data_20261005_e868a4e2.json",
+    "bytes": 40126,
+    "sha256": "2d6ec2c4a5ab387e983835337903f38fdffa808e7777cd282af2eba728a02712",
+    "records": 72,
+    "last_modified": "2026-10-06 15:14:50+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=06/data_20261006_246526ad.json",
+    "bytes": 1716,
+    "sha256": "9e04c6ee9747257a73ab6d0278e09f3f1184559f69a1a18d36ad326f7535985b",
+    "records": 3,
+    "last_modified": "2026-10-06 18:15:48+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=06/data_20261006_3ae37b10.json",
+    "bytes": 1716,
+    "sha256": "4d193f53831806b5962a26e1f036c4cc71a1ccca372f4c01bc71076aa55dd7ef",
+    "records": 3,
+    "last_modified": "2026-10-06 15:15:45+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=06/data_20261006_65689c22.json",
+    "bytes": 1716,
+    "sha256": "2fbae0ef273d0c79442293037d1c0678032355cd8a29334e2d5d4de1ed0aa3c9",
+    "records": 3,
+    "last_modified": "2026-10-06 15:14:01+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=06/data_20261006_878b4174.json",
+    "bytes": 1716,
+    "sha256": "2c3384eac57ae3462cc288f4a34ac7c30d1891636617c4432696c13ee5f2a05e",
+    "records": 3,
+    "last_modified": "2026-10-06 16:15:47+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=06/data_20261006_ace96b34.json",
+    "bytes": 1716,
+    "sha256": "e4d18ebd2892f84148a8d747d40a2e25a181bfe26a24f5fe3d42740faa4fa854",
+    "records": 3,
+    "last_modified": "2026-10-06 17:15:48+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=06/data_20261006_b7990e2f.json",
+    "bytes": 1716,
+    "sha256": "5f8e7c876684b0e52094ed5a38221301fd9540dfa5b07d6f6069e5729da1fecb",
+    "records": 3,
+    "last_modified": "2026-10-06 15:43:55+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=06/data_20261006_ca623f1f.json",
+    "bytes": 1716,
+    "sha256": "612ca7c270fc2a9893a6e64864ff2369a95b9c62ab3da1b816c24eda9c0d6ea2",
+    "records": 3,
+    "last_modified": "2026-10-06 15:41:26+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=07/data_20261007_0d400b0a.json",
+    "bytes": 1711,
+    "sha256": "82e0380b3e8ef58a9ad95b1178e4639c521d4021a98d14ac43fd628dd4a76858",
+    "records": 3,
+    "last_modified": "2026-10-07 02:15:47+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=07/data_20261007_1f0389c5.json",
+    "bytes": 1711,
+    "sha256": "4873e65fec0532cf3f68330ebd3f441893f1c410edb20f88520ba2c2f61bfa94",
+    "records": 3,
+    "last_modified": "2026-10-07 00:15:47+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=07/data_20261007_9ea575fc.json",
+    "bytes": 1711,
+    "sha256": "479ea4238d66bc26e360e100a0991c273f8d1dbf1c43366e147ddfc50a9c5160",
+    "records": 3,
+    "last_modified": "2026-10-07 03:15:48+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=07/data_20261007_b697a908.json",
+    "bytes": 1711,
+    "sha256": "6a3074445b64ec71c03229ba1c3c914f8cb3a750b302bf107f39fc12927c2753",
+    "records": 3,
+    "last_modified": "2026-10-07 01:15:47+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_1223076d.json",
+    "bytes": 1686,
+    "sha256": "e73af88a8335581d4dfb9e5c9c53faf1a6481205d23d40c9051b9745dd5ad086",
+    "records": 3,
+    "last_modified": "2026-10-13 07:15:48+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_1d5171ed.json",
+    "bytes": 1690,
+    "sha256": "524a787ac5b8370ffa809009d5ce0ac14f7e3d294afba8763ccd9cf4879df824",
+    "records": 3,
+    "last_modified": "2026-10-13 18:15:48+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_3520f85d.json",
+    "bytes": 1690,
+    "sha256": "527fea4ec33f321e0387e72511110875f9cbdb432cb09db2bd3f6ef2dcfdd60d",
+    "records": 3,
+    "last_modified": "2026-10-13 17:15:47+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_3f4d0e1a.json",
+    "bytes": 1686,
+    "sha256": "9a7ae469bc774ea78573c611f08bc167a35c87416dd69e9a3af0877788826910",
+    "records": 3,
+    "last_modified": "2026-10-13 09:15:46+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_4ba7ce03.json",
+    "bytes": 1689,
+    "sha256": "53ab696028fd4b42650035694ff208fc330428c4afc1aa1b658c39d8b8c93ac8",
+    "records": 3,
+    "last_modified": "2026-10-13 10:15:46+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_c8667783.json",
+    "bytes": 1690,
+    "sha256": "2870d3913ce3c5b3ec6b842d5f62f238bd24023f1bdd5d85c490c77989e24747",
+    "records": 3,
+    "last_modified": "2026-10-13 16:15:48+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_d62f78bc.json",
+    "bytes": 1690,
+    "sha256": "727db07a05340328a26c90e3457bffa4608f92c773686d831ac0da8552d80dcd",
+    "records": 3,
+    "last_modified": "2026-10-13 19:15:47+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=13/data_20261013_f793d633.json",
+    "bytes": 1685,
+    "sha256": "4f471dbc7cc81c5fe54e77e0c4d1a10b7699013edbcd32d8b6b5006850089e7c",
+    "records": 3,
+    "last_modified": "2026-10-13 08:15:46+00:00"
+  },
+  {
+    "key": "raw/year=2026/month=10/day=14/data_20261014_8968e0b7.json",
+    "bytes": 1687,
+    "sha256": "dfc3da082d1f54bbccca999d86f1724a8651a887dc487d271492984935d26544",
+    "records": 3,
+    "last_modified": "2026-10-14 02:47:49+00:00"
+  }
+]

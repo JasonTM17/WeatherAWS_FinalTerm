@@ -1,0 +1,34 @@
+{
+  "started_at_utc": "2026-10-14 03:00:44.652416+00:00",
+  "finished_at_utc": "2026-10-14 03:02:00.794717+00:00",
+  "metric_start_utc": "2026-10-05 00:00:00+00:00",
+  "profiles": [
+    {
+      "profile": "default",
+      "account": "873674852386",
+      "connected": true,
+      "objects": 22,
+      "raw_records": 204,
+      "query_executions": 52,
+      "query_results": 23,
+      "metric_points": 965,
+      "log_events": 204,
+      "runtime_entries": 21,
+      "unavailable": []
+    },
+    {
+      "profile": "quyen",
+      "account": "134987931868",
+      "connected": true,
+      "objects": 28,
+      "raw_records": 231,
+      "query_executions": 92,
+      "query_results": 76,
+      "metric_points": 851,
+      "log_events": 335,
+      "runtime_entries": 32,
+      "unavailable": []
+    }
+  ],
+  "credential_files_unchanged": true
+}

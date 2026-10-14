@@ -1,0 +1,10 @@
+[
+  {
+    "Protocol": "email",
+    "SubscriptionArn": "arn:aws:sns:us-east-1:134987931868:weather-airquality-alerts:0fc99305-7b3f-4a7a-b88d-6a10e8f1e086"
+  },
+  {
+    "Protocol": "email",
+    "SubscriptionArn": "arn:aws:sns:us-east-1:134987931868:weather-airquality-alerts:3bcfe637-ebe8-4ea0-89d2-ecdf635a7bc8"
+  }
+]

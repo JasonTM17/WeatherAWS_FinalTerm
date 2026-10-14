@@ -1,0 +1,105 @@
+{
+  "source_mode": "Live S3 and Athena downloads",
+  "files": [
+    {
+      "name": "account_inventory.csv",
+      "sha256": "beaef1da804747d141ebbfd8fd2df49aa90f72375c8f40995efe75c5ec77f509"
+    },
+    {
+      "name": "category_distribution.csv",
+      "sha256": "92c4383643107de1fe48f663e7be9f6fb30f2b3ecf79924eb9c324f67e0d023f"
+    },
+    {
+      "name": "city_statistics.csv",
+      "sha256": "790a8c1e5531ab59d62e41edc6767677ea969bd7913d765be9b8d7f02384eb49"
+    },
+    {
+      "name": "correlations.csv",
+      "sha256": "35a72b6817036336350180492a2c7ab3cffd85f6fc5fdca23187859eeec72b58"
+    },
+    {
+      "name": "cost_by_service_day.csv",
+      "sha256": "ae596e16a50627a8de8f28a8eee790c7a66b6c9f00de56874524c153c3f89d19"
+    },
+    {
+      "name": "cross_account_overlap.csv",
+      "sha256": "405bb83ff9f4942d21962f7fabbe9ceb3e5ef2d96998e84bb55dd639dcb6412b"
+    },
+    {
+      "name": "daily_city.csv",
+      "sha256": "2bfeedae03ea1b1b1b2e609fbedb067748cea39ba034f19922c01f743d334f0a"
+    },
+    {
+      "name": "data_quality.csv",
+      "sha256": "11e6ce64bedf148d8ad92847301114f7311cffc8ffd6af6f273b700e8ef23d9d"
+    },
+    {
+      "name": "distribution_statistics.csv",
+      "sha256": "00fddcc89b94e40203e59e127af7159a9c9811424349c8544441172c6c22a211"
+    },
+    {
+      "name": "duplicate_city_timestamp.csv",
+      "sha256": "c8736588938f3dc5f011c5a1f7bcd630cfaa2c5e6dc0f440cc92a19bc84befe5"
+    },
+    {
+      "name": "hourly_city.csv",
+      "sha256": "a37c1156b8cfcc374aaeac8ddb0bf081b8f5f9e8a99f95f187a26958a3559403"
+    },
+    {
+      "name": "lambda_runtime.csv",
+      "sha256": "5e9f944d6b350ec83bdbcfb6e31d51a28508b1dc4870c67099913a6c5b3b1e81"
+    },
+    {
+      "name": "matched_account_hours.csv",
+      "sha256": "832e23065c1d51eea4f4e8d1868ee1ea8e3e381ef9001f602c52559f62be6806"
+    },
+    {
+      "name": "object_inventory.csv",
+      "sha256": "e0d1bf21d04f46aa4f1a2afc94ec8c1ba48c86ad1a3db015ef2e03d5c9ab6560"
+    },
+    {
+      "name": "operational_metrics.csv",
+      "sha256": "eb47523632718863665ebabf7e98cbab5431ab288c25d1c20f6934ab4d43df5d"
+    },
+    {
+      "name": "operational_summary.csv",
+      "sha256": "dc617046938235d041e7c9559a5eb193961d61b78cb757beaf8c787679654228"
+    },
+    {
+      "name": "partition_scan_comparison.csv",
+      "sha256": "d9d8c664bc0ab836b48f900ac8c138d103dcdcfe0dc8580b7cedd3186b4677db"
+    },
+    {
+      "name": "query_history.csv",
+      "sha256": "e6b4872aa4e76f17047c23962687da82ab98537c5068546a47a93f6466e22e00"
+    },
+    {
+      "name": "query_metrics.csv",
+      "sha256": "d45606ac01f2b8f6adfaabebd3414261afbcdc0ad9732eb3fa786dc5c2c554e4"
+    },
+    {
+      "name": "raw_all_both_accounts.csv",
+      "sha256": "d1fe67dad6ef0d1f150ef5ac40de3e98852ddda5395ad5ae98c0126fbc35bfaf"
+    },
+    {
+      "name": "raw_week2_both_accounts.csv",
+      "sha256": "ccbd76299f0b932c73c529ab08f6fe8f91b6400c72be5141529d8214d3a840d7"
+    },
+    {
+      "name": "service_status.csv",
+      "sha256": "6d7a98563e80ce7bdd16d8f7f6e16fbc5167019f7b02b780f4362f2ddbb85cc9"
+    },
+    {
+      "name": "threshold_exceedance.csv",
+      "sha256": "011e36a487e1712374baf0b6768718aee218643d1d447c8ec29a4746265eebdc"
+    },
+    {
+      "name": "weekly_comparison.csv",
+      "sha256": "4ffa62a22f35e937a507d6be4eb94040bcd9dedb9bfd7463b565a9e4516ec2a8"
+    }
+  ],
+  "calculation_policy": "Accounts analyzed independently. Matched city/hour means compare equal time groups. Source rows are not pooled as independent observations.",
+  "missing_values": "Null/nonfinite excluded per variable; numeric zeros retained and counted separately.",
+  "timezone": "Naive environmental timestamps are interpreted as UTC; AWS timezone-aware timestamps converted to UTC before filtering.",
+  "aws_mutations": "Only SELECT query result objects created; no infrastructure or credential changes."
+}

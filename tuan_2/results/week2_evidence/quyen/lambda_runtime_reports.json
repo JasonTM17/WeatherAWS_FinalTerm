@@ -1,0 +1,255 @@
+[
+  {
+    "timestamp_ms": 1791373865034,
+    "Duration": 3041.93,
+    "Billed Duration": 3607.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 564.62
+  },
+  {
+    "timestamp_ms": 1791373866871,
+    "Duration": 2941.01,
+    "Billed Duration": 3451.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 509.13
+  },
+  {
+    "timestamp_ms": 1791374138639,
+    "Duration": 2825.36,
+    "Billed Duration": 2826.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 102.0
+  },
+  {
+    "timestamp_ms": 1791374152152,
+    "Duration": 2634.14,
+    "Billed Duration": 2635.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 102.0
+  },
+  {
+    "timestamp_ms": 1791375800189,
+    "Duration": 3048.92,
+    "Billed Duration": 3568.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 518.36
+  },
+  {
+    "timestamp_ms": 1791375881907,
+    "Duration": 2815.99,
+    "Billed Duration": 3312.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 100.0,
+    "Init Duration": 495.65
+  },
+  {
+    "timestamp_ms": 1791375895966,
+    "Duration": 2728.9,
+    "Billed Duration": 2729.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 102.0
+  },
+  {
+    "timestamp_ms": 1791377464887,
+    "Duration": 2962.86,
+    "Billed Duration": 3468.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 504.39
+  },
+  {
+    "timestamp_ms": 1791377467064,
+    "Duration": 2983.16,
+    "Billed Duration": 3508.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 524.57
+  },
+  {
+    "timestamp_ms": 1791381065090,
+    "Duration": 3025.97,
+    "Billed Duration": 3596.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 569.95
+  },
+  {
+    "timestamp_ms": 1791381067174,
+    "Duration": 2982.44,
+    "Billed Duration": 3600.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 617.18
+  },
+  {
+    "timestamp_ms": 1791384665083,
+    "Duration": 2967.37,
+    "Billed Duration": 3392.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 424.27
+  },
+  {
+    "timestamp_ms": 1791384667102,
+    "Duration": 2896.17,
+    "Billed Duration": 3498.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 600.89
+  },
+  {
+    "timestamp_ms": 1791874265072,
+    "Duration": 2958.57,
+    "Billed Duration": 3488.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 529.16
+  },
+  {
+    "timestamp_ms": 1791874266948,
+    "Duration": 2883.13,
+    "Billed Duration": 3372.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 488.38
+  },
+  {
+    "timestamp_ms": 1791877865139,
+    "Duration": 3132.36,
+    "Billed Duration": 3631.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 497.87
+  },
+  {
+    "timestamp_ms": 1791877865799,
+    "Duration": 1877.31,
+    "Billed Duration": 2391.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 513.08
+  },
+  {
+    "timestamp_ms": 1791881465096,
+    "Duration": 3060.27,
+    "Billed Duration": 3556.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 495.59
+  },
+  {
+    "timestamp_ms": 1791881466933,
+    "Duration": 2868.13,
+    "Billed Duration": 3402.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 533.44
+  },
+  {
+    "timestamp_ms": 1791885065195,
+    "Duration": 2920.35,
+    "Billed Duration": 3439.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 518.34
+  },
+  {
+    "timestamp_ms": 1791885066717,
+    "Duration": 2953.07,
+    "Billed Duration": 3372.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 418.58
+  },
+  {
+    "timestamp_ms": 1791906665302,
+    "Duration": 3083.33,
+    "Billed Duration": 3607.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 523.07
+  },
+  {
+    "timestamp_ms": 1791906666173,
+    "Duration": 1935.01,
+    "Billed Duration": 2526.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 590.9
+  },
+  {
+    "timestamp_ms": 1791910264064,
+    "Duration": 1959.36,
+    "Billed Duration": 2474.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 513.92
+  },
+  {
+    "timestamp_ms": 1791910267017,
+    "Duration": 2968.66,
+    "Billed Duration": 3525.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 556.2
+  },
+  {
+    "timestamp_ms": 1791913865000,
+    "Duration": 2939.45,
+    "Billed Duration": 3462.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 521.73
+  },
+  {
+    "timestamp_ms": 1791913866928,
+    "Duration": 2932.87,
+    "Billed Duration": 3466.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 532.39
+  },
+  {
+    "timestamp_ms": 1791917465145,
+    "Duration": 3109.44,
+    "Billed Duration": 3623.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 512.77
+  },
+  {
+    "timestamp_ms": 1791917466973,
+    "Duration": 2986.93,
+    "Billed Duration": 3499.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 511.51
+  },
+  {
+    "timestamp_ms": 1791946087961,
+    "Duration": 1904.02,
+    "Billed Duration": 2428.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 523.98
+  },
+  {
+    "timestamp_ms": 1791946264971,
+    "Duration": 2997.36,
+    "Billed Duration": 3525.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 527.62
+  },
+  {
+    "timestamp_ms": 1791946265831,
+    "Duration": 1903.05,
+    "Billed Duration": 2411.0,
+    "Memory Size": 256.0,
+    "Max Memory Used": 101.0,
+    "Init Duration": 507.73
+  }
+]

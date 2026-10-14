@@ -1,0 +1,9 @@
+{
+  "State": "Active",
+  "Runtime": "python3.12",
+  "MemorySize": 256,
+  "Timeout": 60,
+  "FunctionName": "WeatherCollectorLambda",
+  "CodeSha256": "tVDUDu3h9Kd/tA7EmuuCvSQOn+v8CS3jnl9GeGAJkKg=",
+  "LastModified": "2026-10-06T15:41:12.000+0000"
+}

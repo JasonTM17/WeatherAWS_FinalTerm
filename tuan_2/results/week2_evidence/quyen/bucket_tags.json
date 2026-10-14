@@ -1,0 +1,16 @@
+{
+  "TagSet": [
+    {
+      "Key": "Course",
+      "Value": "Cloud_FinalTerm"
+    },
+    {
+      "Key": "Project",
+      "Value": "WeatherAWS_FinalTerm"
+    },
+    {
+      "Key": "Owner",
+      "Value": "24110054"
+    }
+  ]
+}

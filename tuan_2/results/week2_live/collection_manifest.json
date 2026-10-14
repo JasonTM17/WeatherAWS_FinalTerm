@@ -1,0 +1,20 @@
+{
+  "mode": "live-select-query",
+  "profiles": [
+    {
+      "profile": "default",
+      "succeeded": 12,
+      "queries": 12
+    },
+    {
+      "profile": "quyen",
+      "succeeded": 12,
+      "queries": 12
+    }
+  ],
+  "week2_start_utc": "2026-10-11 17:00:00",
+  "week2_end_exclusive_utc": "2026-10-18 17:00:00",
+  "week2_definition": "Week 1 begins 05 October 2026 in UTC+7; Week 2 begins 12 October in UTC+7. Only data available at collection are analyzed.",
+  "credential_files_unchanged": true,
+  "new_collection_invoked": false
+}

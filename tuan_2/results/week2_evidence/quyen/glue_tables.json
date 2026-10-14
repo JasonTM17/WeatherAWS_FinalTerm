@@ -1,0 +1,282 @@
+[
+  {
+    "Name": "vietnam_weather_aqi",
+    "DatabaseName": "weather_aqi_db",
+    "Owner": "hadoop",
+    "CreateTime": "2026-10-07 18:54:34+07:00",
+    "UpdateTime": "2026-10-07 18:54:34+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "Retention": 0,
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "PartitionKeys": [
+      {
+        "Name": "year",
+        "Type": "string"
+      },
+      {
+        "Name": "month",
+        "Type": "string"
+      },
+      {
+        "Name": "day",
+        "Type": "string"
+      }
+    ],
+    "TableType": "EXTERNAL_TABLE",
+    "Parameters": {
+      "has_encrypted_data": "false",
+      "EXTERNAL": "TRUE",
+      "transient_lastDdlTime": "1791374074"
+    },
+    "CreatedBy": "arn:aws:sts::134987931868:assumed-role/voclabs/user5434332=24110051@student.hcmute.edu.vn",
+    "IsRegisteredWithLakeFormation": false,
+    "CatalogId": "134987931868",
+    "VersionId": "0",
+    "IsMultiDialectView": false,
+    "IsMaterializedView": false
+  },
+  {
+    "Name": "weather_airquality_records",
+    "DatabaseName": "weather_aqi_db",
+    "Owner": "hadoop",
+    "CreateTime": "2026-10-07 18:54:30+07:00",
+    "UpdateTime": "2026-10-07 18:54:30+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "Retention": 0,
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "PartitionKeys": [
+      {
+        "Name": "year",
+        "Type": "string"
+      },
+      {
+        "Name": "month",
+        "Type": "string"
+      },
+      {
+        "Name": "day",
+        "Type": "string"
+      }
+    ],
+    "TableType": "EXTERNAL_TABLE",
+    "Parameters": {
+      "has_encrypted_data": "false",
+      "EXTERNAL": "TRUE",
+      "transient_lastDdlTime": "1791374070"
+    },
+    "CreatedBy": "arn:aws:sts::134987931868:assumed-role/voclabs/user5434332=24110051@student.hcmute.edu.vn",
+    "IsRegisteredWithLakeFormation": false,
+    "CatalogId": "134987931868",
+    "VersionId": "0",
+    "IsMultiDialectView": false,
+    "IsMaterializedView": false
+  }
+]

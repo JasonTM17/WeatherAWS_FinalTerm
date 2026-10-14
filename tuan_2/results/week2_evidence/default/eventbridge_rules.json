@@ -1,0 +1,10 @@
+{
+  "Rules": [
+    {
+      "Name": "WeatherCollectionSchedule",
+      "State": "ENABLED",
+      "ScheduleExpression": "rate(1 hour)",
+      "Arn": "arn:aws:events:us-east-1:873674852386:rule/WeatherCollectionSchedule"
+    }
+  ]
+}

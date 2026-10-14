@@ -1,27 +1,29 @@
-# Mô hình dữ liệu và phân tích
+# Dữ liệu và phương pháp phân tích
 
-## Bộ dữ liệu đã lưu
+## Bộ báo cáo Tuần 1
 
-156 mã bản ghi khác nhau, 52 mẫu cho mỗi đô thị TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Mỗi bản ghi có 23 trường, gồm nhận diện, tọa độ, thời gian UTC/VN, khí tượng, các nồng độ ô nhiễm, AQI và ba khóa phân vùng. Xem [CSV gốc](../tuan_2/results/athena_queries/raw_weather_aqi_records.csv) và [lược đồ Athena](../tuan_2/athena/create_table.sql).
+[CSV đã nộp](../tuan_2/results/athena_queries/) gồm 156 bản ghi/52 mẫu mỗi đô thị, bốn bảng tổng hợp và chỉ số truy vấn. Bộ này được giữ nguyên cùng báo cáo và Excel Tuần 1.
 
-Dữ liệu chất lượng không khí được cung cấp qua [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api), dựa trên sản phẩm mô hình khí quyển CAMS. Bộ số liệu API đã lưu không được coi là phép đo trực tiếp tại một trạm.
+## Bộ dữ liệu mới Tuần 2
 
-| Kết quả | Cách nhóm | Số dòng |
-| --- | --- | ---: |
-| avg_aqi_by_city.csv | Thành phố | 3 |
-| peak_pollution_hours.csv | Giờ UTC | 24 |
-| aqi_category_distribution.csv | Thành phố và cấp AQI | 8 |
-| weather_correlation.csv | Thành phố | 3 |
-| raw_weather_aqi_records.csv | Bản ghi | 156 |
+[Kết quả Athena](../tuan_2/results/week2_live/) được xuất riêng theo hai tài khoản. Tổng raw là 204/231, mẫu thuộc Tuần 2 là 27/57. Tuần được lọc theo UTC+7, timestamp môi trường dạng không có múi giờ được hiểu là UTC; các thời điểm dịch vụ có múi giờ được đổi về UTC trước khi lọc.
 
-Tổng mẫu theo đô thị, nhóm giờ và cấp AQI đều là 156. Bốn nhóm giờ có 9 mẫu và hai mươi nhóm giờ có 6 mẫu. Tỷ lệ AQI được tính trên số mẫu của từng đô thị; không diễn giải thành tỷ lệ thời gian vận hành.
+[Tệp raw và metadata nguồn](../tuan_2/results/week2_evidence/) giữ đủ tệp raw có thể đọc được, danh sách/hash đối tượng, trạng thái tài nguyên, điểm CloudWatch, dòng REPORT đã trích, lịch sử truy vấn và chi phí theo dịch vụ. Credentials, nội dung secret, endpoint email, URL tải có chữ ký và log thô được loại khỏi bộ công khai.
 
-## Đọc kết quả
+## Phép tính
 
-AQI trung bình của TP. Hồ Chí Minh là 107,79, Đà Nẵng 74,67 và Hà Nội 67,56. AQI theo giờ cao nhất ở 11 UTC (103,83); PM2.5 theo giờ cao nhất ở 19 UTC (25,53 µg/m³). Những giá trị này mô tả tập dữ liệu đã lưu; chúng không đủ để kết luận nguyên nhân phát thải hoặc chu kỳ điển hình.
+- Phân tích riêng từng tài khoản; không cộng 144 cặp lịch sử trùng nhau thành quan trắc độc lập.
+- Trung bình và SD tính trên các bản ghi trong cùng đô thị/tài khoản; SD dùng n−1.
+- Q1, trung vị, Q3 và P95 dùng nội suy tuyến tính. Không gọi SD là khoảng tin cậy.
+- Các tỷ lệ dùng số mẫu cùng đô thị/tài khoản làm mẫu số; không diễn giải thành tỷ lệ thời gian toàn tuần.
+- Đối chiếu ghép trung bình của cùng thành phố/giờ, 21 nhóm (7 giờ mỗi đô thị), với trọng số mỗi giờ bằng nhau.
+- Pearson và Spearman giữ kèm n; Spearman dùng hạng trung bình cho giá trị trùng. Mẫu chuỗi ngắn không chứng minh nhân quả.
+- Giá trị NULL/không hữu hạn được kiểm tra riêng; số 0 giữ nguyên và đếm riêng.
+- Errors > Invocations khiến tỷ lệ lỗi không xác định. Không thay dữ liệu bằng 0 hoặc tạo phần trăm vượt 100%.
+- Cost Explorer giữ số tiền gốc, đơn vị và cờ Estimated; số liệu theo tài khoản không được gọi là chi phí riêng dự án.
 
-Hệ số Pearson tính riêng cho từng đô thị. Ví dụ, nhiệt độ–PM2.5 tại TP. Hồ Chí Minh có r = −0,6977, độ ẩm–PM2.5 có r = 0,6627. Tương quan không chứng minh quan hệ nhân quả.
+## Tệp kết quả
 
-## Xuất và kiểm tra
+[24 CSV phân tích](../tuan_2/results/week2_analysis/) có bảng phân bố, giờ/ngày, cấp AQI, vượt ngưỡng, tương quan, so sánh ghép giờ, chất lượng, vận hành, query metrics và chi phí. [Manifest hình](../tuan_2/results/week2_charts/chart_manifest.json) chỉ rõ CSV nguồn của cả 16 hình. Word và Excel nhúng cùng các ảnh, bên cạnh dữ liệu và các công thức tổng hợp trong Excel.
 
-Xuất trực tiếp lưu CSV do Athena trả về. Nếu đọc qua API phân trang, chương trình giữ header một lần và bảo toàn ô rỗng. Chế độ ngoại tuyến chỉ sao chép bản đã lưu; manifest ghi `saved-snapshot`. Số liệu `query_metrics.csv` là dữ liệu lịch sử của các lượt truy vấn trong bộ kết quả, không phải kết quả mới của một lần sao chép ngoại tuyến.
+Dữ liệu chất lượng không khí được cung cấp qua [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api), dựa trên CAMS. Bộ API đã lưu không được coi là phép đo trực tiếp tại một trạm.

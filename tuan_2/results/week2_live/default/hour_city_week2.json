@@ -1,0 +1,13 @@
+{
+  "name": "hour_city_week2",
+  "query_id": "dea89158-0054-4c67-8b4b-c7037192160a",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1513,
+  "bytes_scanned": 15193,
+  "row_count": 27,
+  "profile": "default",
+  "account_id": "873674852386",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:31.265107+00:00",
+  "csv_sha256": "7f4fd6e30e650bc0f4b5762e40fd6ec6a39c7b9afd8c451b9e4b5381714af172"
+}

@@ -1,0 +1,13 @@
+{
+  "profile": "default",
+  "account": "873674852386",
+  "connected": true,
+  "objects": 22,
+  "raw_records": 204,
+  "query_executions": 52,
+  "query_results": 23,
+  "metric_points": 965,
+  "log_events": 204,
+  "runtime_entries": 21,
+  "unavailable": []
+}

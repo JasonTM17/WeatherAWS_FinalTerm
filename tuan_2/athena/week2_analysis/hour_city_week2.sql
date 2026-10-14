@@ -1,0 +1,1 @@
+SELECT city, hour, COUNT(*) AS sample_count, AVG(us_aqi) AS avg_aqi, AVG(pm2_5) AS avg_pm2_5, AVG(pm10) AS avg_pm10 FROM weather_airquality_records WHERE year='2026' AND month='10' AND day IN ('11','12','13','14','15','16','17','18') AND timestamp_utc >= '2026-10-11 17:00:00' AND timestamp_utc < '2026-10-18 17:00:00' GROUP BY city, hour ORDER BY city, hour;

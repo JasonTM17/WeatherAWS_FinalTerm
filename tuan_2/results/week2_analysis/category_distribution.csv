@@ -1,0 +1,7 @@
+"profile","city","aqi_category","sample_count","fraction"
+"default","DaNang","Good","9","1.0"
+"default","HaNoi","Unhealthy","9","1.0"
+"default","HoChiMinh","Moderate","9","1.0"
+"quyen","DaNang","Good","19","1.0"
+"quyen","HaNoi","Unhealthy","19","1.0"
+"quyen","HoChiMinh","Moderate","19","1.0"

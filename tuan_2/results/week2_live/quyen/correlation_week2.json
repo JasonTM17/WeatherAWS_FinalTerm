@@ -1,0 +1,13 @@
+{
+  "name": "correlation_week2",
+  "query_id": "8ef04820-5bef-45b7-b4bc-9bab9bb785c9",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 1339,
+  "bytes_scanned": 32067,
+  "row_count": 3,
+  "profile": "quyen",
+  "account_id": "134987931868",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:39.035482+00:00",
+  "csv_sha256": "60d5d37ddc3b3a74bf2583814a176245d9373518967d3d20648925c2581ba540"
+}

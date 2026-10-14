@@ -1,0 +1,704 @@
+[
+  {
+    "Values": [
+      "2026",
+      "10",
+      "04"
+    ],
+    "DatabaseName": "weather_aqi_db",
+    "TableName": "weather_airquality_records",
+    "CreationTime": "2026-10-07 18:54:43+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw/year=2026/month=10/day=04",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "CatalogId": "134987931868"
+  },
+  {
+    "Values": [
+      "2026",
+      "10",
+      "06"
+    ],
+    "DatabaseName": "weather_aqi_db",
+    "TableName": "weather_airquality_records",
+    "CreationTime": "2026-10-07 18:54:43+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw/year=2026/month=10/day=06",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "CatalogId": "134987931868"
+  },
+  {
+    "Values": [
+      "2026",
+      "10",
+      "14"
+    ],
+    "DatabaseName": "weather_aqi_db",
+    "TableName": "weather_airquality_records",
+    "CreationTime": "2026-10-14 09:48:16+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw/year=2026/month=10/day=14",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "CatalogId": "134987931868"
+  },
+  {
+    "Values": [
+      "2026",
+      "10",
+      "13"
+    ],
+    "DatabaseName": "weather_aqi_db",
+    "TableName": "weather_airquality_records",
+    "CreationTime": "2026-10-14 09:48:16+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw/year=2026/month=10/day=13",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "CatalogId": "134987931868"
+  },
+  {
+    "Values": [
+      "2026",
+      "10",
+      "07"
+    ],
+    "DatabaseName": "weather_aqi_db",
+    "TableName": "weather_airquality_records",
+    "CreationTime": "2026-10-14 09:48:16+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw/year=2026/month=10/day=07",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "CatalogId": "134987931868"
+  },
+  {
+    "Values": [
+      "2026",
+      "10",
+      "05"
+    ],
+    "DatabaseName": "weather_aqi_db",
+    "TableName": "weather_airquality_records",
+    "CreationTime": "2026-10-07 18:54:43+07:00",
+    "LastAccessTime": "1970-01-01 07:00:00+07:00",
+    "StorageDescriptor": {
+      "Columns": [
+        {
+          "Name": "record_id",
+          "Type": "string"
+        },
+        {
+          "Name": "city",
+          "Type": "string"
+        },
+        {
+          "Name": "latitude",
+          "Type": "double"
+        },
+        {
+          "Name": "longitude",
+          "Type": "double"
+        },
+        {
+          "Name": "timestamp_utc",
+          "Type": "string"
+        },
+        {
+          "Name": "timestamp_vn",
+          "Type": "string"
+        },
+        {
+          "Name": "temperature_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "relative_humidity_2m",
+          "Type": "double"
+        },
+        {
+          "Name": "surface_pressure",
+          "Type": "double"
+        },
+        {
+          "Name": "wind_speed_10m",
+          "Type": "double"
+        },
+        {
+          "Name": "pm2_5",
+          "Type": "double"
+        },
+        {
+          "Name": "pm10",
+          "Type": "double"
+        },
+        {
+          "Name": "carbon_monoxide",
+          "Type": "double"
+        },
+        {
+          "Name": "nitrogen_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "sulphur_dioxide",
+          "Type": "double"
+        },
+        {
+          "Name": "ozone",
+          "Type": "double"
+        },
+        {
+          "Name": "us_aqi",
+          "Type": "int"
+        },
+        {
+          "Name": "aqi_category",
+          "Type": "string"
+        },
+        {
+          "Name": "hour",
+          "Type": "int"
+        },
+        {
+          "Name": "collected_at",
+          "Type": "string"
+        }
+      ],
+      "Location": "s3://weather-aqi-134987931868/raw/year=2026/month=10/day=05",
+      "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+      "OutputFormat": "org.apache.hadoop.hive.ql.io.IgnoreKeyTextOutputFormat",
+      "Compressed": false,
+      "NumberOfBuckets": -1,
+      "SerdeInfo": {
+        "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+        "Parameters": {
+          "serialization.format": "1",
+          "ignore.malformed.json": "true"
+        }
+      },
+      "BucketColumns": [],
+      "SortColumns": [],
+      "Parameters": {},
+      "SkewedInfo": {
+        "SkewedColumnNames": [],
+        "SkewedColumnValues": [],
+        "SkewedColumnValueLocationMaps": {}
+      },
+      "StoredAsSubDirectories": false
+    },
+    "CatalogId": "134987931868"
+  }
+]

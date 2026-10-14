@@ -1,0 +1,13 @@
+{
+  "name": "raw_all",
+  "query_id": "9b63cf94-1521-4fd6-8d02-1ebc062a792b",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 953,
+  "bytes_scanned": 114736,
+  "row_count": 204,
+  "profile": "default",
+  "account_id": "873674852386",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:22.295721+00:00",
+  "csv_sha256": "894283f835f5d0d7af4569dd43000506171d91ecf66237a26370d8bf280bacdb"
+}

@@ -1,0 +1,1325 @@
+[
+  {
+    "QueryExecutionId": "07e51006-9871-42d2-9090-438a5552c57d",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 967,
+      "DataScannedInBytes": 84119,
+      "TotalExecutionTimeInMillis": 1153,
+      "QueryQueueTimeInMillis": 102,
+      "ServicePreProcessingTimeInMillis": 60,
+      "QueryPlanningTimeInMillis": 555,
+      "ServiceProcessingTimeInMillis": 24,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:21:04.313000+07:00",
+      "CompletionDateTime": "2026-10-06 22:21:05.466000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "349d1865-e39f-412d-8a8e-1dc207e80adc",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 928,
+      "DataScannedInBytes": 92699,
+      "TotalExecutionTimeInMillis": 1094,
+      "QueryQueueTimeInMillis": 91,
+      "ServicePreProcessingTimeInMillis": 58,
+      "QueryPlanningTimeInMillis": 492,
+      "ServiceProcessingTimeInMillis": 17,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 14:09:34.651000+07:00",
+      "CompletionDateTime": "2026-10-13 14:09:35.745000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "e62cd2b9-719f-4192-bdfd-f6ccf07f3053",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 884,
+      "DataScannedInBytes": 92699,
+      "TotalExecutionTimeInMillis": 1082,
+      "QueryQueueTimeInMillis": 106,
+      "ServicePreProcessingTimeInMillis": 66,
+      "QueryPlanningTimeInMillis": 411,
+      "ServiceProcessingTimeInMillis": 26,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 14:09:24.949000+07:00",
+      "CompletionDateTime": "2026-10-13 14:09:26.031000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "66eb4c2e-6452-4ea2-a693-98205827183b",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 340,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 541,
+      "QueryQueueTimeInMillis": 67,
+      "ServicePreProcessingTimeInMillis": 57,
+      "ServiceProcessingTimeInMillis": 77,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:56:34.364000+07:00",
+      "CompletionDateTime": "2026-10-13 14:56:34.905000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "1dd691e3-5608-481a-92b1-f1e150e89239",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 274,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 473,
+      "QueryQueueTimeInMillis": 59,
+      "ServicePreProcessingTimeInMillis": 54,
+      "ServiceProcessingTimeInMillis": 86,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:39:33.479000+07:00",
+      "CompletionDateTime": "2026-10-13 14:39:33.952000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "b94cf9de-abfd-4d69-9fd0-165878b329c6",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 336,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 630,
+      "QueryQueueTimeInMillis": 106,
+      "ServicePreProcessingTimeInMillis": 49,
+      "ServiceProcessingTimeInMillis": 139,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:21:06.315000+07:00",
+      "CompletionDateTime": "2026-10-13 14:21:06.945000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "1946bd5a-fe68-45e6-91be-37165d4d727e",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 411,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 624,
+      "QueryQueueTimeInMillis": 101,
+      "ServicePreProcessingTimeInMillis": 50,
+      "ServiceProcessingTimeInMillis": 62,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:56:40.494000+07:00",
+      "CompletionDateTime": "2026-10-13 14:56:41.118000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "75ef268e-c78a-42ef-aee3-c927706187dd",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 304,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 477,
+      "QueryQueueTimeInMillis": 57,
+      "ServicePreProcessingTimeInMillis": 51,
+      "ServiceProcessingTimeInMillis": 65,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:56:46.391000+07:00",
+      "CompletionDateTime": "2026-10-13 14:56:46.868000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "77a261fe-e3a4-4452-a691-4d6f363e5c00",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 938,
+      "DataScannedInBytes": 85835,
+      "TotalExecutionTimeInMillis": 1107,
+      "QueryQueueTimeInMillis": 98,
+      "ServicePreProcessingTimeInMillis": 54,
+      "ServiceProcessingTimeInMillis": 17,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:43:18.828000+07:00",
+      "CompletionDateTime": "2026-10-06 22:43:19.935000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "49b90f79-c720-4563-8976-49105cf5eea0",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 415,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 692,
+      "QueryQueueTimeInMillis": 97,
+      "ServicePreProcessingTimeInMillis": 49,
+      "ServiceProcessingTimeInMillis": 131,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:01:35.087000+07:00",
+      "CompletionDateTime": "2026-10-13 14:01:35.779000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "49509107-bf65-4448-b27d-ab16a411b892",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 898,
+      "DataScannedInBytes": 106289,
+      "TotalExecutionTimeInMillis": 1106,
+      "QueryQueueTimeInMillis": 101,
+      "ServicePreProcessingTimeInMillis": 77,
+      "QueryPlanningTimeInMillis": 485,
+      "ServiceProcessingTimeInMillis": 30,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:45.034000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:46.140000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "ab48ade3-a365-4938-abe4-3fdf276465af",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 550,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 762,
+      "QueryQueueTimeInMillis": 64,
+      "ServicePreProcessingTimeInMillis": 91,
+      "ServiceProcessingTimeInMillis": 57,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:40:11.296000+07:00",
+      "CompletionDateTime": "2026-10-13 14:40:12.058000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "c3eb7f47-5a02-4a1d-94c5-d65bab644fb3",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 405,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 579,
+      "QueryQueueTimeInMillis": 137,
+      "ServicePreProcessingTimeInMillis": 18,
+      "ServiceProcessingTimeInMillis": 19,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:21.792000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:22.371000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "9925449c-e279-44aa-bc4e-57a9bc6b322a",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 984,
+      "DataScannedInBytes": 92699,
+      "TotalExecutionTimeInMillis": 1121,
+      "QueryQueueTimeInMillis": 53,
+      "ServicePreProcessingTimeInMillis": 63,
+      "QueryPlanningTimeInMillis": 487,
+      "ServiceProcessingTimeInMillis": 21,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 14:10:02.377000+07:00",
+      "CompletionDateTime": "2026-10-13 14:10:03.498000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "b0047134-f182-4a95-b626-a44c27f7c0ff",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 800,
+      "DataScannedInBytes": 92699,
+      "TotalExecutionTimeInMillis": 981,
+      "QueryQueueTimeInMillis": 92,
+      "ServicePreProcessingTimeInMillis": 75,
+      "QueryPlanningTimeInMillis": 374,
+      "ServiceProcessingTimeInMillis": 14,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 14:09:43.889000+07:00",
+      "CompletionDateTime": "2026-10-13 14:09:44.870000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "bc2593b6-16c1-4c5a-8e36-4df0730bac80",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 939,
+      "DataScannedInBytes": 106289,
+      "TotalExecutionTimeInMillis": 1159,
+      "QueryQueueTimeInMillis": 97,
+      "ServicePreProcessingTimeInMillis": 88,
+      "QueryPlanningTimeInMillis": 346,
+      "ServiceProcessingTimeInMillis": 35,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:42.916000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:44.075000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "3145c55a-3ecc-4bb3-9f51-d9d0f70703ca",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 3536,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 3743,
+      "QueryQueueTimeInMillis": 134,
+      "ServicePreProcessingTimeInMillis": 57,
+      "ServiceProcessingTimeInMillis": 16,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:41:30.237000+07:00",
+      "CompletionDateTime": "2026-10-06 22:41:33.980000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "9d470ce8-aa47-4846-9c87-20e6d4f35303",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 2356,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 2635,
+      "QueryQueueTimeInMillis": 167,
+      "ServicePreProcessingTimeInMillis": 93,
+      "ServiceProcessingTimeInMillis": 19,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:43:58.755000+07:00",
+      "CompletionDateTime": "2026-10-06 22:44:01.390000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "696b6823-60f7-4141-b427-397197aed852",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 1042,
+      "DataScannedInBytes": 106289,
+      "TotalExecutionTimeInMillis": 1301,
+      "QueryQueueTimeInMillis": 119,
+      "ServicePreProcessingTimeInMillis": 112,
+      "QueryPlanningTimeInMillis": 457,
+      "ServiceProcessingTimeInMillis": 28,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:37.749000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:39.050000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "a2dca336-3a7a-4cd1-9c97-85c1c327f9a9",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 246,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 491,
+      "QueryQueueTimeInMillis": 95,
+      "ServicePreProcessingTimeInMillis": 57,
+      "ServiceProcessingTimeInMillis": 93,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:42:48.514000+07:00",
+      "CompletionDateTime": "2026-10-13 14:42:49.005000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "6d6d93ac-2e7c-4266-bc74-e8d63ba76037",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 288,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 499,
+      "QueryQueueTimeInMillis": 59,
+      "ServicePreProcessingTimeInMillis": 56,
+      "ServiceProcessingTimeInMillis": 96,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:38:44.565000+07:00",
+      "CompletionDateTime": "2026-10-13 14:38:45.064000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "a4d92707-5ea1-4694-ad9a-809459c06af6",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 344,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 616,
+      "QueryQueueTimeInMillis": 148,
+      "ServicePreProcessingTimeInMillis": 81,
+      "ServiceProcessingTimeInMillis": 43,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:05:43.353000+07:00",
+      "CompletionDateTime": "2026-10-13 14:05:43.969000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "5b8a0871-efcf-4a3f-b0eb-999b54de8bf1",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 4797,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 5086,
+      "QueryQueueTimeInMillis": 200,
+      "ServicePreProcessingTimeInMillis": 73,
+      "ServiceProcessingTimeInMillis": 16,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-14 09:47:51.569000+07:00",
+      "CompletionDateTime": "2026-10-14 09:47:56.655000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "de933b52-2e81-4760-9f70-1a334b7008b6",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 1158,
+      "DataScannedInBytes": 114736,
+      "TotalExecutionTimeInMillis": 1382,
+      "QueryQueueTimeInMillis": 104,
+      "ServicePreProcessingTimeInMillis": 100,
+      "QueryPlanningTimeInMillis": 585,
+      "ServiceProcessingTimeInMillis": 20,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-14 09:47:57.005000+07:00",
+      "CompletionDateTime": "2026-10-14 09:47:58.387000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "b659e3c3-23f1-45cc-89ae-73e1a4e4baff",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 282,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 631,
+      "QueryQueueTimeInMillis": 135,
+      "ServicePreProcessingTimeInMillis": 111,
+      "ServiceProcessingTimeInMillis": 103,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:56:52.403000+07:00",
+      "CompletionDateTime": "2026-10-13 14:56:53.034000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "c912516b-02f8-4cdc-8a07-d524115d3d27",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 769,
+      "DataScannedInBytes": 106289,
+      "TotalExecutionTimeInMillis": 985,
+      "QueryQueueTimeInMillis": 105,
+      "ServicePreProcessingTimeInMillis": 80,
+      "QueryPlanningTimeInMillis": 332,
+      "ServiceProcessingTimeInMillis": 31,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:47.189000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:48.174000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "52a3b042-e89a-4977-b0cf-8503a035966a",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 1050,
+      "DataScannedInBytes": 85835,
+      "TotalExecutionTimeInMillis": 1208,
+      "QueryQueueTimeInMillis": 61,
+      "ServicePreProcessingTimeInMillis": 74,
+      "QueryPlanningTimeInMillis": 675,
+      "ServiceProcessingTimeInMillis": 23,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:43:16.227000+07:00",
+      "CompletionDateTime": "2026-10-06 22:43:17.435000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "b07478d6-40d8-4923-9f32-3337adc3389d",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 749,
+      "DataScannedInBytes": 87551,
+      "TotalExecutionTimeInMillis": 915,
+      "QueryQueueTimeInMillis": 106,
+      "ServicePreProcessingTimeInMillis": 39,
+      "QueryPlanningTimeInMillis": 340,
+      "ServiceProcessingTimeInMillis": 21,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:44:07.301000+07:00",
+      "CompletionDateTime": "2026-10-06 22:44:08.216000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "217683c0-0a46-4d5e-964d-303250cc3b88",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 800,
+      "DataScannedInBytes": 84119,
+      "TotalExecutionTimeInMillis": 1009,
+      "QueryQueueTimeInMillis": 106,
+      "ServicePreProcessingTimeInMillis": 82,
+      "QueryPlanningTimeInMillis": 424,
+      "ServiceProcessingTimeInMillis": 21,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:21:09.677000+07:00",
+      "CompletionDateTime": "2026-10-06 22:21:10.686000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "800fe9aa-43c4-45b5-bb2d-cc70d9aa3445",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 1486,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 1771,
+      "QueryQueueTimeInMillis": 215,
+      "ServicePreProcessingTimeInMillis": 44,
+      "ServiceProcessingTimeInMillis": 26,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:18.150000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:19.921000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "f5a40765-c057-468d-9968-c59b57c00584",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 369,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 621,
+      "QueryQueueTimeInMillis": 101,
+      "ServicePreProcessingTimeInMillis": 56,
+      "ServiceProcessingTimeInMillis": 95,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:20:22.467000+07:00",
+      "CompletionDateTime": "2026-10-13 14:20:23.088000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "2c06cfd8-9774-445e-b6cf-cec4eb58d17d",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 1191,
+      "DataScannedInBytes": 84119,
+      "TotalExecutionTimeInMillis": 1586,
+      "QueryQueueTimeInMillis": 69,
+      "ServicePreProcessingTimeInMillis": 263,
+      "QueryPlanningTimeInMillis": 448,
+      "ServiceProcessingTimeInMillis": 63,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:21:06.988000+07:00",
+      "CompletionDateTime": "2026-10-06 22:21:08.574000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "5704da34-ff6f-4f1e-8a1d-d9f983417231",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 747,
+      "DataScannedInBytes": 87551,
+      "TotalExecutionTimeInMillis": 927,
+      "QueryQueueTimeInMillis": 93,
+      "ServicePreProcessingTimeInMillis": 70,
+      "QueryPlanningTimeInMillis": 348,
+      "ServiceProcessingTimeInMillis": 17,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:44:15.629000+07:00",
+      "CompletionDateTime": "2026-10-06 22:44:16.556000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "8bf827a7-e2c6-4b43-a971-eb05369ff9ba",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 873,
+      "DataScannedInBytes": 84119,
+      "TotalExecutionTimeInMillis": 1064,
+      "QueryQueueTimeInMillis": 91,
+      "ServicePreProcessingTimeInMillis": 72,
+      "QueryPlanningTimeInMillis": 382,
+      "ServiceProcessingTimeInMillis": 28,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:21:00.480000+07:00",
+      "CompletionDateTime": "2026-10-06 22:21:01.544000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "c04a8dbe-dc36-434d-b1d6-ba4fdc4da32c",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 295,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 540,
+      "QueryQueueTimeInMillis": 103,
+      "ServicePreProcessingTimeInMillis": 76,
+      "ServiceProcessingTimeInMillis": 66,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:56:28.506000+07:00",
+      "CompletionDateTime": "2026-10-13 14:56:29.046000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "12d3ea77-4bfa-4d4e-a9f2-c7f339c6e345",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 450,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 699,
+      "QueryQueueTimeInMillis": 61,
+      "ServicePreProcessingTimeInMillis": 79,
+      "ServiceProcessingTimeInMillis": 109,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:38:00.804000+07:00",
+      "CompletionDateTime": "2026-10-13 14:38:01.503000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "cc4523ed-2f2e-46cb-ac16-bf6930d7c430",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 820,
+      "DataScannedInBytes": 106289,
+      "TotalExecutionTimeInMillis": 1030,
+      "QueryQueueTimeInMillis": 101,
+      "ServicePreProcessingTimeInMillis": 79,
+      "QueryPlanningTimeInMillis": 370,
+      "ServiceProcessingTimeInMillis": 30,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:40.773000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:41.803000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "38603d3a-bda4-4455-8e7f-32ba8a0c9628",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 339,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 587,
+      "QueryQueueTimeInMillis": 97,
+      "ServicePreProcessingTimeInMillis": 76,
+      "ServiceProcessingTimeInMillis": 75,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:08:40.642000+07:00",
+      "CompletionDateTime": "2026-10-13 14:08:41.229000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "f0c992c3-c598-4e31-b483-1cf367774f02",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 1065,
+      "DataScannedInBytes": 87551,
+      "TotalExecutionTimeInMillis": 1279,
+      "QueryQueueTimeInMillis": 111,
+      "ServicePreProcessingTimeInMillis": 64,
+      "QueryPlanningTimeInMillis": 633,
+      "ServiceProcessingTimeInMillis": 39,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:44:10.684000+07:00",
+      "CompletionDateTime": "2026-10-06 22:44:11.963000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "fda39c5d-a1c3-47a3-aee4-a92f4c41d26e",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 279,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 526,
+      "QueryQueueTimeInMillis": 95,
+      "ServicePreProcessingTimeInMillis": 49,
+      "ServiceProcessingTimeInMillis": 103,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:43:16.349000+07:00",
+      "CompletionDateTime": "2026-10-13 14:43:16.875000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "727a9ca1-7017-49c9-915e-b7d469b3efc8",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 315,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 528,
+      "QueryQueueTimeInMillis": 91,
+      "ServicePreProcessingTimeInMillis": 51,
+      "ServiceProcessingTimeInMillis": 71,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:18:40.385000+07:00",
+      "CompletionDateTime": "2026-10-13 14:18:40.913000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "bf0ed2da-392d-49d1-af60-8c21f2e3acf6",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 1003,
+      "DataScannedInBytes": 85835,
+      "TotalExecutionTimeInMillis": 1193,
+      "QueryQueueTimeInMillis": 97,
+      "ServicePreProcessingTimeInMillis": 71,
+      "QueryPlanningTimeInMillis": 511,
+      "ServiceProcessingTimeInMillis": 22,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:43:09.798000+07:00",
+      "CompletionDateTime": "2026-10-06 22:43:10.991000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "6581f62e-1508-4097-b048-e3197693088a",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 352,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 496,
+      "QueryQueueTimeInMillis": 101,
+      "ServicePreProcessingTimeInMillis": 17,
+      "ServiceProcessingTimeInMillis": 26,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 22:58:16.058000+07:00",
+      "CompletionDateTime": "2026-10-13 22:58:16.554000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "87a34dcf-b738-4a3a-8a26-88d1902a9507",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 320,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 601,
+      "QueryQueueTimeInMillis": 103,
+      "ServicePreProcessingTimeInMillis": 52,
+      "ServiceProcessingTimeInMillis": 126,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:42:20.583000+07:00",
+      "CompletionDateTime": "2026-10-13 14:42:21.184000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "e4771176-f6c8-402a-8cb9-a20ad863becc",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 910,
+      "DataScannedInBytes": 92699,
+      "TotalExecutionTimeInMillis": 1134,
+      "QueryQueueTimeInMillis": 104,
+      "ServicePreProcessingTimeInMillis": 81,
+      "QueryPlanningTimeInMillis": 412,
+      "ServiceProcessingTimeInMillis": 39,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-13 14:09:53.218000+07:00",
+      "CompletionDateTime": "2026-10-13 14:09:54.352000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "20d067bf-a262-49ad-9477-6a9a17dc575f",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 886,
+      "DataScannedInBytes": 85835,
+      "TotalExecutionTimeInMillis": 1074,
+      "QueryQueueTimeInMillis": 100,
+      "ServicePreProcessingTimeInMillis": 46,
+      "QueryPlanningTimeInMillis": 472,
+      "ServiceProcessingTimeInMillis": 42,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:43:13.587000+07:00",
+      "CompletionDateTime": "2026-10-06 22:43:14.661000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "35e1206e-38c1-481a-b2a6-ab12148855c7",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 303,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 528,
+      "QueryQueueTimeInMillis": 73,
+      "ServicePreProcessingTimeInMillis": 53,
+      "ServiceProcessingTimeInMillis": 99,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:51:50.137000+07:00",
+      "CompletionDateTime": "2026-10-13 14:51:50.665000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "09715d2d-6b8f-4f34-88e5-fa4ae8aa7216",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 872,
+      "DataScannedInBytes": 87551,
+      "TotalExecutionTimeInMillis": 1037,
+      "QueryQueueTimeInMillis": 83,
+      "ServicePreProcessingTimeInMillis": 51,
+      "QueryPlanningTimeInMillis": 449,
+      "ServiceProcessingTimeInMillis": 31,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:44:13.217000+07:00",
+      "CompletionDateTime": "2026-10-06 22:44:14.254000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "50fd2087-e61d-459c-846f-b7ec7c1e1c74",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 525,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 736,
+      "QueryQueueTimeInMillis": 63,
+      "ServicePreProcessingTimeInMillis": 53,
+      "ServiceProcessingTimeInMillis": 95,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:32:35.297000+07:00",
+      "CompletionDateTime": "2026-10-13 14:32:36.033000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "ac699393-7d0a-4b6c-bd00-299b44ca8999",
+    "StatementType": "DML",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 783,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 1039,
+      "QueryQueueTimeInMillis": 104,
+      "ServicePreProcessingTimeInMillis": 89,
+      "ServiceProcessingTimeInMillis": 63,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "FAILED",
+      "SubmissionDateTime": "2026-10-13 14:01:02.521000+07:00",
+      "CompletionDateTime": "2026-10-13 14:01:03.560000+07:00",
+      "AthenaError": {
+        "ErrorCategory": 2,
+        "ErrorType": 1301,
+        "Retryable": false
+      }
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "1f9be248-7d7e-4472-a0c3-e67b96655fe0",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 2117,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 2374,
+      "QueryQueueTimeInMillis": 204,
+      "ServicePreProcessingTimeInMillis": 43,
+      "ServiceProcessingTimeInMillis": 10,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:16:43.526000+07:00",
+      "CompletionDateTime": "2026-10-06 22:16:45.900000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  },
+  {
+    "QueryExecutionId": "6ebf196a-aded-4744-a47c-4585a6809160",
+    "StatementType": "DDL",
+    "Statistics": {
+      "EngineExecutionTimeInMillis": 586,
+      "DataScannedInBytes": 0,
+      "TotalExecutionTimeInMillis": 711,
+      "QueryQueueTimeInMillis": 79,
+      "ServicePreProcessingTimeInMillis": 24,
+      "ServiceProcessingTimeInMillis": 22,
+      "ResultReuseInformation": {
+        "ReusedPreviousResult": false
+      }
+    },
+    "Status": {
+      "State": "SUCCEEDED",
+      "SubmissionDateTime": "2026-10-06 22:16:09.897000+07:00",
+      "CompletionDateTime": "2026-10-06 22:16:10.608000+07:00"
+    },
+    "QueryExecutionContext": {
+      "Database": "weather_aqi_db"
+    }
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "name": "partition_all",
+  "query_id": "4651ebcf-b1fc-465f-99d4-cbcfda2ecc93",
+  "status": "SUCCEEDED",
+  "execution_time_ms": 800,
+  "bytes_scanned": 129715,
+  "row_count": 6,
+  "profile": "quyen",
+  "account_id": "134987931868",
+  "region": "us-east-1",
+  "retrieved_at_utc": "2026-10-14T03:04:41.168865+00:00",
+  "csv_sha256": "d7ce3891591151a6e30efbf9ba43b4c26c241eb1c45029980f910491c2e22838"
+}
