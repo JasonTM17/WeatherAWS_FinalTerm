@@ -12,6 +12,7 @@ import urllib.request
 import urllib.error
 import datetime
 import uuid
+import math
 import boto3
 
 # AWS Clients using LabRole
@@ -31,8 +32,9 @@ def safe_float(val, default=0.0):
     if val is None:
         return float(default)
     try:
-        return float(val)
-    except (ValueError, TypeError):
+        number = float(val)
+        return number if math.isfinite(number) else float(default)
+    except (ValueError, TypeError, OverflowError):
         return float(default)
 
 
@@ -42,7 +44,7 @@ def safe_int(val, default=0):
         return int(default)
     try:
         return int(float(val))
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, OverflowError):
         return int(default)
 
 
@@ -52,9 +54,9 @@ def get_aqi_category(us_aqi):
         return "Unknown"
     try:
         val = float(us_aqi)
-    except (ValueError, TypeError):
+    except (ValueError, TypeError, OverflowError):
         return "Unknown"
-    if val < 0:
+    if not math.isfinite(val) or val < 0:
         return "Unknown"
     elif val <= 50:
         return "Good"
@@ -271,7 +273,7 @@ Thời gian ghi nhận (VN): {record['timestamp_vn']} (UTC: {record['timestamp_u
 
 THÔNG SỐ Ô NHIỄM:
 - Chỉ số US AQI: {record['us_aqi']} -> Phân loại: {record['aqi_category']} (Ngưỡng: {threshold_aqi})
-- Bụi mịn PM2.5: {record['pm2_5']} µg/m³ (Ngưỡng cho phép: {threshold_pm25} µg/m³)
+- Bụi mịn PM2.5: {record['pm2_5']} µg/m³ (Ngưỡng cấu hình cảnh báo: {threshold_pm25} µg/m³)
 - Bụi PM10: {record['pm10']} µg/m³
 - Ozone (O3): {record['ozone']} µg/m³
 - Carbon Monoxide (CO): {record['carbon_monoxide']} µg/m³

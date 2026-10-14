@@ -6,7 +6,7 @@ Báo cáo Tuần 2 tổng hợp hai bộ báo cáo dữ liệu do sinh viên Ti�
 
 Hai bộ báo cáo dữ liệu gồm 435 bản ghi: 204 trong bộ của sinh viên Tiến Sơn và 231 trong bộ của sinh viên Ngọc Quyên. Theo ranh giới tuần ở Việt Nam quy đổi sang UTC, mẫu Tuần 2 có 27 và 57 bản ghi, tương ứng 9 và 19 mẫu mỗi đô thị. Các thống kê được trình bày riêng theo từng sinh viên.
 
-Hà Nội có AQI trung bình Tuần 2 đạt 163,56 và 163,05; TP. Hồ Chí Minh đạt 78,00 và 79,05; Đà Nẵng đạt 35,44 và 35,37. Báo cáo trình bày 16 biểu đồ từ dữ liệu thực tế, 24 truy vấn Athena mới thành công, phân bố mẫu, biến thiên theo giờ, ngưỡng cảnh báo, tương quan khí tượng và mức sử dụng tài nguyên. Các kết luận giới hạn trong mẫu đã thu thập.
+Hà Nội có AQI trung bình Tuần 2 đạt 163,56 và 163,05; TP. Hồ Chí Minh đạt 78,00 và 79,05; Đà Nẵng đạt 35,44 và 35,37. Báo cáo trình bày 18 biểu đồ từ dữ liệu thực tế, 24 truy vấn Athena mới thành công, phân bố mẫu, biến thiên theo giờ, ngưỡng cảnh báo, tương quan khí tượng và mức sử dụng tài nguyên. Các kết luận giới hạn trong mẫu đã thu thập.
 
 ## LỜI MỞ ĐẦU
 
@@ -393,9 +393,19 @@ Bảng 3.11 Đối chiếu PM2.5 trung bình (µg/m³) với bộ báo cáo Tu�
 
 So với bộ báo cáo Tuần 1, AQI trung bình mẫu Hà Nội cao hơn 96,00 điểm ở nguồn Tiến Sơn và 95,49 điểm ở nguồn Ngọc Quyên; PM2.5 cao hơn 61,29 và 59,74 µg/m³. TP. Hồ Chí Minh và Đà Nẵng có trung bình AQI, PM2.5 thấp hơn trong mẫu Tuần 2. Thứ tự AQI trung bình đổi từ TP. Hồ Chí Minh – Đà Nẵng – Hà Nội sang Hà Nội – TP. Hồ Chí Minh – Đà Nẵng. Đây là khác biệt giữa các tập mẫu có độ phủ không bằng nhau, chưa đủ kết luận xu hướng của toàn bộ hai tuần.
 
+![AQI trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2](../results/week2_charts/17_submitted_week1_aqi.png)
+
+Hình 3.12 AQI trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2
+
+![PM2.5 trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2](../results/week2_charts/18_submitted_week1_pm25.png)
+
+Hình 3.13 PM2.5 trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2
+
+Hình 3.12 và Hình 3.13 sử dụng bộ 156 bản ghi của báo cáo Tuần 1 (52 mẫu mỗi đô thị) làm mốc chung. Mẫu Tuần 2 có 9 mẫu của sinh viên Tiến Sơn và 19 mẫu của sinh viên Ngọc Quyên cho mỗi đô thị. Hai nguồn được trình bày riêng; chênh lệch giữa các tập mẫu không đại diện cho xu hướng toàn bộ tuần.
+
 b) Đối chiếu theo ranh giới tuần trong cùng lần xuất mới
 
-Phép đối chiếu tiếp theo lọc hai tuần từ cùng lần xuất mới trong bộ dữ liệu của từng sinh viên. Mẫu Tuần 1 có 42 dòng mỗi đô thị trong bộ của sinh viên Tiến Sơn và 41 trong bộ của sinh viên Ngọc Quyên. Phạm vi này khác mốc 52 mẫu trong hai bảng trên; Hình 3.12 minh họa riêng phép lọc này.
+Phép đối chiếu tiếp theo lọc hai tuần từ cùng lần xuất mới trong bộ dữ liệu của từng sinh viên. Mẫu Tuần 1 có 42 dòng mỗi đô thị trong bộ của sinh viên Tiến Sơn và 41 trong bộ của sinh viên Ngọc Quyên. Phạm vi này khác mốc 52 mẫu trong hai bảng trên; Hình 3.14 minh họa riêng phép lọc này.
 
 Bảng 3.12 AQI theo ranh giới tuần trong lần xuất mới
 
@@ -410,11 +420,11 @@ Bảng 3.12 AQI theo ranh giới tuần trong lần xuất mới
 
 ![So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải](../results/week2_charts/16_week_comparison.png)
 
-Hình 3.12 So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải
+Hình 3.14 So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải
 
 Các mẫu thuộc Tuần 1 trong dữ liệu vừa tải có 42 mẫu mỗi đô thị ở bộ dữ liệu của sinh viên Tiến Sơn và 41 ở bộ dữ liệu của sinh viên Ngọc Quyên; Tuần 2 có 9 và 19. Mẫu Hà Nội tăng AQI trung bình, còn TP. Hồ Chí Minh và Đà Nẵng giảm trong cả hai nguồn. Đây là so sánh mô tả hai tập mẫu với độ phủ khác nhau, chưa xác lập xu hướng dài hạn.
 
-Bảng 3.12 và Hình 3.12 dùng mẫu lọc theo ranh giới tuần trong lần xuất mới. Bảng 3.10 và Bảng 3.11 dùng bộ báo cáo Tuần 1 đã lưu, bao gồm phần lịch sử nạp bổ sung. Hai phạm vi được giữ riêng để giải thích rõ sự khác biệt về số mẫu và giá trị trung bình.
+Bảng 3.12 và Hình 3.14 dùng mẫu lọc theo ranh giới tuần trong lần xuất mới. Bảng 3.10 và Bảng 3.11 dùng bộ báo cáo Tuần 1 đã lưu, bao gồm phần lịch sử nạp bổ sung. Hai phạm vi được giữ riêng để giải thích rõ sự khác biệt về số mẫu và giá trị trung bình.
 
 ## Chương 4 Phân tích vận hành Lambda và SNS
 
@@ -541,7 +551,7 @@ Bảng 6.1 Sản phẩm đi kèm và phạm vi
 | Mẫu Tuần 2 | 84 dòng nguồn: 27 của sinh viên Tiến Sơn và 57 của sinh viên Ngọc Quyên; phân tích riêng từng bộ dữ liệu. |
 | Kết quả truy vấn | 24 truy vấn mới thành công; CSV gốc, mã thực thi và metadata theo nguồn. |
 | Phân tích | 25 CSV tổng hợp và đối chiếu về môi trường, chất lượng, dịch vụ, truy vấn và chi phí. |
-| Trực quan hóa | 16 biểu đồ được dựng từ các CSV tương ứng; cùng dữ liệu trong Excel và báo cáo. |
+| Trực quan hóa | 18 biểu đồ được dựng từ các CSV tương ứng; cùng dữ liệu trong Excel và báo cáo. |
 | Báo cáo | Word có mục lục liên kết và bản PDF đã kiểm tra bố cục. |
 
 ### 6.2 Kết luận trong phạm vi mẫu đã thu thập

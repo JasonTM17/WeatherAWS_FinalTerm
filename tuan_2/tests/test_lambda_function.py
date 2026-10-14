@@ -26,6 +26,23 @@ lambda_function.SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:weather-test
 
 class TestWeatherCollectorLambda(unittest.TestCase):
 
+    def test_safe_float_rejects_nonfinite_values(self):
+        for value in ('nan', 'inf', '-inf', float('nan'), float('inf')):
+            with self.subTest(value=value):
+                self.assertEqual(lambda_function.safe_float(value), 0.0)
+                self.assertEqual(lambda_function.safe_float(value, default=12.5), 12.5)
+
+    def test_safe_int_rejects_nonfinite_values(self):
+        for value in ('nan', 'inf', '-inf', float('nan'), float('inf')):
+            with self.subTest(value=value):
+                self.assertEqual(lambda_function.safe_int(value), 0)
+                self.assertEqual(lambda_function.safe_int(value, default=7), 7)
+
+    def test_aqi_nonfinite_is_unknown(self):
+        for value in ('nan', 'inf', '-inf', float('nan'), float('inf')):
+            with self.subTest(value=value):
+                self.assertEqual(lambda_function.get_aqi_category(value), 'Unknown')
+
     def test_safe_float(self):
         self.assertEqual(lambda_function.safe_float(None), 0.0)
         self.assertEqual(lambda_function.safe_float(None, default=10.5), 10.5)

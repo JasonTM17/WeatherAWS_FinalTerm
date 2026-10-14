@@ -5,6 +5,7 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [Kiến trúc và trách nhiệm dịch vụ](architecture.md)
 - [Mô hình dữ liệu và cách phân tích](data-analysis.md)
 - [Cài đặt và vận hành](operation.md)
+- [Hướng dẫn đọc mã nguồn đồ án](source-guide.md)
 - [Nhật ký và số giờ của nhóm](WORKLOG.md)
 - [Minh chứng vận hành đã lưu](saved-evidence.md)
 - [Báo cáo Tuần 1 Word](../tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) · [PDF](../tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf)
@@ -18,4 +19,4 @@ Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng
 
 - [Excel mới](../tuan_2/docs/Du_lieu_phan_tich_Tuan_2_Nhom_05.xlsx)
 - [CSV trong hai báo cáo dữ liệu](../tuan_2/results/week2_live/) và [bảng phân tích](../tuan_2/results/week2_analysis/)
-- [16 biểu đồ](../tuan_2/results/week2_charts/) và [hồ sơ dữ liệu nguồn](../tuan_2/results/week2_evidence/)
+- [18 biểu đồ](../tuan_2/results/week2_charts/) và [hồ sơ dữ liệu nguồn](../tuan_2/results/week2_evidence/)

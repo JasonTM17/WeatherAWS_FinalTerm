@@ -206,5 +206,153 @@
       "default": "#2563EB",
       "quyen": "#F59E0B"
     }
+  },
+  {
+    "file": "17_submitted_week1_aqi.png",
+    "title": "AQI trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2",
+    "source_csv": "submitted_week1_comparison.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    },
+    "comparison_scope": "Retained Week 1 submission including backfill; separate observed Week 2 student samples.",
+    "series": [
+      {
+        "profile": "default",
+        "student": "Sinh viên Tiến Sơn",
+        "cities": [
+          "HoChiMinh",
+          "HaNoi",
+          "DaNang"
+        ],
+        "week1_values": [
+          107.78846153846153,
+          67.5576923076923,
+          74.67307692307692
+        ],
+        "week2_values": [
+          78.0,
+          163.55555555555554,
+          35.44444444444444
+        ],
+        "week1_samples": [
+          52,
+          52,
+          52
+        ],
+        "week2_samples": [
+          9,
+          9,
+          9
+        ]
+      },
+      {
+        "profile": "quyen",
+        "student": "Sinh viên Ngọc Quyên",
+        "cities": [
+          "HoChiMinh",
+          "HaNoi",
+          "DaNang"
+        ],
+        "week1_values": [
+          107.78846153846153,
+          67.5576923076923,
+          74.67307692307692
+        ],
+        "week2_values": [
+          79.05263157894737,
+          163.05263157894737,
+          35.36842105263158
+        ],
+        "week1_samples": [
+          52,
+          52,
+          52
+        ],
+        "week2_samples": [
+          19,
+          19,
+          19
+        ]
+      }
+    ]
+  },
+  {
+    "file": "18_submitted_week1_pm25.png",
+    "title": "PM2.5 trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2",
+    "source_csv": "submitted_week1_comparison.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    },
+    "comparison_scope": "Retained Week 1 submission including backfill; separate observed Week 2 student samples.",
+    "series": [
+      {
+        "profile": "default",
+        "student": "Sinh viên Tiến Sơn",
+        "cities": [
+          "HoChiMinh",
+          "HaNoi",
+          "DaNang"
+        ],
+        "week1_values": [
+          37.03076923076923,
+          15.363461538461538,
+          14.232692307692307
+        ],
+        "week2_values": [
+          23.37777777777778,
+          76.65555555555555,
+          6.377777777777777
+        ],
+        "week1_samples": [
+          52,
+          52,
+          52
+        ],
+        "week2_samples": [
+          9,
+          9,
+          9
+        ]
+      },
+      {
+        "profile": "quyen",
+        "student": "Sinh viên Ngọc Quyên",
+        "cities": [
+          "HoChiMinh",
+          "HaNoi",
+          "DaNang"
+        ],
+        "week1_values": [
+          37.03076923076923,
+          15.363461538461538,
+          14.232692307692307
+        ],
+        "week2_values": [
+          22.91578947368421,
+          75.10526315789474,
+          6.457894736842105
+        ],
+        "week1_samples": [
+          52,
+          52,
+          52
+        ],
+        "week2_samples": [
+          19,
+          19,
+          19
+        ]
+      }
+    ]
   }
 ]

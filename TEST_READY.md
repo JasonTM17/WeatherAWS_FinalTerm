@@ -2,4 +2,6 @@
 
 Lệnh kiểm tra: `python -m unittest discover -s tuan_2/tests -v`.
 
-44 ca kiểm tra cục bộ gồm Lambda, CSV, biểu đồ và SDK. Các ca kiểm tra không yêu cầu một lượt triển khai AWS mới. Word/PDF được kiểm tra riêng về bảng số liệu, hình, mục lục và bố cục sau khi xuất.
+48 ca kiểm tra cục bộ gồm Lambda, CSV, biểu đồ và SDK. Các ca kiểm tra không yêu cầu một lượt triển khai AWS mới. Word/PDF được kiểm tra riêng về bảng số liệu, hình, mục lục và bố cục sau khi xuất.
+
+Kiểm tra phân tích: `python -m unittest discover -s tuan_2/analytics -p "test_*.py" -v`, gồm 13 ca về ranh giới thời gian, thống kê, nguồn đối chiếu và giá trị cột của hai biểu đồ so sánh trực tiếp. Hướng dẫn đọc từng module nằm trong [source-guide](docs/source-guide.md).

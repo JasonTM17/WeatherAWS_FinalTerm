@@ -6,12 +6,12 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from botocore.exceptions import ClientError
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from athena_export import AthenaExporter, AthenaQueryError, copy_snapshot
+from athena_export import AthenaExporter, AthenaQueryError, QUERY_FILES, copy_snapshot, main
 from aws_project import AwsProject, RULE
 
 def error(code):
@@ -87,6 +87,32 @@ class TestSdk(unittest.TestCase):
 
     def test_offline_copy_cannot_overwrite_source(self):
         with self.assertRaises(ValueError): copy_snapshot(ROOT/'results/athena_queries')
+
+    def test_export_uses_selected_database_in_every_query(self):
+        for database in ('weather_aqi_db', 'weekly_data', 'weekly"data'):
+            with self.subTest(database=database), tempfile.TemporaryDirectory() as directory:
+                with patch('athena_export.boto3.Session') as session_type, \
+                     patch('athena_export.AthenaExporter') as exporter_type:
+                    session_type.return_value.client.return_value.get_caller_identity.return_value = {
+                        'Account': '123456789012'}
+                    exporter_type.return_value.export.return_value = {
+                        'name': 'query', 'query_id': 'query-1', 'status': 'SUCCEEDED',
+                        'row_count': 0, 'execution_time_ms': 0, 'bytes_scanned': 0}
+                    main(['--database', database, '--output', directory])
+                    self.assertEqual(exporter_type.call_args.args[2], database)
+                    calls = exporter_type.return_value.export.call_args_list
+                    self.assertEqual(len(calls), len(QUERY_FILES))
+                    for call, (name, filename) in zip(calls, QUERY_FILES.items()):
+                        original = (ROOT / 'athena' / filename).read_text(encoding='utf-8')
+                        qualifier = '"' + database.replace('"', '""') + '"'
+                        expected = original if database == 'weather_aqi_db' else original.replace(
+                            'weather_aqi_db.', qualifier + '.')
+                        self.assertEqual(call.args, (name, expected, Path(directory) / f'{name}.csv'))
+        for database in ('', ' ', 'weekly\x00data'):
+            with self.subTest(database=database), patch('athena_export.boto3.Session') as session_type:
+                with self.assertRaises(ValueError):
+                    main(['--database', database])
+                session_type.assert_not_called()
 
     def project(self):
         project = AwsProject(session=MagicMock())

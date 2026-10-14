@@ -7,6 +7,7 @@ import csv
 import io
 import json
 from pathlib import Path
+import re
 import shutil
 import time
 from urllib.parse import urlparse
@@ -22,6 +23,19 @@ QUERY_FILES = {
     'weather_correlation': 'query_temperature_humidity_correlation.sql',
     'raw_weather_aqi_records': 'query_raw_weather_aqi_records.sql',
 }
+
+
+def load_query_sql(name, database):
+    """Select the same database in the saved SELECT template and query context."""
+    if name not in QUERY_FILES:
+        raise ValueError(f'Unknown query name: {name}')
+    if not database.strip() or '\x00' in database:
+        raise ValueError('Database name must be nonempty and contain no null bytes.')
+    sql = (ROOT / 'athena' / QUERY_FILES[name]).read_text(encoding='utf-8')
+    if database == 'weather_aqi_db':
+        return sql
+    qualifier = '"' + database.replace('"', '""') + '"'
+    return re.sub(r'\bweather_aqi_db(?=\s*\.)', lambda _: qualifier, sql)
 
 
 class AthenaQueryError(RuntimeError):
@@ -146,12 +160,13 @@ def main(argv=None):
         copy_snapshot(args.output, names)
         print('Copied saved CSV snapshot. No new cloud query was executed.')
         return
+    queries = {name: load_query_sql(name, args.database) for name in names}
     session = boto3.Session(region_name=args.region)
     account = session.client('sts').get_caller_identity()['Account']
     bucket = args.bucket or f'weather-aqi-{account}'
     exporter = AthenaExporter(session.client('athena'), session.client('s3'),
                               args.database, f's3://{bucket}/athena-results/', args.timeout)
-    results = [exporter.export(name, (ROOT / 'athena' / QUERY_FILES[name]).read_text(encoding='utf-8'),
+    results = [exporter.export(name, queries[name],
                                args.output / f'{name}.csv') for name in names]
     (args.output / 'summary_metrics.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
     with (args.output / 'query_metrics.csv').open('w', encoding='utf-8', newline='') as handle:

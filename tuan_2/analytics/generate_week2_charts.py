@@ -7,6 +7,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
+from weekly_comparison_charts import make_comparison_figure
 
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'results/week2_analysis';OUT=ROOT/'results/week2_charts'
@@ -185,6 +186,16 @@ for ax,p in zip(axes,PROFILES):
     ax.set_xticks(range(3),['TP.HCM','Hà Nội','Đà Nẵng']);ax.set_title(f'{LABEL[p]}: n₁={data[0]["week1_samples"]}, n₂={data[0]["week2_samples"]} / đô thị');ax.set_ylim(0,200);ax.legend(frameon=False)
 axes[0].set_ylabel('AQI trung bình')
 finish(fig,'week_comparison','So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải','weekly_comparison.csv')
+
+submitted=rows('submitted_week1_comparison')
+for metric,name,title in [
+    ('aqi','submitted_week1_aqi','AQI trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2'),
+    ('pm25','submitted_week1_pm25','PM2.5 trung bình: bộ báo cáo Tuần 1 và mẫu Tuần 2'),
+]:
+    fig,series=make_comparison_figure(submitted,metric)
+    finish(fig,name,title,'submitted_week1_comparison.csv')
+    manifest[-1]['comparison_scope']='Retained Week 1 submission including backfill; separate observed Week 2 student samples.'
+    manifest[-1]['series']=series
 
 (OUT/'chart_manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'charts':len(manifest),'output':str(OUT)},ensure_ascii=False))

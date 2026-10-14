@@ -7,6 +7,7 @@ Nhóm 05 — 24110054 Nguyễn Tiến Sơn và 24110051 Trần Thị Ngọc Quy�
 - [CSV Athena mới](results/week2_live/) · [CSV phân tích](results/week2_analysis/)
 - [Biểu đồ](results/week2_charts/) · [Dữ liệu raw và metadata](results/week2_evidence/)
 - [Nhật ký](docs/WORKLOG.md)
+- [Hướng dẫn đọc mã nguồn](../docs/source-guide.md)
 
 Báo cáo dữ liệu của sinh viên Tiến Sơn có 204 bản ghi toàn bộ, 27 thuộc Tuần 2. Báo cáo của sinh viên Ngọc Quyên có 231 bản ghi toàn bộ, 57 thuộc Tuần 2. Các thống kê được tính riêng theo sinh viên và đối chiếu tại cùng đô thị, giờ quan trắc. Mẫu mới gồm hai ngày và 9 giờ quan trắc riêng mỗi nguồn.
 
