@@ -8,6 +8,7 @@ from unittest.mock import patch, MagicMock
 import os
 import sys
 import json
+from types import SimpleNamespace
 
 # Add lambda directory to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lambda')))
@@ -25,6 +26,80 @@ lambda_function.SNS_TOPIC_ARN = 'arn:aws:sns:us-east-1:123456789012:weather-test
 
 
 class TestWeatherCollectorLambda(unittest.TestCase):
+
+    def test_empty_current_responses_do_not_create_records(self):
+        valid_air = {'current': {'us_aqi': 50}}
+        valid_weather = {'current': {'temperature_2m': 25}}
+        invalid = [{}, {'current': {}}, {'current': {'time': '2026-10-14T00:00'}},
+                   {'current': None}, {'current': []}]
+        loc = {'city': 'A', 'lat': 1, 'lon': 2}
+        for response in invalid:
+            for responses in ([response, valid_weather], [valid_air, response]):
+                with self.subTest(responses=responses), patch.object(
+                        lambda_function, 'http_get_json', side_effect=responses):
+                    with self.assertRaises(ValueError):
+                        lambda_function.fetch_city_data(loc)
+
+    def test_empty_historical_responses_do_not_create_records(self):
+        valid_air = {'hourly': {'time': ['2026-10-14T00:00'], 'us_aqi': [50]}}
+        valid_weather = {'hourly': {'time': ['2026-10-14T00:00'], 'temperature_2m': [25]}}
+        invalid = [{}, {'hourly': {}}, {'hourly': {'time': []}},
+                   {'hourly': {'time': ['2026-10-14T00:00']}}]
+        loc = {'city': 'A', 'lat': 1, 'lon': 2}
+        for response in invalid:
+            for responses in ([response, valid_weather], [valid_air, response]):
+                with self.subTest(responses=responses), patch.object(
+                        lambda_function, 'http_get_json', side_effect=responses):
+                    with self.assertRaises(ValueError):
+                        lambda_function.fetch_historical_series(loc, 1)
+
+    def test_handler_saves_partial_data_with_slow_apis(self):
+        payload = {'current': {'us_aqi': 50, 'pm2_5': 10, 'temperature_2m': 25},
+                   'hourly': {'time': ['2026-10-14T00:00'], 'us_aqi': [50],
+                              'pm2_5': [10], 'temperature_2m': [25]}}
+        locations = [{'city': name, 'lat': 1, 'lon': 2} for name in ('A', 'B', 'C')]
+        for event in ({}, {'backfill_hours': 1}):
+            with self.subTest(event=event):
+                elapsed, timeouts = [0.0], []
+                response = MagicMock()
+                response.__enter__.return_value = response
+                response.read.return_value = json.dumps(payload).encode()
+                def slow_open(request, timeout):
+                    timeouts.append(timeout)
+                    elapsed[0] += min(14.0, timeout)
+                    if timeout < 14:
+                        raise TimeoutError('Simulated slow API')
+                    return response
+                context = SimpleNamespace(get_remaining_time_in_millis=lambda: max(
+                    0, (60 - elapsed[0]) * 1000))
+                with patch.object(lambda_function, 'fetch_secrets', return_value={'locations': locations}), \
+                     patch.object(lambda_function.urllib.request, 'urlopen', side_effect=slow_open), \
+                     patch.object(lambda_function, 'save_records_to_s3', return_value=[]) as save:
+                    result = lambda_function.lambda_handler(event, context)
+                self.assertLess(elapsed[0], 60)
+                self.assertEqual(result['collection_status'], 'partial')
+                self.assertEqual(result['failed_cities'], ['B', 'C'])
+                self.assertEqual(result['records_collected'], 1)
+                self.assertEqual([r['city'] for r in save.call_args.args[0]], ['A'])
+                self.assertEqual(timeouts[:3], [15, 15, 15])
+                self.assertGreater(timeouts[-1], 0)
+                self.assertLess(timeouts[-1], 14)
+
+    def test_exhausted_budget_skips_http_and_storage(self):
+        context = SimpleNamespace(get_remaining_time_in_millis=lambda: 10000)
+        payload = {'current': {'us_aqi': 50, 'pm2_5': 10, 'temperature_2m': 25},
+                   'hourly': {'time': ['2026-10-14T00:00'], 'us_aqi': [50],
+                              'pm2_5': [10], 'temperature_2m': [25]}}
+        for event in ({}, {'backfill_hours': 1}):
+            with self.subTest(event=event), \
+                 patch.object(lambda_function, 'fetch_secrets', return_value={
+                     'locations': [{'city': 'A', 'lat': 1, 'lon': 2}]}), \
+                 patch.object(lambda_function, 'http_get_json', return_value=payload) as http, \
+                 patch.object(lambda_function, 'save_records_to_s3') as save:
+                with self.assertRaisesRegex(RuntimeError, 'No records'):
+                    lambda_function.lambda_handler(event, context)
+                http.assert_not_called()
+                save.assert_not_called()
 
     def test_safe_float_rejects_nonfinite_values(self):
         for value in ('nan', 'inf', '-inf', float('nan'), float('inf')):

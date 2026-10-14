@@ -36,6 +36,6 @@ Thay `ACCOUNT_ID` bằng account của phiên đăng nhập. Xác nhận account
 
 ## Kiểm tra đã thực hiện
 
-Bộ kiểm tra cục bộ gồm 48 ca: Lambda 18, CSV 12, biểu đồ 4 và SDK 14. Các ca bổ sung kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Kết quả này không phải bằng chứng của một lần triển khai live phiên bản mới.
+Bộ kiểm tra cục bộ gồm 52 ca: Lambda 22, CSV 12, biểu đồ 4 và SDK 14. Các ca bổ sung kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, khối phản hồi API bị thiếu, thời gian chờ khi API chậm, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Kết quả này không phải bằng chứng của một lần triển khai live phiên bản mới.
 
 Ba hồi quy bổ sung kiểm tra số không hữu hạn trong chuẩn hóa và phân loại AQI. Các kiểm tra biểu đồ đối chiếu trực tiếp dùng cỡ mẫu thực tế, đơn vị và giá trị từng cột từ CSV. Xem [hướng dẫn đọc source](source-guide.md).

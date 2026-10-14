@@ -21,11 +21,13 @@ Các entry point PowerShell trong tuan_1/scripts và tuan_2/scripts chuyển tha
 
 1. EventBridge gọi lambda_handler với sự kiện mặc định để thu thập hiện tại. Sự kiện có backfill_hours yêu cầu chuỗi lịch sử.
 2. fetch_secrets đọc danh sách đô thị và ngưỡng. Khi dịch vụ trả lỗi, chương trình dùng cấu hình dự phòng ba đô thị.
-3. fetch_city_data gọi API chất lượng không khí và thời tiết. fetch_historical_series ghép hai chuỗi bằng timestamp, giữ chỉ số tương ứng của từng nguồn.
+3. fetch_city_data gọi API chất lượng không khí và thời tiết. Các phản hồi phải có khối current với ít nhất một trường đo được yêu cầu. fetch_historical_series yêu cầu khối hourly cùng danh sách thời gian không rỗng ở cả hai API, rồi ghép hai chuỗi bằng timestamp. Khối bị thiếu hoặc chỉ có metadata sẽ phát sinh lỗi; các trường đo có tên nhưng mang giá trị null vẫn dùng chính sách mặc định được nêu dưới đây.
 4. safe_float/safe_int giữ số hợp lệ và dùng giá trị mặc định cho đầu vào không chuyển đổi được hoặc không hữu hạn. get_aqi_category trả Unknown khi AQI thiếu, không hợp lệ, không hữu hạn hoặc âm. Giá trị mặc định số 0 cần được hiểu là chính sách chuẩn hóa của source, không phải bằng chứng cảm biến đo được 0.
 5. Chế độ hiện tại phát cảnh báo khi AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³. Đây là ngưỡng cấu hình của dự án. Publish được chấp nhận không xác nhận người nhận đã đọc email.
 6. save_records_to_s3 nhóm theo ngày UTC và ghi một dòng JSON cho mỗi bản ghi. timestamp_vn dùng để hiển thị giờ Việt Nam; khóa phân vùng vẫn theo UTC.
 7. Nếu mọi đô thị thu thập thất bại, handler phát sinh lỗi. Nếu một phần thất bại, đầu ra giữ failed_cities và collection_status=partial, kèm số bản ghi và tệp đã lưu.
+
+Khi được gọi trong Lambda, thời gian chờ HTTP được tính lại trước mỗi request: tối đa 15 giây và không vượt thời gian còn lại trừ 10 giây dành cho kết thúc/lưu dữ liệu. Khi không còn thời gian thu thập, chương trình dừng các request tiếp theo và giữ các đô thị đã thu thập để lưu một phần. Gọi helper trực tiếp với context=None giữ mức chờ 15 giây. Đây là cơ chế điều chỉnh timeout theo thời gian còn lại; thời gian DNS, đọc phản hồi và các lượt gọi SDK/S3 vẫn phụ thuộc dịch vụ, nên không phải bảo đảm thời hạn tuyệt đối cho toàn bộ invocation. Tham khảo [Lambda context](https://docs.aws.amazon.com/lambda/latest/dg/python-context.html) về thời gian còn lại và [urllib.request](https://docs.python.org/3.12/library/urllib.request.html) về phạm vi timeout của thao tác kết nối.
 
 ## Xuất CSV và thống kê
 

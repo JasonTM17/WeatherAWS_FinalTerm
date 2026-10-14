@@ -25,6 +25,12 @@ secrets_client = boto3.client('secretsmanager', region_name=REGION)
 BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
 SECRET_NAME = os.environ.get('SECRET_NAME', 'weather/api_config')
 SNS_TOPIC_ARN = os.environ.get('SNS_TOPIC_ARN')
+HTTP_TIMEOUT_SECONDS = 15
+STORAGE_RESERVE_SECONDS = 10
+AIR_FIELDS = ('us_aqi', 'pm2_5', 'pm10', 'carbon_monoxide',
+              'nitrogen_dioxide', 'sulphur_dioxide', 'ozone')
+WEATHER_FIELDS = ('temperature_2m', 'relative_humidity_2m',
+                  'surface_pressure', 'wind_speed_10m')
 
 
 def safe_float(val, default=0.0):
@@ -93,17 +99,37 @@ def fetch_secrets():
         }
 
 
-def http_get_json(url):
+def http_get_json(url, timeout=HTTP_TIMEOUT_SECONDS):
     """Gửi HTTP GET request với header tuân thủ điều khoản API."""
     req = urllib.request.Request(
         url,
         headers={"User-Agent": "WeatherAWS_CloudFinalTerm/1.0 (Student Project; Contact: 24110054@student.hcmute.edu.vn)"}
     )
-    with urllib.request.urlopen(req, timeout=15) as resp:
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
         return json.loads(resp.read().decode('utf-8'))
 
 
-def fetch_city_data(city_info):
+def _fetch_api_json(url, context=None):
+    """Limit each HTTP call using the invocation's current remaining time."""
+    if context is None:
+        return http_get_json(url)
+    available = context.get_remaining_time_in_millis() / 1000 - STORAGE_RESERVE_SECONDS
+    if not math.isfinite(available) or available <= 0:
+        raise TimeoutError('Collection budget exhausted before API request.')
+    return http_get_json(url, timeout=min(HTTP_TIMEOUT_SECONDS, available))
+
+
+def _api_section(payload, name, fields, source):
+    """Reject absent API blocks while retaining named null-field defaults."""
+    section = payload.get(name) if isinstance(payload, dict) else None
+    if not isinstance(section, dict) or not any(field in section for field in fields):
+        raise ValueError(f'{source} API has no {name} measurement fields.')
+    if name == 'hourly' and (not isinstance(section.get('time'), list) or not section['time']):
+        raise ValueError(f'{source} API has no hourly observation times.')
+    return section
+
+
+def fetch_city_data(city_info, context=None):
     """
     Thu thập dữ liệu thời tiết và chất lượng không khí hiện tại cho một thành phố.
     Sử dụng Open-Meteo Air Quality & Weather API.
@@ -118,8 +144,8 @@ def fetch_city_data(city_info):
         f"latitude={lat}&longitude={lon}&current=pm10,pm2_5,carbon_monoxide,"
         f"nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi"
     )
-    aq_json = http_get_json(aq_url)
-    aq_current = aq_json.get('current', {})
+    aq_json = _fetch_api_json(aq_url, context)
+    aq_current = _api_section(aq_json, 'current', AIR_FIELDS, 'Air quality')
 
     # 2. Gọi API thời tiết
     weather_url = (
@@ -127,8 +153,8 @@ def fetch_city_data(city_info):
         f"latitude={lat}&longitude={lon}&current=temperature_2m,relative_humidity_2m,"
         f"surface_pressure,wind_speed_10m"
     )
-    w_json = http_get_json(weather_url)
-    w_current = w_json.get('current', {})
+    w_json = _fetch_api_json(weather_url, context)
+    w_current = _api_section(w_json, 'current', WEATHER_FIELDS, 'Weather')
 
     now_utc = datetime.datetime.now(datetime.timezone.utc)
     now_vn = now_utc + datetime.timedelta(hours=7)
@@ -165,7 +191,7 @@ def fetch_city_data(city_info):
     return record
 
 
-def fetch_historical_series(city_info, past_hours=48):
+def fetch_historical_series(city_info, past_hours=48, context=None):
     """
     Thu thập chuỗi dữ liệu lịch sử n giờ gần nhất cho thành phố (phục vụ phân tích Athena & biểu đồ).
     """
@@ -180,16 +206,16 @@ def fetch_historical_series(city_info, past_hours=48):
         f"latitude={lat}&longitude={lon}&hourly=pm10,pm2_5,carbon_monoxide,"
         f"nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&past_days={past_days}&forecast_days=0"
     )
-    aq_json = http_get_json(aq_url)
-    hourly_aq = aq_json.get('hourly', {})
+    aq_json = _fetch_api_json(aq_url, context)
+    hourly_aq = _api_section(aq_json, 'hourly', AIR_FIELDS, 'Air quality')
 
     w_url = (
         f"https://api.open-meteo.com/v1/forecast?"
         f"latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,"
         f"surface_pressure,wind_speed_10m&past_days={past_days}&forecast_days=0"
     )
-    w_json = http_get_json(w_url)
-    hourly_w = w_json.get('hourly', {})
+    w_json = _fetch_api_json(w_url, context)
+    hourly_w = _api_section(w_json, 'hourly', WEATHER_FIELDS, 'Weather')
 
     times = hourly_aq.get('time', [])
     records = []
@@ -361,6 +387,7 @@ def lambda_handler(event, context):
     threshold_aqi = int(config.get('aqi_threshold_us_aqi', 100))
 
     backfill_hours = event.get('backfill_hours')
+    fetch_options = {'context': context} if context is not None else {}
 
     all_records = []
     alerts_sent = 0
@@ -370,7 +397,7 @@ def lambda_handler(event, context):
         print(f"[INFO] Backfill mode requested for past {backfill_hours} hours.")
         for loc in locations:
             try:
-                recs = fetch_historical_series(loc, past_hours=int(backfill_hours))
+                recs = fetch_historical_series(loc, past_hours=int(backfill_hours), **fetch_options)
                 if not recs:
                     raise RuntimeError('No historical records returned.')
                 all_records.extend(recs)
@@ -380,7 +407,7 @@ def lambda_handler(event, context):
     else:
         for loc in locations:
             try:
-                rec = fetch_city_data(loc)
+                rec = fetch_city_data(loc, **fetch_options)
                 all_records.append(rec)
                 
                 # Kiểm tra ngưỡng cảnh báo

@@ -63,7 +63,7 @@ INSTRUCTOR_NAME = "Huỳnh Xuân Phụng"
 EXPECTED_PHYSICAL_PAGES_W1 = 20
 EXPECTED_TOC_ENTRIES_W1 = 28
 EXPECTED_RAW_RECORD_COUNT = 156
-EXPECTED_UNIT_TEST_COUNT = 48
+EXPECTED_UNIT_TEST_COUNT = 52
 
 EXPECTED_REPORT_FIGURES = [
     "docs/architecture.png",
@@ -399,8 +399,8 @@ class TestTier1FeatureCoverage(unittest.TestCase):
                 f"Technical core concept '{kw}' not mentioned in Week 2 report",
             )
 
-    def test_r4_1_unit_test_suite_48_tests_pass(self):
-        """R4.1: Verify unit test suite runs exactly 48 tests and passes 100%."""
+    def test_r4_1_unit_test_suite_52_tests_pass(self):
+        """R4.1: Verify unit test suite runs exactly 52 tests and passes 100%."""
         test_dir = locate_dir("tuan_2/tests", "tests")
         self.assertIsNotNone(test_dir, "Tests directory not found in 'tuan_2/tests' or 'tests'")
 
@@ -643,8 +643,8 @@ class TestTier3CrossFeatureConsistency(unittest.TestCase):
                 f"City '{city}' has {count} records, expected exactly 52",
             )
 
-    def test_unit_test_count_parity_48_tests(self):
-        """Verifies unit test suite defines exactly 48 test methods across 4 test modules."""
+    def test_unit_test_count_parity_52_tests(self):
+        """Verifies unit test suite defines exactly 52 test methods across 4 test modules."""
         test_dir = locate_dir("tuan_2/tests", "tests")
         self.assertIsNotNone(test_dir, "Tests directory not found")
 

@@ -55,4 +55,4 @@ python tuan_2/analytics/generate_week2_charts.py
 python -m unittest discover -s tuan_2/analytics -p "test_*.py" -v
 ```
 
-Phân tích dùng tệp đã xuất cùng metadata và không cần thông tin đăng nhập. Để chạy các chức năng quản lý dịch vụ hoặc xuất dữ liệu mới, xem [hướng dẫn vận hành](docs/operation.md). Không đưa credentials vào repository. Bộ 48 kiểm tra chức năng và các hồi quy phân tích dữ liệu có phạm vi riêng; kết quả cục bộ không phải một lần triển khai AWS mới.
+Phân tích dùng tệp đã xuất cùng metadata và không cần thông tin đăng nhập. Để chạy các chức năng quản lý dịch vụ hoặc xuất dữ liệu mới, xem [hướng dẫn vận hành](docs/operation.md). Không đưa credentials vào repository. Bộ 52 kiểm tra chức năng và các hồi quy phân tích dữ liệu có phạm vi riêng; kết quả cục bộ không phải một lần triển khai AWS mới.
