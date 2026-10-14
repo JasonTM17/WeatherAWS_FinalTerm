@@ -548,6 +548,8 @@ Bảng 5.4 Chi phí ghi nhận trong phạm vi Tuần 2 làm tròn đến cent
 
 Trong phạm vi Tuần 2, UnblendedCost được trình bày đến cent là 0,00 USD trong báo cáo dữ liệu của sinh viên Tiến Sơn và 0,03 USD trong báo cáo dữ liệu của sinh viên Ngọc Quyên. Tổng giá trị trước khi làm tròn của sinh viên Tiến Sơn có độ lớn dưới 0,000001 USD, nên được hiển thị 0,00 USD ở độ chính xác này. Mức hiển thị 0,00 USD không đồng nghĩa với kết luận dự án hoàn toàn miễn phí.
 
+Chi phí dự kiến: 0,05 USD cho phần thực hành của sinh viên Tiến Sơn trong Tuần 2. Đây là mức dự kiến do nhóm đề xuất; số liệu ghi nhận từ Cost Explorer được trình bày riêng trong Bảng 5.4.
+
 Cả hai kết quả đều có cờ Estimated. Đây là số liệu ước tính tại thời điểm trích xuất Cost Explorer, được tổng hợp theo dịch vụ và ngày trong môi trường AWS của từng sinh viên; chưa phải hóa đơn cuối cùng hoặc chi phí riêng của dự án được phân bổ bằng tag. Các tệp CSV lưu nguyên giá trị trước khi làm tròn, đơn vị và trạng thái ước tính để đối chiếu.
 
 ## Chương 6 Tổng hợp kết quả Tuần 2

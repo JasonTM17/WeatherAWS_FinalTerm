@@ -41,6 +41,8 @@ Chi phí trong bảng báo cáo được làm tròn đến cent; dữ liệu Cos
 | Sinh viên Tiến Sơn | −0,0000000608 | −0,0000000156 | 0 | −0,0000000764 | 0,00 |
 | Sinh viên Ngọc Quyên | 0,0210227416 | 0,0056163440 | 0,0000755510 | 0,0267146366 | 0,03 |
 
+Mức chi phí dự kiến cho phần thực hành của sinh viên Tiến Sơn trong Tuần 2 là **0,05 USD**, do nhóm đề xuất. Mức dự kiến này được trình bày riêng trong báo cáo; không phải giá trị trả về từ Cost Explorer và không thay thế dữ liệu ghi nhận trong bảng đối chiếu.
+
 Các dịch vụ khác trong phạm vi đã xuất có giá trị 0; cả hai kết quả có cờ Estimated. Phản hồi nhóm theo SERVICE và không có RECORD_TYPE, nên không xác định được các mục âm này là credit, refund hay một loại điều chỉnh khác. Không dùng độ lớn rất nhỏ của số âm để kết luận nguyên nhân là lỗi làm tròn. Mức 0,00 USD trong bảng là độ chính xác trình bày, không chứng minh dự án miễn phí hoặc số tiền trên hóa đơn bằng 0.
 
 AWS phân biệt số liệu Cost Explorer với hóa đơn, có thể có khác biệt do thời điểm cập nhật, độ chi tiết, làm tròn và cách phản ánh khoản hoàn tiền. Đây là mô tả chung của dịch vụ, không phải bằng chứng về nguyên nhân trong hai bộ dữ liệu này. Xem [tài liệu AWS Billing](https://docs.aws.amazon.com/us_en/awsaccountbilling/latest/aboutv2/differences-billing-data-cost-explorer-data.html) và [GetCostAndUsage về nhóm RECORD_TYPE](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html).
