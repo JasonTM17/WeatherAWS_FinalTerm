@@ -2,7 +2,7 @@
 
 ## Bộ báo cáo Tuần 1
 
-[CSV đã nộp](../tuan_2/results/athena_queries/) gồm 156 bản ghi/52 mẫu mỗi đô thị, bốn bảng tổng hợp và chỉ số truy vấn. Bộ này được giữ nguyên cùng báo cáo và Excel Tuần 1.
+[CSV của báo cáo Tuần 1](../tuan_2/results/athena_queries/) gồm 156 bản ghi/52 mẫu mỗi đô thị, bốn bảng tổng hợp và chỉ số truy vấn. Bộ này giữ nguyên các giá trị trong báo cáo và Excel Tuần 1. Mỗi đô thị có 52 mốc giờ liên tiếp, được gom thành 24 nhóm giờ trong ngày. Có 51 dòng lịch sử nạp bổ sung trước ranh giới Tuần 1 và 105 dòng trong ranh giới tuần theo UTC+7; bộ 156 dòng là phạm vi của lần xuất dùng làm báo cáo.
 
 ## Bộ dữ liệu mới Tuần 2
 
@@ -24,6 +24,12 @@
 
 ## Tệp kết quả
 
-[24 CSV phân tích](../tuan_2/results/week2_analysis/) có bảng phân bố, giờ/ngày, cấp AQI, vượt ngưỡng, tương quan, so sánh ghép giờ, chất lượng, vận hành, query metrics và chi phí. [Manifest hình](../tuan_2/results/week2_charts/chart_manifest.json) chỉ rõ CSV nguồn của cả 16 hình. Word và Excel nhúng cùng các ảnh, bên cạnh dữ liệu và các công thức tổng hợp trong Excel.
+[25 CSV phân tích](../tuan_2/results/week2_analysis/) có bảng phân bố, giờ/ngày, cấp AQI, vượt ngưỡng, tương quan, so sánh ghép giờ, chất lượng, vận hành, query metrics, chi phí và đối chiếu với báo cáo Tuần 1. [Manifest hình](../tuan_2/results/week2_charts/chart_manifest.json) chỉ rõ CSV nguồn của cả 16 hình. Word và Excel nhúng cùng các ảnh, bên cạnh dữ liệu và các công thức tổng hợp trong Excel.
+
+## Hai phạm vi đối chiếu tuần
+
+- [submitted_week1_comparison.csv](../tuan_2/results/week2_analysis/submitted_week1_comparison.csv) giữ bộ 156 dòng của báo cáo Tuần 1 làm mốc (52 mẫu/đô thị), so với mẫu Tuần 2 riêng từng nguồn (9/19). Bảng 3.10 và 3.11 trong báo cáo dùng phép này cho AQI và PM2.5. Chênh lệch tính từ trung bình chưa làm tròn; tệp manifest lưu hash của bộ mốc.
+- [weekly_comparison.csv](../tuan_2/results/week2_analysis/weekly_comparison.csv) lọc hai tuần từ cùng lần xuất mới, nên có 42/41 mẫu Tuần 1 và 9/19 mẫu Tuần 2 mỗi đô thị. Bảng 3.12 và Hình 3.12 dùng riêng phạm vi này. Sheet So_sanh_tuan trong Excel giữ cả hai bảng nguồn.
+- Các bộ có thời gian và độ phủ khác nhau; không xem chênh lệch trung bình mẫu là xu hướng của toàn bộ bảy ngày hoặc so sánh cùng thời điểm. Trong lần xuất mới, 144/156 dòng theo thành phố và timestamp trùng bộ cũ ở nguồn Sơn, 156/156 ở nguồn Quyên; các trường cảm biến ở phần trùng đều giống nhau.
 
 Dữ liệu chất lượng không khí được cung cấp qua [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api), dựa trên CAMS. Bộ API đã lưu không được coi là phép đo trực tiếp tại một trạm.

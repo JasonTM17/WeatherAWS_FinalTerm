@@ -369,9 +369,35 @@ Hình 3.11 CO NO₂ và O₃ trung bình theo đô thị và tài khoản
 
 CO, NO₂, SO₂ và O₃ được lưu với đơn vị µg/m³. Bảng đưa đủ bốn khí; hình lựa chọn CO, NO₂ và O₃ để so sánh mà không trộn các biến khác đơn vị. CSV phân bố thống kê còn chứa độ lệch chuẩn, trung vị, tứ phân vị và cực trị của từng khí cho mỗi tài khoản và đô thị.
 
-### 3.12 So sánh mẫu hai tuần trong lần tải mới
+### 3.12 Đối chiếu với báo cáo Tuần 1
 
-Bảng 3.10 AQI trung bình theo ranh giới hai tuần
+a) Đối chiếu trực tiếp với bộ báo cáo Tuần 1 đã lưu
+
+Bộ báo cáo Tuần 1 có 156 bản ghi, 52 mẫu mỗi đô thị, bao gồm dữ liệu lịch sử nạp bổ sung. Mẫu Tuần 2 có 9 mẫu mỗi đô thị của sinh viên Tiến Sơn và 19 mẫu của sinh viên Ngọc Quyên. Hai bảng dưới dùng đúng bộ 156 dòng làm mốc đối chiếu; Δ là trung bình Tuần 2 trừ trung bình trong bộ báo cáo Tuần 1, tính từ giá trị gốc trước khi làm tròn.
+
+Bảng 3.10 Đối chiếu AQI trung bình với bộ báo cáo Tuần 1
+
+| Đô thị | Bộ Tuần 1<br>(n=52) | Tiến Sơn<br>Tuần 2 (n=9) | Ngọc Quyên<br>Tuần 2 (n=19) | Δ Tiến Sơn | Δ Ngọc Quyên |
+| --- | --- | --- | --- | --- | --- |
+| TP. Hồ Chí Minh | 107,79 | 78,00 | 79,05 | -29,79 | -28,74 |
+| Hà Nội | 67,56 | 163,56 | 163,05 | 96,00 | 95,49 |
+| Đà Nẵng | 74,67 | 35,44 | 35,37 | -39,23 | -39,30 |
+
+Bảng 3.11 Đối chiếu PM2.5 trung bình (µg/m³) với bộ báo cáo Tuần 1
+
+| Đô thị | Bộ Tuần 1<br>(n=52) | Tiến Sơn<br>Tuần 2 (n=9) | Ngọc Quyên<br>Tuần 2 (n=19) | Δ Tiến Sơn | Δ Ngọc Quyên |
+| --- | --- | --- | --- | --- | --- |
+| TP. Hồ Chí Minh | 37,03 | 23,38 | 22,92 | -13,65 | -14,11 |
+| Hà Nội | 15,36 | 76,66 | 75,11 | 61,29 | 59,74 |
+| Đà Nẵng | 14,23 | 6,38 | 6,46 | -7,85 | -7,77 |
+
+So với bộ báo cáo Tuần 1, AQI trung bình mẫu Hà Nội cao hơn 96,00 điểm ở nguồn Tiến Sơn và 95,49 điểm ở nguồn Ngọc Quyên; PM2.5 cao hơn 61,29 và 59,74 µg/m³. TP. Hồ Chí Minh và Đà Nẵng có trung bình AQI, PM2.5 thấp hơn trong mẫu Tuần 2. Thứ tự AQI trung bình đổi từ TP. Hồ Chí Minh – Đà Nẵng – Hà Nội sang Hà Nội – TP. Hồ Chí Minh – Đà Nẵng. Đây là khác biệt giữa các tập mẫu có độ phủ không bằng nhau, chưa đủ kết luận xu hướng của toàn bộ hai tuần.
+
+b) Đối chiếu theo ranh giới tuần trong cùng lần xuất mới
+
+Phép đối chiếu tiếp theo lọc hai tuần từ cùng lần xuất mới trên mỗi tài khoản. Mẫu Tuần 1 lúc này có 42 dòng mỗi đô thị ở nguồn Tiến Sơn và 41 ở nguồn Ngọc Quyên. Đây là một phạm vi khác với mốc 52 mẫu của hai bảng trên; Hình 3.12 minh họa riêng phép lọc này.
+
+Bảng 3.12 AQI theo ranh giới tuần trong lần xuất mới
 
 | Đô thị | Tài khoản | n Tuần 1 | n Tuần 2 | AQI Tuần 1 | AQI Tuần 2 |
 | --- | --- | --- | --- | --- | --- |
@@ -388,7 +414,7 @@ Hình 3.12 So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu v
 
 Các mẫu thuộc Tuần 1 trong dữ liệu vừa tải có 42 mẫu mỗi đô thị ở nguồn Sơn và 41 ở nguồn Quyên; Tuần 2 có 9 và 19. Mẫu Hà Nội tăng AQI trung bình, còn TP. Hồ Chí Minh và Đà Nẵng giảm trong cả hai nguồn. Đây là so sánh mô tả hai tập mẫu với độ phủ khác nhau, chưa xác lập xu hướng dài hạn.
 
-Bảng này lọc trực tiếp thời gian từ lần tải mới. Nó không thay thế 156 bản ghi của bộ báo cáo Tuần 1 đã nộp, vì phạm vi thời gian và mốc xuất của bộ đó khác phép lọc hiện tại.
+Bảng 3.12 và Hình 3.12 dùng mẫu lọc theo ranh giới tuần trong lần xuất mới. Bảng 3.10 và Bảng 3.11 dùng bộ báo cáo Tuần 1 đã lưu, bao gồm phần lịch sử nạp bổ sung. Hai phạm vi được giữ riêng để giải thích rõ sự khác biệt về số mẫu và giá trị trung bình.
 
 ## Chương 4 Phân tích vận hành Lambda và SNS
 
@@ -514,7 +540,7 @@ Bảng 6.1 Sản phẩm đi kèm và phạm vi
 | Dữ liệu nguồn | 435 bản ghi raw từ hai tài khoản; CSV riêng mỗi nguồn và bản sao tệp NDJSON. |
 | Mẫu Tuần 2 | 84 dòng nguồn: 27 của Sơn và 57 của Quyên; phân tích riêng tài khoản. |
 | Kết quả truy vấn | 24 truy vấn mới thành công; CSV gốc, mã thực thi và metadata theo nguồn. |
-| Phân tích | 24 CSV tổng hợp và đối chiếu về môi trường, chất lượng, dịch vụ, truy vấn và chi phí. |
+| Phân tích | 25 CSV tổng hợp và đối chiếu về môi trường, chất lượng, dịch vụ, truy vấn và chi phí. |
 | Trực quan hóa | 16 biểu đồ được dựng từ các CSV tương ứng; cùng dữ liệu trong Excel và báo cáo. |
 | Báo cáo | Word có mục lục liên kết và bản PDF đã kiểm tra bố cục. |
 

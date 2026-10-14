@@ -2,11 +2,46 @@
 import unittest
 from datetime import datetime,timezone
 from pathlib import Path
-import csv,statistics,math,importlib.util
+import csv,statistics,math,importlib.util,tempfile,hashlib
 target=Path(__file__).with_name('analyze_week2_accounts.py')
 spec=importlib.util.spec_from_file_location('week2_analyzer',target);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 DATA=target.parents[1]/'results/week2_analysis'
 class Week2AnalysisTests(unittest.TestCase):
+    def test_custom_submission_manifest_identifies_actual_input_without_private_path(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path=Path(temporary)/'custom week 1.csv'
+            path.write_text('city,us_aqi,pm2_5\nA,60,6\n',encoding='utf-8')
+            actual=module.submission_baseline(path)
+            self.assertEqual(actual['file'],path.name)
+            self.assertEqual(actual['path_kind'],'external_filename')
+            self.assertEqual(actual['sha256'],hashlib.sha256(path.read_bytes()).hexdigest())
+            self.assertEqual(actual['records'],1)
+            canonical=module.ROOT.parent/'tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05/raw_weather_aqi_records.csv'
+            self.assertEqual(module.submission_baseline(canonical)['file'],canonical.relative_to(module.ROOT.parent).as_posix())
+            self.assertEqual(module.submission_baseline(canonical)['path_kind'],'repository_relative')
+
+    def test_omitted_submission_removes_only_stale_derived_comparison(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output=Path(temporary);stale=output/'submitted_week1_comparison.csv';source=output/'raw_week2_both_accounts.csv'
+            stale.write_text('stale prior comparison',encoding='utf-8');source.write_text('source unchanged',encoding='utf-8')
+            self.assertIsNone(module.prepare_submission_comparison(output,None,{}))
+            self.assertFalse(stale.exists())
+            self.assertEqual(source.read_text(encoding='utf-8'),'source unchanged')
+            self.assertIsNone(module.prepare_submission_comparison(output,None,{}))
+
+    def test_submission_comparison_retains_backfill_and_separate_accounts(self):
+        submitted=[{'city':'A','timestamp_utc':'2026-10-04 00:00:00','us_aqi':'20','pm2_5':'2'},
+                   {'city':'A','timestamp_utc':'2026-10-05 00:00:00','us_aqi':'100','pm2_5':'10'}]
+        weekly={'default':[{'city':'A','us_aqi':'80','pm2_5':'8'}],
+                'quyen':[{'city':'A','us_aqi':'90','pm2_5':'9'},{'city':'A','us_aqi':'110','pm2_5':'11'}]}
+        actual=module.compare_submitted_week1(submitted,weekly)
+        self.assertEqual([r['week1_samples'] for r in actual],[2,2])
+        self.assertEqual([r['week2_samples'] for r in actual],[1,2])
+        self.assertEqual([r['week1_avg_aqi'] for r in actual],[60,60])
+        self.assertEqual([r['delta_aqi'] for r in actual],[20,40])
+        self.assertEqual([r['delta_pm25'] for r in actual],[2,4])
+        self.assertTrue(all('including_backfill' in r['baseline_scope'] for r in actual))
+
     def test_timezone_normalization_avoids_lexical_filter_error(self):
         self.assertLess(module.instant('2026-10-12 00:00:00+07:00'),module.instant('2026-10-11 18:00:00+00:00'))
         self.assertEqual(module.instant('2026-10-12T00:00:00+07:00'),module.START)

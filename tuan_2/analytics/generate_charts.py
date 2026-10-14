@@ -38,7 +38,7 @@ CITY = {"HoChiMinh": "TP. Hồ Chí Minh", "DaNang": "Đà Nẵng", "HaNoi": "H�
 
 
 def finish(fig, name):
-    fig.text(0.01, 0.01, "Nguồn dữ liệu: Open-Meteo (CC BY 4.0); tổng hợp Athena – Tuần 2",
+    fig.text(0.01, 0.01, "Nguồn dữ liệu: Open-Meteo (CC BY 4.0); tổng hợp Athena – Tuần 1",
              color="#444444", fontsize=8)
     Path(CHARTS_DIR).mkdir(parents=True, exist_ok=True)
     fig.savefig(Path(CHARTS_DIR) / name, dpi=260, bbox_inches="tight", pad_inches=0.15)

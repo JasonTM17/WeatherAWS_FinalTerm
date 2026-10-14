@@ -34,7 +34,39 @@ def ranks(values):
         i=j
     return result
 def correlation(x,y):return statistics.correlation(x,y) if len(x)>=3 and statistics.pstdev(x)>0 and statistics.pstdev(y)>0 else None
-def analyze(source,private,destination):
+def compare_submitted_week1(submitted,weekly):
+    """Compare saved submissions, retaining backfill and separate account scopes."""
+    result=[]
+    for profile in PROFILES:
+        for city in sorted({r['city'] for r in submitted}):
+            first=[r for r in submitted if r['city']==city]
+            second=[r for r in weekly[profile] if r['city']==city]
+            row={'profile':profile,'city':city,'baseline_scope':'submitted_week1_snapshot_including_backfill','week2_scope':'observed_week2_samples','week1_samples':len(first),'week2_samples':len(second)}
+            for field,key in [('us_aqi','aqi'),('pm2_5','pm25')]:
+                a=statistics.mean(numbers(first,field));b=statistics.mean(numbers(second,field))
+                row.update({f'week1_avg_{key}':a,f'week2_avg_{key}':b,f'delta_{key}':b-a})
+            result.append(row)
+    return result
+
+def submission_baseline(path):
+    """Identify the actual input without publishing a private absolute path."""
+    path=Path(path)
+    try:
+        reference=path.resolve().relative_to(ROOT.parent.resolve()).as_posix()
+        kind='repository_relative'
+    except ValueError:
+        reference=path.name;kind='external_filename'
+    return {'file':reference,'path_kind':kind,'sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'records':len(read_csv(path)),'scope':'Retained Week 1 submission snapshot including historical backfill; not the later week-filtered baseline.','comparison_csv':'submitted_week1_comparison.csv'}
+
+def prepare_submission_comparison(destination,baseline,weekly):
+    if baseline is None:
+        # This filename is a derived output owned by this analyzer. Omission must
+        # not publish a previous run's comparison with missing source provenance.
+        (Path(destination)/'submitted_week1_comparison.csv').unlink(missing_ok=True)
+        return None
+    return compare_submitted_week1(read_csv(baseline),weekly)
+
+def analyze(source,private,destination,week1_submission=None):
     source,private,destination=Path(source),Path(private),Path(destination)
     destination.mkdir(parents=True,exist_ok=True)
     collection=json.loads((private/'collection_manifest.json').read_text(encoding='utf-8'))
@@ -170,6 +202,9 @@ def analyze(source,private,destination):
         assert counta==countb==len(weekly[profile])
         scan.append({'profile':profile,'matched_records':counta,'time_only_bytes':a['bytes_scanned'],'partition_filtered_bytes':b['bytes_scanned'],'scan_reduction_fraction':1-b['bytes_scanned']/a['bytes_scanned'],'time_only_ms':a['execution_time_ms'],'partition_filtered_ms':b['execution_time_ms']})
     datasets={'account_inventory':inventory,'data_quality':quality,'distribution_statistics':distribution,'city_statistics':city_stats,'hourly_city':hour_rows,'daily_city':day_rows,'category_distribution':categories,'threshold_exceedance':thresholds,'correlations':corr,'matched_account_hours':paired,'cross_account_overlap':overlap,'weekly_comparison':weekly_comparison,'service_status':services,'operational_metrics':operational,'operational_summary':operational_summary,'lambda_runtime':runtime,'query_history':histories,'query_metrics':query_metrics,'partition_scan_comparison':scan,'cost_by_service_day':cost,'object_inventory':objects}
+    submitted=prepare_submission_comparison(destination,week1_submission,weekly)
+    if submitted is not None:
+        datasets['submitted_week1_comparison']=submitted
     for name,data in datasets.items():write_csv(destination/f'{name}.csv',data)
     write_csv(destination/'duplicate_city_timestamp.csv',duplicate_rows,headers=['profile','city','timestamp_utc','record_count'])
     # Include all source records in a flat provenance table without modifying account originals.
@@ -179,7 +214,10 @@ def analyze(source,private,destination):
     write_csv(destination/'raw_all_both_accounts.csv',rawall)
     summary={'inventory':inventory,'city_statistics':city_stats,'operational_summary':operational_summary,'service_status':services,'scan_comparison':scan,'paired_city_hour_groups':len(paired),'exact_overlap_records':len(overlap),'conflicting_overlap_records':sum(not r['sensor_values_match'] for r in overlap),'week2_total_source_rows':len(raw),'sample_policy':'Accounts analyzed independently. Matched city/hour means compare equal time groups. Source rows are not pooled as independent observations.','week2_start_utc':START.isoformat(),'week2_end_exclusive_utc':END.isoformat(),'collected_at_utc':at.isoformat(),'credential_files_unchanged':True,'quantile_method':'linear interpolation, NumPy default; standard deviation uses n-1.'}
     json_save(destination/'analysis_summary.json',summary)
-    json_save(destination/'analysis_manifest.json',{'source_mode':'Live S3 and Athena downloads','files':[{'name':p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(destination.glob('*.csv'))],'calculation_policy':summary['sample_policy'],'missing_values':'Null/nonfinite excluded per variable; numeric zeros retained and counted separately.','timezone':'Naive environmental timestamps are interpreted as UTC; AWS timezone-aware timestamps converted to UTC before filtering.','aws_mutations':'Only SELECT query result objects created; no infrastructure or credential changes.'})
+    manifest={'source_mode':'Live S3 and Athena downloads','files':[{'name':p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted(destination.glob('*.csv'))],'calculation_policy':summary['sample_policy'],'missing_values':'Null/nonfinite excluded per variable; numeric zeros retained and counted separately.','timezone':'Naive environmental timestamps are interpreted as UTC; AWS timezone-aware timestamps converted to UTC before filtering.','aws_mutations':'Only SELECT query result objects created; no infrastructure or credential changes.'}
+    if week1_submission is not None:
+        manifest['submitted_week1_baseline']=submission_baseline(week1_submission)
+    json_save(destination/'analysis_manifest.json',manifest)
     print(json.dumps({'status':'PASS','all_source_rows':len(rawall),'week2_rows':len(raw),'paired_city_hour_groups':len(paired),'exact_overlap_records':len(overlap),'conflicting_overlap_records':summary['conflicting_overlap_records'],'csv_count':len(list(destination.glob('*.csv')))},ensure_ascii=False))
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--source',type=Path,default=ROOT/'results/week2_live');parser.add_argument('--evidence','--private',dest='evidence',type=Path,default=ROOT/'results/week2_evidence');parser.add_argument('--output',type=Path,default=ROOT/'results/week2_analysis');args=parser.parse_args();analyze(args.source,args.evidence,args.output)
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--source',type=Path,default=ROOT/'results/week2_live');parser.add_argument('--evidence','--private',dest='evidence',type=Path,default=ROOT/'results/week2_evidence');parser.add_argument('--output',type=Path,default=ROOT/'results/week2_analysis');parser.add_argument('--week1-submission',type=Path,default=ROOT.parent/'tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05/raw_weather_aqi_records.csv');args=parser.parse_args();analyze(args.source,args.evidence,args.output,args.week1_submission)

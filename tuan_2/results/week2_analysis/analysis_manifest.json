@@ -90,6 +90,10 @@
       "sha256": "6d7a98563e80ce7bdd16d8f7f6e16fbc5167019f7b02b780f4362f2ddbb85cc9"
     },
     {
+      "name": "submitted_week1_comparison.csv",
+      "sha256": "3f53d07be9571e29428efdfa10567c489c8fd0dd96c29484c497ccd62347770d"
+    },
+    {
       "name": "threshold_exceedance.csv",
       "sha256": "011e36a487e1712374baf0b6768718aee218643d1d447c8ec29a4746265eebdc"
     },
@@ -101,5 +105,13 @@
   "calculation_policy": "Accounts analyzed independently. Matched city/hour means compare equal time groups. Source rows are not pooled as independent observations.",
   "missing_values": "Null/nonfinite excluded per variable; numeric zeros retained and counted separately.",
   "timezone": "Naive environmental timestamps are interpreted as UTC; AWS timezone-aware timestamps converted to UTC before filtering.",
-  "aws_mutations": "Only SELECT query result objects created; no infrastructure or credential changes."
+  "aws_mutations": "Only SELECT query result objects created; no infrastructure or credential changes.",
+  "submitted_week1_baseline": {
+    "file": "tuan_1/docs/Bao_cao_tuan_1_CSV_Nhom_05/raw_weather_aqi_records.csv",
+    "path_kind": "repository_relative",
+    "sha256": "0dc2147362519701c70cceb53daf268837bc41d4076ea5edec00c1c956e4b102",
+    "records": 156,
+    "scope": "Retained Week 1 submission snapshot including historical backfill; not the later week-filtered baseline.",
+    "comparison_csv": "submitted_week1_comparison.csv"
+  }
 }

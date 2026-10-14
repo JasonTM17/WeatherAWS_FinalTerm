@@ -1,0 +1,7 @@
+"profile","city","baseline_scope","week2_scope","week1_samples","week2_samples","week1_avg_aqi","week2_avg_aqi","delta_aqi","week1_avg_pm25","week2_avg_pm25","delta_pm25"
+"default","DaNang","submitted_week1_snapshot_including_backfill","observed_week2_samples","52","9","74.67307692307692","35.44444444444444","-39.22863247863248","14.232692307692307","6.377777777777777","-7.85491452991453"
+"default","HaNoi","submitted_week1_snapshot_including_backfill","observed_week2_samples","52","9","67.5576923076923","163.55555555555554","95.99786324786324","15.363461538461538","76.65555555555555","61.292094017094016"
+"default","HoChiMinh","submitted_week1_snapshot_including_backfill","observed_week2_samples","52","9","107.78846153846153","78.0","-29.788461538461533","37.03076923076923","23.37777777777778","-13.65299145299145"
+"quyen","DaNang","submitted_week1_snapshot_including_backfill","observed_week2_samples","52","19","74.67307692307692","35.36842105263158","-39.30465587044534","14.232692307692307","6.457894736842105","-7.774797570850202"
+"quyen","HaNoi","submitted_week1_snapshot_including_backfill","observed_week2_samples","52","19","67.5576923076923","163.05263157894737","95.49493927125506","15.363461538461538","75.10526315789474","59.741801619433204"
+"quyen","HoChiMinh","submitted_week1_snapshot_including_backfill","observed_week2_samples","52","19","107.78846153846153","79.05263157894737","-28.735829959514163","37.03076923076923","22.91578947368421","-14.11497975708502"

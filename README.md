@@ -31,7 +31,7 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 Mẫu mới bao phủ hai ngày và 9 giờ riêng mỗi tài khoản, chưa đủ toàn bộ tuần. Tương quan mô tả tập mẫu, không chứng minh quan hệ nhân quả. Dữ liệu API chất lượng không khí dựa trên sản phẩm CAMS, không phải phép đo trực tiếp tại trạm.
 
 - [CSV Athena mới theo tài khoản](tuan_2/results/week2_live/)
-- [24 CSV phân tích và đối chiếu](tuan_2/results/week2_analysis/)
+- [25 CSV phân tích và đối chiếu](tuan_2/results/week2_analysis/)
 - [16 biểu đồ và bảng nguồn](tuan_2/results/week2_charts/)
 - [Tệp raw và metadata dịch vụ đã đọc](tuan_2/results/week2_evidence/)
 - [SQL của 12 phép phân tích](tuan_2/athena/week2_analysis/)

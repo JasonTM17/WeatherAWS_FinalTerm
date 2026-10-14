@@ -10,4 +10,6 @@ Nhóm 05 — 24110054 Nguyễn Tiến Sơn và 24110051 Trần Thị Ngọc Quy�
 
 Nguồn Sơn có 204 bản ghi toàn bộ, 27 thuộc Tuần 2. Nguồn Quyên có 231 toàn bộ, 57 thuộc Tuần 2. Phân tích giữ riêng mỗi tài khoản và ghép cùng đô thị/giờ khi so sánh. Mẫu mới gồm hai ngày và 9 giờ quan trắc riêng mỗi nguồn.
 
+Mục 3.12 trong báo cáo đối chiếu AQI và PM2.5 với đúng bộ 156 bản ghi của báo cáo Tuần 1 đã lưu. Phép lọc hai tuần từ lần xuất mới được trình bày riêng, vì cỡ mẫu Tuần 1 khi lọc lại là 42/41 mỗi đô thị. Excel có sheet So_sanh_tuan và hai CSV riêng cho hai phạm vi này.
+
 Chi tiết phương pháp và cách tái lập nằm trong [README gốc](../README.md) và [tài liệu dữ liệu](../docs/data-analysis.md). Mã source hiện tại được phân biệt với mã đang triển khai; không thay credentials trong quá trình lấy dữ liệu.

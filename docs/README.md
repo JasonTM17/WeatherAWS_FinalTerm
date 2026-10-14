@@ -9,9 +9,10 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [Minh chứng vận hành đã lưu](saved-evidence.md)
 - [Báo cáo Tuần 1 Word](../tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx) · [PDF](../tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf)
 - [Báo cáo Tuần 2 Word](../tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx) · [PDF](../tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf)
-- [Bộ CSV dùng đối chiếu](../tuan_2/results/athena_queries/)
+- [CSV của báo cáo Tuần 1](../tuan_2/results/athena_queries/)
+- [CSV Athena Tuần 2](../tuan_2/results/week2_live/) và [phân tích Tuần 2](../tuan_2/results/week2_analysis/)
 
-Mục lục Word/PDF có liên kết tới các chương và mục. Các bảng, biểu đồ của hai báo cáo dùng cùng một bộ CSV đã lưu để giữ nhất quán khi đối chiếu.
+Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng tuần, Word, PDF, Excel và biểu đồ dùng cùng dữ liệu nguồn. Tuần 1 giữ bộ xuất 156 dòng, bao gồm dữ liệu lịch sử nạp bổ sung; Tuần 2 phân tích riêng 27/57 dòng của hai tài khoản. Mục 3.12 trong báo cáo Tuần 2 đối chiếu trực tiếp với bộ Tuần 1 đã lưu và phân biệt phép lọc lại theo ranh giới tuần.
 
 ## Phân tích sâu Tuần 2
 

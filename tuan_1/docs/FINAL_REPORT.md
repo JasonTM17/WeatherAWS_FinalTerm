@@ -57,7 +57,7 @@ Open-Meteo là nguồn dữ liệu bên ngoài AWS; các khối còn lại thu�
 
 ### 1.4 Nguồn số liệu và mốc đo
 
-Các bảng phân tích sử dụng bốn CSV tổng hợp, CSV chứa 156 bản ghi gốc và bảng chỉ số truy vấn đã lưu trong Tuần 1. Số liệu S3, Lambda và CloudWatch được đọc ở các mốc quan sát riêng. Báo cáo đối chiếu số dòng giữa bảng đô thị, bảng giờ, bảng cấp AQI và dữ liệu gốc. Dữ liệu chất lượng không khí được lấy từ Open-Meteo Air Quality API, dựa trên sản phẩm mô hình khí quyển CAMS, không phải phép đo trực tiếp tại một trạm. Nguồn dữ liệu: https://open-meteo.com/en/docs/air-quality-api.
+Các bảng phân tích sử dụng bốn CSV tổng hợp, CSV chứa 156 bản ghi gốc và bảng chỉ số truy vấn đã lưu trong Tuần 1. Số liệu S3, Lambda và CloudWatch được đọc ở các mốc quan sát riêng. Báo cáo đối chiếu số dòng giữa bảng đô thị, bảng giờ, bảng cấp AQI và dữ liệu gốc. Dữ liệu chất lượng không khí được lấy từ Open-Meteo Air Quality API, dựa trên sản phẩm mô hình khí quyển CAMS, không phải phép đo trực tiếp tại một trạm. Nguồn dữ liệu: https://open-meteo.com/en/docs/air-quality-api. Bộ xuất dùng trong báo cáo bao gồm dữ liệu lịch sử được nạp bổ sung; phạm vi này được phân biệt với bộ lọc theo ranh giới tuần.
 
 Bảng 1.2. Nguồn và đại lượng dùng trong phân tích
 
@@ -107,7 +107,7 @@ Bảng 2.2. Phạm vi tập dữ liệu Tuần 1
 | Khí tượng | Nhiệt độ, độ ẩm, áp suất, tốc độ gió | Trung bình và tương quan với PM2.5 |
 | Thời gian | Ba phân vùng UTC của tập quan trắc | 24 nhóm giờ UTC; phân vùng theo ngày |
 
-Tập dữ liệu xuất trong Tuần 1 có 156 dòng: 52 dòng cho mỗi đô thị và lần lượt 72, 72, 12 dòng ở ba phân vùng UTC. Các phép tổng hợp theo đô thị, giờ và cấp AQI đều cộng về 156. Phân tích tương quan sử dụng cùng tập dữ liệu này theo từng đô thị.
+Bộ dữ liệu dùng cho báo cáo Tuần 1 có 156 dòng: 52 dòng cho mỗi đô thị và lần lượt 72, 72, 12 dòng ở ba phân vùng UTC. Mỗi đô thị có 52 mốc giờ quan trắc liên tiếp, được tổng hợp thành 24 nhóm giờ trong ngày. Trong bộ xuất này, 51 dòng là dữ liệu lịch sử trước ranh giới Tuần 1 và 105 dòng thuộc ranh giới Tuần 1 theo giờ Việt Nam. Các bảng và biểu đồ giữ đủ 156 dòng để thống nhất với bộ CSV đã lưu; chúng không mô tả toàn bộ bảy ngày của tuần.
 
 ### 2.3 Kết quả định lượng
 
