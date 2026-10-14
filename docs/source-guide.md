@@ -53,6 +53,6 @@ Matplotlib tối thiểu 3.9 vì source dùng tick_labels trong boxplot; tham s�
 
 ## Phạm vi minh chứng
 
-Kiểm tra cục bộ dùng SDK/API giả lập và dữ liệu đã lưu. Nó xác nhận nhánh xử lý và phép tính, không chứng minh source vừa được triển khai lên AWS. Metadata ghi nhận mã đang triển khai khác source hiện tại; các thay đổi về số không hữu hạn trong lần rà soát này thuộc mã nguồn để đọc và chạy lại. Bộ báo cáo giữ nguyên số liệu gốc.
+Kiểm tra cục bộ dùng SDK/API giả lập và dữ liệu đã lưu. Nó xác nhận nhánh xử lý và phép tính, không chứng minh source vừa được triển khai lên AWS. Bộ báo cáo giữ nguyên số liệu gốc.
 
 Lịch thu thập, Alarm và tổng metric có phạm vi thời gian khác nhau. Errors lớn hơn Invocations được giữ nguyên, tỷ lệ lỗi không xác định. Dữ liệu mô hình API và mẫu ngắn không chứng minh xu hướng toàn tuần hoặc quan hệ nhân quả. Không công bố credentials, nội dung Secret, endpoint email hay log thực thi thô trong source.

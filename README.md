@@ -42,7 +42,7 @@ Mẫu mới bao phủ hai ngày và 9 giờ riêng trong bộ dữ liệu của 
 
 EventBridge gọi Lambda; Lambda đọc cấu hình Secrets Manager, thu thập Open-Meteo, ghi NDJSON vào S3 và gửi SNS. Glue quản lý lược đồ, Athena phân tích dữ liệu và CloudWatch ghi chỉ số/log. Các thao tác quản lý và xuất dữ liệu dùng boto3.
 
-Source Lambda trên máy khác bản đang triển khai ở môi trường AWS của hai sinh viên; hash được lưu trong metadata. Môi trường AWS của sinh viên Ngọc Quyên có hai quy tắc lịch đang bật và hai đăng ký email xác nhận, sinh viên Tiến Sơn có một lịch và một đăng ký. Các tổng Errors lớn hơn Invocations được giữ nguyên và tỷ lệ lỗi để trống trong bộ phân tích; không suy diễn trạng thái chạy ổn định từ một Alarm OK.
+Môi trường AWS của sinh viên Ngọc Quyên có hai quy tắc lịch đang bật và hai đăng ký email xác nhận, sinh viên Tiến Sơn có một lịch và một đăng ký. Các tổng Errors lớn hơn Invocations được giữ nguyên và tỷ lệ lỗi để trống trong bộ phân tích; không suy diễn trạng thái chạy ổn định từ một Alarm OK.
 
 ## Tái lập phân tích
 

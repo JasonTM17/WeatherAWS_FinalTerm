@@ -20,7 +20,7 @@ Báo cáo trình bày chức năng hệ thống, dữ liệu và kết quả ph�
 
 - Trần Thị Ngọc Quyên — MSSV 24110051: Glue, Athena, biểu đồ và đối chiếu dữ liệu.
 
-Các chương lần lượt trình bày mục tiêu và kiến trúc, chức năng Lambda, lịch thu thập và cảnh báo, mô hình dữ liệu và phân tích, kiểm tra kết quả, sử dụng tài nguyên và tổng hợp công việc của nhóm.
+Báo cáo gồm sáu chương: phạm vi hệ thống và phân công; nguồn dữ liệu và phương pháp phân tích; dữ liệu môi trường; vận hành Lambda và SNS; truy vấn và sử dụng tài nguyên; tổng hợp kết quả Tuần 2.
 
 ## Chương 1 Phạm vi và hệ thống thực hành Tuần 2
 
@@ -49,7 +49,7 @@ Hình 1.1 Kiến trúc và luồng dữ liệu của hệ thống
 
 EventBridge kích hoạt Lambda. Hàm đọc cấu hình, gọi hai nguồn Open-Meteo, chuẩn hóa các trường và ghi NDJSON vào S3 theo phân vùng. SNS tiếp nhận thông báo khi thỏa ngưỡng cấu hình. Glue quản lý lược đồ và phân vùng; Athena đọc S3 để tạo các bảng phân tích. CloudWatch lưu chỉ số và log thời gian thực thi.
 
-### 1.4 Trạng thái dịch vụ tại lần đọc hiện tại
+### 1.4 Trạng thái dịch vụ trong dữ liệu Tuần 2
 
 Bảng 1.2 Cấu hình và trạng thái hệ thống trong hai báo cáo dữ liệu
 
@@ -60,11 +60,8 @@ Bảng 1.2 Cấu hình và trạng thái hệ thống trong hai báo cáo dữ l
 | Đăng ký email SNS | 1 đăng ký đã xác nhận. | 2 đăng ký đã xác nhận. |
 | CloudWatch Alarm | OK tại thời điểm đọc. | OK tại thời điểm đọc. |
 | Glue Catalog | 6 phân vùng trong bảng raw. | 6 phân vùng trong bảng raw. |
-| Mã đang triển khai | Khác mã source hiện tại trên máy. | Khác mã source hiện tại trên máy. |
 
 Báo cáo dữ liệu của sinh viên Ngọc Quyên ghi nhận WeatherCollectionHourlyRule và WeatherCollectionSchedule cùng bật với chu kỳ rate(1 hour); báo cáo của sinh viên Tiến Sơn ghi nhận WeatherCollectionSchedule. Trạng thái bật chỉ mô tả cấu hình tại lần đọc. Danh sách lịch và số mẫu được dùng để giải thích mật độ thu thập của từng bộ dữ liệu.
-
-Hash gói Lambda được ghi nhận riêng trong môi trường AWS của từng sinh viên. Mã đang triển khai khác phiên bản source hiện tại trên máy, nên báo cáo phân biệt kết quả vận hành với các lần sửa source sau đó. Các số liệu được lấy từ thao tác đọc tài nguyên và truy vấn phân tích.
 
 ## Chương 2 Nguồn dữ liệu và phương pháp phân tích
 
@@ -87,7 +84,7 @@ Ranh giới tuần được xác định theo UTC+7, sau đó đổi sang UTC đ
 
 ### 2.2 Cấu trúc và chất lượng bản ghi
 
-Mỗi bản ghi có 23 trường: nhận diện, tọa độ, thời gian UTC và Việt Nam, các yếu tố khí tượng, nồng độ ô nhiễm, chỉ số AQI, cấp AQI và ba khóa phân vùng. CSV giữ một dòng cho một bản ghi; không thêm tiêu đề trang trí hoặc thay đổi giá trị raw.
+Dữ liệu xuất từ Athena gồm 23 cột, tương ứng 20 cột thường và ba khóa phân vùng year, month, day. Các cột mô tả nhận diện, tọa độ, thời gian UTC và Việt Nam, yếu tố khí tượng, nồng độ ô nhiễm, chỉ số AQI và cấp AQI. CSV giữ một dòng cho một bản ghi; không thêm tiêu đề trang trí hoặc thay đổi giá trị raw.
 
 Bảng 2.2 Đối chiếu chất lượng trong tập Tuần 2
 
@@ -123,7 +120,7 @@ Source Lambda được tổ chức thành các nhóm chức năng: đọc cấu 
 
 Cấu hình weather/api_config quản lý tọa độ ba đô thị và ngưỡng cảnh báo. Khi đọc cấu hình thất bại, source có nhánh dự phòng và ghi log. Các hàm chuyển đổi dùng mặc định khi dữ liệu không hợp lệ; vì thế việc đánh giá chất lượng CSV phân biệt số 0 với dữ liệu thiếu. Các khoảng phân loại AQI được xác định trong source; nhãn cấp AQI đi cùng chỉ số trong bản ghi.
 
-Phiên bản source hiện tại ghép chuỗi lịch sử khí tượng và AQI theo timestamp, kiểm tra độ dài mảng trước khi đọc, phát sinh lỗi khi không thu được bản ghi và ghi rõ trạng thái thu thập một phần khi chỉ một số đô thị thất bại. Các logic này được mô tả theo source hiện tại; hash ở mục 1.4 cho thấy bản đang triển khai chưa đồng nhất với bản đó.
+Mã nguồn ghép chuỗi lịch sử khí tượng và AQI theo timestamp, kiểm tra độ dài mảng trước khi đọc, phát sinh lỗi khi không thu được bản ghi và ghi rõ trạng thái thu thập một phần khi chỉ một số đô thị thất bại.
 
 Bảng 2.4 Đầu vào và đầu ra của các nhóm xử lý
 
@@ -469,7 +466,7 @@ Bảng 4.3 Invocations và Errors trong dữ liệu trả về
 
 AWS trả về Errors bằng 150 và 294, lớn hơn Invocations bằng 9 và 19 trong cùng phạm vi chọn. Các tổng này không thỏa điều kiện để diễn giải Errors/Invocations thành tỷ lệ lỗi của hàm. Báo cáo ghi rõ mâu thuẫn và để tỷ lệ lỗi không xác định, thay vì đưa một phần trăm vượt 100% hoặc tự thay Errors bằng 0.
 
-Trạng thái Alarm hiện là OK, trong khi chuỗi Errors có vấn đề nhất quán. Trạng thái tại một thời điểm và tổng chỉ số qua nhiều giờ là hai nguồn riêng; không dùng một trong hai để suy diễn hệ thống vận hành không có lỗi. CSV giữ tất cả các điểm chỉ số, thống kê, thời gian UTC và tên metric để kiểm tra tiếp.
+Trạng thái Alarm được ghi nhận là OK trong dữ liệu Tuần 2, trong khi chuỗi Errors có vấn đề nhất quán. Trạng thái tại một thời điểm và tổng chỉ số qua nhiều giờ là hai nguồn riêng; không dùng một trong hai để suy diễn hệ thống vận hành không có lỗi. CSV giữ tất cả các điểm chỉ số, thống kê, thời gian UTC và tên metric để kiểm tra tiếp.
 
 ## Chương 5 Phân tích truy vấn và sử dụng tài nguyên
 
@@ -560,4 +557,4 @@ Hai báo cáo dữ liệu Tuần 2 của sinh viên Tiến Sơn và sinh viên N
 
 Mỗi bộ báo cáo dữ liệu hiện bao phủ hai ngày và 9 giờ quan trắc, nên các kết luận giới hạn trong mẫu đã có của Tuần 2. Các hệ số tương quan lớn không chứng minh quan hệ nhân quả. Phép đối chứng lọc phân vùng ghi nhận giảm byte quét; thời gian engine được diễn giải theo từng lượt cụ thể.
 
-Chúng em đã đối chiếu số liệu môi trường với S3 và Athena, đọc trạng thái lịch, SNS, Lambda và các chỉ số vận hành. Các mâu thuẫn giữa Errors và Invocations được giữ rõ trong báo cáo; mã source trên máy được phân biệt với mã đang triển khai. Phân công và thời gian 19,5 giờ của nhóm được ghi thống nhất trong nhật ký và báo cáo.
+Chúng em đã đối chiếu số liệu môi trường với S3 và Athena, đọc trạng thái lịch, SNS, Lambda và các chỉ số vận hành. Các mâu thuẫn giữa Errors và Invocations được giữ rõ trong báo cáo. Phân công và thời gian 19,5 giờ của nhóm được ghi thống nhất trong nhật ký và báo cáo.

@@ -6,7 +6,7 @@ Báo cáo trình bày kết quả Tuần 1 của đề tài Hệ thống thu th�
 
 Trong Tuần 1, Lambda ở trạng thái Active, lịch EventBridge đang Enabled, S3 có ba đối tượng raw với tổng 87.250 byte và Glue có ba phân vùng dữ liệu. Năm truy vấn Athena đều SUCCEEDED, gồm bốn truy vấn phân tích và một truy vấn xuất 156 bản ghi gốc; mỗi truy vấn quét 87.250 byte. Báo cáo trình bày bốn biểu đồ từ CSV, 24 nhóm giờ UTC, phân bố AQI và tương quan khí tượng.
 
-Theo phân công nhóm xác nhận, Sơn phụ trách S3, Secrets Manager, Lambda và SNS; Quyên phụ trách Glue, Athena và phân tích biểu đồ. Hai thành viên cùng thực hiện kiến trúc, tích hợp và báo cáo. Các số liệu trong tài liệu thuộc tập dữ liệu và các lượt quan sát của Tuần 1.
+Theo phân công nhóm xác nhận, sinh viên Tiến Sơn phụ trách S3, Secrets Manager, Lambda và SNS; sinh viên Ngọc Quyên phụ trách Glue, Athena và phân tích biểu đồ. Hai thành viên cùng thực hiện kiến trúc, tích hợp và báo cáo. Các số liệu trong tài liệu thuộc tập dữ liệu và các lượt quan sát của Tuần 1.
 
 ## LỜI MỞ ĐẦU
 
@@ -185,10 +185,10 @@ Bảng 3.2. Đường đi của trường dữ liệu từ API tới Athena
 | year, month, day, hour | Tách từ thời gian UTC của bản ghi | Ba trường đầu là khóa phân vùng; hour dùng trong Bảng 4.4 |
 | us_aqi, aqi_category | AQI từ Open-Meteo; safe_int và get_aqi_category | Giá trị thiếu có thể thành AQI 0 nhưng cấp Unknown |
 | pm2_5, pm10, CO, NO2, SO2, O3 | Air Quality API; safe_float trước khi ghi JSON | Giá trị thiếu/không hợp lệ bị đổi thành 0, có thể lệch trung bình |
-| nhiệt độ, độ ẩm, áp suất, gió | Weather Forecast API; safe_float | Phiên bản Tuần 1 ghép theo vị trí trong mảng; phiên bản Tuần 2 ghép theo timestamp. |
+| nhiệt độ, độ ẩm, áp suất, gió | Weather Forecast API; safe_float | Chuỗi khí tượng được ghép với chuỗi AQI theo vị trí trong mảng thời gian ở Tuần 1. |
 | record_id, collected_at | ID có hậu tố ngẫu nhiên; collected_at gắn thời điểm trong bản ghi | Chưa có cơ chế chống ghi lặp theo city + timestamp |
 
-Việc đổi null thành 0 giúp hàm không lỗi kiểu dữ liệu nhưng khiến AVG coi số 0 là một phép đo thật. Chưa có thống kê tỷ lệ giá trị thiếu trong toàn bộ đối tượng S3, nên các kết luận khí tượng ở Chương 4 chỉ mô tả tệp CSV đã xuất. Phiên bản được đối chiếu ở Tuần 1 ghép hai chuỗi lịch sử theo vị trí trong mảng; bộ source hoàn thiện ở Tuần 2 đã ghép theo timestamp. Sự thay đổi mã nguồn này không làm thay đổi các giá trị trong bộ CSV đã lưu dùng cho hai báo cáo.
+Việc đổi null thành 0 giúp hàm không lỗi kiểu dữ liệu nhưng khiến AVG coi số 0 là một phép đo thật. Chưa có thống kê tỷ lệ giá trị thiếu trong toàn bộ đối tượng S3, nên các kết luận khí tượng ở Chương 4 chỉ mô tả tệp CSV đã xuất.
 
 ### 3.7 Tần suất gọi Open-Meteo và yêu cầu khóa API
 
@@ -217,7 +217,7 @@ CSV gốc có 156 dòng, đúng bằng 52 dòng cho mỗi đô thị. S3 có ba 
 
 #### Phép đối chiếu bốn tập kết quả
 
-Tổng total_records theo đô thị là 52 + 52 + 52 = 156. Tổng sample_count của 24 nhóm giờ và tổng occurrence_count của các cấp AQI đều bằng 156. CSV gốc cũng có đúng 156 dòng và 156 record_id riêng biệt. Bốn phép kiểm tra số dòng độc lập cho thấy các bảng tổng hợp dùng cùng quy mô mẫu của lượt xuất Tuần 1.
+Tổng total_records theo đô thị là 52 + 52 + 52 = 156. Tổng sample_count của 24 nhóm giờ và tổng occurrence_count của các cấp AQI đều bằng 156. CSV gốc cũng có đúng 156 dòng và 156 record_id riêng biệt. Các phép đối chiếu số dòng cho thấy các bảng tổng hợp dùng cùng quy mô mẫu của lượt xuất Tuần 1.
 
 | 52 + 52 + 52 = 156 dòng theo đô thị<br>Tổng 24 nhóm giờ = tổng các cấp AQI = 156<br>CSV raw = 156 dòng, 156 record_id riêng biệt |
 | --- |
