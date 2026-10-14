@@ -305,9 +305,9 @@ Số mẫu vượt điều kiện và số thông điệp SNS là hai đại lư
 
 ### 3.8 So sánh hai tài khoản tại cùng đô thị và giờ
 
-![Chênh lệch Quyên trừ Sơn sau khi ghép cùng đô thị và giờ](../results/week2_charts/09_matched_account_difference.png)
+![Chênh lệch Sinh viên Ngọc Quyên trừ Sinh viên Tiến Sơn](../results/week2_charts/09_matched_account_difference.png)
 
-Hình 3.8 Chênh lệch Quyên trừ Sơn sau khi ghép cùng đô thị và giờ
+Hình 3.8 Chênh lệch Sinh viên Ngọc Quyên trừ Sinh viên Tiến Sơn
 
 Bảng 3.7 Chênh lệch Quyên trừ Sơn trên các giờ ghép
 

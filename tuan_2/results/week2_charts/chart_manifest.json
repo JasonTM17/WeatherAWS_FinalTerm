@@ -2,81 +2,209 @@
   {
     "file": "01_data_scope.png",
     "title": "Quy mô dữ liệu tải về và phạm vi Tuần 2",
-    "source_csv": "account_inventory.csv"
+    "source_csv": "account_inventory.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "02_aqi_city.png",
     "title": "AQI trung bình và độ lệch chuẩn của mẫu Tuần 2",
-    "source_csv": "city_statistics.csv"
+    "source_csv": "city_statistics.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "03_particulates.png",
     "title": "PM2.5 và PM10 trung bình theo đô thị và tài khoản",
-    "source_csv": "city_statistics.csv"
+    "source_csv": "city_statistics.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "04_aqi_distribution.png",
     "title": "Trung vị khoảng tứ phân vị và độ phân tán AQI",
-    "source_csv": "raw_week2_both_accounts.csv; distribution_statistics.csv"
+    "source_csv": "raw_week2_both_accounts.csv; distribution_statistics.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "05_hourly_aqi.png",
     "title": "Biến thiên AQI tại các giờ thực sự có dữ liệu",
-    "source_csv": "hourly_city.csv"
+    "source_csv": "hourly_city.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "06_sampling_coverage.png",
     "title": "Mật độ lấy mẫu theo đô thị tài khoản và giờ",
-    "source_csv": "hourly_city.csv"
+    "source_csv": "hourly_city.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "07_categories.png",
     "title": "Cấp AQI xuất hiện trong mẫu Tuần 2 của mỗi đô thị",
-    "source_csv": "category_distribution.csv"
+    "source_csv": "category_distribution.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "08_exceedance.png",
     "title": "Tỷ lệ mẫu vượt các ngưỡng cấu hình cảnh báo",
-    "source_csv": "threshold_exceedance.csv"
+    "source_csv": "threshold_exceedance.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "09_matched_account_difference.png",
-    "title": "Chênh lệch Quyên trừ Sơn sau khi ghép cùng đô thị và giờ",
-    "source_csv": "matched_account_hours.csv"
+    "title": "Chênh lệch Sinh viên Ngọc Quyên trừ Sinh viên Tiến Sơn",
+    "source_csv": "matched_account_hours.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "10_correlations.png",
     "title": "Tương quan PM2.5 với khí tượng trong tập mẫu Tuần 2",
-    "source_csv": "correlations.csv"
+    "source_csv": "correlations.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "11_pm25_temperature.png",
     "title": "Quan hệ giữa nhiệt độ và PM2.5 trên các bản ghi thực tế",
-    "source_csv": "raw_week2_both_accounts.csv"
+    "source_csv": "raw_week2_both_accounts.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "12_gaseous_pollutants.png",
     "title": "CO NO₂ và O₃ trung bình theo đô thị và tài khoản",
-    "source_csv": "distribution_statistics.csv"
+    "source_csv": "distribution_statistics.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "13_lambda_runtime.png",
     "title": "Phân bố thời gian Lambda từ các dòng REPORT thuộc Tuần 2",
-    "source_csv": "lambda_runtime.csv"
+    "source_csv": "lambda_runtime.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "14_partition_scan.png",
     "title": "Đối chứng dung lượng quét với cùng số bản ghi Tuần 2",
-    "source_csv": "partition_scan_comparison.csv"
+    "source_csv": "partition_scan_comparison.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "15_query_time.png",
     "title": "Thời gian thực thi của 24 truy vấn mới trên hai tài khoản",
-    "source_csv": "query_metrics.csv"
+    "source_csv": "query_metrics.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   },
   {
     "file": "16_week_comparison.png",
     "title": "So sánh các mẫu thuộc Tuần 1 và Tuần 2 trong dữ liệu vừa tải",
-    "source_csv": "weekly_comparison.csv"
+    "source_csv": "weekly_comparison.csv",
+    "student_labels": {
+      "default": "Sinh viên Tiến Sơn",
+      "quyen": "Sinh viên Ngọc Quyên"
+    },
+    "account_colors": {
+      "default": "#2563EB",
+      "quyen": "#F59E0B"
+    }
   }
 ]
