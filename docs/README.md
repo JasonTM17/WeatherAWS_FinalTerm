@@ -15,7 +15,7 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [Danh mục dữ liệu và hình](../tuan_2/results/README.md)
 - [CSV Athena Tuần 2](../tuan_2/results/week2_live/) và [phân tích Tuần 2](../tuan_2/results/week2_analysis/)
 
-Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng tuần, Word, PDF, Excel và biểu đồ dùng cùng dữ liệu nguồn. Tuần 1 giữ bộ xuất 156 dòng, bao gồm dữ liệu lịch sử nạp bổ sung; Tuần 2 phân tích riêng 27/57 dòng trong hai báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Mục 3.12 trong báo cáo Tuần 2 đối chiếu trực tiếp với bộ Tuần 1 đã lưu và phân biệt phép lọc lại theo ranh giới tuần.
+Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng tuần, Word, PDF, Excel và biểu đồ dùng cùng dữ liệu nguồn. Tuần 1 giữ bộ xuất 156 dòng, bao gồm dữ liệu lịch sử nạp bổ sung; Tuần 2 giữ riêng 27/57 lượt ghi gốc của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Sau khi nhóm theo đô thị và giờ UTC, mỗi sinh viên có 27 nhóm, gồm 21 nhóm chung để đối chiếu trực tiếp. Mục 3.12 trong báo cáo Tuần 2 đối chiếu với bộ Tuần 1 đã lưu và phân biệt phép lọc lại theo ranh giới tuần.
 
 ## Phân tích sâu Tuần 2
 

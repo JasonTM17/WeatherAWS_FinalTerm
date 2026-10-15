@@ -4,7 +4,7 @@
 
 Báo cáo Tuần 2 tổng hợp hai bộ báo cáo dữ liệu do sinh viên Tiến Sơn và sinh viên Ngọc Quyên cung cấp về thời tiết, chất lượng không khí và kết quả vận hành hệ thống AWS Learner Lab. Chúng em sử dụng các tệp raw trên S3, kết quả truy vấn Athena và chỉ số dịch vụ để trình bày số liệu theo từng nguồn.
 
-Hai bộ báo cáo dữ liệu gồm 435 bản ghi: 204 trong bộ của sinh viên Tiến Sơn và 231 trong bộ của sinh viên Ngọc Quyên. Theo ranh giới tuần ở Việt Nam quy đổi sang UTC, mẫu Tuần 2 có 27 và 57 bản ghi, tương ứng 9 và 19 mẫu mỗi đô thị. Các thống kê được trình bày riêng theo từng sinh viên.
+Hai bộ báo cáo dữ liệu gồm 435 bản ghi: 204 trong bộ của sinh viên Tiến Sơn và 231 trong bộ của sinh viên Ngọc Quyên. Theo ranh giới tuần ở Việt Nam quy đổi sang UTC, mẫu Tuần 2 có 27 và 57 lượt ghi gốc. Khi nhóm theo đô thị và giờ UTC, mỗi sinh viên có 27 nhóm, trong đó 21 nhóm cùng giờ được dùng để đối chiếu trực tiếp. Các thống kê theo lượt ghi gốc được trình bày riêng theo từng sinh viên.
 
 Hà Nội có AQI trung bình Tuần 2 đạt 163,56 và 163,05; TP. Hồ Chí Minh đạt 78,00 và 79,05; Đà Nẵng đạt 35,44 và 35,37. Báo cáo trình bày 20 biểu đồ từ dữ liệu thực tế, 24 truy vấn Athena mới thành công, phân bố mẫu, biến thiên theo giờ, ngưỡng cảnh báo, tương quan khí tượng và mức sử dụng tài nguyên. Các kết luận giới hạn trong mẫu đã thu thập.
 
@@ -67,18 +67,18 @@ Báo cáo dữ liệu của sinh viên Ngọc Quyên ghi nhận WeatherCollectio
 
 ### 2.1 Toàn bộ dữ liệu và mẫu thuộc Tuần 2
 
-Bảng 2.1 Quy mô nguồn dữ liệu đã tải
+Bảng 2.1 Quy mô dữ liệu gốc và số nhóm theo đô thị, giờ UTC
 
-| Sinh viên | Tệp raw | Byte raw | Tổng dòng | Dòng Tuần 2 | Giờ có mẫu |
+| Sinh viên | Tổng dòng raw | Lượt ghi Tuần 2 | Giờ có dữ liệu | Nhóm đô thị–giờ | Nhóm chung |
 | --- | --- | --- | --- | --- | --- |
-| Tiến Sơn | 22 | 114.736 | 204 | 27 | 9 |
-| Ngọc Quyên | 28 | 129.715 | 231 | 57 | 9 |
+| Tiến Sơn | 204 | 27 | 9 | 27 | 21 |
+| Ngọc Quyên | 231 | 57 | 9 | 27 | 21 |
 
 ![Quy mô dữ liệu tải về và phạm vi Tuần 2](../results/week2_charts/01_data_scope.png)
 
-Hình 2.1 Quy mô dữ liệu tải về và phạm vi Tuần 2
+Hình 2.1 Số lượt ghi gốc trong hai bộ dữ liệu
 
-Hai bộ báo cáo dữ liệu có tổng 435 dòng nguồn, bao gồm phần dữ liệu lịch sử. Sau khi chọn phạm vi Tuần 2, bộ của sinh viên Tiến Sơn có 27 dòng và bộ của sinh viên Ngọc Quyên có 57 dòng. Các bảng thống kê giữ riêng từng bộ cùng mã bản ghi và thời gian quan trắc; tổng số dòng nguồn không được dùng làm cỡ mẫu độc lập của một tập gộp.
+Trong Tuần 2, sinh viên Tiến Sơn có 27 lượt ghi gốc; sinh viên Ngọc Quyên có 57. Ở bộ của sinh viên Ngọc Quyên, 24 nhóm đô thị–giờ được ghi hai lần và ba nhóm được ghi ba lần. Các lượt cùng nhóm có 11 chỉ số số và cấp AQI bằng nhau, dù mã và giây ghi nhận khác. Gộp theo đô thị–giờ còn 27 nhóm mỗi sinh viên, gồm 21 nhóm chung để đối chiếu. Hình 2.1 thể hiện lượt ghi gốc; Bảng 2.1 thể hiện cả số nhóm.
 
 Ranh giới tuần được xác định theo UTC+7, sau đó đổi sang UTC để lọc timestamp_utc. Các thời điểm AWS có múi giờ được chuẩn hóa về UTC trước khi so sánh. Phân vùng S3 dùng ngày UTC, nên điều kiện trên phân vùng được kết hợp với điều kiện timestamp để giữ đúng phạm vi.
 
@@ -99,7 +99,7 @@ Trong 11 trường số kiểm tra của mẫu Tuần 2, không có NULL, giá t
 
 Chúng em trình bày hai bộ báo cáo dữ liệu do sinh viên Tiến Sơn và sinh viên Ngọc Quyên cung cấp. Mỗi bộ giữ riêng mã bản ghi, đô thị, thời gian quan trắc và các chỉ số môi trường. Có 144 quan trắc lịch sử cùng đô thị và thời điểm xuất hiện trong cả hai bộ, với giá trị cảm biến tương ứng bằng nhau; các thống kê được tính riêng cho từng bộ dữ liệu.
 
-Đối chiếu số liệu Tuần 2 dựa trên các nhóm cùng đô thị và giờ UTC trong hai báo cáo dữ liệu. Có 21 nhóm đối chiếu, tương ứng 7 giờ chung cho mỗi đô thị. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ giá trị của sinh viên Tiến Sơn, với trọng số mỗi giờ như nhau. Các thống kê theo từng sinh viên vẫn sử dụng toàn bộ mẫu thuộc bộ dữ liệu tương ứng.
+Đối chiếu số liệu Tuần 2 dựa trên bảng nhóm giờ gồm 27 dòng cho mỗi sinh viên tại hourly_city.csv. Trong đó có 21 nhóm cùng đô thị và giờ UTC, tương ứng bảy giờ chung cho mỗi đô thị. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ giá trị của sinh viên Tiến Sơn, với trọng số mỗi giờ như nhau. Các thống kê mô tả theo lượt ghi gốc ở những bảng khác vẫn giữ riêng 27 và 57 dòng nguồn.
 
 ### 2.4 Các đại lượng và cách diễn giải
 
@@ -340,7 +340,7 @@ Bảng 3.7 Giá trị trung bình và chênh lệch tại bảy giờ quan trắ
 | Hà Nội | 7 | 163,29 | 73,66 | -0,19 | +1,29 |
 | Đà Nẵng | 7 | 35,43 | 6,34 | 0,00 | -0,57 |
 
-Hai bộ báo cáo có bảy giờ quan trắc chung cho mỗi đô thị, tổng cộng 21 nhóm đối chiếu. Tại từng nhóm, AQI, PM2.5 và PM10 bằng nhau trước khi làm tròn; vì vậy chênh lệch của các chỉ số ô nhiễm bằng 0. Hình 3.8 trình bày giá trị thực để thể hiện mức ô nhiễm trong phạm vi giờ chung. Các giá trị này khác trung bình toàn bộ mẫu Tuần 2 vì phạm vi tính chỉ gồm bảy giờ chung.
+Sau khi gộp các lượt ghi trong cùng đô thị và giờ UTC, mỗi sinh viên có 27 nhóm. Hai bộ cùng có dữ liệu ở bảy giờ cho mỗi đô thị, tổng cộng 21 nhóm đối chiếu. Tại từng nhóm chung, AQI, PM2.5 và PM10 bằng nhau trước khi làm tròn; vì vậy chênh lệch của các chỉ số ô nhiễm bằng 0. Hình 3.8 trình bày giá trị thực trong phạm vi giờ chung. Các giá trị này khác trung bình tính theo toàn bộ lượt ghi Tuần 2 vì phạm vi giờ và trọng số mẫu khác nhau.
 
 Nhiệt độ và độ ẩm vẫn có khác biệt. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ sinh viên Tiến Sơn, sau khi lấy trung bình riêng trong từng giờ và cho mỗi giờ cùng trọng số. Δ độ ẩm dùng điểm phần trăm; số gần 0 được hiển thị 0,00 ở độ chính xác hai chữ số thập phân. Số liệu gốc và số mẫu của từng giờ được giữ trong CSV đối chiếu.
 
@@ -640,7 +640,7 @@ Bảng 7.1 Sản phẩm đi kèm và phạm vi
 | Sản phẩm | Nội dung |
 | --- | --- |
 | Dữ liệu nguồn | 435 bản ghi raw trong hai báo cáo dữ liệu; CSV và tệp NDJSON được lưu riêng theo sinh viên. |
-| Mẫu Tuần 2 | 84 dòng nguồn: 27 của sinh viên Tiến Sơn và 57 của sinh viên Ngọc Quyên; phân tích riêng từng bộ dữ liệu. |
+| Mẫu Tuần 2 | 84 lượt ghi gốc: 27 của sinh viên Tiến Sơn và 57 của sinh viên Ngọc Quyên; sau nhóm theo đô thị và giờ còn 27 nhóm mỗi sinh viên, gồm 21 nhóm chung để đối chiếu. |
 | Kết quả truy vấn | 24 truy vấn mới thành công; CSV gốc, mã thực thi và metadata theo nguồn. |
 | Phân tích | 27 CSV tổng hợp và đối chiếu về môi trường, chất lượng, dịch vụ, truy vấn và chi phí. |
 | Trực quan hóa | 20 biểu đồ được dựng từ các CSV tương ứng; cùng dữ liệu trong Excel và báo cáo. |
@@ -648,7 +648,7 @@ Bảng 7.1 Sản phẩm đi kèm và phạm vi
 
 ### 7.2 Kết luận trong phạm vi mẫu đã thu thập
 
-Trong 84 bản ghi Tuần 2 (27 của sinh viên Tiến Sơn, 57 của sinh viên Ngọc Quyên), AQI trung bình Hà Nội lần lượt là 163,56 và 163,05; PM2.5 là 76,66 và 75,11 µg/m³. Cả 9/9 và 19/19 mẫu Hà Nội thỏa ngưỡng cảnh báo cấu hình. Đà Nẵng có AQI thấp nhất, TP. Hồ Chí Minh ở giữa. Các phép tính giữ riêng hai bộ dữ liệu.
+Trong 84 lượt ghi gốc Tuần 2 (27 của sinh viên Tiến Sơn, 57 của sinh viên Ngọc Quyên), mỗi bộ có 27 nhóm đô thị–giờ sau khi gộp các lượt cùng giờ. Phép so sánh trực tiếp dùng 21 nhóm chung. AQI, PM2.5 và PM10 tại các nhóm chung bằng nhau trước khi làm tròn. Nếu tính riêng trên toàn bộ lượt ghi gốc, AQI trung bình Hà Nội lần lượt là 163,56 và 163,05; PM2.5 là 76,66 và 75,11 µg/m³. Cả 9/9 và 19/19 lượt ghi Hà Nội thỏa ngưỡng cảnh báo cấu hình. Đà Nẵng có AQI thấp nhất, TP. Hồ Chí Minh ở giữa.
 
 So với bộ báo cáo Tuần 1 đã nộp (52 mẫu mỗi đô thị), AQI trung bình Hà Nội cao hơn lần lượt 96,00 và 95,49 điểm trong hai bộ Tuần 2. Tuy nhiên, mỗi bộ Tuần 2 chỉ bao phủ hai ngày và 9 giờ quan trắc; khác biệt này chưa chứng minh xu hướng toàn tuần. Hệ số tương quan khí tượng cũng không xác lập quan hệ nhân quả.
 

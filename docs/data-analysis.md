@@ -6,14 +6,14 @@
 
 ## Bộ dữ liệu mới Tuần 2
 
-[Kết quả Athena](../tuan_2/results/week2_live/) được lưu riêng trong hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tổng raw là 204/231, mẫu thuộc Tuần 2 là 27/57. Tuần được lọc theo UTC+7, timestamp môi trường dạng không có múi giờ được hiểu là UTC; các thời điểm dịch vụ có múi giờ được đổi về UTC trước khi lọc.
+[Kết quả Athena](../tuan_2/results/week2_live/) được lưu riêng trong hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tổng raw là 204/231, số lượt ghi gốc thuộc Tuần 2 là 27/57. Bộ của sinh viên Ngọc Quyên có 24 nhóm đô thị–giờ ghi hai lượt và ba nhóm ghi ba lượt; trong mỗi nhóm, 11 chỉ số số và cấp AQI bằng nhau. [Bảng theo giờ](../tuan_2/results/week2_analysis/hourly_city.csv) lấy trung bình trong từng đô thị và giờ UTC nên còn 27 nhóm mỗi sinh viên, gồm 21 nhóm có mặt ở cả hai bộ để đối chiếu trực tiếp. Các dòng gốc vẫn được giữ nguyên. Tuần được lọc theo UTC+7, timestamp môi trường dạng không có múi giờ được hiểu là UTC; các thời điểm dịch vụ có múi giờ được đổi về UTC trước khi lọc.
 
 [Tệp raw và metadata nguồn](../tuan_2/results/week2_evidence/) giữ đủ tệp raw có thể đọc được, danh sách/hash đối tượng, trạng thái tài nguyên, điểm CloudWatch, dòng REPORT đã trích, lịch sử truy vấn và chi phí theo dịch vụ. Credentials, nội dung secret, endpoint email, URL tải có chữ ký và log thô được loại khỏi bộ công khai.
 
 ## Phép tính
 
 - Phân tích riêng từng bộ báo cáo dữ liệu; 144 quan trắc lịch sử cùng đô thị và thời điểm xuất hiện trong cả hai bộ có giá trị tương ứng bằng nhau, nên giữ riêng cỡ mẫu khi trình bày.
-- Trung bình và SD tính trên các bản ghi trong cùng đô thị/bộ dữ liệu; SD dùng n−1.
+- Các bảng mô tả theo lượt ghi gốc tính trung bình và SD trên các bản ghi trong cùng đô thị/bộ dữ liệu; SD dùng n−1. Bảng và hình đối chiếu trực tiếp gộp từng đô thị–giờ trước khi tính, nên hai sinh viên có cùng trọng số theo giờ.
 - Q1, trung vị, Q3 và P95 dùng nội suy tuyến tính. Không gọi SD là khoảng tin cậy.
 - Các tỷ lệ dùng số mẫu cùng đô thị/bộ dữ liệu làm mẫu số; không diễn giải thành tỷ lệ thời gian toàn tuần.
 - Đối chiếu ghép trung bình của cùng thành phố/giờ, 21 nhóm (7 giờ mỗi đô thị), với trọng số mỗi giờ bằng nhau.
@@ -28,7 +28,7 @@
 
 [Thống kê bổ sung Tuần 1](../tuan_2/results/charts/week1_extended_statistics.csv) tính trên đúng 156 dòng của bộ báo cáo đã lưu, gồm 52 mẫu mỗi đô thị. Năm hình bổ sung mô tả nồng độ bụi, khí tượng, phân bố, các cặp nhiệt độ–PM2.5 và hiệu năng truy vấn; [manifest Tuần 1](../tuan_2/results/charts/week1_chart_manifest.json) giữ các mảng vẽ và hash nguồn.
 
-[matched_hour_summary.csv](../tuan_2/results/week2_analysis/matched_hour_summary.csv) tổng hợp bảy giờ chung cho mỗi đô thị với mỗi giờ cùng trọng số. AQI, PM2.5 và PM10 bằng nhau trước khi làm tròn trong cả 21 nhóm; Hình 3.8 trình bày mức thực tế, bảng kèm chênh lệch khí tượng. Phạm vi này khác trung bình toàn bộ 9/19 mẫu Tuần 2.
+[matched_hour_summary.csv](../tuan_2/results/week2_analysis/matched_hour_summary.csv) tổng hợp bảy giờ chung cho mỗi đô thị với mỗi giờ cùng trọng số. AQI, PM2.5 và PM10 bằng nhau trước khi làm tròn trong cả 21 nhóm; Hình 3.8 trình bày mức thực tế, bảng kèm chênh lệch khí tượng. Phạm vi này khác trung bình tính từ toàn bộ 9/19 lượt ghi gốc mỗi đô thị.
 
 [week1_week2_extended_comparison.csv](../tuan_2/results/week2_analysis/week1_week2_extended_comparison.csv) giữ số đếm, mẫu số, tỷ lệ cấp AQI và Pearson khí tượng–PM2.5 của bộ Tuần 1 cùng hai mẫu Tuần 2. Hai hình đối chiếu mới sử dụng trực tiếp bảng này. Chạy `generate_week2_charts.py` tạo các hình và hai CSV bổ sung sau bộ 25 CSV nền tảng của `analyze_week2_accounts.py`.
 

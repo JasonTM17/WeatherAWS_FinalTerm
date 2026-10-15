@@ -16,7 +16,7 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 | Tuần | Phạm vi | Word | PDF | Excel |
 | --- | --- | --- | --- | --- |
 | 1 | Bộ dữ liệu đã nộp: 156 bản ghi và chín biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
-| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, 20 biểu đồ và 24 truy vấn mới, phụ lục đủ 84 bản ghi gốc Tuần 2 | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
+| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên; 27 nhóm đô thị–giờ mỗi sinh viên, 20 biểu đồ, 24 truy vấn mới và phụ lục đủ 84 lượt ghi gốc | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 
 [Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc mã nguồn](docs/source-guide.md).
 
@@ -37,7 +37,7 @@ Hai tuần dùng chung một bộ triển khai tại `tuan_2/`; các script nề
 
 ## Kết quả Tuần 2
 
-Báo cáo dữ liệu của sinh viên Tiến Sơn có 204 bản ghi raw, báo cáo của sinh viên Ngọc Quyên có 231 bản ghi raw. Sau lọc ranh giới Tuần 2 theo UTC+7, có **27 và 57 dòng nguồn**, tương ứng **9 và 19 mẫu mỗi đô thị**. Hai bộ báo cáo dữ liệu được trình bày riêng; 144 quan trắc lịch sử cùng đô thị và thời điểm có giá trị cảm biến tương ứng bằng nhau được nhận diện khi đối chiếu.
+Báo cáo dữ liệu của sinh viên Tiến Sơn có 204 bản ghi raw, báo cáo của sinh viên Ngọc Quyên có 231 bản ghi raw. Sau lọc ranh giới Tuần 2 theo UTC+7, có **27 và 57 lượt ghi gốc**. Bộ của sinh viên Ngọc Quyên ghi hai hoặc ba lượt trong cùng đô thị và giờ UTC với các chỉ số môi trường bằng nhau. [Bảng theo giờ](tuan_2/results/week2_analysis/hourly_city.csv) gộp các lượt cùng giờ, còn **27 nhóm đô thị–giờ mỗi sinh viên**, trong đó **21 nhóm chung** được dùng để so sánh trực tiếp. Dòng gốc vẫn giữ riêng theo sinh viên và đầy đủ trong phụ lục; 144 quan trắc lịch sử cùng đô thị và thời điểm có giá trị cảm biến tương ứng bằng nhau được nhận diện khi đối chiếu.
 
 | Đô thị | AQI TB Tiến Sơn | AQI TB Ngọc Quyên | PM2.5 TB Tiến Sơn µg/m³ | PM2.5 TB Ngọc Quyên µg/m³ |
 | --- | ---: | ---: | ---: | ---: |

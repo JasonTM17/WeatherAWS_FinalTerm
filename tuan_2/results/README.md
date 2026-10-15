@@ -17,6 +17,6 @@ Bản CSV đi cùng báo cáo nằm tại [tuan_1/docs/Bao_cao_tuan_1_CSV_241100
 
 ## Phạm vi Tuần 2
 
-CSV raw của sinh viên Tiến Sơn có 204 dòng và sinh viên Ngọc Quyên có 231 dòng. Sau lọc Tuần 2 còn 27/57 dòng, tương ứng 9/19 mẫu mỗi đô thị. `default` và `quyen` là mã nguồn dữ liệu trong các tệp; nhãn trình bày dùng “sinh viên Tiến Sơn” và “sinh viên Ngọc Quyên”.
+CSV raw của sinh viên Tiến Sơn có 204 dòng và sinh viên Ngọc Quyên có 231 dòng. Sau lọc Tuần 2 còn 27/57 lượt ghi gốc. [hourly_city.csv](week2_analysis/hourly_city.csv) gom theo đô thị và giờ UTC, cho 27 nhóm ở mỗi sinh viên; [matched_account_hours.csv](week2_analysis/matched_account_hours.csv) giữ 21 nhóm có dữ liệu của cả hai. Sinh viên Ngọc Quyên có 24 nhóm gồm hai lượt và ba nhóm gồm ba lượt, nhưng các chỉ số môi trường trong cùng nhóm bằng nhau. Các tệp raw không bị lược dòng. `default` và `quyen` là mã nguồn dữ liệu trong các tệp; nhãn trình bày dùng “sinh viên Tiến Sơn” và “sinh viên Ngọc Quyên”.
 
 Các tệp đã lưu là đầu vào của báo cáo. Để xuất thêm dữ liệu mà giữ riêng bộ này, dùng `--output output/athena` như [hướng dẫn vận hành](../../docs/operation.md). Dữ liệu phân tích và hình có thể được tái tạo từ những đầu vào đã lưu; timestamp tạo tệp trong manifest không phải thời điểm quan trắc mới.
