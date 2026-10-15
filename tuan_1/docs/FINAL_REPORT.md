@@ -155,7 +155,7 @@ Lambda lấy tên bucket, secret và SNS topic từ biến môi trường; quy�
 
 Khi được kích hoạt, Lambda đọc cấu hình, duyệt danh sách ba thành phố, yêu cầu dữ liệu chất lượng không khí và thời tiết qua HTTPS, rồi ghép các trường từ hai nguồn vào một bản ghi thống nhất. Các hàm safe_float và safe_int chặn lỗi kiểu dữ liệu khi API trả null hoặc chuỗi không hợp lệ; hàm get_aqi_category chia US AQI thành sáu mức từ Good đến Hazardous. Sau bước chuẩn hóa, logic so sánh từng bản ghi với ngưỡng; các bản ghi vượt ngưỡng được chuyển thành thông điệp SNS có địa điểm, thời gian và chỉ số đo.
 
-Phiên bản Tuần 1 nạp dữ liệu lịch sử với past_hours=48, tính số ngày cần truy vấn rồi lấy tối đa 48 mốc cuối trong mảng thời gian. Hàm dùng chỉ số gốc của mảng khi nguồn trả ít mốc hơn dự kiến để giữ thời gian cùng vị trí với giá trị cảm biến. Mỗi bản ghi được gắn record_id có phần ngẫu nhiên; khi thu thập lại cùng thời điểm, cần đối chiếu thành phố và timestamp để xác định phạm vi quan trắc.
+Phiên bản Tuần 1 nạp dữ liệu lịch sử với past_hours=48, tính số ngày cần truy vấn rồi lấy tối đa 48 mốc cuối trong mảng thời gian. Hàm dùng chỉ số gốc của mảng khi nguồn trả ít mốc hơn dự kiến để giữ thời gian cùng vị trí với giá trị môi trường. Mỗi bản ghi được gắn record_id có phần ngẫu nhiên; khi thu thập lại cùng thời điểm, cần đối chiếu thành phố và timestamp để xác định phạm vi quan trắc.
 
 Đường dẫn phân vùng dùng ngày UTC lấy từ bản ghi. Trường timestamp_vn là giờ hiển thị cho người đọc ở Việt Nam; vì vậy một quan trắc gần nửa đêm có thể mang ngày Việt Nam khác với ngày trong thư mục S3. Đây là lựa chọn nhất quán của mã hiện tại, cần giải thích rõ khi lọc dữ liệu theo ngày địa phương trong Athena.
 
@@ -387,7 +387,7 @@ Bảng 5.1. Đại lượng đã đo dùng để theo dõi mức tiêu thụ
 | Athena | 5 × 87.250 = 436.250 byte quét | QueryExecution của năm truy vấn |
 | Cost Explorer | 0 USD tại các mốc đã quan sát | UnblendedCost lúc đọc; có thể cập nhật trễ |
 
-Dung lượng lưu trữ và số lượt gọi ở mốc quan sát đều nhỏ. Cost Explorer chưa ghi nhận khoản trừ tại các mốc đã quan sát của Tuần 1, nhưng giá trị này không cho phép kết luận tổng chi phí thực tế bằng 0. Số dư Learner Lab không có trong phép đo Cost Explorer.
+Dung lượng lưu trữ và số lượt gọi ở mốc quan sát đều nhỏ. Cost Explorer ghi nhận 0 USD tại các mốc quan sát của Tuần 1, nhưng giá trị này không cho phép kết luận tổng chi phí thực tế bằng 0. Số dư Learner Lab không có trong phép đo Cost Explorer.
 
 ### 5.3 Kết luận
 

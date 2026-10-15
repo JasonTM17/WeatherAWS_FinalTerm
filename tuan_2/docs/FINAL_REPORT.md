@@ -26,7 +26,7 @@ Báo cáo gồm bảy chương: phạm vi hệ thống và phân công; nguồn 
 
 ### 1.1 Mục tiêu và phạm vi số liệu
 
-Chúng em tiếp tục phân tích luồng thu thập thời tiết và chất lượng không khí cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Tuần 2 tập trung vào hoạt động của các dịch vụ, dữ liệu mới theo thời gian quan trắc và các phép phân tích có thể tái lập từ tệp xuất. Dữ liệu Open-Meteo là dữ liệu API mô hình, không được coi là phép đo trực tiếp của một trạm.
+Chúng em tiếp tục phân tích luồng thu thập thời tiết và chất lượng không khí cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Tuần 2 tập trung vào hoạt động của các dịch vụ, dữ liệu mới theo thời gian quan trắc và các phép phân tích có thể tái lập từ tệp xuất. Dữ liệu Open-Meteo được cung cấp qua API và dựa trên mô hình, không được coi là phép đo trực tiếp của một trạm.
 
 Hai bộ báo cáo dữ liệu được thu thập trên hệ thống AWS tại us-east-1 của từng sinh viên. Mỗi bộ gồm các tệp raw của dự án và kết quả của 12 truy vấn SELECT. Bộ dữ liệu Tuần 1 đã lưu được giữ nguyên; số liệu Tuần 2 lấy từ lần đọc dịch vụ và truy vấn mới. Thời điểm xuất và mã truy vấn được lưu cùng dữ liệu để đối chiếu.
 
@@ -78,7 +78,7 @@ Bảng 2.1 Quy mô dữ liệu gốc và số nhóm theo đô thị, giờ UTC
 
 Hình 2.1 Số lượt ghi gốc trong hai bộ dữ liệu
 
-Trong Tuần 2, sinh viên Tiến Sơn có 27 lượt ghi gốc; sinh viên Ngọc Quyên có 57. Ở bộ của sinh viên Ngọc Quyên, 24 nhóm đô thị–giờ được ghi hai lần và ba nhóm được ghi ba lần. Các lượt cùng nhóm có 11 chỉ số số và cấp AQI bằng nhau, dù mã và giây ghi nhận khác. Gộp theo đô thị–giờ còn 27 nhóm mỗi sinh viên, gồm 21 nhóm chung để đối chiếu. Hình 2.1 thể hiện lượt ghi gốc; Bảng 2.1 thể hiện cả số nhóm.
+Trong Tuần 2, sinh viên Tiến Sơn có 27 lượt ghi gốc; sinh viên Ngọc Quyên có 57. Ở bộ của sinh viên Ngọc Quyên, 24 nhóm đô thị–giờ được ghi hai lần và ba nhóm được ghi ba lần. Các lượt cùng nhóm có 11 chỉ số môi trường dạng số và cấp AQI bằng nhau, dù mã và giây ghi nhận khác. Gộp theo đô thị–giờ còn 27 nhóm mỗi sinh viên, gồm 21 nhóm chung để đối chiếu. Hình 2.1 thể hiện lượt ghi gốc; Bảng 2.1 thể hiện cả số nhóm.
 
 Ranh giới tuần được xác định theo UTC+7, sau đó đổi sang UTC để lọc timestamp_utc. Các thời điểm AWS có múi giờ được chuẩn hóa về UTC trước khi so sánh. Phân vùng S3 dùng ngày UTC, nên điều kiện trên phân vùng được kết hợp với điều kiện timestamp để giữ đúng phạm vi.
 
@@ -97,7 +97,7 @@ Trong 11 trường số kiểm tra của mẫu Tuần 2, không có NULL, giá t
 
 ### 2.3 Hai bộ báo cáo dữ liệu của nhóm
 
-Chúng em trình bày hai bộ báo cáo dữ liệu do sinh viên Tiến Sơn và sinh viên Ngọc Quyên cung cấp. Mỗi bộ giữ riêng mã bản ghi, đô thị, thời gian quan trắc và các chỉ số môi trường. Có 144 quan trắc lịch sử cùng đô thị và thời điểm xuất hiện trong cả hai bộ, với giá trị cảm biến tương ứng bằng nhau; các thống kê được tính riêng cho từng bộ dữ liệu.
+Chúng em trình bày hai bộ báo cáo dữ liệu do sinh viên Tiến Sơn và sinh viên Ngọc Quyên cung cấp. Mỗi bộ giữ riêng mã bản ghi, đô thị, thời gian quan trắc và các chỉ số môi trường. Có 144 quan trắc lịch sử cùng đô thị và thời điểm xuất hiện trong cả hai bộ, với giá trị môi trường tương ứng bằng nhau; các thống kê được tính riêng cho từng bộ dữ liệu.
 
 Đối chiếu số liệu Tuần 2 dựa trên bảng nhóm giờ gồm 27 dòng cho mỗi sinh viên tại hourly_city.csv. Trong đó có 21 nhóm cùng đô thị và giờ UTC, tương ứng bảy giờ chung cho mỗi đô thị. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ giá trị của sinh viên Tiến Sơn, với trọng số mỗi giờ như nhau. Các thống kê mô tả theo lượt ghi gốc ở những bảng khác vẫn giữ riêng 27 và 57 dòng nguồn.
 
@@ -249,9 +249,9 @@ Bảng 3.3 Các phân vị AQI trong từng tập mẫu
 | Hà Nội | Ngọc Quyên | 160,50 | 161,00 | 166,00 | 168,00 | 5,50 |
 | TP. Hồ Chí Minh | Ngọc Quyên | 77,00 | 78,00 | 81,00 | 83,00 | 4,00 |
 
-![Trung vị khoảng tứ phân vị và độ phân tán AQI](../results/week2_charts/04_aqi_distribution.png)
+![Trung vị, khoảng tứ phân vị và độ phân tán AQI](../results/week2_charts/04_aqi_distribution.png)
 
-Hình 3.3 Trung vị khoảng tứ phân vị và độ phân tán AQI
+Hình 3.3 Trung vị, khoảng tứ phân vị và độ phân tán AQI
 
 Biểu đồ hộp thể hiện trung vị, khoảng tứ phân vị và cực trị của mẫu. P95 được tính bằng nội suy tuyến tính giữa các giá trị quan trắc. Với cỡ mẫu nhỏ và chuỗi lấy mẫu ngắn, P95 mô tả tập mẫu hiện có, chưa đại diện cho phân vị dài hạn của đô thị.
 
@@ -344,7 +344,7 @@ Bảng 3.7 Giá trị trung bình và chênh lệch tại bảy giờ quan trắ
 
 Sau khi gộp các lượt ghi trong cùng đô thị và giờ UTC, mỗi sinh viên có 27 nhóm. Hai bộ cùng có dữ liệu ở bảy giờ cho mỗi đô thị, tổng cộng 21 nhóm đối chiếu. Tại từng nhóm chung, AQI, PM2.5 và PM10 bằng nhau trước khi làm tròn; vì vậy chênh lệch của các chỉ số ô nhiễm bằng 0. Hình 3.8 trình bày giá trị thực trong phạm vi giờ chung. Các giá trị này khác trung bình tính theo toàn bộ lượt ghi Tuần 2 vì phạm vi giờ và trọng số mẫu khác nhau.
 
-Nhiệt độ và độ ẩm vẫn có khác biệt. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ sinh viên Tiến Sơn, sau khi lấy trung bình riêng trong từng giờ và cho mỗi giờ cùng trọng số. Δ độ ẩm dùng điểm phần trăm; số gần 0 được hiển thị 0,00 ở độ chính xác hai chữ số thập phân. Số liệu gốc và số mẫu của từng giờ được giữ trong CSV đối chiếu.
+Nhiệt độ và độ ẩm vẫn có khác biệt. Chênh lệch được tính bằng giá trị của sinh viên Ngọc Quyên trừ giá trị của sinh viên Tiến Sơn, sau khi lấy trung bình riêng trong từng giờ và cho mỗi giờ cùng trọng số. Δ độ ẩm dùng điểm phần trăm; số gần 0 được hiển thị 0,00 ở độ chính xác hai chữ số thập phân. Số liệu gốc và số mẫu của từng giờ được giữ trong CSV đối chiếu.
 
 ### 3.9 Tương quan Pearson và Spearman
 
@@ -373,7 +373,7 @@ Chuỗi ngắn, mẫu gần nhau theo thời gian và các biến cùng đổi t
 
 Hình 3.10 Quan hệ giữa nhiệt độ và PM2.5 trên các bản ghi thực tế
 
-Biểu đồ phân tán sử dụng từng bản ghi gốc và tách ba đô thị bằng ba khung. Vị trí điểm giúp nhìn thấy độ phủ nhiệt độ nhỏ của mẫu và các điểm gần nhau trong bộ dữ liệu của sinh viên Ngọc Quyên. Trục PM2.5 của các khung được ghi rõ; các khung dùng thang riêng để giữ khả năng đọc từng đô thị.
+Biểu đồ phân tán sử dụng từng bản ghi gốc và tách ba đô thị bằng ba khung. Vị trí điểm giúp nhìn thấy khoảng nhiệt độ hẹp của mẫu và các điểm gần nhau trong bộ dữ liệu của sinh viên Ngọc Quyên. Trục PM2.5 của các khung được ghi rõ; các khung dùng thang riêng để giữ khả năng đọc từng đô thị.
 
 Biểu đồ phân tán bổ sung góc nhìn về khoảng biến thiên của các chỉ số trong từng bộ báo cáo dữ liệu. Nhiều điểm gần nhau có thể phản ánh các trạng thái môi trường tương tự; vì vậy cần xem cả số giờ quan trắc và độ phủ dữ liệu khi diễn giải cỡ mẫu.
 
@@ -582,13 +582,13 @@ Cả hai kết quả Cost Explorer đều có cờ Estimated. Chúng được t�
 
 ## Chương 6 Giải thích mã nguồn và cơ sở hình thành kết quả
 
-Chương này đối chiếu các lựa chọn trong source với dữ liệu Tuần 2 đã lưu. Mã nguồn cho biết hệ thống được thiết kế để xử lý dữ liệu như thế nào; các con số trong báo cáo được kiểm chứng từ CSV, JSON và metadata của từng sinh viên. Chúng em không suy ra số lần chạy hoặc chi phí chỉ từ một dòng cấu hình. Các tệp chính gồm `tuan_2/scripts/aws_project.py`, `tuan_2/lambda/lambda_function.py`, SQL trong `tuan_2/athena/`, `tuan_2/scripts/athena_export.py` và hai chương trình phân tích, dựng hình trong `tuan_2/analytics/`.
+Chương này đối chiếu các lựa chọn trong mã nguồn với dữ liệu Tuần 2 đã lưu. Mã nguồn cho biết hệ thống được thiết kế để xử lý dữ liệu như thế nào; các con số trong báo cáo được kiểm chứng từ CSV, JSON và metadata của từng sinh viên. Chúng em không suy ra số lần chạy hoặc chi phí chỉ từ một dòng cấu hình. Các tệp chính gồm `tuan_2/scripts/aws_project.py`, `tuan_2/lambda/lambda_function.py`, SQL trong `tuan_2/athena/`, `tuan_2/scripts/athena_export.py` và hai chương trình phân tích, dựng hình trong `tuan_2/analytics/`.
 
 ### 6.1 Thiết lập tài nguyên và lý do lựa chọn
 
 Trong `aws_project.py`, lớp `AwsProject` tạo tên bucket từ định danh tài khoản, sau đó chặn truy cập công khai và bật mã hóa SSE-S3. Cách đặt tên giúp mỗi môi trường thực hành có một vùng lưu trữ riêng; chính sách truy cập và mã hóa bảo vệ tệp dữ liệu gốc. Cấu hình `weather/api_config` chứa tọa độ của TP. Hồ Chí Minh, Hà Nội, Đà Nẵng và các ngưỡng cảnh báo. Đưa các tham số này vào Secrets Manager giúp Lambda đọc chung một cấu hình thay vì sửa trực tiếp trong hàm khi đổi vị trí hoặc ngưỡng. Tọa độ trong 84 dòng CSV Tuần 2 tương ứng với ba đô thị được khai báo.
 
-Hàm `deploy_lambda` đóng gói `lambda_function.py`, khai báo handler, Python 3.12, bộ nhớ 256 MB, giới hạn 60 giây và truyền tên bucket, tên secret, ARN SNS qua biến môi trường. Giới hạn tài nguyên làm rõ điều kiện thực thi để diễn giải chỉ số Duration và Max Memory Used; nó không tự bảo đảm từng lượt gọi API sẽ hoàn thành. Metadata đã lưu xác nhận cả hai môi trường có cấu hình 256 MB và 60 giây. Mã thiết lập EventBridge mặc định `rate(1 hour)` và cấp quyền cho đúng rule gọi Lambda. Trạng thái đã lưu ghi nhận một lịch bật ở môi trường sinh viên Tiến Sơn và hai lịch bật ở môi trường sinh viên Ngọc Quyên; vì vậy không suy số mẫu 9/19 chỉ từ lịch mặc định trong source.
+Hàm `deploy_lambda` đóng gói `lambda_function.py`, khai báo handler, Python 3.12, bộ nhớ 256 MB, giới hạn 60 giây và truyền tên bucket, tên secret, ARN SNS qua biến môi trường. Giới hạn tài nguyên làm rõ điều kiện thực thi để diễn giải chỉ số Duration và Max Memory Used; nó không tự bảo đảm từng lượt gọi API sẽ hoàn thành. Metadata đã lưu xác nhận cả hai môi trường có cấu hình 256 MB và 60 giây. Mã thiết lập EventBridge mặc định `rate(1 hour)` và cấp quyền cho đúng rule gọi Lambda. Trạng thái đã lưu ghi nhận một lịch bật ở môi trường sinh viên Tiến Sơn và hai lịch bật ở môi trường sinh viên Ngọc Quyên; vì vậy không suy số mẫu 9/19 chỉ từ lịch mặc định trong mã nguồn.
 
 `setup_sns` tạo topic thông báo, còn `setup_cloudwatch` đặt Alarm cho tổng Errors của Lambda trong cửa sổ 5 phút và dựng dashboard Invocations, Errors, Duration. Thiết kế này tách việc thu thập dữ liệu, gửi thông báo và quan sát vận hành. Email chỉ nhận được thông báo sau khi đăng ký xác nhận; số dòng thỏa ngưỡng trong CSV không phải bằng chứng email đã tới người nhận. Một trạng thái Alarm OK tại thời điểm đọc cũng không giải thích được chuỗi Errors và Invocations bất nhất ở Bảng 4.3.
 
@@ -598,7 +598,7 @@ Hàm `deploy_lambda` đóng gói `lambda_function.py`, khai báo handler, Python
 
 Mỗi bản ghi có `record_id`, tọa độ, `timestamp_utc`, `timestamp_vn`, các chỉ số đo, giờ UTC và khóa ngày. `get_aqi_category` gán nhãn theo dải AQI; do đó AQI của các mẫu Hà Nội từ 160 đến 169 ở sinh viên Tiến Sơn và 160 đến 168 ở sinh viên Ngọc Quyên xuất hiện ở cấp Unhealthy. Trong chế độ thu thập hiện tại, điều kiện gửi SNS là AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³. Cả 9 mẫu Hà Nội của sinh viên Tiến Sơn và 19 mẫu Hà Nội của sinh viên Ngọc Quyên thỏa điều kiện phân tích này; các đô thị còn lại không có mẫu thỏa. Đây là số bản ghi theo ngưỡng, không phải số thông báo SNS thực sự được giao.
 
-Trước mỗi yêu cầu HTTP, `_fetch_api_json` lấy thời gian Lambda còn lại, giữ tối đa 15 giây cho yêu cầu và dự trữ 10 giây cho phần kết thúc. Khi một đô thị lỗi, handler giữ các đô thị đã thu thập và trả `collection_status=partial`; khi không có bản ghi nào, hàm báo lỗi. Cơ chế này giải thích vì sao chương trình có thể lưu một phần dữ liệu thay vì loại toàn bộ lần thu thập, song số mẫu thực tế vẫn phải đọc từ CSV. Chế độ `backfill_hours` ghép hai chuỗi hourly theo cùng timestamp để bổ sung dữ liệu lịch sử; phép phân tích Tuần 2 chỉ lấy các bản ghi nằm trong cửa sổ thời gian đã quy định.
+Trước mỗi yêu cầu HTTP, `_fetch_api_json` lấy thời gian Lambda còn lại, giữ tối đa 15 giây cho yêu cầu và dự trữ 10 giây cho phần kết thúc. Khi một đô thị lỗi, handler giữ dữ liệu của các đô thị đã thu thập thành công và trả `collection_status=partial`; khi không có bản ghi nào, hàm báo lỗi. Cơ chế này giải thích vì sao chương trình có thể lưu một phần dữ liệu thay vì loại toàn bộ lần thu thập, song số mẫu thực tế vẫn phải đọc từ CSV. Chế độ `backfill_hours` ghép hai chuỗi hourly theo cùng timestamp để bổ sung dữ liệu lịch sử; phép phân tích Tuần 2 chỉ lấy các bản ghi nằm trong cửa sổ thời gian đã quy định.
 
 ### 6.3 Phân vùng S3, lược đồ và truy vấn Athena
 
@@ -616,13 +616,13 @@ Trước mỗi yêu cầu HTTP, `_fetch_api_json` lấy thời gian Lambda còn 
 
 Phép tái tính trên bản sao dữ liệu đã lưu cho kết quả: 24 trong 25 CSV nền tảng trùng từng byte với bản công bố; CSV tương quan còn một chênh lệch 5×10⁻¹⁷ ở chữ số cuối của một hệ số, không làm thay đổi giá trị làm tròn trong báo cáo. Dữ liệu thô 84 dòng và các tổng hợp chính không thay đổi. Phép ghép theo đô thị và giờ tạo 21 nhóm cùng giờ quan trắc để so hai sinh viên; các trung bình AQI, PM2.5 và PM10 bằng nhau trong phạm vi ghép này, nhưng trung bình toàn bộ 9/19 mẫu vẫn khác do số mẫu ở các giờ khác nhau.
 
-### 6.5 Tạo biểu đồ và liên hệ số liệu với source
+### 6.5 Tạo biểu đồ và liên hệ số liệu với mã nguồn
 
-`generate_week2_charts.py` đọc trực tiếp các CSV phân tích, dùng nhãn đầy đủ của hai sinh viên, màu khác nhau và xuất hình 250 dpi. `chart_manifest.json` ghi tên CSV nguồn cho từng hình. Vì vậy Hình 3.1 lấy trung bình và độ lệch chuẩn từ `city_statistics.csv`; Hình 5.1 lấy số byte quét từ `partition_scan_comparison.csv`; Hình 5.2 lấy thời gian từ `query_metrics.csv`. Cơ chế giữ cùng một bảng số liệu cho hình, Excel và phần diễn giải trong Word/PDF.
+`generate_week2_charts.py` đọc trực tiếp các CSV phân tích, dùng nhãn đầy đủ của hai sinh viên, màu khác nhau và xuất hình 250 dpi. `chart_manifest.json` ghi tên CSV nguồn cho từng hình. Vì vậy Hình 3.1 lấy trung bình và độ lệch chuẩn từ `city_statistics.csv`; Hình 5.1 lấy số byte quét từ `partition_scan_comparison.csv`; Hình 5.2 lấy thời gian từ `query_metrics.csv`. Cách tổ chức này giữ cùng một bảng số liệu cho hình, Excel và phần diễn giải trong Word/PDF.
 
 Bảng 6.1 Liên hệ lựa chọn mã nguồn với dữ liệu Tuần 2
 
-| Lựa chọn trong source | Lý do thiết lập | Kết quả đối chiếu trong báo cáo |
+| Lựa chọn trong mã nguồn | Lý do thiết lập | Kết quả đối chiếu trong báo cáo |
 | --- | --- | --- |
 | Ba đô thị trong secret và Lambda | Thu thập cùng bộ chỉ số theo vị trí xác định | Mỗi đô thị có 9 mẫu của sinh viên Tiến Sơn và 19 mẫu của sinh viên Ngọc Quyên. |
 | Ngưỡng AQI 100 hoặc PM2.5 35,5 | Đánh dấu bản ghi cần cảnh báo theo một quy tắc cố định | Hà Nội có 9/9 và 19/19 mẫu thỏa điều kiện; không suy ra số email được nhận. |
@@ -631,7 +631,7 @@ Bảng 6.1 Liên hệ lựa chọn mã nguồn với dữ liệu Tuần 2
 | Tính thống kê riêng cho từng sinh viên | Giữ đúng mẫu số và tránh gộp hai bộ thành một mẫu độc lập | AQI trung bình Hà Nội là 163,56 và 163,05 với cỡ mẫu 9 và 19. |
 | Dựng hình từ CSV có manifest | Giữ đường dẫn dữ liệu từ bảng số đến biểu đồ | 20 hình trong báo cáo có thể đối chiếu với CSV nguồn; 0,05 USD và 0,03 USD là mức nhóm dự kiến, không phải đầu ra của mã. |
 
-Mã trong repository mô tả thiết kế và phép phân tích; trạng thái dịch vụ và chi phí được xác nhận từ bộ bằng chứng đã lưu. Một cấu hình trong source không tự chứng minh có bao nhiêu lịch, lượt chạy, email nhận được hoặc phí phải thanh toán trong từng môi trường. Vì vậy báo cáo nêu rõ số liệu quan sát, số liệu tính từ CSV và hai mức dự kiến của nhóm ở những vị trí khác nhau.
+Mã trong repository mô tả thiết kế và phép phân tích; trạng thái dịch vụ và chi phí được xác nhận từ bộ bằng chứng đã lưu. Một cấu hình trong mã nguồn không tự chứng minh có bao nhiêu lịch, lượt chạy, email nhận được hoặc phí phải thanh toán trong từng môi trường. Vì vậy báo cáo nêu rõ số liệu quan sát, số liệu tính từ CSV và hai mức dự kiến của nhóm ở những vị trí khác nhau.
 
 ## Chương 7 Tổng hợp kết quả Tuần 2
 
