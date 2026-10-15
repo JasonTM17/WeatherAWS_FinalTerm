@@ -31,6 +31,8 @@ Thiết kế trong [aws_project.py](../tuan_2/scripts/aws_project.py) tạo buck
 
 `export_metrics.py` là điểm vào tương thích để xuất năm truy vấn SELECT. Khi xuất kết quả mới, chỉ định `--output output/athena` để giữ riêng dữ liệu báo cáo đã lưu; điểm vào chính là `scripts/athena_export.py`. Các chương trình dựng hình ghi vào thư mục kết quả của tuần tương ứng, nên việc tái lập hình có thể làm thay đổi tệp PNG/manifest được Git theo dõi.
 
+`generate_week2_charts.py` chỉ đọc dữ liệu và ghi hình khi gọi `main()` hoặc chạy trực tiếp tệp. Import module để kiểm tra hoặc dùng lại hàm sẽ không tạo hay thay hình báo cáo.
+
 ## Luồng dữ liệu và hợp đồng đầu vào
 
 1. EventBridge gọi lambda_handler với sự kiện mặc định để thu thập hiện tại. Sự kiện có backfill_hours yêu cầu chuỗi lịch sử.
@@ -46,10 +48,12 @@ Khi được gọi trong Lambda, thời gian chờ HTTP được tính lại tr�
 ## Xuất CSV và thống kê
 
 - AthenaExporter chỉ thay tệp đích sau khi truy vấn thành công và đọc được kết quả. Chờ quá thời hạn sẽ yêu cầu dừng truy vấn; lỗi thực thi không ghi đè tệp CSV cũ.
+- CSV được kiểm tra UTF-8, header có tên cột không rỗng và duy nhất, dấu nháy hợp lệ và số ô khớp số cột. Kết quả không có dòng dữ liệu vẫn hợp lệ nếu có header; trường chứa xuống dòng được đọc theo quy tắc CSV. Bytes của tệp hợp lệ được giữ nguyên khi xuất.
 - Tham số --database được áp dụng đồng thời vào ngữ cảnh thực thi và tên cơ sở dữ liệu trong cả năm mẫu SELECT. Mặc định giữ nguyên nội dung SQL đã lưu; tên tùy chọn được bao bằng dấu nháy kép và thoát dấu nháy bên trong theo cú pháp định danh SELECT của [Athena](https://docs.aws.amazon.com/athena/latest/ug/reserved-words.html).
 - Nếu tải S3 bị AccessDenied hoặc NoSuchKey, exporter đọc GetQueryResults theo NextToken; giữ vị trí cột, trường NULL rỗng và một hàng tiêu đề.
 - Chế độ offline sao chép bộ đã lưu và ghi manifest là saved-snapshot. Chế độ này không được trình bày như truy vấn mới.
 - Tuần 2 lọc theo ranh giới tuần UTC+7, rồi quy đổi timestamp_utc về UTC. Trung bình và SD dùng riêng mẫu từng sinh viên/đô thị; SD có mẫu số n−1. Phân vị nội suy tuyến tính; Spearman dùng hạng trung bình khi các giá trị bằng nhau.
+- Tương quan chỉ dùng những bản ghi có cả hai biến hữu hạn trong cùng một quan trắc. Số mẫu của từng hệ số là số cặp hợp lệ; không lọc riêng hai cột rồi ghép theo vị trí còn lại.
 - submitted_week1_comparison.csv dùng đúng 156 dòng của bộ báo cáo Tuần 1, gồm dữ liệu lịch sử nạp bổ sung. Hai hình mới dùng mốc chung 52 mẫu/đô thị, so với 9/19 mẫu Tuần 2. weekly_comparison.csv là phép lọc từ lần xuất mới, có mốc 42/41 mẫu; hai phạm vi được trình bày riêng.
 - Module biểu đồ từ chối thiếu hàng đô thị, lặp khóa sinh viên/đô thị, sai phạm vi, số không hữu hạn và mốc Tuần 1 khác nhau giữa hai bộ sinh viên. Manifest giữ các giá trị thực sự dùng cho cột của hai hình mới.
 

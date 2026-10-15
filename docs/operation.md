@@ -29,6 +29,8 @@ Thư mục `output/` được Git bỏ qua để lưu các lượt xuất tùy c
 
 `verify` đọc trạng thái Lambda, lịch, S3 và bảng Glue; không tự kích hoạt thu thập. Chức năng Lambda xử lý hiện tại theo sự kiện mặc định; sự kiện có `backfill_hours` yêu cầu nạp bù lịch sử.
 
+Khi cập nhật Lambda đã tồn tại, `deploy-lambda` đặt lại runtime Python 3.12, handler `lambda_function.lambda_handler`, bộ nhớ 256 MB và timeout 60 giây. Các biến môi trường riêng được giữ, còn tên bucket, secret và topic được cập nhật theo dự án.
+
 ## Thu hồi tài nguyên
 
 ```powershell
@@ -40,6 +42,6 @@ Thay `ACCOUNT_ID` bằng account của phiên đăng nhập. Xác nhận account
 
 ## Kiểm tra đã thực hiện
 
-Bộ kiểm tra cục bộ gồm 52 ca: Lambda 22, CSV 12, biểu đồ 4 và SDK 14. Các ca bổ sung kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, khối phản hồi API bị thiếu, thời gian chờ khi API chậm, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Kết quả này không phải bằng chứng của một lần triển khai phiên bản mới trên AWS.
+Bộ kiểm tra cục bộ gồm 56 ca: Lambda 22, CSV 12, biểu đồ 5 và SDK 17. Các ca kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, khối phản hồi API bị thiếu, thời gian chờ khi API chậm, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Các hồi quy mới kiểm tra cấu hình Lambda khi cập nhật, bảo toàn CSV cũ khi kết quả sai cấu trúc, CSV rỗng dữ liệu có header và việc import chương trình biểu đồ. Kết quả này không phải bằng chứng của một lần triển khai phiên bản mới trên AWS.
 
-Ba hồi quy bổ sung kiểm tra số không hữu hạn trong chuẩn hóa và phân loại AQI. Các kiểm tra biểu đồ đối chiếu trực tiếp dùng cỡ mẫu thực tế, đơn vị và giá trị từng cột từ CSV. Xem [hướng dẫn đọc mã nguồn](source-guide.md).
+Các kiểm tra Lambda bao gồm ba hồi quy về số không hữu hạn trong chuẩn hóa và phân loại AQI. Bộ phân tích có thêm 18 ca kiểm tra phạm vi mẫu, cặp quan trắc khi thiếu dữ liệu, phép làm tròn và các giá trị dùng để vẽ. Xem [hướng dẫn đọc mã nguồn](source-guide.md).
