@@ -34,16 +34,16 @@
 
 ### Đối chiếu số liệu chi phí
 
-Chi phí trong bảng báo cáo được làm tròn đến cent; dữ liệu Cost Explorer gốc được giữ nguyên. Đối chiếu từng nhóm dịch vụ bằng số thập phân chính xác cho tổng −0,0000000764 USD của sinh viên Tiến Sơn và 0,0267146366 USD của sinh viên Ngọc Quyên, lần lượt hiển thị 0,00 USD và 0,03 USD. Số âm đã nằm trong các chuỗi Amount của phản hồi JSON, không phát sinh từ việc cộng tổng hoặc làm tròn ở báo cáo.
+Chi phí Cost Explorer trong báo cáo được hiển thị đến cent; các giá trị gốc theo ngày và dịch vụ vẫn được giữ nguyên trong [CSV đối chiếu](../tuan_2/results/week2_analysis/cost_by_service_day.csv). Giá trị gốc của sinh viên Tiến Sơn có độ lớn dưới 0,000001 USD nên hiển thị 0,00 USD; dữ liệu của sinh viên Ngọc Quyên hiển thị 0,03 USD. Đây là số liệu ước tính do AWS trả về, không phải hóa đơn cuối cùng.
 
-| Bộ báo cáo dữ liệu | AWS Secrets Manager (USD) | Amazon CloudWatch (USD) | Amazon S3 (USD) | Tổng UnblendedCost (USD) | Hiển thị đến cent (USD) |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Sinh viên Tiến Sơn | −0,0000000608 | −0,0000000156 | 0 | −0,0000000764 | 0,00 |
-| Sinh viên Ngọc Quyên | 0,0210227416 | 0,0056163440 | 0,0000755510 | 0,0267146366 | 0,03 |
+| Sinh viên | Dự kiến nhóm đề xuất (USD) | Cost Explorer đến cent (USD) | Estimated |
+| --- | ---: | ---: | --- |
+| Sinh viên Tiến Sơn | 0,05 | 0,00 | Có |
+| Sinh viên Ngọc Quyên | 0,03 | 0,03 | Có |
 
-Mức chi phí dự kiến cho phần thực hành của sinh viên Tiến Sơn trong Tuần 2 là **0,05 USD**, do nhóm đề xuất. Bảng 5.4 của báo cáo trình bày mức này ở cột dự kiến và đặt số Cost Explorer làm tròn trong một cột riêng. Mức dự kiến không phải giá trị trả về từ Cost Explorer và không thay thế dữ liệu ghi nhận trong CSV.
+Hai mức dự kiến trong bảng do nhóm xác nhận cho phần thực hành Tuần 2. Bảng 5.4 của báo cáo đặt số Cost Explorer làm tròn trong một cột riêng; việc mức dự kiến của sinh viên Ngọc Quyên trùng số hiển thị Cost Explorer không làm hai loại dữ liệu trở thành một.
 
-Các dịch vụ khác trong phạm vi đã xuất có giá trị 0; cả hai kết quả có cờ Estimated. Phản hồi nhóm theo SERVICE và không có RECORD_TYPE, nên không xác định được các mục âm này là credit, refund hay một loại điều chỉnh khác. Không dùng độ lớn rất nhỏ của số âm để kết luận nguyên nhân là lỗi làm tròn. Mức 0,00 USD trong bảng là độ chính xác trình bày, không chứng minh dự án miễn phí hoặc số tiền trên hóa đơn bằng 0.
+Các dịch vụ khác trong phạm vi đã xuất có giá trị hiển thị 0,00 USD; cả hai kết quả có cờ Estimated. Phản hồi nhóm theo SERVICE và không có RECORD_TYPE, nên báo cáo không quy kết nguyên nhân cho giá trị gốc có độ lớn rất nhỏ của sinh viên Tiến Sơn. Mức 0,00 USD trong bảng là độ chính xác trình bày, không chứng minh dự án miễn phí hoặc số tiền trên hóa đơn bằng 0.
 
 AWS phân biệt số liệu Cost Explorer với hóa đơn, có thể có khác biệt do thời điểm cập nhật, độ chi tiết, làm tròn và cách phản ánh khoản hoàn tiền. Đây là mô tả chung của dịch vụ, không phải bằng chứng về nguyên nhân trong hai bộ dữ liệu này. Xem [tài liệu AWS Billing](https://docs.aws.amazon.com/us_en/awsaccountbilling/latest/aboutv2/differences-billing-data-cost-explorer-data.html) và [GetCostAndUsage về nhóm RECORD_TYPE](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html).
 
@@ -59,4 +59,4 @@ Hai hình đối chiếu trực tiếp AQI và PM2.5 (Hình 3.12 và 3.13) dùng
 
 ## Dữ liệu gốc trong báo cáo Tuần 2
 
-Mục 2.8 đối chiếu 27/57 dòng Tuần 2 với 204/231 dòng toàn bộ và trích sáu bản ghi gốc. Phụ lục dữ liệu gốc trình bày đủ 84 dòng Tuần 2, mỗi dòng đủ 23 trường qua hai bảng nối bằng mã TS/NQ; city là giá trị cố định trong tiêu đề nhóm. Timestamp, định danh và giá trị số giữ nguyên chuỗi từ CSV. Mức dự kiến 0,05 USD và số liệu Cost Explorer không thuộc dữ liệu cảm biến. Xem [báo cáo đầy đủ](../tuan_2/docs/FINAL_REPORT.md), [CSV của sinh viên Tiến Sơn](../tuan_2/results/week2_live/default/raw_week2.csv) và [CSV của sinh viên Ngọc Quyên](../tuan_2/results/week2_live/quyen/raw_week2.csv).
+Mục 2.8 đối chiếu 27/57 dòng Tuần 2 với 204/231 dòng toàn bộ và trích sáu bản ghi gốc. Phụ lục dữ liệu gốc trình bày đủ 84 dòng Tuần 2, mỗi dòng đủ 23 trường qua hai bảng nối bằng mã TS/NQ; city là giá trị cố định trong tiêu đề nhóm. Timestamp, định danh và giá trị số giữ nguyên chuỗi từ CSV. Hai mức dự kiến chi phí và số liệu Cost Explorer không thuộc dữ liệu cảm biến. Xem [báo cáo đầy đủ](../tuan_2/docs/FINAL_REPORT.md), [CSV của sinh viên Tiến Sơn](../tuan_2/results/week2_live/default/raw_week2.csv) và [CSV của sinh viên Ngọc Quyên](../tuan_2/results/week2_live/quyen/raw_week2.csv).

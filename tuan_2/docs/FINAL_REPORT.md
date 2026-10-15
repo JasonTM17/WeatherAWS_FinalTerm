@@ -570,11 +570,11 @@ Bảng 5.4 Mức dự kiến của nhóm và chi phí Cost Explorer trong phạm
 | Sinh viên | Dự kiến nhóm đề xuất (USD) | Cost Explorer đến cent (USD) | Estimated |
 | --- | --- | --- | --- |
 | Sinh viên Tiến Sơn | 0,05 | 0,00 | Có |
-| Sinh viên Ngọc Quyên | — | 0,03 | Có |
+| Sinh viên Ngọc Quyên | 0,03 | 0,03 | Có |
 
-Mức 0,05 USD ở dòng sinh viên Tiến Sơn là chi phí dự kiến do nhóm đề xuất cho phần thực hành Tuần 2; nhóm chưa đặt mức dự kiến riêng cho sinh viên Ngọc Quyên. Cột Cost Explorer là số liệu AWS đã lưu và được làm tròn đến cent: 0,00 USD đối với sinh viên Tiến Sơn và 0,03 USD đối với sinh viên Ngọc Quyên. Hai loại số liệu được đặt cạnh nhau để người đọc đối chiếu, không được cộng gộp hoặc coi 0,05 USD là kết quả Cost Explorer.
+Nhóm dự kiến chi phí thực hành Tuần 2 là 0,05 USD cho sinh viên Tiến Sơn và 0,03 USD cho sinh viên Ngọc Quyên. Đây là mức nhóm lựa chọn để lập kế hoạch, không phải số Cost Explorer trả về. Cột Cost Explorer hiển thị số liệu AWS đã lưu đến cent: 0,00 USD và 0,03 USD tương ứng. Mức dự kiến và kết quả Cost Explorer được trình bày riêng, kể cả khi hai số của sinh viên Ngọc Quyên cùng là 0,03 USD.
 
-Tổng UnblendedCost gốc trước khi làm tròn trong CSV lần lượt là −0,0000000764 USD và 0,0267146366 USD. Giá trị đầu tiên có độ lớn dưới 0,000001 USD nên hiển thị 0,00 USD ở độ chính xác cent; số liệu không đủ để xác định vì sao phản hồi chứa giá trị âm rất nhỏ. Mức hiển thị 0,00 USD không đồng nghĩa với kết luận dự án hoàn toàn miễn phí.
+Giá trị Cost Explorer gốc của sinh viên Tiến Sơn có độ lớn dưới 0,000001 USD nên hiển thị 0,00 USD ở độ chính xác cent. Báo cáo không suy đoán nguyên nhân của giá trị rất nhỏ này và không coi mức hiển thị 0,00 USD là bằng chứng dự án hoàn toàn miễn phí. Các giá trị gốc trước làm tròn của hai sinh viên được giữ nguyên trong tệp CSV và phản hồi JSON để đối chiếu.
 
 Cả hai kết quả Cost Explorer đều có cờ Estimated. Chúng được tổng hợp theo dịch vụ và ngày trong môi trường AWS của từng sinh viên; chưa phải hóa đơn cuối cùng hoặc chi phí riêng của dự án được phân bổ bằng tag. Các tệp CSV lưu nguyên giá trị trước khi làm tròn, đơn vị và trạng thái ước tính để đối chiếu.
 
@@ -627,9 +627,9 @@ Bảng 6.1 Liên hệ lựa chọn mã nguồn với dữ liệu Tuần 2
 | NDJSON và phân vùng S3 theo ngày UTC | Lưu nguyên bản ghi, giảm dung lượng đọc ngoài phạm vi | 84 dòng gốc giữ 23 trường; thêm điều kiện phân vùng giảm 86,76% và 75,28% byte quét. |
 | Lọc timestamp sau lọc phân vùng | Cắt đúng ranh giới tuần UTC+7 | 27 và 57 dòng Tuần 2 được tách khỏi 204 và 231 dòng toàn bộ. |
 | Tính thống kê riêng cho từng sinh viên | Giữ đúng mẫu số và tránh gộp hai bộ thành một mẫu độc lập | AQI trung bình Hà Nội là 163,56 và 163,05 với cỡ mẫu 9 và 19. |
-| Dựng hình từ CSV có manifest | Giữ đường dẫn dữ liệu từ bảng số đến biểu đồ | 20 hình trong báo cáo có thể đối chiếu với CSV nguồn; 0,05 USD là mức dự kiến của nhóm, không phải đầu ra của mã. |
+| Dựng hình từ CSV có manifest | Giữ đường dẫn dữ liệu từ bảng số đến biểu đồ | 20 hình trong báo cáo có thể đối chiếu với CSV nguồn; 0,05 USD và 0,03 USD là mức nhóm dự kiến, không phải đầu ra của mã. |
 
-Mã trong repository mô tả thiết kế và phép phân tích; trạng thái dịch vụ và chi phí được xác nhận từ bộ bằng chứng đã lưu. Một cấu hình trong source không tự chứng minh có bao nhiêu lịch, lượt chạy, email nhận được hoặc phí phải thanh toán trong từng môi trường. Vì vậy báo cáo nêu rõ số liệu quan sát, số liệu tính từ CSV và mức dự kiến 0,05 USD ở những vị trí khác nhau.
+Mã trong repository mô tả thiết kế và phép phân tích; trạng thái dịch vụ và chi phí được xác nhận từ bộ bằng chứng đã lưu. Một cấu hình trong source không tự chứng minh có bao nhiêu lịch, lượt chạy, email nhận được hoặc phí phải thanh toán trong từng môi trường. Vì vậy báo cáo nêu rõ số liệu quan sát, số liệu tính từ CSV và hai mức dự kiến của nhóm ở những vị trí khác nhau.
 
 ## Chương 7 Tổng hợp kết quả Tuần 2
 
