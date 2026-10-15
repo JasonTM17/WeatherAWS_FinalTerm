@@ -7,6 +7,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
+from matplotlib.patches import Rectangle,Patch
+from matplotlib.lines import Line2D
 from weekly_comparison_charts import make_comparison_figure
 from report_chart_extensions import matched_summary, matched_figure, generate_extensions
 
@@ -25,7 +27,8 @@ def value(row,key):return float(row[key])
 def finish(fig,name,title,source):
     fig.suptitle(title,fontsize=14,y=.99)
     fig.text(.02,.01,'Nguồn: báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên',fontsize=8,color='#444444')
-    if name!='correlations':fig.tight_layout(rect=(0,.035,1,.865 if getattr(fig,'shared_legend',False) else .96))
+    if name=='exceedance':fig.tight_layout(rect=(0,.075,1,.89))
+    elif name!='correlations':fig.tight_layout(rect=(0,.035,1,.865 if getattr(fig,'shared_legend',False) else .96))
     filename=f'{len(manifest)+1:02d}_{name}.png';fig.savefig(OUT/filename,dpi=250,bbox_inches='tight',pad_inches=.16);plt.close(fig)
     manifest.append({'file':filename,'title':title,'source_csv':source,'student_labels':LABEL,'account_colors':COLOR})
 
@@ -106,23 +109,63 @@ for i in range(6):
 ax.set_yticks(range(6),[f'{CITY[c]}\n{LABEL[p]}' for c in CITIES for p in PROFILES],fontsize=9);ax.set_xticks(range(0,grid.shape[1],2));ax.set_xlabel('Số giờ kể từ mốc đầu tiên có dữ liệu');fig.colorbar(im,ax=ax,label='Số mẫu trong giờ',ticks=[0,1,2,3])
 finish(fig,'sampling_coverage','Mật độ lấy mẫu theo đô thị, sinh viên và giờ','hourly_city.csv')
 
-cat=rows('category_distribution');fig,ax=plt.subplots(figsize=(9.8,4.8));labels=[];positions=range(6);colors={'Good':'#16A34A','Moderate':'#EAB308','Unhealthy':'#DC2626'}
-for label in ['Good','Moderate','Unhealthy']:
-    y=[]
-    for city in CITIES:
-        for p in PROFILES:
-            entry=next((r for r in cat if r['city']==city and r['profile']==p and r['aqi_category']==label),None);y.append(value(entry,'fraction')*100 if entry else 0)
-    ax.bar(positions,y,color=colors[label],label={'Good':'Tốt','Moderate':'Trung bình','Unhealthy':'Không tốt'}[label])
-ax.set_xticks(positions,[f'{CITY[c]}\n{LABEL[p]}' for c in CITIES for p in PROFILES],fontsize=9);ax.set_ylabel('Tỷ lệ mẫu (%)');ax.set_ylim(0,120);ax.legend(frameon=False,ncol=3)
-for i in positions:ax.text(i,102,'100%',ha='center',fontsize=9)
-finish(fig,'categories','Cấp AQI xuất hiện trong mẫu Tuần 2 của mỗi đô thị','category_distribution.csv')
+cat=rows('category_distribution')
+fig,ax=plt.subplots(figsize=(9.2,4.25))
+grade_colors={'Good':'#15803D','Moderate':'#D97706','Unhealthy':'#B91C1C'}
+grade_labels={'Good':'Tốt','Moderate':'Trung bình','Unhealthy':'Không tốt'}
+for city_index,city in enumerate(CITIES):
+    y=2.5-city_index
+    for student_index,profile in enumerate(PROFILES):
+        matches=[r for r in cat if r['city']==city and r['profile']==profile]
+        assert len(matches)==1 and value(matches[0],'fraction')==1.0
+        entry=matches[0]
+        x=student_index+.04
+        ax.add_patch(Rectangle((x,y-.39),.92,.78,facecolor=grade_colors[entry['aqi_category']],edgecolor='none'))
+        count=int(value(entry,'sample_count'))
+        ax.text(x+.46,y,f'{grade_labels[entry["aqi_category"]]}\n{count}/{count} lượt',ha='center',va='center',
+                color='white',fontsize=11,fontweight='bold')
+ax.set_xlim(0,2);ax.set_ylim(0,3)
+ax.set_xticks([.5,1.5],[LABEL[p] for p in PROFILES],fontsize=10)
+ax.xaxis.tick_top()
+ax.set_yticks([2.5,1.5,.5],[CITY[c] for c in CITIES],fontsize=10)
+ax.tick_params(length=0);ax.set_frame_on(False)
+fig.text(.5,.055,'Mỗi ô: cấp AQI và số lượt cùng cấp / tổng lượt đã lưu tại đô thị.',ha='center',fontsize=9)
+finish(fig,'categories','Cấp AQI trong mẫu của từng đô thị và sinh viên','category_distribution.csv')
 
-threshold=rows('threshold_exceedance');fig,ax=plt.subplots(figsize=(9,4.5))
-for i,condition in enumerate(['AQI >= 100','PM2.5 >= 35.5','AQI OR PM2.5']):
-    y=[value(next(r for r in threshold if r['city']==c and r['profile']==p and r['condition']==condition),'fraction')*100 for c in CITIES for p in PROFILES]
-    ax.bar(np.arange(6)+(i-1)*.23,y,.23,color=['#2563EB','#F59E0B','#16A34A'][i],label=condition)
-ax.set_xticks(range(6),[f'{CITY[c]}\n{LABEL[p]}' for c in CITIES for p in PROFILES],fontsize=9);ax.set_ylim(0,120);ax.set_ylabel('Tỷ lệ mẫu thỏa điều kiện (%)');ax.legend(frameon=False,fontsize=9,ncol=3)
-finish(fig,'exceedance','Tỷ lệ mẫu vượt các ngưỡng cấu hình cảnh báo','threshold_exceedance.csv')
+threshold=rows('threshold_exceedance')
+conditions={r['condition'] for r in threshold}
+aqi_conditions=[c for c in conditions if c.startswith('AQI >=')]
+pm25_conditions=[c for c in conditions if c.startswith('PM2.5 >=')]
+assert len(aqi_conditions)==len(pm25_conditions)==1 and 'AQI OR PM2.5' in conditions
+aqi_limit=float(aqi_conditions[0].split('>=',1)[1])
+pm25_limit=float(pm25_conditions[0].split('>=',1)[1])
+fig,axes=plt.subplots(1,2,figsize=(11.2,4.25),sharey=True)
+student_rows=[(city,profile) for city in CITIES for profile in PROFILES]
+for ax,metric,limit,title,unit in zip(
+    axes,['avg_aqi','avg_pm2_5'],[aqi_limit,pm25_limit],['US AQI','PM2.5'],['điểm','µg/m³']
+):
+    for i,(city,profile) in enumerate(student_rows):
+        values=[value(r,metric) for r in hourly if r['city']==city and r['profile']==profile]
+        assert len(values)==9
+        low,high=float(np.min(values)),float(np.max(values))
+        ax.hlines(i,low,high,color=COLOR[profile],linewidth=5,zorder=2)
+        ax.scatter([np.median(values)],[i],color=COLOR[profile],edgecolors='white',linewidths=.8,s=75,zorder=3)
+        ax.text((low+high)/2,i-.18,f'{low:g}–{high:g}',ha='center',va='bottom',fontsize=8,color='#333333')
+    ax.axvline(limit,color='#B91C1C',linestyle='--',linewidth=1.35,zorder=1)
+    ax.set_title(f'{title}: ngưỡng {limit:g} {unit}')
+    ax.set_xlabel(f'{title} theo giờ ({unit})')
+    ax.set_ylim(-.55,5.5);ax.invert_yaxis()
+    ax.grid(axis='x',color='#E5E7EB',linewidth=.6)
+    for separator in [1.5,3.5]:ax.axhline(separator,color='#E5E7EB',linewidth=.7)
+axes[0].set_yticks(range(6),[f'{CITY[city]} · {LABEL[profile]}' for city,profile in student_rows],fontsize=9)
+axes[0].set_xlim(0,190);axes[1].set_xlim(0,140)
+fig.legend(handles=[
+    Patch(facecolor=COLOR['default'],label=LABEL['default']),
+    Patch(facecolor=COLOR['quyen'],label=LABEL['quyen']),
+    Line2D([0],[0],color='#B91C1C',linestyle='--',label='Ngưỡng cấu hình')
+],loc='upper center',bbox_to_anchor=(.5,.95),ncol=3,frameon=False,fontsize=9)
+fig.shared_legend=True
+finish(fig,'exceedance','Khoảng AQI và PM2.5 theo giờ so với ngưỡng cảnh báo','hourly_city.csv; threshold_exceedance.csv')
 
 paired=rows('matched_account_hours');fig=matched_figure(matched_summary(paired));fig.shared_legend=True
 finish(fig,'matched_account_difference','AQI và PM2.5 trung bình tại các giờ quan trắc chung','matched_account_hours.csv; matched_hour_summary.csv')

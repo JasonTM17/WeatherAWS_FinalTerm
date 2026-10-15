@@ -299,17 +299,19 @@ Bảng 3.5 Cấp AQI xuất hiện và tỷ lệ mẫu
 | Hà Nội | Ngọc Quyên | Unhealthy | 19 | 100,0 |
 | TP. Hồ Chí Minh | Ngọc Quyên | Moderate | 19 | 100,0 |
 
-![Cấp AQI xuất hiện trong mẫu Tuần 2 của mỗi đô thị](../results/week2_charts/07_categories.png)
+![Cấp AQI và số lượt ghi trong mẫu Tuần 2 của từng đô thị, sinh viên](../results/week2_charts/07_categories.png)
 
-Hình 3.6 Cấp AQI xuất hiện trong mẫu Tuần 2 của mỗi đô thị
+Hình 3.6 Cấp AQI và số lượt ghi trong mẫu Tuần 2 của từng đô thị, sinh viên
 
-Toàn bộ mẫu Đà Nẵng thuộc Good, TP. Hồ Chí Minh thuộc Moderate và Hà Nội thuộc Unhealthy trên cả hai nguồn. Đây là tỷ lệ bản ghi trong tập mẫu. Không diễn giải 100% mẫu thành 100% thời gian trong tuần, vì còn các giờ chưa có dữ liệu.
+Trong dữ liệu của cả hai sinh viên, toàn bộ lượt ghi tại Đà Nẵng thuộc Good, TP. Hồ Chí Minh thuộc Moderate và Hà Nội thuộc Unhealthy. Hình 3.6 ghi rõ 9/9 lượt của sinh viên Tiến Sơn và 19/19 lượt của sinh viên Ngọc Quyên tại mỗi đô thị; số lượt khác nhau do tần suất ghi nhận khác nhau. Tỷ lệ 100% trong Bảng 3.5 chỉ tính trên những bản ghi đã lưu, không đại diện cho toàn bộ thời gian của tuần vì còn các giờ chưa có dữ liệu.
 
 ### 3.7 Tần suất vượt ngưỡng cấu hình cảnh báo
 
-![Tỷ lệ mẫu vượt các ngưỡng cấu hình cảnh báo](../results/week2_charts/08_exceedance.png)
+![Khoảng AQI và PM2.5 theo giờ so với ngưỡng cảnh báo của dự án](../results/week2_charts/08_exceedance.png)
 
-Hình 3.7 Tỷ lệ mẫu vượt các ngưỡng cấu hình cảnh báo
+Hình 3.7 Khoảng AQI và PM2.5 theo giờ so với ngưỡng cảnh báo của dự án
+
+Đoạn màu là khoảng nhỏ nhất–lớn nhất của chín nhóm giờ theo đô thị và sinh viên; dấu tròn là trung vị, nét đứt đỏ là ngưỡng. Hà Nội có AQI thấp nhất 160 và PM2.5 thấp nhất 37,3 µg/m³; TP. Hồ Chí Minh cao nhất 83 và 33,6; Đà Nẵng cao nhất 42 và 9,7. Bảng 3.6 ghi số lượt ghi vượt ngưỡng trên tập mẫu đã lưu.
 
 Bảng 3.6 Mẫu thỏa ít nhất một điều kiện cảnh báo
 
@@ -322,9 +324,9 @@ Bảng 3.6 Mẫu thỏa ít nhất một điều kiện cảnh báo
 | Hà Nội | Ngọc Quyên | 19 | 19 | 100,0 |
 | TP. Hồ Chí Minh | Ngọc Quyên | 19 | 0 | 0,0 |
 
-Điều kiện cấu hình là AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³. Cả 9 và 19 mẫu Hà Nội đồng thời vượt hai ngưỡng; hai đô thị còn lại không có mẫu vượt trong tập Tuần 2. Các ngưỡng là tham số cảnh báo của dự án, không được gọi là giới hạn an toàn của một quy chuẩn y tế.
+Ngưỡng dự án là AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³. Tại Hà Nội, 9/9 lượt của sinh viên Tiến Sơn và 19/19 lượt của sinh viên Ngọc Quyên thỏa cả hai điều kiện; Đà Nẵng và TP. Hồ Chí Minh không có lượt vượt trong tập mẫu. Các tỷ lệ 0% và 100% không biểu thị toàn bộ thời gian trong tuần; ngưỡng này không phải quy chuẩn y tế.
 
-Số mẫu vượt điều kiện và số thông điệp SNS là hai đại lượng khác nhau: một lần gọi có thể tạo nhiều thông báo, số mẫu phân tích còn phụ thuộc phạm vi thời gian và tệp lưu. Báo cáo không dùng số bản ghi vượt để suy ra số email đã nhận hoặc đã đọc.
+Số lượt vượt không bằng số thông điệp SNS; báo cáo không suy ra số email đã nhận từ Bảng 3.6.
 
 ### 3.8 Đối chiếu hai báo cáo dữ liệu theo đô thị và giờ
 

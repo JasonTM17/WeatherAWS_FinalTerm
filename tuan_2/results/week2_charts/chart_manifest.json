@@ -79,7 +79,7 @@
   },
   {
     "file": "07_categories.png",
-    "title": "Cấp AQI xuất hiện trong mẫu Tuần 2 của mỗi đô thị",
+    "title": "Cấp AQI trong mẫu của từng đô thị và sinh viên",
     "source_csv": "category_distribution.csv",
     "student_labels": {
       "default": "Sinh viên Tiến Sơn",
@@ -92,8 +92,8 @@
   },
   {
     "file": "08_exceedance.png",
-    "title": "Tỷ lệ mẫu vượt các ngưỡng cấu hình cảnh báo",
-    "source_csv": "threshold_exceedance.csv",
+    "title": "Khoảng AQI và PM2.5 theo giờ so với ngưỡng cảnh báo",
+    "source_csv": "hourly_city.csv; threshold_exceedance.csv",
     "student_labels": {
       "default": "Sinh viên Tiến Sơn",
       "quyen": "Sinh viên Ngọc Quyên"
