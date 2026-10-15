@@ -12,7 +12,7 @@ Theo phân công nhóm xác nhận, sinh viên Tiến Sơn phụ trách S3, Secr
 
 Đề tài thuộc nhóm Domain Apps của học phần Điện toán đám mây, lớp 261CLCO332779_05. Hệ thống được triển khai trên AWS Learner Lab để thu thập dữ liệu môi trường công khai, lưu trữ theo ngày và phân tích bằng truy vấn SQL. Bài toán thời tiết và chất lượng không khí cho phép theo dõi trọn luồng dữ liệu từ nguồn API đến bảng và biểu đồ.
 
-Toàn bộ mã nguồn triển khai, cấu hình dịch vụ AWS và tài liệu kỹ thuật của đề tài được công khai và quản lý tại kho mã nguồn GitHub: https://github.com/JasonTM17/WeatherAWS_FinalTerm.git.
+Mã nguồn và tài liệu kỹ thuật của đề tài được quản lý tại kho GitHub: https://github.com/JasonTM17/WeatherAWS_FinalTerm.git.
 
 Báo cáo đi từ mục tiêu và kiến trúc Tuần 1 đến các mốc triển khai, cấu hình chi tiết và kết quả đo được. Các số liệu gắn với từng lượt quan sát; dữ liệu môi trường có thể thay đổi ở lần chạy sau. Phần đánh giá phân biệt kết quả Publish của SNS với việc email được giao thực tế, và phân biệt cấu hình Alarm với trạng thái đã quan sát.
 

@@ -7,14 +7,14 @@ Lớp 261CLCO332779_05 — Điện toán đám mây.
 | Nguyễn Tiến Sơn — 24110054 | S3, Secrets Manager, Lambda và SNS | Kiến trúc, tích hợp, đối chiếu và báo cáo | 10,0 |
 | Trần Thị Ngọc Quyên — 24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu | Kiến trúc, tích hợp, đối chiếu và báo cáo | 9,5 |
 
-**Tổng thời gian của nhóm: 19,5 giờ.** Số giờ và phân công do nhóm xác nhận. Mục 1.2 và kết luận Chương 6 của báo cáo Tuần 2 sử dụng cùng số liệu này.
+**Tổng thời gian của nhóm: 19,5 giờ.** Số giờ và phân công do nhóm xác nhận. Mục 1.2 của báo cáo Tuần 2 sử dụng cùng số liệu này.
 
 ## Sản phẩm và nguồn đối chiếu
 
 - [Báo cáo Word](Bao_cao_Tuan_2_24110054_24110051.docx) và [PDF](Bao_cao_Tuan_2_24110054_24110051.pdf): chức năng, cấu hình, bảng số liệu và phân tích.
 - [Mã nguồn Lambda](../lambda/lambda_function.py) và [chương trình quản lý dịch vụ](../scripts/aws_project.py): thu thập, chuẩn hóa, lưu trữ, lịch và cảnh báo.
 - [Lược đồ và truy vấn](../athena/): mô hình dữ liệu và phép tổng hợp.
-- [Kết quả Athena mới](../results/week2_live/) và [18 biểu đồ](../results/week2_charts/): hai bộ báo cáo dữ liệu được trình bày riêng, 27/57 bản ghi thuộc Tuần 2.
+- [Kết quả Athena mới](../results/week2_live/) và [20 biểu đồ](../results/week2_charts/): hai bộ báo cáo dữ liệu được trình bày riêng, 27/57 bản ghi thuộc Tuần 2.
 - [Excel Tuần 2](Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx): bảng nguồn, kết quả và các biểu đồ cùng dữ liệu với báo cáo.
 - [Hồ sơ vận hành đã lưu](../../docs/saved-evidence.md): phản hồi Lambda 3 bản ghi, 2 cảnh báo và năm mã truy vấn khớp CSV.
 

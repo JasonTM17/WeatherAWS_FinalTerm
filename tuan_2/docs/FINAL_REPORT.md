@@ -236,7 +236,7 @@ Hình 3.2 PM2.5 và PM10 trung bình theo đô thị và nguồn dữ liệu
 
 PM2.5 trung bình tại Hà Nội là 76,66 và 75,11 µg/m³, trong khi TP. Hồ Chí Minh khoảng 23 µg/m³ và Đà Nẵng khoảng 6,4 µg/m³. PM10 cao hơn PM2.5 trong cả sáu nhóm. Các đơn vị nồng độ được giữ riêng với chỉ số AQI; không so sánh chiều cao cột của hai đại lượng khác đơn vị trên cùng trục.
 
-### 3.3 Trung vị tứ phân vị và P95
+### 3.3 Trung vị, tứ phân vị và P95
 
 Bảng 3.3 Các phân vị AQI trong từng tập mẫu
 
@@ -390,9 +390,9 @@ Bảng 3.9 Nồng độ khí trung bình µg/m³
 | Đà Nẵng | Tiến Sơn | 432,22 | 6,08 | 3,66 | 71,11 |
 | Đà Nẵng | Ngọc Quyên | 461,42 | 5,56 | 3,45 | 74,00 |
 
-![CO NO₂ và O₃ trung bình theo đô thị và nguồn dữ liệu](../results/week2_charts/12_gaseous_pollutants.png)
+![CO, NO₂ và O₃ trung bình theo đô thị và từng sinh viên](../results/week2_charts/12_gaseous_pollutants.png)
 
-Hình 3.11 CO NO₂ và O₃ trung bình theo đô thị và nguồn dữ liệu
+Hình 3.11 CO, NO₂ và O₃ trung bình theo đô thị và từng sinh viên
 
 CO, NO₂, SO₂ và O₃ được lưu với đơn vị µg/m³. Bảng trình bày đủ bốn khí; hình thể hiện CO, NO₂ và O₃ trên các khung riêng. CSV thống kê giữ độ lệch chuẩn, trung vị, tứ phân vị và cực trị của từng khí theo đô thị và sinh viên.
 
