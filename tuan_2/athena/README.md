@@ -9,7 +9,7 @@
 
 Chương trình [aws_project.py](../scripts/aws_project.py), thao tác `setup-catalog`, tạo database nếu cần, tạo bảng gốc, chạy `MSCK REPAIR TABLE`, rồi tạo view. Hai tên đối tượng có vai trò riêng; tên `vietnam_weather_aqi` dành cho view. `ACCOUNT_ID` trong vị trí S3 là mẫu được SDK thay bằng bucket của phiên đăng nhập.
 
-Nếu catalog đã có một bảng ngoài cũ mang tên `vietnam_weather_aqi`, SDK giữ đối tượng hiện có; cần xem loại đối tượng trước khi chuyển đổi. Source này không tự xóa bảng cũ để tạo view.
+Nếu catalog đã có một bảng ngoài cũ mang tên `vietnam_weather_aqi`, SDK giữ đối tượng hiện có; cần xem loại đối tượng trước khi chuyển đổi. Chương trình không tự xóa bảng cũ để tạo view.
 
 ## Các truy vấn đọc dữ liệu
 

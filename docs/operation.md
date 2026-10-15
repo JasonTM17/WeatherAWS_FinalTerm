@@ -23,7 +23,7 @@ python tuan_2/scripts/aws_project.py verify --region us-east-1
 python tuan_2/scripts/athena_export.py --region us-east-1 --output output/athena
 ```
 
-Tùy chọn `--email` của `deploy` hoặc `setup-sns` đăng ký địa chỉ nhận thông báo; người nhận cần xác nhận. Các entry point PowerShell trong `tuan_1/scripts` và `tuan_2/scripts` chuyển tham số tới chương trình Python; tùy chọn `-Python` chọn đường dẫn Python khi máy có nhiều phiên bản.
+Tùy chọn `--email` của `deploy` hoặc `setup-sns` đăng ký địa chỉ nhận thông báo; người nhận cần xác nhận. Các chương trình PowerShell trong `tuan_1/scripts` và `tuan_2/scripts` chuyển tham số tới chương trình Python; tùy chọn `-Python` chọn đường dẫn Python khi máy có nhiều phiên bản.
 
 Thư mục `output/` được Git bỏ qua để lưu các lượt xuất tùy chọn. Luôn chỉ định `--output` khi cần giữ riêng kết quả mới; các mặc định tương thích vẫn trỏ tới thư mục kết quả trong `tuan_2/`. Không dùng thư mục dữ liệu đã nộp làm đích xuất mới.
 

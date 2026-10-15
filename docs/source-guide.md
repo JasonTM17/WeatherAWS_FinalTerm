@@ -17,7 +17,7 @@
 | So sánh tuần | [Module đối chiếu trực tiếp](../tuan_2/analytics/weekly_comparison_charts.py) | Kiểm tra phạm vi đầu vào, dựng cột AQI và PM2.5 với cỡ mẫu, đơn vị rõ ràng |
 | Kiểm tra | [Kiểm tra chức năng](../tuan_2/tests/) và [kiểm tra phân tích](../tuan_2/analytics/) | API/SDK giả lập và đối chiếu dữ liệu đã lưu, không gọi tài nguyên thật |
 
-Các entry point PowerShell trong tuan_1/scripts và tuan_2/scripts chuyển tham số tới chương trình Python chung. Tuần 1 dùng lại phần thiết lập nền tảng; mã Lambda và phân tích chính nằm tại Tuần 2. Bộ kiểm tra chức năng nằm trong tuan_2/tests/; các hồi quy phân tích nằm trong tuan_2/analytics/.
+Các chương trình PowerShell trong `tuan_1/scripts` và `tuan_2/scripts` chuyển tham số tới chương trình Python chung. Tuần 1 dùng lại phần thiết lập nền tảng; mã Lambda và phân tích chính nằm tại Tuần 2. Bộ kiểm tra chức năng nằm trong `tuan_2/tests/`; các hồi quy phân tích nằm trong `tuan_2/analytics/`.
 
 ## Vì sao cấu hình này tạo ra các bảng kết quả
 
@@ -38,7 +38,7 @@ Thiết kế trong [aws_project.py](../tuan_2/scripts/aws_project.py) tạo buck
 1. EventBridge gọi lambda_handler với sự kiện mặc định để thu thập hiện tại. Sự kiện có backfill_hours yêu cầu chuỗi lịch sử.
 2. fetch_secrets đọc danh sách đô thị và ngưỡng. Khi dịch vụ trả lỗi, chương trình dùng cấu hình dự phòng ba đô thị.
 3. fetch_city_data gọi API chất lượng không khí và thời tiết. Các phản hồi phải có khối current với ít nhất một trường đo được yêu cầu. fetch_historical_series yêu cầu khối hourly cùng danh sách thời gian không rỗng ở cả hai API, rồi ghép hai chuỗi bằng timestamp. Khối bị thiếu hoặc chỉ có metadata sẽ phát sinh lỗi; các trường đo có tên nhưng mang giá trị null vẫn dùng chính sách mặc định được nêu dưới đây.
-4. safe_float/safe_int giữ số hợp lệ và dùng giá trị mặc định cho đầu vào không chuyển đổi được hoặc không hữu hạn. get_aqi_category trả Unknown khi AQI thiếu, không hợp lệ, không hữu hạn hoặc âm. Giá trị mặc định số 0 cần được hiểu là chính sách chuẩn hóa của mã nguồn, không phải bằng chứng cảm biến đo được 0.
+4. safe_float/safe_int giữ số hợp lệ và dùng giá trị mặc định cho đầu vào không chuyển đổi được hoặc không hữu hạn. get_aqi_category trả Unknown khi AQI thiếu, không hợp lệ, không hữu hạn hoặc âm. Giá trị mặc định số 0 là chính sách chuẩn hóa của mã nguồn, không xác nhận API đã cung cấp một giá trị môi trường bằng 0.
 5. Chế độ hiện tại phát cảnh báo khi AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³. Đây là ngưỡng cấu hình của dự án. Publish được chấp nhận không xác nhận người nhận đã đọc email.
 6. save_records_to_s3 nhóm theo ngày UTC và ghi một dòng JSON cho mỗi bản ghi. timestamp_vn dùng để hiển thị giờ Việt Nam; khóa phân vùng vẫn theo UTC.
 7. Nếu mọi đô thị thu thập thất bại, handler phát sinh lỗi. Nếu một phần thất bại, đầu ra giữ failed_cities và collection_status=partial, kèm số bản ghi và tệp đã lưu.

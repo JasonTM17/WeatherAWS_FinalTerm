@@ -1,4 +1,6 @@
-# Hệ thống thu thập và phân tích thời tiết và chất lượng không khí
+# Thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS
+
+Dự án sử dụng AWS Serverless để thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Lambda xử lý dữ liệu theo lịch, lưu bản ghi trên S3 theo phân vùng ngày và gửi thông báo qua SNS khi thỏa ngưỡng cấu hình. Athena tổng hợp US AQI, PM2.5, PM10 và các yếu tố khí tượng để tạo bảng số liệu, biểu đồ và báo cáo theo tuần.
 
 Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**.
 
@@ -20,7 +22,7 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 
 [Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc mã nguồn](docs/source-guide.md).
 
-## Cấu trúc repository
+## Cấu trúc dự án
 
 | Thư mục | Vai trò | Điểm bắt đầu |
 | --- | --- | --- |
@@ -33,19 +35,21 @@ Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nh
 | `tuan_2/results/` | Các tập dữ liệu đã lưu, metadata và hình từ dữ liệu | [Danh mục dữ liệu](tuan_2/results/README.md) |
 | `tuan_2/tests/` | Kiểm tra Lambda, SDK, CSV và biểu đồ của dự án | [Kiểm tra chức năng](tuan_2/tests/) |
 
-Hai tuần dùng chung một bộ triển khai tại `tuan_2/`; các script nền tảng Tuần 1 gọi bộ này. Chi tiết tệp chuẩn, bản sao dữ liệu và các điểm vào tương thích nằm trong [sơ đồ mã nguồn](docs/repository-layout.md).
+Mã triển khai dùng chung nằm tại `tuan_2/`; các chương trình thiết lập nền tảng của Tuần 1 gọi lại bộ mã này. [Sơ đồ mã nguồn](docs/repository-layout.md) giải thích các tệp chính, dữ liệu đầu vào và cách dùng lại chương trình giữa hai tuần.
 
 ## Kết quả Tuần 2
 
-Báo cáo dữ liệu của sinh viên Tiến Sơn có 204 bản ghi raw, báo cáo của sinh viên Ngọc Quyên có 231 bản ghi raw. Sau lọc ranh giới Tuần 2 theo UTC+7, có **27 và 57 lượt ghi gốc**. Bộ của sinh viên Ngọc Quyên ghi hai hoặc ba lượt trong cùng đô thị và giờ UTC với các chỉ số môi trường bằng nhau. [Bảng theo giờ](tuan_2/results/week2_analysis/hourly_city.csv) gộp các lượt cùng giờ, còn **27 nhóm đô thị–giờ mỗi sinh viên**, trong đó **21 nhóm chung** được dùng để so sánh trực tiếp. Dòng gốc vẫn giữ riêng theo sinh viên và đầy đủ trong phụ lục; 144 quan trắc lịch sử cùng đô thị và thời điểm có giá trị cảm biến tương ứng bằng nhau được nhận diện khi đối chiếu.
+Hai bộ dữ liệu đã lưu gồm 204 bản ghi của sinh viên Tiến Sơn và 231 bản ghi của sinh viên Ngọc Quyên. Sau khi lọc theo ranh giới Tuần 2 ở múi giờ UTC+7, có **27 và 57 lượt ghi gốc** tương ứng. Bộ của sinh viên Ngọc Quyên có hai hoặc ba lượt ghi trong cùng đô thị và giờ UTC với các chỉ số môi trường bằng nhau.
 
-| Đô thị | AQI TB Tiến Sơn | AQI TB Ngọc Quyên | PM2.5 TB Tiến Sơn µg/m³ | PM2.5 TB Ngọc Quyên µg/m³ |
+[Bảng theo giờ](tuan_2/results/week2_analysis/hourly_city.csv) tổng hợp các lượt ghi thành **27 nhóm đô thị–giờ cho mỗi sinh viên**; **21 nhóm có dữ liệu của cả hai sinh viên** được dùng để đối chiếu trực tiếp. Các bản ghi gốc được giữ riêng theo sinh viên và trình bày đầy đủ trong phụ lục. Khi đối chiếu dữ liệu lịch sử, có 144 quan trắc cùng đô thị và thời điểm xuất hiện trong cả hai bộ với các giá trị môi trường tương ứng bằng nhau.
+
+| Đô thị | AQI TB<br>Sinh viên Tiến Sơn | AQI TB<br>Sinh viên Ngọc Quyên | PM2.5 TB (µg/m³)<br>Sinh viên Tiến Sơn | PM2.5 TB (µg/m³)<br>Sinh viên Ngọc Quyên |
 | --- | ---: | ---: | ---: | ---: |
 | TP. Hồ Chí Minh | 78,00 | 79,05 | 23,38 | 22,92 |
 | Hà Nội | 163,56 | 163,05 | 76,66 | 75,11 |
 | Đà Nẵng | 35,44 | 35,37 | 6,38 | 6,46 |
 
-Mẫu mới bao phủ hai ngày và 9 giờ riêng trong bộ dữ liệu của mỗi sinh viên, chưa đủ toàn bộ tuần. Tương quan mô tả tập mẫu, không chứng minh quan hệ nhân quả. Dữ liệu API chất lượng không khí dựa trên sản phẩm CAMS, không phải phép đo trực tiếp tại trạm.
+Mẫu Tuần 2 của mỗi sinh viên bao phủ hai ngày, gồm chín giờ có dữ liệu. Các thống kê mô tả phạm vi mẫu đã thu thập; hệ số tương quan không chứng minh quan hệ nhân quả. Dữ liệu chất lượng không khí từ Open-Meteo dựa trên mô hình CAMS, không phải phép đo trực tiếp tại trạm.
 
 - [CSV Athena trong hai báo cáo dữ liệu](tuan_2/results/week2_live/)
 - [27 CSV phân tích và đối chiếu](tuan_2/results/week2_analysis/)
@@ -53,13 +57,13 @@ Mẫu mới bao phủ hai ngày và 9 giờ riêng trong bộ dữ liệu của 
 - [Tệp raw và metadata dịch vụ đã đọc](tuan_2/results/week2_evidence/)
 - [SQL của 12 phép phân tích](tuan_2/athena/week2_analysis/)
 
-## Kiến trúc và thao tác
+## Kiến trúc hệ thống
 
 ![Kiến trúc](docs/architecture.png)
 
 EventBridge gọi Lambda; Lambda đọc cấu hình Secrets Manager, thu thập Open-Meteo, ghi NDJSON vào S3 và gửi SNS. Glue quản lý lược đồ, Athena phân tích dữ liệu và CloudWatch ghi chỉ số/log. Các thao tác quản lý và xuất dữ liệu dùng boto3.
 
-Môi trường AWS của sinh viên Ngọc Quyên có hai quy tắc lịch đang bật và hai đăng ký email xác nhận, sinh viên Tiến Sơn có một lịch và một đăng ký. Các tổng Errors lớn hơn Invocations được giữ nguyên và tỷ lệ lỗi để trống trong bộ phân tích; không suy diễn trạng thái chạy ổn định từ một Alarm OK.
+Theo hồ sơ Tuần 2 đã lưu, môi trường AWS của sinh viên Ngọc Quyên có hai quy tắc lịch đang bật và hai đăng ký email đã xác nhận; sinh viên Tiến Sơn có một lịch và một đăng ký. Tổng Errors lớn hơn Invocations trong bộ chỉ số đã xuất, nên tỷ lệ lỗi được để trống trong kết quả phân tích. Trạng thái Alarm OK tại lần đọc được trình bày riêng với các chỉ số tích lũy.
 
 ## Tái lập phân tích
 

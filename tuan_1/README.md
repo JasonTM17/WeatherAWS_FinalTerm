@@ -9,4 +9,4 @@ Lớp 261CLCO332779_05. Nguyễn Tiến Sơn (24110054) và Trần Thị Ngọc 
 - [CSV của bộ báo cáo đã nộp](docs/Bao_cao_tuan_1_CSV_24110054_24110051/)
 - [Phân công đã xác nhận](docs/PHAN_CONG.md)
 
-Tuần 1 trình bày mục tiêu, kiến trúc, dịch vụ nền tảng và phân tích số liệu của bộ mẫu đã lưu. Hai entry point thiết lập S3/Secrets Manager dùng lại chương trình SDK chung tại tuan_2/scripts/aws_project.py.
+Tuần 1 trình bày mục tiêu, kiến trúc, dịch vụ nền tảng và phân tích số liệu của bộ mẫu đã lưu. Hai chương trình thiết lập S3 và Secrets Manager dùng lại bộ mã SDK tại `tuan_2/scripts/aws_project.py`.

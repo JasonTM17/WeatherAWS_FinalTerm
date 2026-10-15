@@ -6,7 +6,7 @@
 
 ## Bộ dữ liệu mới Tuần 2
 
-[Kết quả Athena](../tuan_2/results/week2_live/) được lưu riêng trong hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tổng raw là 204/231, số lượt ghi gốc thuộc Tuần 2 là 27/57. Bộ của sinh viên Ngọc Quyên có 24 nhóm đô thị–giờ ghi hai lượt và ba nhóm ghi ba lượt; trong mỗi nhóm, 11 chỉ số số và cấp AQI bằng nhau. [Bảng theo giờ](../tuan_2/results/week2_analysis/hourly_city.csv) lấy trung bình trong từng đô thị và giờ UTC nên còn 27 nhóm mỗi sinh viên, gồm 21 nhóm có mặt ở cả hai bộ để đối chiếu trực tiếp. Các dòng gốc vẫn được giữ nguyên. Tuần được lọc theo UTC+7, timestamp môi trường dạng không có múi giờ được hiểu là UTC; các thời điểm dịch vụ có múi giờ được đổi về UTC trước khi lọc.
+[Kết quả Athena](../tuan_2/results/week2_live/) được lưu riêng trong hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tổng số bản ghi gốc tương ứng là 204 và 231; số lượt ghi thuộc Tuần 2 là 27 và 57. Bộ của sinh viên Ngọc Quyên có 24 nhóm đô thị–giờ ghi hai lượt và ba nhóm ghi ba lượt; trong mỗi nhóm, 11 chỉ số môi trường dạng số và cấp AQI bằng nhau. [Bảng theo giờ](../tuan_2/results/week2_analysis/hourly_city.csv) lấy trung bình trong từng đô thị và giờ UTC nên còn 27 nhóm mỗi sinh viên, gồm 21 nhóm có mặt ở cả hai bộ để đối chiếu trực tiếp. Các dòng gốc vẫn được giữ nguyên. Tuần được lọc theo UTC+7, timestamp môi trường dạng không có múi giờ được hiểu là UTC; các thời điểm dịch vụ có múi giờ được đổi về UTC trước khi lọc.
 
 [Tệp raw và metadata nguồn](../tuan_2/results/week2_evidence/) giữ đủ tệp raw có thể đọc được, danh sách/hash đối tượng, trạng thái tài nguyên, điểm CloudWatch, dòng REPORT đã trích, lịch sử truy vấn và chi phí theo dịch vụ. Credentials, nội dung secret, endpoint email, URL tải có chữ ký và log thô được loại khỏi bộ công khai.
 
@@ -50,8 +50,8 @@ AWS phân biệt số liệu Cost Explorer với hóa đơn, có thể có khác
 ## Hai phạm vi đối chiếu tuần
 
 - [submitted_week1_comparison.csv](../tuan_2/results/week2_analysis/submitted_week1_comparison.csv) giữ bộ 156 dòng của báo cáo Tuần 1 làm mốc (52 mẫu/đô thị), so với mẫu Tuần 2 riêng từng nguồn (9/19). Bảng 3.10 và 3.11 trong báo cáo dùng phép này cho AQI và PM2.5. Chênh lệch tính từ trung bình chưa làm tròn; tệp manifest lưu hash của bộ mốc.
-- [weekly_comparison.csv](../tuan_2/results/week2_analysis/weekly_comparison.csv) lọc hai tuần từ cùng lần xuất mới, nên có 42/41 mẫu Tuần 1 và 9/19 mẫu Tuần 2 mỗi đô thị. Bảng 3.12 và Hình 3.14 dùng riêng phạm vi này. Sheet So_sanh_tuan trong Excel giữ cả hai bảng nguồn.
-- Các bộ có thời gian và độ phủ khác nhau; không xem chênh lệch trung bình mẫu là xu hướng của toàn bộ bảy ngày hoặc so sánh cùng thời điểm. Trong lần xuất mới, 144/156 dòng trong bộ của sinh viên Tiến Sơn và 156/156 dòng trong bộ của sinh viên Ngọc Quyên có cùng thành phố, timestamp với bộ cũ; các giá trị cảm biến tương ứng bằng nhau.
+- [weekly_comparison.csv](../tuan_2/results/week2_analysis/weekly_comparison.csv) lọc hai tuần từ cùng lần xuất mới, nên có 42/41 mẫu Tuần 1 và 9/19 mẫu Tuần 2 mỗi đô thị. Bảng 3.12 và Hình 3.16 dùng riêng phạm vi này. Sheet So_sanh_tuan trong Excel giữ cả hai bảng nguồn.
+- Các bộ có thời gian và độ phủ khác nhau; không xem chênh lệch trung bình mẫu là xu hướng của toàn bộ bảy ngày hoặc so sánh cùng thời điểm. Trong lần xuất mới, 144/156 dòng trong bộ của sinh viên Tiến Sơn và 156/156 dòng trong bộ của sinh viên Ngọc Quyên có cùng thành phố, timestamp với bộ cũ; các giá trị môi trường tương ứng bằng nhau.
 
 Dữ liệu chất lượng không khí được cung cấp qua [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api), dựa trên CAMS. Bộ API đã lưu không được coi là phép đo trực tiếp tại một trạm.
 
@@ -59,4 +59,4 @@ Hai hình đối chiếu trực tiếp AQI và PM2.5 (Hình 3.12 và 3.13) dùng
 
 ## Dữ liệu gốc trong báo cáo Tuần 2
 
-Mục 2.8 đối chiếu 27/57 dòng Tuần 2 với 204/231 dòng toàn bộ và trích sáu bản ghi gốc. Phụ lục dữ liệu gốc trình bày đủ 84 dòng Tuần 2, mỗi dòng đủ 23 trường qua hai bảng nối bằng mã TS/NQ; city là giá trị cố định trong tiêu đề nhóm. Timestamp, định danh và giá trị số giữ nguyên chuỗi từ CSV. Hai mức dự kiến chi phí và số liệu Cost Explorer không thuộc dữ liệu cảm biến. Xem [báo cáo đầy đủ](../tuan_2/docs/FINAL_REPORT.md), [CSV của sinh viên Tiến Sơn](../tuan_2/results/week2_live/default/raw_week2.csv) và [CSV của sinh viên Ngọc Quyên](../tuan_2/results/week2_live/quyen/raw_week2.csv).
+Mục 2.8 đối chiếu 27/57 dòng Tuần 2 với 204/231 dòng toàn bộ và trích sáu bản ghi gốc. Phụ lục dữ liệu gốc trình bày đủ 84 dòng Tuần 2, mỗi dòng đủ 23 trường qua hai bảng nối bằng mã TS/NQ; city là giá trị cố định trong tiêu đề nhóm. Timestamp, định danh và giá trị số giữ nguyên chuỗi từ CSV. Hai mức dự kiến chi phí và số liệu Cost Explorer không thuộc dữ liệu môi trường. Xem [báo cáo đầy đủ](../tuan_2/docs/FINAL_REPORT.md), [CSV của sinh viên Tiến Sơn](../tuan_2/results/week2_live/default/raw_week2.csv) và [CSV của sinh viên Ngọc Quyên](../tuan_2/results/week2_live/quyen/raw_week2.csv).
