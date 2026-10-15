@@ -648,11 +648,11 @@ Bảng 7.1 Sản phẩm đi kèm và phạm vi
 
 ### 7.2 Kết luận trong phạm vi mẫu đã thu thập
 
-Hai báo cáo dữ liệu Tuần 2 của sinh viên Tiến Sơn và sinh viên Ngọc Quyên cùng ghi nhận Hà Nội có AQI và PM2.5 cao nhất trong ba đô thị; các mẫu Hà Nội đều thỏa ngưỡng cảnh báo của dự án. Đà Nẵng có AQI thấp nhất, TP. Hồ Chí Minh nằm giữa. Phân bố mẫu, trung vị, diễn biến theo giờ và đối chiếu cùng giờ được trình bày riêng để giải thích kết quả của từng bộ dữ liệu.
+Trong 84 bản ghi Tuần 2 (27 của sinh viên Tiến Sơn, 57 của sinh viên Ngọc Quyên), AQI trung bình Hà Nội lần lượt là 163,56 và 163,05; PM2.5 là 76,66 và 75,11 µg/m³. Cả 9/9 và 19/19 mẫu Hà Nội thỏa ngưỡng cảnh báo cấu hình. Đà Nẵng có AQI thấp nhất, TP. Hồ Chí Minh ở giữa. Các phép tính giữ riêng hai bộ dữ liệu.
 
-Mỗi bộ báo cáo dữ liệu hiện bao phủ hai ngày và 9 giờ quan trắc, nên các kết luận giới hạn trong mẫu đã có của Tuần 2. Các hệ số tương quan lớn không chứng minh quan hệ nhân quả. Phép đối chứng lọc phân vùng ghi nhận giảm byte quét; thời gian engine được diễn giải theo từng lượt cụ thể.
+So với bộ báo cáo Tuần 1 đã nộp (52 mẫu mỗi đô thị), AQI trung bình Hà Nội cao hơn lần lượt 96,00 và 95,49 điểm trong hai bộ Tuần 2. Tuy nhiên, mỗi bộ Tuần 2 chỉ bao phủ hai ngày và 9 giờ quan trắc; khác biệt này chưa chứng minh xu hướng toàn tuần. Hệ số tương quan khí tượng cũng không xác lập quan hệ nhân quả.
 
-Chúng em đã đối chiếu số liệu môi trường với S3 và Athena, đọc trạng thái lịch, SNS, Lambda và các chỉ số vận hành. Các mâu thuẫn giữa Errors và Invocations được giữ rõ trong báo cáo. Phân công và thời gian 19,5 giờ của nhóm được ghi thống nhất trong nhật ký và báo cáo.
+Phụ lục giữ đủ 84 bản ghi và 23 trường để đối chiếu CSV. Cả 24 truy vấn mới thành công; lọc phân vùng giảm 86,76% và 75,28% byte quét, nhưng thời gian engine trong lần đo không giảm. Errors và Invocations chưa nhất quán, nên không suy số lần xử lý chỉ từ một chỉ số. Chi phí dự kiến của nhóm là 0,05 và 0,03 USD, tách khỏi số Cost Explorer 0,00 và 0,03 USD có cờ Estimated; số liệu sau chưa phải hóa đơn cuối cùng.
 
 ## Phụ lục Dữ liệu gốc Tuần 2
 
