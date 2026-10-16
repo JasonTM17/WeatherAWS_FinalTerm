@@ -159,8 +159,8 @@ class TestCsvExports(unittest.TestCase):
         try:
             target_file = os.path.join(temp_dir, 'offline_raw_test.csv')
             script = os.path.join(REPO_ROOT, 'scripts', 'export_raw_records.py')
-            res = subprocess.run([sys.executable, script, '--offline', '--output', target_file],
-                                 capture_output=True, text=True, check=True)
+            subprocess.run([sys.executable, script, '--offline', '--output', target_file],
+                           capture_output=True, text=True, check=True)
             self.assertTrue(os.path.exists(target_file))
             with open(target_file, 'r', encoding='utf-8') as f:
                 records = list(csv.DictReader(f))

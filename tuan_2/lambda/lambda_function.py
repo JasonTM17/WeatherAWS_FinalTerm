@@ -219,6 +219,7 @@ def fetch_historical_series(city_info, past_hours=48, context=None):
 
     times = hourly_aq.get('time', [])
     records = []
+    collected_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
     total_times = len(times)
     start_idx = max(0, total_times - past_hours)
@@ -234,7 +235,11 @@ def fetch_historical_series(city_info, past_hours=48, context=None):
         except Exception:
             dt = datetime.datetime.strptime(t_str, "%Y-%m-%dT%H:%M")
 
-        dt_utc = dt.replace(tzinfo=datetime.timezone.utc)
+        dt_utc = (
+            dt.replace(tzinfo=datetime.timezone.utc)
+            if dt.tzinfo is None
+            else dt.astimezone(datetime.timezone.utc)
+        )
         dt_vn = dt_utc + datetime.timedelta(hours=7)
 
         us_aqi_raw = hourly_aq.get('us_aqi', [])[idx] if idx < len(hourly_aq.get('us_aqi', [])) else None
@@ -274,7 +279,7 @@ def fetch_historical_series(city_info, past_hours=48, context=None):
             "month": dt_utc.strftime('%m'),
             "day": dt_utc.strftime('%d'),
             "hour": int(dt_utc.strftime('%H')),
-            "collected_at": dt_utc.isoformat()
+            "collected_at": collected_at
         }
         records.append(record)
 

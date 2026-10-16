@@ -227,7 +227,6 @@ def main():
 
     hourly = rows("hourly_city")
     times = sorted({r["timestamp_utc"] for r in hourly})
-    index = {t: i for i, t in enumerate(times)}
     fig, axes = plt.subplots(3, 1, figsize=(9, 7.5), sharex=True)
     start = datetime.fromisoformat(times[0])
     time_positions = [

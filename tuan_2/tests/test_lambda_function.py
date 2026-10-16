@@ -8,6 +8,7 @@ from unittest.mock import patch, MagicMock
 import os
 import sys
 import json
+from datetime import datetime, timezone
 from types import SimpleNamespace
 
 # Add lambda directory to sys.path
@@ -345,6 +346,45 @@ class TestWeatherCollectorLambda(unittest.TestCase):
         ]
         records = lambda_function.fetch_historical_series({'city':'HaNoi','lat':21,'lon':105},2)
         self.assertEqual([r['temperature_2m'] for r in records],[24.0,31.0])
+
+    @patch('lambda_function.http_get_json')
+    def test_historical_collection_time_is_separate_from_observation_time(self, mock_http):
+        times = ['2026-10-06T00:00', '2026-10-06T01:00']
+        mock_http.side_effect = [
+            {'hourly': {'time': times, 'us_aqi': [40, 75]}},
+            {'hourly': {'time': times, 'temperature_2m': [24, 25]}},
+        ]
+        collected = datetime(2026, 10, 16, 7, 30, tzinfo=timezone.utc)
+        with patch('lambda_function.datetime.datetime', wraps=datetime) as clock:
+            clock.now.return_value = collected
+            records = lambda_function.fetch_historical_series(
+                {'city': 'HaNoi', 'lat': 21, 'lon': 105}, 2
+            )
+        self.assertEqual(
+            [record['timestamp_utc'] for record in records],
+            ['2026-10-06 00:00:00', '2026-10-06 01:00:00'],
+        )
+        self.assertEqual(
+            [record['collected_at'] for record in records],
+            [collected.isoformat(), collected.isoformat()],
+        )
+
+    @patch('lambda_function.http_get_json')
+    def test_historical_offset_is_converted_before_partitioning(self, mock_http):
+        times = ['2026-10-06T00:00:00+07:00']
+        mock_http.side_effect = [
+            {'hourly': {'time': times, 'us_aqi': [40]}},
+            {'hourly': {'time': times, 'temperature_2m': [24]}},
+        ]
+        record = lambda_function.fetch_historical_series(
+            {'city': 'HaNoi', 'lat': 21, 'lon': 105}, 1
+        )[0]
+        self.assertEqual(record['timestamp_utc'], '2026-10-05 17:00:00')
+        self.assertEqual(record['timestamp_vn'], '2026-10-06 00:00:00')
+        self.assertEqual(
+            (record['year'], record['month'], record['day'], record['hour']),
+            ('2026', '10', '05', 17),
+        )
 
     @patch('lambda_function.save_records_to_s3', return_value=[])
     @patch('lambda_function.fetch_city_data', side_effect=RuntimeError('API unavailable'))

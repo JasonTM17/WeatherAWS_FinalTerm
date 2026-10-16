@@ -43,6 +43,10 @@ Thiết kế trong [aws_project.py](../tuan_2/scripts/aws_project.py) tạo buck
 6. save_records_to_s3 nhóm theo ngày UTC và ghi một dòng JSON cho mỗi bản ghi. timestamp_vn dùng để hiển thị giờ Việt Nam; khóa phân vùng vẫn theo UTC.
 7. Nếu mọi đô thị thu thập thất bại, handler phát sinh lỗi. Nếu một phần thất bại, đầu ra giữ failed_cities và collection_status=partial, kèm số bản ghi và tệp đã lưu.
 
+Ở chế độ lịch sử, `timestamp_utc` là thời điểm dữ liệu từ API, `timestamp_vn` là thời điểm đó cộng bảy giờ và `collected_at` là thời điểm chương trình tiếp nhận chuỗi dữ liệu. Timestamp không kèm múi giờ được hiểu là UTC; timestamp có offset được chuyển về UTC trước khi xác định phân vùng. Ở chế độ hiện tại, mã đang dùng thời điểm thu thập để gắn `timestamp_utc`/`timestamp_vn`; các trường này không lưu riêng thời gian cập nhật `current.time` của API.
+
+Mã hiện tại đã sửa việc gán `collected_at` bằng thời điểm dữ liệu lịch sử và việc thay offset trực tiếp bằng UTC. Các bản ghi trong CSV đã lưu giữ nguyên giá trị của phiên bản đã tạo ra chúng; không sửa hồi tố metadata hoặc thời gian để làm giống mã mới. Hai hồi quy kiểm tra riêng thời điểm thu thập và chuyển ngày/phân vùng khi timestamp có offset. Những sửa đổi này vẫn cần được triển khai và kiểm chứng riêng trên AWS.
+
 Khi được gọi trong Lambda, thời gian chờ HTTP được tính lại trước mỗi request: tối đa 15 giây và không vượt thời gian còn lại trừ 10 giây dành cho kết thúc/lưu dữ liệu. Khi không còn thời gian thu thập, chương trình dừng các request tiếp theo và giữ các đô thị đã thu thập để lưu một phần. Gọi helper trực tiếp với context=None giữ mức chờ 15 giây. Đây là cơ chế điều chỉnh timeout theo thời gian còn lại; thời gian DNS, đọc phản hồi và các lượt gọi SDK/S3 vẫn phụ thuộc dịch vụ, nên không phải bảo đảm thời hạn tuyệt đối cho toàn bộ invocation. Tham khảo [Lambda context](https://docs.aws.amazon.com/lambda/latest/dg/python-context.html) về thời gian còn lại và [urllib.request](https://docs.python.org/3.12/library/urllib.request.html) về phạm vi timeout của thao tác kết nối.
 
 ## Xuất CSV và thống kê
@@ -80,7 +84,7 @@ Matplotlib tối thiểu 3.9 vì mã nguồn dùng tick_labels trong boxplot; th
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-Các kết quả kiểm tra cục bộ và CI có thể xem ở [workflow](../.github/workflows/verify-repository.yml). Hai bộ kiểm tra nền tảng giữ 56 và 18 ca; các hồi quy riêng của hồ sơ nằm trong [test_repository_evidence.py](../tuan_2/tests/test_repository_evidence.py).
+Các lệnh trên chạy năm module kiểm tra chức năng và hồ sơ trong `tuan_2/tests`, cùng bộ kiểm tra phân tích trong `tuan_2/analytics`. Kết quả theo từng commit được ghi tại [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions); cấu hình nằm trong [workflow](../.github/workflows/verify-repository.yml). Các hồi quy riêng của hồ sơ nằm trong [test_repository_evidence.py](../tuan_2/tests/test_repository_evidence.py).
 
 ## Phạm vi minh chứng
 

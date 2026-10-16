@@ -18,7 +18,7 @@ WeatherAWS_FinalTerm/
     scripts/                 SDK, bộ xuất CSV và các điểm vào PowerShell
     athena/                  Một bảng gốc, một view, năm SELECT, 12 SELECT Tuần 2
     analytics/               Phân tích, dựng hình và hồi quy phân tích
-    tests/                   Bốn module kiểm tra chức năng chuẩn
+    tests/                   Năm module kiểm tra chức năng và hồ sơ
     docs/                    Báo cáo Word/PDF/Excel và nhật ký Tuần 2
     results/                 Bộ đầu vào, kết quả và metadata đã lưu
 ```
@@ -35,7 +35,7 @@ WeatherAWS_FinalTerm/
 | Năm hình bổ sung Tuần 1 | [generate_week1_supplement.py](../tuan_2/analytics/generate_week1_supplement.py) | Đọc bộ CSV của báo cáo Tuần 1; tạo thống kê và manifest có mảng vẽ |
 | Phân tích Tuần 2 | [analyze_week2_accounts.py](../tuan_2/analytics/analyze_week2_accounts.py) | Đọc CSV và hồ sơ nguồn của từng sinh viên |
 | 20 hình Tuần 2 | [generate_week2_charts.py](../tuan_2/analytics/generate_week2_charts.py) | Đọc `results/week2_analysis/`; dùng helper so sánh tuần và [phần đối chiếu bổ sung](../tuan_2/analytics/report_chart_extensions.py) |
-| Kiểm tra chức năng | [tuan_2/tests/](../tuan_2/tests/) | Bốn module kiểm tra Lambda, SDK, CSV và biểu đồ |
+| Kiểm tra chức năng và hồ sơ | [tuan_2/tests/](../tuan_2/tests/) | Năm module kiểm tra Lambda, SDK, CSV, biểu đồ và minh chứng dữ liệu |
 
 `lambda` được giữ làm tên thư mục chứa gói triển khai, không dùng làm tên Python package để import. Chạy các chương trình bằng đường dẫn tệp từ thư mục gốc, như [hướng dẫn mã nguồn](source-guide.md).
 
