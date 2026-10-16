@@ -101,6 +101,24 @@ def reconcile_snapshot(folder):
         } != counts:
             raise ValueError("AQI category counts differ from raw")
         queries = json.loads((base / "queries.json").read_text(encoding="utf-8"))
+        expected_queries = {
+            "raw_all",
+            "raw_week2",
+            "city_week2",
+            "category_week2",
+            "hour_city_week2",
+            "partition_all",
+            "quality_all",
+        }
+        if (
+            len(queries) != len(expected_queries)
+            or {q["name"] for q in queries} != expected_queries
+        ):
+            raise ValueError(
+                "Snapshot must contain each of the seven declared SELECT results"
+            )
+        if len({q["query_id"] for q in queries}) != len(queries):
+            raise ValueError("Query execution IDs must be distinct")
         for q in queries:
             if q["status"] != "SUCCEEDED":
                 raise ValueError("Snapshot contains unavailable query results")

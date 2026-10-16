@@ -63,6 +63,6 @@ python -X utf8 tuan_2/scripts/collect_repository_evidence.py --output output/rev
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-Thư mục đích phải chưa tồn tại để tránh ghi đè. Athena SELECT tạo các đối tượng kết quả thông thường trong S3; chương trình không triển khai, đổi lịch, thay quyền, gọi Lambda, lấy giá trị Secret hoặc gửi SNS. Metadata không công bố token, URL tải gói có chữ ký hay địa chỉ email. Lần đọc này xác nhận tài nguyên và dữ liệu đang đọc được, không chứng minh phiên bản repo vừa được triển khai, thư đã tới người nhận hoặc lịch chạy suốt thời gian Lab ngừng hoạt động.
+Thư mục đích phải chưa tồn tại để tránh ghi đè. Nếu có API không đọc được hoặc thiếu truy vấn, chương trình giữ manifest và trả mã thoát khác 0. Athena SELECT tạo các đối tượng kết quả thông thường trong S3; chương trình không triển khai, đổi lịch, thay quyền, gọi Lambda, lấy giá trị Secret hoặc gửi SNS. Metadata không công bố token, URL tải gói có chữ ký hay địa chỉ email. Lần đọc này xác nhận tài nguyên và dữ liệu đang đọc được, không chứng minh phiên bản repo vừa được triển khai, thư đã tới người nhận hoặc lịch chạy suốt thời gian Lab ngừng hoạt động.
 
 [Hồ sơ Tuần 2](../../README.md) · [Bộ dữ liệu đã lưu](../README.md) · [Mã thu thập minh chứng](../../scripts/collect_repository_evidence.py)

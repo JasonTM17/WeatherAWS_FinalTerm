@@ -1,5 +1,7 @@
 """Regression checks for public evidence without network access."""
 
+import contextlib
+import io
 import json
 import sys
 import tempfile
@@ -139,6 +141,21 @@ class EvidenceTests(unittest.TestCase):
         result = audit.reconcile_snapshot(folder)
         self.assertEqual(result["default"]["week2_records"], 39)
         self.assertEqual(result["quyen"]["week2_records"], 75)
+
+    def test_incomplete_collection_returns_failure_with_manifest_retained(self):
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            patch.object(collector, "collect_profile") as run,
+            contextlib.redirect_stdout(io.StringIO()),
+        ):
+            run.return_value = ({}, [{"status": "UNAVAILABLE"}], [])
+            output = Path(directory) / "new"
+            self.assertEqual(collector.main(["--output", str(output)]), 1)
+            manifest = json.loads(
+                (output / "manifest.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(manifest["summary"][0]["service_pass"], 0)
+            self.assertEqual(manifest["summary"][0]["query_pass"], 0)
 
 
 if __name__ == "__main__":
