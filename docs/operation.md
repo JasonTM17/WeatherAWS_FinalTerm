@@ -2,6 +2,8 @@
 
 [Kết quả triển khai và kiểm chứng thực tế](deployment-verification.md) ghi phiên bản Lambda, dữ liệu mới, cảnh báo và trạng thái lịch sau khi triển khai.
 
+[Minh chứng chạy tự động](scheduled-run-verification.md) đối chiếu metric của rule với log Lambda, S3, Athena và SNS, giữ riêng với các lượt gọi trực tiếp khi triển khai.
+
 Chạy từ thư mục gốc repository với Python 3.12 trở lên.
 
 [tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt) cài boto3, NumPy và Matplotlib cho SDK, phân tích và biểu đồ. Tệp phụ thuộc trong `tuan_2/lambda/` mô tả phạm vi phát triển Lambda. Xem [sơ đồ mã nguồn](repository-layout.md).

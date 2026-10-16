@@ -72,7 +72,7 @@ Tại snapshot trước triển khai, hai hàm Active nhưng mã chưa đồng b
 
 ## Kết luận và hồ sơ đầy đủ
 
-Tuần 2 đã có mã cho luồng thu thập/phân tích, các kết quả truy vấn truy được về raw, bảng thống kê và hình dùng cùng nguồn. Đợt triển khai bổ sung xác nhận source mới, các lượt thu thập trực tiếp và cảnh báo có người nhận xác nhận. Kết quả thống kê vẫn mô tả đúng các bộ mẫu đã lưu; chưa chứng minh vận hành liên tục hoặc lượt kích hoạt tự động sau triển khai. Tuần 3 tiếp tục các tiêu chí tích hợp và giám sát còn lại.
+Tuần 2 đã có mã cho luồng thu thập/phân tích, các kết quả truy vấn truy được về raw, bảng thống kê và hình dùng cùng nguồn. Sau đợt triển khai, [hai lượt chạy theo lịch](../docs/scheduled-run-verification.md) được đối chiếu với metric EventBridge, log Lambda, sáu bản ghi mới và bốn thông điệp SNS; người nhận xác nhận email mới. Kết quả thống kê vẫn mô tả đúng các bộ mẫu đã lưu; hai lượt kiểm chứng chưa chứng minh vận hành ổn định nhiều ngày. Tuần 3 tiếp tục các tiêu chí tích hợp và giám sát còn lại.
 
 [Báo cáo chi tiết trên GitHub](docs/FINAL_REPORT.md) · [CSV Athena đã lưu](results/week2_live/) · [27 CSV phân tích](results/week2_analysis/) · [20 biểu đồ](results/week2_charts/) · [Raw và metadata đã lưu](results/week2_evidence/)
 

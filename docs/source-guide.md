@@ -88,6 +88,8 @@ Các lệnh trên chạy năm module kiểm tra chức năng và hồ sơ trong 
 
 ## Phạm vi minh chứng
 
+Sau khi triển khai commit `36c9b39`, [đợt theo dõi lịch tự động](scheduled-run-verification.md) đã đối chiếu một lượt thực tế ở mỗi môi trường: ba bản ghi/lượt và hai thông điệp SNS/lượt, có xác nhận email mới từ người nhận. Đợt này giữ nguyên source và lịch một giờ; phương pháp đối chiếu metric/log được nêu riêng vì handler chưa lưu payload sự kiện EventBridge.
+
 Kiểm tra cục bộ dùng SDK/API giả lập và dữ liệu đã lưu. Nó xác nhận nhánh xử lý và phép tính, không chứng minh mã nguồn vừa được triển khai lên AWS. Bộ báo cáo giữ nguyên số liệu gốc.
 
 Lịch thu thập, Alarm và tổng metric có phạm vi thời gian khác nhau. Errors lớn hơn Invocations được giữ nguyên, tỷ lệ lỗi không xác định. Dữ liệu mô hình API và mẫu ngắn không chứng minh xu hướng toàn tuần hoặc quan hệ nhân quả. Không công bố credentials, nội dung Secret, endpoint email hay log thực thi thô trong mã nguồn.

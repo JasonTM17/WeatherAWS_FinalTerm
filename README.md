@@ -28,6 +28,7 @@
 | Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Minh chứng vận hành đã lưu](docs/saved-evidence.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
 | AWS và kế hoạch tiếp theo | [Snapshot AWS ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) · [Kế hoạch Tuần 3](docs/WEEK_3_PLAN.md) |
 | Triển khai đã kiểm chứng | [Mã Lambda, thu thập thực tế, Athena và email cảnh báo](docs/deployment-verification.md) |
+| Chạy tự động sau triển khai | [EventBridge, log Lambda, dữ liệu mới và cảnh báo của hai lượt theo lịch](docs/scheduled-run-verification.md) |
 
 [Phạm vi](#mục-tiêu-và-phạm-vi) · [Luồng xử lý](#luồng-xử-lý-dữ-liệu) · [Mô hình và phương pháp](#mô-hình-dữ-liệu-và-phương-pháp) · [Kết quả từng tuần](#kết-quả-theo-tuần) · [Đối chiếu hai tuần](#đối-chiếu-bộ-báo-cáo-tuần-1-và-mẫu-tuần-2) · [Mã nguồn](#cấu-trúc-mã-nguồn) · [Cài đặt và kiểm tra](#cài-đặt-và-kiểm-tra) · [Kế hoạch](#kế-hoạch-tiếp-theo)
 
@@ -230,6 +231,8 @@ Số giờ là tổng theo tuần đã được xác nhận; không chia ngượ
 Trong cửa sổ metric đã truy vấn, tổng Errors lớn hơn tổng Invocations; nguyên nhân chưa được kết luận và không tính tỷ lệ lỗi. Đợt đọc chỉ kiểm tra metadata và truy vấn SELECT, **không triển khai mã mới, không đổi lịch và không gọi thử Lambda**. Đăng ký email đã xác nhận không đồng nghĩa có minh chứng email cảnh báo đã đến hộp thư. Xem [manifest và kết quả chi tiết](tuan_2/results/review_2026_10_16/README.md).
 
 **Cập nhật sau snapshot:** commit `36c9b39` đã được triển khai lên cả hai Lambda và đối chiếu hash module thành công. Bốn lượt gọi trực tiếp thu đủ 12 bản ghi; Athena đối chiếu khớp các dòng mới. Mỗi môi trường phát hai thông điệp SNS và người nhận xác nhận đã nhận email mới. Lịch dư của sinh viên Ngọc Quyên đã được tắt theo xác nhận, giữ một lịch một giờ ở mỗi môi trường. Xem [minh chứng triển khai và phạm vi kiểm chứng](docs/deployment-verification.md). Dữ liệu báo cáo đã lưu không bị thay thế.
+
+**Lượt chạy tự động:** đã theo dõi thêm một lượt theo lịch ở mỗi môi trường. Log Lambda bắt đầu lúc 14:51:02 đối với sinh viên Ngọc Quyên và 15:15:44 đối với sinh viên Tiến Sơn ngày 16/10, giờ Việt Nam; mỗi lượt thu ba bản ghi, phát hai thông điệp SNS và có xác nhận nhận email mới. [Metric rule, log, S3, Athena và SNS](docs/scheduled-run-verification.md) được đối chiếu riêng với các lượt gọi trực tiếp.
 
 ## Cấu trúc mã nguồn
 

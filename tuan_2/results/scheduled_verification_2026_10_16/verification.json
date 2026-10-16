@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "verification_date": "2026-10-16",
+  "source_commit": "36c9b3966a8b6f645dc6bb1491ad6e2b40a78765",
+  "source_module_sha256": "d9d0ad2584feef121234d634bf26bdc43097bb9b8798123cfd767023397ed3cf",
+  "function": "WeatherCollectorLambda",
+  "rule": "WeatherCollectionSchedule",
+  "region": "us-east-1",
+  "observed_from": "2026-10-16T07:33:00+00:00",
+  "completed_at": "2026-10-16T08:16:58.656305+00:00",
+  "direct_invocations_performed": 0,
+  "schedule_mutations_performed": 0,
+  "recipient_confirmation": {
+    "both_received_new_scheduled_run_email": true,
+    "evidence_type": "User confirmation in conversation; mailbox not inspected by agent"
+  },
+  "profiles": {
+    "default": {
+      "student": "Sinh viên Tiến Sơn",
+      "scheduled_run": {
+        "request_id": "b4f8b93f-722e-4fdb-b03d-4c2da2f3934f",
+        "started_at": "2026-10-16T08:15:44.037000+00:00",
+        "ended_at": "2026-10-16T08:15:45.949000+00:00",
+        "collection_status": "complete",
+        "records_collected": 3,
+        "alerts_sent": 2,
+        "sns_message_ids": [
+          "2f572519-f095-5355-8352-46522fe5530c",
+          "0be04aae-2e05-5b4e-b65b-29e5f1743b17"
+        ],
+        "s3_objects": [
+          {
+            "key": "raw/year=2026/month=10/day=16/data_20261016_1810726a.json",
+            "records": 3,
+            "sha256": "a8e0beaaa0f0c38808d71d2cbf14f17fb0cfa276fe905e8420f7015fc5beba78",
+            "last_modified": "2026-10-16T08:15:46+00:00",
+            "encryption": "AES256"
+          }
+        ],
+        "observations": [
+          {
+            "record_id": "HoChiMinh_20261016081544_e2f981",
+            "city": "HoChiMinh",
+            "timestamp_utc": "2026-10-16 08:15:44",
+            "timestamp_vn": "2026-10-16 15:15:44",
+            "collected_at": "2026-10-16T08:15:44.769164+00:00",
+            "us_aqi": 132,
+            "pm2_5": 23.9,
+            "aqi_category": "Unhealthy for Sensitive Groups"
+          },
+          {
+            "record_id": "HaNoi_20261016081545_92b3c6",
+            "city": "HaNoi",
+            "timestamp_utc": "2026-10-16 08:15:45",
+            "timestamp_vn": "2026-10-16 15:15:45",
+            "collected_at": "2026-10-16T08:15:45.336287+00:00",
+            "us_aqi": 102,
+            "pm2_5": 29.7,
+            "aqi_category": "Unhealthy for Sensitive Groups"
+          },
+          {
+            "record_id": "DaNang_20261016081545_c636d9",
+            "city": "DaNang",
+            "timestamp_utc": "2026-10-16 08:15:45",
+            "timestamp_vn": "2026-10-16 15:15:45",
+            "collected_at": "2026-10-16T08:15:45.827112+00:00",
+            "us_aqi": 90,
+            "pm2_5": 23.2,
+            "aqi_category": "Moderate"
+          }
+        ],
+        "duration_ms": 1911.98,
+        "max_memory_mb": 101,
+        "warning_count": 2,
+        "validation": "PASS",
+        "eventbridge_metrics": {
+          "TriggeredRules": [
+            {
+              "at": "2026-10-16T15:15:00+07:00",
+              "sum": 1.0
+            }
+          ],
+          "Invocations": [
+            {
+              "at": "2026-10-16T15:15:00+07:00",
+              "sum": 1.0
+            }
+          ],
+          "FailedInvocations": []
+        },
+        "correlated_rule_minute": "2026-10-16T15:15:00+07:00",
+        "rule_metric_resolution_seconds": 60,
+        "evidence_method": "AWS/Events canonical rule TriggeredRules and Invocations in the same or immediately preceding minute bucket to non-manual Lambda START/REPORT, complete result, SNS MessageIds and verified S3 object; no event payload captured; bucket timestamp is not precise delivery latency"
+      },
+      "source_identity_unchanged": true,
+      "athena": {
+        "query_id": "1c741e62-21e1-4f92-97cf-4e6c4ddfd092",
+        "validation": "PASS",
+        "matched_rows": 3,
+        "bytes_scanned": 8691
+      },
+      "metric_window": {
+        "start": "2026-10-16T08:15:00+00:00",
+        "end": "2026-10-16T08:16:00+00:00"
+      },
+      "metrics": {
+        "Invocations": {
+          "sum": 1.0,
+          "datapoints": 1
+        },
+        "Errors": {
+          "sum": 0.0,
+          "datapoints": 1
+        },
+        "Throttles": {
+          "sum": 0.0,
+          "datapoints": 1
+        },
+        "NumberOfMessagesPublished": {
+          "sum": 2.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsDelivered": {
+          "sum": 2.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsFailed": {
+          "sum": 0.0,
+          "datapoints": 1
+        }
+      },
+      "alarms": [
+        {
+          "name": "WeatherCollector-Errors-Alarm",
+          "state": "OK"
+        }
+      ],
+      "observed_at": "2026-10-16T08:17:21.173963+00:00",
+      "metric_status": "READY"
+    },
+    "quyen": {
+      "student": "Sinh viên Ngọc Quyên",
+      "scheduled_run": {
+        "request_id": "5d3e0439-5403-4e25-9363-b405f65fa2f4",
+        "started_at": "2026-10-16T07:51:02.086000+00:00",
+        "ended_at": "2026-10-16T07:51:05.040000+00:00",
+        "collection_status": "complete",
+        "records_collected": 3,
+        "alerts_sent": 2,
+        "sns_message_ids": [
+          "5f4a5748-b488-5125-9db9-34036d2f264c",
+          "4f3b30cd-5c92-5fe6-91b4-5386853a188f"
+        ],
+        "s3_objects": [
+          {
+            "key": "raw/year=2026/month=10/day=16/data_20261016_98d7ce2e.json",
+            "records": 3,
+            "sha256": "712692d60d4a924e94fae022b5beec0b94ddf8bded5ac14595973f615c7ed70d",
+            "last_modified": "2026-10-16T07:51:05+00:00",
+            "encryption": "AES256"
+          }
+        ],
+        "observations": [
+          {
+            "record_id": "HoChiMinh_20261016075103_d146f7",
+            "city": "HoChiMinh",
+            "timestamp_utc": "2026-10-16 07:51:03",
+            "timestamp_vn": "2026-10-16 14:51:03",
+            "collected_at": "2026-10-16T07:51:03.177434+00:00",
+            "us_aqi": 132,
+            "pm2_5": 24.7,
+            "aqi_category": "Unhealthy for Sensitive Groups"
+          },
+          {
+            "record_id": "HaNoi_20261016075104_deafaf",
+            "city": "HaNoi",
+            "timestamp_utc": "2026-10-16 07:51:04",
+            "timestamp_vn": "2026-10-16 14:51:04",
+            "collected_at": "2026-10-16T07:51:04.101785+00:00",
+            "us_aqi": 103,
+            "pm2_5": 29.6,
+            "aqi_category": "Unhealthy for Sensitive Groups"
+          },
+          {
+            "record_id": "DaNang_20261016075104_a5432e",
+            "city": "DaNang",
+            "timestamp_utc": "2026-10-16 07:51:04",
+            "timestamp_vn": "2026-10-16 14:51:04",
+            "collected_at": "2026-10-16T07:51:04.906741+00:00",
+            "us_aqi": 78,
+            "pm2_5": 24.7,
+            "aqi_category": "Moderate"
+          }
+        ],
+        "duration_ms": 2953.22,
+        "max_memory_mb": 101,
+        "warning_count": 2,
+        "validation": "PASS",
+        "eventbridge_metrics": {
+          "TriggeredRules": [
+            {
+              "at": "2026-10-16T14:50:00+07:00",
+              "sum": 1.0
+            }
+          ],
+          "Invocations": [
+            {
+              "at": "2026-10-16T14:50:00+07:00",
+              "sum": 1.0
+            }
+          ],
+          "FailedInvocations": []
+        },
+        "correlated_rule_minute": "2026-10-16T14:50:00+07:00",
+        "rule_metric_resolution_seconds": 60,
+        "evidence_method": "AWS/Events canonical rule TriggeredRules and Invocations in the same or immediately preceding minute bucket to non-manual Lambda START/REPORT, complete result, SNS MessageIds and verified S3 object; no event payload captured; bucket timestamp is not precise delivery latency"
+      },
+      "source_identity_unchanged": true,
+      "athena": {
+        "query_id": "3da11c4c-5ae5-4b99-90d1-40040e9d21cd",
+        "validation": "PASS",
+        "matched_rows": 3,
+        "bytes_scanned": 10428
+      },
+      "metric_window": {
+        "start": "2026-10-16T07:51:00+00:00",
+        "end": "2026-10-16T07:52:00+00:00"
+      },
+      "metrics": {
+        "Invocations": {
+          "sum": 1.0,
+          "datapoints": 1
+        },
+        "Errors": {
+          "sum": 0.0,
+          "datapoints": 1
+        },
+        "Throttles": {
+          "sum": 0.0,
+          "datapoints": 1
+        },
+        "NumberOfMessagesPublished": {
+          "sum": 2.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsDelivered": {
+          "sum": 4.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsFailed": {
+          "sum": 0.0,
+          "datapoints": 1
+        }
+      },
+      "alarms": [
+        {
+          "name": "WeatherCollector-Errors-Alarm",
+          "state": "OK"
+        }
+      ],
+      "observed_at": "2026-10-16T07:53:42.675402+00:00",
+      "metric_status": "READY"
+    }
+  }
+}
