@@ -56,8 +56,9 @@ ORIGINAL_REQUEST.md
 /docs/worklog.csv
 /tuan_1/docs/worklog.csv
 /tuan_2/docs/worklog.csv
-/tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.docx
-/tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_Nhom_05.pdf
-/tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_Nhom_05.xlsx
-/tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.docx
-/tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_Nhom_05.pdf
+/tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_*.docx
+/tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_*.pdf
+/tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_*.xlsx
+/tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_*.docx
+/tuan_2/docs/Bao_cao_tuan_2_Dien_toan_dam_may_*.pdf
+/tuan_1/docs/PHAN_CONG_*.md
