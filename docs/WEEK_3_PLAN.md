@@ -6,6 +6,17 @@ Hoàn thiện và kiểm chứng liên thông luồng **EventBridge → Lambda �
 
 Đợt kiểm chứng ngày 16/10/2026 ghi nhận hai hàm Lambda ở trạng thái Active, S3 Data Lake phân vùng theo ngày, AWS Glue Catalog bảng 20 cột và các truy vấn Athena thành công. Các mục tiêu kiểm chứng và tối ưu trong Tuần 3 tập trung vào 4 trụ cột dưới đây.
 
+## Hai hạng mục ưu tiên và kết quả bổ sung
+
+Theo góp ý của giảng viên, ưu tiên trước hết là đồng bộ mã Lambda đang chạy với repository và kiểm chứng cảnh báo SNS tới email người nhận. Đợt triển khai và theo dõi ngày 16/10 đã có kết quả cho cả hai hạng mục:
+
+| Ưu tiên | Kết quả đã kiểm chứng | Minh chứng mở trực tiếp |
+| --- | --- | --- |
+| Đồng bộ mã thực chạy | Cả hai module Lambda tải lại từ AWS khớp source commit `36c9b39`; cấu hình hàm được giữ nguyên, gói cũ được sao lưu cục bộ | [Triển khai và hash](deployment-verification.md) · [JSON](../tuan_2/results/deployment_2026_10_16/verification.json) |
+| Cảnh báo tới email | Mỗi môi trường có một lượt theo lịch thu ba bản ghi, phát hai thông điệp SNS; metric ghi nhận giao thông báo và người nhận xác nhận email mới | [Lượt chạy tự động](scheduled-run-verification.md) · [JSON](../tuan_2/results/scheduled_verification_2026_10_16/verification.json) |
+
+Đây là kết quả tại các lượt kiểm chứng đã lưu, không phải kết luận vận hành ổn định nhiều ngày. Các phần mở rộng ở bốn trụ cột và trạng thái từng mã việc bên dưới được theo dõi riêng; chưa đánh dấu toàn bộ Tuần 3 hoàn thành.
+
 ## Bốn trụ cột chiến lược Tuần 3
 
 1. **Trụ cột 1: Tích hợp CI/CD tự động hóa kiểm thử và kiểm tra chất lượng dữ liệu**:
@@ -36,6 +47,21 @@ Hoàn thiện và kiểm chứng liên thông luồng **EventBridge → Lambda �
 | **W3-08** | Tích hợp CI/CD tự động và rà soát hồ sơ repo GitHub | Trụ cột 1 | Cả hai sinh viên | Workflow GitHub Actions và README Tuần 3 | Mã, dữ liệu và commit mở được; các kiểm tra được cấu hình trong workflow đạt PASS trên CI |
 
 Hai sinh viên phối hợp đối chiếu ở tất cả đầu việc. W3-01 và W3-02 đi trước W3-03; W3-03 cung cấp đầu vào cho W3-04/W3-07. W3-05 và W3-06 theo dõi cùng phiên bản triển khai. W3-08 tổng hợp sau khi các kết quả được đối chiếu.
+
+## Tiến độ theo minh chứng đã có
+
+Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc với hồ sơ hiện có sau đợt ngày 16/10; không suy ra số giờ làm việc từ commit hoặc thời gian chạy chương trình.
+
+| Mã việc | Trạng thái có thể xác nhận | Minh chứng và phần còn lại |
+| --- | --- | --- |
+| W3-01 | Đã đạt tại đợt triển khai | [Source, hash module và sao lưu trước cập nhật](deployment-verification.md#phiên-bản-được-triển-khai); tiếp tục đối chiếu nếu mã thay đổi |
+| W3-02 | Đạt phần chuẩn hóa lịch và một lượt tự động mỗi môi trường | [Rule/target và các lượt theo lịch](scheduled-run-verification.md); còn theo dõi các lượt liên tiếp để đánh giá độ ổn định |
+| W3-03 | Chưa có minh chứng nghiệm thu tối ưu | Chưa có bảng so sánh Partition Projection/Parquet trên cùng tập dữ liệu; việc bổ sung phân vùng ngày để đọc dữ liệu mới chưa phải tối ưu này |
+| W3-04 | Đã đối chiếu dữ liệu của các lượt kiểm chứng | [S3/Athena và thời gian bản ghi mới](scheduled-run-verification.md#thời-điểm-và-kết-quả-thu-thập); còn bộ kiểm tra chất lượng và CSV tổng hợp dành cho Tuần 3 |
+| W3-05 | Đạt phần đọc metric cùng cửa sổ | [Lambda/SNS và trạng thái Alarm](deployment-verification.md#cảnh-báo-và-email); còn nghiệm thu Dashboard thời gian thực theo tiêu chí đã đặt |
+| W3-06 | Đạt luồng email; chưa hoàn thành đa kênh | [Vượt ngưỡng → Publish → giao thông báo → xác nhận người nhận](scheduled-run-verification.md#cảnh-báo-và-giám-sát); SMS/Webhook vẫn là phần chưa được nghiệm thu |
+| W3-07 | Chưa có minh chứng nghiệm thu dự báo | Chưa có kết quả dự báo và sai số trên tập giữ lại đáp ứng tiêu chí; không dùng mẫu ngắn để tuyên bố dự báo đã đạt |
+| W3-08 | CI đã có kết quả; chưa có minh chứng CD tự động | [Workflow](../.github/workflows/verify-repository.yml) và [CI của commit lưu lượt theo lịch](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/38873083277); workflow hiện kiểm tra hồ sơ/chức năng/phân tích, chưa có bước tự triển khai Lambda. Còn hoàn thiện hồ sơ tổng kết Tuần 3 |
 
 ## Điều kiện và hồ sơ kết thúc
 

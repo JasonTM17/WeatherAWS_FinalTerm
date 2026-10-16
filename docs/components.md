@@ -1,6 +1,18 @@
 # Mã nguồn và lịch sử theo từng thành phần AWS
 
-Các đường dẫn mở trực tiếp mã nguồn trên GitHub (Blob URL) và mốc commit liên quan. Trạng thái kiểm chứng tài nguyên AWS thực tế được đối chiếu riêng trong [hồ sơ kiểm chứng](../tuan_2/results/review_2026_10_16/README.md).
+Các đường dẫn mở trực tiếp mã nguồn trên GitHub (Blob URL) và mốc commit liên quan. Các mốc hình thành thành phần được giữ trong bảng bên dưới; kết quả đồng bộ mã và cảnh báo sau đó được đối chiếu tại [hồ sơ triển khai](deployment-verification.md) và [lượt chạy tự động](scheduled-run-verification.md). [Snapshot trước triển khai](../tuan_2/results/review_2026_10_16/README.md) được giữ riêng theo thời điểm đọc.
+
+## Ba mốc hoàn thiện gần đây
+
+| Commit | Nội dung thực sự thay đổi | Kết quả liên quan |
+| --- | --- | --- |
+| [36c9b39](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/36c9b3966a8b6f645dc6bb1491ad6e2b40a78765) | Sửa `collected_at` của dữ liệu lịch sử, chuyển offset về UTC trước khi xác định phân vùng, bổ sung hồi quy và tài liệu | Đây là phiên bản mã được triển khai; riêng commit mã chưa thay thế minh chứng AWS |
+| [4a72d02](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/4a72d0260ce7fbe5ff681e8ec73d17c03ab8859b) | Lưu tài liệu và JSON đối chiếu module, bốn lượt gọi trực tiếp, S3/Athena, SNS và xác nhận email | [Minh chứng triển khai](deployment-verification.md); commit này ghi hồ sơ, không phải một phiên bản mã Lambda khác |
+| [3d6dfee](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/3d6dfeed922fa9d63d4659419bb75be675429c9a) | Lưu hai lượt theo lịch sau triển khai, metric rule/Lambda/SNS, sáu bản ghi và kết quả Athena | [Minh chứng tự động](scheduled-run-verification.md); người nhận xác nhận email mới của các lượt này |
+
+[Thân báo cáo tiến độ](../BAO_CAO.md#nội-dung-báo-cáo-tiến-độ) có ba liên kết commit trực tiếp gắn với từng kết quả để thuận tiện đối chiếu.
+
+## Thành phần và phân công
 
 | Thành phần | Tệp cục bộ và vai trò kỹ thuật | Phụ trách chính | Blob URL trên GitHub | Commit minh chứng |
 | :--- | :--- | :--- | :--- | :--- |

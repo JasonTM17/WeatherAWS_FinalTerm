@@ -27,3 +27,13 @@ Lịch sử Git ghi nhận các lần cập nhật sản phẩm; tên người c
 [Đợt kiểm chứng mới](../tuan_2/results/review_2026_10_16/README.md) giữ riêng số liệu được tải lại. Không cộng hai lần những quan trắc đã có trong bộ cũ.
 
 [Mã nguồn và commit](components.md) · [Kế hoạch Tuần 3](WEEK_3_PLAN.md) · [Danh mục CSV](csv_catalog.csv)
+
+## Minh chứng bổ sung cho hai hạng mục ưu tiên Tuần 3
+
+| Mốc sản phẩm | Kết quả ghi nhận | Liên kết |
+| --- | --- | --- |
+| Mã thu thập đã hoàn thiện | Sửa thời điểm thu thập lịch sử và chuyển múi giờ trước phân vùng | [Commit mã 36c9b39](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/36c9b3966a8b6f645dc6bb1491ad6e2b40a78765) |
+| Triển khai và gọi trực tiếp | Module của hai Lambda khớp source; bốn lượt gọi thu 12 bản ghi, dữ liệu đối chiếu được bằng Athena; có SNS và xác nhận email | [Kết quả triển khai](deployment-verification.md) |
+| Theo dõi lịch tự động | Một lượt mỗi môi trường, tổng sáu bản ghi và bốn thông điệp SNS; người nhận xác nhận email mới | [Kết quả theo lịch](scheduled-run-verification.md) |
+
+Các mốc trên bổ sung minh chứng kỹ thuật; không tự cộng vào 38,0 giờ Tuần 1–2 đã xác nhận. Chưa điền số giờ Tuần 3 khi sinh viên chưa xác nhận thời gian thực tế. [Bảng tiến độ W3-01–W3-08](WEEK_3_PLAN.md#tiến-độ-theo-minh-chứng-đã-có) nêu rõ phần đã đạt và phần còn lại.

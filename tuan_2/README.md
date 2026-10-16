@@ -16,7 +16,7 @@ Chúng em hoàn thiện luồng thu thập, phân tích AQI và kiểm tra dữ 
 | Phân tích và đối chiếu | [Chương trình phân tích](analytics/analyze_week2_accounts.py) | [27 CSV](results/week2_analysis/) |
 | Trực quan hóa | [Chương trình dựng hình](analytics/generate_week2_charts.py) | [20 hình và manifest nguồn](results/week2_charts/) |
 
-Mã hiện tại bổ sung kiểm tra phản hồi API, timeout theo thời gian Lambda còn lại, bảo vệ tệp CSV cũ khi xuất lỗi, ghép cặp hợp lệ khi tính tương quan và tránh tạo hình khi import module. [Giải thích code và lý do thiết lập](../docs/source-guide.md). Commit `36c9b39` đã được triển khai lên cả hai Lambda; module tải lại từ AWS khớp source. [Minh chứng thu thập, Athena và cảnh báo](../docs/deployment-verification.md) được giữ riêng với bộ dữ liệu đã dùng lập báo cáo.
+Mã hiện tại bổ sung kiểm tra phản hồi API, timeout theo thời gian Lambda còn lại, bảo vệ tệp CSV cũ khi xuất lỗi, ghép cặp hợp lệ khi tính tương quan và tránh tạo hình khi import module. [Giải thích code và lý do thiết lập](../docs/source-guide.md). Mã tại commit [36c9b39](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/36c9b3966a8b6f645dc6bb1491ad6e2b40a78765) đã được triển khai lên cả hai Lambda; module tải lại từ AWS khớp source. [Minh chứng thu thập, Athena và cảnh báo](../docs/deployment-verification.md) được giữ riêng với bộ dữ liệu đã dùng lập báo cáo.
 
 ## Phân công và số giờ
 
@@ -68,11 +68,11 @@ Mẫu Hà Nội có 9/9 và 19/19 lượt thỏa ngưỡng cấu hình `AQI >= 1
 
 Đợt ngày 16/10 đọc được 13 nhóm thông tin dịch vụ ở mỗi môi trường và 14/14 SELECT thành công. CSV mới xác nhận mẫu Tuần 2 tăng lên 39/75 lượt ghi. [Manifest và bảng kết quả](results/review_2026_10_16/README.md) nêu mã truy vấn, thời gian tải, SHA-256, cấu hình, số đối tượng và phân vùng.
 
-Tại snapshot trước triển khai, hai hàm Active nhưng mã chưa đồng bộ, hai Alarm thiếu dữ liệu và sinh viên Ngọc Quyên có hai lịch bật. Đợt đọc đó chỉ kiểm tra trạng thái. Trong [đợt triển khai tiếp theo](../docs/deployment-verification.md), source được đồng bộ; mỗi môi trường thu sáu bản ghi qua hai lượt gọi, Athena đối chiếu khớp và SNS phát hai thông điệp. Người nhận xác nhận cả hai bên nhận email mới. Lịch dư được tắt theo xác nhận; mỗi môi trường giữ một lịch một giờ. Alarm ở trạng thái OK tại lần đọc cuối.
+Tại snapshot trước triển khai, hai hàm Active nhưng mã chưa đồng bộ, hai Alarm thiếu dữ liệu và sinh viên Ngọc Quyên có hai lịch bật. Đợt đọc đó chỉ kiểm tra trạng thái. Trong [đợt triển khai tiếp theo](../docs/deployment-verification.md), source được đồng bộ; mỗi môi trường thu sáu bản ghi qua hai lượt gọi, Athena đối chiếu khớp và SNS phát hai thông điệp. Người nhận xác nhận cả hai bên nhận email mới. Lịch dư được tắt theo xác nhận; mỗi môi trường giữ một lịch một giờ. Alarm ở trạng thái OK tại lần đọc cuối. Commit [4a72d02](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/4a72d0260ce7fbe5ff681e8ec73d17c03ab8859b) lưu hồ sơ và JSON kiểm chứng của đợt này.
 
 ## Kết luận và hồ sơ đầy đủ
 
-Tuần 2 đã có mã cho luồng thu thập/phân tích, các kết quả truy vấn truy được về raw, bảng thống kê và hình dùng cùng nguồn. Sau đợt triển khai, [hai lượt chạy theo lịch](../docs/scheduled-run-verification.md) được đối chiếu với metric EventBridge, log Lambda, sáu bản ghi mới và bốn thông điệp SNS; người nhận xác nhận email mới. Kết quả thống kê vẫn mô tả đúng các bộ mẫu đã lưu; hai lượt kiểm chứng chưa chứng minh vận hành ổn định nhiều ngày. Tuần 3 tiếp tục các tiêu chí tích hợp và giám sát còn lại.
+Tuần 2 đã có mã cho luồng thu thập/phân tích, các kết quả truy vấn truy được về raw, bảng thống kê và hình dùng cùng nguồn. Sau đợt triển khai, [hai lượt chạy theo lịch](../docs/scheduled-run-verification.md) được đối chiếu với metric EventBridge, log Lambda, sáu bản ghi mới và bốn thông điệp SNS; người nhận xác nhận email mới. Commit [3d6dfee](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/3d6dfeed922fa9d63d4659419bb75be675429c9a) lưu minh chứng của hai lượt tự động. Kết quả thống kê vẫn mô tả đúng các bộ mẫu đã lưu; hai lượt kiểm chứng chưa chứng minh vận hành ổn định nhiều ngày. [Tiến độ Tuần 3](../docs/WEEK_3_PLAN.md#tiến-độ-theo-minh-chứng-đã-có) phân biệt hai ưu tiên đã có kết quả với các phần mở rộng còn lại.
 
 [Báo cáo chi tiết trên GitHub](docs/FINAL_REPORT.md) · [CSV Athena đã lưu](results/week2_live/) · [27 CSV phân tích](results/week2_analysis/) · [20 biểu đồ](results/week2_charts/) · [Raw và metadata đã lưu](results/week2_evidence/)
 
