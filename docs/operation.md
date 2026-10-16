@@ -1,5 +1,7 @@
 # Cài đặt và vận hành
 
+[Kết quả triển khai và kiểm chứng thực tế](deployment-verification.md) ghi phiên bản Lambda, dữ liệu mới, cảnh báo và trạng thái lịch sau khi triển khai.
+
 Chạy từ thư mục gốc repository với Python 3.12 trở lên.
 
 [tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt) cài boto3, NumPy và Matplotlib cho SDK, phân tích và biểu đồ. Tệp phụ thuộc trong `tuan_2/lambda/` mô tả phạm vi phát triển Lambda. Xem [sơ đồ mã nguồn](repository-layout.md).
@@ -28,6 +30,8 @@ Tùy chọn `--email` của `deploy` hoặc `setup-sns` đăng ký địa chỉ 
 Thư mục `output/` được Git bỏ qua để lưu các lượt xuất tùy chọn. Luôn chỉ định `--output` khi cần giữ riêng kết quả mới; các mặc định tương thích vẫn trỏ tới thư mục kết quả trong `tuan_2/`. Không dùng thư mục dữ liệu đã nộp làm đích xuất mới.
 
 `verify` đọc trạng thái Lambda, lịch, S3 và bảng Glue; không tự kích hoạt thu thập. Chức năng Lambda xử lý hiện tại theo sự kiện mặc định; sự kiện có `backfill_hours` yêu cầu nạp bù lịch sử.
+
+Lambda lưu dữ liệu theo ngày UTC trên S3 nhưng chưa tự đăng ký phân vùng Glue. Khi có ngày mới, cần cập nhật catalog trước khi dùng Athena đọc ngày đó. Điểm vào `python tuan_2/scripts/aws_project.py setup-catalog --region us-east-1` có bước `MSCK REPAIR TABLE`; chọn đúng profile AWS của môi trường cần cập nhật. Sau đó chạy SELECT lọc theo ngày và đối chiếu record_id với đối tượng S3, không dùng số dòng của báo cáo cũ làm kết quả kiểm chứng mới.
 
 Khi cập nhật Lambda đã tồn tại, `deploy-lambda` đặt lại runtime Python 3.12, handler `lambda_function.lambda_handler`, bộ nhớ 256 MB và timeout 60 giây. Các biến môi trường riêng được giữ, còn tên bucket, secret và topic được cập nhật theo dự án.
 

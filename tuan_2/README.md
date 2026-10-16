@@ -16,7 +16,7 @@ Chúng em hoàn thiện luồng thu thập, phân tích AQI và kiểm tra dữ 
 | Phân tích và đối chiếu | [Chương trình phân tích](analytics/analyze_week2_accounts.py) | [27 CSV](results/week2_analysis/) |
 | Trực quan hóa | [Chương trình dựng hình](analytics/generate_week2_charts.py) | [20 hình và manifest nguồn](results/week2_charts/) |
 
-Mã hiện tại bổ sung kiểm tra phản hồi API, timeout theo thời gian Lambda còn lại, bảo vệ tệp CSV cũ khi xuất lỗi, ghép cặp hợp lệ khi tính tương quan và tránh tạo hình khi import module. [Giải thích code và lý do thiết lập](../docs/source-guide.md). Những sửa đổi này đã có kiểm tra cục bộ; hash mới đọc cho thấy chúng chưa trùng phiên bản Lambda đang triển khai.
+Mã hiện tại bổ sung kiểm tra phản hồi API, timeout theo thời gian Lambda còn lại, bảo vệ tệp CSV cũ khi xuất lỗi, ghép cặp hợp lệ khi tính tương quan và tránh tạo hình khi import module. [Giải thích code và lý do thiết lập](../docs/source-guide.md). Commit `36c9b39` đã được triển khai lên cả hai Lambda; module tải lại từ AWS khớp source. [Minh chứng thu thập, Athena và cảnh báo](../docs/deployment-verification.md) được giữ riêng với bộ dữ liệu đã dùng lập báo cáo.
 
 ## Phân công và số giờ
 
@@ -68,11 +68,11 @@ Mẫu Hà Nội có 9/9 và 19/19 lượt thỏa ngưỡng cấu hình `AQI >= 1
 
 Đợt ngày 16/10 đọc được 13 nhóm thông tin dịch vụ ở mỗi môi trường và 14/14 SELECT thành công. CSV mới xác nhận mẫu Tuần 2 tăng lên 39/75 lượt ghi. [Manifest và bảng kết quả](results/review_2026_10_16/README.md) nêu mã truy vấn, thời gian tải, SHA-256, cấu hình, số đối tượng và phân vùng.
 
-Hai hàm Active nhưng mã đang chạy khác mã repo; hai Alarm thiếu dữ liệu. Errors/Invocations chưa nhất quán và sinh viên Ngọc Quyên có hai lịch bật. Đợt đọc này không triển khai, đổi lịch hoặc gọi Lambda. Các việc tích hợp và giám sát cần kiểm chứng tiếp được đưa vào [kế hoạch Tuần 3](../docs/WEEK_3_PLAN.md).
+Tại snapshot trước triển khai, hai hàm Active nhưng mã chưa đồng bộ, hai Alarm thiếu dữ liệu và sinh viên Ngọc Quyên có hai lịch bật. Đợt đọc đó chỉ kiểm tra trạng thái. Trong [đợt triển khai tiếp theo](../docs/deployment-verification.md), source được đồng bộ; mỗi môi trường thu sáu bản ghi qua hai lượt gọi, Athena đối chiếu khớp và SNS phát hai thông điệp. Người nhận xác nhận cả hai bên nhận email mới. Lịch dư được tắt theo xác nhận; mỗi môi trường giữ một lịch một giờ. Alarm ở trạng thái OK tại lần đọc cuối.
 
 ## Kết luận và hồ sơ đầy đủ
 
-Tuần 2 đã có mã cho luồng thu thập/phân tích, các kết quả truy vấn truy được về raw, bảng thống kê và hình dùng cùng nguồn. Kết quả mô tả hai bộ mẫu; chưa chứng minh vận hành liên tục, hoàn tất luồng nhận email hoặc triển khai phiên bản mã mới. Tuần 3 sẽ tập trung tích hợp và giám sát theo các tiêu chí cụ thể.
+Tuần 2 đã có mã cho luồng thu thập/phân tích, các kết quả truy vấn truy được về raw, bảng thống kê và hình dùng cùng nguồn. Đợt triển khai bổ sung xác nhận source mới, các lượt thu thập trực tiếp và cảnh báo có người nhận xác nhận. Kết quả thống kê vẫn mô tả đúng các bộ mẫu đã lưu; chưa chứng minh vận hành liên tục hoặc lượt kích hoạt tự động sau triển khai. Tuần 3 tiếp tục các tiêu chí tích hợp và giám sát còn lại.
 
 [Báo cáo chi tiết trên GitHub](docs/FINAL_REPORT.md) · [CSV Athena đã lưu](results/week2_live/) · [27 CSV phân tích](results/week2_analysis/) · [20 biểu đồ](results/week2_charts/) · [Raw và metadata đã lưu](results/week2_evidence/)
 

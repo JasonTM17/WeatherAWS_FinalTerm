@@ -27,6 +27,7 @@
 | Kiến trúc và mã nguồn | [Sơ đồ kiến trúc](docs/architecture.md) · [Hướng dẫn đọc mã](docs/source-guide.md) · [Cấu trúc repository](docs/repository-layout.md) · [Chỉ mục thành phần và commit](docs/components.md) |
 | Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Minh chứng vận hành đã lưu](docs/saved-evidence.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
 | AWS và kế hoạch tiếp theo | [Snapshot AWS ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) · [Kế hoạch Tuần 3](docs/WEEK_3_PLAN.md) |
+| Triển khai đã kiểm chứng | [Mã Lambda, thu thập thực tế, Athena và email cảnh báo](docs/deployment-verification.md) |
 
 [Phạm vi](#mục-tiêu-và-phạm-vi) · [Luồng xử lý](#luồng-xử-lý-dữ-liệu) · [Mô hình và phương pháp](#mô-hình-dữ-liệu-và-phương-pháp) · [Kết quả từng tuần](#kết-quả-theo-tuần) · [Đối chiếu hai tuần](#đối-chiếu-bộ-báo-cáo-tuần-1-và-mẫu-tuần-2) · [Mã nguồn](#cấu-trúc-mã-nguồn) · [Cài đặt và kiểm tra](#cài-đặt-và-kiểm-tra) · [Kế hoạch](#kế-hoạch-tiếp-theo)
 
@@ -228,6 +229,8 @@ Số giờ là tổng theo tuần đã được xác nhận; không chia ngượ
 
 Trong cửa sổ metric đã truy vấn, tổng Errors lớn hơn tổng Invocations; nguyên nhân chưa được kết luận và không tính tỷ lệ lỗi. Đợt đọc chỉ kiểm tra metadata và truy vấn SELECT, **không triển khai mã mới, không đổi lịch và không gọi thử Lambda**. Đăng ký email đã xác nhận không đồng nghĩa có minh chứng email cảnh báo đã đến hộp thư. Xem [manifest và kết quả chi tiết](tuan_2/results/review_2026_10_16/README.md).
 
+**Cập nhật sau snapshot:** commit `36c9b39` đã được triển khai lên cả hai Lambda và đối chiếu hash module thành công. Bốn lượt gọi trực tiếp thu đủ 12 bản ghi; Athena đối chiếu khớp các dòng mới. Mỗi môi trường phát hai thông điệp SNS và người nhận xác nhận đã nhận email mới. Lịch dư của sinh viên Ngọc Quyên đã được tắt theo xác nhận, giữ một lịch một giờ ở mỗi môi trường. Xem [minh chứng triển khai và phạm vi kiểm chứng](docs/deployment-verification.md). Dữ liệu báo cáo đã lưu không bị thay thế.
+
 ## Cấu trúc mã nguồn
 
 | Đường dẫn | Vai trò |
@@ -291,7 +294,7 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 - Dữ liệu chất lượng không khí từ Open-Meteo dựa trên mô hình CAMS; đây không phải phép đo tại trạm quan trắc cụ thể.
 - Bộ Tuần 2 đã lưu chỉ có dữ liệu ở hai ngày và chín khung giờ. Tỷ lệ, trung bình và tương quan trong báo cáo mô tả đúng mẫu đã lưu, không đại diện cho toàn tuần hoặc xu hướng dài hạn.
 - Các ngưỡng AQI và PM2.5 là cấu hình của đồ án. SNS nhận thông điệp hoặc có đăng ký đã xác nhận không chứng minh email được gửi tới, nhận hoặc đọc.
-- Snapshot ngày 16/10 ghi nhận hai Alarm đang INSUFFICIENT_DATA và mã Lambda trên AWS khác mã nguồn hiện tại; không tuyên bố mã trong repository đã được triển khai.
+- Snapshot trước triển khai ngày 16/10 ghi nhận Alarm INSUFFICIENT_DATA và mã Lambda chưa đồng bộ. [Đợt triển khai tiếp theo](docs/deployment-verification.md) xác nhận module đã đồng bộ, các lượt gọi trực tiếp thành công và Alarm OK tại lần đọc cuối; chưa chứng minh vận hành liên tục nhiều ngày.
 - Cost Explorer có cờ Estimated; số hiển thị không thay cho hóa đơn cuối cùng. Mức dự kiến do sinh viên xác nhận được báo riêng.
 - Giá trị thiếu/không chuyển đổi được có thể đi qua chính sách mặc định của mã nguồn. Khi diễn giải số 0, hãy đối chiếu dữ liệu gốc, quy tắc chuẩn hóa và bảng chất lượng dữ liệu.
 - Tương quan không chứng minh quan hệ nhân quả. Mẫu ít và thời điểm lấy mẫu khác nhau cần được nêu cùng mọi kết luận so sánh.
@@ -299,6 +302,8 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 ## Kế hoạch tiếp theo
 
 Tuần 3 tập trung tích hợp và giám sát theo [tám đầu việc W3-01–W3-08](docs/WEEK_3_PLAN.md). Các phần dưới đây là kế hoạch, được đánh giá bằng sản phẩm và số đo sau khi thực hiện.
+
+[Đợt triển khai ngày 16/10](docs/deployment-verification.md) đã có bằng chứng đồng bộ mã, chỉnh lịch dư và kiểm chứng cảnh báo qua các lượt gọi trực tiếp. Các tiêu chí theo dõi lịch tự động, vận hành dài hạn và tối ưu truy vấn vẫn cần thực hiện; kết quả này không đồng nghĩa toàn bộ kế hoạch Tuần 3 đã hoàn thành.
 
 | Hướng công việc | Kết quả cần kiểm chứng |
 | --- | --- |

@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "source_commit": "36c9b3966a8b6f645dc6bb1491ad6e2b40a78765",
+  "source_module_sha256": "d9d0ad2584feef121234d634bf26bdc43097bb9b8798123cfd767023397ed3cf",
+  "region": "us-east-1",
+  "function": "WeatherCollectorLambda",
+  "verification_date": "2026-10-16",
+  "recipient_confirmation": {
+    "received_by_both_students": true,
+    "evidence_type": "User confirmation in conversation; mailbox not inspected by agent"
+  },
+  "scope": "Direct realtime and historical invocations; EventBridge configuration inspected, post-release scheduled execution not observed",
+  "profiles": {
+    "default": {
+      "student": "Sinh viên Tiến Sơn",
+      "deployment": {
+        "verified_at": "2026-10-16T07:25:20.755237+00:00",
+        "module_sha256": "d9d0ad2584feef121234d634bf26bdc43097bb9b8798123cfd767023397ed3cf",
+        "source_matches": true,
+        "configuration_unchanged": true,
+        "state": "Active",
+        "last_update_status": "Successful"
+      },
+      "confirmed_subscriptions": 1,
+      "invocations": {
+        "realtime": {
+          "started_at": "2026-10-16T07:25:55.052163+00:00",
+          "ended_at": "2026-10-16T07:25:57.896570+00:00",
+          "status_code": 200,
+          "function_error": null,
+          "request_id": "480b33d1-fe48-4737-9b53-ce4630aa9976",
+          "collection_status": "complete",
+          "records_collected": 3,
+          "failed_cities": [],
+          "alerts_sent": 2,
+          "sns_message_ids": [
+            "f8214c38-acd3-547f-98b2-2f737f14243b",
+            "328468a5-8621-5ded-911d-0bee55e61da9"
+          ],
+          "saved_files": [
+            {
+              "s3_key": "raw/year=2026/month=10/day=16/data_20261016_edfeeaf5.json",
+              "count": 3
+            }
+          ],
+          "s3_objects": [
+            {
+              "key": "raw/year=2026/month=10/day=16/data_20261016_edfeeaf5.json",
+              "records": 3,
+              "sha256": "e4d97aa7de7e6edf084aca15402bd37644b57362445eb3738ad25a7183ea2568",
+              "last_modified": "2026-10-16T07:26:01+00:00",
+              "content_type": "application/json",
+              "encryption": "AES256"
+            }
+          ],
+          "observations": [
+            {
+              "city": "HoChiMinh",
+              "timestamp_utc": "2026-10-16 07:25:59",
+              "timestamp_vn": "2026-10-16 14:25:59",
+              "collected_at": "2026-10-16T07:25:59.068371+00:00",
+              "us_aqi": 132,
+              "pm2_5": 24.7,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "HaNoi",
+              "timestamp_utc": "2026-10-16 07:25:59",
+              "timestamp_vn": "2026-10-16 14:25:59",
+              "collected_at": "2026-10-16T07:25:59.641098+00:00",
+              "us_aqi": 103,
+              "pm2_5": 29.6,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "DaNang",
+              "timestamp_utc": "2026-10-16 07:26:00",
+              "timestamp_vn": "2026-10-16 14:26:00",
+              "collected_at": "2026-10-16T07:26:00.102900+00:00",
+              "us_aqi": 78,
+              "pm2_5": 24.7,
+              "aqi_category": "Moderate"
+            }
+          ],
+          "validation": "PASS"
+        },
+        "historical": {
+          "started_at": "2026-10-16T07:27:40.501979+00:00",
+          "ended_at": "2026-10-16T07:27:42.394931+00:00",
+          "status_code": 200,
+          "aws_response_date": "Fri, 16 Oct 2026 07:27:44 GMT",
+          "function_error": null,
+          "request_id": "a0f80a73-5316-4a81-ae17-371230638594",
+          "collection_status": "complete",
+          "records_collected": 3,
+          "failed_cities": [],
+          "alerts_sent": 0,
+          "sns_message_ids": [],
+          "saved_files": [
+            {
+              "s3_key": "raw/year=2026/month=10/day=15/data_20261015_ef427825.json",
+              "count": 3
+            }
+          ],
+          "s3_objects": [
+            {
+              "key": "raw/year=2026/month=10/day=15/data_20261015_ef427825.json",
+              "records": 3,
+              "sha256": "ff43ed3720dc9f71abe5624379404ce327c7dd84d3cc31bdd2ce84061e79608d",
+              "last_modified": "2026-10-16T07:27:45+00:00",
+              "content_type": "application/json",
+              "encryption": "AES256"
+            }
+          ],
+          "observations": [
+            {
+              "city": "HoChiMinh",
+              "timestamp_utc": "2026-10-15 23:00:00",
+              "timestamp_vn": "2026-10-16 06:00:00",
+              "collected_at": "2026-10-16T07:27:43.734436+00:00",
+              "us_aqi": 120,
+              "pm2_5": 64.0,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "HaNoi",
+              "timestamp_utc": "2026-10-15 23:00:00",
+              "timestamp_vn": "2026-10-16 06:00:00",
+              "collected_at": "2026-10-16T07:27:44.165340+00:00",
+              "us_aqi": 120,
+              "pm2_5": 44.1,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "DaNang",
+              "timestamp_utc": "2026-10-15 23:00:00",
+              "timestamp_vn": "2026-10-16 06:00:00",
+              "collected_at": "2026-10-16T07:27:44.612636+00:00",
+              "us_aqi": 64,
+              "pm2_5": 18.9,
+              "aqi_category": "Moderate"
+            }
+          ],
+          "validation": "PASS"
+        }
+      },
+      "observed_at": "2026-10-16T07:32:20.367665+00:00",
+      "metric_window": {
+        "start": "2026-10-16T07:24:55.052163+00:00",
+        "end": "2026-10-16T07:32:55.220193+00:00"
+      },
+      "metrics": {
+        "Invocations": {
+          "sum": 2.0,
+          "datapoints": 2
+        },
+        "Errors": {
+          "sum": 0.0,
+          "datapoints": 2
+        },
+        "Throttles": {
+          "sum": 0.0,
+          "datapoints": 2
+        },
+        "NumberOfMessagesPublished": {
+          "sum": 2.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsDelivered": {
+          "sum": 2.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsFailed": {
+          "sum": 0.0,
+          "datapoints": 1
+        }
+      },
+      "alarms": [
+        {
+          "name": "WeatherCollector-Errors-Alarm",
+          "state": "OK",
+          "metric": "Errors"
+        }
+      ],
+      "eventbridge_routes": [
+        {
+          "rule": "WeatherCollectionSchedule",
+          "state": "ENABLED",
+          "schedule": "rate(1 hour)",
+          "lambda_targets": 1,
+          "invoke_permission": true,
+          "custom_input": false
+        }
+      ],
+      "invocation_reports": [
+        {
+          "mode": "realtime",
+          "request_id": "480b33d1-fe48-4737-9b53-ce4630aa9976",
+          "log_events": 3,
+          "report_found": true,
+          "duration_ms": 1913.35,
+          "max_memory_mb": 101
+        },
+        {
+          "mode": "historical",
+          "request_id": "a0f80a73-5316-4a81-ae17-371230638594",
+          "log_events": 3,
+          "report_found": true,
+          "duration_ms": 1618.63,
+          "max_memory_mb": 102
+        }
+      ],
+      "athena": {
+        "required_partitions": [
+          [
+            "2026",
+            "10",
+            "15"
+          ],
+          [
+            "2026",
+            "10",
+            "16"
+          ]
+        ],
+        "created_partitions": [
+          [
+            "2026",
+            "10",
+            "15"
+          ],
+          [
+            "2026",
+            "10",
+            "16"
+          ]
+        ],
+        "query_id": "7448c46c-34ec-43c2-8509-8e6c46458707",
+        "status": "SUCCEEDED",
+        "matched_rows": 6,
+        "validation": "PASS",
+        "bytes_scanned": 8686,
+        "completed_at": "2026-10-16 14:31:37.082000+07:00"
+      }
+    },
+    "quyen": {
+      "student": "Sinh viên Ngọc Quyên",
+      "deployment": {
+        "verified_at": "2026-10-16T07:25:29.807036+00:00",
+        "module_sha256": "d9d0ad2584feef121234d634bf26bdc43097bb9b8798123cfd767023397ed3cf",
+        "source_matches": true,
+        "configuration_unchanged": true,
+        "state": "Active",
+        "last_update_status": "Successful"
+      },
+      "confirmed_subscriptions": 2,
+      "invocations": {
+        "realtime": {
+          "started_at": "2026-10-16T07:27:03.935130+00:00",
+          "ended_at": "2026-10-16T07:27:07.749625+00:00",
+          "status_code": 200,
+          "aws_response_date": "Fri, 16 Oct 2026 07:27:10 GMT",
+          "function_error": null,
+          "request_id": "4d1837b3-2276-48c9-8a05-755dbf06ec3d",
+          "collection_status": "complete",
+          "records_collected": 3,
+          "failed_cities": [],
+          "alerts_sent": 2,
+          "sns_message_ids": [
+            "cd114910-192c-5ced-9b21-2a5bcd209939",
+            "34c67731-46fc-57c4-ac5e-147a92f1a210"
+          ],
+          "saved_files": [
+            {
+              "s3_key": "raw/year=2026/month=10/day=16/data_20261016_7bb591a2.json",
+              "count": 3
+            }
+          ],
+          "s3_objects": [
+            {
+              "key": "raw/year=2026/month=10/day=16/data_20261016_7bb591a2.json",
+              "records": 3,
+              "sha256": "2abea548fe01ed30ead50470cac8d7715f49fd0d22523d40b4d8dc778d9b2190",
+              "last_modified": "2026-10-16T07:27:11+00:00",
+              "content_type": "application/json",
+              "encryption": "AES256"
+            }
+          ],
+          "observations": [
+            {
+              "city": "HoChiMinh",
+              "timestamp_utc": "2026-10-16 07:27:08",
+              "timestamp_vn": "2026-10-16 14:27:08",
+              "collected_at": "2026-10-16T07:27:08.250258+00:00",
+              "us_aqi": 132,
+              "pm2_5": 24.7,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "HaNoi",
+              "timestamp_utc": "2026-10-16 07:27:09",
+              "timestamp_vn": "2026-10-16 14:27:09",
+              "collected_at": "2026-10-16T07:27:09.155528+00:00",
+              "us_aqi": 103,
+              "pm2_5": 29.6,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "DaNang",
+              "timestamp_utc": "2026-10-16 07:27:09",
+              "timestamp_vn": "2026-10-16 14:27:09",
+              "collected_at": "2026-10-16T07:27:09.955045+00:00",
+              "us_aqi": 78,
+              "pm2_5": 24.7,
+              "aqi_category": "Moderate"
+            }
+          ],
+          "validation": "PASS"
+        },
+        "historical": {
+          "started_at": "2026-10-16T07:27:46.368461+00:00",
+          "ended_at": "2026-10-16T07:27:49.253619+00:00",
+          "status_code": 200,
+          "aws_response_date": "Fri, 16 Oct 2026 07:27:51 GMT",
+          "function_error": null,
+          "request_id": "29cbca61-6706-4574-8fdb-c93a12ed1650",
+          "collection_status": "complete",
+          "records_collected": 3,
+          "failed_cities": [],
+          "alerts_sent": 0,
+          "sns_message_ids": [],
+          "saved_files": [
+            {
+              "s3_key": "raw/year=2026/month=10/day=15/data_20261015_a4efde70.json",
+              "count": 3
+            }
+          ],
+          "s3_objects": [
+            {
+              "key": "raw/year=2026/month=10/day=15/data_20261015_a4efde70.json",
+              "records": 3,
+              "sha256": "4ca0d9e780fdeacb252b8227fbe62392070f05b5c0ea56a8c60e3b29066452b1",
+              "last_modified": "2026-10-16T07:27:52+00:00",
+              "content_type": "application/json",
+              "encryption": "AES256"
+            }
+          ],
+          "observations": [
+            {
+              "city": "HoChiMinh",
+              "timestamp_utc": "2026-10-15 23:00:00",
+              "timestamp_vn": "2026-10-16 06:00:00",
+              "collected_at": "2026-10-16T07:27:49.866991+00:00",
+              "us_aqi": 120,
+              "pm2_5": 64.0,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "HaNoi",
+              "timestamp_utc": "2026-10-15 23:00:00",
+              "timestamp_vn": "2026-10-16 06:00:00",
+              "collected_at": "2026-10-16T07:27:50.654031+00:00",
+              "us_aqi": 120,
+              "pm2_5": 44.1,
+              "aqi_category": "Unhealthy for Sensitive Groups"
+            },
+            {
+              "city": "DaNang",
+              "timestamp_utc": "2026-10-15 23:00:00",
+              "timestamp_vn": "2026-10-16 06:00:00",
+              "collected_at": "2026-10-16T07:27:51.439272+00:00",
+              "us_aqi": 64,
+              "pm2_5": 18.9,
+              "aqi_category": "Moderate"
+            }
+          ],
+          "validation": "PASS"
+        }
+      },
+      "observed_at": "2026-10-16T07:32:31.473849+00:00",
+      "metric_window": {
+        "start": "2026-10-16T07:26:03.935130+00:00",
+        "end": "2026-10-16T07:33:06.938105+00:00"
+      },
+      "metrics": {
+        "Invocations": {
+          "sum": 2.0,
+          "datapoints": 1
+        },
+        "Errors": {
+          "sum": 0.0,
+          "datapoints": 1
+        },
+        "Throttles": {
+          "sum": 0.0,
+          "datapoints": 1
+        },
+        "NumberOfMessagesPublished": {
+          "sum": 2.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsDelivered": {
+          "sum": 4.0,
+          "datapoints": 1
+        },
+        "NumberOfNotificationsFailed": {
+          "sum": 0.0,
+          "datapoints": 1
+        }
+      },
+      "alarms": [
+        {
+          "name": "WeatherCollector-Errors-Alarm",
+          "state": "OK",
+          "metric": "Errors"
+        }
+      ],
+      "eventbridge_routes": [
+        {
+          "rule": "WeatherCollectionHourlyRule",
+          "state": "DISABLED",
+          "schedule": "rate(1 hour)",
+          "lambda_targets": 1,
+          "invoke_permission": true,
+          "custom_input": false
+        },
+        {
+          "rule": "WeatherCollectionSchedule",
+          "state": "ENABLED",
+          "schedule": "rate(1 hour)",
+          "lambda_targets": 1,
+          "invoke_permission": true,
+          "custom_input": false
+        }
+      ],
+      "invocation_reports": [
+        {
+          "mode": "realtime",
+          "request_id": "4d1837b3-2276-48c9-8a05-755dbf06ec3d",
+          "log_events": 3,
+          "report_found": true,
+          "duration_ms": 2914.01,
+          "max_memory_mb": 101
+        },
+        {
+          "mode": "historical",
+          "request_id": "29cbca61-6706-4574-8fdb-c93a12ed1650",
+          "log_events": 3,
+          "report_found": true,
+          "duration_ms": 2608.56,
+          "max_memory_mb": 101
+        }
+      ],
+      "athena": {
+        "required_partitions": [
+          [
+            "2026",
+            "10",
+            "15"
+          ],
+          [
+            "2026",
+            "10",
+            "16"
+          ]
+        ],
+        "created_partitions": [
+          [
+            "2026",
+            "10",
+            "15"
+          ],
+          [
+            "2026",
+            "10",
+            "16"
+          ]
+        ],
+        "query_id": "0adf328c-6b27-4700-b5e5-c186abdb0130",
+        "status": "SUCCEEDED",
+        "matched_rows": 6,
+        "validation": "PASS",
+        "bytes_scanned": 10424,
+        "completed_at": "2026-10-16 14:31:48.513000+07:00"
+      }
+    }
+  }
+}

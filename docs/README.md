@@ -6,6 +6,7 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [Kiến trúc và trách nhiệm dịch vụ](architecture.md)
 - [Mô hình dữ liệu và cách phân tích](data-analysis.md)
 - [Cài đặt và vận hành](operation.md)
+- [Triển khai Lambda và kiểm chứng thu thập, cảnh báo](deployment-verification.md)
 - [Hướng dẫn đọc mã nguồn đồ án](source-guide.md)
 - [Sơ đồ mã nguồn và tệp chuẩn](repository-layout.md)
 - [Nhật ký và số giờ của nhóm](WORKLOG.md)
