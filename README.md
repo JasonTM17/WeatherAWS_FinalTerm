@@ -4,13 +4,13 @@ Dự án thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và
 
 Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**. Sinh viên **Nguyễn Tiến Sơn (24110054)** và **Trần Thị Ngọc Quyên (24110051)**.
 
-[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Báo cáo nộp lại](BAO_CAO_NOP_LAI.md) · [Hồ sơ Tuần 1](tuan_1/README.md) · [Hồ sơ Tuần 2](tuan_2/README.md)
+[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Báo cáo nộp lại](BAO_CAO.md) · [Hồ sơ Tuần 1](tuan_1/README.md) · [Hồ sơ Tuần 2](tuan_2/README.md)
 
 ## Hồ sơ tiến độ trên GitHub
 
 | Nội dung | Đường dẫn xem trực tiếp |
 | --- | --- |
-| Tổng hợp bổ sung theo nhận xét GVHD | [Phân công, kết quả, minh chứng và kế hoạch](BAO_CAO_NOP_LAI.md) |
+| Tổng hợp bổ sung theo nhận xét GVHD | [Phân công, kết quả, minh chứng và kế hoạch](BAO_CAO.md) |
 | Tuần 1 | [Mục tiêu, nền tảng, 156 bản ghi và chín biểu đồ](tuan_1/README.md) |
 | Tuần 2 | [Phần đã thực hiện, kết quả AQI và dữ liệu hai sinh viên](tuan_2/README.md) |
 | Phân công và số giờ | [Worklog](docs/WORKLOG.md) · [CSV tổng hợp](worklog.csv) |

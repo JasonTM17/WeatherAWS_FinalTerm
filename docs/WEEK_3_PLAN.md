@@ -2,7 +2,7 @@
 
 ## Mục tiêu và đầu vào
 
-Hoàn thiện và kiểm chứng liên thông luồng **EventBridge → Lambda → S3 → Glue/Athena → Biểu đồ**, đồng thời chuẩn hóa hệ thống cảnh báo SNS và giám sát CloudWatch. Kế hoạch tiếp nối [Tuần 2](../tuan_2/README.md), [Báo cáo nộp lại](../BAO_CAO_NOP_LAI.md) và [đợt đọc AWS ngày 16/10](../tuan_2/results/review_2026_10_16/README.md).
+Hoàn thiện và kiểm chứng liên thông luồng **EventBridge → Lambda → S3 → Glue/Athena → Biểu đồ**, đồng thời chuẩn hóa hệ thống cảnh báo SNS và giám sát CloudWatch. Kế hoạch tiếp nối [Tuần 2](../tuan_2/README.md), [Báo cáo nộp lại](../BAO_CAO.md) và [đợt đọc AWS ngày 16/10](../tuan_2/results/review_2026_10_16/README.md).
 
 Hiện tại hệ thống đã có hai hàm Lambda Active, S3 Data Lake phân vùng theo ngày, AWS Glue Catalog bảng 20 cột và bộ SQL Athena truy vấn thành công. Các mục tiêu kiểm chứng và tối ưu trong Tuần 3 tập trung vào 4 trụ cột chiến lược dưới đây.
 
@@ -47,4 +47,4 @@ Hai sinh viên phối hợp đối chiếu ở tất cả đầu việc. W3-01 v
 
 Hồ sơ kết thúc ghi kết quả W3-01 đến W3-08, phân công/số giờ, raw và CSV tổng hợp, cấu hình đã loại thông tin riêng tư, commit triển khai và các giới hạn còn lại. Chỉ đánh dấu hoàn thành khi có minh chứng tương ứng.
 
-[Báo cáo nộp lại](../BAO_CAO_NOP_LAI.md) · [Nhật ký hai tuần](WORKLOG.md) · [Mã nguồn theo thành phần](components.md) · [Vận hành](operation.md)
+[Báo cáo nộp lại](../BAO_CAO.md) · [Nhật ký hai tuần](WORKLOG.md) · [Mã nguồn theo thành phần](components.md) · [Vận hành](operation.md)

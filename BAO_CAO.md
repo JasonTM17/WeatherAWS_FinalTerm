@@ -22,7 +22,7 @@
 > - **Sinh viên 2**: Trần Thị Ngọc Quyên — MSSV: 24110051 (18,5 giờ)  
 > - **Tổng số giờ làm việc**: 38,0 giờ (Tuần 1: 18,5h, Tuần 2: 19,5h) — xác nhận tại: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv  
 > - **GitHub Repository chính thức**: https://github.com/JasonTM17/WeatherAWS_FinalTerm  
-> - **Báo cáo nộp lại hoàn chỉnh**: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/BAO_CAO_NOP_LAI.md  
+> - **Báo cáo nộp lại hoàn chỉnh**: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/BAO_CAO.md  
 >
 > **1. Phân công trách nhiệm và số giờ của từng sinh viên**:
 > - **Nguyễn Tiến Sơn (24110054 — 19,5h)**: Thiết kế S3 Data Lake phân vùng ngày, cấu hình Secrets Manager, lập trình Lambda Collector, cấu hình Amazon SNS cảnh báo ngưỡng, thiết lập EventBridge Scheduler theo giờ, CloudWatch Alarms & Dashboard.

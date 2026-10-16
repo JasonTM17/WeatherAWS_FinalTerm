@@ -2,7 +2,7 @@
 
 Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS Serverless, lớp 261CLCO332779_05.
 
-- [Báo cáo Nộp lại toàn diện theo nhận xét GVHD](../BAO_CAO_NOP_LAI.md)
+- [Báo cáo Nộp lại toàn diện theo nhận xét GVHD](../BAO_CAO.md)
 - [Kiến trúc và trách nhiệm dịch vụ](architecture.md)
 - [Mô hình dữ liệu và cách phân tích](data-analysis.md)
 - [Cài đặt và vận hành](operation.md)
