@@ -19,30 +19,31 @@
 >
 > **NỘI DUNG BÁO CÁO**
 >
-> Nguyễn Tiến Sơn – MSSV 24110054, Trần Thị Ngọc Quyên – MSSV 24110051 (Nhóm 05) Báo cáo tiến độ Tuần 1 và Tuần 2 – Đề tài “Hệ thống thu thập và phân tích dữ liệu thời tiết/không khí (Nhóm: Domain Apps)”.
+> Nguyễn Tiến Sơn – MSSV 24110054, Trần Thị Ngọc Quyên – MSSV 24110051 (Nhóm 05, Lớp 261CLCO332779_05) Báo cáo tiến độ Tuần 1 và Tuần 2 – Đề tài “Hệ thống thu thập và phân tích dữ liệu thời tiết/không khí (Nhóm: Domain Apps)”.
 >
-> Mục tiêu đề tài: Định kỳ thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai (Open-Meteo) cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng, lưu trữ trên S3 theo phân vùng ngày, tổng hợp phân tích xu hướng bằng Glue/Athena, đồng thời phát hành cảnh báo tức thì qua Amazon SNS khi AQI hoặc PM2.5 vượt ngưỡng nguy hại.
+> Mục tiêu đề tài: Định kỳ thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai (Open-Meteo) cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng, lưu trữ trên Amazon S3 Data Lake theo phân vùng ngày, tổng hợp phân tích xu hướng bằng Glue/Athena, đồng thời phát hành cảnh báo tức thì qua Amazon SNS khi chỉ số US AQI hoặc nồng độ bụi PM2.5 vượt ngưỡng nguy hại.
 >
-> Tiến độ triển khai trên AWS Learner Lab tại Region us-east-1 (sử dụng IAM LabRole có sẵn, gắn tag Project/Owner đầy đủ):
-> 1. Hạ tầng nền tảng & Lưu trữ: S3 Data Lake riêng tư, bật mã hóa SSE-S3 AES256, chặn Public Access, tổ chức dữ liệu NDJSON theo phân vùng raw/year=YYYY/month=MM/day=DD/. Secrets Manager lưu trữ tọa độ và cấu hình ngưỡng cảnh báo an toàn.
-> 2. Xử lý & Thu thập: EventBridge Scheduler kích hoạt định kỳ 1 giờ/lần (rate(1 hour)); Lambda Collector thu thập dữ liệu Open-Meteo, chuẩn hóa 20 trường thông tin môi trường, bổ sung cơ chế quản lý ngân sách thời gian (time-budgeting với context.get_remaining_time_in_millis()) và phân giải null-safety chống crash.
-> 3. Cảnh báo & Giám sát: Topic Amazon SNS (WeatherAQIAlerts) gửi thông báo khi US AQI >= 100 hoặc PM2.5 >= 35.5 µg/m³; CloudWatch Alarms giám sát lỗi Lambda Errors >= 1 kết hợp Dashboard theo dõi chỉ số Invocations, Duration, Errors, SNS Messages.
-> 4. Catalog & Truy vấn: AWS Glue Data Catalog khai báo database weather_aqi_db và bảng ngoài weather_airquality_records (20 cột + 3 partition keys); Athena View chuẩn hóa sang giờ Việt Nam (UTC+7); 12 câu truy vấn SQL phân tích chuyên sâu.
-> 5. Dữ liệu thực nghiệm & Phân tích chất lượng không khí ban đầu:
->    - Tuần 1: 156 bản ghi chuẩn hóa (52 bản ghi/thành phố), 6 tệp CSV và 9 biểu đồ trực quan.
->    - Tuần 2: 435 bản ghi trên 2 tài khoản sinh viên độc lập (Tiến Sơn: 204 bản ghi, Ngọc Quyên: 231 bản ghi); trích xuất 27 nhóm đô thị–giờ mỗi bạn, 21 nhóm cùng giờ đối chiếu độc lập; 27 tệp CSV phân tích và 20 biểu đồ chất lượng cao.
->    - Kết quả môi trường: Hà Nội có AQI TB ~163,3 (Unhealthy — Không lành mạnh), PM2.5 TB ~75,9 µg/m³, 100% mẫu quan trắc vượt ngưỡng cảnh báo SNS; TP.HCM có AQI TB ~78,5 (Moderate); Đà Nẵng có AQI TB ~35,4 (Good). Ô nhiễm đạt đỉnh vào khung giờ cao điểm (07:00–09:00 và 18:00–20:00); PM2.5 tương quan nghịch rất mạnh với nhiệt độ (r ≈ -0,99) và tương quan thuận rất mạnh với độ ẩm (r ≈ +0,99).
-> 6. Phân công & Chấm công: Nguyễn Tiến Sơn: 19,5 giờ; Trần Thị Ngọc Quyên: 18,5 giờ; Tổng cộng 2 tuần: 38,0 giờ (đạt định mức >= 16h/tuần/nhóm theo đề cương môn học).
-> 7. Kế hoạch Tuần 3 (Tích hợp & Giám sát): Triển khai CI/CD Quality Gate tự động qua GitHub Actions; tối ưu hóa Athena Partition Projection và Parquet/S3 Intelligent-Tiering; mở rộng cảnh báo đa kênh SNS và CloudWatch Metrics Dashboard thời gian thực; phát triển mô hình dự báo chuỗi thời gian AQI/PM2.5 (W3-01 đến W3-08).
+> Phân công trách nhiệm và khối lượng thời gian làm việc (đối chiếu chuẩn hóa tại worklog.csv): Tuân thủ chặt chẽ định mức học phần (mỗi SV ≥ 8 giờ/tuần; nhóm 2 SV ≥ 16 giờ/tuần), nhóm xác nhận tổng thời gian làm việc kỹ thuật thực tế qua 2 tuần là 38,0 giờ. Cụ thể: Nguyễn Tiến Sơn phụ trách thiết kế S3 Data Lake, cấu hình Secrets Manager, lập trình hàm Lambda Collector, thiết lập EventBridge Scheduler theo giờ, cấu hình Amazon SNS và CloudWatch Alarms/Dashboard (Tuần 1: 9,5h; Tuần 2: 10,0h; Tổng: 19,5h). Trần Thị Ngọc Quyên phụ trách xây dựng AWS Glue Data Catalog, tối ưu hóa Athena Views, phát triển 12 truy vấn SQL phân tích chuyên sâu, xây dựng module xuất CSV an toàn, đối chiếu số liệu 2 tài khoản và trực quan hóa biểu đồ (Tuần 1: 9,0h; Tuần 2: 9,5h; Tổng: 18,5h). Cả hai thành viên cùng phối hợp thiết kế kiến trúc Serverless, đối chiếu dữ liệu độc lập và kiểm thử hồi quy 106 test cases.
+>
+> Tiến độ triển khai thực tế trên AWS Learner Lab tại Region us-east-1 (sử dụng IAM LabRole có sẵn, gắn tag Project/Owner đầy đủ):
+> 1. Tuần 1 (Nền tảng & Xác lập luồng thu thập): Khảo sát API Open-Meteo, thiết kế sơ đồ kiến trúc hệ thống; khởi tạo S3 Data Lake riêng tư với mã hóa SSE-S3 AES256, bật Block Public Access, tổ chức lưu trữ NDJSON phân vùng theo raw/year=YYYY/month=MM/day=DD/; lưu trữ tọa độ và ngưỡng an toàn trong Secrets Manager; khai báo AWS Glue Data Catalog database weather_aqi_db và bảng ngoài weather_airquality_records (20 trường + 3 khóa phân vùng ngày). Đã thu thập và chuẩn hóa bộ mẫu Tuần 1 gồm 156 bản ghi (52 bản ghi/đô thị), thực thi 5/5 truy vấn Athena SUCCEEDED (mỗi truy vấn quét 87.250 bytes) và kết xuất 6 tệp CSV cùng 9 biểu đồ trực quan hóa ban đầu.
+> 2. Tuần 2 (Triển khai chức năng lõi, sửa lỗi vận hành & Phân tích 2 tài khoản độc lập):
+>    - Triển khai EventBridge Scheduler với Rule kích hoạt định kỳ 1 giờ/lần (rate(1 hour)), gán Target gọi Lambda tự động.
+>    - Phát triển hàm Lambda Collector (lambda_function.py, runtime Python 3.12, 256MB, timeout 60s), khắc phục triệt để các lỗi kỹ thuật quan trọng: (a) bổ sung cơ chế quản lý ngân sách thời gian thực thi time-budgeting (context.get_remaining_time_in_millis()) để chủ động ghi dữ liệu các thành phố đã tải lên S3 trước khi chạm timeout; (b) xử lý null-safety (safe_float, safe_int) triệt tiêu lỗi runtime khi API Open-Meteo trả trường rỗng; (c) xây dựng cơ chế bảo vệ file CSV Athena (safe exporter), không ghi đè file rỗng 0-byte khi truy vấn thất bại; (d) chuẩn hóa ghép cặp tương quan khí tượng cùng thời điểm.
+>    - Cấu hình Topic Amazon SNS (WeatherAQIAlerts) tự động gửi email cảnh báo khi AQI >= 100 hoặc PM2.5 >= 35.5 µg/m³.
+>    - Thiết lập CloudWatch Alarms giám sát lỗi Lambda Errors >= 1 và xây dựng Dashboard hiển thị chỉ số thời gian thực.
+>    - Thu thập và đối chiếu thực nghiệm trên 2 tài khoản AWS Learner Lab độc lập của 2 sinh viên (Tiến Sơn: Account 873674852386; Ngọc Quyên: Account 134987931868): lưu trữ tổng cộng 435 bản ghi (204 và 231 bản ghi), tổng hợp thành 27 nhóm đô thị–giờ ở mỗi tài khoản và 21 nhóm cùng giờ đối chiếu độc lập; đợt kiểm chứng mới ngày 16/10 ghi nhận 14/14 câu lệnh SELECT thành công (tăng lên 216 và 249 bản ghi).
+> 3. Kết quả phân tích môi trường và ô nhiễm không khí ban đầu: Chất lượng không khí phân hóa rõ nét giữa 3 miền: Hà Nội có AQI trung bình cao nhất đạt 163,3 (cấp Unhealthy — Không lành mạnh), nồng độ bụi mịn PM2.5 trung bình đạt 75,9 µg/m³ với 100% mẫu quan trắc vượt ngưỡng nguy hại, liên tục kích hoạt thông báo cảnh báo qua SNS; TP. Hồ Chí Minh có AQI trung bình 78,5 (cấp Moderate — Trung bình) và PM2.5 trung bình 23,2 µg/m³; Đà Nẵng có chất lượng không khí trong lành nhất với AQI trung bình 35,4 (cấp Good — Tốt) và PM2.5 trung bình 6,4 µg/m³. Quy luật biến thiên theo giờ cho thấy ô nhiễm đạt đỉnh vào 2 khung giờ cao điểm giao thông (07:00–09:00 sáng và 18:00–20:00 tối) kết hợp hiện tượng nghịch nhiệt bề mặt ban đêm. Nồng độ PM2.5 tương quan nghịch rất mạnh với nhiệt độ (r ≈ -0,99) do nhiệt độ cao thúc đẩy đối lưu phân tán bụi, và tương quan thuận rất mạnh với độ ẩm (r ≈ +0,99) do độ ẩm cao khiến các hạt bụi ngưng kết lơ lửng gần mặt đất.
+> 4. Kế hoạch Tuần 3 (Tích hợp & Giám sát toàn diện): Tập trung vào 4 trụ cột chiến lược và 8 gói công việc (W3-01 đến W3-08): (1) Vận hành CI/CD Quality Gate tự động hóa 106 bài kiểm thử qua GitHub Actions, kiểm tra tự động schema drift và tính toàn vẹn CSV; (2) Triển khai tính năng Partition Projection trong Athena để loại bỏ lệnh MSCK REPAIR TABLE, đồng thời thử nghiệm chuyển đổi NDJSON sang Apache Parquet nén Snappy kết hợp S3 Intelligent-Tiering giúp giảm 70–80% chi phí quét dữ liệu; (3) Nâng cấp hệ thống cảnh báo đa kênh SNS qua SMS/Webhook (Slack/Discord) và thiết lập CloudWatch Metrics Dashboard thời gian thực theo dõi Invocations, Duration, Errors; (4) Xây dựng mô hình phân tích chuỗi thời gian (time-series forecasting) dự báo xu hướng AQI/PM2.5 theo từng giờ trong 24 giờ tiếp theo.
 >
 > Cập nhật các link repo:
 > - Repo GitHub: https://github.com/JasonTM17/WeatherAWS_FinalTerm
-> - Báo cáo chi tiết trên Repo: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/BAO_CAO.md
-> - Hồ sơ Tuần 1: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/README.md
-> - Hồ sơ Tuần 2: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/README.md
-> - Bảng chấm công (worklog.csv): https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv
-> - Mã nguồn & commit từng thành phần: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/components.md
-> - Kế hoạch Tuần 3: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_3_PLAN.md
+> - Báo cáo nộp lại hoàn chỉnh trên Repo: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/BAO_CAO.md
+> - Bảng chấm công chuẩn hóa (worklog.csv): https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv
+> - Hồ sơ chi tiết Tuần 1: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/README.md
+> - Hồ sơ chi tiết Tuần 2: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/README.md
+> - Mã nguồn và commit từng thành phần: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/components.md
+> - Kế hoạch Tuần 3 chi tiết: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_3_PLAN.md
 > - Nguồn dữ liệu Open-Meteo API: https://open-meteo.com/en/docs/air-quality-api
 >
 > ---
@@ -51,9 +52,9 @@
 >
 > - Công cụ AI sử dụng: ChatGPT, Claude, GitHub Copilot.
 > - Mục đích và phạm vi hỗ trợ:
->   + Tham khảo gợi ý thiết kế kiến trúc Serverless Event-driven và sơ đồ khối luồng dữ liệu.
+>   + Tham khảo gợi ý thiết kế kiến trúc Serverless Event-driven và cấu trúc luồng dữ liệu trên AWS.
 >   + Hỗ trợ cấu trúc boilerplate mã nguồn Python SDK tương tác boto3, PowerShell wrapper scripts và GitHub Actions CI workflow.
->   + Rà soát cú pháp câu lệnh SQL Athena DDL/Views và công thức thống kê Pearson/Spearman trong xử lý dữ liệu.
+>   + Rà soát cú pháp câu lệnh SQL Athena DDL/Views và công thức tính toán thống kê Pearson/Spearman trong xử lý dữ liệu.
 >   + Hỗ trợ kiểm tra phát hiện lỗi logic tiềm ẩn (null handling, Lambda remaining execution time budgeting).
 > - Cam kết của nhóm sinh viên:
 >   + Toàn bộ hạ tầng đám mây và quy trình xử lý dữ liệu đã được nhóm tự cấu hình, kiểm thử và chạy thật 100% trên AWS Learner Lab của 2 sinh viên (Region us-east-1, Account 873674852386 và Account 134987931868).
