@@ -491,7 +491,14 @@ def main(argv=None):
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(summaries))
+    return int(
+        any(
+            item["service_pass"] != item["service_total"]
+            or item["query_pass"] != len(QUERIES)
+            for item in summaries
+        )
+    )
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

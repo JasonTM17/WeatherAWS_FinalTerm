@@ -72,6 +72,16 @@ python tuan_2/analytics/generate_week2_charts.py
 
 Matplotlib tối thiểu 3.9 vì mã nguồn dùng tick_labels trong boxplot; tham số này xuất hiện từ phiên bản 3.9 theo [tài liệu Matplotlib](https://matplotlib.org/3.9.2/api/_as_gen/matplotlib.axes.Axes.boxplot.html). Hướng dẫn thao tác tài nguyên nằm trong [vận hành](operation.md).
 
+## Kiểm tra hồ sơ repository
+
+[repository_audit.py](../tuan_2/scripts/repository_audit.py) đối chiếu tổng giờ theo tuần, đường dẫn worklog và Markdown, cấu trúc toàn bộ CSV, danh mục hash và kết quả SQL mới với raw. [Bộ thu thập minh chứng](../tuan_2/scripts/collect_repository_evidence.py) dùng SDK đọc cấu hình và chạy SELECT vào thư mục mới, không triển khai hoặc gọi Lambda. Xem [đợt đọc ngày 16/10](../tuan_2/results/review_2026_10_16/README.md).
+
+```powershell
+python tuan_2/scripts/repository_audit.py --check
+```
+
+Các kết quả kiểm tra cục bộ và CI có thể xem ở [workflow](../.github/workflows/verify-repository.yml). Hai bộ kiểm tra nền tảng giữ 56 và 18 ca; các hồi quy riêng của hồ sơ nằm trong [test_repository_evidence.py](../tuan_2/tests/test_repository_evidence.py).
+
 ## Phạm vi minh chứng
 
 Kiểm tra cục bộ dùng SDK/API giả lập và dữ liệu đã lưu. Nó xác nhận nhánh xử lý và phép tính, không chứng minh mã nguồn vừa được triển khai lên AWS. Bộ báo cáo giữ nguyên số liệu gốc.

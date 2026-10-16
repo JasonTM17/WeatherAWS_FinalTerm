@@ -41,7 +41,7 @@ WeatherAWS_FinalTerm/
 
 ## Dữ liệu và tệp tạo ra
 
-[Danh mục kết quả](../tuan_2/results/README.md) giải thích từng tập dữ liệu, các bản sao cùng số liệu và đường từ CSV tới hình. Báo cáo Word/PDF/Excel là sản phẩm nộp; bản Markdown `FINAL_REPORT.md` giúp đọc nội dung trên GitHub. Hình PNG dùng trong báo cáo vẫn được theo dõi để có thể xem mà không cần chạy Python.
+[Danh mục kết quả](../tuan_2/results/README.md) giải thích từng tập dữ liệu, các bản sao cùng số liệu và đường từ CSV tới hình. README từng tuần và bản Markdown `FINAL_REPORT.md` là nội dung đọc trực tiếp trên GitHub; Word/PDF/Excel được giữ làm bản lưu bổ sung. Hình PNG vẫn được theo dõi để xem mà không cần chạy Python. [Danh mục CSV](csv_catalog.csv), [worklog](../worklog.csv), [chỉ mục commit](components.md) và [kế hoạch Tuần 3](WEEK_3_PLAN.md) liên kết các phần của hồ sơ.
 
 Các lượt xuất tùy chọn nên ghi vào `output/`, được Git bỏ qua. Cache Python, tệp tạm Office, gói triển khai Lambda và thư mục làm báo cáo tạm cũng được bỏ qua. Tệp CSV ZIP cũ được giữ ở máy; repo cung cấp thư mục CSV đã giải nén để xem trực tiếp.
 

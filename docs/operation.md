@@ -40,8 +40,6 @@ python tuan_2/scripts/aws_project.py cleanup --confirm-account ACCOUNT_ID --dele
 
 Thay `ACCOUNT_ID` bằng account của phiên đăng nhập. Xác nhận account được kiểm tra trước thao tác xóa. Dữ liệu S3 được giữ nếu không chọn `--delete-data`; khi chọn xóa, tag Project của bucket phải khớp dự án. Secret sử dụng cửa sổ phục hồi 7 ngày. Quyền hạn Learner Lab có thể giới hạn một số thao tác; lỗi dịch vụ được trả về thay vì báo thành công giả.
 
-## Kiểm tra đã thực hiện
-
 ## Đọc minh chứng cho repository
 
 [collect_repository_evidence.py](../tuan_2/scripts/collect_repository_evidence.py) đọc cấu hình Lambda, hash module đang triển khai, lịch/target/policy, S3, Glue, SNS và CloudWatch. Chương trình chạy bảy SELECT đã lưu cho mỗi profile `default` và `quyen`, ghi raw, thống kê và QueryExecutionId vào một thư mục mới. Không truy xuất giá trị Secret, đổi cấu hình hoặc gọi thử Lambda.
@@ -57,6 +55,8 @@ Danh mục [csv_catalog.csv](csv_catalog.csv) được tạo từ các CSV công
 
 ## Các kiểm tra chức năng nền tảng
 
-Bộ kiểm tra cục bộ gồm 56 ca: Lambda 22, CSV 12, biểu đồ 5 và SDK 17. Các ca kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, khối phản hồi API bị thiếu, thời gian chờ khi API chậm, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Các hồi quy mới kiểm tra cấu hình Lambda khi cập nhật, bảo toàn CSV cũ khi kết quả sai cấu trúc, CSV rỗng dữ liệu có header và việc import chương trình biểu đồ. Kết quả này không phải bằng chứng của một lần triển khai phiên bản mới trên AWS.
+Bộ kiểm tra nền tảng có 56 ca: Lambda 22, CSV 12, biểu đồ 5 và SDK 17. Các ca kiểm tra ghép chuỗi khác thứ tự, thu thập lỗi toàn bộ hoặc một phần, khối phản hồi API bị thiếu, thời gian chờ khi API chậm, phân trang có trang đầu chỉ chứa header và chọn cùng cơ sở dữ liệu trong ngữ cảnh lẫn năm truy vấn xuất CSV. Các hồi quy kiểm tra cấu hình Lambda khi cập nhật, bảo toàn CSV cũ khi kết quả sai cấu trúc, CSV rỗng dữ liệu có header và việc import chương trình biểu đồ. Kết quả này không phải bằng chứng của một lần triển khai phiên bản mới trên AWS.
+
+Kiểm tra hồ sơ bổ sung trong [test_repository_evidence.py](../tuan_2/tests/test_repository_evidence.py) bao phủ raw/thống kê, cấu trúc CSV, tiếng Việt/xuống dòng, không ghi đè snapshot và không công bố chi tiết lỗi khi phiên AWS hết hạn. CI [Verify repository](../.github/workflows/verify-repository.yml) chạy catalog/worklog, các ca chức năng/hồ sơ và 18 ca phân tích trên Python 3.12; trạng thái từng lần chạy xem tại GitHub Actions.
 
 Các kiểm tra Lambda bao gồm ba hồi quy về số không hữu hạn trong chuẩn hóa và phân loại AQI. Bộ phân tích có thêm 18 ca kiểm tra phạm vi mẫu, cặp quan trắc khi thiếu dữ liệu, phép làm tròn và các giá trị dùng để vẽ. Xem [hướng dẫn đọc mã nguồn](source-guide.md).
