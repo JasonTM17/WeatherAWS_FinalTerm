@@ -4,14 +4,14 @@ Dự án sử dụng AWS Serverless để thu thập dữ liệu Open-Meteo cho 
 
 Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**.
 
-[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm) · [Hồ sơ Tuần 1](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1) · [Hồ sơ Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2)
+[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Hồ sơ Tuần 1](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1) · [Hồ sơ Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2)
 
 | Sinh viên | MSSV | Phụ trách chính |
 | --- | --- | --- |
 | Nguyễn Tiến Sơn | 24110054 | S3, Secrets Manager, Lambda và SNS |
 | Trần Thị Ngọc Quyên | 24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu |
 
-Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nhật ký nhóm](docs/WORKLOG.md).
+Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nhật ký nhóm](docs/WORKLOG.md) · [Bảng chấm công CSV](worklog.csv).
 
 ## Báo cáo và dữ liệu
 

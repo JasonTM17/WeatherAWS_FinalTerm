@@ -12,6 +12,7 @@ Lớp 261CLCO332779_05 — Điện toán đám mây.
 ## Sản phẩm và nguồn đối chiếu
 
 - [Báo cáo Word](Bao_cao_Tuan_2_24110054_24110051.docx) và [PDF](Bao_cao_Tuan_2_24110054_24110051.pdf): chức năng, cấu hình, bảng số liệu và phân tích.
+- [Bảng chấm công chi tiết CSV](worklog.csv): nhật ký chi tiết từng ngày, từng đầu việc, số giờ và mức độ hỗ trợ AI Tuần 2.
 - [Mã nguồn Lambda](../lambda/lambda_function.py) và [chương trình quản lý dịch vụ](../scripts/aws_project.py): thu thập, chuẩn hóa, lưu trữ, lịch và cảnh báo.
 - [Lược đồ và truy vấn](../athena/): mô hình dữ liệu và phép tổng hợp.
 - [Kết quả Athena mới](../results/week2_live/) và [20 biểu đồ](../results/week2_charts/): hai bộ báo cáo dữ liệu được trình bày riêng, 27/57 bản ghi thuộc Tuần 2.

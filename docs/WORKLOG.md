@@ -2,8 +2,9 @@
 
 | Tuần | Nhật ký | Số giờ đã được nhóm xác nhận |
 | --- | --- | --- |
-| 1 | [Nhật ký Tuần 1](../tuan_1/docs/WORKLOG.md) | Nguyễn Tiến Sơn: 9,5 giờ; Trần Thị Ngọc Quyên: 9,0 giờ; tổng 18,5 giờ |
-| 2 | [Nhật ký Tuần 2](../tuan_2/docs/WORKLOG.md) | Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 9,5 giờ; tổng 19,5 giờ |
+| 1 | [Nhật ký Tuần 1](../tuan_1/docs/WORKLOG.md) · [Tải CSV](../tuan_1/docs/worklog.csv) | Nguyễn Tiến Sơn: 9,5 giờ; Trần Thị Ngọc Quyên: 9,0 giờ; tổng 18,5 giờ |
+| 2 | [Nhật ký Tuần 2](../tuan_2/docs/WORKLOG.md) · [Tải CSV](../tuan_2/docs/worklog.csv) | Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 9,5 giờ; tổng 19,5 giờ |
+| Toàn bộ | [Bảng chấm công tổng hợp CSV](worklog.csv) | Tổng cộng 38,0 giờ (Sơn: 19,5 giờ; Quyên: 18,5 giờ) |
 
 Phân công và số giờ được nhóm xác nhận và ghi nhất quán trong từng báo cáo. Tổng thời gian hai tuần là 38,0 giờ. Tuần 1 giữ nguyên bộ CSV 156 bản ghi đã nộp. Phân tích bổ sung Tuần 2 dùng hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên: 204/231 bản ghi toàn bộ, trong đó 27/57 thuộc Tuần 2. Các quan trắc cùng đô thị và thời điểm được đối chiếu; thống kê giữ riêng theo bộ dữ liệu của từng sinh viên.
 

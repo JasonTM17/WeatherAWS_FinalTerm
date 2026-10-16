@@ -2,13 +2,13 @@
 
 Sinh viên thực hiện: Nguyễn Tiến Sơn (24110054) và Trần Thị Ngọc Quyên (24110051). Lớp 261CLCO332779_05, học phần Điện toán đám mây. GVHD ThS. Huỳnh Xuân Phụng.
 
-[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm) · [Hồ sơ Tuần 1](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1) · [Hồ sơ Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2)
+[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Hồ sơ Tuần 1](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1) · [Hồ sơ Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2)
 
 - [Báo cáo Word](docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [PDF](docs/Bao_cao_Tuan_2_24110054_24110051.pdf)
 - [Excel phân tích](docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx)
 - [CSV Athena mới](results/week2_live/) · [CSV phân tích](results/week2_analysis/)
 - [Biểu đồ](results/week2_charts/) · [Dữ liệu raw và metadata](results/week2_evidence/)
-- [Nhật ký](docs/WORKLOG.md)
+- [Nhật ký Tuần 2](docs/WORKLOG.md) · [Tải CSV](docs/worklog.csv)
 - [Hướng dẫn đọc mã nguồn](../docs/source-guide.md)
 
 Bộ dữ liệu đã lưu của sinh viên Tiến Sơn có 204 bản ghi, trong đó 27 lượt ghi thuộc Tuần 2. Bộ của sinh viên Ngọc Quyên có 231 bản ghi, trong đó 57 lượt ghi thuộc Tuần 2. Khi [tổng hợp theo đô thị và giờ UTC](results/week2_analysis/hourly_city.csv), mỗi sinh viên có 27 nhóm, gồm 21 nhóm cùng giờ để đối chiếu. Bộ của sinh viên Ngọc Quyên có 24 nhóm ghi hai lượt và ba nhóm ghi ba lượt; các chỉ số môi trường trong cùng nhóm bằng nhau. Các lượt ghi gốc được giữ đầy đủ trong CSV và phụ lục. Mẫu Tuần 2 của mỗi sinh viên bao phủ hai ngày, gồm chín giờ có dữ liệu.
