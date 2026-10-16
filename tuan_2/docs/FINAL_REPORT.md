@@ -12,7 +12,7 @@ Hà Nội có AQI trung bình Tuần 2 đạt 163,56 và 163,05; TP. Hồ Chí M
 
 Học phần Điện toán đám mây giúp chúng em vận dụng các dịch vụ quản lý trên AWS vào một luồng dữ liệu cụ thể. Bài toán thời tiết và chất lượng không khí cho phép theo dõi quá trình từ thu thập qua API, chuẩn hóa bản ghi, lưu trữ đến truy vấn và trình bày kết quả.
 
-Báo cáo trình bày chức năng hệ thống, dữ liệu và kết quả phân tích Tuần 2 từ hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Word, PDF, bảng và biểu đồ Excel sử dụng cùng các tệp CSV đã đối chiếu. Kho dự án: https://github.com/JasonTM17/WeatherAWS_FinalTerm.git
+Báo cáo trình bày chức năng hệ thống, dữ liệu và kết quả phân tích Tuần 2 từ hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Word, PDF, bảng và biểu đồ Excel sử dụng cùng các tệp CSV đã đối chiếu. Kho dự án: [https://github.com/JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm). Hồ sơ kèm theo: [Tuần 1](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1), [Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2) và [Nhật ký Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/docs/WORKLOG.md).
 
 Đề tài được thực hiện bởi nhóm sinh viên:
 
