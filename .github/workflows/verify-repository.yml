@@ -1,0 +1,29 @@
+name: Verify repository
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: tuan_2/analytics/requirements.txt
+      - name: Install dependencies
+        run: python -m pip install -r tuan_2/analytics/requirements.txt
+      - name: Check worklogs, CSV catalog and saved AWS evidence
+        run: python tuan_2/scripts/repository_audit.py --check
+      - name: Check Lambda, SDK, exports, charts and evidence regressions
+        run: python -m unittest discover -s tuan_2/tests -v
+      - name: Check data analysis
+        run: python -m unittest discover -s tuan_2/analytics -p 'test_*.py' -v
