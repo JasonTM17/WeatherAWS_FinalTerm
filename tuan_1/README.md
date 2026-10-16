@@ -1,4 +1,4 @@
-# Tuần 1 Nền tảng và kết quả phân tích dữ liệu
+# Tuần 1: Nền tảng và kết quả phân tích dữ liệu — Hệ thống thu thập và phân tích dữ liệu thời tiết/không khí (Domain Apps)
 
 Nguyễn Tiến Sơn (24110054), Trần Thị Ngọc Quyên (24110051), lớp 261CLCO332779_05. GVHD ThS. Huỳnh Xuân Phụng.
 

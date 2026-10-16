@@ -1,4 +1,4 @@
-# Tuần 2 Thu thập và phân tích hai bộ báo cáo dữ liệu
+# Tuần 2: Thu thập và phân tích hai bộ dữ liệu — Hệ thống thu thập và phân tích dữ liệu thời tiết/không khí (Domain Apps)
 
 Nguyễn Tiến Sơn (24110054), Trần Thị Ngọc Quyên (24110051), lớp 261CLCO332779_05. GVHD ThS. Huỳnh Xuân Phụng.
 

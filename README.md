@@ -1,8 +1,8 @@
-# Thu thập và phân tích dữ liệu thời tiết và chất lượng không khí trên AWS
+# Hệ thống thu thập và phân tích dữ liệu thời tiết/không khí (Nhóm: Domain Apps)
 
-Dự án thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng bằng AWS Serverless. EventBridge gọi Lambda; dữ liệu được chuẩn hóa, lưu trên S3 theo ngày và phân tích bằng Glue/Athena. SNS phục vụ cảnh báo theo ngưỡng cấu hình, CloudWatch phục vụ giám sát.
+Định kỳ thu thập dữ liệu thời tiết/chất lượng không khí từ API công khai (Open-Meteo), lưu trữ, phân tích xu hướng và cảnh báo AQI cao bằng AWS Serverless (EventBridge, Lambda, S3, Glue, Athena, SNS, Secrets Manager, CloudWatch).
 
-Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**. Sinh viên **Nguyễn Tiến Sơn (24110054)** và **Trần Thị Ngọc Quyên (24110051)**.
+Học phần **Điện toán đám mây** (Cloud - Đợt 1 - 2026-2027), lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**. Sinh viên thực hiện: **Nguyễn Tiến Sơn (24110054)** và **Trần Thị Ngọc Quyên (24110051)**.
 
 [Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Báo cáo nộp lại](BAO_CAO.md) · [Hồ sơ Tuần 1](tuan_1/README.md) · [Hồ sơ Tuần 2](tuan_2/README.md)
 
