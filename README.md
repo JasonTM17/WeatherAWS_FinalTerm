@@ -1,6 +1,8 @@
-# Hệ thống thu thập, lưu trữ và phân tích dữ liệu thời tiết và chất lượng không khí
+# Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS
 
 Đồ án thực hành học phần **Điện toán đám mây**: xây dựng luồng thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai, lưu bản ghi thô trên Amazon S3, truy vấn bằng Amazon Athena, sau đó tổng hợp kết quả thành CSV và biểu đồ có thể đối chiếu với dữ liệu đầu vào.
+
+Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày tiến độ Tuần 1 và Tuần 2, kết quả phân tích từ các bộ CSV đã lưu và kế hoạch tích hợp, giám sát ở Tuần 3.
 
 | Thông tin | Chi tiết |
 | --- | --- |
@@ -10,21 +12,25 @@
 | Sinh viên thực hiện | Nguyễn Tiến Sơn (24110054) và Trần Thị Ngọc Quyên (24110051) |
 | Khu vực dữ liệu | TP. Hồ Chí Minh, Hà Nội và Đà Nẵng |
 | Nguồn dữ liệu | [Open-Meteo Weather API](https://open-meteo.com/en/docs) và [Air Quality API](https://open-meteo.com/en/docs/air-quality-api) |
+| Môi trường thực hành | AWS Learner Lab tại vùng `us-east-1`, dùng IAM LabRole có sẵn |
 
 ## Điều hướng nhanh
 
 | Nội dung | Tài liệu hoặc dữ liệu |
 | --- | --- |
-| Hồ sơ Tuần 1 | [Trang Tuần 1](tuan_1/README.md) · [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
+| Báo cáo nộp LMS | [Nội dung báo cáo tiến độ nộp trực tiếp lên LMS/E-Learning](BAO_CAO.md) |
+| Hồ sơ Tuần 1 | [Trang Tuần 1](tuan_1/README.md) · [Markdown](tuan_1/docs/FINAL_REPORT.md) · [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
 | CSV Tuần 1 | [Sáu CSV đã dùng trong báo cáo](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) · [Chín biểu đồ](tuan_2/results/charts/) |
-| Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
+| Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [Markdown](tuan_2/docs/FINAL_REPORT.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 | CSV và hình Tuần 2 | [CSV Athena đã lưu](tuan_2/results/week2_live/) · [27 bảng phân tích](tuan_2/results/week2_analysis/) · [20 biểu đồ](tuan_2/results/week2_charts/) · [Raw và metadata](tuan_2/results/week2_evidence/) |
 | Phân công và thời gian | [Worklog tổng hợp](docs/WORKLOG.md) · [CSV worklog](worklog.csv) |
 | Kiến trúc và mã nguồn | [Sơ đồ kiến trúc](docs/architecture.md) · [Hướng dẫn đọc mã](docs/source-guide.md) · [Cấu trúc repository](docs/repository-layout.md) · [Chỉ mục thành phần và commit](docs/components.md) |
-| Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
+| Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Minh chứng vận hành đã lưu](docs/saved-evidence.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
 | AWS và kế hoạch tiếp theo | [Snapshot AWS ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) · [Kế hoạch Tuần 3](docs/WEEK_3_PLAN.md) |
 
-[Phạm vi](#mục-tiêu-và-phạm-vi) · [Luồng xử lý](#luồng-xử-lý-dữ-liệu) · [Mô hình và phương pháp](#mô-hình-dữ-liệu-và-phương-pháp) · [Kết quả từng tuần](#kết-quả-theo-tuần) · [Mã nguồn](#cấu-trúc-mã-nguồn) · [Cài đặt và kiểm tra](#cài-đặt-và-kiểm-tra) · [Giới hạn minh chứng](#giới-hạn-và-cách-diễn-giải)
+[Phạm vi](#mục-tiêu-và-phạm-vi) · [Luồng xử lý](#luồng-xử-lý-dữ-liệu) · [Mô hình và phương pháp](#mô-hình-dữ-liệu-và-phương-pháp) · [Kết quả từng tuần](#kết-quả-theo-tuần) · [Đối chiếu hai tuần](#đối-chiếu-bộ-báo-cáo-tuần-1-và-mẫu-tuần-2) · [Mã nguồn](#cấu-trúc-mã-nguồn) · [Cài đặt và kiểm tra](#cài-đặt-và-kiểm-tra) · [Kế hoạch](#kế-hoạch-tiếp-theo)
+
+Để xem hồ sơ theo thứ tự, đọc phần kiến trúc, kết quả Tuần 1, kết quả Tuần 2 và bảng đối chiếu; sau đó mở CSV nguồn dưới mỗi hình. Các liên kết Word/PDF ở bảng trên dẫn tới bản báo cáo chính theo MSSV. Nhật ký có tổng giờ từng sinh viên và liên kết sản phẩm tương ứng.
 
 ## Mục tiêu và phạm vi
 
@@ -43,6 +49,8 @@ Dự án **không** coi dữ liệu API là phép đo trực tiếp tại trạm
 ## Luồng xử lý dữ liệu
 
 ![Sơ đồ kiến trúc hệ thống](docs/architecture.png)
+
+*Hình 1. Sơ đồ thiết kế luồng thu thập, lưu trữ, truy vấn và cảnh báo. [Giải thích kiến trúc](docs/architecture.md). Sơ đồ mô tả quan hệ giữa các thành phần; trạng thái dịch vụ được đối chiếu riêng trong snapshot AWS.*
 
 | Bước | Thành phần | Trách nhiệm và đầu ra |
 | --- | --- | --- |
@@ -65,11 +73,37 @@ Dự án **không** coi dữ liệu API là phép đo trực tiếp tại trạm
 
 Chi tiết về xử lý lỗi API, timeout theo thời gian Lambda còn lại, xuất CSV và các hàm tính thống kê nằm trong [hướng dẫn đọc mã nguồn](docs/source-guide.md).
 
+### Các cấu hình chính và lý do lựa chọn
+
+| Cấu hình trong mã nguồn | Giá trị hoặc cách tổ chức | Mục đích |
+| --- | --- | --- |
+| Lambda | Python 3.12, 256 MB, timeout 60 giây | Thực hiện thu thập theo lượt; runtime, bộ nhớ và thời hạn được đặt bởi mã cấu hình dịch vụ |
+| Lịch thiết kế | `rate(1 hour)` | Tổ chức dữ liệu theo thời gian; số lịch thực tế phải kiểm tra từ cấu hình AWS |
+| Thời gian chờ HTTP | Tối đa 15 giây mỗi yêu cầu; điều chỉnh theo thời gian còn lại | Hạn chế một API chậm sử dụng hết thời gian thực thi |
+| Thời gian dành cho kết thúc | Trừ 10 giây khỏi thời gian còn lại khi tính timeout HTTP | Dành thời gian để kết thúc thu thập và yêu cầu ghi dữ liệu; không bảo đảm thời hạn tuyệt đối của mọi lời gọi dịch vụ |
+| Lưu trữ | NDJSON tại `raw/year=YYYY/month=MM/day=DD/` | Giữ từng bản ghi JSON riêng, phù hợp lược đồ đọc trên S3 và truy vấn theo phân vùng |
+| Ngưỡng cảnh báo | `AQI >= 100` hoặc `PM2.5 >= 35.5 µg/m³` | Quy tắc cấu hình của đồ án để yêu cầu phát thông báo; kiểm tra ngưỡng được tách khỏi việc xác nhận nhận thư |
+| Định danh triển khai | `S3_BUCKET_NAME`, `SECRET_NAME`, `SNS_TOPIC_ARN` | Cấp cấu hình theo môi trường qua biến môi trường Lambda |
+
+Nguồn cấu hình: [Lambda thu thập](tuan_2/lambda/lambda_function.py) và [Python SDK quản lý dịch vụ](tuan_2/scripts/aws_project.py). Các giá trị này giải thích thiết kế mã nguồn; [snapshot ngày 16/10](tuan_2/results/review_2026_10_16/README.md) xác định cấu hình đã đọc được trên AWS.
+
 ## Mô hình dữ liệu và phương pháp
 
 ### Trường dữ liệu và mốc thời gian
 
 Bản ghi thu thập có 23 trường đầu ra. Lược đồ Athena gồm 20 cột dữ liệu cùng ba khóa phân vùng `year`, `month`, `day`. Các trường mô tả đô thị/tọa độ, timestamp UTC và giờ địa phương, chỉ số thời tiết, chất ô nhiễm, US AQI/cấp AQI và thông tin thu thập.
+
+| Nhóm dữ liệu | Tên trường trong lược đồ | Cách sử dụng |
+| --- | --- | --- |
+| Nhận diện | `record_id`, `city`, `latitude`, `longitude` | Phân biệt bản ghi và xác định đô thị, vị trí API |
+| Thời gian | `timestamp_utc`, `timestamp_vn`, `hour`, `collected_at` | Phân biệt thời điểm dữ liệu môi trường với thời điểm thu thập; tổng hợp giờ/ngày |
+| Khí tượng | `temperature_2m`, `relative_humidity_2m`, `surface_pressure`, `wind_speed_10m` | Mô tả điều kiện thời tiết và phân tích mối liên hệ với bụi |
+| Bụi | `pm2_5`, `pm10` | So sánh nồng độ bụi theo đô thị và thời điểm; đơn vị nồng độ µg/m³ |
+| Khí ô nhiễm | `carbon_monoxide`, `nitrogen_dioxide`, `sulphur_dioxide`, `ozone` | Các biến môi trường bổ sung, giữ theo đơn vị của phản hồi nguồn |
+| AQI | `us_aqi`, `aqi_category` | Mô tả chỉ số US AQI và cấp chất lượng không khí theo quy tắc trong mã |
+| Phân vùng | `year`, `month`, `day` | Giới hạn vùng dữ liệu cần đọc trên S3 |
+
+[DDL gốc](tuan_2/athena/create_table.sql) xác định kiểu dữ liệu. CSV gốc trong từng tuần giữ giá trị và thời điểm nguồn; bảng trong README chỉ trình bày các chỉ số đã tổng hợp, làm tròn để dễ đọc.
 
 Mốc thời gian chất lượng không khí từ API không kèm múi giờ được diễn giải là UTC. Thời gian có offset trong metadata dịch vụ được đổi về UTC trước khi lọc. Phạm vi tuần dùng UTC+7: bộ Tuần 2 lọc từ **12/10/2026 00:00** đến trước **19/10/2026 00:00**, nhưng các bản ghi đã lưu trong mẫu chỉ nằm ở hai ngày 13–14/10.
 
@@ -93,6 +127,22 @@ Mức dự kiến cho phần thực hành Tuần 2 được sinh viên xác nh�
 
 Bộ CSV dùng trong báo cáo có **156 dòng**, tương ứng **52 dòng cho mỗi đô thị**, cùng sáu CSV báo cáo và chín biểu đồ. Trong 156 dòng của snapshot này, **51 dòng là dữ liệu lịch sử trước ranh giới tuần** và **105 dòng nằm trong ranh giới Tuần 1 theo UTC+7**. Vì vậy, con số 156 mô tả bộ đầu vào đã nộp, không có nghĩa cả 156 lượt đều được thu trong tuần.
 
+| Đô thị | Số bản ghi | AQI trung bình | AQI thấp nhất–cao nhất | PM2.5 trung bình (µg/m³) |
+| --- | ---: | ---: | ---: | ---: |
+| TP. Hồ Chí Minh | 52 | 107,79 | 95–172 | 37,03 |
+| Hà Nội | 52 | 67,56 | 56–80 | 15,36 |
+| Đà Nẵng | 52 | 74,67 | 36–155 | 14,23 |
+
+![AQI thấp nhất, trung bình và cao nhất của ba đô thị trong bộ báo cáo Tuần 1](tuan_2/results/charts/01_aqi_city_comparison.png)
+
+*Hình 2. AQI theo ba đô thị trong bộ 156 bản ghi Tuần 1. Nguồn: [avg_aqi_by_city.csv](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/avg_aqi_by_city.csv). Nhãn trên hình được làm tròn một chữ số; bảng giữ hai chữ số.*
+
+Trong bộ này, TP. Hồ Chí Minh có AQI trung bình cao nhất và khoảng giá trị 95–172. Hà Nội có AQI trung bình thấp nhất, trong khoảng 56–80. Kết quả mô tả tập mẫu đã lưu; vị trí tương đối giữa các đô thị ở Tuần 2 cần được xem lại trên đúng dữ liệu Tuần 2.
+
+![Tổng hợp nồng độ bụi và AQI theo 24 nhóm giờ UTC của bộ Tuần 1](tuan_2/results/charts/02_peak_pollution_hours.png)
+
+*Hình 3. Tổng hợp theo 24 nhóm giờ UTC. Nguồn: [peak_pollution_hours.csv](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/peak_pollution_hours.csv). Mỗi điểm là kết quả gom cùng giờ trong bộ dữ liệu; khi đổi sang giờ Việt Nam cần cộng bảy giờ và điều chỉnh ngày tương ứng.*
+
 - [Trang hồ sơ Tuần 1](tuan_1/README.md) giải thích mục tiêu, phạm vi, bảng kết quả và nguồn CSV.
 - [CSV gốc và bảng truy vấn](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) là bộ được dùng để lập báo cáo.
 - [Chín hình Tuần 1](tuan_2/results/charts/) có manifest và các bảng mở rộng tương ứng.
@@ -114,7 +164,43 @@ Nguồn: [city_statistics.csv](tuan_2/results/week2_analysis/city_statistics.csv
 
 ![AQI trung bình theo đô thị trong bộ Tuần 2 đã lưu](tuan_2/results/week2_charts/02_aqi_city.png)
 
+*Hình 4. AQI trung bình và độ lệch chuẩn mẫu của từng bộ dữ liệu Tuần 2. Cỡ mẫu mỗi đô thị là 9 lượt ghi của sinh viên Tiến Sơn và 19 lượt ghi của sinh viên Ngọc Quyên. Nguồn: [city_statistics.csv](tuan_2/results/week2_analysis/city_statistics.csv). Thanh sai số là SD, không phải khoảng tin cậy.*
+
+![PM2.5 và PM10 trung bình theo đô thị trong hai bộ dữ liệu Tuần 2](tuan_2/results/week2_charts/03_particulates.png)
+
+*Hình 5. Nồng độ PM2.5 và PM10 trung bình (µg/m³), cùng nguồn [city_statistics.csv](tuan_2/results/week2_analysis/city_statistics.csv). Hai bộ dữ liệu được trình bày riêng theo sinh viên.*
+
+Hà Nội có PM2.5 trung bình 76,66 và 75,11 µg/m³ trong hai bộ mẫu, cao hơn TP. Hồ Chí Minh và Đà Nẵng. Kết quả vượt ngưỡng được lưu trong [threshold_exceedance.csv](tuan_2/results/week2_analysis/threshold_exceedance.csv); kết quả đó xác nhận điều kiện dữ liệu thỏa cấu hình, chưa xác nhận thư cảnh báo đã nhận.
+
+![Biến thiên AQI tại các giờ có dữ liệu của hai sinh viên trong Tuần 2](tuan_2/results/week2_charts/05_hourly_aqi.png)
+
+*Hình 6. AQI theo giờ thực tế có trong mẫu. Nguồn: [hourly_city.csv](tuan_2/results/week2_analysis/hourly_city.csv). Trục ngang là số giờ kể từ mốc đầu tiên có dữ liệu; khoảng không có điểm không được coi là AQI bằng 0.*
+
+Các điểm được tổng hợp theo đô thị–giờ UTC; mỗi sinh viên có 27 nhóm. Ở 21 nhóm giờ chung, các giá trị AQI tương ứng bằng nhau nên hai đường có thể chồng lên nhau. Các trung bình tính trên toàn bộ lượt ghi vẫn có thể khác do thời điểm và trọng số lượt ghi khác nhau. Xem [bảng đối chiếu giờ](tuan_2/results/week2_analysis/matched_account_hours.csv).
+
 Các đầu ra chi tiết gồm [27 CSV phân tích](tuan_2/results/week2_analysis/), [20 biểu đồ có manifest nguồn](tuan_2/results/week2_charts/), [CSV truy vấn Athena](tuan_2/results/week2_live/) và [dữ liệu gốc/metadata](tuan_2/results/week2_evidence/). Báo cáo Tuần 2 có phụ lục **84 dòng dữ liệu gốc** trong phạm vi tuần, chia thành hai bảng theo từng sinh viên.
+
+### Đối chiếu bộ báo cáo Tuần 1 và mẫu Tuần 2
+
+![Đối chiếu AQI trung bình giữa bộ báo cáo Tuần 1 và mẫu Tuần 2 của từng sinh viên](tuan_2/results/week2_charts/17_submitted_week1_aqi.png)
+
+*Hình 7. AQI trung bình của bộ 52 mẫu/đô thị Tuần 1 so với 9 mẫu/đô thị của sinh viên Tiến Sơn và 19 mẫu/đô thị của sinh viên Ngọc Quyên trong Tuần 2. Nguồn: [submitted_week1_comparison.csv](tuan_2/results/week2_analysis/submitted_week1_comparison.csv).*
+
+Trong hai tập mẫu, AQI trung bình tại TP. Hồ Chí Minh và Đà Nẵng ở Tuần 2 thấp hơn mốc Tuần 1 đã nộp, trong khi Hà Nội cao hơn. Hai bộ có độ phủ thời gian và cỡ mẫu khác nhau, nên đây là so sánh trung bình của các tập dữ liệu báo cáo; không xem là mức tăng/giảm đại diện cho toàn bộ hai tuần hoặc bằng chứng nguyên nhân ô nhiễm.
+
+Phép so sánh này dùng bộ 156 dòng Tuần 1 đã nộp. Bảng [weekly_comparison.csv](tuan_2/results/week2_analysis/weekly_comparison.csv) lọc lại hai tuần từ cùng lần xuất khác, có cỡ mẫu khác và được giải thích riêng trong [phương pháp phân tích](docs/data-analysis.md).
+
+### Truy vết hình, bảng và dữ liệu gốc
+
+| Bước đối chiếu | Tuần 1 | Tuần 2 |
+| --- | --- | --- |
+| Xem bản ghi đầu vào | [156 dòng raw](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv) | [27 dòng của sinh viên Tiến Sơn](tuan_2/results/week2_live/default/raw_week2.csv) · [57 dòng của sinh viên Ngọc Quyên](tuan_2/results/week2_live/quyen/raw_week2.csv) |
+| Xem số liệu tổng hợp | [Sáu CSV báo cáo](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) | [Các CSV phân tích](tuan_2/results/week2_analysis/) |
+| Xem nguồn dựng hình | [Manifest Tuần 1](tuan_2/results/charts/week1_chart_manifest.json) | [Manifest Tuần 2](tuan_2/results/week2_charts/chart_manifest.json) |
+| Kiểm tra đúng tệp | [Danh mục CSV và SHA-256](docs/csv_catalog.csv) | [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
+| Đọc kết quả và giải thích đầy đủ | [Báo cáo Tuần 1](tuan_1/docs/FINAL_REPORT.md) | [Báo cáo Tuần 2](tuan_2/docs/FINAL_REPORT.md) |
+
+Các ảnh trong README dùng trực tiếp những PNG đã lưu của bộ báo cáo. Người đọc có thể mở CSV ngay dưới hình để kiểm tra giá trị; sơ đồ kiến trúc là hình mô tả thiết kế, còn các biểu đồ là kết quả dựng từ dữ liệu đã lưu.
 
 ### Phân công và thời gian đã xác nhận
 
@@ -158,13 +244,32 @@ Trong cửa sổ metric đã truy vấn, tổng Errors lớn hơn tổng Invocat
 
 Điểm vào phân tích và tệp có trách nhiệm chi tiết được liệt kê trong [chỉ mục mã nguồn](docs/components.md) và [hướng dẫn đọc mã nguồn](docs/source-guide.md).
 
+### Thứ tự đọc mã nguồn
+
+1. Đọc [lambda_function.py](tuan_2/lambda/lambda_function.py) để theo luồng từ cấu hình, gọi hai API, chuẩn hóa, đánh giá ngưỡng đến lưu dữ liệu. Chế độ lấy hiện tại và chế độ lịch sử có nhánh xử lý riêng.
+2. Đọc [create_table.sql](tuan_2/athena/create_table.sql) và [raw_week2.sql](tuan_2/athena/week2_analysis/raw_week2.sql) để kiểm tra ánh xạ trường, phân vùng và ranh giới lọc tuần.
+3. Đọc [athena_export.py](tuan_2/scripts/athena_export.py) để xem cách chờ truy vấn, xử lý kết quả, giữ vị trí cột và bảo vệ tệp đích khi xuất thất bại.
+4. Đọc [analyze_week2_accounts.py](tuan_2/analytics/analyze_week2_accounts.py) để xem thống kê theo sinh viên, nhóm theo giờ, ghép thời điểm và cách tính tương quan trên các cặp giá trị hợp lệ.
+5. Đọc [generate_week2_charts.py](tuan_2/analytics/generate_week2_charts.py) cùng manifest để xác định CSV nguồn của từng hình; phần [đối chiếu hai tuần](tuan_2/analytics/weekly_comparison_charts.py) kiểm tra phạm vi bộ mốc trước khi vẽ.
+
+Các tệp PowerShell trong hồ sơ hai tuần chuyển tham số tới chương trình Python dùng chung. Phần triển khai và mã thu thập chính nằm tại `tuan_2/`; [sơ đồ repository](docs/repository-layout.md) giải thích các điểm vào dùng lại giữa hai tuần.
+
 ## Cài đặt và kiểm tra
 
 Yêu cầu Python **3.12 trở lên**. Các kiểm tra cục bộ bên dưới dùng dữ liệu đã lưu; không cần thông tin đăng nhập AWS.
 
+Tải mã nguồn và chuyển vào thư mục dự án:
+
+```powershell
+git clone https://github.com/JasonTM17/WeatherAWS_FinalTerm.git
+cd WeatherAWS_FinalTerm
+```
+
 Cài dependencies từ gốc repository:
 
     python -m pip install -r tuan_2/analytics/requirements.txt
+
+Tệp [tuan_2/lambda/requirements.txt](tuan_2/lambda/requirements.txt) chỉ phục vụ phát triển cục bộ cho Lambda; runtime Lambda Python 3.12 đã cung cấp sẵn boto3 và các thư viện chuẩn mà mã nguồn sử dụng.
 
 Kiểm tra tính nhất quán của CSV catalog, worklog và các hồ sơ:
 
@@ -190,6 +295,22 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 - Cost Explorer có cờ Estimated; số hiển thị không thay cho hóa đơn cuối cùng. Mức dự kiến do sinh viên xác nhận được báo riêng.
 - Giá trị thiếu/không chuyển đổi được có thể đi qua chính sách mặc định của mã nguồn. Khi diễn giải số 0, hãy đối chiếu dữ liệu gốc, quy tắc chuẩn hóa và bảng chất lượng dữ liệu.
 - Tương quan không chứng minh quan hệ nhân quả. Mẫu ít và thời điểm lấy mẫu khác nhau cần được nêu cùng mọi kết luận so sánh.
+
+## Kế hoạch tiếp theo
+
+Tuần 3 tập trung tích hợp và giám sát theo [tám đầu việc W3-01–W3-08](docs/WEEK_3_PLAN.md). Các phần dưới đây là kế hoạch, được đánh giá bằng sản phẩm và số đo sau khi thực hiện.
+
+| Hướng công việc | Kết quả cần kiểm chứng |
+| --- | --- |
+| Đồng bộ phiên bản triển khai | Xác định commit và hash của gói Lambda thực chạy; lưu phiên bản trước khi cập nhật |
+| Chuẩn hóa lịch thu thập | Đối chiếu rule, target và quyền gọi hàm; giải thích lịch đang bật trước khi đánh giá mật độ dữ liệu |
+| Chất lượng dữ liệu và truy vấn | Giữ raw đầy đủ, đối chiếu thời gian, thử Partition Projection/Parquet và đo bytes quét trên cùng dữ liệu |
+| Giám sát và cảnh báo | Đối chiếu metric cùng cửa sổ thời gian; xác nhận riêng vượt ngưỡng, SNS nhận Publish và người nhận nhận thông báo |
+| Kiểm tra tự động và phân tích tiếp | Duy trì CI, đánh giá độ phủ chuỗi thời gian trước khi thử dự báo và ghi nhận sai số |
+
+## Kết luận tiến độ
+
+Hồ sơ hai tuần đã có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công có thể đối chiếu trên GitHub. Bộ Tuần 1 giữ 156 bản ghi đã dùng trong báo cáo; bộ Tuần 2 tách rõ dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, kèm nguồn của từng hình. Lần đọc AWS bổ sung có thư mục và manifest riêng. Các bước tiếp theo được gắn với việc đồng bộ mã triển khai, hoàn thiện giám sát và kiểm chứng cảnh báo.
 
 ## Tài liệu chi tiết
 
