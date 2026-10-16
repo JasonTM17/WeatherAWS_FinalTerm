@@ -2,7 +2,7 @@
 
 Nguyễn Tiến Sơn (24110054), Trần Thị Ngọc Quyên (24110051), lớp 261CLCO332779_05. GVHD ThS. Huỳnh Xuân Phụng.
 
-[Repository](../README.md) · [Hồ sơ Tuần 1](../tuan_1/README.md) · [Phân công và worklog](docs/WORKLOG.md) · [CSV worklog](worklog.csv) · [Mã nguồn và commit](../docs/components.md) · [Kế hoạch Tuần 3](../docs/WEEK_3_PLAN.md)
+[Báo cáo Nộp lại](../BAO_CAO_NOP_LAI.md) · [Repository](../README.md) · [Hồ sơ Tuần 1](../tuan_1/README.md) · [Phân công và worklog](docs/WORKLOG.md) · [CSV worklog](worklog.csv) · [Mã nguồn và commit](../docs/components.md) · [Kế hoạch Tuần 3](../docs/WEEK_3_PLAN.md)
 
 ## Mục tiêu và phần đã thực hiện
 
