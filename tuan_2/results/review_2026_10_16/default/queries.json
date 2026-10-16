@@ -1,0 +1,93 @@
+[
+  {
+    "name": "raw_all",
+    "query_id": "fe9fa48d-b7c8-456a-b8c1-846603bba1fe",
+    "status": "SUCCEEDED",
+    "execution_time_ms": 812,
+    "bytes_scanned": 121487,
+    "row_count": 216,
+    "profile": "default",
+    "student": "Sinh viên Tiến Sơn",
+    "retrieved_at_utc": "2026-10-16T05:16:12.460084+00:00",
+    "sql_path": "tuan_2/athena/week2_analysis/raw_all.sql",
+    "csv_sha256": "35d06c6d5ce16b5bc6d16676b6c17db3fb6d64fb7c2d8c86a98ce7485b3bfcd6"
+  },
+  {
+    "name": "raw_week2",
+    "query_id": "0eb99fa1-0fe2-47b8-91e6-c066144749f6",
+    "status": "SUCCEEDED",
+    "execution_time_ms": 1285,
+    "bytes_scanned": 21944,
+    "row_count": 39,
+    "profile": "default",
+    "student": "Sinh viên Tiến Sơn",
+    "retrieved_at_utc": "2026-10-16T05:16:14.607829+00:00",
+    "sql_path": "tuan_2/athena/week2_analysis/raw_week2.sql",
+    "csv_sha256": "ffe9de873cd93429550234480a47efc62756ef9943290943e41dc0fbb59c35bf"
+  },
+  {
+    "name": "city_week2",
+    "query_id": "c9e29b38-9dae-470b-98e0-cbf1db0870bc",
+    "status": "SUCCEEDED",
+    "execution_time_ms": 1473,
+    "bytes_scanned": 21944,
+    "row_count": 3,
+    "profile": "default",
+    "student": "Sinh viên Tiến Sơn",
+    "retrieved_at_utc": "2026-10-16T05:16:18.018590+00:00",
+    "sql_path": "tuan_2/athena/week2_analysis/city_week2.sql",
+    "csv_sha256": "39d188bb3f5dff8f72193579a12174fc984cd5f046e615c50c7fb2dea4b75223"
+  },
+  {
+    "name": "category_week2",
+    "query_id": "300e4a28-4861-4b4f-9462-aafb4ce9faa7",
+    "status": "SUCCEEDED",
+    "execution_time_ms": 1092,
+    "bytes_scanned": 21944,
+    "row_count": 3,
+    "profile": "default",
+    "student": "Sinh viên Tiến Sơn",
+    "retrieved_at_utc": "2026-10-16T05:16:20.152259+00:00",
+    "sql_path": "tuan_2/athena/week2_analysis/category_week2.sql",
+    "csv_sha256": "9833d231b0d05263de9d69dcf28cba1f609e59afbb3fe9a1639a4e559b2a6b33"
+  },
+  {
+    "name": "hour_city_week2",
+    "query_id": "99e9ecd6-996c-4b04-b41b-0a1c13dd948f",
+    "status": "SUCCEEDED",
+    "execution_time_ms": 1441,
+    "bytes_scanned": 21944,
+    "row_count": 39,
+    "profile": "default",
+    "student": "Sinh viên Tiến Sơn",
+    "retrieved_at_utc": "2026-10-16T05:16:23.558332+00:00",
+    "sql_path": "tuan_2/athena/week2_analysis/hour_city_week2.sql",
+    "csv_sha256": "42dd40949ba9083d2438985d8f7eebbe03bff7d58120aa69ddce5fd67baa9105"
+  },
+  {
+    "name": "partition_all",
+    "query_id": "d26c2d15-26fd-4f96-b4b6-587a6de52c59",
+    "status": "SUCCEEDED",
+    "execution_time_ms": 1122,
+    "bytes_scanned": 121487,
+    "row_count": 6,
+    "profile": "default",
+    "student": "Sinh viên Tiến Sơn",
+    "retrieved_at_utc": "2026-10-16T05:16:25.790722+00:00",
+    "sql_path": "tuan_2/athena/week2_analysis/partition_all.sql",
+    "csv_sha256": "255b4772cf8f526afb9a300cbde4872853f8e6f9ed19d163e62c636f8ff265e0"
+  },
+  {
+    "name": "quality_all",
+    "query_id": "4a7fd3ac-bdea-44d3-8ffc-5067e763cfa6",
+    "status": "SUCCEEDED",
+    "execution_time_ms": 762,
+    "bytes_scanned": 121487,
+    "row_count": 1,
+    "profile": "default",
+    "student": "Sinh viên Tiến Sơn",
+    "retrieved_at_utc": "2026-10-16T05:16:27.932591+00:00",
+    "sql_path": "tuan_2/athena/week2_analysis/quality_all.sql",
+    "csv_sha256": "026ff43a94c9f84487e7c536b2208b09af5288fe1048e2679773f6eafbe27290"
+  }
+]

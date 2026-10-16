@@ -1,0 +1,147 @@
+{
+  "mode": "live-read-and-select",
+  "retrieved_at_utc": "2026-10-16T05:17:07.802734+00:00",
+  "repository_base_commit": "eac531c0e4b53e3ef6558cdb5883ce34bc1c5a6f",
+  "collector_sha256": "89995af2d5a5fb80dcba4866eb8a8fd1c3c1082a95b9b99ad7f9a7c2aa468574",
+  "region": "us-east-1",
+  "summary": [
+    {
+      "profile": "default",
+      "student": "Sinh viên Tiến Sơn",
+      "service_pass": 13,
+      "service_total": 13,
+      "query_pass": 7,
+      "query_total": 7
+    },
+    {
+      "profile": "quyen",
+      "student": "Sinh viên Ngọc Quyên",
+      "service_pass": 13,
+      "service_total": 13,
+      "query_pass": 7,
+      "query_total": 7
+    }
+  ],
+  "files": [
+    {
+      "path": "default/category_week2.csv",
+      "sha256": "9833d231b0d05263de9d69dcf28cba1f609e59afbb3fe9a1639a4e559b2a6b33",
+      "bytes": 111
+    },
+    {
+      "path": "default/city_week2.csv",
+      "sha256": "39d188bb3f5dff8f72193579a12174fc984cd5f046e615c50c7fb2dea4b75223",
+      "bytes": 653
+    },
+    {
+      "path": "default/cloudwatch_metrics.csv",
+      "sha256": "3198776d06c10e50fdf407f527a5a803165848f2cacaf6a10eecdc0d77ecb0c6",
+      "bytes": 715
+    },
+    {
+      "path": "default/hour_city_week2.csv",
+      "sha256": "42dd40949ba9083d2438985d8f7eebbe03bff7d58120aa69ddce5fd67baa9105",
+      "bytes": 1589
+    },
+    {
+      "path": "default/partition_all.csv",
+      "sha256": "255b4772cf8f526afb9a300cbde4872853f8e6f9ed19d163e62c636f8ff265e0",
+      "bytes": 201
+    },
+    {
+      "path": "default/quality_all.csv",
+      "sha256": "026ff43a94c9f84487e7c536b2208b09af5288fe1048e2679773f6eafbe27290",
+      "bytes": 111
+    },
+    {
+      "path": "default/queries.json",
+      "sha256": "8e6a419709d871e2b13b1645da7d1632c78b7c669848033236e636c3ed49ffb3",
+      "bytes": 3423
+    },
+    {
+      "path": "default/raw_all.csv",
+      "sha256": "35d06c6d5ce16b5bc6d16676b6c17db3fb6d64fb7c2d8c86a98ce7485b3bfcd6",
+      "bytes": 54173
+    },
+    {
+      "path": "default/raw_week2.csv",
+      "sha256": "ffe9de873cd93429550234480a47efc62756ef9943290943e41dc0fbb59c35bf",
+      "bytes": 10031
+    },
+    {
+      "path": "default/s3_objects.csv",
+      "sha256": "7de74e204ce89203b242a2ee474f9cda04c2d9dd6f0145481b132ac14a5426a1",
+      "bytes": 2601
+    },
+    {
+      "path": "default/service_checks.csv",
+      "sha256": "ae4c12553f594d59b57d33337f0dfdf4e93b8d30d5c2aee398cfed02bf60efcd",
+      "bytes": 498
+    },
+    {
+      "path": "default/services.json",
+      "sha256": "1b689f551057901c9697be204d7547027b4263abe69d770fb887f43d463aafea",
+      "bytes": 4594
+    },
+    {
+      "path": "quyen/category_week2.csv",
+      "sha256": "20b082f66221ed5dd07718b6944a8ed7aa10513d0a73422cf9acb5132679b427",
+      "bytes": 111
+    },
+    {
+      "path": "quyen/city_week2.csv",
+      "sha256": "46bd2114e79db5e8cd5ba2982a85688343c5c20ada041d82a93cbd847defb739",
+      "bytes": 530
+    },
+    {
+      "path": "quyen/cloudwatch_metrics.csv",
+      "sha256": "3edcd9817843274be2f3ff30efe422c30f0ee42fe82a52f2c22fb84a1ffdf2cb",
+      "bytes": 730
+    },
+    {
+      "path": "quyen/hour_city_week2.csv",
+      "sha256": "1f500fc2286eb5f4874cb87f9fdcf33e912e16c9cbefdc02891b9d9c241dfec5",
+      "bytes": 1483
+    },
+    {
+      "path": "quyen/partition_all.csv",
+      "sha256": "0d0e89334e6c4fab9234b5b98147a16fe7f3ca0503ccf0decd2a1d3a8946fe6b",
+      "bytes": 201
+    },
+    {
+      "path": "quyen/quality_all.csv",
+      "sha256": "f54cd67906be347ae99f2eee96e65d0efacbfe9c01a7481a9905c8d93c53527f",
+      "bytes": 111
+    },
+    {
+      "path": "quyen/queries.json",
+      "sha256": "f6710f27ae4515fd19684ceb4e5987f391d9fe59da1739808f705ec7016de0d4",
+      "bytes": 3424
+    },
+    {
+      "path": "quyen/raw_all.csv",
+      "sha256": "e547ac3409f4aae3292991b6e31c0b7c2dac4aa0a1209690b2a113938966624b",
+      "bytes": 62202
+    },
+    {
+      "path": "quyen/raw_week2.csv",
+      "sha256": "a56b65854ed9660eea81e25c9c5638990497525fff380517db746daf34301454",
+      "bytes": 19016
+    },
+    {
+      "path": "quyen/s3_objects.csv",
+      "sha256": "709e8f76d7ded4aafe2b3a1f2934c31dccf70e137952e81d59c7f7529269dabc",
+      "bytes": 3239
+    },
+    {
+      "path": "quyen/service_checks.csv",
+      "sha256": "109eb505e007b8e9815419a1cdf3c97b2c7b229a273c80845a2dd05ead677d40",
+      "bytes": 472
+    },
+    {
+      "path": "quyen/services.json",
+      "sha256": "43e6c182532a6b5cb4e528f4676ca38271f9578fcef660a492717192366bed23",
+      "bytes": 4747
+    }
+  ]
+}

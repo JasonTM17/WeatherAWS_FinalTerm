@@ -1,0 +1,221 @@
+{
+  "profile": "quyen",
+  "student": "Sinh viên Ngọc Quyên",
+  "region": "us-east-1",
+  "observed_at_utc": "2026-10-16T05:16:27.965003+00:00",
+  "identity": {
+    "account_id": "134987931868"
+  },
+  "lambda": {
+    "FunctionName": "WeatherCollectorLambda",
+    "Runtime": "python3.12",
+    "Handler": "lambda_function.lambda_handler",
+    "MemorySize": 256,
+    "Timeout": 60,
+    "State": "Active",
+    "LastModified": "2026-10-07T12:23:37.000+0000",
+    "LastUpdateStatus": "Successful",
+    "CodeSha256": "eVLB77FJBNA39JlCLFaS8QtodSv51EzoyoawUZ12quo="
+  },
+  "deployed_source": {
+    "deployed_module_sha256": "ca4550dbd1a906ed4c3117835863d25e9e76826e6be46631a800f3e504515ed9",
+    "repository_module_sha256": "3ba7bb240826763a9d27523b926d93dfbfa97358409a11641e0ec48cbf29d1a8",
+    "matches_repository": false
+  },
+  "eventbridge": [
+    {
+      "name": "WeatherCollectionHourlyRule",
+      "state": "ENABLED",
+      "schedule": "rate(1 hour)",
+      "collector_targets": 1
+    },
+    {
+      "name": "WeatherCollectionSchedule",
+      "state": "ENABLED",
+      "schedule": "rate(1 hour)",
+      "collector_targets": 1
+    }
+  ],
+  "lambda_policy": {
+    "eventbridge_invoke_statements": 2
+  },
+  "s3_public_access": {
+    "BlockPublicAcls": true,
+    "IgnorePublicAcls": true,
+    "BlockPublicPolicy": true,
+    "RestrictPublicBuckets": true
+  },
+  "s3_encryption": {
+    "algorithms": [
+      "AES256"
+    ]
+  },
+  "s3_raw": {
+    "prefix": "raw/",
+    "objects": 34,
+    "bytes": 139845
+  },
+  "glue_table": {
+    "database": "weather_aqi_db",
+    "name": "weather_airquality_records",
+    "columns": [
+      {
+        "Name": "record_id",
+        "Type": "string"
+      },
+      {
+        "Name": "city",
+        "Type": "string"
+      },
+      {
+        "Name": "latitude",
+        "Type": "double"
+      },
+      {
+        "Name": "longitude",
+        "Type": "double"
+      },
+      {
+        "Name": "timestamp_utc",
+        "Type": "string"
+      },
+      {
+        "Name": "timestamp_vn",
+        "Type": "string"
+      },
+      {
+        "Name": "temperature_2m",
+        "Type": "double"
+      },
+      {
+        "Name": "relative_humidity_2m",
+        "Type": "double"
+      },
+      {
+        "Name": "surface_pressure",
+        "Type": "double"
+      },
+      {
+        "Name": "wind_speed_10m",
+        "Type": "double"
+      },
+      {
+        "Name": "pm2_5",
+        "Type": "double"
+      },
+      {
+        "Name": "pm10",
+        "Type": "double"
+      },
+      {
+        "Name": "carbon_monoxide",
+        "Type": "double"
+      },
+      {
+        "Name": "nitrogen_dioxide",
+        "Type": "double"
+      },
+      {
+        "Name": "sulphur_dioxide",
+        "Type": "double"
+      },
+      {
+        "Name": "ozone",
+        "Type": "double"
+      },
+      {
+        "Name": "us_aqi",
+        "Type": "int"
+      },
+      {
+        "Name": "aqi_category",
+        "Type": "string"
+      },
+      {
+        "Name": "hour",
+        "Type": "int"
+      },
+      {
+        "Name": "collected_at",
+        "Type": "string"
+      }
+    ],
+    "partition_keys": [
+      {
+        "Name": "year",
+        "Type": "string"
+      },
+      {
+        "Name": "month",
+        "Type": "string"
+      },
+      {
+        "Name": "day",
+        "Type": "string"
+      }
+    ],
+    "serde": "org.openx.data.jsonserde.JsonSerDe"
+  },
+  "glue_partitions": {
+    "count": 6,
+    "values": [
+      [
+        "2026",
+        "10",
+        "04"
+      ],
+      [
+        "2026",
+        "10",
+        "05"
+      ],
+      [
+        "2026",
+        "10",
+        "06"
+      ],
+      [
+        "2026",
+        "10",
+        "07"
+      ],
+      [
+        "2026",
+        "10",
+        "13"
+      ],
+      [
+        "2026",
+        "10",
+        "14"
+      ]
+    ]
+  },
+  "sns": {
+    "project_topics": 1,
+    "confirmed_email_subscriptions": 2,
+    "pending_subscriptions": 0
+  },
+  "cloudwatch_alarms": [
+    {
+      "AlarmName": "WeatherCollector-Errors-Alarm",
+      "StateValue": "INSUFFICIENT_DATA",
+      "MetricName": "Errors",
+      "Namespace": "AWS/Lambda",
+      "Threshold": 1.0,
+      "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+      "Period": 300,
+      "EvaluationPeriods": 1
+    }
+  ],
+  "cloudwatch_metrics": {
+    "namespace": "AWS/Lambda",
+    "dimension": "FunctionName=WeatherCollectorLambda",
+    "start_utc": "2026-10-11T17:00:00+00:00",
+    "end_utc": "2026-10-16T05:16:45.669531+00:00",
+    "period_seconds": 86400,
+    "invocations": 25.0,
+    "errors": 576.0,
+    "points": 9
+  }
+}

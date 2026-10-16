@@ -1,80 +1,96 @@
-# Thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS
+# Thu thập và phân tích dữ liệu thời tiết và chất lượng không khí trên AWS
 
-Dự án sử dụng AWS Serverless để thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Lambda xử lý dữ liệu theo lịch, lưu bản ghi trên S3 theo phân vùng ngày và gửi thông báo qua SNS khi thỏa ngưỡng cấu hình. Athena tổng hợp US AQI, PM2.5, PM10 và các yếu tố khí tượng để tạo bảng số liệu, biểu đồ và báo cáo theo tuần.
+Dự án thu thập dữ liệu Open-Meteo cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng bằng AWS Serverless. EventBridge gọi Lambda; dữ liệu được chuẩn hóa, lưu trên S3 theo ngày và phân tích bằng Glue/Athena. SNS phục vụ cảnh báo theo ngưỡng cấu hình, CloudWatch phục vụ giám sát.
 
-Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**.
+Học phần **Điện toán đám mây**, lớp **261CLCO332779_05**. GVHD **ThS. Huỳnh Xuân Phụng**. Sinh viên **Nguyễn Tiến Sơn (24110054)** và **Trần Thị Ngọc Quyên (24110051)**.
 
-[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Hồ sơ Tuần 1](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1) · [Hồ sơ Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2)
+[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Báo cáo nộp lại](BAO_CAO_NOP_LAI.md) · [Hồ sơ Tuần 1](tuan_1/README.md) · [Hồ sơ Tuần 2](tuan_2/README.md)
 
-| Sinh viên | MSSV | Phụ trách chính |
-| --- | --- | --- |
-| Nguyễn Tiến Sơn | 24110054 | S3, Secrets Manager, Lambda và SNS |
-| Trần Thị Ngọc Quyên | 24110051 | Glue, Athena, biểu đồ và đối chiếu dữ liệu |
+## Hồ sơ tiến độ trên GitHub
 
-Hai thành viên cùng thiết kế kiến trúc, tích hợp và báo cáo. [Nhật ký nhóm](docs/WORKLOG.md) · [Bảng chấm công CSV](worklog.csv).
+| Nội dung | Đường dẫn xem trực tiếp |
+| --- | --- |
+| Tổng hợp bổ sung theo nhận xét GVHD | [Phân công, kết quả, minh chứng và kế hoạch](BAO_CAO_NOP_LAI.md) |
+| Tuần 1 | [Mục tiêu, nền tảng, 156 bản ghi và chín biểu đồ](tuan_1/README.md) |
+| Tuần 2 | [Phần đã thực hiện, kết quả AQI và dữ liệu hai sinh viên](tuan_2/README.md) |
+| Phân công và số giờ | [Worklog](docs/WORKLOG.md) · [CSV tổng hợp](worklog.csv) |
+| Mã nguồn và commit từng thành phần | [Chỉ mục mã nguồn](docs/components.md) |
+| Kiểm chứng AWS bằng phiên mới | [Đợt ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) |
+| Kế hoạch Tuần 3 | [Tích hợp và giám sát](docs/WEEK_3_PLAN.md) |
+| Danh mục tệp dữ liệu | [CSV có số dòng, số cột và SHA-256](docs/csv_catalog.csv) |
 
-## Báo cáo và dữ liệu
+Repo chứa nội dung tiến độ, mã nguồn và dữ liệu để đọc trực tiếp. Word/PDF/Excel là các bản lưu bổ sung, có đường dẫn trong từng tuần.
 
-| Tuần | Phạm vi | Word | PDF | Excel |
-| --- | --- | --- | --- | --- |
-| 1 | Bộ dữ liệu đã nộp: 156 bản ghi và chín biểu đồ | [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) | [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) | [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
-| 2 | Hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên; 27 nhóm đô thị–giờ mỗi sinh viên, 20 biểu đồ, 24 truy vấn mới và phụ lục đủ 84 lượt ghi gốc | [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) | [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) | [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
+## Phân công
 
-[Tài liệu dự án](docs/README.md) · [Kiến trúc](docs/architecture.md) · [Phương pháp dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Hướng dẫn đọc mã nguồn](docs/source-guide.md).
+| Sinh viên | MSSV | Phụ trách chính | Tuần 1 | Tuần 2 |
+| --- | --- | --- | ---: | ---: |
+| Nguyễn Tiến Sơn | 24110054 | S3, Secrets Manager, Lambda và SNS; phối hợp lịch và giám sát | 9,5 giờ | 10,0 giờ |
+| Trần Thị Ngọc Quyên | 24110051 | Glue, Athena, xuất CSV, biểu đồ và đối chiếu dữ liệu | 9,0 giờ | 9,5 giờ |
+| Tổng | | Cả hai cùng làm kiến trúc, tích hợp và hồ sơ | 18,5 giờ | 19,5 giờ |
 
-## Cấu trúc dự án
+Các tổng giờ đã được sinh viên xác nhận theo tuần; không suy ra giờ từng ngày từ lịch sử commit. [Nhật ký và minh chứng từng đầu việc](docs/WORKLOG.md).
 
-| Thư mục | Vai trò | Điểm bắt đầu |
-| --- | --- | --- |
-| `docs/` | Tài liệu chung, kiến trúc, phương pháp và nhật ký | [Mục lục tài liệu](docs/README.md) |
-| `tuan_1/` | Báo cáo, dữ liệu đã nộp và script nền tảng của Tuần 1 | [Tuần 1](tuan_1/README.md) |
-| `tuan_2/lambda/` | Chương trình thu thập chính | [lambda_function.py](tuan_2/lambda/lambda_function.py) |
-| `tuan_2/scripts/` | Quản lý dịch vụ và xuất CSV bằng Python SDK; PowerShell chuyển tham số | [Hướng dẫn vận hành](docs/operation.md) |
-| `tuan_2/athena/` | Một bảng dữ liệu, một view và các truy vấn phân tích | [Thứ tự dùng SQL](tuan_2/athena/README.md) |
-| `tuan_2/analytics/` | Phân tích CSV và dựng biểu đồ của từng tuần | [Hướng dẫn đọc mã nguồn](docs/source-guide.md) |
-| `tuan_2/results/` | Các tập dữ liệu đã lưu, metadata và hình từ dữ liệu | [Danh mục dữ liệu](tuan_2/results/README.md) |
-| `tuan_2/tests/` | Kiểm tra Lambda, SDK, CSV và biểu đồ của dự án | [Kiểm tra chức năng](tuan_2/tests/) |
+## Kiến trúc và dữ liệu đầu vào
 
-Mã triển khai dùng chung nằm tại `tuan_2/`; các chương trình thiết lập nền tảng của Tuần 1 gọi lại bộ mã này. [Sơ đồ mã nguồn](docs/repository-layout.md) giải thích các tệp chính, dữ liệu đầu vào và cách dùng lại chương trình giữa hai tuần.
+![Kiến trúc hệ thống](docs/architecture.png)
 
-## Kết quả Tuần 2
+Open-Meteo cung cấp dữ liệu thời tiết và chất lượng không khí qua API. Bản ghi có 20 trường nội dung và ba khóa phân vùng `year/month/day`, gồm thành phố, tọa độ, thời gian UTC/UTC+7, khí tượng, bụi, khí ô nhiễm, US AQI và thời điểm thu thập. Dữ liệu chất lượng không khí dựa trên mô hình CAMS; không phải phép đo trực tiếp tại trạm.
 
-Hai bộ dữ liệu đã lưu gồm 204 bản ghi của sinh viên Tiến Sơn và 231 bản ghi của sinh viên Ngọc Quyên. Sau khi lọc theo ranh giới Tuần 2 ở múi giờ UTC+7, có **27 và 57 lượt ghi gốc** tương ứng. Bộ của sinh viên Ngọc Quyên có hai hoặc ba lượt ghi trong cùng đô thị và giờ UTC với các chỉ số môi trường bằng nhau.
+[Kiến trúc chi tiết](docs/architecture.md) · [Mô hình và phương pháp phân tích](docs/data-analysis.md) · [Lược đồ và SQL](tuan_2/athena/README.md)
 
-[Bảng theo giờ](tuan_2/results/week2_analysis/hourly_city.csv) tổng hợp các lượt ghi thành **27 nhóm đô thị–giờ cho mỗi sinh viên**; **21 nhóm có dữ liệu của cả hai sinh viên** được dùng để đối chiếu trực tiếp. Các bản ghi gốc được giữ riêng theo sinh viên và trình bày đầy đủ trong phụ lục. Khi đối chiếu dữ liệu lịch sử, có 144 quan trắc cùng đô thị và thời điểm xuất hiện trong cả hai bộ với các giá trị môi trường tương ứng bằng nhau.
+## Kết quả AQI trong bộ báo cáo Tuần 2 đã lưu
 
-| Đô thị | AQI TB<br>Sinh viên Tiến Sơn | AQI TB<br>Sinh viên Ngọc Quyên | PM2.5 TB (µg/m³)<br>Sinh viên Tiến Sơn | PM2.5 TB (µg/m³)<br>Sinh viên Ngọc Quyên |
+| Đô thị | AQI TB sinh viên Tiến Sơn | AQI TB sinh viên Ngọc Quyên | PM2.5 TB sinh viên Tiến Sơn (µg/m³) | PM2.5 TB sinh viên Ngọc Quyên (µg/m³) |
 | --- | ---: | ---: | ---: | ---: |
 | TP. Hồ Chí Minh | 78,00 | 79,05 | 23,38 | 22,92 |
 | Hà Nội | 163,56 | 163,05 | 76,66 | 75,11 |
 | Đà Nẵng | 35,44 | 35,37 | 6,38 | 6,46 |
 
-Mẫu Tuần 2 của mỗi sinh viên bao phủ hai ngày, gồm chín giờ có dữ liệu. Các thống kê mô tả phạm vi mẫu đã thu thập; hệ số tương quan không chứng minh quan hệ nhân quả. Dữ liệu chất lượng không khí từ Open-Meteo dựa trên mô hình CAMS, không phải phép đo trực tiếp tại trạm.
+Bảng lấy từ [city_statistics.csv](tuan_2/results/week2_analysis/city_statistics.csv), dùng **27/57 lượt ghi gốc** trong phạm vi Tuần 2 của hai sinh viên. Khi tổng hợp theo đô thị–giờ, mỗi sinh viên có 27 nhóm; 21 nhóm cùng giờ dùng cho đối chiếu trực tiếp. Các lượt trong cùng giờ được giữ trong raw và giải thích trong [phương pháp](docs/data-analysis.md). Mẫu của mỗi sinh viên chỉ bao phủ hai ngày và chín giờ có dữ liệu; kết luận giới hạn trong tập mẫu.
 
-- [CSV Athena trong hai báo cáo dữ liệu](tuan_2/results/week2_live/)
-- [27 CSV phân tích và đối chiếu](tuan_2/results/week2_analysis/)
-- [20 biểu đồ và bảng nguồn](tuan_2/results/week2_charts/)
-- [Tệp raw và metadata dịch vụ đã đọc](tuan_2/results/week2_evidence/)
-- [SQL của 12 phép phân tích](tuan_2/athena/week2_analysis/)
+![AQI theo đô thị trong bộ báo cáo đã lưu](tuan_2/results/week2_charts/02_aqi_city.png)
 
-## Kiến trúc hệ thống
+## Phân biệt các mốc dữ liệu
 
-![Kiến trúc](docs/architecture.png)
+| Bộ dữ liệu | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Mục đích |
+| --- | ---: | ---: | --- |
+| Tuần 1 đã nộp | 156 bản ghi chung, 52/đô thị | Cùng bộ Tuần 1 | [Sáu CSV](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) và chín hình |
+| Tuần 2 đã lưu | 204 toàn bộ; 27 thuộc Tuần 2 | 231 toàn bộ; 57 thuộc Tuần 2 | [24 truy vấn](tuan_2/results/week2_live/), [27 bảng](tuan_2/results/week2_analysis/), [20 hình](tuan_2/results/week2_charts/) |
+| Đọc lại AWS ngày 16/10 | 216 toàn bộ; 39 thuộc Tuần 2 | 249 toàn bộ; 75 thuộc Tuần 2 | [14 SELECT mới, raw, metadata và hash](tuan_2/results/review_2026_10_16/README.md) |
 
-EventBridge gọi Lambda; Lambda đọc cấu hình Secrets Manager, thu thập Open-Meteo, ghi NDJSON vào S3 và gửi SNS. Glue quản lý lược đồ, Athena phân tích dữ liệu và CloudWatch ghi chỉ số/log. Các thao tác quản lý và xuất dữ liệu dùng boto3.
+Không cộng các mốc này thành các quan trắc độc lập. Truy vấn mới ghi vào thư mục riêng, giữ nguyên số liệu đã dùng trong báo cáo và biểu đồ cũ.
 
-Theo hồ sơ Tuần 2 đã lưu, môi trường AWS của sinh viên Ngọc Quyên có hai quy tắc lịch đang bật và hai đăng ký email đã xác nhận; sinh viên Tiến Sơn có một lịch và một đăng ký. Tổng Errors lớn hơn Invocations trong bộ chỉ số đã xuất, nên tỷ lệ lỗi được để trống trong kết quả phân tích. Trạng thái Alarm OK tại lần đọc được trình bày riêng với các chỉ số tích lũy.
+## Trạng thái kiểm chứng AWS mới
 
-## Tái lập phân tích
+Hai Lambda đều Active, Python 3.12, 256 MB và timeout 60 giây. Hai S3 bật mã hóa AES256 và đủ bốn tùy chọn chặn truy cập công khai. Mỗi môi trường có sáu phân vùng Glue. Sinh viên Tiến Sơn có một lịch bật và một đăng ký email đã xác nhận; sinh viên Ngọc Quyên có hai lịch bật và hai đăng ký.
 
-Yêu cầu Python 3.12 trở lên và các thư viện trong [tuan_2/analytics/requirements.txt](tuan_2/analytics/requirements.txt).
+Hai Alarm hiện `INSUFFICIENT_DATA`; tổng Errors lớn hơn Invocations trong cửa sổ metric đã đọc, nên chưa tính tỷ lệ lỗi. Mã Lambda đang triển khai khác mã nguồn hiện tại trong repo. Đợt này chỉ đọc cấu hình và chạy SELECT, chưa triển khai hoặc gọi thử Lambda. [Metadata, mã truy vấn và giới hạn xác nhận](tuan_2/results/review_2026_10_16/README.md).
+
+## Cấu trúc mã nguồn
+
+| Thư mục | Vai trò |
+| --- | --- |
+| [docs/](docs/README.md) | Kiến trúc, phương pháp, worklog, chỉ mục commit và kế hoạch |
+| [tuan_1/](tuan_1/README.md) | Hồ sơ nền tảng, phân công, CSV và báo cáo Tuần 1 |
+| [tuan_2/lambda/](tuan_2/lambda/) | Hàm thu thập chuẩn |
+| [tuan_2/scripts/](tuan_2/scripts/) | Python SDK quản lý dịch vụ, xuất CSV, đọc minh chứng và kiểm tra repo |
+| [tuan_2/athena/](tuan_2/athena/README.md) | Một bảng gốc, một view và SQL phân tích |
+| [tuan_2/analytics/](tuan_2/analytics/) | Phân tích CSV và dựng biểu đồ |
+| [tuan_2/results/](tuan_2/results/README.md) | Các bộ raw, CSV, hình và metadata theo mốc |
+| [tuan_2/tests/](tuan_2/tests/) | Kiểm tra chức năng và tính nhất quán của hồ sơ |
+
+[Sơ đồ mã nguồn](docs/repository-layout.md) · [Giải thích code](docs/source-guide.md) · [Vận hành bằng Python SDK](docs/operation.md)
+
+## Kiểm tra và tái lập
+
+Python 3.12 trở lên. Các kiểm tra dưới đây dùng dữ liệu đã lưu, không cần credentials:
 
 ```powershell
 python -m pip install -r tuan_2/analytics/requirements.txt
-python tuan_2/analytics/analyze_week2_accounts.py
-python tuan_2/analytics/generate_week1_supplement.py
-python tuan_2/analytics/generate_week2_charts.py
+python tuan_2/scripts/repository_audit.py --check
+python -m unittest discover -s tuan_2/tests -v
 python -m unittest discover -s tuan_2/analytics -p "test_*.py" -v
 ```
 
-Phân tích dùng tệp đã xuất cùng metadata và không cần thông tin đăng nhập. Để chạy các chức năng quản lý dịch vụ hoặc xuất dữ liệu mới, xem [hướng dẫn vận hành](docs/operation.md). Không đưa credentials vào repository. Bộ kiểm tra gồm 56 ca chức năng và 18 ca phân tích dữ liệu; kết quả cục bộ không phải một lần triển khai AWS mới.
+Để tính lại bảng và dựng hình, xem [hướng dẫn tái lập](docs/source-guide.md). Để xuất một mốc kiểm chứng AWS khác, xem [hướng dẫn bộ thu thập](docs/operation.md). Không lưu credentials, token, giá trị Secret hoặc địa chỉ người nhận vào repo. Kiểm tra cục bộ/CI và minh chứng AWS có phạm vi xác nhận riêng.

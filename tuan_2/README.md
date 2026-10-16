@@ -1,18 +1,79 @@
-# Tuần 2 Hai bộ báo cáo dữ liệu của nhóm
+# Tuần 2 Thu thập và phân tích hai bộ báo cáo dữ liệu
 
-Sinh viên thực hiện: Nguyễn Tiến Sơn (24110054) và Trần Thị Ngọc Quyên (24110051). Lớp 261CLCO332779_05, học phần Điện toán đám mây. GVHD ThS. Huỳnh Xuân Phụng.
+Nguyễn Tiến Sơn (24110054), Trần Thị Ngọc Quyên (24110051), lớp 261CLCO332779_05. GVHD ThS. Huỳnh Xuân Phụng.
 
-[Repository GitHub](https://github.com/JasonTM17/WeatherAWS_FinalTerm.git) · [Hồ sơ Tuần 1](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1) · [Hồ sơ Tuần 2](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2)
+[Repository](../README.md) · [Hồ sơ Tuần 1](../tuan_1/README.md) · [Phân công và worklog](docs/WORKLOG.md) · [CSV worklog](worklog.csv) · [Mã nguồn và commit](../docs/components.md) · [Kế hoạch Tuần 3](../docs/WEEK_3_PLAN.md)
 
-- [Báo cáo Word](docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [PDF](docs/Bao_cao_Tuan_2_24110054_24110051.pdf)
-- [Excel phân tích](docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx)
-- [CSV Athena mới](results/week2_live/) · [CSV phân tích](results/week2_analysis/)
-- [Biểu đồ](results/week2_charts/) · [Dữ liệu raw và metadata](results/week2_evidence/)
-- [Nhật ký Tuần 2](docs/WORKLOG.md) · [Tải CSV](docs/worklog.csv)
-- [Hướng dẫn đọc mã nguồn](../docs/source-guide.md)
+## Mục tiêu và phần đã thực hiện
 
-Bộ dữ liệu đã lưu của sinh viên Tiến Sơn có 204 bản ghi, trong đó 27 lượt ghi thuộc Tuần 2. Bộ của sinh viên Ngọc Quyên có 231 bản ghi, trong đó 57 lượt ghi thuộc Tuần 2. Khi [tổng hợp theo đô thị và giờ UTC](results/week2_analysis/hourly_city.csv), mỗi sinh viên có 27 nhóm, gồm 21 nhóm cùng giờ để đối chiếu. Bộ của sinh viên Ngọc Quyên có 24 nhóm ghi hai lượt và ba nhóm ghi ba lượt; các chỉ số môi trường trong cùng nhóm bằng nhau. Các lượt ghi gốc được giữ đầy đủ trong CSV và phụ lục. Mẫu Tuần 2 của mỗi sinh viên bao phủ hai ngày, gồm chín giờ có dữ liệu.
+Chúng em hoàn thiện luồng thu thập, phân tích AQI và kiểm tra dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Nội dung được giữ trực tiếp trên GitHub để đối chiếu từng phần từ mã nguồn tới CSV và biểu đồ.
 
-Mục 3.12 trong báo cáo đối chiếu AQI và PM2.5 với đúng bộ 156 bản ghi của báo cáo Tuần 1 đã lưu. Phép lọc hai tuần từ lần xuất mới được trình bày riêng, vì cỡ mẫu Tuần 1 khi lọc lại là 42/41 mỗi đô thị. Excel có sheet So_sanh_tuan và hai CSV riêng cho hai phạm vi này.
+| Phần việc | Sản phẩm | Cách kiểm chứng |
+| --- | --- | --- |
+| Thu thập và lưu dữ liệu | [Lambda](lambda/lambda_function.py), NDJSON theo ngày | [Raw và metadata của từng sinh viên](results/week2_evidence/) |
+| Lịch, cấu hình và cảnh báo | [SDK quản lý dịch vụ](scripts/aws_project.py) | [Rule, target, policy, cấu hình hàm và SNS mới đọc](results/review_2026_10_16/README.md) |
+| Lược đồ và truy vấn | [Bảng, view](athena/README.md) và [12 SELECT](athena/week2_analysis/) | [24 kết quả truy vấn trong bộ đã lưu](results/week2_live/) |
+| Phân tích và đối chiếu | [Chương trình phân tích](analytics/analyze_week2_accounts.py) | [27 CSV](results/week2_analysis/) |
+| Trực quan hóa | [Chương trình dựng hình](analytics/generate_week2_charts.py) | [20 hình và manifest nguồn](results/week2_charts/) |
 
-Phương pháp và cách tái lập được trình bày trong [tổng quan dự án](../README.md) và [tài liệu dữ liệu](../docs/data-analysis.md). Xem [sơ đồ mã nguồn](../docs/repository-layout.md), [thứ tự dùng SQL](athena/README.md) và [danh mục dữ liệu](results/README.md) để tra cứu từng thành phần.
+Mã hiện tại bổ sung kiểm tra phản hồi API, timeout theo thời gian Lambda còn lại, bảo vệ tệp CSV cũ khi xuất lỗi, ghép cặp hợp lệ khi tính tương quan và tránh tạo hình khi import module. [Giải thích code và lý do thiết lập](../docs/source-guide.md). Những sửa đổi này đã có kiểm tra cục bộ; hash mới đọc cho thấy chúng chưa trùng phiên bản Lambda đang triển khai.
+
+## Phân công và số giờ
+
+| Sinh viên | Phụ trách chính | Giờ Tuần 2 |
+| --- | --- | ---: |
+| Sinh viên Tiến Sơn | S3, Secrets Manager, Lambda và SNS; phối hợp lịch và giám sát | 10,0 |
+| Sinh viên Ngọc Quyên | Glue, Athena, xuất CSV, biểu đồ và đối chiếu dữ liệu | 9,5 |
+
+Cả hai phối hợp kiến trúc, tích hợp và hồ sơ. Tổng **19,5 giờ** đã xác nhận theo tuần. [Nhật ký đầu việc](docs/WORKLOG.md) ghi liên kết sản phẩm; chưa chia giờ theo ngày khi chưa có nhật ký buổi làm.
+
+## Đầu vào và phạm vi thống kê
+
+Open-Meteo cung cấp thời tiết và chất lượng không khí cho ba đô thị. Lược đồ gồm 20 trường nội dung và ba khóa phân vùng; raw có thành phố, tọa độ, thời gian UTC/UTC+7, 11 chỉ số môi trường dạng số, cấp AQI và thời điểm thu thập.
+
+| Mốc | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Nguồn |
+| --- | ---: | ---: | --- |
+| Bộ báo cáo đã lưu | 204 toàn bộ; 27 thuộc Tuần 2 | 231 toàn bộ; 57 thuộc Tuần 2 | [Raw Athena](results/week2_live/) |
+| Kiểm chứng AWS ngày 16/10 | 216 toàn bộ; 39 thuộc Tuần 2 | 249 toàn bộ; 75 thuộc Tuần 2 | [Raw, 14 SELECT mới và metadata](results/review_2026_10_16/README.md) |
+
+Phần kết quả và 20 hình dưới đây dùng **bộ đã lưu 27/57**. Hai mốc không được trộn. Bộ lọc Tuần 2 là từ 12/10 00:00 đến trước 19/10 00:00 UTC+7; truy vấn dùng ranh giới UTC tương ứng. Mẫu thực có hai ngày và chín giờ ở mỗi sinh viên trong bộ đã lưu.
+
+## Kết quả AQI ban đầu trong bộ đã lưu
+
+| Đô thị | AQI TB sinh viên Tiến Sơn | AQI TB sinh viên Ngọc Quyên | PM2.5 TB sinh viên Tiến Sơn (µg/m³) | PM2.5 TB sinh viên Ngọc Quyên (µg/m³) |
+| --- | ---: | ---: | ---: | ---: |
+| TP. Hồ Chí Minh | 78,00 | 79,05 | 23,38 | 22,92 |
+| Hà Nội | 163,56 | 163,05 | 76,66 | 75,11 |
+| Đà Nẵng | 35,44 | 35,37 | 6,38 | 6,46 |
+
+Nguồn: [city_statistics.csv](results/week2_analysis/city_statistics.csv). Hà Nội có AQI trung bình cao nhất trong mẫu; các mẫu tại đây thuộc cấp Unhealthy. TP. Hồ Chí Minh thuộc Moderate và Đà Nẵng thuộc Good. [Số mẫu và tỷ lệ](results/week2_analysis/category_distribution.csv).
+
+![AQI trung bình và độ lệch chuẩn](results/week2_charts/02_aqi_city.png)
+
+![Biến thiên AQI theo giờ](results/week2_charts/05_hourly_aqi.png)
+
+### Cách đối chiếu hai bộ báo cáo dữ liệu
+
+Gom theo đô thị và giờ UTC cho **27 nhóm ở mỗi sinh viên**, trong đó **21 nhóm cùng giờ** được dùng đối chiếu trực tiếp. Bộ của sinh viên Ngọc Quyên có nhiều lượt ghi trong một giờ; raw giữ đầy đủ, thống kê theo lượt ghi và theo giờ được trình bày riêng. [hourly_city.csv](results/week2_analysis/hourly_city.csv) · [matched_account_hours.csv](results/week2_analysis/matched_account_hours.csv).
+
+Mẫu Hà Nội có 9/9 và 19/19 lượt thỏa ngưỡng cấu hình `AQI >= 100` hoặc `PM2.5 >= 35.5`. Đây là tỷ lệ trong mẫu, không chứng minh ô nhiễm cả tuần hoặc email đã được gửi/nhận ở từng lượt. Các hệ số tương quan mô tả mẫu ngắn, không xác định quan hệ nhân quả.
+
+### Đối chiếu Tuần 1
+
+[submitted_week1_comparison.csv](results/week2_analysis/submitted_week1_comparison.csv) dùng đúng bộ 156 dòng Tuần 1, 52/đô thị. [weekly_comparison.csv](results/week2_analysis/weekly_comparison.csv) lọc lại hai tuần từ lần xuất mới và có cỡ mẫu khác; hai phép so sánh được trình bày riêng. [Chi tiết](../docs/data-analysis.md).
+
+![Đối chiếu AQI với bộ Tuần 1 đã nộp](results/week2_charts/17_submitted_week1_aqi.png)
+
+## Kiểm chứng vận hành mới
+
+Đợt ngày 16/10 đọc được 13 nhóm thông tin dịch vụ ở mỗi môi trường và 14/14 SELECT thành công. CSV mới xác nhận mẫu Tuần 2 tăng lên 39/75 lượt ghi. [Manifest và bảng kết quả](results/review_2026_10_16/README.md) nêu mã truy vấn, thời gian tải, SHA-256, cấu hình, số đối tượng và phân vùng.
+
+Hai hàm Active nhưng mã đang chạy khác mã repo; hai Alarm thiếu dữ liệu. Errors/Invocations chưa nhất quán và sinh viên Ngọc Quyên có hai lịch bật. Đợt đọc này không triển khai, đổi lịch hoặc gọi Lambda. Các việc tích hợp và giám sát cần kiểm chứng tiếp được đưa vào [kế hoạch Tuần 3](../docs/WEEK_3_PLAN.md).
+
+## Kết luận và hồ sơ đầy đủ
+
+Tuần 2 đã có mã cho luồng thu thập/phân tích, các kết quả truy vấn truy được về raw, bảng thống kê và hình dùng cùng nguồn. Kết quả mô tả hai bộ mẫu; chưa chứng minh vận hành liên tục, hoàn tất luồng nhận email hoặc triển khai phiên bản mã mới. Tuần 3 sẽ tập trung tích hợp và giám sát theo các tiêu chí cụ thể.
+
+[Báo cáo chi tiết trên GitHub](docs/FINAL_REPORT.md) · [CSV Athena đã lưu](results/week2_live/) · [27 CSV phân tích](results/week2_analysis/) · [20 biểu đồ](results/week2_charts/) · [Raw và metadata đã lưu](results/week2_evidence/)
+
+Các bản lưu bổ sung: [PDF](docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx).

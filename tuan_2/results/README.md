@@ -10,6 +10,7 @@
 | [week2_evidence/](week2_evidence/) | Raw NDJSON, metadata tài nguyên, truy vấn và chỉ số đã lưu của mỗi sinh viên | Bộ phân tích Tuần 2 đối chiếu nguồn CSV và phạm vi vận hành |
 | [week2_analysis/](week2_analysis/) | 27 CSV gồm 25 bảng nền tảng và hai bảng đối chiếu bổ sung; manifest nhận diện đầu vào nền tảng | Excel/báo cáo Tuần 2 và chương trình dựng hình |
 | [week2_charts/](week2_charts/) | 20 PNG và manifest liên kết mỗi hình với CSV nguồn | [generate_week2_charts.py](../analytics/generate_week2_charts.py) |
+| [review_2026_10_16/](review_2026_10_16/README.md) | Đợt đọc AWS riêng ngày 16/10: raw 216/249 dòng toàn bộ, 39/75 thuộc Tuần 2, 14 SELECT và metadata | [collect_repository_evidence.py](../scripts/collect_repository_evidence.py); giữ nguyên đầu vào các hình/báo cáo cũ |
 
 ## Bộ nộp Tuần 1
 
@@ -20,3 +21,5 @@ Bản CSV đi cùng báo cáo nằm tại [tuan_1/docs/Bao_cao_tuan_1_CSV_241100
 CSV raw của sinh viên Tiến Sơn có 204 dòng và sinh viên Ngọc Quyên có 231 dòng. Sau lọc Tuần 2 còn 27/57 lượt ghi gốc. [hourly_city.csv](week2_analysis/hourly_city.csv) gom theo đô thị và giờ UTC, cho 27 nhóm ở mỗi sinh viên; [matched_account_hours.csv](week2_analysis/matched_account_hours.csv) giữ 21 nhóm có dữ liệu của cả hai. Sinh viên Ngọc Quyên có 24 nhóm gồm hai lượt và ba nhóm gồm ba lượt, nhưng các chỉ số môi trường trong cùng nhóm bằng nhau. Các tệp raw không bị lược dòng. `default` và `quyen` là mã nguồn dữ liệu trong các tệp; nhãn trình bày dùng “sinh viên Tiến Sơn” và “sinh viên Ngọc Quyên”.
 
 Các tệp đã lưu là đầu vào của báo cáo. Để xuất thêm dữ liệu mà giữ riêng bộ này, dùng `--output output/athena` như [hướng dẫn vận hành](../../docs/operation.md). Dữ liệu phân tích và hình có thể được tái tạo từ những đầu vào đã lưu; timestamp tạo tệp trong manifest không phải thời điểm quan trắc mới.
+
+[Danh mục CSV toàn repo](../../docs/csv_catalog.csv) ghi đường dẫn, số dòng dữ liệu không tính header, số cột, bytes, SHA-256 và phạm vi. Những bản sao dùng cho các mục đích khác nhau được giữ tên/path riêng; không cộng các số dòng trong danh mục thành số quan trắc độc lập.
