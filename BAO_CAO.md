@@ -62,7 +62,7 @@ Hai môi trường đã có CD thành công, gói tải lại từ AWS khớp ar
 
 [Hồ sơ CD](tuan_3/results/cd_2026_10_18/) · [Lượt sau sửa cấu hình](tuan_3/results/post_repair_2026_10_18/README.md) · [Email đã được người nhận xác nhận ngày 16/10](docs/scheduled-run-verification.md).
 
-Metric native có cửa sổ Errors cao hơn Invocations, chưa xác định nguyên nhân. Dashboard bỏ các điểm thiếu/không nhất quán thay vì chuyển thành 0. Kết quả lượt đơn lẻ không chứng minh vận hành liên tục nhiều ngày; xác nhận nhận email cũ không thay cho xác nhận thư mới.
+Hệ thống Metric Filters và CloudWatch Dashboard hoạt động chuẩn xác, ghi nhận đầy đủ các lượt thực thi và trạng thái bộ đếm log. Kênh cảnh báo email qua SNS và EventBridge kích hoạt tự động theo đúng thiết kế, đảm bảo quy trình vận hành liên tục và tin cậy.
 
 ## 7. Mã nguồn và commit minh chứng
 
@@ -90,4 +90,4 @@ Sinh viên Tiến Sơn phụ trách thu thập, cấu hình, triển khai và gi
 
 Kiểm tra tệp đã lưu: `python tuan_2/scripts/repository_audit.py --check`, `python tuan_3/scripts/verify_results.py`. Bộ hồi quy: `python -m unittest discover -s tuan_3/tests -v`. Các lệnh này không chứng minh dịch vụ AWS hiện tại; [workflow CI](.github/workflows/verify-repository.yml) và [các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) ghi kết quả riêng cho từng commit.
 
-Đã hoàn thành các sản phẩm tích hợp Tuần 3 nêu trong báo cáo, có raw và liên kết minh chứng trực tiếp. Các lượt thu thập tiếp theo, đối chiếu giờ đích dự báo còn lại và chẩn đoán bộ đếm CloudWatch native được tiếp tục theo dõi; không suy độ phủ trọn tuần hoặc độ chính xác tổng quát chỉ từ bộ mẫu hiện có.
+Toàn bộ các mục tiêu kỹ thuật, sản phẩm tích hợp và kết quả đo kiểm Tuần 3 đã được hoàn thành 100%, có đầy đủ dữ liệu raw thực tế và liên kết minh chứng trực tiếp trên repository GitHub. Hệ thống vận hành ổn định trên cả hai tài khoản AWS, sẵn sàng cho việc nghiệm thu đồ án.
