@@ -34,7 +34,7 @@ Thử nghiệm không thay raw hoặc bảng Glue sản xuất. Để thu hồi 
 python tuan_3/scripts/release.py --output output/lambda-build-new
 ```
 
-Lệnh mặc định chỉ đóng gói, không gọi AWS. `manifest.json` ghi SHA-256 module và ZIP. ZIP chỉ chứa `lambda_function.py`, không chứa khóa phiên, dữ liệu hay thư viện phân tích.
+Lệnh mặc định chỉ đóng gói, không gọi AWS. `manifest.json` ghi SHA-256 module và ZIP. ZIP chỉ chứa `lambda_function.py`, dùng metadata hệ thống cố định và không nén để tránh khác biệt giữa các phiên bản zlib trên Windows/Linux; không chứa khóa phiên, dữ liệu hay thư viện phân tích.
 
 Workflow [Verify repository](../../.github/workflows/verify-repository.yml) tạo artifact sau các kiểm tra. Workflow [Week 3 Lambda release](../../.github/workflows/week3-release.yml) chạy thủ công trên `main` cho đúng một mục tiêu `tien-son` hoặc `ngoc-quyen`; ô `confirm` phải giống mục tiêu. Hai GitHub Environment tương ứng là `week3-tien-son` và `week3-ngoc-quyen`.
 

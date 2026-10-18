@@ -16,9 +16,11 @@ from common import ROOT, FUNCTION, OPTIONS, digest, write_json
 
 def package(source):
     buffer = io.BytesIO()
-    with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
+    # Stored bytes avoid zlib-version differences between Windows and Linux.
+    with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_STORED) as archive:
         entry = zipfile.ZipInfo('lambda_function.py', date_time=(2026, 1, 1, 0, 0, 0))
-        entry.compress_type = zipfile.ZIP_DEFLATED
+        entry.create_system = 3
+        entry.compress_type = zipfile.ZIP_STORED
         entry.external_attr = 0o644 << 16
         archive.writestr(entry, source)
     return buffer.getvalue()

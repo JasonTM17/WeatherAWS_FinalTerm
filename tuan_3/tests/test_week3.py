@@ -89,6 +89,9 @@ class Week3Tests(unittest.TestCase):
         with zipfile.ZipFile(io.BytesIO(blob)) as archive:
             self.assertEqual(archive.namelist(), ['lambda_function.py'])
             self.assertEqual(archive.read('lambda_function.py'), b'print("example")\n')
+            entry = archive.infolist()[0]
+            self.assertEqual(entry.create_system, 3)
+            self.assertEqual(entry.compress_type, zipfile.ZIP_STORED)
     def test_forecast_recurses_using_predictions_not_holdout(self):
         values = list(range(120))
         result = predict(values)
