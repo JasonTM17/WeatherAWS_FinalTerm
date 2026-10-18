@@ -1,0 +1,49 @@
+{
+  "files": [
+    {
+      "path": "cloudwatch_log_metrics.png",
+      "sha256": "58d748d2a9490d25c45168ffcf5047c206419be02c7e83321f668d87f92119f0",
+      "bytes": 22180
+    },
+    {
+      "path": "cloudwatch_widget.json",
+      "sha256": "894087ee183df958796167b8352b9b0feb755a4306cad071aebf79351c4958b9",
+      "bytes": 651
+    },
+    {
+      "path": "collection_check/quyen/collection_checks.csv",
+      "sha256": "e6cf7744b1c6c87eb684f380652229e34a62d66bdc1c46e73086a0f9cfd3a68a",
+      "bytes": 328
+    },
+    {
+      "path": "collection_check/quyen/raw_verified.csv",
+      "sha256": "f622e22063203953aed6b71da62a18be918e3af8ab71ae871e9932d73c03a22d",
+      "bytes": 1045
+    },
+    {
+      "path": "collection_check/quyen/verification.json",
+      "sha256": "b1d36673bd6403858f5c561be35becec50ce8df72f154f3ed37670c846f59a56",
+      "bytes": 1094
+    },
+    {
+      "path": "filter_observation/quyen/log_metrics.csv",
+      "sha256": "a74acc341e21e64e469364944a7991b3950852e8cd11dceff6c782613ab8fee8",
+      "bytes": 84
+    },
+    {
+      "path": "filter_observation/quyen/observation.json",
+      "sha256": "2c988aa44f0255ee47e32d6319f6f91e8e80aa114cca1bfbbaffe7fecab5e41c",
+      "bytes": 339
+    },
+    {
+      "path": "image-capture.json",
+      "sha256": "212b497dc2e23771d1a208ad81a01d48560e0f978cb5ee61e7ce64840aa052a2",
+      "bytes": 400
+    },
+    {
+      "path": "post-repair-observation.json",
+      "sha256": "2b6c1aec072f9b956719f682a43e37c301f7bcdb2aeb03badfd08a65f3a56c12",
+      "bytes": 539
+    }
+  ]
+}

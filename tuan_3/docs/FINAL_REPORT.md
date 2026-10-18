@@ -113,6 +113,14 @@ Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `W
 
 Đợt này còn phát hiện Secret cấu hình của sinh viên Ngọc Quyên sai định dạng JSON, khiến mã dùng dự phòng. Đã chuẩn hóa định dạng, giữ nguyên các trường vận hành, đọc lại xác minh và giữ phiên bản cũ để khôi phục. [Biên bản loại thông tin bí mật](../results/operations_2026_10_18/configuration-format-repair.json) ghi các kiểm tra đã thực hiện. [CSV đối chiếu log và raw S3](../results/operations_2026_10_18/scheduled_followup/) cho phép xem từng lượt, số bản ghi và số cảnh báo phù hợp với ngưỡng.
 
+### 4.2. Lượt tự động sau sửa cấu hình của sinh viên Ngọc Quyên
+
+[Lượt 13:51:04 UTC+7 ngày 18/10](../results/post_repair_2026_10_18/README.md) phát sinh sau mốc sửa JSON 13:12:36. Log báo `complete`, ba đô thị và ba bản ghi; đọc S3 xác nhận đủ ba dòng với AQI lần lượt 66, 87, 52 và PM2.5 là 10,3; 22,8; 10,8 µg/m³. Cả ba mẫu dưới ngưỡng AQI 100/PM2.5 35,5, nên 0 cảnh báo dự kiến khớp 0 cảnh báo Lambda báo gửi.
+
+Metric Filter nhận điểm `ResultLogLines = 1` tại 06:51 UTC; [CSV](../results/post_repair_2026_10_18/filter_observation/quyen/log_metrics.csv) và [ảnh do AWS trả về](../results/post_repair_2026_10_18/cloudwatch_log_metrics.png) được giữ cùng cửa sổ. Trong truy vấn log từ 60 giây trước đến 5 giây sau dòng kết quả không có sự kiện khớp thông báo đọc Secret thất bại. Không có điểm `ErrorLogLines` được giữ là `null`, không đổi thành 0.
+
+Kết quả bổ sung hoàn tất kiểm chứng thu thập sau sửa định dạng và nhận metric log mới ở môi trường sinh viên Ngọc Quyên. Không có trace ID nối riêng từng sự kiện lịch, không có email mới để xác nhận vì không vượt ngưỡng, và chưa giải thích bất thường của bộ đếm native. Một lượt đạt không thay thế theo dõi dài ngày.
+
 ## 5. Dự báo theo giờ và đánh giá
 
 ### 5.1. Nguồn dữ liệu và cách chia tập

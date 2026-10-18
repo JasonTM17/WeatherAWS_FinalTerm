@@ -11,7 +11,7 @@ python tuan_3/scripts/verify_results.py
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 184 tệp trong năm manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của hai mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Phần dự báo mới kiểm tra đủ 144 giờ đích đều sau thời điểm phát hành và khớp phép tính lại. Các kiểm tra này không cần khóa AWS. Đây là kiểm tra tệp đã lưu, không phải kiểm tra dịch vụ hiện tại.
+`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 193 tệp trong sáu manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của hai mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Mốc sau sửa cấu hình được kiểm tra riêng về thời gian, lịch, raw ba đô thị, điều kiện cảnh báo và metric log mới. Phần dự báo mới kiểm tra đủ 144 giờ đích đều sau thời điểm phát hành và khớp phép tính lại. Các kiểm tra này không cần khóa AWS. Đây là kiểm tra tệp đã lưu, không phải kiểm tra dịch vụ hiện tại.
 
 ## 2. Chạy một mốc mới trên AWS
 
@@ -61,7 +61,7 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 
 ## 4. Kết quả thực hiện
 
-- Kiểm tra hồi quy gồm 32 trường hợp sau phần bổ sung thời điểm phát hành; đối chiếu 184 tệp manifest và các phép tính lại đã đạt. Kết quả toàn bộ bộ thử được ghi riêng theo lượt CI.
+- Kiểm tra hồi quy gồm 32 trường hợp sau phần bổ sung thời điểm phát hành; đối chiếu 193 tệp manifest và các phép tính lại đã đạt. Kết quả toàn bộ bộ thử được ghi riêng theo lượt CI.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
 - [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
 - [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.
@@ -84,5 +84,9 @@ Mỗi đợt cấp tạm bốn secrets cho mỗi môi trường. [Biên bản d�
 Dashboard dùng `IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))` cho từng chu kỳ: bỏ điểm thiếu Errors, không có lượt gọi hoặc Errors vượt Invocations. CSV chỉ giữ điểm dịch vụ trả về. Một vài điểm hợp lệ trên biểu đồ không chứng minh toàn cửa sổ có metric đầy đủ. Triển khai mã thành công cũng chưa chứng minh lịch chạy liên tục hay email mới đã tới người nhận.
 
 [Đối chiếu bổ sung](../results/operations_2026_10_18/) dùng hai API metric trên cùng cửa sổ: kết quả từng điểm khớp nhau, nên chưa có bằng chứng quy nguyên nhân cho phần xuất CSV. Mốc này bổ sung Metric Filters, sửa định dạng Secret cấu hình của sinh viên Ngọc Quyên và kiểm tra các lượt thu với raw S3. Các giá trị Secret không được đưa vào hồ sơ; phiên bản trước sửa được giữ để khôi phục.
+
+## 6. Lượt theo lịch sau sửa cấu hình
+
+[Hồ sơ 13:51 của sinh viên Ngọc Quyên](../results/post_repair_2026_10_18/README.md) có ba bản ghi khớp log/S3, đủ ba đô thị, không có đô thị lỗi; AQI/PM2.5 dưới ngưỡng nên không phát cảnh báo mới. Một điểm `ResultLogLines` đã được CloudWatch ghi nhận sau tạo filter/sửa cấu hình; không có sự kiện khớp thông báo đọc Secret thất bại trong cửa sổ log đã kiểm tra. Chương trình quan sát không gọi Lambda và không thay đổi lịch. Đây là minh chứng thu thập và metric mới, không phải bằng chứng nhận email mới hoặc vận hành liên tục.
 
 [Báo cáo](FINAL_REPORT.md) · [Trang Tuần 3](../README.md)

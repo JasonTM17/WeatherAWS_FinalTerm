@@ -1,0 +1,9 @@
+{
+  "captured_at": "2026-10-18T06:53:31.243568+00:00",
+  "api": "GetMetricWidgetImage",
+  "student": "Sinh viên Ngọc Quyên",
+  "bytes": 22180,
+  "sha256": "58d748d2a9490d25c45168ffcf5047c206419be02c7e83321f668d87f92119f0",
+  "resource_modified": false,
+  "limitation": "Native AWS graph for retained window; not a Console screenshot or proof of zero errors when no error points exist"
+}

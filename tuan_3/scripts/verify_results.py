@@ -57,6 +57,45 @@ def verify_operations(folder):
     return count
 
 
+def verify_post_repair(folder):
+    count = verify_manifest(folder)
+    proof = json.loads((folder / 'post-repair-observation.json').read_text(encoding='utf-8'))
+    repair = json.loads((folder.parent / 'operations_2026_10_18/configuration-format-repair.json').read_text(encoding='utf-8'))
+    collected = json.loads((folder / 'collection_check/quyen/verification.json').read_text(encoding='utf-8'))
+    checks = read_csv(folder / 'collection_check/quyen/collection_checks.csv')
+    raw = read_csv(folder / 'collection_check/quyen/raw_verified.csv')
+    metrics = read_csv(folder / 'filter_observation/quyen/log_metrics.csv')
+    observed = json.loads((folder / 'filter_observation/quyen/observation.json').read_text(encoding='utf-8'))
+    if (proof['status'] != 'OBSERVED' or proof['lambda_invoked'] or not proof['custom_result_metric_observed']
+            or proof['config_fallback_warning_events_returned'] != 0 or proof['warning_query_has_more_pages']):
+        raise ValueError('Post-repair observation is incomplete or reports configuration fallback')
+    if (collected['invoked_by_this_check'] or not collected['package_matches_reviewed_release']
+            or collected['rule'] != {'state': 'ENABLED', 'schedule': 'rate(1 hour)',
+                                    'matching_targets': 1, 'source_rule_permission': True}
+            or collected['result_entries'] != 1 or len(checks) != 1 or len(raw) != 3):
+        raise ValueError('Post-repair rule/release/collection evidence differs')
+    row = checks[0]
+    stamp = datetime.fromisoformat(row['timestamp_utc'])
+    if (stamp <= datetime.fromisoformat(repair['checked_at']) or row['timestamp_utc'] != proof['result_timestamp_utc']
+            or not datetime.fromisoformat(collected['window_start']) <= stamp <= datetime.fromisoformat(collected['window_end'])
+            or row['collection_status'] != 'complete' or proof['collection_status'] != 'complete'
+            or any(row[k] != 'True' for k in ('record_count_matches', 'alert_count_matches_current_thresholds', 'after_current_lambda_update'))
+            or any(int(row[k]) != 3 for k in ('reported_records', 's3_verified_records', 'cities'))
+            or int(row['failed_cities']) != 0 or proof['reported_records'] != 3):
+        raise ValueError('Post-repair result does not prove a complete three-city collection')
+    quality, _ = inspect_rows(raw)
+    if any(quality['issues'].values()) or len({r['city'] for r in raw}) != 3 or sum(r['records'] for r in collected['objects']) != 3:
+        raise ValueError('Post-repair raw quality/count mismatch')
+    thresholds = collected['thresholds_at_verification']
+    alerts = sum(float(r['us_aqi']) >= thresholds['aqi'] or float(r['pm2_5']) >= thresholds['pm2_5'] for r in raw)
+    if any(alerts != value for value in (int(row['expected_alerts']), int(row['reported_alerts_sent']), proof['reported_alerts_sent'])):
+        raise ValueError('Post-repair alert predicate disagrees with raw/result')
+    total = sum(float(r['value']) for r in metrics if r['metric'] == 'ResultLogLines')
+    if not observed['result_ingestion_observed'] or total <= 0 or total != observed['metric_sums']['ResultLogLines']:
+        raise ValueError('Post-repair custom result metric not observed')
+    return count
+
+
 def verify_issued_forecast(folder):
     count = verify_manifest(folder)
     history = read_csv(folder / 'hourly_model_history.csv')
@@ -122,6 +161,7 @@ def verify(folder):
     file_count += verify_manifest(monitoring) + verify_manifest(cd)
     file_count += verify_operations(folder.parent / 'operations_2026_10_18')
     file_count += verify_issued_forecast(folder.parent / 'forecast_issued_2026_10_18')
+    file_count += verify_post_repair(folder.parent / 'post_repair_2026_10_18')
     for profile in ('default', 'quyen'):
         observed = metric_consistency(read_csv(monitoring / profile / 'metrics.csv'))
         saved = json.loads((monitoring / profile / 'metric-consistency.json').read_text())
