@@ -46,7 +46,9 @@ Hai dòng CSV Tuần 3 ghi tổng 10,0 giờ mỗi sinh viên, không chứa ng�
 - Sinh viên Ngọc Quyên: raw, Glue/Athena, thống kê, đối chiếu dự báo và CSV/biểu đồ.
 - Hai sinh viên: đối chiếu kết quả, rà soát báo cáo và các liên kết minh chứng.
 
-Đợt đọc mới sau cập nhật phiên Lab có 246/285 bản ghi; mã Lambda khớp gói đã kiểm chứng. [Hồ sơ mới](../results/refresh_2026_10_18/README.md) bổ sung thống kê tái lập, so sánh MA 3 giờ và đối chiếu được 2/24 giờ đích với dữ liệu mô hình tải về sau. Không ghi 2 giờ này là toàn bộ 24 giờ đã đánh giá.
+Snapshot phân tích trước có 246/285 bản ghi; mã Lambda ở mốc đó khớp gói đã kiểm chứng. [Hồ sơ của mốc trước](../results/refresh_2026_10_18/README.md) bổ sung thống kê tái lập, so sánh MA 3 giờ và đối chiếu 2/24 giờ đích với mô hình tải về sau. Bản cập nhật bổ sung bên dưới nâng phạm vi đối chiếu lên 4/24 giờ đích, giữ nguyên các tệp của mốc trước.
+
+**Cập nhật đối chiếu bổ sung:** [metric/log cùng cửa sổ](../results/monitoring_followup_2026_10_18/README.md), [Dashboard cuối sau sửa IF](../results/monitoring_dashboard_repair_2026_10_18/README.md) và [24 giá trị đối chiếu cho bốn giờ đích](../results/forecast_followup_2026_10_18/README.md). Đã sửa cách ghép/tính/hiển thị; giữ nguyên điểm Errors thiếu Invocations của sinh viên Tiến Sơn để chẩn đoán. Không cộng thêm giờ làm từ thời gian chương trình chạy.
 
 ## 5. Kết quả hoàn thành kế hoạch công việc tích hợp Tuần 3
 
@@ -61,7 +63,7 @@ Hai dòng CSV Tuần 3 ghi tổng 10,0 giờ mỗi sinh viên, không chứa ng�
 | W3-04 | Xuất 246/288 dòng raw, lưu 83 JSON gốc, đối chiếu chất lượng; có 96 dòng thống kê và 120 dòng tương quan ở snapshot phân tích 246/285 | [Raw mới nhất](../results/raw_export_2026_10_18/README.md) · [Phân tích](../results/refresh_2026_10_18/analysis/) |
 | W3-05 | Tạo Dashboard, hai Metric Filters mỗi môi trường, đọc lại cấu hình và lưu ảnh/CSV AWS; ghi riêng điểm native metric cần làm rõ | [Dashboard](../results/integration_2026_10_18/dashboard/) · [Metric Filters](../results/operations_2026_10_18/) |
 | W3-06 | Kiểm chứng Publish, giao thông báo và người nhận xác nhận email tại các lượt 16/10; các lượt mới dưới ngưỡng không phát thêm cảnh báo | [Xác nhận email](../../docs/scheduled-run-verification.md#cảnh-báo-và-giám-sát) |
-| W3-07 | Đánh giá trên 24 giờ giữ lại, phát hành 144 giá trị cho 24 giờ đích sau phát hành; bổ sung MA 3 giờ và đối chiếu 2 giờ đích đã có mô hình tải về sau | [Dự báo đã phát hành](../results/forecast_issued_2026_10_18/) · [Phân tích bổ sung](../results/refresh_2026_10_18/README.md) |
+| W3-07 | Đánh giá trên 24 giờ giữ lại, phát hành 144 giá trị cho 24 giờ đích sau phát hành; bổ sung MA 3 giờ và cập nhật đối chiếu 4/24 giờ đích, 24/144 giá trị với mô hình tải về sau | [Dự báo đã phát hành](../results/forecast_issued_2026_10_18/) · [Phân tích bổ sung](../results/refresh_2026_10_18/README.md) |
 | W3-08 | CI/CD hai môi trường, artifact Windows/Linux khớp byte, xóa secrets tạm và hoàn thiện liên kết hồ sơ | [Vận hành và Actions](operation.md#4-kết-quả-thực-hiện) |
 
 **Bản xuất bổ sung lúc 17:02 ngày 18/10:** sinh viên Tiến Sơn có 246 bản ghi, sinh viên Ngọc Quyên có 288 bản ghi. Có thêm ba bản ghi của sinh viên Ngọc Quyên so với snapshot 246/285; toàn bộ bản ghi cũ được bảo toàn. [JSON/CSV, inventory và thời điểm đọc](../results/raw_export_2026_10_18/README.md).

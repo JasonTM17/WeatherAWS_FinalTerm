@@ -1,0 +1,124 @@
+{
+  "files": [
+    {
+      "path": "default/cloudwatch_01.png",
+      "sha256": "eeac7760cbffe6ff1b762fb37e6bca2ac2dc2506383413a3925e132f270b8792",
+      "bytes": 30685
+    },
+    {
+      "path": "default/cloudwatch_03.png",
+      "sha256": "f125c4e4df2b695c7cf369dfa7cb91ed6081d730abbc333af09b3221a5f8f806",
+      "bytes": 24598
+    },
+    {
+      "path": "default/cloudwatch_07.png",
+      "sha256": "b5737f380f3e802ccbb26cfd0a9e380500ba3dee478b49202b8ea2f0ebb1eb36",
+      "bytes": 33411
+    },
+    {
+      "path": "default/dashboard.json",
+      "sha256": "2e1b74abbe8bdff37779d783228c59cfc46cf146ac83399b6b0d99af5042f467",
+      "bytes": 7595
+    },
+    {
+      "path": "default/log_lifecycle.csv",
+      "sha256": "deb23fabdbaec23348a7cc60ae5f906842248f5f89fc6d8c2689e249e81339d9",
+      "bytes": 1083
+    },
+    {
+      "path": "default/metric_catalog.json",
+      "sha256": "566860fcc9844a6f620a6676945b0a582197cdb253231c540278161f9212f386",
+      "bytes": 3373
+    },
+    {
+      "path": "default/minute_statistics.csv",
+      "sha256": "6ce61bbe4842263b7a9e1d441927318efc39b49ea7a05e7f6e95d8fc99f53200",
+      "bytes": 929
+    },
+    {
+      "path": "default/native_data.csv",
+      "sha256": "75f9a7bde5ca18ba3d5abadb32e9932beaaaeeb856e9042ddf103e40b7ffc3f7",
+      "bytes": 643
+    },
+    {
+      "path": "default/native_statistics.csv",
+      "sha256": "75f9a7bde5ca18ba3d5abadb32e9932beaaaeeb856e9042ddf103e40b7ffc3f7",
+      "bytes": 643
+    },
+    {
+      "path": "default/period_reconciliation.csv",
+      "sha256": "1991c2fb58c51f5f549da8f523adcb826e3bb88888556b28f4316fe983a801ae",
+      "bytes": 239
+    },
+    {
+      "path": "default/resource_statistics.csv",
+      "sha256": "75f9a7bde5ca18ba3d5abadb32e9932beaaaeeb856e9042ddf103e40b7ffc3f7",
+      "bytes": 643
+    },
+    {
+      "path": "default/summary.json",
+      "sha256": "e4c4b069de2327b73ff1422f2c4b34d794b939f88a3f9da5d01e2e73274e35a6",
+      "bytes": 2864
+    },
+    {
+      "path": "quyen/cloudwatch_01.png",
+      "sha256": "d982bd53c499be5ad9a01dcb8563b5062e4d6521e8855af0852f9db05ff5d520",
+      "bytes": 23495
+    },
+    {
+      "path": "quyen/cloudwatch_03.png",
+      "sha256": "c19d28b9876e4525c1dd50fcd2de137656fd4a479af580d0db951b9bebb40f7e",
+      "bytes": 24597
+    },
+    {
+      "path": "quyen/cloudwatch_07.png",
+      "sha256": "5758e2161b0ef616cb93d26c10c36f0bebad5c614c6f20aeb2a23e8f03a3d2b4",
+      "bytes": 27325
+    },
+    {
+      "path": "quyen/dashboard.json",
+      "sha256": "2e1b74abbe8bdff37779d783228c59cfc46cf146ac83399b6b0d99af5042f467",
+      "bytes": 7595
+    },
+    {
+      "path": "quyen/log_lifecycle.csv",
+      "sha256": "4cf2d5f0471e5334d73b7065a7045338bbc85fa2a1f77daed332cbacbdb33d8f",
+      "bytes": 1571
+    },
+    {
+      "path": "quyen/metric_catalog.json",
+      "sha256": "b083d8820ad2edb95df54e9a3e9451351af2c724563563aac8d960eeddd5690e",
+      "bytes": 3373
+    },
+    {
+      "path": "quyen/minute_statistics.csv",
+      "sha256": "89c274c0ed8563c67adec0dca91581204aae5a60fded03a94cfe6df24d6daed0",
+      "bytes": 718
+    },
+    {
+      "path": "quyen/native_data.csv",
+      "sha256": "33ff5b2f5d67e2182c43ff9cee867f4bc0526c1dedbc02919459ee206191258d",
+      "bytes": 718
+    },
+    {
+      "path": "quyen/native_statistics.csv",
+      "sha256": "33ff5b2f5d67e2182c43ff9cee867f4bc0526c1dedbc02919459ee206191258d",
+      "bytes": 718
+    },
+    {
+      "path": "quyen/period_reconciliation.csv",
+      "sha256": "f3a6dacd208bd20928333a5e4f0bfaa255dbdeedafe253e2ed508409a320e680",
+      "bytes": 231
+    },
+    {
+      "path": "quyen/resource_statistics.csv",
+      "sha256": "33ff5b2f5d67e2182c43ff9cee867f4bc0526c1dedbc02919459ee206191258d",
+      "bytes": 718
+    },
+    {
+      "path": "quyen/summary.json",
+      "sha256": "79823e0fd864752e08f7640e3b3a5428263c326e999eb4e7e2d0b10f4f2aecd8",
+      "bytes": 2823
+    }
+  ]
+}

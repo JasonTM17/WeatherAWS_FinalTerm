@@ -52,9 +52,11 @@ Phép đánh giá ban đầu dùng 149 giờ huấn luyện và 24 giờ giữ l
 
 ![So sánh các phương pháp trên cùng tập giữ lại](tuan_3/results/refresh_2026_10_18/analysis/holdout_ma_comparison.png)
 
-Đã đối chiếu được hai giờ đích 07:00 và 08:00 UTC của bản dự báo phát hành lúc khoảng 06:24 UTC với giá trị CAMS tải về sau: **12/144 dòng**. Các giá trị này không phải số đo trạm và có thể chịu cập nhật mô hình. Chưa đủ 24 giờ đích nên chưa kết luận độ chính xác của toàn kỳ dự báo.
+Bản cập nhật cutoff **11:00 UTC ngày 18/10** đã đối chiếu được **4/24 giờ đích (24/144 giá trị)**, gồm 07:00–10:00 UTC, với dữ liệu CAMS tải về sau. Giữ nguyên bản dự báo phát hành khoảng 06:24 UTC. Các giá trị này là dữ liệu mô hình có thể cập nhật hồi cứu; sai số hiện chỉ mô tả bốn giờ đã hoàn tất, không đại diện cả 24 giờ.
 
-[Bản dự báo đã phát hành](tuan_3/results/forecast_issued_2026_10_18/forecast_24h.csv) · [Đối chiếu mới từng giá trị](tuan_3/results/refresh_2026_10_18/analysis/later_model/comparison.csv) · [Nguồn tải về sau](tuan_3/results/refresh_2026_10_18/analysis/later_model/provenance.json).
+[Bản dự báo đã phát hành](tuan_3/results/forecast_issued_2026_10_18/forecast_24h.csv) · [Đối chiếu mới 24 giá trị và sai số](tuan_3/results/forecast_followup_2026_10_18/README.md) · [Nguồn tải về sau và cutoff 11:00 UTC](tuan_3/results/forecast_followup_2026_10_18/provenance.json).
+
+![Dự báo đã phát hành và dữ liệu mô hình mới](tuan_3/results/forecast_followup_2026_10_18/issued_vs_later_model.png)
 
 ## 6. Triển khai, lịch chạy và email
 
@@ -62,7 +64,7 @@ Hai môi trường đã có CD thành công, gói tải lại từ AWS khớp ar
 
 [Hồ sơ CD](tuan_3/results/cd_2026_10_18/) · [Lượt sau sửa cấu hình](tuan_3/results/post_repair_2026_10_18/README.md) · [Email đã được người nhận xác nhận ngày 16/10](docs/scheduled-run-verification.md).
 
-Đã cấu hình và đọc lại Dashboard cùng hai Metric Filters trong mỗi môi trường; các lượt theo lịch đã kiểm chứng có log và dữ liệu S3 tương ứng. Luồng email có xác nhận của người nhận tại các lượt ngày 16/10. Riêng bộ đếm CloudWatch native tại cửa sổ đã lưu có Errors lớn hơn Invocations, nên Dashboard chỉ hiển thị tỷ lệ lỗi khi đủ điều kiện tính; kết quả này được tách khỏi bộ đếm dòng log và xác nhận email. [Cửa sổ metric và cách xử lý](tuan_3/docs/operation.md#5-giới-hạn-của-metric-vận-hành).
+Đã sửa chương trình để ghép Invocations/Errors đúng timestamp, từ chối tỷ lệ khi thiếu cặp hoặc từng khoảng không hợp lệ. Dashboard hai môi trường đã đổi sang một IF phẳng và thêm đồ thị điểm thiếu cặp; sáu phép thử GetMetricData chỉ đọc trong mỗi môi trường đạt. Trong cửa sổ 07:40–10:40 UTC: sinh viên Ngọc Quyên có 3 Invocations/0 Errors khớp ba khoảng; sinh viên Tiến Sơn có 2 Invocations và một điểm Errors = 3 thiếu Invocations lúc 09:15. Điểm nguồn này được giữ nguyên, không gọi 0% của hai khoảng đủ cặp là tỷ lệ toàn cửa sổ. [CSV, log và cách đối chiếu](tuan_3/results/monitoring_followup_2026_10_18/README.md) · [Dashboard cuối và kiểm chứng biểu thức](tuan_3/results/monitoring_dashboard_repair_2026_10_18/README.md).
 
 ## 7. Mã nguồn và commit minh chứng
 

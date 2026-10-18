@@ -46,6 +46,8 @@ Các đường dẫn mở trực tiếp mã nguồn trên GitHub (Blob URL) và 
 
 Các commit trên bổ sung công cụ tích hợp, không thay thuật toán thu thập của module Lambda ở commit `36c9b39`. Phiên bản và trạng thái chạy thật được xác nhận riêng trong [hồ sơ CI/CD](../tuan_3/docs/operation.md).
 
+Phần đối chiếu bổ sung dùng [monitoring_followup.py](../tuan_3/scripts/monitoring_followup.py) để ghép các bộ đếm theo thời gian, kiểm tra hai API/dimension/chu kỳ và đối chiếu lifecycle log; [dashboard.py](../tuan_3/scripts/dashboard.py) cung cấp điều kiện IF phẳng và đồ thị thiếu cặp. [forecast_followup.py](../tuan_3/scripts/forecast_followup.py) giữ bản dự báo đã phát hành, tải nguồn mô hình mới và tính sai số trên các giờ đích đã hoàn tất. [Kết quả và cách tái lập](../tuan_3/docs/operation.md#9-đối-chiếu-bộ-đếm-và-giờ-dự-báo-bổ-sung) liên kết dữ liệu và phạm vi kiểm chứng.
+
 EventBridge tách lịch khỏi xử lý; Lambda chuẩn hóa bản ghi theo cùng lược đồ. S3 giữ raw NDJSON theo `year/month/day`; Glue khai báo kiểu và phân vùng để Athena đọc bằng SQL. View dùng lại bảng gốc, tránh hai lược đồ độc lập. Exporter giữ CSV và mã truy vấn để kết quả truy về đầu vào. Biểu đồ đọc CSV thay vì nhập lại số liệu.
 
 Mã SDK dùng chung nằm trong `tuan_2/`; hai script nền tảng Tuần 1 gọi module này. Đường dẫn hiện tại không đồng nghĩa toàn bộ nội dung tệp đã tồn tại từ Tuần 1. Hồ sơ lịch sử và mốc truy vấn được giữ riêng.

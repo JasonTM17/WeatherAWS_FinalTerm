@@ -60,7 +60,7 @@ Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc v�
 | W3-04 | Đã xuất raw và kiểm tra chất lượng | [Bản xuất mới 246/288 dòng và 83 JSON gốc](../tuan_3/results/raw_export_2026_10_18/README.md); bảy nhóm kiểm tra đã khai báo không phát hiện lỗi; snapshot thống kê 246/285 và benchmark 237/273 được giữ riêng |
 | W3-05 | Đã cấu hình Dashboard, hai Metric Filters và quan sát log mới ở cả hai môi trường | [Filter và điểm mới sinh viên Tiến Sơn](../tuan_3/results/operations_2026_10_18/), [điểm mới sinh viên Ngọc Quyên](../tuan_3/results/post_repair_2026_10_18/README.md); native metric còn điểm chưa nhất quán, không chuyển thiếu điểm thành 0 |
 | W3-06 | Đạt luồng email tại các lượt 16/10 | [Publish → giao thông báo → xác nhận người nhận](scheduled-run-verification.md#cảnh-báo-và-giám-sát); tiếp tục ghi nhận lượt mới, không suy ra đã nhận thư từ metric đơn lẻ |
-| W3-07 | Có đánh giá giữ lại và đối chiếu một phần với mô hình tải về sau | [Bốn phương pháp, 24 bộ sai số bổ sung](../tuan_3/docs/FINAL_REPORT.md#5-dự-báo-theo-giờ-và-đánh-giá); mới đối chiếu 2/24 giờ đích của bản phát hành, không phải dữ liệu trạm hoặc kết quả đủ 24 giờ |
+| W3-07 | Có đánh giá giữ lại và đối chiếu một phần với mô hình tải về sau | [Bốn phương pháp, 24 bộ sai số bổ sung](../tuan_3/docs/FINAL_REPORT.md#5-dự-báo-theo-giờ-và-đánh-giá); đã cập nhật đối chiếu 4/24 giờ đích, 24/144 giá trị của bản phát hành, không phải dữ liệu trạm hoặc kết quả đủ 24 giờ |
 | W3-08 | CI và CD hai môi trường đã có lượt thành công | [Kết quả CI/CD, hash AWS và dọn secrets](../tuan_3/docs/operation.md#4-kết-quả-thực-hiện); độ phủ vận hành theo lịch và giờ làm Tuần 3 vẫn ghi riêng |
 
 ## Điều kiện và hồ sơ kết thúc

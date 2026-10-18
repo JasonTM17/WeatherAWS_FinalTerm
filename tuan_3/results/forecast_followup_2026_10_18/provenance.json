@@ -1,0 +1,38 @@
+{
+  "captured_at_utc": "2026-10-18T11:01:31.147391+00:00",
+  "sources": [
+    {
+      "city": "HoChiMinh",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=10.8231&longitude=106.6297&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-18T11:01:28.709647+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-18T11:00:00+00:00",
+      "retained_hours": 179,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    },
+    {
+      "city": "HaNoi",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=21.0285&longitude=105.8542&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-18T11:01:29.551388+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-18T11:00:00+00:00",
+      "retained_hours": 179,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    },
+    {
+      "city": "DaNang",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=16.0544&longitude=108.2022&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-18T11:01:30.402056+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-18T11:00:00+00:00",
+      "retained_hours": 179,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    }
+  ],
+  "cutoff_exclusive_utc": "2026-10-18T11:00:00+00:00",
+  "issued_path": "tuan_3/results/forecast_issued_2026_10_18/forecast_24h.csv",
+  "issued_sha256": "9ebfd3aca39d6b71c816f42e366d4b7c505c48530df8ce6fdd7096f5e68e159a",
+  "matched_target_hours": 4,
+  "issued_target_hours": 24,
+  "matched_values": 24,
+  "issued_values": 144,
+  "comparison_kind": "Unchanged issued predictions vs later downloaded CAMS model values, not station truth; revisions possible",
+  "script_sha256_lf": "64f1329ece5d054154cd60de2d9b578dc91703c4ad325d4ea6d8c23c79e86ec6"
+}

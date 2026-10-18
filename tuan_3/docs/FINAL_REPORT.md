@@ -300,6 +300,33 @@ Metric Filter nhận điểm `ResultLogLines = 1` tại 06:51 UTC; [CSV](../resu
 
 Kết quả bổ sung hoàn tất kiểm chứng thu thập sau sửa định dạng và nhận metric log mới ở môi trường sinh viên Ngọc Quyên. Không có trace ID nối riêng từng sự kiện lịch, không có email mới để xác nhận vì không vượt ngưỡng, và chưa giải thích bất thường của bộ đếm native. Một lượt đạt không thay thế theo dõi dài ngày.
 
+### 4.3. Sửa ghép bộ đếm và biểu thức Dashboard
+
+Đã truy vấn cùng cửa sổ **07:40–10:40 UTC ngày 18/10**, chu kỳ 300 giây và statistic Sum. GetMetricStatistics và GetMetricData khớp từng điểm; dimension FunctionName và FunctionName + Resource khớp; tổng chu kỳ 60 giây khớp chu kỳ 300 giây.
+
+| Chỉ tiêu | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
+| --- | --- | --- |
+| Invocations có điểm trả về | 2 | 3 |
+| Errors có điểm trả về | 3 | 0 |
+| Khoảng đủ cặp hợp lệ | 2 | 3 |
+| Tỷ lệ trên khoảng đủ cặp | 0% | 0% |
+| Tỷ lệ từ toàn bộ bộ đếm trong cửa sổ | Không tính: thiếu cặp | 0% trên các điểm đã phát đủ cặp |
+| Request có đủ START/END/REPORT | 2 | 3 |
+
+Sinh viên Tiến Sơn có Errors = 3 tại 09:15 nhưng không có điểm Invocations hoặc lifecycle log tương ứng trong phép đọc này. Vì vậy, không ghép Errors của khoảng đó với Invocations ở giờ khác và không suy nguyên nhân từ số dòng log. [Native CSV, log đã loại thông tin riêng và tổng hợp](../results/monitoring_followup_2026_10_18/README.md).
+
+Đã sửa chương trình để ghép theo timestamp UTC, từ chối tỷ lệ toàn cửa sổ khi thiếu cặp hoặc khi một khoảng có Errors lớn hơn Invocations. Rà soát độc lập phát hiện IF lồng có thể làm điểm bị loại hiện lại thành 0 theo quy tắc metric math của AWS. Biểu thức cuối dùng một điều kiện kết hợp:
+
+```text
+IF((inv>0) AND (FILL(err,-1)>=0) AND (err<=inv),100*err/inv)
+```
+
+Đã kiểm tra sáu trường hợp chỉ đọc trên dịch vụ trong mỗi môi trường: thiếu Errors, thiếu Invocations, Errors lớn hơn Invocations, Invocations = 0, tỷ lệ hợp lệ 0% và 50%. Không ghi metric/log/sự kiện giả. Dashboard được sao lưu trước cập nhật và đọc lại khớp. [Cấu hình cuối, kết quả API và ảnh AWS](../results/monitoring_dashboard_repair_2026_10_18/README.md).
+
+![Điểm Errors thiếu Invocations của sinh viên Tiến Sơn](../results/monitoring_dashboard_repair_2026_10_18/default/cloudwatch_07.png)
+
+Ảnh giữ nguyên điểm Errors = 3 lúc 09:15. Đã sửa cách tính/hiển thị; nguyên nhân sâu hơn của điểm native thiếu cặp vẫn chưa xác định từ các bằng chứng hiện có. Không đổi số nguồn để tạo một tỷ lệ toàn cửa sổ bằng 0.
+
 ## 5. Dự báo theo giờ và đánh giá
 
 ### 5.1. Nguồn dữ liệu và cách chia tập
@@ -390,6 +417,25 @@ MA 3 giờ không tốt hơn ở mọi chỉ số/đô thị: với PM2.5 Đà N
 
 Đây là so sánh với giá trị CAMS tải về sau; dữ liệu mô hình có thể được tái dựng/cập nhật và không phải số đo trạm. Chưa đủ 24 giờ đích nên chưa tính một chỉ số độ chính xác đại diện cho toàn bộ kỳ dự báo. Không thay đổi các giá trị đã phát hành trong tệp gốc.
 
+### 5.7. Cập nhật đối chiếu giờ đích đã hoàn tất
+
+Mốc tải mới giữ dữ liệu mô hình hoàn tất trước **11:00 UTC ngày 18/10** và đối chiếu **4/24 giờ đích, 24/144 giá trị**, gồm 07:00–10:00 UTC (14:00–17:00 UTC+7). Không thay bản dự báo phát hành khoảng 06:24 UTC, không đưa giá trị tải về sau vào huấn luyện để làm lại dự báo. Snapshot 2/24 giờ ở mục 5.6 được giữ như mốc cũ.
+
+| Đô thị | Chỉ số | Giờ đã đối chiếu | MAE | RMSE | Bias |
+| --- | --- | --- | --- | --- | --- |
+| TP. Hồ Chí Minh | US AQI | 4/24 | 6,727 | 6,734 | 6,727 |
+| TP. Hồ Chí Minh | PM2.5 (µg/m³) | 4/24 | 8,960 | 9,063 | 8,960 |
+| Hà Nội | US AQI | 4/24 | 15,061 | 16,285 | 5,167 |
+| Hà Nội | PM2.5 (µg/m³) | 4/24 | 2,079 | 2,312 | 1,347 |
+| Đà Nẵng | US AQI | 4/24 | 12,032 | 12,140 | 12,032 |
+| Đà Nẵng | PM2.5 (µg/m³) | 4/24 | 2,235 | 2,335 | 2,235 |
+
+MAE/RMSE cùng đơn vị với chỉ số; Bias = dự báo trừ giá trị mô hình tải về sau. Sai số mô tả bốn giờ đã đối chiếu, không phải toàn bộ 24 giờ hay hiệu năng trên số đo trạm. Phản hồi CAMS có thể được cập nhật hồi cứu.
+
+[CSV 24 giá trị đối chiếu](../results/forecast_followup_2026_10_18/comparison.csv) · [Sáu bộ sai số](../results/forecast_followup_2026_10_18/comparison_metrics.csv) · [537 dòng lịch sử và nguồn API](../results/forecast_followup_2026_10_18/README.md).
+
+![Đối chiếu bốn giờ đích đã hoàn tất](../results/forecast_followup_2026_10_18/issued_vs_later_model.png)
+
 ## 6. Kiểm tra và triển khai
 
 Mã và hồ sơ tích hợp nằm tại commit [0b26858](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e). Commit [c28da19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356) sửa định dạng ZIP để gói dựng trên Windows và Linux có thể đối chiếu byte trực tiếp. Hai commit không thay đổi thuật toán trong module thu thập.
@@ -415,7 +461,7 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 [Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng giờ theo tuần đã xác nhận, không ghi ngày làm hoặc phân bổ giờ thực tế theo nhiệm vụ. 38,0 giờ Tuần 1–2 giữ nguyên; 20,0 giờ Tuần 3 được ghi bổ sung theo thông tin sinh viên.
 
-Dữ liệu raw đã được xuất và gắn link tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ đã xác nhận được trình bày trong [Worklog](WORKLOG.md). Hồ sơ có các lượt chạy theo lịch được đối chiếu log–S3 và xác nhận email ngày 16/10. Bộ đếm dòng log đã có điểm mới sau cấu hình Metric Filters; bộ đếm CloudWatch native còn điểm chưa nhất quán nên tỷ lệ lỗi chỉ được tính khi các đầu vào hợp lệ. Việc đối chiếu dự báo với mô hình tải về sau hiện bao phủ 2/24 giờ đích. [Bảng đối chiếu trước khi nộp](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) tổng hợp phạm vi của từng kết quả.
+Dữ liệu raw đã được xuất và gắn link tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ đã xác nhận được trình bày trong [Worklog](WORKLOG.md). Hồ sơ có các lượt chạy theo lịch được đối chiếu log–S3 và xác nhận email ngày 16/10. Bộ đếm dòng log đã có điểm mới sau cấu hình Metric Filters; bộ đếm CloudWatch native còn điểm chưa nhất quán nên tỷ lệ lỗi chỉ được tính khi các đầu vào hợp lệ. Bản đối chiếu mới bao phủ 4/24 giờ đích, 24/144 giá trị. Đã sửa ghép bộ đếm theo thời gian và IF phẳng, kiểm chứng lại Dashboard trong hai môi trường; điểm native thiếu cặp vẫn được trình bày riêng ở mục 4.3. [Bảng đối chiếu trước khi nộp](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) tổng hợp phạm vi của từng kết quả.
 
 
 ## Tài liệu tham khảo

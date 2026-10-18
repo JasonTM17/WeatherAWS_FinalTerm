@@ -36,7 +36,8 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 
 - Snapshot phân tích đã lưu: **246 bản ghi của sinh viên Tiến Sơn** và **285 bản ghi của sinh viên Ngọc Quyên**; bảy nhóm kiểm tra chất lượng đều bằng 0.
 - [Raw, thống kê, ba biểu đồ màu và đối chiếu dự báo mới](results/refresh_2026_10_18/README.md).
-- MA 3 giờ đã có mã và CSV tính lại; chỉ 2/24 giờ đích của bản phát hành được đối chiếu với dữ liệu mô hình tải về sau.
+- Đã đối chiếu mới **4/24 giờ đích, 24/144 giá trị**, giữ nguyên bản dự báo phát hành. [Nguồn, sai số và biểu đồ](results/forecast_followup_2026_10_18/README.md).
+- Đã sửa ghép bộ đếm theo timestamp và biểu thức IF của Dashboard; [hai API/dimension/chu kỳ và log](results/monitoring_followup_2026_10_18/README.md) được đối chiếu, [Dashboard cuối](results/monitoring_dashboard_repair_2026_10_18/README.md) đã đọc lại khớp trong cả hai môi trường. Điểm native Errors thiếu Invocations vẫn được giữ để chẩn đoán.
 
 ## Kết quả chính tại mốc tích hợp ban đầu
 
@@ -141,7 +142,9 @@ MA 3 giờ được tính bổ sung sau khi xem kết quả giữ lại; đây k
 
 ![So sánh MA 3/24 giờ và cơ sở](results/refresh_2026_10_18/analysis/holdout_ma_comparison.png)
 
-Đối với bản dự báo phát hành trước giờ đích, đã so được **2/24 giờ đích (12/144 dòng)** với dữ liệu CAMS tải về sau; các giá trị này không phải số đo trạm. [CSV đối chiếu từng giá trị](results/refresh_2026_10_18/analysis/later_model/comparison.csv).
+Bản cập nhật cutoff 11:00 UTC đã so được **4/24 giờ đích (24/144 giá trị)** với dữ liệu CAMS tải về sau, giữ nguyên các giá trị dự báo đã phát hành; đây không phải số đo trạm. [CSV đối chiếu, sáu bộ sai số và nguồn](results/forecast_followup_2026_10_18/README.md).
+
+![Đối chiếu bốn giờ đích](results/forecast_followup_2026_10_18/issued_vs_later_model.png)
 
 
 ## Mã nguồn và kiểm tra
@@ -152,6 +155,8 @@ MA 3 giờ được tính bổ sung sau khi xem kết quả giữ lại; đây k
 | [benchmark.py](scripts/benchmark.py) | Tạo dữ liệu thử nghiệm NDJSON/Parquet riêng, cấu hình Projection, đo và đối chiếu truy vấn |
 | [dashboard.py](scripts/dashboard.py) | Tạo Dashboard riêng, xuất metric và ảnh CloudWatch |
 | [metric_filters.py](scripts/metric_filters.py), [check_operations.py](scripts/check_operations.py) | Kiểm tra mẫu và tạo bộ đếm log; đối chiếu kết quả với S3, lịch/quyền gọi và ngưỡng cảnh báo |
+| [monitoring_followup.py](scripts/monitoring_followup.py) | Ghép metric theo khoảng, đối chiếu hai API/dimension/chu kỳ với lifecycle log, kiểm tra biểu thức metric math chỉ đọc và cập nhật Dashboard có sao lưu |
+| [forecast_followup.py](scripts/forecast_followup.py) | Giữ nguyên dự báo đã phát hành, tải nguồn mô hình mới và tính sai số trên các giờ đích đã hoàn tất |
 | [forecast.py](scripts/forecast.py) | Thu dữ liệu mô hình theo giờ, chia tập theo thời gian, dự báo và tính sai số |
 | [release.py](scripts/release.py) | Đóng gói xác định, kiểm tra tài khoản, triển khai chỉ mã, xác minh và khôi phục có kiểm soát phiên bản |
 | [verify_results.py](scripts/verify_results.py) | Đối chiếu hash, raw, kết quả Athena và sai số đã lưu mà không gọi AWS |

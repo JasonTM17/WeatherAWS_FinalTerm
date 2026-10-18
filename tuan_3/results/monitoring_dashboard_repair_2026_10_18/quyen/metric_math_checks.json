@@ -1,0 +1,98 @@
+{
+  "operation": "GetMetricData expression evaluation only",
+  "native_input_points": {
+    "2026-10-18T07:50:00+00:00": 1.0,
+    "2026-10-18T08:50:00+00:00": 1.0,
+    "2026-10-18T09:50:00+00:00": 1.0
+  },
+  "checks": [
+    {
+      "case": "missing_errors",
+      "previous_output": {
+        "2026-10-18T07:50:00+00:00": 0.0,
+        "2026-10-18T08:50:00+00:00": 0.0,
+        "2026-10-18T09:50:00+00:00": 0.0
+      },
+      "repaired_output": {
+        "2026-10-18T08:50:00+00:00": 0.0
+      },
+      "expected": {
+        "2026-10-18T08:50:00+00:00": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "errors_above_invocations",
+      "previous_output": {
+        "2026-10-18T07:50:00+00:00": 0.0,
+        "2026-10-18T08:50:00+00:00": 0.0,
+        "2026-10-18T09:50:00+00:00": 0.0
+      },
+      "repaired_output": {},
+      "expected": {},
+      "status": "PASS"
+    },
+    {
+      "case": "missing_invocations",
+      "previous_output": {
+        "2026-10-18T08:50:00+00:00": 0.0
+      },
+      "repaired_output": {
+        "2026-10-18T08:50:00+00:00": 0.0
+      },
+      "expected": {
+        "2026-10-18T08:50:00+00:00": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "zero_invocations",
+      "previous_output": {},
+      "repaired_output": {},
+      "expected": {},
+      "status": "PASS"
+    },
+    {
+      "case": "valid_zero_errors",
+      "previous_output": {
+        "2026-10-18T07:50:00+00:00": 0.0,
+        "2026-10-18T08:50:00+00:00": 0.0,
+        "2026-10-18T09:50:00+00:00": 0.0
+      },
+      "repaired_output": {
+        "2026-10-18T07:50:00+00:00": 0.0,
+        "2026-10-18T08:50:00+00:00": 0.0,
+        "2026-10-18T09:50:00+00:00": 0.0
+      },
+      "expected": {
+        "2026-10-18T07:50:00+00:00": 0.0,
+        "2026-10-18T08:50:00+00:00": 0.0,
+        "2026-10-18T09:50:00+00:00": 0.0
+      },
+      "status": "PASS"
+    },
+    {
+      "case": "valid_half_errors",
+      "previous_output": {
+        "2026-10-18T07:50:00+00:00": 50.0,
+        "2026-10-18T08:50:00+00:00": 50.0,
+        "2026-10-18T09:50:00+00:00": 50.0
+      },
+      "repaired_output": {
+        "2026-10-18T07:50:00+00:00": 50.0,
+        "2026-10-18T08:50:00+00:00": 50.0,
+        "2026-10-18T09:50:00+00:00": 50.0
+      },
+      "expected": {
+        "2026-10-18T07:50:00+00:00": 50.0,
+        "2026-10-18T08:50:00+00:00": 50.0,
+        "2026-10-18T09:50:00+00:00": 50.0
+      },
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS",
+  "synthetic_metrics_or_events_written": false,
+  "semantics": "Transformed series are verification inputs, not native observation counters or pipeline evidence",
+  "reference": "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html"
+}

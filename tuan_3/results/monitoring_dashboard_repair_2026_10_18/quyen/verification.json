@@ -1,0 +1,26 @@
+{
+  "dashboard": "WeatherAirQuality-Week3",
+  "readback_matches": true,
+  "images": [
+    {
+      "widget": 1,
+      "bytes": 23495
+    },
+    {
+      "widget": 3,
+      "bytes": 24597
+    },
+    {
+      "widget": 7,
+      "bytes": 27235
+    }
+  ],
+  "period_seconds": 300,
+  "semantics": "Native AWS widget images, not console screenshots; diagnostic gaps remain visible",
+  "captured_at_utc": "2026-10-18T11:00:16.536342+00:00",
+  "window_start_utc": "2026-10-18T07:40:00+00:00",
+  "window_end_exclusive_utc": "2026-10-18T10:40:00+00:00",
+  "reason": "Replace nested IF with one flat condition; retain missing native counter anomaly",
+  "lambda_invoked": false,
+  "native_metric_data_modified": false
+}

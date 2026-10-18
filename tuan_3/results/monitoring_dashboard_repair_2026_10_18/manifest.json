@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "path": "default/cloudwatch_01.png",
+      "sha256": "eeac7760cbffe6ff1b762fb37e6bca2ac2dc2506383413a3925e132f270b8792",
+      "bytes": 30685
+    },
+    {
+      "path": "default/cloudwatch_03.png",
+      "sha256": "f125c4e4df2b695c7cf369dfa7cb91ed6081d730abbc333af09b3221a5f8f806",
+      "bytes": 24598
+    },
+    {
+      "path": "default/cloudwatch_07.png",
+      "sha256": "07cf2dab8bf4ca39cc35105f2e60150a5940fc0de16f7060e64b2776986f08e8",
+      "bytes": 25970
+    },
+    {
+      "path": "default/dashboard.json",
+      "sha256": "8ab346cae1bfec15bd872ede79ccfa57a7b71ce5d8c0cabdc895fca8fd254e1e",
+      "bytes": 7633
+    },
+    {
+      "path": "default/metric_math_checks.json",
+      "sha256": "a1753c1ca028bcdc58e7ba20acb9645b1bb7f5f861a56434385de897201ac01c",
+      "bytes": 2440
+    },
+    {
+      "path": "default/verification.json",
+      "sha256": "148aefe03a82cee89bbce09919e41f739aba0e43241d4fd8c095560189beb36a",
+      "bytes": 731
+    },
+    {
+      "path": "quyen/cloudwatch_01.png",
+      "sha256": "d982bd53c499be5ad9a01dcb8563b5062e4d6521e8855af0852f9db05ff5d520",
+      "bytes": 23495
+    },
+    {
+      "path": "quyen/cloudwatch_03.png",
+      "sha256": "c19d28b9876e4525c1dd50fcd2de137656fd4a479af580d0db951b9bebb40f7e",
+      "bytes": 24597
+    },
+    {
+      "path": "quyen/cloudwatch_07.png",
+      "sha256": "bba04f16dbd8883b89117c1eca257ecea05cfbf660e699c3bd93b5eadb2a25ec",
+      "bytes": 27235
+    },
+    {
+      "path": "quyen/dashboard.json",
+      "sha256": "8ab346cae1bfec15bd872ede79ccfa57a7b71ce5d8c0cabdc895fca8fd254e1e",
+      "bytes": 7633
+    },
+    {
+      "path": "quyen/metric_math_checks.json",
+      "sha256": "643130cd48c81bafcbb2713f8bc684f3450b48505a69c2179d87ecfd991f92ae",
+      "bytes": 2826
+    },
+    {
+      "path": "quyen/verification.json",
+      "sha256": "3f05dc72c0adcfa223f20f87d000ba58c2063b96746df56b66c265c7e10aed6c",
+      "bytes": 731
+    }
+  ]
+}

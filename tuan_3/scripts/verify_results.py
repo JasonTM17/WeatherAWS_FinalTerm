@@ -5,11 +5,117 @@ from datetime import datetime
 
 from benchmark import assert_equal_groups
 from common import ROOT, digest, ndjson_rows, read_csv
-from dashboard import metric_consistency
+from dashboard import ERROR_RATE, metric_consistency, reconcile_periods
 from forecast import evaluate, future_forecast
 from quality import inspect_rows
 from reconcile_analysis import VARIABLES, WEATHER, correlation, descriptive, hourly_rows, partial_comparison, ranks, recursive_mean
 from forecast import score
+from forecast_followup import summarize
+from monitoring_followup import point_map
+
+
+def verify_followups(root):
+    monitoring=root/'monitoring_followup_2026_10_18'
+    forecast=root/'forecast_followup_2026_10_18'
+    count=verify_manifest(monitoring)+verify_manifest(forecast)
+    for profile in ('default','quyen'):
+        base=monitoring/profile
+        native=read_csv(base/'native_statistics.csv')
+        proof=json.loads((base/'summary.json').read_text(encoding='utf-8'))
+        aligned=reconcile_periods(native)
+        if aligned!=proof['period_reconciliation'] or metric_consistency(native)!=proof['native_summary']:
+            raise ValueError('Followup native reconciliation differs from source points')
+        if not proof['api_parity'] or point_map(native)!=point_map(read_csv(base/'native_data.csv')):
+            raise ValueError('Followup metric APIs differ')
+        resource_equal=point_map(native)==point_map(read_csv(base/'resource_statistics.csv'))
+        if proof['resource_dimension_same_points']!=resource_equal:
+            raise ValueError('Followup resource-dimension proof differs')
+        minute=read_csv(base/'minute_statistics.csv')
+        if proof['minute_totals']!={name:sum(float(r['value']) for r in minute if r['metric']==name) for name in ('Invocations','Errors','Throttles')}:
+            raise ValueError('Followup minute totals differ')
+        saved=read_csv(base/'period_reconciliation.csv')
+        if len(saved)!=len(aligned['periods']) or any(a[k]!=('' if v is None else str(v)) for a,b in zip(saved,aligned['periods']) for k,v in b.items()):
+            raise ValueError('Followup period CSV differs')
+        start=datetime.fromisoformat(proof['window_start_utc']);end=datetime.fromisoformat(proof['window_end_exclusive_utc'])
+        if start>=end or any(t.minute%5 or t.second or t.microsecond for t in (start,end)):
+            raise ValueError('Followup metric window is not aligned')
+        if any(not start<=datetime.fromisoformat(r['timestamp_utc'])<end for r in native):
+            raise ValueError('Followup native point outside requested window')
+        lifecycle=read_csv(base/'log_lifecycle.csv')
+        log=proof['log_summary']
+        ids={kind:{r['request_hash'] for r in lifecycle if r['kind']==kind} for kind in ('START','END','REPORT')}
+        if log['matched_start_end_report']!=len(set.intersection(*ids.values())):
+            raise ValueError('Followup lifecycle identity match differs')
+        for key,kind in (('unique_start_requests','START'),('unique_end_requests','END'),('unique_report_requests','REPORT')):
+            if log[key]!=len(ids[kind]): raise ValueError('Followup unique request count differs')
+        if log['result_lines']!=sum(r['kind']=='RESULT' for r in lifecycle) or log['complete_results']!=sum(r['kind']=='RESULT' and r['status']=='complete' for r in lifecycle):
+            raise ValueError('Followup Result-line counts differ')
+        dashboard=json.loads((base/'dashboard.json').read_text(encoding='utf-8'))
+        rate=dashboard['widgets'][3]['properties']['metrics'][2][0]['expression']
+        diagnostics=dashboard['widgets'][7]['properties']['metrics']
+        if rate!='IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))' or diagnostics[2][0]['expression']!='IF(FILL(inv,-1)<0,err)' or not proof['dashboard_update']['readback_matches']:
+            raise ValueError('Initial dashboard attempt identity differs; use repaired proof for acceptance')
+        if proof['lambda_invoked'] or proof['synthetic_events_injected'] or proof['lambda_code_or_configuration_changed']:
+            raise ValueError('Followup observation unexpectedly changed Lambda or generated data')
+    repaired=root/'monitoring_dashboard_repair_2026_10_18'
+    count+=verify_manifest(repaired)
+    for profile in ('default','quyen'):
+        body=json.loads((repaired/profile/'dashboard.json').read_text(encoding='utf-8'))
+        proof=json.loads((repaired/profile/'verification.json').read_text(encoding='utf-8'))
+        math_checks=json.loads((repaired/profile/'metric_math_checks.json').read_text(encoding='utf-8'))
+        if body['widgets'][3]['properties']['metrics'][2][0]['expression']!=ERROR_RATE or not proof['readback_matches']:
+            raise ValueError('Final dashboard flat guard/readback differs')
+        if math_checks['status']!='PASS' or len(math_checks['checks'])!=6 or math_checks['synthetic_metrics_or_events_written']:
+            raise ValueError('Read-only metric math tests incomplete')
+        native_inputs={r['timestamp_utc']:float(r['value']) for r in read_csv(monitoring/profile/'native_statistics.csv') if r['metric']=='Invocations'}
+        if math_checks['native_input_points']!=native_inputs or not native_inputs or any(v<=0 for v in native_inputs.values()):
+            raise ValueError('Metric math test inputs differ from retained positive native counts')
+        cases={'missing_errors','errors_above_invocations','missing_invocations','zero_invocations','valid_zero_errors','valid_half_errors'}
+        if {r['case'] for r in math_checks['checks']}!=cases:
+            raise ValueError('Metric math verification cases missing or repeated')
+        for row in math_checks['checks']:
+            if row['case'] in ('missing_errors','missing_invocations'):
+                expected_values={t:0.0 for t in native_inputs if datetime.fromisoformat(t).hour==8}
+            elif row['case'] in ('errors_above_invocations','zero_invocations'):
+                expected_values={}
+            else:
+                expected_values={t:50.0 if row['case']=='valid_half_errors' else 0.0 for t in native_inputs}
+            if row['status']!='PASS' or row['repaired_output']!=expected_values or row['expected']!=expected_values:
+                raise ValueError('Metric math repaired output differs from expected data gaps')
+    provenance=json.loads((forecast/'provenance.json').read_text(encoding='utf-8'))
+    issued_path=ROOT/provenance['issued_path']
+    if not issued_path.resolve().is_relative_to(ROOT) or digest(issued_path.read_bytes())!=provenance['issued_sha256']:
+        raise ValueError('Issued forecast source changed')
+    issued=read_csv(issued_path);later=read_csv(forecast/'history.csv')
+    cutoff=datetime.fromisoformat(provenance['cutoff_exclusive_utc'])
+    if cutoff!=min(datetime.fromisoformat(s['historical_cutoff_exclusive_utc']) for s in provenance['sources']):
+        raise ValueError('Followup source cutoffs differ')
+    for source in provenance['sources']:
+        payload=json.loads((forecast/'model_source'/f"{source['city']}_api.json").read_text(encoding='utf-8'))
+        records=[r for r in later if r['city']==source['city']]
+        if payload['utc_offset_seconds']!=0 or len(records)!=source['retained_hours']:
+            raise ValueError('Followup model source count/timezone differs')
+        times={datetime.fromisoformat(t).replace(tzinfo=cutoff.tzinfo).isoformat():i for i,t in enumerate(payload['hourly']['time'])}
+        for row in records:
+            if datetime.fromisoformat(row['timestamp_utc'])>=datetime.fromisoformat(source['historical_cutoff_exclusive_utc']):
+                raise ValueError('Followup includes an uncompleted model hour')
+            i=times[row['timestamp_utc']]
+            if any(not math.isclose(float(row[k]),float(payload['hourly'][k][i]),rel_tol=1e-11,abs_tol=1e-9) for k in ('us_aqi','pm2_5')):
+                raise ValueError('Followup model CSV differs from retained API payload')
+    expected=partial_comparison(issued,later,cutoff);saved=read_csv(forecast/'comparison.csv')
+    if len(saved)!=len(expected) or any(a[k]!=str(v) for a,b in zip(saved,expected) for k,v in b.items()):
+        raise ValueError('Followup comparison differs from unchanged issued values and completed model hours')
+    hours=len({r['timestamp_utc'] for r in saved})
+    if provenance['matched_values']!=len(saved) or provenance['matched_target_hours']!=hours or len(saved)!=hours*6 or len(issued)!=144:
+        raise ValueError('Followup coverage dimensions differ')
+    metrics=read_csv(forecast/'comparison_metrics.csv');expected_metrics=summarize(issued,expected)
+    if len(metrics)!=6 or len(metrics)!=len(expected_metrics): raise ValueError('Followup score dimensions differ')
+    for a,b in zip(metrics,expected_metrics):
+        for k,v in b.items():
+            if isinstance(v,(int,float)):
+                if not math.isclose(float(a[k]),v,rel_tol=1e-11,abs_tol=1e-9): raise ValueError('Followup score differs')
+            elif a[k]!=v: raise ValueError('Followup score key differs')
+    return count,hours,len(saved)
 
 
 def verify_refresh(folder):
@@ -287,6 +393,8 @@ def verify(folder):
     file_count += verify_post_repair(folder.parent / 'post_repair_2026_10_18')
     file_count += verify_refresh(folder.parent / 'refresh_2026_10_18')
     file_count += verify_raw_export(folder.parent / 'raw_export_2026_10_18')
+    added,followup_hours,followup_values=verify_followups(folder.parent)
+    file_count+=added
     for profile in ('default', 'quyen'):
         observed = metric_consistency(read_csv(monitoring / profile / 'metrics.csv'))
         saved = json.loads((monitoring / profile / 'metric-consistency.json').read_text())
@@ -310,7 +418,7 @@ def verify(folder):
             'forecast_metrics': len(metrics), 'cd_environments': 2, 'temporary_secrets_remaining': 0,
             'supplementary_descriptive_rows': 96, 'supplementary_ma_metrics': 24,
             'later_model_comparison_rows': len(read_csv(folder.parent / 'refresh_2026_10_18/analysis/later_model/comparison.csv')),
-            'week3_confirmed_hours': 20}
+            'week3_confirmed_hours': 20,'followup_target_hours':followup_hours,'followup_comparison_values':followup_values}
 
 
 if __name__ == '__main__':

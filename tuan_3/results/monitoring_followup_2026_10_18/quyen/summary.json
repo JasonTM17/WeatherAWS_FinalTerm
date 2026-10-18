@@ -1,0 +1,98 @@
+{
+  "student": "Sinh viên Ngọc Quyên",
+  "captured_at_utc": "2026-10-18T10:53:48.001895+00:00",
+  "window_start_utc": "2026-10-18T07:40:00+00:00",
+  "window_end_exclusive_utc": "2026-10-18T10:40:00+00:00",
+  "namespace": "AWS/Lambda",
+  "function": "WeatherCollectorLambda",
+  "statistic": "Sum",
+  "period_seconds": 300,
+  "api_parity": true,
+  "resource_dimension_same_points": true,
+  "minute_totals": {
+    "Invocations": 3.0,
+    "Errors": 0.0,
+    "Throttles": 0.0
+  },
+  "native_summary": {
+    "lambda_sums": {
+      "Invocations": 3.0,
+      "Errors": 0.0
+    },
+    "error_rate_status": "VALID",
+    "error_rate_percent": 0.0,
+    "limitation": "Missing metrics are not zero; inconsistent counters cannot establish an error rate or root cause"
+  },
+  "period_reconciliation": {
+    "status": "VALID",
+    "periods": [
+      {
+        "timestamp_utc": "2026-10-18T07:50:00+00:00",
+        "invocations": 1.0,
+        "errors": 0.0,
+        "status": "VALID",
+        "error_rate_percent": 0.0
+      },
+      {
+        "timestamp_utc": "2026-10-18T08:50:00+00:00",
+        "invocations": 1.0,
+        "errors": 0.0,
+        "status": "VALID",
+        "error_rate_percent": 0.0
+      },
+      {
+        "timestamp_utc": "2026-10-18T09:50:00+00:00",
+        "invocations": 1.0,
+        "errors": 0.0,
+        "status": "VALID",
+        "error_rate_percent": 0.0
+      }
+    ],
+    "valid_periods": 3,
+    "unpaired_periods": 0,
+    "paired_invocations": 3.0,
+    "paired_errors": 0.0,
+    "paired_error_rate_percent": 0.0,
+    "overall_error_rate_percent": 0.0
+  },
+  "log_summary": {
+    "events_in_window": 21,
+    "result_lines": 3,
+    "complete_results": 3,
+    "partial_results": 0,
+    "error_lines": 0,
+    "malformed_results": 0,
+    "unique_start_requests": 3,
+    "unique_end_requests": 3,
+    "unique_report_requests": 3,
+    "matched_start_end_report": 3,
+    "explicit_error_reports": 0,
+    "init_error_lines": 0,
+    "semantics": "Unique lifecycle request hashes and matching Result lines are distinct observations; no native error-rate inference from absent log lines"
+  },
+  "dashboard_update": {
+    "dashboard": "WeatherAirQuality-Week3",
+    "readback_matches": true,
+    "images": [
+      {
+        "widget": 1,
+        "bytes": 23495
+      },
+      {
+        "widget": 3,
+        "bytes": 24597
+      },
+      {
+        "widget": 7,
+        "bytes": 27325
+      }
+    ],
+    "period_seconds": 300,
+    "semantics": "Native AWS widget images, not console screenshots; diagnostic gaps remain visible"
+  },
+  "lambda_state": "Active",
+  "lambda_last_update_status": "Successful",
+  "lambda_invoked": false,
+  "synthetic_events_injected": false,
+  "lambda_code_or_configuration_changed": false
+}

@@ -1,0 +1,44 @@
+{
+  "files": [
+    {
+      "path": "comparison.csv",
+      "sha256": "d49d32f6e191ce871fe499ab451166f800fb5db0d90a2f1f4fac889cedbbf9d2",
+      "bytes": 6228
+    },
+    {
+      "path": "comparison_metrics.csv",
+      "sha256": "633051a08cd32b8b9547a1483250f752b618534eb2e893d471182966c2ff3d2d",
+      "bytes": 972
+    },
+    {
+      "path": "history.csv",
+      "sha256": "5d2069848d0ed80ac2cf119086ef0a36d77d2ebd9ba8133dc179afc5cfcf2ad7",
+      "bytes": 26806
+    },
+    {
+      "path": "issued_vs_later_model.png",
+      "sha256": "fe1f1f6a63f7b75765ca999f0f12cb40875d62f7f7572c29e0d1a15b336d7614",
+      "bytes": 142797
+    },
+    {
+      "path": "model_source/DaNang_api.json",
+      "sha256": "3f8b5034461fad44b5cc5ae41cfb9f0d9f23ab72051b5eb40fdb1fc9a29f3cac",
+      "bytes": 10103
+    },
+    {
+      "path": "model_source/HaNoi_api.json",
+      "sha256": "4c11d4b06678ffcd53f25f400fe735f3e3980e9e7e28aa70bc381bea77698882",
+      "bytes": 10342
+    },
+    {
+      "path": "model_source/HoChiMinh_api.json",
+      "sha256": "f3ac98f595c5c898dea50eebb5d4b9282759a81637309d7f10d16e0b7dc0222d",
+      "bytes": 10203
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "7fddd2c50a53e971286376cd04f8fc00e54f6ccf60c7f82bd7831ab6376ff369",
+      "bytes": 2190
+    }
+  ]
+}

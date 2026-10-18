@@ -1,0 +1,178 @@
+[
+  {
+    "metric": "ConcurrentExecutions",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Duration",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Invocations",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "ConcurrentExecutions",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Duration",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Invocations",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "AsyncEventsReceived",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "AsyncEventsReceived",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Throttles",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "AsyncEventsDropped",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "AsyncEventsDropped",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "AsyncEventAge",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "AsyncEventAge",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Errors",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Errors",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  },
+  {
+    "metric": "Throttles",
+    "dimensions": [
+      {
+        "Name": "FunctionName",
+        "Value": "WeatherCollectorLambda"
+      },
+      {
+        "Name": "Resource",
+        "Value": "WeatherCollectorLambda"
+      }
+    ]
+  }
+]

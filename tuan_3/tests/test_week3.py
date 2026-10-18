@@ -208,7 +208,7 @@ class Week3Tests(unittest.TestCase):
             self.assertEqual(metric[0], 'AWS/Lambda')
             self.assertEqual(metric[2:4], ['FunctionName', 'WeatherCollectorLambda'])
             self.assertEqual(metric[-1]['stat'], 'Sum')
-        self.assertEqual(rate['metrics'][2][0]['expression'], 'IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))')
+        self.assertEqual(rate['metrics'][2][0]['expression'], 'IF((inv>0) AND (FILL(err,-1)>=0) AND (err<=inv),100*err/inv)')
 
     def test_inconsistent_and_absent_metrics_cannot_create_error_rate(self):
         def point(name, value):

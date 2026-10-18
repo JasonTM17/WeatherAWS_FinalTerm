@@ -2,13 +2,52 @@
 import argparse
 from datetime import datetime, timedelta, timezone
 import json
+import math
 from pathlib import Path
 
 from botocore.exceptions import ClientError
 from common import PROFILES, FUNCTION, client, session, write_csv, write_json
 
 DASHBOARD = 'WeatherAirQuality-Week3'
-ERROR_RATE = 'IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))'
+ERROR_RATE = 'IF((inv>0) AND (FILL(err,-1)>=0) AND (err<=inv),100*err/inv)'
+
+
+def reconcile_periods(rows):
+    """Join native counters by UTC bucket; never treat an absent point as zero."""
+    counters={'Invocations':{},'Errors':{}}
+    for row in rows:
+        if row['namespace']!='AWS/Lambda' or row['metric'] not in counters or row['statistic']!='Sum':
+            continue
+        stamp=datetime.fromisoformat(row['timestamp_utc'])
+        if stamp.tzinfo is None:
+            raise ValueError('Counter timestamp must include timezone')
+        stamp=stamp.astimezone(timezone.utc).isoformat()
+        value=float(row['value'])
+        if not math.isfinite(value) or value<0 or stamp in counters[row['metric']]:
+            raise ValueError('Invalid or duplicate native counter point')
+        counters[row['metric']][stamp]=value
+    periods=[]
+    for stamp in sorted(set(counters['Invocations'])|set(counters['Errors'])):
+        inv,err=(counters[name].get(stamp) for name in ('Invocations','Errors'))
+        rate=None
+        if inv is None: status='MISSING_INVOCATIONS'
+        elif err is None: status='MISSING_ERRORS'
+        elif err>inv: status='INCONSISTENT_COUNTS'
+        elif inv==0: status='NO_INVOCATIONS'
+        else: status,rate='VALID',100*err/inv
+        periods.append({'timestamp_utc':stamp,'invocations':inv,'errors':err,'status':status,'error_rate_percent':rate})
+    valid=[r for r in periods if r['status']=='VALID']
+    inv=sum(r['invocations'] for r in valid)
+    err=sum(r['errors'] for r in valid)
+    paired_rate=100*err/inv if inv else None
+    status='UNAVAILABLE'
+    if any(r['status']=='INCONSISTENT_COUNTS' for r in periods): status='INCONSISTENT_COUNTS'
+    elif any(r['status'].startswith('MISSING_') for r in periods): status='UNPAIRED_PERIODS'
+    elif valid: status='VALID'
+    return {'status':status,'periods':periods,'valid_periods':len(valid),
+            'unpaired_periods':sum(r['status'].startswith('MISSING_') for r in periods),
+            'paired_invocations':inv,'paired_errors':err,'paired_error_rate_percent':paired_rate,
+            'overall_error_rate_percent':paired_rate if status=='VALID' else None}
 
 
 def metric_consistency(rows):
@@ -24,6 +63,12 @@ def metric_consistency(rows):
             status = 'INCONSISTENT_COUNTS'
         elif invocations > 0:
             status, ratio = 'VALID', 100 * errors / invocations
+    native=[r for r in rows if r['namespace']=='AWS/Lambda' and r['metric'] in ('Invocations','Errors') and r['statistic']=='Sum']
+    if native and all('timestamp_utc' in r for r in native):
+        aligned=reconcile_periods(native)
+        # Historical totals remain visible, including inconsistent service-side sums.
+        if status!='INCONSISTENT_COUNTS':
+            status,ratio=aligned['status'],aligned['overall_error_rate_percent']
     return {'lambda_sums': totals, 'error_rate_status': status, 'error_rate_percent': ratio,
             'limitation': 'Missing metrics are not zero; inconsistent counters cannot establish an error rate or root cause'}
 
@@ -35,13 +80,17 @@ def build_dashboard(topic, region='us-east-1'):
     groups = [
         ('Lambda invocations / errors / throttles', [metric('Invocations'), metric('Errors'), metric('Throttles')]),
         ('Execution duration (ms)', [metric('Duration', 'Average'), metric('Duration', 'Maximum')]),
-        ('Error rate (%) - requires present and consistent counters', [metric('Invocations', id='inv', visible=False), metric('Errors', id='err', visible=False), [{'expression': ERROR_RATE, 'id': 'rate', 'label': 'Errors / Invocations (%)'}]]),
+        ('Error rate (%) - matched periods only', [metric('Invocations', id='inv', visible=False), metric('Errors', id='err', visible=False), [{'expression': ERROR_RATE, 'id': 'rate', 'label': 'Errors / Invocations (%) - matched periods only'}]]),
         ('SNS published / delivered / failed', [['AWS/SNS', name, 'TopicName', topic, {'stat': 'Sum'}] for name in ('NumberOfMessagesPublished', 'NumberOfNotificationsDelivered', 'NumberOfNotificationsFailed')]),
         ('Canonical hourly rule', [['AWS/Events', name, 'RuleName', 'WeatherCollectionSchedule', {'stat': 'Sum'}] for name in ('TriggeredRules', 'Invocations', 'FailedInvocations')]),
         ('Matching collection log lines (not invocation counts)', [['WeatherAWS/Collection', name, {'stat': 'Sum'}] for name in ('ResultLogLines', 'ErrorLogLines')]),
+        ('Counter data gaps - not a failure rate', [metric('Invocations',id='inv',visible=False),metric('Errors',id='err',visible=False),
+            [{'expression':'IF((FILL(inv,-1)<0) AND (FILL(err,-1)>=0),err)','id':'orphan_errors','label':'Errors with no Invocations point'}],
+            [{'expression':'IF((inv>0) AND (FILL(err,-1)<0),inv)','id':'missing_errors','label':'Invocations with no Errors point'}],
+            [{'expression':'IF((FILL(inv,-1)>=0) AND (err>inv),err)','id':'invalid_counts','label':'Errors exceeding present Invocations'}]]),
     ]
     widgets = [{'type': 'text', 'x': 0, 'y': 0, 'width': 24, 'height': 2,
-                'properties': {'markdown': '# WeatherAWS Week 3\nSource: tuan_3/scripts/dashboard.py. Metrics share 300s periods and the selected window. Missing points are not measured zero; delivery counts are not email-read confirmations.'}}]
+                'properties': {'markdown': '# WeatherAWS Week 3\nSource: tuan_3/scripts/dashboard.py. Metrics share 300s periods. Error rate covers only matched, consistent periods; inspect Counter data gaps before interpreting the window. Missing points are not measured zero. Matching log lines are not invocation counts; delivery counts are not email-read confirmations.'}}]
     for i, (title, metrics) in enumerate(groups):
         widgets.append({'type': 'metric', 'x': (i % 2) * 12, 'y': 2 + (i // 2) * 6, 'width': 12, 'height': 6,
                         'properties': {'region': region, 'title': title, 'period': 300, 'stat': 'Sum', 'view': 'timeSeries', 'metrics': metrics}})
@@ -72,7 +121,9 @@ def run(profile, output, backup):
     if actual != body:
         raise ValueError('Saved dashboard body differs')
     write_json(folder / 'dashboard.json', body)
-    start = datetime.now(timezone.utc).replace(microsecond=0) - timedelta(hours=24)
+    end = datetime.now(timezone.utc).replace(second=0,microsecond=0)
+    end -= timedelta(minutes=end.minute % 5)
+    start = end - timedelta(hours=24)
     end = start + timedelta(hours=24)
     rows = []
     for namespace, dimension, name, metrics in [

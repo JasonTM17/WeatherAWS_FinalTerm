@@ -1,0 +1,4 @@
+"timestamp_utc","invocations","errors","status","error_rate_percent"
+"2026-10-18T08:15:00+00:00","1.0","0.0","VALID","0.0"
+"2026-10-18T09:15:00+00:00","","3.0","MISSING_INVOCATIONS",""
+"2026-10-18T10:15:00+00:00","1.0","0.0","VALID","0.0"
