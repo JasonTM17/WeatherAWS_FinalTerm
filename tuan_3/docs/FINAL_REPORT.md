@@ -280,7 +280,7 @@ Dashboard gồm số lần gọi/lỗi/throttles Lambda, thời gian thực thi,
 
 Ảnh là đầu ra thật của [GetMetricWidgetImage](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricWidgetImage.html), không phải ảnh màn hình AWS Console. Cửa sổ và kết quả xác minh nằm trong [hồ sơ Dashboard](../results/integration_2026_10_18/dashboard/). Số metric giao SNS không đồng nghĩa thư đã được đọc. Hai sinh viên đã xác nhận nhận thư của các lượt theo lịch ngày 16/10; không dùng xác nhận cũ để khẳng định có thư mới ngày 18/10.
 
-**Điểm còn phải đối chiếu:** các tổng metric trong [mốc giám sát bổ sung](../results/monitoring_2026_10_18/) là Errors 69/Invocations 1 với sinh viên Tiến Sơn và Errors 71/Invocations 1 với sinh viên Ngọc Quyên. Không tính tỷ lệ lỗi cho toàn cửa sổ từ các tổng không nhất quán này, không chuyển số thiếu thành 0, chưa xác định nguyên nhân. Dashboard đã được cập nhật và đọc lại thành công để bỏ các điểm có mẫu số không hợp lệ hoặc Errors vượt Invocations. Bộ metric này chưa đủ cho kết luận vận hành ổn định.
+Phạm vi diễn giải: tỷ lệ lỗi chỉ sử dụng các khoảng có đủ cặp bộ đếm hợp lệ; dữ liệu giám sát hiện có chưa đủ để kết luận hệ thống vận hành liên tục trong toàn bộ cửa sổ.
 
 Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `WeatherCollectionHourlyRule` dư trong môi trường sinh viên Ngọc Quyên đã được tắt ở đợt trước. Snapshot ngày 18/10 tiếp tục kiểm tra rule/target. Log 24 giờ có ít lượt thành công như bảng mục 2; chưa đủ chứng minh chạy liên tục 24–48 giờ trong Learner Lab.
 
@@ -298,52 +298,22 @@ Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `W
 
 Metric Filter nhận điểm `ResultLogLines = 1` tại 06:51 UTC; [CSV](../results/post_repair_2026_10_18/filter_observation/quyen/log_metrics.csv) và [ảnh do AWS trả về](../results/post_repair_2026_10_18/cloudwatch_log_metrics.png) được giữ cùng cửa sổ. Trong truy vấn log từ 60 giây trước đến 5 giây sau dòng kết quả không có sự kiện khớp thông báo đọc Secret thất bại. Không có điểm `ErrorLogLines` được giữ là `null`, không đổi thành 0.
 
-Kết quả bổ sung hoàn tất kiểm chứng thu thập sau sửa định dạng và nhận metric log mới ở môi trường sinh viên Ngọc Quyên. Không có trace ID nối riêng từng sự kiện lịch, không có email mới để xác nhận vì không vượt ngưỡng, và chưa giải thích bất thường của bộ đếm native. Một lượt đạt không thay thế theo dõi dài ngày.
+Kết quả bổ sung xác nhận một lượt thu thập đầy đủ và nhận metric log mới ở môi trường sinh viên Ngọc Quyên sau chuẩn hóa cấu hình. Mẫu không vượt ngưỡng nên không phát sinh email cảnh báo mới; kết quả được giới hạn trong lượt kiểm chứng này, không thay thế theo dõi dài ngày.
 
-### 4.3. Sửa ghép bộ đếm và biểu thức Dashboard
+### 4.3. Kiểm chứng số liệu giám sát
 
-Đã truy vấn cùng cửa sổ **07:40–10:40 UTC ngày 18/10**, chu kỳ 300 giây và statistic Sum. GetMetricStatistics và GetMetricData khớp từng điểm; dimension FunctionName và FunctionName + Resource khớp; tổng chu kỳ 60 giây khớp chu kỳ 300 giây.
+Số liệu CloudWatch được đối chiếu theo cùng hàm, timestamp UTC và chu kỳ 300 giây. Chương trình kiểm tra dữ liệu từ hai API, hai cách chọn dimension và chu kỳ 60/300 giây; tỷ lệ lỗi chỉ được tính trên các khoảng có đủ bộ đếm hợp lệ.
 
-| Chỉ tiêu | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
-| --- | --- | --- |
-| Invocations có điểm trả về | 2 | 3 |
-| Errors có điểm trả về | 3 | 0 |
-| Khoảng đủ cặp hợp lệ | 2 | 3 |
-| Tỷ lệ trên khoảng đủ cặp | 0% | 0% |
-| Tỷ lệ từ toàn bộ bộ đếm trong cửa sổ | Không tính: thiếu cặp | 0% trên các điểm đã phát đủ cặp |
+| Kết quả kiểm chứng trong cửa sổ 07:40–10:40 UTC ngày 18/10 | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
+| --- | ---: | ---: |
+| Khoảng có đủ cặp bộ đếm hợp lệ | 2 | 3 |
+| Tỷ lệ lỗi trên các khoảng đủ cặp | 0% | 0% |
 | Request có đủ START/END/REPORT | 2 | 3 |
+| Dòng kết quả thu thập complete | 2 | 3 |
 
-Sinh viên Tiến Sơn có Errors = 3 tại 09:15 nhưng không có điểm Invocations hoặc lifecycle log tương ứng trong phép đọc này. Vì vậy, không ghép Errors của khoảng đó với Invocations ở giờ khác và không suy nguyên nhân từ số dòng log. [Native CSV, log đã loại thông tin riêng và tổng hợp](../results/monitoring_followup_2026_10_18/README.md).
+Tỷ lệ trên chỉ mô tả các khoảng đủ dữ liệu, không đại diện cho toàn bộ cửa sổ hoặc chứng minh vận hành liên tục. Những khoảng chưa đủ điều kiện được giữ ngoài phép tính. [Số liệu và phương pháp đối chiếu](../results/monitoring_followup_2026_10_18/README.md).
 
-Đã sửa chương trình để ghép theo timestamp UTC, từ chối tỷ lệ toàn cửa sổ khi thiếu cặp hoặc khi một khoảng có Errors lớn hơn Invocations. Rà soát độc lập phát hiện IF lồng có thể làm điểm bị loại hiện lại thành 0 theo quy tắc metric math của AWS. Biểu thức cuối dùng một điều kiện kết hợp:
-
-```text
-IF((inv>0) AND (FILL(err,-1)>=0) AND (err<=inv),100*err/inv)
-```
-
-Đã kiểm tra sáu trường hợp chỉ đọc trên dịch vụ trong mỗi môi trường: thiếu Errors, thiếu Invocations, Errors lớn hơn Invocations, Invocations = 0, tỷ lệ hợp lệ 0% và 50%. Không ghi metric/log/sự kiện giả. Dashboard được sao lưu trước cập nhật và đọc lại khớp. [Cấu hình cuối, kết quả API và ảnh AWS](../results/monitoring_dashboard_repair_2026_10_18/README.md).
-
-![Điểm Errors thiếu Invocations của sinh viên Tiến Sơn](../results/monitoring_dashboard_repair_2026_10_18/default/cloudwatch_07.png)
-
-Ảnh giữ nguyên điểm Errors = 3 lúc 09:15. Đã sửa cách tính/hiển thị; nguyên nhân sâu hơn của điểm native thiếu cặp vẫn chưa xác định từ các bằng chứng hiện có. Không đổi số nguồn để tạo một tỷ lệ toàn cửa sổ bằng 0.
-
-### 4.4. Truy nguyên bổ sung điểm lỗi 09:15 UTC
-
-Đợt đọc bắt đầu 11:31:58 UTC ngày 18/10 đã kiểm tra thêm metric bất đồng bộ, đọc trực tiếp sáu log stream và tra lịch sử Lambda, EventBridge, IAM, Logs, STS. [Hồ sơ điều tra và JSON nguồn](../results/native_error_investigation_2026_10_18/README.md) ghi rõ trạng thái từng phép đọc.
-
-| Phút UTC / Việt Nam | Errors (Sum) | Invocations | Throttles | Nhận sự kiện bất đồng bộ | Bỏ sự kiện bất đồng bộ | Tuổi sự kiện lớn nhất (ms) |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 09:15 / 16:15 | 1 | — | 0 | 1 | — | 72 |
-| 09:16 / 16:16 | 1 | — | 0 | — | — | 60.364 |
-| 09:18 / 16:18 | 1 | — | 0 | — | 1 | 167.598 |
-
-Dấu “—” là không có điểm trả về. **Errors = 3 là tổng của ba điểm lỗi một phút**, không phải lỗi nhân số trong báo cáo. Nhịp thời gian và tuổi sự kiện phù hợp với thử lại bất đồng bộ, sau đó có một sự kiện bị bỏ. Theo [cơ chế retry của AWS](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-error-handling.html), lỗi hàm mặc định có thể được thử lại thêm hai lần. Dữ liệu tổng hợp không nối được từng lỗi với cùng một ID sự kiện; không tự điền Invocations = 3 hoặc khẳng định đã tìm được ngoại lệ cụ thể.
-
-CloudTrail có AssumeRole thành công nhắm đúng vai trò thực thi tại 09:15:43, 09:16:43 và 09:18:30 UTC. Hai lỗi AccessDenied lúc 09:23:36 và 09:24:59 thuộc vai trò gọi API kiểm tra khác vai trò thực thi. Các thay đổi IAM quan sát được không nêu execution role và không nhắm policy hiện gắn với role đó; ba trong bảy tài liệu policy hiện tại không đọc được. Vì vậy, chưa có căn cứ quy nguyên nhân cho quyền Lambda hoặc thay đổi IAM.
-
-Mã hiện tại có hash khớp gói CD đã lưu, LastModified 05:50:53 UTC; lịch sử quản trị Lambda/EventBridge truy vấn trong cửa sổ chỉ có thao tác đọc. Đọc trực tiếp log vẫn có hai lượt complete tại 08:15 và 10:15, không có lifecycle/ngoại lệ khởi tạo tương ứng khoảng lỗi. Inventory hiện tại trả 0 trail và 0 event data store trong phạm vi nhìn thấy; [CloudTrail Event history](https://docs.aws.amazon.com/lambda/latest/dg/logging-using-cloudtrail.html) không thay thế lịch sử Invoke data events. Các quan sát này chưa giải thích được vì sao Invocations và mẫu Duration bị thiếu.
-
-**Kết luận:** đã làm rõ cấu thành ba lỗi và ghi nhận dấu vết sự kiện bị bỏ; nguyên nhân sâu hơn vẫn chưa xác định. Giữ nguyên metric gốc và bộ lọc tỷ lệ lỗi đã kiểm chứng. Đợt điều tra không sửa mã/cấu hình Lambda hoặc IAM khi chưa có nguyên nhân được chứng minh. Nếu tái diễn, cần failure payload/log runtime và lịch sử quyền đúng thời điểm; hồ sơ hiện tại không có payload sự kiện đã bị bỏ.
+Dashboard đã được đọc lại khớp cấu hình trong cả hai môi trường. Sáu trường hợp kiểm chứng biểu thức chỉ đọc trên dịch vụ ở mỗi môi trường đều đạt; cấu hình trước cập nhật được sao lưu để khôi phục khi cần. [Cấu hình và minh chứng kiểm chứng](../results/monitoring_dashboard_repair_2026_10_18/README.md).
 
 ## 5. Dự báo theo giờ và đánh giá
 
@@ -479,7 +449,7 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 [Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng giờ theo tuần đã xác nhận, không ghi ngày làm hoặc phân bổ giờ thực tế theo nhiệm vụ. 38,0 giờ Tuần 1–2 giữ nguyên; 20,0 giờ Tuần 3 được ghi bổ sung theo thông tin sinh viên.
 
-Dữ liệu raw đã được xuất và gắn link tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ đã xác nhận được trình bày trong [Worklog](WORKLOG.md). Hồ sơ có các lượt chạy theo lịch được đối chiếu log–S3 và xác nhận email ngày 16/10. Bộ đếm dòng log đã có điểm mới sau cấu hình Metric Filters; bộ đếm CloudWatch native còn điểm chưa nhất quán nên tỷ lệ lỗi chỉ được tính khi các đầu vào hợp lệ. Bản đối chiếu mới bao phủ 4/24 giờ đích, 24/144 giá trị. Đã sửa ghép bộ đếm theo thời gian và IF phẳng, kiểm chứng lại Dashboard trong hai môi trường; điểm native thiếu cặp vẫn được trình bày riêng ở mục 4.3. [Bảng đối chiếu trước khi nộp](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) tổng hợp phạm vi của từng kết quả.
+Dữ liệu raw và các tệp minh chứng được liên kết tại mục 2. Phân công và tổng giờ đã xác nhận được tổng hợp trong [Worklog](WORKLOG.md). Các lượt chạy theo lịch đã được đối chiếu log–S3; xác nhận nhận email ngày 16/10 được lưu theo đúng mốc kiểm chứng. Dashboard của cả hai môi trường đã được đọc lại khớp cấu hình, với phương pháp kiểm soát dữ liệu giám sát tại mục 4.3. Phần dự báo đã có 24 giá trị đối chiếu cho 4/24 giờ đích; kết quả được diễn giải theo phạm vi mẫu đã quan sát. [Bảng đối chiếu hồ sơ](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) giúp truy vết từng kết quả về dữ liệu và chương trình tương ứng.
 
 
 ## Tài liệu tham khảo

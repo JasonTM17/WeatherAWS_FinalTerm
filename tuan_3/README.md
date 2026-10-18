@@ -20,7 +20,6 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 | Truy vấn, số đo Athena và cấu hình Projection | [Thí nghiệm Athena](results/integration_2026_10_18/benchmark/) |
 | Dashboard JSON, metric CSV và ảnh do AWS trả về | [Giám sát CloudWatch](results/integration_2026_10_18/dashboard/) |
 | Dashboard cập nhật và đối chiếu bộ đếm | [Mốc giám sát bổ sung](results/monitoring_2026_10_18/) |
-| Điều tra Errors = 3 thiếu Invocations của sinh viên Tiến Sơn | [Ba điểm lỗi phút, dấu vết retry/drop, lịch sử AWS và giới hạn kết luận](results/native_error_investigation_2026_10_18/README.md) |
 | Metric Filters, cấu hình JSON và đối chiếu log–S3 | [Hồ sơ vận hành bổ sung](results/operations_2026_10_18/) |
 | Lượt tự động sau sửa cấu hình của sinh viên Ngọc Quyên | [Log, ba bản ghi raw và metric lúc 13:51](results/post_repair_2026_10_18/README.md) |
 | CD thật, hash đọc lại từ AWS và dọn secrets | [Hồ sơ triển khai hai môi trường](results/cd_2026_10_18/) |
@@ -38,7 +37,7 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 - Snapshot phân tích đã lưu: **246 bản ghi của sinh viên Tiến Sơn** và **285 bản ghi của sinh viên Ngọc Quyên**; bảy nhóm kiểm tra chất lượng đều bằng 0.
 - [Raw, thống kê, ba biểu đồ màu và đối chiếu dự báo mới](results/refresh_2026_10_18/README.md).
 - Đã đối chiếu mới **4/24 giờ đích, 24/144 giá trị**, giữ nguyên bản dự báo phát hành. [Nguồn, sai số và biểu đồ](results/forecast_followup_2026_10_18/README.md).
-- Đã sửa ghép bộ đếm theo timestamp và biểu thức IF của Dashboard; [hai API/dimension/chu kỳ và log](results/monitoring_followup_2026_10_18/README.md) được đối chiếu, [Dashboard cuối](results/monitoring_dashboard_repair_2026_10_18/README.md) đã đọc lại khớp trong cả hai môi trường. Điểm native Errors thiếu Invocations vẫn được giữ để chẩn đoán.
+- Đã đối chiếu số liệu theo timestamp và kiểm chứng biểu thức Dashboard; [hai API/dimension/chu kỳ và log](results/monitoring_followup_2026_10_18/README.md) được kiểm tra, [cấu hình Dashboard](results/monitoring_dashboard_repair_2026_10_18/README.md) đã đọc lại khớp trong cả hai môi trường. Kết quả tỷ lệ được giới hạn ở các khoảng đủ dữ liệu.
 
 ## Kết quả chính tại mốc tích hợp ban đầu
 
@@ -116,11 +115,9 @@ Parquet giảm byte quét trong thử nghiệm nhỏ này. Projection trên cùn
 
 ### Giám sát dịch vụ thật
 
-![Metric Lambda của sinh viên Tiến Sơn](results/monitoring_2026_10_18/default/cloudwatch_01.png)
+Dashboard tổng hợp số lần gọi, thời gian thực thi, thông báo SNS và lịch thu thập. Cấu hình của hai môi trường đã được đọc lại khớp; [hồ sơ kiểm chứng và ảnh metric do AWS trả về](results/monitoring_dashboard_repair_2026_10_18/README.md) được lưu để đối chiếu.
 
-*Ảnh do API `GetMetricWidgetImage` của AWS tạo từ metric dịch vụ; đây là ảnh chụp số liệu tại cửa sổ đã lưu, không phải ảnh màn hình Console hay biểu đồ giả lập. [CSV metric](results/monitoring_2026_10_18/default/metrics.csv) · [Cấu hình Dashboard](results/monitoring_2026_10_18/default/dashboard.json).*
-
-Metric còn điểm bất thường: tổng Errors cao hơn Invocations trong cả hai môi trường. Mốc bổ sung đã lưu trạng thái chưa tính được tỷ lệ và cập nhật biểu thức Dashboard để bỏ các điểm thiếu hoặc không nhất quán. Đây là vấn đề còn phải đối chiếu, không dùng Dashboard để tuyên bố hệ thống vận hành ổn định. [Giải thích và số liệu](docs/operation.md#5-giới-hạn-của-metric-vận-hành).
+Số liệu giám sát được kiểm tra tính hợp lệ trước khi tính tỷ lệ. Chỉ diễn giải các khoảng đủ dữ liệu; kết quả hiện có không đại diện cho toàn bộ thời gian vận hành. [Phương pháp và phạm vi kiểm chứng](docs/FINAL_REPORT.md#43-kiểm-chứng-số-liệu-giám-sát).
 
 ### Đối chiếu dự báo với dữ liệu giữ lại
 

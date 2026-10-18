@@ -27,4 +27,4 @@ START/END/REPORT được ghép theo request hash. Các dòng Result được đ
 
 Các tệp `dashboard.json` và PNG trong thư mục này ghi **lần cập nhật đầu**, còn dùng nhiều lớp IF. Sau rà soát metric math, biểu thức đó được thay bằng một IF phẳng; không dùng ảnh của lần đầu làm bằng chứng cho biểu thức cuối. [Cấu hình, phép thử chỉ đọc và ảnh AWS sau sửa](../monitoring_dashboard_repair_2026_10_18/README.md) được lưu riêng để giữ lịch sử đối chiếu.
 
-[Báo cáo](../../docs/FINAL_REPORT.md#43-sửa-ghép-bộ-đếm-và-biểu-thức-dashboard) · [Mã nguồn](../../scripts/monitoring_followup.py).
+[Báo cáo](../../docs/FINAL_REPORT.md#43-kiểm-chứng-số-liệu-giám-sát) · [Mã nguồn](../../scripts/monitoring_followup.py).

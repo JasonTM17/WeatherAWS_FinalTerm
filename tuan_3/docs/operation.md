@@ -149,7 +149,7 @@ Tài liệu kỹ thuật: [AWS — định nghĩa Invocations/Errors](https://do
 
 ## 10. Điều tra native Errors = 3 thiếu Invocations
 
-[Hồ sơ điều tra ngày 18/10](../results/native_error_investigation_2026_10_18/README.md) và [mục 4.4 của báo cáo](FINAL_REPORT.md#44-truy-nguyên-bổ-sung-điểm-lỗi-0915-utc) bổ sung dữ liệu phút, hàng đợi bất đồng bộ, log stream và lịch sử quản trị. Tổng Errors = 3 được phân giải thành ba điểm Errors = 1 ở 09:15, 09:16, 09:18 UTC. Một điểm AsyncEventsDropped = 1 và tuổi sự kiện tăng hỗ trợ giả thuyết retry/drop; chưa xác định ngoại lệ hay giải thích được Invocations thiếu.
+[Hồ sơ điều tra ngày 18/10](../results/native_error_investigation_2026_10_18/README.md) và [phần phương pháp giám sát trong báo cáo](FINAL_REPORT.md#43-kiểm-chứng-số-liệu-giám-sát) bổ sung dữ liệu phút, hàng đợi bất đồng bộ, log stream và lịch sử quản trị. Tổng Errors = 3 được phân giải thành ba điểm Errors = 1 ở 09:15, 09:16, 09:18 UTC. Một điểm AsyncEventsDropped = 1 và tuổi sự kiện tăng hỗ trợ giả thuyết retry/drop; chưa xác định ngoại lệ hay giải thích được Invocations thiếu.
 
 ```bash
 python tuan_3/scripts/investigate_native_errors.py --profile default --output output/native-error-new/probe.json
