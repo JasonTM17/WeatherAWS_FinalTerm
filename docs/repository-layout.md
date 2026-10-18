@@ -21,6 +21,13 @@ WeatherAWS_FinalTerm/
     tests/                   Năm module kiểm tra chức năng và hồ sơ
     docs/                    Báo cáo Word/PDF/Excel và nhật ký Tuần 2
     results/                 Bộ đầu vào, kết quả và metadata đã lưu
+  tuan_3/
+    README.md                Mốc tích hợp chuẩn bị Tuần 3
+    scripts/                 Snapshot, chất lượng, benchmark, Dashboard, dự báo, release
+    tests/                   Hồi quy dữ liệu, thời gian, dự báo và triển khai
+    docs/                    Báo cáo Markdown, vận hành và nhật ký kỹ thuật
+    results/                 Dữ liệu và minh chứng theo mốc, có SHA-256
+  .github/workflows/         CI kiểm tra và CD Lambda thủ công có xác nhận môi trường
 ```
 
 ## Tệp chuẩn và điểm vào dùng lại
@@ -50,5 +57,6 @@ Các lượt xuất tùy chọn nên ghi vào `output/`, được Git bỏ qua. 
 - [tuan_2/analytics/requirements.txt](../tuan_2/analytics/requirements.txt): boto3, NumPy và Matplotlib để chạy SDK, phân tích, biểu đồ và các kiểm tra chức năng.
 - `tuan_2/lambda/requirements.txt`: boto3 để phát triển cục bộ; runtime Lambda cung cấp SDK và các thư viện chuẩn được mã nguồn sử dụng.
 - Các lệnh kiểm tra nằm trong [hướng dẫn đọc mã nguồn](source-guide.md). Kiểm tra SDK/API giả lập xác nhận cách xử lý cục bộ; phạm vi vận hành được đối chiếu riêng từ hồ sơ dữ liệu đã lưu.
+- [tuan_3/requirements.txt](../tuan_3/requirements.txt) bổ sung PyArrow cho thí nghiệm Parquet; Lambda triển khai không mang các thư viện phân tích này. [Hướng dẫn Tuần 3](../tuan_3/docs/operation.md) phân biệt kiểm tra tệp đã lưu, thao tác AWS và workflow triển khai.
 
 [Trở về tài liệu dự án](README.md) · [Nhật ký và số giờ](WORKLOG.md)

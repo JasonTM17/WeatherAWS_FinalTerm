@@ -37,6 +37,15 @@ Các đường dẫn mở trực tiếp mã nguồn trên GitHub (Blob URL) và 
 
 ## Vì sao tổ chức như vậy
 
+### Bổ sung tại mốc tích hợp Tuần 3
+
+| Thành phần | Mã nguồn và hồ sơ | Commit trực tiếp |
+| --- | --- | --- |
+| Snapshot, chất lượng, Projection/Parquet, Dashboard, dự báo | [Chương trình Tuần 3](../tuan_3/scripts/) · [Kết quả và biểu đồ](../tuan_3/README.md) | [0b26858](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e) |
+| Artifact và triển khai Lambda có kiểm tra môi trường/phiên bản | [release.py](../tuan_3/scripts/release.py) · [Workflow CD](../.github/workflows/week3-release.yml) | [c28da19 — sửa ZIP để đồng nhất Windows/Linux](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356) |
+
+Các commit trên bổ sung công cụ tích hợp, không thay thuật toán thu thập của module Lambda ở commit `36c9b39`. Phiên bản và trạng thái chạy thật được xác nhận riêng trong [hồ sơ CI/CD](../tuan_3/docs/operation.md).
+
 EventBridge tách lịch khỏi xử lý; Lambda chuẩn hóa bản ghi theo cùng lược đồ. S3 giữ raw NDJSON theo `year/month/day`; Glue khai báo kiểu và phân vùng để Athena đọc bằng SQL. View dùng lại bảng gốc, tránh hai lược đồ độc lập. Exporter giữ CSV và mã truy vấn để kết quả truy về đầu vào. Biểu đồ đọc CSV thay vì nhập lại số liệu.
 
 Mã SDK dùng chung nằm trong `tuan_2/`; hai script nền tảng Tuần 1 gọi module này. Đường dẫn hiện tại không đồng nghĩa toàn bộ nội dung tệp đã tồn tại từ Tuần 1. Hồ sơ lịch sử và mốc truy vấn được giữ riêng.

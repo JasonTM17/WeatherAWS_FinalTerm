@@ -319,12 +319,13 @@ Tuần 3 tập trung tích hợp và giám sát theo [tám đầu việc W3-01�
 
 ## Kết luận tiến độ
 
-Hồ sơ hai tuần đã có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công có thể đối chiếu trên GitHub. Bộ Tuần 1 giữ 156 bản ghi đã dùng trong báo cáo; bộ Tuần 2 tách rõ dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, kèm nguồn của từng hình. Lần đọc AWS bổ sung có thư mục và manifest riêng. Các bước tiếp theo được gắn với việc đồng bộ mã triển khai, hoàn thiện giám sát và kiểm chứng cảnh báo.
+Hồ sơ hai tuần đã có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công có thể đối chiếu trên GitHub. Bộ Tuần 1 giữ 156 bản ghi đã dùng trong báo cáo; bộ Tuần 2 tách rõ dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, kèm nguồn của từng hình. Mốc tích hợp ngày 18/10 bổ sung thử nghiệm Projection/Parquet, Dashboard thật, đánh giá dự báo và đường CI/CD. Phần tiếp tục là độ phủ vận hành, dữ liệu theo lịch Tuần 3 và giờ làm việc thực tế; kết quả chi tiết nằm trong [hồ sơ Tuần 3](tuan_3/README.md).
 
 ## Tài liệu chi tiết
 
 - [Hồ sơ và kết quả Tuần 1](tuan_1/README.md)
 - [Hồ sơ và kết quả Tuần 2](tuan_2/README.md)
+- [Mốc tích hợp Tuần 3](tuan_3/README.md)
 - [Kiến trúc hệ thống](docs/architecture.md)
 - [Dữ liệu và phương pháp phân tích](docs/data-analysis.md)
 - [Hướng dẫn đọc mã nguồn](docs/source-guide.md)

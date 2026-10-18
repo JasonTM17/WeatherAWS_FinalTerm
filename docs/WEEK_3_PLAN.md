@@ -61,7 +61,7 @@ Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc v�
 | W3-05 | Đã tạo và đọc lại hai Dashboard | [Metric CSV và 10 ảnh AWS](../tuan_3/results/integration_2026_10_18/dashboard/); ảnh API metric không phải ảnh màn hình Console |
 | W3-06 | Đạt luồng email tại các lượt 16/10 | [Publish → giao thông báo → xác nhận người nhận](scheduled-run-verification.md#cảnh-báo-và-giám-sát); tiếp tục ghi nhận lượt mới, không suy ra đã nhận thư từ metric đơn lẻ |
 | W3-07 | Đã có đánh giá hồi cứu 24 giờ giữ lại | [Ba phương pháp, 18 bộ sai số](../tuan_3/docs/FINAL_REPORT.md#5-dự-báo-theo-giờ-và-đánh-giá); dự báo 24 giờ tiếp theo chưa được đánh giá bằng dữ liệu tương lai |
-| W3-08 | Đã bổ sung workflow và hồ sơ; theo dõi run thực tế | [CI](../.github/workflows/verify-repository.yml), [CD](../.github/workflows/week3-release.yml), [kết quả chạy](../tuan_3/docs/operation.md#4-kết-quả-thực-hiện) |
+| W3-08 | CI và CD hai môi trường đã có lượt thành công | [Kết quả CI/CD, hash AWS và dọn secrets](../tuan_3/docs/operation.md#4-kết-quả-thực-hiện); độ phủ vận hành theo lịch và giờ làm Tuần 3 vẫn ghi riêng |
 
 ## Điều kiện và hồ sơ kết thúc
 

@@ -11,7 +11,7 @@ python tuan_3/scripts/verify_results.py
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-`verify_results.py` kiểm tra đường dẫn/hash/kích thước của manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn và 18 bộ sai số dự báo. Các kiểm tra này không cần khóa AWS. Đây là kiểm tra tệp đã lưu, không phải kiểm tra dịch vụ hiện tại.
+`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 116 tệp trong ba manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, 18 bộ sai số dự báo, kiểm tra tính nhất quán metric và hồ sơ CD/dọn secrets. Các kiểm tra này không cần khóa AWS. Đây là kiểm tra tệp đã lưu, không phải kiểm tra dịch vụ hiện tại.
 
 ## 2. Chạy một mốc mới trên AWS
 
@@ -55,8 +55,26 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 
 ## 4. Kết quả thực hiện
 
-- Kiểm tra cục bộ: 18 hồi quy Tuần 3 đạt; đối chiếu 92 tệp manifest, 18 kết quả Athena và 18 bộ sai số đạt.
+- Kiểm tra cục bộ: 19 hồi quy Tuần 3 đạt; đối chiếu 116 tệp manifest, 18 kết quả Athena và 18 bộ sai số đạt.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
-- CI/CD trên GitHub: xem [các lượt chạy](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions). Trạng thái triển khai của lần kiểm chứng sẽ được ghi kèm run ID và bằng chứng sau khi workflow kết thúc; không suy ra thành công chỉ từ việc có tệp workflow.
+- [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
+- [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.
+
+| Môi trường | Lượt CD đã thành công | Đọc lại trực tiếp từ AWS |
+| --- | --- | --- |
+| Sinh viên Tiến Sơn | [39101930450](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101930450) | Gói khớp artifact CI, module khớp source, Active/Successful, cấu hình giữ nguyên |
+| Sinh viên Ngọc Quyên | [39101934718](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101934718) | Gói khớp artifact CI, module khớp source, Active/Successful, cấu hình giữ nguyên |
+
+Hai lượt triển khai dùng commit `c28da19568a7bbe4b5be60d844574ad2853bf356`; SHA-256 gói cùng là `a8cfeb7d3f569a34573d1986299d82eefbc043bb749e3fe373403716604a1ea5`. Module thu thập giữ hash `d9d0ad2584feef121234d634bf26bdc43097bb9b8798123cfd767023397ed3cf`. [JSON từng môi trường và đối chiếu artifact](../results/cd_2026_10_18/) ghi thời điểm đọc lại.
+
+Ở đợt đầu, hai job GitHub đã thành công nhưng phép kiểm tra bổ sung phát hiện metadata ZIP và dữ liệu nén khác giữa Windows/Linux. Module bên trong vẫn giống nhau. Đợt sau dùng metadata cố định và ZIP không nén, đã vượt qua đối chiếu byte toàn gói. [Hồ sơ lần đầu](../results/cd_2026_10_18/initial-attempt.json) được giữ để truy vết việc sửa.
+
+Mỗi đợt cấp tạm bốn secrets cho mỗi môi trường. [Biên bản dọn đợt đầu](../results/cd_2026_10_18/initial-secret-cleanup.json) và [đợt kiểm chứng lại](../results/cd_2026_10_18/secret-cleanup.json) đều xác nhận đã xóa đủ tám secrets; danh sách secrets của cả hai Environment còn rỗng. Việc xóa khỏi GitHub không có nghĩa phiên AWS gốc đã bị thu hồi; lần triển khai sau cần cấp khóa phiên theo quyền được cho phép.
+
+## 5. Giới hạn của metric vận hành
+
+Đợt [cập nhật Dashboard](../results/monitoring_2026_10_18/) vẫn nhận tổng Errors lớn hơn Invocations: 69/1 trong môi trường sinh viên Tiến Sơn và 71/1 trong môi trường sinh viên Ngọc Quyên. Hai tổng này không tạo được tỷ lệ lỗi hợp lệ; JSON ghi `INCONSISTENT_COUNTS` và tỷ lệ `null`. Chưa kết luận nguyên nhân từ các bộ đếm này.
+
+Dashboard dùng `IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))` cho từng chu kỳ: bỏ điểm thiếu Errors, không có lượt gọi hoặc Errors vượt Invocations. CSV chỉ giữ điểm dịch vụ trả về. Một vài điểm hợp lệ trên biểu đồ không chứng minh toàn cửa sổ có metric đầy đủ. Triển khai mã thành công cũng chưa chứng minh lịch chạy liên tục hay email mới đã tới người nhận.
 
 [Báo cáo](FINAL_REPORT.md) · [Trang Tuần 3](../README.md)

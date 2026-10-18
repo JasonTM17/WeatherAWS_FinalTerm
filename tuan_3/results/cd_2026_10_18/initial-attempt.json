@@ -1,0 +1,16 @@
+{
+  "commit": "0b2685883c92eba1f31e27c735fdc48c94a8a12e",
+  "cd_runs": [
+    39101721752,
+    39101725292
+  ],
+  "github_job_conclusions": [
+    "success",
+    "success"
+  ],
+  "module_readback": "PASS",
+  "local_cross_platform_package_check": "FAIL",
+  "cause": "ZIP host metadata and zlib output differed between Windows and Linux",
+  "repair": "Fix create_system and use ZIP_STORED; require byte equality with Linux CI artifact before retry",
+  "temporary_secrets_removed": true
+}

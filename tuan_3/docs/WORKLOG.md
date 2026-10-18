@@ -15,4 +15,6 @@ Tài liệu ghi đầu việc và sản phẩm đã lưu. Phân công tiếp n�
 
 Các dòng trên ghi phạm vi phụ trách, không chứng minh ai tự viết từng dòng mã. Kết quả kiểm tra và triển khai thật được ghi trong [hướng dẫn vận hành](operation.md); dữ liệu và phép đo nằm trong [manifest](../results/integration_2026_10_18/manifest.json).
 
+Mốc bổ sung ngày 18/10 lưu thêm [431 dòng metric và Dashboard có kiểm tra bộ đếm](../results/monitoring_2026_10_18/), cùng [hai lượt CD và biên bản xóa secrets tạm](../results/cd_2026_10_18/). Hai cửa sổ metric có thời gian chồng lên nhau, không cộng số dòng thành số quan sát độc lập. Tổng Errors vượt Invocations vẫn là điểm chưa giải thích được; hồ sơ không tính tỷ lệ lỗi cho cửa sổ đó. Bộ kiểm tra Tuần 3 hiện có 19 trường hợp hồi quy.
+
 **Cần bổ sung khi kết thúc tuần:** ngày làm, công việc thực tế, số giờ được từng sinh viên xác nhận và các lượt chạy trong lịch 19–25/10/2026. Nhật ký [Tuần 1–2](../../docs/WORKLOG.md) giữ tổng 38,0 giờ đã xác nhận.

@@ -8,6 +8,24 @@ from botocore.exceptions import ClientError
 from common import PROFILES, FUNCTION, client, session, write_csv, write_json
 
 DASHBOARD = 'WeatherAirQuality-Week3'
+ERROR_RATE = 'IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))'
+
+
+def metric_consistency(rows):
+    totals = {}
+    for name in ('Invocations', 'Errors'):
+        values = [float(r['value']) for r in rows if r['namespace'] == 'AWS/Lambda'
+                  and r['metric'] == name and r['statistic'] == 'Sum']
+        totals[name] = sum(values) if values else None
+    invocations, errors = totals['Invocations'], totals['Errors']
+    status, ratio = 'UNAVAILABLE', None
+    if invocations is not None and errors is not None:
+        if errors < 0 or invocations < 0 or errors > invocations:
+            status = 'INCONSISTENT_COUNTS'
+        elif invocations > 0:
+            status, ratio = 'VALID', 100 * errors / invocations
+    return {'lambda_sums': totals, 'error_rate_status': status, 'error_rate_percent': ratio,
+            'limitation': 'Missing metrics are not zero; inconsistent counters cannot establish an error rate or root cause'}
 
 
 def build_dashboard(topic, region='us-east-1'):
@@ -17,7 +35,7 @@ def build_dashboard(topic, region='us-east-1'):
     groups = [
         ('Lambda invocations / errors / throttles', [metric('Invocations'), metric('Errors'), metric('Throttles')]),
         ('Execution duration (ms)', [metric('Duration', 'Average'), metric('Duration', 'Maximum')]),
-        ('Error rate (%) - undefined when invocations absent', [metric('Invocations', id='inv', visible=False), metric('Errors', id='err', visible=False), [{'expression': 'IF(inv>0,100*err/inv)', 'id': 'rate', 'label': 'Errors / Invocations (%)'}]]),
+        ('Error rate (%) - requires present and consistent counters', [metric('Invocations', id='inv', visible=False), metric('Errors', id='err', visible=False), [{'expression': ERROR_RATE, 'id': 'rate', 'label': 'Errors / Invocations (%)'}]]),
         ('SNS published / delivered / failed', [['AWS/SNS', name, 'TopicName', topic, {'stat': 'Sum'}] for name in ('NumberOfMessagesPublished', 'NumberOfNotificationsDelivered', 'NumberOfNotificationsFailed')]),
         ('Canonical hourly rule', [['AWS/Events', name, 'RuleName', 'WeatherCollectionSchedule', {'stat': 'Sum'}] for name in ('TriggeredRules', 'Invocations', 'FailedInvocations')]),
     ]
@@ -63,8 +81,9 @@ def run(profile, output, backup):
         for name_metric, stat in metrics:
             points = cw.get_metric_statistics(Namespace=namespace, MetricName=name_metric, Dimensions=[{'Name': dimension, 'Value': name}], StartTime=start, EndTime=end, Period=300, Statistics=[stat]).get('Datapoints', [])
             for point in sorted(points, key=lambda r: r['Timestamp']):
-                rows.append({'namespace': namespace, 'metric': name_metric, 'statistic': stat, 'timestamp_utc': point['Timestamp'].isoformat(), 'value': point[stat], 'unit': point['Unit']})
+                rows.append({'namespace': namespace, 'metric': name_metric, 'statistic': stat, 'timestamp_utc': point['Timestamp'].astimezone(timezone.utc).isoformat(), 'value': point[stat], 'unit': point['Unit']})
     write_csv(folder / 'metrics.csv', rows, ['namespace', 'metric', 'statistic', 'timestamp_utc', 'value', 'unit'])
+    write_json(folder / 'metric-consistency.json', metric_consistency(rows))
     graph_status = []
     for i, widget in enumerate(body['widgets']):
         if widget['type'] != 'metric':

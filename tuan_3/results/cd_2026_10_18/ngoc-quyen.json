@@ -1,0 +1,18 @@
+{
+  "previous_package_sha256": "3ca4f32a4359e2309620478ff55fd6a828de37411c41549987ce94b490490283",
+  "requested_package_sha256": "a8cfeb7d3f569a34573d1986299d82eefbc043bb749e3fe373403716604a1ea5",
+  "code_only": true,
+  "status": "PASS",
+  "configuration_unchanged": true,
+  "state": "Active",
+  "last_update_status": "Successful",
+  "deployed_package_sha256": "a8cfeb7d3f569a34573d1986299d82eefbc043bb749e3fe373403716604a1ea5",
+  "target": "ngoc-quyen",
+  "run_id": 39101934718,
+  "run_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101934718",
+  "commit": "c28da19568a7bbe4b5be60d844574ad2853bf356",
+  "module_sha256": "d9d0ad2584feef121234d634bf26bdc43097bb9b8798123cfd767023397ed3cf",
+  "final_aws_readback": "PASS",
+  "invoked_by_this_verification": false,
+  "checked_at": "2026-10-18T05:51:19.925290+00:00"
+}

@@ -76,7 +76,7 @@ Chưa đổi lifecycle của raw sản xuất: thử nghiệm nhỏ này chưa c
 
 [dashboard.py](../scripts/dashboard.py) tạo Dashboard riêng `WeatherAirQuality-Week3`, sao lưu cấu hình cũ cục bộ, kiểm tra thông báo hợp lệ từ PutDashboard rồi đọc lại GetDashboard để so toàn bộ nội dung. Hai môi trường đều đọc lại khớp và không có thông báo validation.
 
-Dashboard gồm số lần gọi/lỗi/throttles Lambda, thời gian thực thi, tỷ lệ lỗi, metric SNS và metric lịch chuẩn. Tỷ lệ lỗi dùng `Errors / Invocations × 100` cùng hàm, cùng cửa sổ và chu kỳ 300 giây; không hiển thị tỷ lệ bằng 0 khi không có lượt gọi. CSV chỉ giữ điểm AWS trả về, không lấp khoảng trống bằng số 0.
+Dashboard gồm số lần gọi/lỗi/throttles Lambda, thời gian thực thi, tỷ lệ lỗi, metric SNS và metric lịch chuẩn. Tỷ lệ lỗi dùng `Errors / Invocations × 100` cùng hàm, cùng cửa sổ và chu kỳ 300 giây. Bản cập nhật thêm điều kiện đủ bộ đếm, Invocations > 0 và Errors ≤ Invocations; không lấp khoảng trống bằng số 0.
 
 | Kết quả | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
 | --- | ---: | ---: |
@@ -89,6 +89,8 @@ Dashboard gồm số lần gọi/lỗi/throttles Lambda, thời gian thực thi,
 ![Metric SNS của sinh viên Ngọc Quyên](../results/integration_2026_10_18/dashboard/quyen/cloudwatch_04.png)
 
 Ảnh là đầu ra thật của [GetMetricWidgetImage](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricWidgetImage.html), không phải ảnh màn hình AWS Console. Cửa sổ và kết quả xác minh nằm trong [hồ sơ Dashboard](../results/integration_2026_10_18/dashboard/). Số metric giao SNS không đồng nghĩa thư đã được đọc. Hai sinh viên đã xác nhận nhận thư của các lượt theo lịch ngày 16/10; không dùng xác nhận cũ để khẳng định có thư mới ngày 18/10.
+
+**Điểm còn phải đối chiếu:** các tổng metric trong [mốc giám sát bổ sung](../results/monitoring_2026_10_18/) là Errors 69/Invocations 1 với sinh viên Tiến Sơn và Errors 71/Invocations 1 với sinh viên Ngọc Quyên. Không tính tỷ lệ lỗi cho toàn cửa sổ từ các tổng không nhất quán này, không chuyển số thiếu thành 0, chưa xác định nguyên nhân. Dashboard đã được cập nhật và đọc lại thành công để bỏ các điểm có mẫu số không hợp lệ hoặc Errors vượt Invocations. Bộ metric này chưa đủ cho kết luận vận hành ổn định.
 
 Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `WeatherCollectionHourlyRule` dư trong môi trường sinh viên Ngọc Quyên đã được tắt ở đợt trước. Snapshot ngày 18/10 tiếp tục kiểm tra rule/target. Log 24 giờ có ít lượt thành công như bảng mục 2; chưa đủ chứng minh chạy liên tục 24–48 giờ trong Learner Lab.
 
@@ -131,11 +133,13 @@ Chương trình vẫn xuất [144 giá trị dự báo](../results/integration_2
 
 ## 6. Kiểm tra và triển khai
 
+Mã và hồ sơ tích hợp nằm tại commit [0b26858](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e). Commit [c28da19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356) sửa định dạng ZIP để gói dựng trên Windows và Linux có thể đối chiếu byte trực tiếp. Hai commit không thay đổi thuật toán trong module thu thập.
+
 Workflow [Verify repository](../../.github/workflows/verify-repository.yml) kiểm tra hồ sơ cũ, các hồi quy chức năng/phân tích, bộ kiểm tra Tuần 3 và tính toàn vẹn 92 tệp kết quả. Sau đó workflow đóng gói module Lambda thành ZIP có tên entry, timestamp và quyền tệp xác định; artifact được giữ bảy ngày trên Actions.
 
 Workflow [Week 3 Lambda release](../../.github/workflows/week3-release.yml) chỉ chạy thủ công trên `main`, yêu cầu chọn môi trường và nhập lại tên để xác nhận. Khóa phiên được cấp qua GitHub Environment secrets, không đặt trong mã. STS phải khớp tài khoản của môi trường trước khi tải gói khôi phục hoặc cập nhật Lambda. Cập nhật chỉ thay mã và dùng RevisionId; xác minh hash, trạng thái và dấu vân tay cấu hình. Khi xác minh lỗi, chỉ thử khôi phục nếu RevisionId vẫn thuộc lượt cập nhật này, tránh ghi đè cập nhật của người khác.
 
-Kết quả chạy thật của CI/CD được cập nhật tại [hướng dẫn và hồ sơ triển khai](operation.md). Khai báo workflow hoặc kết quả kiểm tra giả lập không thay thế một lượt triển khai thành công trên GitHub.
+Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037), [CD sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101930450), [CD sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101934718) đều thành công. Gói tải lại từ cả hai Lambda khớp artifact CI, module khớp source, trạng thái Active/Successful và cấu hình giữ nguyên. [Hướng dẫn và hồ sơ triển khai](operation.md#4-kết-quả-thực-hiện) ghi cả sửa lỗi ZIP giữa hai nền tảng và xác nhận xóa secrets tạm.
 
 ## 7. Kết luận và phần còn lại
 

@@ -6,7 +6,7 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from benchmark import assert_equal_groups, projection, typed_rows
-from dashboard import build_dashboard
+from dashboard import build_dashboard, metric_consistency
 from quality import REQUIRED, WEEK3_START, WEEK3_END, inspect_rows
 from forecast import evaluate, predict, score, consecutive_tail
 from release import deployment, package
@@ -175,7 +175,16 @@ class Week3Tests(unittest.TestCase):
             self.assertEqual(metric[0], 'AWS/Lambda')
             self.assertEqual(metric[2:4], ['FunctionName', 'WeatherCollectorLambda'])
             self.assertEqual(metric[-1]['stat'], 'Sum')
-        self.assertEqual(rate['metrics'][2][0]['expression'], 'IF(inv>0,100*err/inv)')
+        self.assertEqual(rate['metrics'][2][0]['expression'], 'IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))')
+
+    def test_inconsistent_and_absent_metrics_cannot_create_error_rate(self):
+        def point(name, value):
+            return {'namespace': 'AWS/Lambda', 'metric': name, 'statistic': 'Sum', 'value': value}
+        result = metric_consistency([point('Invocations', 1), point('Errors', 69)])
+        self.assertEqual(result['error_rate_status'], 'INCONSISTENT_COUNTS')
+        self.assertIsNone(result['error_rate_percent'])
+        self.assertIsNone(metric_consistency([point('Errors', 72)])['error_rate_percent'])
+        self.assertEqual(metric_consistency([point('Invocations', 10), point('Errors', 2)])['error_rate_percent'], 20)
 
 
 if __name__ == '__main__':

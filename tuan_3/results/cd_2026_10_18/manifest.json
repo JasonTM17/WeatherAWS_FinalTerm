@@ -1,0 +1,34 @@
+{
+  "files": [
+    {
+      "path": "ci-artifact-verification.json",
+      "sha256": "2156ff4d9f59e3776735c311196738a0c47460cec3bf506ebe0a7589070698f0",
+      "bytes": 437
+    },
+    {
+      "path": "initial-attempt.json",
+      "sha256": "1ce291507002409f7a601e7fa66888105f202e192c56a435a63e88e82ac30cb2",
+      "bytes": 500
+    },
+    {
+      "path": "initial-secret-cleanup.json",
+      "sha256": "619711ff9f06a28d88b1a93b22913349cb7f02f16344529bf063fa78e39504e6",
+      "bytes": 289
+    },
+    {
+      "path": "ngoc-quyen.json",
+      "sha256": "2be31c8918fed5e93207aa83d9a85c22219d3fcd56f362a0f10a8dea52a70917",
+      "bytes": 858
+    },
+    {
+      "path": "secret-cleanup.json",
+      "sha256": "7653241df7f471814f451b32608b00e4c67aba2fc6360a3e993f787c08c59c80",
+      "bytes": 289
+    },
+    {
+      "path": "tien-son.json",
+      "sha256": "fde349dd814d7e6e457cea2ae76ab17ff2e228abc20555afd15ea39bc2ff82fe",
+      "bytes": 856
+    }
+  ]
+}

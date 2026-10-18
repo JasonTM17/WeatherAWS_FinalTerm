@@ -230,4 +230,6 @@
 "tuan_3/results/integration_2026_10_18/snapshot/quyen/quality.csv","7","2","226","dfdb1ee6e1d23b65f29402255ab2f173f5903e7a8012bea3ccf530d7ea28c6e1","saved-report-input-or-analysis"
 "tuan_3/results/integration_2026_10_18/snapshot/quyen/raw_all.csv","273","23","68591","e25b6333aeafd1f5e7d76c4fff26dfb9b5975f3b69666195c960295bcdbe1374","saved-report-input-or-analysis"
 "tuan_3/results/integration_2026_10_18/snapshot/quyen/recent_collections.csv","0","5","86","2978a03e15074be7cc5739fa1775b5f958984d232fd4246621bdc1c7c6e42c0c","saved-report-input-or-analysis"
+"tuan_3/results/monitoring_2026_10_18/default/metrics.csv","213","6","16714","51228edc63eb47f4fd9c22cdb8dd1117501d4b563b1fbf5fd3f0973ea7d0075e","saved-report-input-or-analysis"
+"tuan_3/results/monitoring_2026_10_18/quyen/metrics.csv","218","6","17122","515f9ed4471a19a4bb33a088ddfd083dc48d25f76c6fa0bbbd0bc18d81cd1367","saved-report-input-or-analysis"
 "worklog.csv","4","10","2244","5791058547737fd63d79114e2b82d4ae8c23b7798db5b19123dfd31d8225462f","weekly-worklog"
