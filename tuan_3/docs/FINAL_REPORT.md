@@ -94,11 +94,11 @@ Bảng tổng hợp các tham số thống kê mô tả: Trung bình (Mean), Tru
 | Đà Nẵng | Khí CO | µg/m³ | 510.05 | 466.00 | 216.98 | 175.00 | 958.00 | 345.00 | 634.50 | 829.00 | 895.50 |
 | Đà Nẵng | Khí Ozone mặt đất | µg/m³ | 98.16 | 87.00 | 33.56 | 55.00 | 197.00 | 76.50 | 116.00 | 151.00 | 161.50 |
 
-### 2.2. Ma trận hệ số tương quan (Pearson r & Spearman rho)
+#### 2.2. Ma trận hệ số tương quan (Pearson r & Spearman rho)
 
-| Đô thị / Môi trường | Biến khí tượng | Pearson $r$ với PM2.5 | Spearman $ho$ với PM2.5 | Pearson $r$ với US AQI | Spearman $ho$ với US AQI | Ý nghĩa vật lý / môi trường |
+| Đô thị / Môi trường | Biến khí tượng | Pearson $r$ với PM2.5 | Spearman $\rho$ với PM2.5 | Pearson $r$ với US AQI | Spearman $\rho$ với US AQI | Ý nghĩa vật lý / môi trường |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
-| Hà Nội (`default`) | Nhiệt độ (2m) | +0.2119 | +0.3483 | +0.6303 | +0.6670 | Nắng nóng kích thích quang hóa hình thành Ozone |
+| Hà Nội (`default`) | Nhiệt độ (2m) | +0.2119 | +0.3483 | **+0.6303** | **+0.6670** | Nắng nóng kích thích quang hóa hình thành Ozone |
 | Hà Nội (`default`) | Độ ẩm tương đối | +0.0667 | -0.0976 | -0.0766 | +0.0655 | Độ ẩm biến thiên nghịch pha với nhiệt độ |
 | Hà Nội (`default`) | Tốc độ gió (10m) | **-0.6564** | **-0.6908** | **-0.5679** | **-0.5546** | Gió mạnh giúp xáo trộn khí quyển, giải tán bụi mịn |
 | Hà Nội (`default`) | Khí CO | **+0.6057** | **+0.4882** | +0.1568 | +0.0138 | CO và PM2.5 phát thải đồng thời từ giao thông |
@@ -107,12 +107,27 @@ Bảng tổng hợp các tham số thống kê mô tả: Trung bình (Mean), Tru
 | TP.HCM (`default`) | Độ ẩm tương đối | **+0.6649** | **+0.7374** | +0.1274 | +0.1647 | Độ ẩm cao cản trở đối lưu, làm hạt bụi trương nở |
 | TP.HCM (`default`) | Tốc độ gió (10m) | -0.3464 | -0.3744 | -0.0097 | -0.0241 | Gió đô thị yếu làm chậm quá trình tự làm sạch |
 | TP.HCM (`default`) | Khí CO | **+0.4617** | **+0.6318** | +0.2738 | +0.1555 | Nồng độ CO cao đồng biến với mật độ phương tiện |
-| Đà Nẵng (`default`) | Nhiệt độ (2m) | +0.4795 | +0.5009 | +0.4394 | +0.4296 | Nhiệt độ cao kích hoạt phản ứng quang hóa ven biển |
+| TP.HCM (`default`) | Khí Ozone ($O_3$) | **-0.5534** | **-0.6691** | +0.1352 | +0.0856 | Tương quan nghịch với bụi do cạnh tranh bức xạ |
+| Đà Nẵng (`default`) | Nhiệt độ (2m) | **+0.4795** | **+0.5009** | **+0.4394** | **+0.4296** | Nhiệt độ cao kích hoạt phản ứng quang hóa ven biển |
 | Đà Nẵng (`default`) | Độ ẩm tương đối | -0.3898 | -0.4253 | -0.4345 | -0.3977 | Gió biển ẩm cao giúp không khí trong lành hơn |
-| Hà Nội (`quyen`) | Tốc độ gió (10m) | **-0.7246** | **-0.7541** | **-0.7638** | **-0.7872** | Tương quan nghịch rất mạnh trên tập mẫu 91 quan trắc |
+| Đà Nẵng (`default`) | Tốc độ gió (10m) | -0.1048 | +0.0072 | +0.0386 | -0.0139 | Biên độ gió ven biển có tính chất điều hòa |
+| Đà Nẵng (`default`) | Khí CO | **+0.4135** | +0.2907 | +0.3096 | **+0.3736** | Đồng biến tích cực mức nhẹ giữa các chất ô nhiễm |
+| Đà Nẵng (`default`) | Khí Ozone ($O_3$) | **+0.4636** | **+0.4475** | **+0.4110** | **+0.4337** | Ozone thứ cấp ven biển tương quan đồng thuận AQI |
+| Hà Nội (`quyen`) | Nhiệt độ (2m) | +0.0762 | **+0.5047** | **+0.6190** | **+0.6405** | Tương quan thứ hạng mạnh với AQI khi nắng kích hoạt |
+| Hà Nội (`quyen`) | Độ ẩm tương đối | +0.1743 | -0.0312 | -0.0674 | +0.0601 | Biến thiên nghịch pha nhiệt độ trong tập mẫu 91 bản ghi |
+| Hà Nội (`quyen`) | Tốc độ gió (10m) | **-0.7246** | **-0.7541** | **-0.7638** | **-0.7872** | **Tương quan nghịch rất mạnh:** Gió xua tan sol khí |
 | Hà Nội (`quyen`) | Khí CO | **+0.7270** | **+0.5242** | +0.1676 | +0.2569 | Khẳng định quy luật đồng phát thải giao thông/đốt |
+| Hà Nội (`quyen`) | Khí Ozone ($O_3$) | -0.2824 | -0.0325 | **+0.3528** | +0.2020 | Đóng góp trực tiếp vào AQI các khung giờ nắng |
+| TP.HCM (`quyen`) | Nhiệt độ (2m) | **-0.6066** | **-0.6788** | -0.0112 | +0.0037 | Nhiệt độ cao thường đi kèm đối lưu làm loãng ô nhiễm |
 | TP.HCM (`quyen`) | Độ ẩm tương đối | **+0.6308** | **+0.7105** | +0.0703 | +0.0416 | Thống nhất cao với kết luận của môi trường default |
-| Đà Nẵng (`quyen`) | Nhiệt độ (2m) | +0.5538 | +0.7136 | +0.5116 | +0.5617 | Tương quan nhiệt độ và AQI đồng pha ổn định |
+| TP.HCM (`quyen`) | Tốc độ gió (10m) | -0.4218 | -0.4795 | -0.0681 | -0.1382 | Gió đô thị nhẹ hạn chế phát tán ô nhiễm sol khí |
+| TP.HCM (`quyen`) | Khí CO | **+0.4989** | **+0.6337** | +0.1990 | +0.0639 | Tương quan đồng pha với nồng độ bụi giao thông |
+| TP.HCM (`quyen`) | Khí Ozone ($O_3$) | **-0.5353** | **-0.6258** | +0.1797 | +0.1820 | Hấp thụ và suy giảm quang hóa bởi hạt bụi |
+| Đà Nẵng (`quyen`) | Nhiệt độ (2m) | **+0.5538** | **+0.7136** | **+0.5116** | **+0.5617** | Khẳng định quy luật nhiệt độ - quang hóa ven biển |
+| Đà Nẵng (`quyen`) | Độ ẩm tương đối | **-0.4714** | **-0.6309** | **-0.4822** | **-0.4913** | Gió biển ẩm cao thanh lọc sol khí bề mặt |
+| Đà Nẵng (`quyen`) | Tốc độ gió (10m) | +0.0229 | +0.1992 | +0.1757 | +0.2212 | Gió đối lưu đất - biển dao động ổn định |
+| Đà Nẵng (`quyen`) | Khí CO | +0.2878 | +0.1409 | +0.2412 | +0.2799 | Nồng độ phát thải thấp không tạo liên hệ lớn |
+| Đà Nẵng (`quyen`) | Khí Ozone ($O_3$) | **+0.5158** | **+0.3948** | **+0.4539** | **+0.4652** | Bức xạ nhiệt đới ven biển kích hoạt chu trình quang hóa |
 
 ### 2.3. Tần suất và tỷ lệ phân bố theo 6 cấp độ chất lượng không khí chuẩn US EPA
 
@@ -122,14 +137,20 @@ Bảng tổng hợp các tham số thống kê mô tả: Trung bình (Mean), Tru
 | Hà Nội | Moderate (Trung bình) | 51 – 100 | 60 | 75.95% | 52 | 57.14% | Chiếm đa số các khung giờ quan trắc |
 | Hà Nội | Unhealthy for Sensitive | 101 – 150 | 6 | 7.59% | 14 | 15.38% | Nguy hại cho nhóm người nhạy cảm |
 | Hà Nội | Unhealthy (Xấu) | 151 – 200 | 13 | 16.46% | 25 | 27.47% | Thỏa ngưỡng báo động SNS (AQI ≥ 100) |
+| Hà Nội | Very Unhealthy (Rất xấu) | 201 – 300 | 0 | 0.00% | 0 | 0.00% | Chưa ghi nhận trong tập dữ liệu |
+| Hà Nội | Hazardous (Nguy hại) | 301 – 500 | 0 | 0.00% | 0 | 0.00% | Chưa ghi nhận trong tập dữ liệu |
 | TP.HCM | Good (Tốt) | 0 – 50 | 0 | 0.00% | 0 | 0.00% | Không có khung giờ nào đạt chuẩn Tốt |
 | TP.HCM | Moderate (Trung bình) | 51 – 100 | 27 | 34.18% | 40 | 43.96% | Xuất hiện chủ yếu vào ban đêm |
 | TP.HCM | Unhealthy for Sensitive | 101 – 150 | 48 | 60.76% | 47 | 51.65% | **Chiếm đa số áp đảo tại TP.HCM** |
 | TP.HCM | Unhealthy (Xấu) | 151 – 200 | 4 | 5.06% | 4 | 4.40% | Giờ cao điểm giao thông ban ngày |
+| TP.HCM | Very Unhealthy (Rất xấu) | 201 – 300 | 0 | 0.00% | 0 | 0.00% | Chưa ghi nhận trong tập dữ liệu |
+| TP.HCM | Hazardous (Nguy hại) | 301 – 500 | 0 | 0.00% | 0 | 0.00% | Chưa ghi nhận trong tập dữ liệu |
 | Đà Nẵng | Good (Tốt) | 0 – 50 | 19 | 24.05% | 31 | 34.07% | Đô thị có chất lượng không khí tốt nhất |
 | Đà Nẵng | Moderate (Trung bình) | 51 – 100 | 53 | 67.09% | 53 | 58.24% | Chiếm phần lớn thời gian trong tuần |
 | Đà Nẵng | Unhealthy for Sensitive | 101 – 150 | 4 | 5.06% | 4 | 4.40% | Rất hiếm khi xuất hiện |
 | Đà Nẵng | Unhealthy (Xấu) | 151 – 200 | 3 | 3.80% | 3 | 3.30% | Rất hiếm khi xuất hiện |
+| Đà Nẵng | Very Unhealthy (Rất xấu) | 201 – 300 | 0 | 0.00% | 0 | 0.00% | Chưa ghi nhận trong tập dữ liệu |
+| Đà Nẵng | Hazardous (Nguy hại) | 301 – 500 | 0 | 0.00% | 0 | 0.00% | Chưa ghi nhận trong tập dữ liệu |
 
 ### Vì sao kiểm tra theo cách này?
 
@@ -206,6 +227,17 @@ Chưa đổi lifecycle của raw sản xuất: thử nghiệm nhỏ này chưa c
 | Ngọc Quyên (`quyen`) | `registered_json` | 10.98 KB | 0.00% | 572.0 ms | 756.0 ms | 185.0 ms | $0.0000000562 | $0.0000524 |
 | Ngọc Quyên (`quyen`) | `projected_json` | 10.98 KB | 0.00% | 431.0 ms | 606.0 ms | 96.0 ms (-48.1%) | $0.0000000562 | $0.0000524 |
 | Ngọc Quyên (`quyen`) | `projected_parquet`| **0.38 KB** | **-96.50%** | 515.0 ms | 722.0 ms | 118.0 ms | **$0.0000000020** | $0.0000524 |
+
+##### Phân bổ kết quả và 3 trục đo theo 3 đô thị (Hà Nội, TP.HCM, Đà Nẵng)
+
+| Môi trường / Ngày đo | Đô thị (City) | Số mẫu (Samples) | US AQI trung bình | PM2.5 trung bình (µg/m³) | Data Scanned tương đương Parquet | Engine Time trung vị | Chi phí quét tương đương ($) |
+| --- | --- | :---: | ---: | ---: | ---: | ---: | ---: |
+| **Tiến Sơn (`default`)** (18/10) | Hà Nội | 1 | 87.00 | 23.20 | 100.7 B | 452.0 ms | $0.0000000005 |
+| **Tiến Sơn (`default`)** (18/10) | TP. Hồ Chí Minh | 1 | 66.00 | 9.80 | 100.7 B | 452.0 ms | $0.0000000005 |
+| **Tiến Sơn (`default`)** (18/10) | Đà Nẵng | 1 | 53.00 | 11.40 | 100.7 B | 452.0 ms | $0.0000000005 |
+| **Ngọc Quyên (`quyen`)** (16/10) | Hà Nội | 7 | 104.00 | 28.87 | 131.0 B | 515.0 ms | $0.0000000007 |
+| **Ngọc Quyên (`quyen`)** (16/10) | TP. Hồ Chí Minh | 7 | 131.14 | 26.04 | 131.0 B | 515.0 ms | $0.0000000007 |
+| **Ngọc Quyên (`quyen`)** (16/10) | Đà Nẵng | 7 | 74.29 | 25.43 | 131.0 B | 515.0 ms | $0.0000000007 |
 
 #### Cơ chế toán học và tối ưu I/O của Parquet & Partition Projection
 
@@ -317,6 +349,19 @@ Kiểm tra hồi quy thay đổi toàn bộ giá trị đích vẫn giữ nguyê
 | Đà Nẵng | PM2.5 | Persistence | 149h | 24h | 12.30 | 12.82 | +12.30 | Lệch dương lớn khi nền bụi giảm |
 | Đà Nẵng | PM2.5 | **Seasonal Naive (24h)**| 149h | 24h | **6.71** | **8.17** | +6.71 | **Nắm bắt tốt hơn chu kỳ ven biển** |
 | Đà Nẵng | PM2.5 | Moving Average (24h) | 149h | 24h | 6.78 | 7.26 | +6.21 | Tương đương Seasonal Naive |
+
+##### So sánh chuyên sâu: 3-Period Moving Average vs 24-Period Moving Average
+
+Để đối sánh mô hình trung bình trượt ngắn hạn (3-Period Moving Average) với mô hình chu kỳ ngày (24-Period Moving Average), nhóm đã tính toán sai số của 3-Period MA trên cùng 24 giờ giữ lại:
+
+| Đô thị | Chỉ số | 3-Period MA MAE | 3-Period MA RMSE | 3-Period MA MBE | 24-Period MA MAE | 24-Period MA RMSE | 24-Period MA MBE | Nhận xét so sánh |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| TP.HCM | US AQI | **6.30** | **6.83** | +6.30 | 25.78 | 25.85 | +25.78 | 3-Period MA giảm 75.6% MAE so với 24-Period MA |
+| TP.HCM | PM2.5 | **3.44** | **4.38** | +1.17 | 5.73 | 6.54 | +5.06 | 3-Period MA giảm 40.0% MAE |
+| Hà Nội | US AQI | **11.33** | 19.27 | -6.08 | 13.20 | **17.85** | -0.81 | 3-Period MA hội tụ nhanh về hằng số tiệm cận |
+| Hà Nội | PM2.5 | **4.17** | **5.45** | -3.08 | 7.53 | 8.63 | +7.52 | 3-Period MA giảm 44.6% MAE |
+| Đà Nẵng | US AQI | **5.63** | **6.35** | +5.63 | 12.60 | 12.86 | +12.60 | 3-Period MA giảm 55.3% MAE |
+| Đà Nẵng | PM2.5 | 11.60 | 12.17 | +11.60 | **6.78** | **7.26** | +6.21 | 24-Period MA tốt hơn trên chuỗi PM2.5 Đà Nẵng |
 
 ![Đánh giá AQI](../results/integration_2026_10_18/forecast/holdout_us_aqi.png)
 

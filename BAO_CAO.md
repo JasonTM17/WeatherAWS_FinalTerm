@@ -90,8 +90,10 @@ Số liệu được trích xuất trực tiếp từ các dòng nhật ký `REP
 | Chỉ số thực thi Lambda | Môi trường Nguyễn Tiến Sơn | Môi trường Trần Thị Ngọc Quyên | Đánh giá kỹ thuật |
 | --- | ---: | ---: | --- |
 | **Cấu hình Runtime & Kiến trúc** | Python 3.12 / x86_64 | Python 3.12 / x86_64 | Đồng nhất hash triển khai `qM/rfT...` |
-| **Dung lượng bộ nhớ cấu hình** | **256 MB** | **256 MB** | Đã nâng cấp từ mức 128 MB ban đầu |
-| **Bộ nhớ thực tế sử dụng (Mean / Peak)** | **100.7 MB / 102 MB** | **100.7 MB / 101 MB** | Tối đa chiếm 39.8% bộ nhớ cấp phát |
+| **Tổng số lượt gọi Lambda (Invocations)** | **35 lượt gọi** | **50 lượt gọi** | Tổng cộng 85 lượt gọi ghi nhận trên CloudWatch |
+| - Phân bổ Invocations theo ngày | 06/10 (8), 07/10 (4), 13/10 (8)<br>14/10 (5), 16/10 (6), 18/10 (4) | 07/10 (13), 13/10 (16)<br>14/10 (9), 16/10 (8), 18/10 (4) | Khớp chính xác metric `AWS/Lambda Invocations` |
+| **Dung lượng bộ nhớ cấu hình** | **256 MB** | **256 MB** | Nâng cấp từ mốc thiết kế ban đầu 128 MB |
+| **Bộ nhớ thực tế sử dụng (Mean / Peak)** | **100.7 MB / 102 MB** | **100.7 MB / 101 MB** | Chiếm 79.7% mức 128 MB; chiếm 39.8% mức 256 MB |
 | **Thời gian thực thi trung bình (Avg Duration)**| **2,207.67 ms** | **2,597.86 ms** | An toàn trước ngưỡng timeout 60s |
 | **Thời gian phân vị 95th (p95 Duration)** | **2,982.55 ms** | **2,977.57 ms** | Biên độ dao động phụ thuộc độ trễ mạng |
 | **Thời gian tính cước trung bình (Billed Duration)**| **2,653.36 ms** | **3,060.73 ms** | Làm tròn theo block 1 ms của AWS Lambda |
@@ -144,6 +146,8 @@ Mỗi cơ chế chạy 3 lượt lặp (trials), tắt bộ nhớ đệm kết q
 
 ### 2.2. Bảng so sánh tổng hợp 3 trục đo (Data Scanned, Execution Time, Query Cost)
 
+#### A. Tổng hợp 3 trục đo theo cơ chế lưu trữ và cấu hình bảng
+
 | Môi trường dữ liệu | Cơ chế lưu trữ & truy vấn | Data Scanned trung vị (KB) | Mức cắt giảm I/O (%) | Engine Time trung vị (ms) | Total Time trung vị (ms) | Planning Time trung vị (ms) | Chi phí quét lý thuyết / query | Chi phí tính cước Athena sàn 10MB |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | **Tiến Sơn (default)** | `registered_json` | 1.52 KB | Mốc cơ sở (0%) | 615.0 ms | 799.0 ms | 234.0 ms | $0.0000000078 | $0.0000524 |
@@ -152,6 +156,21 @@ Mỗi cơ chế chạy 3 lượt lặp (trials), tắt bộ nhớ đệm kết q
 | **Ngọc Quyên (quyen)**| `registered_json` | 10.98 KB | Mốc cơ sở (0%) | 572.0 ms | 756.0 ms | 185.0 ms | $0.0000000562 | $0.0000524 |
 | **Ngọc Quyên (quyen)**| `projected_json` | 10.98 KB | 0.00% | 431.0 ms | 606.0 ms | 96.0 ms (-48.1%) | $0.0000000562 | $0.0000524 |
 | **Ngọc Quyên (quyen)**| `projected_parquet`| **0.38 KB** | **-96.50%** | 515.0 ms | 722.0 ms | 118.0 ms | **$0.0000000020** | $0.0000524 |
+
+#### B. Kết quả truy vấn tổng hợp và phân bổ 3 trục đo theo 3 đô thị (Hà Nội, TP.HCM, Đà Nẵng)
+
+Truy vấn benchmark thực hiện gom nhóm đồng thời cả 3 đô thị trong một lần quét phân vùng. Dưới đây là bảng số liệu chi tiết đầu ra và phân bổ tương đương trên 3 trục đo cho từng đô thị:
+
+| Môi trường / Ngày đo | Đô thị (City) | Số mẫu (Samples) | US AQI trung bình (Mean) | PM2.5 trung bình (µg/m³) | Data Scanned tương đương Parquet (Byte) | Engine Time trung vị (ms) | Chi phí quét lý thuyết tương đương ($) |
+| --- | --- | :---: | ---: | ---: | ---: | ---: | ---: |
+| **Tiến Sơn (`default`)**<br>2026-10-18 (3 bản ghi) | **Hà Nội** | 1 | 87.00 | 23.20 | 100.7 B | 452.0 ms | $0.0000000005 |
+| **Tiến Sơn (`default`)**<br>2026-10-18 (3 bản ghi) | **TP. Hồ Chí Minh** | 1 | 66.00 | 9.80 | 100.7 B | 452.0 ms | $0.0000000005 |
+| **Tiến Sơn (`default`)**<br>2026-10-18 (3 bản ghi) | **Đà Nẵng** | 1 | 53.00 | 11.40 | 100.7 B | 452.0 ms | $0.0000000005 |
+| **Ngọc Quyên (`quyen`)**<br>2026-10-16 (21 bản ghi) | **Hà Nội** | 7 | 104.00 | 28.87 | 131.0 B | 515.0 ms | $0.0000000007 |
+| **Ngọc Quyên (`quyen`)**<br>2026-10-16 (21 bản ghi) | **TP. Hồ Chí Minh** | 7 | 131.14 | 26.04 | 131.0 B | 515.0 ms | $0.0000000007 |
+| **Ngọc Quyên (`quyen`)**<br>2026-10-16 (21 bản ghi) | **Đà Nẵng** | 7 | 74.29 | 25.43 | 131.0 B | 515.0 ms | $0.0000000007 |
+
+*Nhận xét cơ chế gom nhóm đa đô thị:* Trong thiết kế Data Lake, dữ liệu của cả 3 đô thị cùng ngày được ghi trong cùng một partition S3. Việc gom nhóm `GROUP BY city` cho phép Athena tính toán chỉ số cho toàn bộ 3 thành phố chỉ trong một lần phát lệnh truy vấn, triệt tiêu chi phí khởi động Presto nhiều lần và tối ưu hóa tối đa lượng byte quét truyền qua mạng.
 
 ### 2.3. Giải thích toán học và nguyên lý tối ưu I/O
 
@@ -245,12 +264,27 @@ Mối liên hệ giữa các biến khí tượng với nồng độ bụi mịn
 | **TP.HCM (`default`)** | Độ ẩm tương đối | **+0.6649** | **+0.7374** | +0.1274 | +0.1647 | Độ ẩm cao cản trở khuếch tán thẳng đứng và làm hạt bụi ngậm nước nở to |
 | **TP.HCM (`default`)** | Tốc độ gió (10m) | -0.3464 | -0.3744 | -0.0097 | -0.0241 | Gió đô thị yếu (trung bình 4.45 km/h) hạn chế phát tán ô nhiễm |
 | **TP.HCM (`default`)** | Khí CO | **+0.4617** | **+0.6318** | +0.2738 | +0.1555 | Nồng độ CO rất cao tại TP.HCM (trung bình 1,326 µg/m³) đồng pha PM2.5 |
+| **TP.HCM (`default`)** | Khí Ozone ($O_3$) | **-0.5534** | **-0.6691** | +0.1352 | +0.0856 | Tương quan nghịch với bụi do cạnh tranh sol khí phân tán bức xạ |
 | **Đà Nẵng (`default`)** | Nhiệt độ (2m) | **+0.4795** | **+0.5009** | **+0.4394** | **+0.4296** | Nắng nóng ven biển thúc đẩy quang hóa ô nhiễm thứ cấp |
 | **Đà Nẵng (`default`)** | Độ ẩm tương đối | -0.3898 | -0.4253 | -0.4345 | -0.3977 | Gió biển kèm ẩm cao giúp không khí trong lành hơn |
-| **Hà Nội (`quyen`)** | Tốc độ gió (10m) | **-0.7246** | **-0.7541** | **-0.7638** | **-0.7872** | Tương quan nghịch cực kỳ chặt chẽ trên tập mẫu mở rộng 91 quan trắc |
+| **Đà Nẵng (`default`)** | Tốc độ gió (10m) | -0.1048 | +0.0072 | +0.0386 | -0.0139 | Tốc độ gió ven biển có biên độ điều hòa ổn định |
+| **Đà Nẵng (`default`)** | Khí CO | **+0.4135** | +0.2907 | +0.3096 | **+0.3736** | Đồng biến tích cực ở mức độ nhẹ giữa các nguồn phát thải |
+| **Đà Nẵng (`default`)** | Khí Ozone ($O_3$) | **+0.4636** | **+0.4475** | **+0.4110** | **+0.4337** | Ozone thứ cấp ven biển tương quan đồng thuận với chỉ số ô nhiễm |
+| **Hà Nội (`quyen`)** | Nhiệt độ (2m) | +0.0762 | **+0.5047** | **+0.6190** | **+0.6405** | Tương quan thứ hạng mạnh với AQI khi nhiệt độ kích hoạt quang hóa |
+| **Hà Nội (`quyen`)** | Độ ẩm tương đối | +0.1743 | -0.0312 | -0.0674 | +0.0601 | Biến thiên nghịch pha nhiệt độ trong tập quan trắc mở rộng |
+| **Hà Nội (`quyen`)** | Tốc độ gió (10m) | **-0.7246** | **-0.7541** | **-0.7638** | **-0.7872** | **Tương quan nghịch cực mạnh:** Gió giải tỏa ô nhiễm sol khí |
 | **Hà Nội (`quyen`)** | Khí CO | **+0.7270** | **+0.5242** | +0.1676 | +0.2569 | Mối liên hệ phát thải đốt than/xăng dầu đô thị thể hiện rõ rệt |
+| **Hà Nội (`quyen`)** | Khí Ozone ($O_3$) | -0.2824 | -0.0325 | **+0.3528** | +0.2020 | Đóng góp vào chỉ số tổng hợp AQI trong các khung giờ trưa chiều |
+| **TP.HCM (`quyen`)** | Nhiệt độ (2m) | **-0.6066** | **-0.6788** | -0.0112 | +0.0037 | Nhiệt độ cao thường đi kèm đối lưu mạnh phân tán bụi bề mặt |
 | **TP.HCM (`quyen`)** | Độ ẩm tương đối | **+0.6308** | **+0.7105** | +0.0703 | +0.0416 | Tương quan đồng thuận cao với kết quả quan sát của môi trường default |
+| **TP.HCM (`quyen`)** | Tốc độ gió (10m) | -0.4218 | -0.4795 | -0.0681 | -0.1382 | Tương quan nghịch vừa phải với nồng độ bụi sol khí |
+| **TP.HCM (`quyen`)** | Khí CO | **+0.4989** | **+0.6337** | +0.1990 | +0.0639 | Tương quan đồng pha ổn định giữa phát thải giao thông và PM2.5 |
+| **TP.HCM (`quyen`)** | Khí Ozone ($O_3$) | **-0.5353** | **-0.6258** | +0.1797 | +0.1820 | Hiện tượng hấp thụ/phân hủy Ozone bởi sol khí hạt mịn |
 | **Đà Nẵng (`quyen`)** | Nhiệt độ (2m) | **+0.5538** | **+0.7136** | **+0.5116** | **+0.5617** | Khẳng định quy luật nhiệt độ - quang hóa đối lưu ven biển miền Trung |
+| **Đà Nẵng (`quyen`)** | Độ ẩm tương đối | **-0.4714** | **-0.6309** | **-0.4822** | **-0.4913** | Gió biển kèm ẩm cao làm giảm tích tụ bụi và thanh lọc không khí |
+| **Đà Nẵng (`quyen`)** | Tốc độ gió (10m) | +0.0229 | +0.1992 | +0.1757 | +0.2212 | Gió đối lưu tuần hoàn đất - biển ổn định |
+| **Đà Nẵng (`quyen`)** | Khí CO | +0.2878 | +0.1409 | +0.2412 | +0.2799 | Nồng độ phát thải thấp không tạo liên hệ tuyến tính vượt trội |
+| **Đà Nẵng (`quyen`)** | Khí Ozone ($O_3$) | **+0.5158** | **+0.3948** | **+0.4539** | **+0.4652** | Bức xạ nhiệt đới ven biển kích hoạt chu trình quang hóa Ozone |
 
 ### 3.3. Tần suất và tỷ lệ phân bố theo 6 cấp độ chất lượng không khí chuẩn US EPA
 
@@ -266,10 +300,14 @@ Mối liên hệ giữa các biến khí tượng với nồng độ bụi mịn
 | **TP.HCM** | **Moderate (Trung bình)** | 51 – 100 | 27 mẫu | 34.18% | 40 mẫu | 43.96% | Phân bố ở các khung giờ đêm muộn |
 | **TP.HCM** | **Unhealthy for Sensitive (Kém)** | 101 – 150 | 48 mẫu | **60.76%** | 47 mẫu | **51.65%** | **Chiếm đa số tuyệt đối tại TP.HCM** |
 | **TP.HCM** | **Unhealthy (Xấu)** | 151 – 200 | 4 mẫu | 5.06% | 4 mẫu | 4.40% | Giờ cao điểm kẹt xe và nghịch nhiệt |
+| **TP.HCM** | **Very Unhealthy (Rất xấu)** | 201 – 300 | 0 mẫu | 0.00% | 0 mẫu | 0.00% | Chưa ghi nhận trong tập dữ liệu |
+| **TP.HCM** | **Hazardous (Nguy hại)** | 301 – 500 | 0 mẫu | 0.00% | 0 mẫu | 0.00% | Chưa ghi nhận trong tập dữ liệu |
 | **Đà Nẵng** | **Good (Tốt)** | 0 – 50 | 19 mẫu | **24.05%** | 31 mẫu | **34.07%** | Đô thị biển có chất lượng tốt nhất |
 | **Đà Nẵng** | **Moderate (Trung bình)** | 51 – 100 | 53 mẫu | **67.09%** | 53 mẫu | **58.24%** | Chiếm tỷ trọng áp đảo tại Đà Nẵng |
 | **Đà Nẵng** | **Unhealthy for Sensitive (Kém)** | 101 – 150 | 4 mẫu | 5.06% | 4 mẫu | 4.40% | Rất hiếm khi xuất hiện |
 | **Đà Nẵng** | **Unhealthy (Xấu)** | 151 – 200 | 3 mẫu | 3.80% | 3 mẫu | 3.30% | Rất hiếm khi xuất hiện |
+| **Đà Nẵng** | **Very Unhealthy (Rất xấu)** | 201 – 300 | 0 mẫu | 0.00% | 0 mẫu | 0.00% | Chưa ghi nhận trong tập dữ liệu |
+| **Đà Nẵng** | **Hazardous (Nguy hại)** | 301 – 500 | 0 mẫu | 0.00% | 0 mẫu | 0.00% | Chưa ghi nhận trong tập dữ liệu |
 
 ---
 
@@ -313,7 +351,22 @@ Công thức tính sai số:
 | **Đà Nẵng** | **PM2.5** | **Seasonal Naive (24h)**| 149h | 24h | **6.71** | **8.17** | +6.71 | **Nắm bắt tốt hơn chu kỳ ven biển** |
 | **Đà Nẵng** | **PM2.5** | Moving Average (24h) | 149h | 24h | 6.78 | 7.26 | +6.21 | Tương đương Seasonal Naive |
 
-*Kết luận thực nghiệm:* Mô hình Trung bình trượt (Moving Average) **không giành chiến thắng** ở bất kỳ trường hợp nào trong 6 bài toán dự báo. Điều này chứng minh không thể áp dụng máy móc mô hình trượt phức tạp vào cảnh báo thời gian thực; thay vào đó, việc kết hợp giữa **Persistence** (cho ngắn hạn 1–3h) và **Seasonal 24h** (cho chu kỳ ngày đêm) đem lại độ chính xác cao nhất.
+### 4.3. Đối sánh chuyên sâu: 3-Period Moving Average vs 24-Period Moving Average
+
+Để làm rõ yêu cầu khảo sát cơ chế trung bình trượt ngắn hạn (3-Period Moving Average) so với cửa sổ chu kỳ ngày (24-Period Moving Average), nhóm đã thực hiện tính toán độc lập sai số của mô hình trung bình trượt 3 bước đệ quy trên cùng 24 giờ giữ lại:
+
+| Đô thị | Chỉ số | 3-Period MA MAE | 3-Period MA RMSE | 3-Period MA MBE | 24-Period MA MAE | 24-Period MA RMSE | 24-Period MA MBE | So sánh hiệu năng 3-Period vs 24-Period MA |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| **TP.HCM** | **US AQI** | **6.30** | **6.83** | +6.30 | 25.78 | 25.85 | +25.78 | **3-Period vượt trội:** Giảm 75.6% MAE so với 24-Period MA |
+| **TP.HCM** | **PM2.5** | **3.44** | **4.38** | +1.17 | 5.73 | 6.54 | +5.06 | **3-Period vượt trội:** Giảm 40.0% MAE nhờ bám sát xu hướng ngắn hạn |
+| **Hà Nội** | **US AQI** | **11.33** | 19.27 | -6.08 | 13.20 | **17.85** | -0.81 | 3-Period phản ứng nhanh hơn nhưng hội tụ nhanh về tiệm cận |
+| **Hà Nội** | **PM2.5** | **4.17** | **5.45** | -3.08 | 7.53 | 8.63 | +7.52 | **3-Period vượt trội:** Giảm 44.6% MAE, sai số sát ngưỡng Persistence |
+| **Đà Nẵng** | **US AQI** | **5.63** | **6.35** | +5.63 | 12.60 | 12.86 | +12.60 | **3-Period vượt trội:** Giảm 55.3% MAE do khử độ trễ pha dài hạn |
+| **Đà Nẵng** | **PM2.5** | 11.60 | 12.17 | +11.60 | **6.78** | **7.26** | +6.21 | 24-Period MA tốt hơn do chuỗi PM2.5 Đà Nẵng có độ lệch nền |
+
+*Đánh giá bản chất kỹ thuật:* Cửa sổ trượt ngắn 3 giờ (3-Period MA) giúp giảm độ trễ tín hiệu (phase lag) rất lớn so với cửa sổ 24 giờ (24-Period MA), giúp MAE giảm từ 40% đến 75% ở hầu hết các kịch bản. Tuy nhiên, khi dự báo đa bước đệ quy (multi-step autoregression) ra 24 giờ, 3-Period MA nhanh chóng hội tụ về một hằng số sau 3 bước đầu tiên, tiệm cận hành vi của mô hình Persistence. Vì vậy, **Seasonal Naive 24h** vẫn là mô hình duy nhất tái lập được nhịp điệu sinh hoạt và biến thiên khí tượng ngày-đêm tại các đô thị có biên độ dao động mạnh như Hà Nội.
+
+*Kết luận thực nghiệm:* Không thể áp dụng máy móc mô hình trung bình trượt vào cảnh báo thời gian thực; thay vào đó, việc kết hợp giữa **Persistence** (cho ngắn hạn 1–3h) và **Seasonal 24h** (cho chu kỳ ngày đêm) đem lại độ chính xác và tin cậy cao nhất.
 
 ---
 
@@ -329,6 +382,8 @@ Nhóm đã thiết lập và kiểm chứng thực tế 2 bộ lọc Metric Filt
 | `Week3CollectionErrorLines` | `"[ERROR]"` | `ErrorLogLines` | `WeatherAWS/Collection` | Count | 1 | **ACTIVE & VERIFIED** trên cả 2 tài khoản |
 
 *Kiểm chứng sau sửa lỗi cấu hình JSON:* Tại lượt chạy tự động `13:51:04 UTC+7 ngày 18/10` của sinh viên Ngọc Quyên, CloudWatch Metric Filter ghi nhận ngay lập tức điểm dữ liệu `ResultLogLines = 1` tại thời điểm `06:51 UTC`, đồng thời `ErrorLogLines` không phát sinh sự kiện nào (`null`, không bị gán ép 0).
+
+*Lưu ý về phạm vi quyền hạn trong AWS Academy Learner Lab:* Trong môi trường phòng lab học phần, vai trò IAM `LabRole` bị kiểm soát bởi chính sách `arn:aws:iam::<Account>:policy/voc-cancel-cred`, khiến một số lệnh tra cứu siêu dữ liệu chỉ đọc như `DescribeMetricFilters`, `DescribeAlarms` và `GetDashboard` trả về `AccessDeniedException` khi phiên làm việc bị hạn chế. Tuy nhiên, toàn bộ cấu hình Metric Filters và Dashboard đã được triển khai, kiểm thử khớp mẫu (pattern testing: 2/2 mẫu match cho Result và 1/1 cho ERROR) và ghi nhận trạng thái nguyên vẹn tại [configuration.json](tuan_3/results/operations_2026_10_18/filters/default/configuration.json) cùng chuỗi quan trắc [log_metrics.csv](tuan_3/results/post_repair_2026_10_18/filter_observation/quyen/log_metrics.csv).
 
 ### 5.2. CloudWatch Dashboard và Alarm trạng thái
 

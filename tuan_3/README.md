@@ -50,18 +50,26 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 | **Đà Nẵng**| Tiến Sơn (`default`) | 79 | 69.18 ± 26.68 | 13.88 ± 8.73 | 28.09 °C | 78.41 % | 8.19 km/h | **8.86%** (7/79) |
 | **Đà Nẵng**| Ngọc Quyên (`quyen`) | 91 | 64.34 ± 27.59 | 12.79 ± 9.06 | 27.97 °C | 78.96 % | 7.74 km/h | **7.69%** (7/91) |
 
-### Ma trận tương quan giữa khí tượng và ô nhiễm (Pearson r & Spearman rho)
+#### Ma trận tương quan giữa khí tượng và ô nhiễm (Pearson r & Spearman rho)
 
-| Đô thị | Yếu tố khí tượng | Tương quan với PM2.5 (Pearson / Spearman) | Tương quan với US AQI (Pearson / Spearman) | Đánh giá hiện tượng môi trường |
-| --- | --- | :---: | :---: | --- |
-| **Hà Nội** | Tốc độ gió (10m) | **-0.6564 / -0.6908** | **-0.5679 / -0.5546** | Gió mạnh giúp phát tán và giải phóng sol khí ô nhiễm |
-| **Hà Nội** | Khí CO | **+0.6057 / +0.4882** | +0.1568 / +0.0138 | Đồng phát thải từ phương tiện giao thông và nhiên liệu đốt |
-| **TP.HCM** | Độ ẩm tương đối | **+0.6649 / +0.7374** | +0.1274 / +0.1647 | Độ ẩm cao cản trở đối lưu, làm hạt bụi trương nở ngậm nước |
-| **TP.HCM** | Nhiệt độ (2m) | **-0.6495 / -0.7209** | -0.0686 / -0.1642 | Mưa rào nhiệt đới làm giảm nhiệt độ và rửa trôi bụi bề mặt |
-| **Đà Nẵng**| Nhiệt độ (2m) | **+0.4795 / +0.5009** | **+0.4394 / +0.4296** | Nắng nóng thúc đẩy phản ứng quang hóa Ozone ven biển |
+| Đô thị / Môi trường | Yếu tố khí tượng | Pearson $r$ với PM2.5 | Spearman $\rho$ với PM2.5 | Pearson $r$ với US AQI | Spearman $\rho$ với US AQI | Đánh giá hiện tượng môi trường |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| **Hà Nội (`default`)** | Tốc độ gió (10m) | **-0.6564** | **-0.6908** | **-0.5679** | **-0.5546** | Gió mạnh giúp xáo trộn khí quyển, giải tán bụi mịn |
+| **Hà Nội (`default`)** | Khí CO | **+0.6057** | **+0.4882** | +0.1568 | +0.0138 | Đồng phát thải từ phương tiện giao thông và đốt nhiên liệu |
+| **Hà Nội (`default`)** | Nhiệt độ (2m) | +0.2119 | +0.3483 | **+0.6303** | **+0.6670** | Nhiệt độ ban ngày kích hoạt quang hóa Ozone và AQI |
+| **TP.HCM (`default`)** | Độ ẩm tương đối | **+0.6649** | **+0.7374** | +0.1274 | +0.1647 | Độ ẩm cao cản trở đối lưu, làm hạt bụi trương nở ngậm nước |
+| **TP.HCM (`default`)** | Nhiệt độ (2m) | **-0.6495** | **-0.7209** | -0.0686 | -0.1642 | Mưa rào nhiệt đới làm giảm nhiệt độ và rửa trôi bụi bề mặt |
+| **TP.HCM (`default`)** | Khí Ozone ($O_3$) | **-0.5534** | **-0.6691** | +0.1352 | +0.0856 | Tương quan nghịch với bụi do cạnh tranh bức xạ |
+| **Đà Nẵng (`default`)** | Nhiệt độ (2m) | **+0.4795** | **+0.5009** | **+0.4394** | **+0.4296** | Nắng nóng thúc đẩy phản ứng quang hóa Ozone ven biển |
+| **Đà Nẵng (`default`)** | Độ ẩm tương đối | -0.3898 | -0.4253 | -0.4345 | -0.3977 | Gió biển ẩm cao giúp không khí trong lành hơn |
+| **Hà Nội (`quyen`)** | Tốc độ gió (10m) | **-0.7246** | **-0.7541** | **-0.7638** | **-0.7872** | Tương quan nghịch cực kỳ chặt chẽ trên tập mẫu mở rộng 91 quan trắc |
+| **Hà Nội (`quyen`)** | Khí CO | **+0.7270** | **+0.5242** | +0.1676 | +0.2569 | Khẳng định quy luật đồng phát thải khí đốt đô thị |
+| **TP.HCM (`quyen`)** | Độ ẩm tương đối | **+0.6308** | **+0.7105** | +0.0703 | +0.0416 | Thống nhất cao với kết luận của môi trường default |
+| **Đà Nẵng (`quyen`)** | Nhiệt độ (2m) | **+0.5538** | **+0.7136** | **+0.5116** | **+0.5617** | Khẳng định quy luật nhiệt độ - quang hóa đối lưu ven biển |
+
+*(Bảng đầy đủ 30 phép đo tương quan 5 biến x 3 đô thị x 2 môi trường được trình bày chi tiết tại [FINAL_REPORT.md](docs/FINAL_REPORT.md)).*
 
 ### Truy vấn Athena trên cùng dữ liệu
-
 
 | Cấu hình truy vấn Athena | Scanned trung vị Tiến Sơn | Scanned trung vị Ngọc Quyên | Engine Time trung vị Tiến Sơn | Engine Time trung vị Ngọc Quyên | Mức giảm Scanned Bytes | Chi phí quét lý thuyết / query |
 | --- | ---: | ---: | ---: | ---: | :---: | ---: |
@@ -69,6 +77,13 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 | **NDJSON (Partition Projection)**| 1.52 KB | 10.98 KB | 537 ms | 431 ms | 0.00% (Giảm 48-66% Planning ms) | $0.00000001 – $0.00000006 |
 | **Parquet Snappy (Projection)** | **0.29 KB** | **0.38 KB** | **452 ms** | **515 ms** | **Giảm 80.59% – 96.50%** | **$0.0000000015 – $0.0000000020** |
 
+#### Kết quả truy vấn tổng hợp 3 đô thị (Hà Nội, TP.HCM, Đà Nẵng)
+
+| Đô thị | Môi trường đo | Số mẫu (N) | US AQI trung bình | PM2.5 trung bình (µg/m³) | Data Scanned Parquet tương đương |
+| --- | --- | :---: | ---: | ---: | ---: |
+| **Hà Nội** | Tiến Sơn (18/10) / Quyên (16/10) | 1 / 7 | 87.00 / 104.00 | 23.20 / 28.87 | 100.7 B / 131.0 B |
+| **TP. Hồ Chí Minh** | Tiến Sơn (18/10) / Quyên (16/10) | 1 / 7 | 66.00 / 131.14 | 9.80 / 26.04 | 100.7 B / 131.0 B |
+| **Đà Nẵng** | Tiến Sơn (18/10) / Quyên (16/10) | 1 / 7 | 53.00 / 74.29 | 11.40 / 25.43 | 100.7 B / 131.0 B |
 
 ![Lượng byte được Athena quét](results/integration_2026_10_18/benchmark_scan.png)
 
@@ -90,17 +105,16 @@ Metric còn điểm bất thường: tổng Errors cao hơn Invocations trong c�
 
 *Dữ liệu mô hình Open-Meteo/CAMS; đường thực tế trong phép đánh giá là giá trị mô hình được giữ lại, không phải số đo trạm. Phương pháp trung bình trượt không thắng các phương pháp cơ sở ở mọi trường hợp. [Sai số đầy đủ](results/integration_2026_10_18/forecast/forecast_metrics.csv) · [Giá trị từng giờ](results/integration_2026_10_18/forecast/holdout_predictions.csv).*
 
+#### Đánh giá sai số các mô hình dự báo trên 24 giờ giữ lại (Holdout Errors)
 
-#### Đánh giá sai số 3 mô hình dự báo trên 24 giờ giữ lại (Holdout Errors)
-
-| Đô thị | Biến số | Mô hình tối ưu nhất | MAE tối ưu | RMSE tối ưu | MBE (Bias) | Mô hình xếp sau (MAE) | Nhận xét độ tin cậy |
-| --- | --- | --- | ---: | ---: | ---: | --- | --- |
-| **TP.HCM** | **US AQI** | **Persistence** | **6.13** | **6.67** | +6.13 | Moving Avg (25.78), Seasonal (34.50) | AQI TP.HCM biến thiên chậm; Persistence tối ưu |
-| **TP.HCM** | **PM2.5** | **Persistence** | **3.27** | **4.23** | -0.58 | Seasonal (4.88), Moving Avg (5.73) | Bám sát giá trị quan trắc thực tế |
-| **Hà Nội** | **US AQI** | **Seasonal Naive (24h)**| **5.29** | **6.23** | +2.96 | Persistence (11.33), Moving Avg (13.20)| Bắt trúng chu kỳ ngày đêm đặc trưng tại Hà Nội |
-| **Hà Nội** | **PM2.5** | **Persistence** | **4.02** | **5.31** | -2.81 | Seasonal (7.26), Moving Avg (7.53) | Tốt trong các giờ ổn định khí quyển |
-| **Đà Nẵng** | **US AQI** | **Persistence** | **5.46** | **6.20** | +5.46 | Moving Avg (12.60), Seasonal (16.58) | Nền không khí ổn định tại đô thị biển |
-| **Đà Nẵng** | **PM2.5** | **Seasonal Naive (24h)**| **6.71** | **8.17** | +6.71 | Moving Avg (6.78), Persistence (12.30) | Nắm bắt tốt chu kỳ tuần hoàn gió đất - gió biển |
+| Đô thị | Biến số | Mô hình tối ưu nhất | MAE tối ưu | RMSE tối ưu | MBE (Bias) | Mô hình trượt ngắn (3-Period MA MAE) | Mô hình trượt ngày (24-Period MA MAE) | Nhận xét độ tin cậy |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
+| **TP.HCM** | **US AQI** | **Persistence** | **6.13** | **6.67** | +6.13 | 6.30 | 25.78 | AQI TP.HCM biến thiên chậm; Persistence tối ưu |
+| **TP.HCM** | **PM2.5** | **Persistence** | **3.27** | **4.23** | -0.58 | 3.44 | 5.73 | Bám sát giá trị quan trắc thực tế |
+| **Hà Nội** | **US AQI** | **Seasonal Naive (24h)**| **5.29** | **6.23** | +2.96 | 11.33 | 13.20 | Bắt trúng chu kỳ ngày đêm đặc trưng tại Hà Nội |
+| **Hà Nội** | **PM2.5** | **Persistence** | **4.02** | **5.31** | -2.81 | 4.17 | 7.53 | Tốt trong các giờ ổn định khí quyển |
+| **Đà Nẵng** | **US AQI** | **Persistence** | **5.46** | **6.20** | +5.46 | 5.63 | 12.60 | Nền không khí ổn định tại đô thị biển |
+| **Đà Nẵng** | **PM2.5** | **Seasonal Naive (24h)**| **6.71** | **8.17** | +6.71 | 11.60 | 6.78 | Nắm bắt tốt chu kỳ tuần hoàn gió đất - gió biển |
 
 
 ## Mã nguồn và kiểm tra
