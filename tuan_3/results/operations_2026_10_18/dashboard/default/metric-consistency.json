@@ -1,0 +1,9 @@
+{
+  "lambda_sums": {
+    "Invocations": 1.0,
+    "Errors": 69.0
+  },
+  "error_rate_status": "INCONSISTENT_COUNTS",
+  "error_rate_percent": null,
+  "limitation": "Missing metrics are not zero; inconsistent counters cannot establish an error rate or root cause"
+}

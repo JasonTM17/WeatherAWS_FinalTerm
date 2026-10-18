@@ -1,0 +1,52 @@
+{
+  "student": "Sinh viên Tiến Sơn",
+  "configured_at": "2026-10-18T06:02:42.015585+00:00",
+  "configuration_verified": true,
+  "created_filters": [
+    "Week3CollectionResultLines",
+    "Week3CollectionErrorLines"
+  ],
+  "definitions": [
+    {
+      "filterName": "Week3CollectionResultLines",
+      "filterPattern": "\"Result:\"",
+      "metricTransformations": [
+        {
+          "metricName": "ResultLogLines",
+          "metricNamespace": "WeatherAWS/Collection",
+          "metricValue": "1",
+          "unit": "Count"
+        }
+      ]
+    },
+    {
+      "filterName": "Week3CollectionErrorLines",
+      "filterPattern": "\"[ERROR]\"",
+      "metricTransformations": [
+        {
+          "metricName": "ErrorLogLines",
+          "metricNamespace": "WeatherAWS/Collection",
+          "metricValue": "1",
+          "unit": "Count"
+        }
+      ]
+    }
+  ],
+  "pattern_tests": [
+    {
+      "filter": "Week3CollectionResultLines",
+      "expected_matches": 2,
+      "observed_matches": 2,
+      "status": "PASS"
+    },
+    {
+      "filter": "Week3CollectionErrorLines",
+      "expected_matches": 1,
+      "observed_matches": 1,
+      "status": "PASS"
+    }
+  ],
+  "synthetic_events_ingested": false,
+  "lambda_invoked": false,
+  "semantics": "Counts matching new log lines, not failed invocations or independent samples; no historical backfill and no missing-to-zero fill"
+}

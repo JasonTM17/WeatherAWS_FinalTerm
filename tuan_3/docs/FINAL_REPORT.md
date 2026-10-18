@@ -72,6 +72,17 @@ Nguồn từng lần đo, QueryExecutionId, truy vấn SQL và cấu hình: [sin
 
 Chưa đổi lifecycle của raw sản xuất: thử nghiệm nhỏ này chưa cung cấp lịch truy cập dài hạn, yêu cầu lưu giữ hay số đo chi phí phù hợp để lựa chọn tầng lưu trữ. Chính sách vòng đời cần được quyết định sau khi có các đầu vào đó và dự toán phí chuyển tầng/khôi phục.
 
+### 3.3. Kích thước object và đánh giá lifecycle
+
+| Báo cáo dữ liệu | Số object mỗi định dạng | Tổng NDJSON (byte) | Tổng Parquet (byte) | Object lớn nhất trong hai định dạng (byte) |
+| --- | ---: | ---: | ---: | ---: |
+| Sinh viên Tiến Sơn | 9 | 123.172 | 75.947 | 37.393 |
+| Sinh viên Ngọc Quyên | 8 | 141.734 | 69.721 | 37.321 |
+
+Nguồn: [inventory sinh viên Tiến Sơn](../results/integration_2026_10_18/benchmark/default/storage_inventory.csv), [inventory sinh viên Ngọc Quyên](../results/integration_2026_10_18/benchmark/quyen/storage_inventory.csv). Đây là object thử nghiệm cùng 20 cột nội dung, không phải tổng dung lượng toàn bộ bucket sản xuất. Mọi object trong cả hai tập đều nhỏ hơn 128 KiB.
+
+Theo [điều kiện chuyển tầng S3 Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html), cấu hình mới mặc định không chuyển các object dưới 128 KB; phí yêu cầu chuyển tầng có thể vượt lợi ích lưu trữ với object nhỏ. Glacier Flexible Retrieval còn cần khôi phục trước khi đọc và có thời hạn lưu tối thiểu. Vì vậy chưa áp dụng chuyển tầng cho raw đang được Athena đọc thường xuyên. Cần đánh giá gộp object, thời gian lưu và tần suất truy cập trước; chưa có căn cứ báo một khoản tiền tiết kiệm cụ thể.
+
 ## 4. Dashboard và cảnh báo email
 
 [dashboard.py](../scripts/dashboard.py) tạo Dashboard riêng `WeatherAirQuality-Week3`, sao lưu cấu hình cũ cục bộ, kiểm tra thông báo hợp lệ từ PutDashboard rồi đọc lại GetDashboard để so toàn bộ nội dung. Hai môi trường đều đọc lại khớp và không có thông báo validation.
@@ -93,6 +104,14 @@ Dashboard gồm số lần gọi/lỗi/throttles Lambda, thời gian thực thi,
 **Điểm còn phải đối chiếu:** các tổng metric trong [mốc giám sát bổ sung](../results/monitoring_2026_10_18/) là Errors 69/Invocations 1 với sinh viên Tiến Sơn và Errors 71/Invocations 1 với sinh viên Ngọc Quyên. Không tính tỷ lệ lỗi cho toàn cửa sổ từ các tổng không nhất quán này, không chuyển số thiếu thành 0, chưa xác định nguyên nhân. Dashboard đã được cập nhật và đọc lại thành công để bỏ các điểm có mẫu số không hợp lệ hoặc Errors vượt Invocations. Bộ metric này chưa đủ cho kết luận vận hành ổn định.
 
 Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `WeatherCollectionHourlyRule` dư trong môi trường sinh viên Ngọc Quyên đã được tắt ở đợt trước. Snapshot ngày 18/10 tiếp tục kiểm tra rule/target. Log 24 giờ có ít lượt thành công như bảng mục 2; chưa đủ chứng minh chạy liên tục 24–48 giờ trong Learner Lab.
+
+### 4.1. Bổ sung kiểm chứng vận hành
+
+[Mốc khoảng 13:04 UTC+7](../results/operations_2026_10_18/) lưu 237/276 bản ghi; ba dòng mới trong báo cáo dữ liệu của sinh viên Ngọc Quyên được giữ riêng với mốc ban đầu 237/273. Các phép đo Athena và biểu đồ đã đóng băng vẫn dùng đúng bộ đầu vào ban đầu.
+
+Đã tạo hai Metric Filters cho từng log group: đếm dòng `Result:` và dòng `[ERROR]`, không lấp khoảng trống bằng 0 và không tạo dimension theo từng request. Các mẫu complete/partial/error/WARN/INFO được AWS kiểm tra trước khi tạo; đọc lại cấu hình khớp. Dashboard có thêm widget thứ sáu. Bộ đếm dòng log không phải số lần Lambda thất bại và không hồi tố log cũ; cần ghi riêng bằng chứng nhận log mới.
+
+Đợt này còn phát hiện Secret cấu hình của sinh viên Ngọc Quyên sai định dạng JSON, khiến mã dùng dự phòng. Đã chuẩn hóa định dạng, giữ nguyên các trường vận hành, đọc lại xác minh và giữ phiên bản cũ để khôi phục. [Biên bản loại thông tin bí mật](../results/operations_2026_10_18/configuration-format-repair.json) ghi các kiểm tra đã thực hiện. [CSV đối chiếu log và raw S3](../results/operations_2026_10_18/scheduled_followup/) cho phép xem từng lượt, số bản ghi và số cảnh báo phù hợp với ngưỡng.
 
 ## 5. Dự báo theo giờ và đánh giá
 

@@ -38,6 +38,7 @@ def build_dashboard(topic, region='us-east-1'):
         ('Error rate (%) - requires present and consistent counters', [metric('Invocations', id='inv', visible=False), metric('Errors', id='err', visible=False), [{'expression': ERROR_RATE, 'id': 'rate', 'label': 'Errors / Invocations (%)'}]]),
         ('SNS published / delivered / failed', [['AWS/SNS', name, 'TopicName', topic, {'stat': 'Sum'}] for name in ('NumberOfMessagesPublished', 'NumberOfNotificationsDelivered', 'NumberOfNotificationsFailed')]),
         ('Canonical hourly rule', [['AWS/Events', name, 'RuleName', 'WeatherCollectionSchedule', {'stat': 'Sum'}] for name in ('TriggeredRules', 'Invocations', 'FailedInvocations')]),
+        ('Matching collection log lines (not invocation counts)', [['WeatherAWS/Collection', name, {'stat': 'Sum'}] for name in ('ResultLogLines', 'ErrorLogLines')]),
     ]
     widgets = [{'type': 'text', 'x': 0, 'y': 0, 'width': 24, 'height': 2,
                 'properties': {'markdown': '# WeatherAWS Week 3\nSource: tuan_3/scripts/dashboard.py. Metrics share 300s periods and the selected window. Missing points are not measured zero; delivery counts are not email-read confirmations.'}}]

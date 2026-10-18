@@ -17,4 +17,6 @@ Các dòng trên ghi phạm vi phụ trách, không chứng minh ai tự viết 
 
 Mốc bổ sung ngày 18/10 lưu thêm [431 dòng metric và Dashboard có kiểm tra bộ đếm](../results/monitoring_2026_10_18/), cùng [hai lượt CD và biên bản xóa secrets tạm](../results/cd_2026_10_18/). Hai cửa sổ metric có thời gian chồng lên nhau, không cộng số dòng thành số quan sát độc lập. Tổng Errors vượt Invocations vẫn là điểm chưa giải thích được; hồ sơ không tính tỷ lệ lỗi cho cửa sổ đó. Bộ kiểm tra Tuần 3 hiện có 19 trường hợp hồi quy.
 
+Đợt đối chiếu tiếp theo bổ sung [Metric Filters và hồ sơ log–S3](../results/operations_2026_10_18/), sửa định dạng JSON cấu hình của sinh viên Ngọc Quyên và thay baseline snapshot bằng hồ sơ CD công khai. Lượt 13:15 của sinh viên Tiến Sơn có ba bản ghi đúng theo log và đã tạo một điểm metric log mới; sinh viên Ngọc Quyên còn chờ lượt sau tạo filter/sửa cấu hình. Bộ hồi quy sau bổ sung có 29 trường hợp. Không phát sinh số giờ worklog được tự suy đoán từ các thao tác này.
+
 **Cần bổ sung khi kết thúc tuần:** ngày làm, công việc thực tế, số giờ được từng sinh viên xác nhận và các lượt chạy trong lịch 19–25/10/2026. Nhật ký [Tuần 1–2](../../docs/WORKLOG.md) giữ tổng 38,0 giờ đã xác nhận.

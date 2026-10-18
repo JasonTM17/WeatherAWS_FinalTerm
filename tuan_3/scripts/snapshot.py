@@ -1,14 +1,36 @@
 """Read actual Lambda/S3/CloudWatch state into a new isolated snapshot."""
 import argparse
+import base64
 from datetime import datetime, timedelta, timezone
 import json
+from pathlib import Path
 import subprocess
 
 from common import ROOT, PROFILES, FUNCTION, client, digest, ndjson_rows, session, write_csv, write_json
 from quality import inspect_rows
 
 
-def collect(profile, folder):
+def reviewed_release(profile, folder):
+    target = {'default': 'tien-son', 'quyen': 'ngoc-quyen'}[profile]
+    path = Path(folder) / f'{target}.json'
+    if not path.exists():
+        return None
+    proof = json.loads(path.read_text(encoding='utf-8'))
+    if proof.get('status') != 'PASS' or proof.get('target') != target or proof.get('final_aws_readback') != 'PASS':
+        raise ValueError('Release baseline must contain a verified proof for the selected environment')
+    digest_bytes = bytes.fromhex(proof['deployed_package_sha256'])
+    if len(digest_bytes) != 32:
+        raise ValueError('Invalid release package SHA-256')
+    return {'commit': proof['commit'], 'code_sha256': base64.b64encode(digest_bytes).decode()}
+
+
+def result_counts(entries):
+    return {'recent_result_log_entries': len(entries),
+            'recent_success_log_results': sum(r['collection_status'] == 'complete' and r['failed_cities'] == 0 for r in entries),
+            'recent_partial_log_results': sum(r['collection_status'] == 'partial' for r in entries)}
+
+
+def collect(profile, folder, proof_folder=ROOT / 'tuan_3/results/cd_2026_10_18'):
     sess = session(profile)
     account = client(sess, 'sts').get_caller_identity()['Account']
     lamb = client(sess, 'lambda')
@@ -36,8 +58,8 @@ def collect(profile, folder):
     write_csv(folder / 'hourly_city.csv', grouped, list(grouped[0]))
     write_csv(folder / 'quality.csv', [{'check': k, 'count': v} for k, v in summary['issues'].items()], ['check', 'count'])
     write_csv(folder / 'object_inventory.csv', inventory, list(inventory[0]))
-    before = ROOT / 'output/lambda_release_2026_10_16' / profile / 'update-request.json'
-    expected = json.loads(before.read_text())['code_sha256'] if before.exists() else None
+    baseline = reviewed_release(profile, proof_folder)
+    expected = baseline['code_sha256'] if baseline else None
     events = client(sess, 'events')
     rules = []
     for name in events.list_rule_names_by_target(TargetArn=config['FunctionArn']).get('RuleNames', []):
@@ -57,21 +79,22 @@ def collect(profile, folder):
     write_csv(folder / 'recent_collections.csv', successful, ['timestamp_utc', 'collection_status', 'records_collected', 'alerts_sent', 'failed_cities'])
     summary.update({'profile': profile, 'student': PROFILES[profile], 'captured_at': datetime.now(timezone.utc).isoformat(),
                     'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
-                    'lambda': {'state': config['State'], 'update': config['LastUpdateStatus'], 'code_sha256': config['CodeSha256'], 'matches_reviewed_release_package': expected == config['CodeSha256'] if expected else None},
-                    'rules': rules, 'recent_success_log_results': len(successful), 'snapshot_semantics': 'All raw objects listed once; conditional GET protects each ETag; not an atomic multi-object AWS snapshot'})
+                    'lambda': {'state': config['State'], 'update': config['LastUpdateStatus'], 'code_sha256': config['CodeSha256'], 'reviewed_release_commit': baseline['commit'] if baseline else None, 'matches_reviewed_release_package': expected == config['CodeSha256'] if expected else None},
+                    'rules': rules, **result_counts(successful), 'snapshot_semantics': 'All raw objects listed once; conditional GET protects each ETag; not an atomic multi-object AWS snapshot'})
     write_json(folder / 'snapshot.json', summary)
     return summary
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=__import__('pathlib').Path, required=True)
+    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--release-proof', type=Path, default=ROOT / 'tuan_3/results/cd_2026_10_18')
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError('Use a new output directory; snapshots are immutable')
     args.output.mkdir(parents=True)
     for profile in PROFILES:
-        result = collect(profile, args.output / profile)
+        result = collect(profile, args.output / profile, args.release_proof)
         print(json.dumps({'profile': profile, 'records': result['records'], 'week3_calendar_records': result['week3_calendar_records'], 'recent_collections': result['recent_success_log_results'], 'lambda_matches': result['lambda']['matches_reviewed_release_package']}), flush=True)
 
 

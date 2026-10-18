@@ -1,0 +1,2 @@
+"timestamp_utc","collection_status","reported_records","s3_verified_records","cities","failed_cities","expected_alerts","reported_alerts_sent","record_count_matches","alert_count_matches_current_thresholds","after_current_lambda_update"
+"2026-10-18T05:51:03.749000+00:00","complete","3","3","3","0","0","0","True","True","True"

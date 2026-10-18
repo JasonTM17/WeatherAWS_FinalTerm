@@ -1,0 +1,254 @@
+{
+  "start": "-PT24H",
+  "periodOverride": "inherit",
+  "widgets": [
+    {
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 24,
+      "height": 2,
+      "properties": {
+        "markdown": "# WeatherAWS Week 3\nSource: tuan_3/scripts/dashboard.py. Metrics share 300s periods and the selected window. Missing points are not measured zero; delivery counts are not email-read confirmations."
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 2,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "region": "us-east-1",
+        "title": "Lambda invocations / errors / throttles",
+        "period": 300,
+        "stat": "Sum",
+        "view": "timeSeries",
+        "metrics": [
+          [
+            "AWS/Lambda",
+            "Invocations",
+            "FunctionName",
+            "WeatherCollectorLambda",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/Lambda",
+            "Errors",
+            "FunctionName",
+            "WeatherCollectorLambda",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/Lambda",
+            "Throttles",
+            "FunctionName",
+            "WeatherCollectorLambda",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 2,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "region": "us-east-1",
+        "title": "Execution duration (ms)",
+        "period": 300,
+        "stat": "Sum",
+        "view": "timeSeries",
+        "metrics": [
+          [
+            "AWS/Lambda",
+            "Duration",
+            "FunctionName",
+            "WeatherCollectorLambda",
+            {
+              "stat": "Average"
+            }
+          ],
+          [
+            "AWS/Lambda",
+            "Duration",
+            "FunctionName",
+            "WeatherCollectorLambda",
+            {
+              "stat": "Maximum"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 8,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "region": "us-east-1",
+        "title": "Error rate (%) - requires present and consistent counters",
+        "period": 300,
+        "stat": "Sum",
+        "view": "timeSeries",
+        "metrics": [
+          [
+            "AWS/Lambda",
+            "Invocations",
+            "FunctionName",
+            "WeatherCollectorLambda",
+            {
+              "stat": "Sum",
+              "id": "inv",
+              "visible": false
+            }
+          ],
+          [
+            "AWS/Lambda",
+            "Errors",
+            "FunctionName",
+            "WeatherCollectorLambda",
+            {
+              "stat": "Sum",
+              "id": "err",
+              "visible": false
+            }
+          ],
+          [
+            {
+              "expression": "IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))",
+              "id": "rate",
+              "label": "Errors / Invocations (%)"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 8,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "region": "us-east-1",
+        "title": "SNS published / delivered / failed",
+        "period": 300,
+        "stat": "Sum",
+        "view": "timeSeries",
+        "metrics": [
+          [
+            "AWS/SNS",
+            "NumberOfMessagesPublished",
+            "TopicName",
+            "weather-airquality-alerts",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/SNS",
+            "NumberOfNotificationsDelivered",
+            "TopicName",
+            "weather-airquality-alerts",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/SNS",
+            "NumberOfNotificationsFailed",
+            "TopicName",
+            "weather-airquality-alerts",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 0,
+      "y": 14,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "region": "us-east-1",
+        "title": "Canonical hourly rule",
+        "period": 300,
+        "stat": "Sum",
+        "view": "timeSeries",
+        "metrics": [
+          [
+            "AWS/Events",
+            "TriggeredRules",
+            "RuleName",
+            "WeatherCollectionSchedule",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/Events",
+            "Invocations",
+            "RuleName",
+            "WeatherCollectionSchedule",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "AWS/Events",
+            "FailedInvocations",
+            "RuleName",
+            "WeatherCollectionSchedule",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "type": "metric",
+      "x": 12,
+      "y": 14,
+      "width": 12,
+      "height": 6,
+      "properties": {
+        "region": "us-east-1",
+        "title": "Matching collection log lines (not invocation counts)",
+        "period": 300,
+        "stat": "Sum",
+        "view": "timeSeries",
+        "metrics": [
+          [
+            "WeatherAWS/Collection",
+            "ResultLogLines",
+            {
+              "stat": "Sum"
+            }
+          ],
+          [
+            "WeatherAWS/Collection",
+            "ErrorLogLines",
+            {
+              "stat": "Sum"
+            }
+          ]
+        ]
+      }
+    }
+  ]
+}

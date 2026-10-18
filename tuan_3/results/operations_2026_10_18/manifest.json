@@ -1,0 +1,284 @@
+{
+  "files": [
+    {
+      "path": "collection_checks/default/collection_checks.csv",
+      "sha256": "87ea1f5a715f659f52917458832f9a5968fe31276757fd4347060a2d8b3c6ae8",
+      "bytes": 329
+    },
+    {
+      "path": "collection_checks/default/verification.json",
+      "sha256": "e009ed0ec7a261336710c85ca4c83ca43d81b072da066660cf7a0f3ecfb68618",
+      "bytes": 1092
+    },
+    {
+      "path": "collection_checks/quyen/collection_checks.csv",
+      "sha256": "127cad18b62d3e450343a2df671cc34b7c397564f08a029728bd56dd4045c972",
+      "bytes": 328
+    },
+    {
+      "path": "collection_checks/quyen/verification.json",
+      "sha256": "9cb7b0f55e43e9a5ed0e000b6f9c120bd9cf3fda30dd61777e8be45a684a10b9",
+      "bytes": 1094
+    },
+    {
+      "path": "configuration-format-repair.json",
+      "sha256": "5683ab1acef8bfa42fdf6b8ccb1065461be684ee4d2702abd795de686c0ef897",
+      "bytes": 517
+    },
+    {
+      "path": "dashboard/default/cloudwatch_01.png",
+      "sha256": "01c80d0fa01e05f5058c527e4834e049095f21f6dda809fd91518926feeacfe4",
+      "bytes": 29788
+    },
+    {
+      "path": "dashboard/default/cloudwatch_02.png",
+      "sha256": "feecebeb5302db969e3f723431ba9623b908b6bf8ddf5ba7c2c0dc75d6678d44",
+      "bytes": 30181
+    },
+    {
+      "path": "dashboard/default/cloudwatch_03.png",
+      "sha256": "d4659148f6ca6f1ca5afbfe37f5af444388ef6cbad985506beb2aeea4ea37445",
+      "bytes": 31223
+    },
+    {
+      "path": "dashboard/default/cloudwatch_04.png",
+      "sha256": "32f9e4559775abb5c3628f006771045ab2211ed6b0e7cf0f58a85d2373c4ec02",
+      "bytes": 31700
+    },
+    {
+      "path": "dashboard/default/cloudwatch_05.png",
+      "sha256": "b1d1057556bb7bd4099c14c66dcf47c4c8c0f15f4f63784aac9c7a4ebb199f84",
+      "bytes": 27822
+    },
+    {
+      "path": "dashboard/default/cloudwatch_06.png",
+      "sha256": "bd77dc9190165e472bd49f6a551b63161731761e35b51d9d17a5ad8b39efe4f0",
+      "bytes": 31323
+    },
+    {
+      "path": "dashboard/default/dashboard-verification.json",
+      "sha256": "fe70677bcbd57b68941ff973d400cb23a8d2a2273f315228a8c263ae010af005",
+      "bytes": 936
+    },
+    {
+      "path": "dashboard/default/dashboard.json",
+      "sha256": "440f484c997df688632b5cc352a22260cdd0fa541885fa2bd4c3ae0f0175f066",
+      "bytes": 5923
+    },
+    {
+      "path": "dashboard/default/metric-consistency.json",
+      "sha256": "1ca847091fb93bb0f2e294841da25c0a8d373b2e6fac4772a8100978b46eb32b",
+      "bytes": 271
+    },
+    {
+      "path": "dashboard/default/metrics.csv",
+      "sha256": "687d4cb69cafd5277a38fb6e224c84bc3c9ae4126a46b3e1bac627c026715ecb",
+      "bytes": 13568
+    },
+    {
+      "path": "dashboard/quyen/cloudwatch_01.png",
+      "sha256": "93ac0f733b47d4e19990ac0308a92c15dfc65776637ee1659d34fd00ababd1ed",
+      "bytes": 29491
+    },
+    {
+      "path": "dashboard/quyen/cloudwatch_02.png",
+      "sha256": "e5fca92569efe7a7758a73a46ade25bc2de4d43b29b9d3fe1ba2d1378d4075f5",
+      "bytes": 29435
+    },
+    {
+      "path": "dashboard/quyen/cloudwatch_03.png",
+      "sha256": "ce514aaf33a2b69dc2cb1d1631cd9475d45a70f06cfa058e8db21c72ad022cef",
+      "bytes": 31227
+    },
+    {
+      "path": "dashboard/quyen/cloudwatch_04.png",
+      "sha256": "39d7d7895267d47b82bb32d055cfa5a0e11ed504a89e16d611aeeaa5748265d7",
+      "bytes": 29987
+    },
+    {
+      "path": "dashboard/quyen/cloudwatch_05.png",
+      "sha256": "aad3f3e47a1480e6d56268990a4cdcb815bce44676a46da6621b87c6f83915b5",
+      "bytes": 27825
+    },
+    {
+      "path": "dashboard/quyen/cloudwatch_06.png",
+      "sha256": "bd77dc9190165e472bd49f6a551b63161731761e35b51d9d17a5ad8b39efe4f0",
+      "bytes": 31323
+    },
+    {
+      "path": "dashboard/quyen/dashboard-verification.json",
+      "sha256": "3efbc6ffbcef9cf901fe00554273192a72d960ac4b5638d327987d005d51c4ca",
+      "bytes": 934
+    },
+    {
+      "path": "dashboard/quyen/dashboard.json",
+      "sha256": "440f484c997df688632b5cc352a22260cdd0fa541885fa2bd4c3ae0f0175f066",
+      "bytes": 5923
+    },
+    {
+      "path": "dashboard/quyen/metric-consistency.json",
+      "sha256": "1ca847091fb93bb0f2e294841da25c0a8d373b2e6fac4772a8100978b46eb32b",
+      "bytes": 271
+    },
+    {
+      "path": "dashboard/quyen/metrics.csv",
+      "sha256": "a1748aa36df9b85d13b96b0e3f9b61e4f9d51c8ee7bcc312a20a24b003960966",
+      "bytes": 15856
+    },
+    {
+      "path": "filters/default/configuration.json",
+      "sha256": "fff5894b0a53109cd8e45969f1bf24a59c523e7700c86e54a728e199501e79c7",
+      "bytes": 1442
+    },
+    {
+      "path": "filters/default/log_metrics.csv",
+      "sha256": "f08e3edaebe416ed3cf122231d75e0364939e58ef6b87ac25d85e4e12491935c",
+      "bytes": 33
+    },
+    {
+      "path": "filters/default/observation.json",
+      "sha256": "52fe8f7543c4283bc48175de6d613177e2482d5c19aff3cbedd59b180316f480",
+      "bytes": 341
+    },
+    {
+      "path": "filters/quyen/configuration.json",
+      "sha256": "7b6574f60be9ceac95c185c4d4867b2fa60cc511a7e2235cd9dee8af76b49482",
+      "bytes": 1444
+    },
+    {
+      "path": "filters/quyen/log_metrics.csv",
+      "sha256": "f08e3edaebe416ed3cf122231d75e0364939e58ef6b87ac25d85e4e12491935c",
+      "bytes": 33
+    },
+    {
+      "path": "filters/quyen/observation.json",
+      "sha256": "6d2dca3dc74955131342d0950d1c85e2c4eb336246c28d5bcf09cb15632a4b4e",
+      "bytes": 341
+    },
+    {
+      "path": "metric_cross_api/default.json",
+      "sha256": "0222bbc05bfdda00771474b8d148d06479f1274d0dedf69067981b1e913dff64",
+      "bytes": 991
+    },
+    {
+      "path": "metric_cross_api/quyen.json",
+      "sha256": "aa8220ee10761a43b5711b8afab65b434f303673e7f9393ab414f0ce618e3f95",
+      "bytes": 1147
+    },
+    {
+      "path": "scheduled_followup/collections/default/collection_checks.csv",
+      "sha256": "9057034929c38e0fe7d679402aaade112a6aacf6ab218176675287c3fc69062d",
+      "bytes": 420
+    },
+    {
+      "path": "scheduled_followup/collections/default/raw_verified.csv",
+      "sha256": "e5fa196673e0dd7a9fbd8ba50a69133f17bd3a45452e85cc1f9e293db88153a1",
+      "bytes": 1795
+    },
+    {
+      "path": "scheduled_followup/collections/default/verification.json",
+      "sha256": "ee9a74eb1505fb0919a6cd2e7484daf26d45e34c9ae5e66eeaa388635c71fb20",
+      "bytes": 1287
+    },
+    {
+      "path": "scheduled_followup/collections/quyen/collection_checks.csv",
+      "sha256": "127cad18b62d3e450343a2df671cc34b7c397564f08a029728bd56dd4045c972",
+      "bytes": 328
+    },
+    {
+      "path": "scheduled_followup/collections/quyen/raw_verified.csv",
+      "sha256": "2b6b26730e2ce25d5b8a2d59813f0731047c8e3d179ff5c3a9dc6c4e4796cd57",
+      "bytes": 1044
+    },
+    {
+      "path": "scheduled_followup/collections/quyen/verification.json",
+      "sha256": "175027632beafcee78996959baa186e7fe38b26b6859f8c0cdd4886f949bae0a",
+      "bytes": 1094
+    },
+    {
+      "path": "scheduled_followup/filters/default/log_metrics.csv",
+      "sha256": "a733bf6261f9a94035fa1536df1c5e37dba8405a6b0e2d7cd8256c48482894bc",
+      "bytes": 84
+    },
+    {
+      "path": "scheduled_followup/filters/default/log_metrics.png",
+      "sha256": "3c690b0415cc8d19947f47fc4f2e20020313cf870e30ba3302f925a9d00f6543",
+      "bytes": 24859
+    },
+    {
+      "path": "scheduled_followup/filters/default/observation.json",
+      "sha256": "8f40086e901a6d95baec7ab2572fc8421a263c77c6f29b0a4ff01155057583ad",
+      "bytes": 339
+    },
+    {
+      "path": "scheduled_followup/filters/quyen/log_metrics.csv",
+      "sha256": "f08e3edaebe416ed3cf122231d75e0364939e58ef6b87ac25d85e4e12491935c",
+      "bytes": 33
+    },
+    {
+      "path": "scheduled_followup/filters/quyen/observation.json",
+      "sha256": "ac7b6e4d678ca06eb6c5bf34cb8bb4b78588bd22cf24e8834a0bf941842b5c94",
+      "bytes": 341
+    },
+    {
+      "path": "snapshot/default/hourly_city.csv",
+      "sha256": "5ce3a22a51063bd8084b72c16511ca3ad0002e85a8326266158527e5b9e89e21",
+      "bytes": 12612
+    },
+    {
+      "path": "snapshot/default/object_inventory.csv",
+      "sha256": "c1e0db09a5a0fdbbe371e3ea6c8b9b8aa8e4eb20708f8ce3864fc3676755451c",
+      "bytes": 5531
+    },
+    {
+      "path": "snapshot/default/quality.csv",
+      "sha256": "dfdb1ee6e1d23b65f29402255ab2f173f5903e7a8012bea3ccf530d7ea28c6e1",
+      "bytes": 226
+    },
+    {
+      "path": "snapshot/default/raw_all.csv",
+      "sha256": "21a300541d7a93a20a2a17f23dc30579dc125e872c1354aa0df1c66071a2eb8a",
+      "bytes": 59713
+    },
+    {
+      "path": "snapshot/default/recent_collections.csv",
+      "sha256": "382d6629c77465f75ab87e99aec6756ff0e068c45bc11dd4b76e70b1de6ae1c9",
+      "bytes": 144
+    },
+    {
+      "path": "snapshot/default/snapshot.json",
+      "sha256": "d807a77cd74c025dd2d0d051ecca1f8cd2f1671b64ca5f1d019ea81cc6325f82",
+      "bytes": 1251
+    },
+    {
+      "path": "snapshot/quyen/hourly_city.csv",
+      "sha256": "5e6587a92bbc9c3f8c77a7a6ae6dcde7bf9497a14a755c37437dc53185079f84",
+      "bytes": 12278
+    },
+    {
+      "path": "snapshot/quyen/object_inventory.csv",
+      "sha256": "545dc5b0745823606cb19a56e6206b5522c437db94cbed0e1188d6a53d40ad56",
+      "bytes": 7165
+    },
+    {
+      "path": "snapshot/quyen/quality.csv",
+      "sha256": "dfdb1ee6e1d23b65f29402255ab2f173f5903e7a8012bea3ccf530d7ea28c6e1",
+      "bytes": 226
+    },
+    {
+      "path": "snapshot/quyen/raw_all.csv",
+      "sha256": "ffab7314b624bbc0ee5542d21117b0b8ee26332816174e5c8d9ddd9eaef23e16",
+      "bytes": 69341
+    },
+    {
+      "path": "snapshot/quyen/recent_collections.csv",
+      "sha256": "15e6638a0ba222b3ae018205003181ae4bf934e8ba9a22bad25ea897727142e7",
+      "bytes": 144
+    },
+    {
+      "path": "snapshot/quyen/snapshot.json",
+      "sha256": "274d45e81ec409d758d535e6a17b2e6b70fbb682d2bf16dbb9294855de3e7963",
+      "bytes": 1405
+    }
+  ]
+}

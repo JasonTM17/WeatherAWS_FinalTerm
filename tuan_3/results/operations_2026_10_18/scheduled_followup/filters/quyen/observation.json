@@ -1,0 +1,10 @@
+{
+  "window_start": "2026-10-18T04:16:43.426312+00:00",
+  "window_end": "2026-10-18T06:16:43.426312+00:00",
+  "metric_sums": {
+    "ResultLogLines": null,
+    "ErrorLogLines": null
+  },
+  "result_ingestion_observed": false,
+  "limitation": "No point is unknown, not zero; absence cannot establish no errors or failed collection"
+}

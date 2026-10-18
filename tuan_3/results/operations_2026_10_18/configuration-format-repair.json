@@ -1,0 +1,13 @@
+{
+  "student": "Sinh viên Ngọc Quyên",
+  "checked_at": "2026-10-18T06:12:36.547780+00:00",
+  "before_json_valid": false,
+  "after_json_valid": true,
+  "repair": "Quoted existing bare identifiers as JSON strings; no values added, removed or substituted",
+  "operational_fields_unchanged": true,
+  "location_count": 3,
+  "previous_version_retained_and_readback_equal": true,
+  "current_version_readback_equal": true,
+  "lambda_code_or_environment_modified": false,
+  "secret_values_in_report": false
+}

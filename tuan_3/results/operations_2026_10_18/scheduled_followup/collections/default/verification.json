@@ -1,0 +1,37 @@
+{
+  "student": "Sinh viên Tiến Sơn",
+  "window_start": "2026-10-18T04:16:18.741497+00:00",
+  "window_end": "2026-10-18T06:16:18.741497+00:00",
+  "rule": {
+    "state": "ENABLED",
+    "schedule": "rate(1 hour)",
+    "matching_targets": 1,
+    "source_rule_permission": true
+  },
+  "lambda_updated_at": "2026-10-18T05:50:53.000+0000",
+  "release_baseline_commit": "c28da19568a7bbe4b5be60d844574ad2853bf356",
+  "package_matches_reviewed_release": true,
+  "thresholds_at_verification": {
+    "aqi": 100,
+    "pm2_5": 35.5
+  },
+  "result_entries": 2,
+  "objects": [
+    {
+      "key": "raw/year=2026/month=10/day=18/data_20261018_f90be826.json",
+      "records": 3,
+      "sha256": "dbf60527f81babd20329568882aaed4913d769bcb858079788128eb2528c28d2"
+    },
+    {
+      "key": "raw/year=2026/month=10/day=18/data_20261018_78dcb0a5.json",
+      "records": 3,
+      "sha256": "110f70e2f1fc5a485167cf10003a3df58501c079738e61522d35d6388a5f4f0e"
+    }
+  ],
+  "invoked_by_this_check": false,
+  "limitations": [
+    "Rule configuration and result timing do not provide a per-event trace ID.",
+    "Current secret thresholds are not an archived configuration for every past invocation.",
+    "Zero expected alerts does not exercise a new email delivery."
+  ]
+}
