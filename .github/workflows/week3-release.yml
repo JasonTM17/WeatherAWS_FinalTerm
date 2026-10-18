@@ -1,0 +1,59 @@
+name: Week 3 Lambda release
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Existing student environment
+        type: choice
+        required: true
+        options: [tien-son, ngoc-quyen]
+      confirm:
+        description: Type the selected target again to approve a code-only release
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: week3-lambda-${{ inputs.target }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main' && inputs.confirm == inputs.target
+    runs-on: ubuntu-latest
+    environment: week3-${{ inputs.target }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: tuan_3/requirements.txt
+      - name: Install dependencies
+        run: python -m pip install -r tuan_3/requirements.txt
+      - name: Check source and Week 3 regressions before release
+        run: |
+          python -m unittest discover -s tuan_2/tests -v
+          python -m unittest discover -s tuan_3/tests -v
+      - name: Deploy exact checked source without changing configuration
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_EC2_METADATA_DISABLED: 'true'
+          EXPECTED_ACCOUNT: ${{ secrets.AWS_ACCOUNT_ID }}
+          TARGET_ENVIRONMENT: ${{ inputs.target }}
+        run: |
+          python tuan_3/scripts/release.py --deploy --output output/release-private --expected-account "$EXPECTED_ACCOUNT" --confirm-environment "$TARGET_ENVIRONMENT"
+      - name: Retain sanitized deployment proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-proof-${{ inputs.target }}
+          path: output/release-private/release.json
+          if-no-files-found: ignore
+          retention-days: 7

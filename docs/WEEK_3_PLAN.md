@@ -25,9 +25,9 @@ Theo góp ý của giảng viên, ưu tiên trước hết là đồng bộ mã 
 2. **Trụ cột 2: Tối ưu hóa hiệu năng Athena và chi phí S3 Data Lake**:
    - Triển khai **Partition Projection** trong AWS Glue/Athena để tối ưu hóa truy vấn thời gian thực, loại trừ thao tác quét metadata thủ công `MSCK REPAIR TABLE`.
    - Thử nghiệm định dạng cột như **Apache Parquet** với cấu hình nén phù hợp; so sánh lượng dữ liệu quét và thời gian xử lý với NDJSON trên cùng truy vấn và tập dữ liệu trước khi kết luận về chi phí.
-   - Cấu hình chính sách vòng đời **S3 Intelligent-Tiering / Glacier Flexible Retrieval** tối ưu hóa chi phí lưu trữ dài hạn trong S3 Data Lake.
-3. **Trụ cột 3: Nâng cấp cảnh báo đa kênh SNS và giám sát thời gian thực CloudWatch**:
-   - Nâng cấp kênh cảnh báo Amazon SNS từ Email sang SMS và tích hợp Webhook tới kênh trao đổi nhóm (Slack / Discord).
+   - Đánh giá chính sách vòng đời dựa trên kích thước object, lịch truy cập và yêu cầu lưu giữ. Chưa đổi lifecycle raw sản xuất khi chưa đủ căn cứ dự toán phí chuyển tầng/khôi phục.
+3. **Trụ cột 3: Kiểm chứng cảnh báo email SNS và giám sát CloudWatch**:
+   - Giữ kênh email theo phạm vi đã thống nhất; kiểm chứng SNS nhận thông điệp, số metric giao thông báo và xác nhận người nhận riêng biệt.
    - Thiết lập CloudWatch Metric Filters và Custom Dashboard theo dõi trực quan các chỉ số vận hành thời gian thực: số lần gọi hàm (Invocations), tỷ lệ lỗi (Error Rate), thời lượng thực thi (Duration) và số lượng cảnh báo phát hành (NumberOfMessagesPublished).
 4. **Trụ cột 4: Mở rộng phân tích dự báo chuỗi thời gian (Time-Series Forecasting)**:
    - Xây dựng mô hình thống kê dự báo chuỗi thời gian (ARIMA / Moving Average) cho chỉ số AQI và nồng độ PM2.5 theo từng giờ trong 24 giờ tiếp theo.
@@ -41,8 +41,8 @@ Theo góp ý của giảng viên, ưu tiên trước hết là đồng bộ mã 
 | **W3-02** | Tích hợp lịch với Lambda và dọn dẹp rule | Trụ cột 1 & 2 | Sinh viên Tiến Sơn | Bảng rule/target/policy và các lượt thực thi liên tiếp | Xác nhận lịch được chọn cho từng môi trường; giải thích và xử lý lịch thừa trước khi đánh giá mật độ mẫu |
 | **W3-03** | Thử nghiệm Partition Projection và Parquet trên S3/Athena | Trụ cột 2 | Sinh viên Ngọc Quyên | Cấu hình thử nghiệm, câu truy vấn và bảng so sánh | Truy vấn không cần `MSCK REPAIR`; lượng byte quét và thời gian được đo trên cùng dữ liệu trước khi đánh giá lợi ích |
 | **W3-04** | Kiểm tra chất lượng và thời gian quan trắc | Trụ cột 1 & 4 | Sinh viên Ngọc Quyên | CSV chất lượng và thống kê theo đô thị–giờ | Phân biệt khóa record_id, UTC/UTC+7, NULL và các lượt cùng giờ; giữ raw đầy đủ |
-| **W3-05** | Chuẩn hóa giám sát CloudWatch Dashboard thời gian thực | Trụ cột 3 | Sinh viên Tiến Sơn | CloudWatch Dashboard JSON, CSV metrics và ảnh chụp giao diện | Invocations/Errors dùng cùng namespace, dimensions, khoảng thời gian; hiển thị biểu đồ thời gian thực |
-| **W3-06** | Kiểm chứng cảnh báo đa kênh SNS (Email + SMS/Webhook) | Trụ cột 3 | Sinh viên Tiến Sơn | Cấu hình Topic đa kênh, kết quả gửi thông báo thử nghiệm | Tách rõ vượt ngưỡng, SNS nhận Publish và người nhận đã nhận thư/tin nhắn; thử có kiểm soát trong Lab |
+| **W3-05** | Chuẩn hóa giám sát CloudWatch Dashboard | Trụ cột 3 | Sinh viên Tiến Sơn | Dashboard JSON, CSV metric và ảnh biểu đồ do AWS trả về | Invocations/Errors dùng cùng namespace, dimensions, cửa sổ và chu kỳ; đọc lại Dashboard khớp cấu hình gửi |
+| **W3-06** | Kiểm chứng cảnh báo email SNS | Trụ cột 3 | Sinh viên Tiến Sơn | Minh chứng Publish, giao thông báo và xác nhận nhận email | Tách rõ vượt ngưỡng, SNS nhận Publish và người nhận đã nhận thư; không mở thêm kênh cảnh báo |
 | **W3-07** | Đánh giá khả năng dự báo chuỗi thời gian AQI/PM2.5 | Trụ cột 4 | Sinh viên Ngọc Quyên | Script, CSV dự báo và biểu đồ có nguồn dữ liệu | Tính sai số trên khoảng thời gian giữ lại; ghi rõ kích thước mẫu, phương pháp và giới hạn dữ liệu |
 | **W3-08** | Tích hợp CI/CD tự động và rà soát hồ sơ repo GitHub | Trụ cột 1 | Cả hai sinh viên | Workflow GitHub Actions và README Tuần 3 | Mã, dữ liệu và commit mở được; các kiểm tra được cấu hình trong workflow đạt PASS trên CI |
 
@@ -56,12 +56,12 @@ Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc v�
 | --- | --- | --- |
 | W3-01 | Đã đạt tại đợt triển khai | [Source, hash module và sao lưu trước cập nhật](deployment-verification.md#phiên-bản-được-triển-khai); tiếp tục đối chiếu nếu mã thay đổi |
 | W3-02 | Đạt phần chuẩn hóa lịch và một lượt tự động mỗi môi trường | [Rule/target và các lượt theo lịch](scheduled-run-verification.md); còn theo dõi các lượt liên tiếp để đánh giá độ ổn định |
-| W3-03 | Chưa có minh chứng nghiệm thu tối ưu | Chưa có bảng so sánh Partition Projection/Parquet trên cùng tập dữ liệu; việc bổ sung phân vùng ngày để đọc dữ liệu mới chưa phải tối ưu này |
-| W3-04 | Đã đối chiếu dữ liệu của các lượt kiểm chứng | [S3/Athena và thời gian bản ghi mới](scheduled-run-verification.md#thời-điểm-và-kết-quả-thu-thập); còn bộ kiểm tra chất lượng và CSV tổng hợp dành cho Tuần 3 |
-| W3-05 | Đạt phần đọc metric cùng cửa sổ | [Lambda/SNS và trạng thái Alarm](deployment-verification.md#cảnh-báo-và-email); còn nghiệm thu Dashboard thời gian thực theo tiêu chí đã đặt |
-| W3-06 | Đạt luồng email; chưa hoàn thành đa kênh | [Vượt ngưỡng → Publish → giao thông báo → xác nhận người nhận](scheduled-run-verification.md#cảnh-báo-và-giám-sát); SMS/Webhook vẫn là phần chưa được nghiệm thu |
-| W3-07 | Chưa có minh chứng nghiệm thu dự báo | Chưa có kết quả dự báo và sai số trên tập giữ lại đáp ứng tiêu chí; không dùng mẫu ngắn để tuyên bố dự báo đã đạt |
-| W3-08 | CI đã có kết quả; chưa có minh chứng CD tự động | [Workflow](../.github/workflows/verify-repository.yml) và [CI của commit lưu lượt theo lịch](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/38873083277); workflow hiện kiểm tra hồ sơ/chức năng/phân tích, chưa có bước tự triển khai Lambda. Còn hoàn thiện hồ sơ tổng kết Tuần 3 |
+| W3-03 | Đã có thử nghiệm riêng ngày 18/10 | [18 truy vấn và kết quả Projection/Parquet](../tuan_3/docs/FINAL_REPORT.md#3-partition-projection-và-parquet); không quy đổi giảm byte quét thành mức tiết kiệm tiền |
+| W3-04 | Đã có bộ kiểm tra tại mốc tích hợp | [Raw và chất lượng](../tuan_3/docs/FINAL_REPORT.md#2-đầu-vào-dữ-liệu-raw-và-chất-lượng); 237/273 bản ghi, chưa có bản ghi thuộc lịch Tuần 3 |
+| W3-05 | Đã tạo và đọc lại hai Dashboard | [Metric CSV và 10 ảnh AWS](../tuan_3/results/integration_2026_10_18/dashboard/); ảnh API metric không phải ảnh màn hình Console |
+| W3-06 | Đạt luồng email tại các lượt 16/10 | [Publish → giao thông báo → xác nhận người nhận](scheduled-run-verification.md#cảnh-báo-và-giám-sát); tiếp tục ghi nhận lượt mới, không suy ra đã nhận thư từ metric đơn lẻ |
+| W3-07 | Đã có đánh giá hồi cứu 24 giờ giữ lại | [Ba phương pháp, 18 bộ sai số](../tuan_3/docs/FINAL_REPORT.md#5-dự-báo-theo-giờ-và-đánh-giá); dự báo 24 giờ tiếp theo chưa được đánh giá bằng dữ liệu tương lai |
+| W3-08 | Đã bổ sung workflow và hồ sơ; theo dõi run thực tế | [CI](../.github/workflows/verify-repository.yml), [CD](../.github/workflows/week3-release.yml), [kết quả chạy](../tuan_3/docs/operation.md#4-kết-quả-thực-hiện) |
 
 ## Điều kiện và hồ sơ kết thúc
 

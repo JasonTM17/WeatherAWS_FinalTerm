@@ -1,0 +1,10 @@
+{
+  "name": "registered_json_1",
+  "query_id": "3b3523ca-5ba4-4ec4-93b8-5bf2530bb647",
+  "status": "SUCCEEDED",
+  "bytes_scanned": 1556,
+  "engine_ms": 610,
+  "total_ms": 795,
+  "planning_ms": 174,
+  "result_reused": false
+}

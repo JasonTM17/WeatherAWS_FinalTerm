@@ -1,0 +1,10 @@
+{
+  "name": "projected_json_3",
+  "query_id": "9b01187d-94fc-4e30-80b7-7fa7445b5217",
+  "status": "SUCCEEDED",
+  "bytes_scanned": 11243,
+  "engine_ms": 431,
+  "total_ms": 606,
+  "planning_ms": 98,
+  "result_reused": false
+}

@@ -1,0 +1,10 @@
+{
+  "name": "projected_parquet_1",
+  "query_id": "5c4954f1-01bc-4755-a2ec-a456971879b7",
+  "status": "SUCCEEDED",
+  "bytes_scanned": 302,
+  "engine_ms": 430,
+  "total_ms": 592,
+  "planning_ms": 84,
+  "result_reused": false
+}

@@ -1,0 +1,31 @@
+{
+  "profile": "quyen",
+  "input_records": 273,
+  "selected_date": "2026-10-16",
+  "selected_records": 21,
+  "result_parity": "PASS",
+  "trial_count": 9,
+  "medians": {
+    "registered_json": {
+      "bytes_scanned": 11243,
+      "engine_ms": 572,
+      "total_ms": 756,
+      "planning_ms": 185
+    },
+    "projected_json": {
+      "bytes_scanned": 11243,
+      "engine_ms": 431,
+      "total_ms": 606,
+      "planning_ms": 96
+    },
+    "projected_parquet": {
+      "bytes_scanned": 393,
+      "engine_ms": 515,
+      "total_ms": 722,
+      "planning_ms": 118
+    }
+  },
+  "format_scope": "Same frozen rows and aggregation, same daily grouping, one object per day; not a production cost forecast",
+  "source_sha256": "e25b6333aeafd1f5e7d76c4fff26dfb9b5975f3b69666195c960295bcdbe1374",
+  "parquet_scan_change_percent": -96.5044916837143
+}

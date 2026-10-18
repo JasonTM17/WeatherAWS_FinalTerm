@@ -2,7 +2,7 @@
 
 Đồ án thực hành học phần **Điện toán đám mây**: xây dựng luồng thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai, lưu bản ghi thô trên Amazon S3, truy vấn bằng Amazon Athena, sau đó tổng hợp kết quả thành CSV và biểu đồ có thể đối chiếu với dữ liệu đầu vào.
 
-Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày tiến độ Tuần 1 và Tuần 2, kết quả phân tích từ các bộ CSV đã lưu và kế hoạch tích hợp, giám sát ở Tuần 3.
+Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày tiến độ Tuần 1–2 cùng mốc tích hợp chuẩn bị Tuần 3 ngày 18/10/2026: thử nghiệm Athena, kiểm tra dữ liệu, Dashboard, dự báo và CI/CD. Mốc này chưa đại diện cho toàn bộ lịch Tuần 3 (19–25/10).
 
 | Thông tin | Chi tiết |
 | --- | --- |
@@ -23,6 +23,7 @@
 | CSV Tuần 1 | [Sáu CSV đã dùng trong báo cáo](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) · [Chín biểu đồ](tuan_2/results/charts/) |
 | Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [Markdown](tuan_2/docs/FINAL_REPORT.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 | CSV và hình Tuần 2 | [CSV Athena đã lưu](tuan_2/results/week2_live/) · [27 bảng phân tích](tuan_2/results/week2_analysis/) · [20 biểu đồ](tuan_2/results/week2_charts/) · [Raw và metadata](tuan_2/results/week2_evidence/) |
+| Mốc tích hợp Tuần 3 | [Trang Tuần 3 có biểu đồ](tuan_3/README.md) · [Báo cáo kỹ thuật](tuan_3/docs/FINAL_REPORT.md) · [Raw, Athena, metric và dự báo](tuan_3/results/integration_2026_10_18/) · [CI/CD và vận hành](tuan_3/docs/operation.md) |
 | Phân công và thời gian | [Worklog tổng hợp](docs/WORKLOG.md) · [CSV worklog](worklog.csv) |
 | Kiến trúc và mã nguồn | [Sơ đồ kiến trúc](docs/architecture.md) · [Hướng dẫn đọc mã](docs/source-guide.md) · [Cấu trúc repository](docs/repository-layout.md) · [Chỉ mục thành phần và commit](docs/components.md) |
 | Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Minh chứng vận hành đã lưu](docs/saved-evidence.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |

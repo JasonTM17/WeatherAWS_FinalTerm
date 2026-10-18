@@ -1,0 +1,54 @@
+{
+  "registered_json": {
+    "name": "w3_r20261018_registered_json",
+    "projected": false,
+    "registered_partitions": 8,
+    "parameters": {
+      "classification": "json",
+      "week3.run_id": "r20261018",
+      "week3.input_sha256": "e25b6333aeafd1f5e7d76c4fff26dfb9b5975f3b69666195c960295bcdbe1374"
+    }
+  },
+  "projected_json": {
+    "name": "w3_r20261018_projected_json",
+    "projected": true,
+    "registered_partitions": 0,
+    "parameters": {
+      "classification": "json",
+      "week3.run_id": "r20261018",
+      "week3.input_sha256": "e25b6333aeafd1f5e7d76c4fff26dfb9b5975f3b69666195c960295bcdbe1374",
+      "projection.enabled": "true",
+      "projection.year.type": "integer",
+      "projection.year.range": "2026,2026",
+      "projection.year.digits": "4",
+      "projection.month.type": "integer",
+      "projection.month.range": "1,12",
+      "projection.month.digits": "2",
+      "projection.day.type": "integer",
+      "projection.day.range": "1,31",
+      "projection.day.digits": "2",
+      "storage.location.template": "s3://PROJECT_BUCKET/week3/experiments/r20261018/ndjson/year=${year}/month=${month}/day=${day}/"
+    }
+  },
+  "projected_parquet": {
+    "name": "w3_r20261018_projected_parquet",
+    "projected": true,
+    "registered_partitions": 0,
+    "parameters": {
+      "classification": "parquet",
+      "week3.run_id": "r20261018",
+      "week3.input_sha256": "e25b6333aeafd1f5e7d76c4fff26dfb9b5975f3b69666195c960295bcdbe1374",
+      "projection.enabled": "true",
+      "projection.year.type": "integer",
+      "projection.year.range": "2026,2026",
+      "projection.year.digits": "4",
+      "projection.month.type": "integer",
+      "projection.month.range": "1,12",
+      "projection.month.digits": "2",
+      "projection.day.type": "integer",
+      "projection.day.range": "1,31",
+      "projection.day.digits": "2",
+      "storage.location.template": "s3://PROJECT_BUCKET/week3/experiments/r20261018/parquet/year=${year}/month=${month}/day=${day}/"
+    }
+  }
+}

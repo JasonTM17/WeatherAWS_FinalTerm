@@ -1,0 +1,38 @@
+{
+  "profile": "default",
+  "dashboard": "WeatherAirQuality-Week3",
+  "validation_messages": [],
+  "get_matches_put": true,
+  "window_start": "2026-10-17T05:31:41+00:00",
+  "window_end": "2026-10-18T05:31:41+00:00",
+  "period_seconds": 300,
+  "metric_rows": 213,
+  "images": [
+    {
+      "widget": 1,
+      "status": "PNG_RETURNED",
+      "bytes": 29251
+    },
+    {
+      "widget": 2,
+      "status": "PNG_RETURNED",
+      "bytes": 29824
+    },
+    {
+      "widget": 3,
+      "status": "PNG_RETURNED",
+      "bytes": 29605
+    },
+    {
+      "widget": 4,
+      "status": "PNG_RETURNED",
+      "bytes": 30686
+    },
+    {
+      "widget": 5,
+      "status": "PNG_RETURNED",
+      "bytes": 26809
+    }
+  ],
+  "graph_semantics": "Native AWS GetMetricWidgetImage snapshots; not screenshots of the Console UI"
+}

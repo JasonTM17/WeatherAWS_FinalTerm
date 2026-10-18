@@ -1,5 +1,6 @@
 # Keep downloaded AWS bytes and manifest hashes unchanged on every platform.
 *.csv -text whitespace=cr-at-eol
+tuan_3/results/** -text whitespace=cr-at-eol
 tuan_2/results/review_*/** -text whitespace=cr-at-eol
 tuan_2/results/week2_live/** -text
 tuan_2/results/week2_evidence/** -text

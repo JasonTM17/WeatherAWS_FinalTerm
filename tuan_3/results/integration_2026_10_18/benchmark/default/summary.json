@@ -1,0 +1,31 @@
+{
+  "profile": "default",
+  "input_records": 237,
+  "selected_date": "2026-10-18",
+  "selected_records": 3,
+  "result_parity": "PASS",
+  "trial_count": 9,
+  "medians": {
+    "registered_json": {
+      "bytes_scanned": 1556,
+      "engine_ms": 615,
+      "total_ms": 799,
+      "planning_ms": 234
+    },
+    "projected_json": {
+      "bytes_scanned": 1556,
+      "engine_ms": 537,
+      "total_ms": 746,
+      "planning_ms": 79
+    },
+    "projected_parquet": {
+      "bytes_scanned": 302,
+      "engine_ms": 452,
+      "total_ms": 619,
+      "planning_ms": 84
+    }
+  },
+  "format_scope": "Same frozen rows and aggregation, same daily grouping, one object per day; not a production cost forecast",
+  "source_sha256": "21a300541d7a93a20a2a17f23dc30579dc125e872c1354aa0df1c66071a2eb8a",
+  "parquet_scan_change_percent": -80.59125964010283
+}

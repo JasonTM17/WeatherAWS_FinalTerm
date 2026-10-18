@@ -18,12 +18,24 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-          cache-dependency-path: tuan_2/analytics/requirements.txt
+          cache-dependency-path: tuan_3/requirements.txt
       - name: Install dependencies
-        run: python -m pip install -r tuan_2/analytics/requirements.txt
+        run: python -m pip install -r tuan_3/requirements.txt
       - name: Check worklogs, CSV catalog and saved AWS evidence
         run: python tuan_2/scripts/repository_audit.py --check
       - name: Check Lambda, SDK, exports, charts and evidence regressions
         run: python -m unittest discover -s tuan_2/tests -v
       - name: Check data analysis
         run: python -m unittest discover -s tuan_2/analytics -p 'test_*.py' -v
+      - name: Check Week 3 data, forecast and deployment invariants
+        run: |
+          python -m unittest discover -s tuan_3/tests -v
+          python tuan_3/scripts/verify_results.py
+      - name: Build reproducible Lambda artifact
+        run: python tuan_3/scripts/release.py --output output/lambda-artifact
+      - name: Retain checked Lambda artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lambda-checked-${{ github.sha }}
+          path: output/lambda-artifact/
+          retention-days: 7
