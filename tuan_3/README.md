@@ -12,10 +12,10 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 | --- | --- |
 | Báo cáo kỹ thuật, phương pháp và giới hạn | [Báo cáo chi tiết](docs/FINAL_REPORT.md) |
 | Hướng dẫn chạy, kiểm chứng và khôi phục | [Vận hành và CI/CD](docs/operation.md) |
-| Nhật ký có minh chứng, phân công và kế hoạch thời gian | [Nhật ký và kế hoạch Tuần 3](docs/WORKLOG.md) · [CSV tổng hợp](worklog.csv) · [CSV chi tiết](docs/worklog.csv) |
+| Nhật ký kỹ thuật, phân công và tổng giờ sinh viên công bố | [Nhật ký Tuần 3](docs/WORKLOG.md) · [CSV tổng giờ](worklog.csv) · [Bản CSV trong hồ sơ](docs/worklog.csv) |
 | Raw cập nhật sau làm mới phiên Lab | [Sinh viên Tiến Sơn — 246 dòng](results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên — 285 dòng](results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) |
 | Raw của mốc tích hợp ban đầu | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/raw_all.csv) |
-| Chất lượng và thống kê theo giờ | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/) |
+| Chất lượng và thống kê theo giờ của snapshot cập nhật | [Sinh viên Tiến Sơn](results/refresh_2026_10_18/snapshot/default/) · [Sinh viên Ngọc Quyên](results/refresh_2026_10_18/snapshot/quyen/) |
 | Truy vấn, số đo Athena và cấu hình Projection | [Thí nghiệm Athena](results/integration_2026_10_18/benchmark/) |
 | Dashboard JSON, metric CSV và ảnh do AWS trả về | [Giám sát CloudWatch](results/integration_2026_10_18/dashboard/) |
 | Dashboard cập nhật và đối chiếu bộ đếm | [Mốc giám sát bổ sung](results/monitoring_2026_10_18/) |
@@ -24,7 +24,7 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 | CD thật, hash đọc lại từ AWS và dọn secrets | [Hồ sơ triển khai hai môi trường](results/cd_2026_10_18/) |
 | Dữ liệu mô hình, dự báo và sai số | [Hồ sơ dự báo](results/integration_2026_10_18/forecast/) |
 | Dự báo đã kiểm tra giờ đích sau phát hành | [Bản phát hành dự báo mới](results/forecast_issued_2026_10_18/) |
-| Tính toàn vẹn các tệp kết quả | [Manifest SHA-256](results/integration_2026_10_18/manifest.json) |
+| Tính toàn vẹn các tệp kết quả | [Manifest mốc đầu](results/integration_2026_10_18/manifest.json) · [Manifest snapshot cập nhật](results/refresh_2026_10_18/manifest.json) · [Kiểm tra toàn bộ các mốc](scripts/verify_results.py) |
 | Kiểm tra tự động và triển khai | [CI](../.github/workflows/verify-repository.yml) · [Workflow triển khai Lambda](../.github/workflows/week3-release.yml) · [Các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) |
 
 ## Kết quả cập nhật mới nhất
@@ -79,11 +79,13 @@ Hệ số mô tả liên hệ trong mẫu, không chứng minh quan hệ nhân q
 
 ### Truy vấn Athena trên cùng dữ liệu
 
-| Cấu hình truy vấn Athena | Scanned trung vị Tiến Sơn | Scanned trung vị Ngọc Quyên | Engine Time trung vị Tiến Sơn | Engine Time trung vị Ngọc Quyên | Mức giảm Scanned Bytes | Chi phí quét lý thuyết / query |
-| --- | ---: | ---: | ---: | ---: | :---: | ---: |
-| **Raw NDJSON (Registered)** | 1.52 KB | 10.98 KB | 615 ms | 572 ms | Mốc cơ sở (0%) | $0.00000001 – $0.00000006 |
-| **NDJSON (Partition Projection)**| 1.52 KB | 10.98 KB | 537 ms | 431 ms | 0.00% (Giảm 48-66% Planning ms) | $0.00000001 – $0.00000006 |
-| **Parquet Snappy (Projection)** | **0.29 KB** | **0.38 KB** | **452 ms** | **515 ms** | **Giảm 80.59% – 96.50%** | **$0.0000000015 – $0.0000000020** |
+| Cấu hình truy vấn Athena | Byte quét trung vị — sinh viên Tiến Sơn | Byte quét trung vị — sinh viên Ngọc Quyên | Engine trung vị — sinh viên Tiến Sơn (ms) | Engine trung vị — sinh viên Ngọc Quyên (ms) |
+| --- | ---: | ---: | ---: | ---: |
+| NDJSON, phân vùng đăng ký | 1.556 | 11.243 | 615 | 572 |
+| NDJSON, Partition Projection | 1.556 | 11.243 | 537 | 431 |
+| Parquet Snappy, Partition Projection | 302 | 393 | 452 | 515 |
+
+Dấu chấm trong hai cột byte phân cách hàng nghìn. Số đo thuộc toàn truy vấn; không phải chi phí hóa đơn. Parquet giảm byte quét 80,59% trong báo cáo dữ liệu của sinh viên Tiến Sơn và 96,50% trong báo cáo dữ liệu của sinh viên Ngọc Quyên, nhưng chưa đủ căn cứ quy thành số tiền tiết kiệm. Các trung vị planning/total và từng lượt được lưu trong [bảng đo gốc](results/integration_2026_10_18/benchmark/).
 
 #### Kết quả truy vấn tổng hợp ba đô thị
 
@@ -169,7 +171,7 @@ Các lệnh trên kiểm tra tệp đã lưu, không chứng minh vận hành AW
 | Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng do sinh viên công bố, không phân bổ ngày |
 | **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
 
-38,0 giờ thuộc hồ sơ Tuần 1–2; 20,0 giờ Tuần 3 là tổng sinh viên công bố, không phân bổ ngày.
+38,0 giờ thuộc hồ sơ Tuần 1–2; 20,0 giờ Tuần 3 là tổng sinh viên công bố, không phân bổ ngày. [Hai dòng CSV tổng giờ Tuần 3](worklog.csv) ghi căn cứ này riêng với các mốc kỹ thuật trong nhật ký.
 
 ## Phần tiếp tục theo dõi
 

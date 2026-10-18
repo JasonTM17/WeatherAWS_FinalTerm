@@ -67,6 +67,13 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
 - [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
 - [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.
+- [CI của bộ dữ liệu cập nhật `9480d14`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39116618730): thành công, gồm 39 kiểm tra Tuần 3, đối chiếu 219 tệp minh chứng và tạo artifact. Đây là kiểm tra snapshot đã lưu; không phải một lượt triển khai hoặc thu thập AWS mới.
+
+### Đối chiếu độc lập các bảng số cập nhật
+
+Đợt rà soát dùng cách tính riêng bằng thư viện chuẩn Python để đối chiếu 96 dòng thống kê (độ lệch chuẩn mẫu, phân vị tuyến tính), 120 dòng tương quan (hạng trung bình cho các giá trị bằng nhau), 24 bộ sai số/576 dòng giữ lại và 12 dòng so sánh với phản hồi mô hình tải về sau. Các giá trị khớp CSV. Kết quả 18 lượt Athena và trung vị cũng được đối chiếu với đúng bộ raw đầu vào ban đầu; raw cập nhật không thay đầu vào lịch sử đó.
+
+Các bảng thống kê, tương quan, phân bố AQI, từng lượt Athena và sai số trong báo cáo được so lại với CSV nguồn; biểu đồ màu dùng cùng các tệp. Tổng 38,0 giờ Tuần 1–2 giữ nguyên, 20,0 giờ Tuần 3 ghi là tổng sinh viên công bố, không tự gán ngày hoặc phân bổ thời lượng theo nhiệm vụ. Việc rà soát không mở rộng 2 giờ đích đã đối chiếu thành kết luận cho cả 24 giờ.
 
 | Môi trường | Lượt CD đã thành công | Đọc lại trực tiếp từ AWS |
 | --- | --- | --- |
