@@ -162,7 +162,7 @@ Chương trình ghi `issued_at_utc`, lấy giờ đích đầu là đầu giờ 
 
 Mã và hồ sơ tích hợp nằm tại commit [0b26858](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e). Commit [c28da19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356) sửa định dạng ZIP để gói dựng trên Windows và Linux có thể đối chiếu byte trực tiếp. Hai commit không thay đổi thuật toán trong module thu thập.
 
-Workflow [Verify repository](../../.github/workflows/verify-repository.yml) kiểm tra hồ sơ cũ, các hồi quy chức năng/phân tích, bộ kiểm tra Tuần 3 và tính toàn vẹn 92 tệp kết quả. Sau đó workflow đóng gói module Lambda thành ZIP có tên entry, timestamp và quyền tệp xác định; artifact được giữ bảy ngày trên Actions.
+Workflow [Verify repository](../../.github/workflows/verify-repository.yml) kiểm tra hồ sơ cũ, các hồi quy chức năng/phân tích, bộ kiểm tra Tuần 3 và tính toàn vẹn các tệp kết quả đã lưu. Tại commit `cf05203`, có 32 hồi quy Tuần 3 và 184 tệp kết quả trong năm manifest được kiểm tra. Sau đó workflow đóng gói module Lambda thành ZIP có tên entry, timestamp và quyền tệp xác định; artifact được giữ bảy ngày trên Actions.
 
 Workflow [Week 3 Lambda release](../../.github/workflows/week3-release.yml) chỉ chạy thủ công trên `main`, yêu cầu chọn môi trường và nhập lại tên để xác nhận. Khóa phiên được cấp qua GitHub Environment secrets, không đặt trong mã. STS phải khớp tài khoản của môi trường trước khi tải gói khôi phục hoặc cập nhật Lambda. Cập nhật chỉ thay mã và dùng RevisionId; xác minh hash, trạng thái và dấu vân tay cấu hình. Khi xác minh lỗi, chỉ thử khôi phục nếu RevisionId vẫn thuộc lượt cập nhật này, tránh ghi đè cập nhật của người khác.
 
@@ -172,7 +172,7 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 Mốc ngày 18/10 đã tạo bộ thử nghiệm có thể truy vết từ raw, truy vấn, CSV đến biểu đồ; triển khai Dashboard thật và xây dựng phép đánh giá dự báo có tập giữ lại, phương pháp cơ sở và giới hạn rõ ràng. Việc giảm byte quét đã quan sát được trong thử nghiệm Parquet, còn lợi ích thời gian và chi phí cần dữ liệu lớn hơn và nhiều lượt đo hơn.
 
-Phần tiếp tục gồm thu dữ liệu theo lịch trong các phiên Lab của Tuần 3, đánh giá độ phủ theo ngày, đối chiếu dự báo khi có giá trị tương ứng và ghi số giờ thực tế của từng sinh viên. Chưa bổ sung số giờ Tuần 3; [nhật ký 38 giờ của Tuần 1–2](../../docs/WORKLOG.md) giữ nguyên.
+Phần tiếp tục gồm thu dữ liệu theo lịch trong các phiên Lab của Tuần 3, đánh giá độ phủ theo ngày, đối chiếu dự báo khi có giá trị tương ứng và ghi số giờ thực tế của từng sinh viên. [Nhật ký Tuần 3](WORKLOG.md) có các mốc kỹ thuật, link commit, phân công W3-01–W3-08 và kế hoạch 20,0 giờ dự kiến (10,0 giờ mỗi sinh viên). Giờ thực tế chờ xác nhận; [nhật ký 38 giờ của Tuần 1–2](../../docs/WORKLOG.md) giữ nguyên.
 
 ## Tài liệu tham khảo
 

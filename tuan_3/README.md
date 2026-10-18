@@ -12,7 +12,7 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 | --- | --- |
 | Báo cáo kỹ thuật, phương pháp và giới hạn | [Báo cáo chi tiết](docs/FINAL_REPORT.md) |
 | Hướng dẫn chạy, kiểm chứng và khôi phục | [Vận hành và CI/CD](docs/operation.md) |
-| Nhật ký kỹ thuật và phân công | [Nhật ký mốc tích hợp](docs/WORKLOG.md) |
+| Nhật ký có minh chứng, phân công và kế hoạch thời gian | [Nhật ký và kế hoạch Tuần 3](docs/WORKLOG.md) |
 | Dữ liệu thô của từng sinh viên | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/raw_all.csv) |
 | Chất lượng và thống kê theo giờ | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/) |
 | Truy vấn, số đo Athena và cấu hình Projection | [Thí nghiệm Athena](results/integration_2026_10_18/benchmark/) |
@@ -79,4 +79,4 @@ Các lệnh trên kiểm tra tệp đã lưu, không chứng minh vận hành AW
 
 ## Phần tiếp tục theo dõi
 
-Chưa ghi giờ làm việc Tuần 3 khi chưa có xác nhận thực tế của từng sinh viên. Dữ liệu tại mốc này có **0 bản ghi thuộc lịch Tuần 3**. Cần tiếp tục lưu các lượt theo lịch trong phiên Learner Lab còn hiệu lực và cập nhật độ phủ theo ngày; không suy ra vận hành liên tục từ trạng thái lịch đang bật. Dữ liệu dự báo tương lai cũng cần được đối chiếu khi thời điểm đích đã qua.
+[Nhật ký Tuần 3](docs/WORKLOG.md) ghi chi tiết mốc chuẩn bị và kế hoạch **20,0 giờ dự kiến**, gồm **10,0 giờ cho sinh viên Tiến Sơn** và **10,0 giờ cho sinh viên Ngọc Quyên**. Giờ thực tế chờ xác nhận và chưa cộng vào tổng 38,0 giờ Tuần 1–2. Dữ liệu tại mốc này có **0 bản ghi thuộc lịch Tuần 3**. Cần tiếp tục lưu các lượt theo lịch trong phiên Learner Lab còn hiệu lực và cập nhật độ phủ theo ngày; không suy ra vận hành liên tục từ trạng thái lịch đang bật. Dữ liệu dự báo tương lai cũng cần được đối chiếu khi thời điểm đích đã qua.
