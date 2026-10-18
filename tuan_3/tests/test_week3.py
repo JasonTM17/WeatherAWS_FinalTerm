@@ -83,6 +83,39 @@ class Week3Tests(unittest.TestCase):
             self.assertEqual(json.loads((evidence / 'release.json').read_text())['rollback_status'], 'BLOCKED_CONCURRENT_REVISION')
         self.assertEqual(client.update_function_code.call_count, 1)
 
+    def test_release_update_error_records_unconfirmed_failure_without_raw_details(self):
+        import json
+        sess, client, blob, _, _, response = self.release_fixture()
+        client.update_function_code.side_effect = RuntimeError('provider-private-detail')
+        with tempfile.TemporaryDirectory() as folder, patch('release.urllib.request.urlopen', return_value=response):
+            evidence = Path(folder) / 'evidence'
+            with self.assertRaises(RuntimeError) as caught:
+                deployment(sess, 'expected', blob, evidence)
+            saved = (evidence / 'release.json').read_text()
+            proof = json.loads(saved)
+            self.assertEqual(proof.get('status'), 'FAIL')
+            self.assertEqual(proof.get('rollback_status'), 'NOT_ATTEMPTED_UPDATE_NOT_ACKNOWLEDGED')
+            self.assertNotIn('provider-private-detail', str(caught.exception) + saved)
+            self.assertTrue((evidence / 'previous.zip').exists())
+        self.assertEqual(client.update_function_code.call_count, 1)
+        client.get_function_configuration.assert_not_called()
+
+    def test_release_unavailable_revision_records_failure_without_unsafe_rollback(self):
+        import json
+        sess, client, blob, _, _, response = self.release_fixture()
+        client.get_waiter.return_value.wait.side_effect = RuntimeError('verification-unavailable')
+        client.get_function_configuration.side_effect = RuntimeError('provider-private-detail')
+        with tempfile.TemporaryDirectory() as folder, patch('release.urllib.request.urlopen', return_value=response):
+            evidence = Path(folder) / 'evidence'
+            with self.assertRaises(RuntimeError) as caught:
+                deployment(sess, 'expected', blob, evidence)
+            saved = (evidence / 'release.json').read_text()
+            proof = json.loads(saved)
+            self.assertEqual(proof.get('status'), 'FAIL')
+            self.assertEqual(proof.get('rollback_status'), 'BLOCKED_UNAVAILABLE_CURRENT_REVISION')
+            self.assertNotIn('provider-private-detail', str(caught.exception) + saved)
+        self.assertEqual(client.update_function_code.call_count, 1)
+
     def test_release_package_is_reproducible_and_has_only_handler(self):
         blob = package(b'print("example")\n')
         self.assertEqual(blob, package(b'print("example")\n'))

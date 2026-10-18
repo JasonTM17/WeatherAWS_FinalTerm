@@ -29,6 +29,8 @@ Các giờ bên dưới là thời điểm của commit hoặc kết quả hệ 
 
 Các thư mục kết quả là những mốc chụp riêng. Chẳng hạn, snapshot đầu có 273 bản ghi của sinh viên Ngọc Quyên, snapshot vận hành sau có 276 bản ghi. Đây là cập nhật theo thời điểm thu thập; không cộng các snapshot thành những quan sát độc lập. Tương tự, các cửa sổ metric có thể chồng lên nhau.
 
+**Rà soát bổ sung ngày 18/10:** tính lại tổng hợp từ raw cho đủ 18 truy vấn Athena, đối chiếu các trung vị đã báo cáo và toàn bộ 432 dòng đánh giá của mỗi mốc dự báo; các giá trị khớp. Phát hiện và sửa nhánh xử lý lỗi của công cụ triển khai để ghi trạng thái thất bại khi không nhận được xác nhận cập nhật hoặc không đọc được RevisionId hiện tại. Hai hồi quy mới thất bại trước sửa và đạt sau sửa; cả bảy kiểm tra tập trung vào triển khai/khôi phục đạt. Không triển khai lại Lambda và không gây lỗi lên AWS thật trong lần rà soát này.
+
 ## 3. Kế hoạch thực hiện và theo dõi thời gian
 
 Ngày và thời lượng dưới đây là **dự kiến phân bổ cho tuần 19–25/10**, tập trung rà soát sản phẩm chuẩn bị và bổ sung quan sát trong tuần. Khi ghi giờ thực tế, cần thêm ngày làm, kết quả và minh chứng tương ứng. Không ghi lại công việc chuẩn bị ngày 18/10 thành công việc đã làm trong một ngày tương lai.

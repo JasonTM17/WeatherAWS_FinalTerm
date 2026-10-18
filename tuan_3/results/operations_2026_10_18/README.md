@@ -38,6 +38,8 @@ Dashboard đã bổ sung widget thứ sáu cho hai metric mới và được đ�
 
 Lượt bổ sung lúc **13:15:45 UTC+7** của sinh viên Tiến Sơn đã thu đủ ba đô thị, raw S3 khớp ba dòng và số cảnh báo bằng 0 phù hợp ngưỡng. Metric `ResultLogLines` đã có một điểm giá trị 1 sau khi tạo filter. Với sinh viên Ngọc Quyên, tại mốc đọc khoảng 13:16 chưa có điểm metric mới sau khi tạo filter; trạng thái vẫn chờ lượt tiếp theo. `ErrorLogLines` không có điểm trong cửa sổ này, được giữ là chưa có số liệu, không chuyển thành số 0.
 
+**Kết quả cập nhật sau mốc này:** [lượt 13:51 của sinh viên Ngọc Quyên](../post_repair_2026_10_18/README.md) đã thu đủ ba đô thị, raw khớp ba dòng và có điểm metric mới sau sửa cấu hình. Nội dung phía trên vẫn mô tả đúng trạng thái lúc 13:16; CSV và JSON của snapshot này được giữ nguyên.
+
 ![Điểm metric log thật của sinh viên Tiến Sơn](scheduled_followup/filters/default/log_metrics.png)
 
 *Ảnh CloudWatch mới chụp từ API sau khi nhận log thật. [CSV metric](scheduled_followup/filters/default/log_metrics.csv) · [CSV kiểm tra từng lượt](scheduled_followup/collections/default/collection_checks.csv) · [Raw đã đọc lại từ S3](scheduled_followup/collections/default/raw_verified.csv).*

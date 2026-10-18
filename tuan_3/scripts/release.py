@@ -47,9 +47,17 @@ def deployment(sess, expected_account, blob, evidence):
         raise ValueError('Backup package digest mismatch; nothing deployed')
     evidence.mkdir(parents=True, exist_ok=False)
     (evidence / 'previous.zip').write_bytes(previous)
-    proof = {'previous_package_sha256': digest(previous), 'requested_package_sha256': digest(blob), 'code_only': True}
+    proof = {'status': 'PENDING', 'previous_package_sha256': digest(previous),
+             'requested_package_sha256': digest(blob), 'code_only': True}
     write_json(evidence / 'release.json', proof)
-    update = client.update_function_code(FunctionName=FUNCTION, ZipFile=blob, RevisionId=before['RevisionId'])
+    try:
+        update = client.update_function_code(FunctionName=FUNCTION, ZipFile=blob, RevisionId=before['RevisionId'])
+    except Exception:
+        # A lost acknowledgement does not establish whether AWS accepted the update.
+        # Without its revision, rollback could overwrite another operator's change.
+        proof.update({'status': 'FAIL', 'rollback_status': 'NOT_ATTEMPTED_UPDATE_NOT_ACKNOWLEDGED'})
+        write_json(evidence / 'release.json', proof)
+        raise RuntimeError('Deployment update was not acknowledged; inspect sanitized release proof before recovery') from None
     write_json(evidence / 'update.json', {'revision_id': update['RevisionId'], 'code_sha256': update['CodeSha256']})
     expected_sha = base64.b64encode(hashlib.sha256(blob).digest()).decode()
     try:
@@ -60,20 +68,24 @@ def deployment(sess, expected_account, blob, evidence):
             raise RuntimeError('Post-deployment identity/configuration check failed')
     except Exception:
         # Never overwrite a revision created by another operator or pipeline.
-        current = client.get_function_configuration(FunctionName=FUNCTION)
         proof['status'] = 'FAIL'
-        if current['RevisionId'] != update['RevisionId']:
-            proof['rollback_status'] = 'BLOCKED_CONCURRENT_REVISION'
+        try:
+            current = client.get_function_configuration(FunctionName=FUNCTION)
+        except Exception:
+            proof['rollback_status'] = 'BLOCKED_UNAVAILABLE_CURRENT_REVISION'
         else:
-            try:
-                client.update_function_code(FunctionName=FUNCTION, ZipFile=previous, RevisionId=update['RevisionId'])
-                client.get_waiter('function_updated_v2').wait(FunctionName=FUNCTION, WaiterConfig={'Delay': 3, 'MaxAttempts': 30})
-                restored = client.get_function_configuration(FunctionName=FUNCTION)
-                proof['rollback_verified'] = (restored['CodeSha256'] == before['CodeSha256']
-                                              and restored['LastUpdateStatus'] == 'Successful'
-                                              and fingerprint(restored) == fingerprint(before))
-            except Exception:
-                proof['rollback_status'] = 'FAILED_OR_UPDATE_STILL_IN_PROGRESS'
+            if current['RevisionId'] != update['RevisionId']:
+                proof['rollback_status'] = 'BLOCKED_CONCURRENT_REVISION'
+            else:
+                try:
+                    client.update_function_code(FunctionName=FUNCTION, ZipFile=previous, RevisionId=update['RevisionId'])
+                    client.get_waiter('function_updated_v2').wait(FunctionName=FUNCTION, WaiterConfig={'Delay': 3, 'MaxAttempts': 30})
+                    restored = client.get_function_configuration(FunctionName=FUNCTION)
+                    proof['rollback_verified'] = (restored['CodeSha256'] == before['CodeSha256']
+                                                  and restored['LastUpdateStatus'] == 'Successful'
+                                                  and fingerprint(restored) == fingerprint(before))
+                except Exception:
+                    proof['rollback_status'] = 'FAILED_OR_UPDATE_STILL_IN_PROGRESS'
         write_json(evidence / 'release.json', proof)
         raise RuntimeError('Deployment verification failed; inspect sanitized rollback proof') from None
     proof.update({'status': 'PASS', 'configuration_unchanged': True, 'state': config['State'], 'last_update_status': config['LastUpdateStatus'], 'deployed_package_sha256': digest(blob)})

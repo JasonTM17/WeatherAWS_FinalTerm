@@ -55,13 +55,15 @@ Mỗi Environment cần bốn secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_K
 5. Chờ cập nhật rồi so hash gói, trạng thái Active/Successful và dấu vân tay cấu hình.
 6. Nếu kiểm chứng lỗi, chỉ khôi phục khi RevisionId vẫn là phiên bản thuộc lượt này. Nếu đã có người khác cập nhật, dừng để người vận hành đối chiếu.
 
-Khôi phục có thể không thực hiện được ngay nếu Lambda vẫn đang cập nhật hoặc khóa phiên hết hạn; `release.json` phải ghi trạng thái thất bại thay vì báo thành công. Gói khôi phục trong runner là tệp riêng tạm thời, không được upload vào artifact công khai. Người vận hành cần giữ thêm bản sao riêng lâu dài nếu yêu cầu khôi phục sau khi runner kết thúc.
+Khôi phục có thể không thực hiện được ngay nếu Lambda vẫn đang cập nhật hoặc khóa phiên hết hạn; `release.json` ghi trạng thái thất bại thay vì báo thành công. Nếu lời gọi cập nhật không nhận được phản hồi xác nhận, chương trình ghi `NOT_ATTEMPTED_UPDATE_NOT_ACKNOWLEDGED`: chưa thể biết AWS đã nhận cập nhật hay chưa, nên không tự ghi đè mã. Nếu bước xác minh lỗi và không đọc được RevisionId hiện tại, chương trình ghi `BLOCKED_UNAVAILABLE_CURRENT_REVISION` và không thử khôi phục khi chưa xác định được quyền sở hữu phiên bản. Hai nhánh lỗi này dùng thông báo chuẩn hóa, không chép nội dung lỗi provider vào hồ sơ.
+
+Gói khôi phục trong runner là tệp riêng tạm thời, không được upload vào artifact công khai. Người vận hành cần giữ thêm bản sao riêng lâu dài nếu yêu cầu khôi phục sau khi runner kết thúc.
 
 Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc email. Triển khai thành công chỉ chứng minh gói/cấu hình đúng tại thời điểm kiểm tra; kiểm chứng luồng theo lịch và xác nhận người nhận là bước riêng.
 
 ## 4. Kết quả thực hiện
 
-- Kiểm tra hồi quy gồm 32 trường hợp sau phần bổ sung thời điểm phát hành; đối chiếu 193 tệp manifest và các phép tính lại đã đạt. Kết quả toàn bộ bộ thử được ghi riêng theo lượt CI.
+- Bộ hồi quy hiện có 34 trường hợp, gồm hai trường hợp bổ sung về lỗi cập nhật/không đọc được RevisionId. Bảy kiểm tra tập trung vào đóng gói, cập nhật và khôi phục đã chạy đạt sau sửa; hai trường hợp mới đã tái hiện lỗi trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 193 tệp manifest và các phép tính lại đã đạt; kết quả toàn bộ bộ thử được ghi riêng theo lượt CI.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
 - [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
 - [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.
