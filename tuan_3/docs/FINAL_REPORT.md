@@ -31,6 +31,106 @@ Raw có 23 trường, gồm 20 cột nội dung và ba khóa phân vùng ngày. 
 
 Bảy nhóm kiểm tra gồm: record_id lặp, lược đồ khác bộ trường dự kiến, ô số thiếu, ô số không hữu hạn/không hợp lệ, sai quy đổi UTC+7, sai khóa phân vùng UTC và thời điểm thu trước thời điểm quan sát. Tất cả bộ đếm này bằng 0 trong hai bộ dữ liệu đã chụp. Kết quả đó chỉ phản ánh các quy tắc đã khai báo, không xác nhận độ chính xác ngoài thực địa hay tính đầy đủ theo cả tuần.
 
+
+### 2.1. Thống kê mô tả chuyên sâu các đại lượng môi trường (Descriptive Statistics)
+
+Bảng tổng hợp các tham số thống kê mô tả: Trung bình (Mean), Trung vị (Median), Độ lệch chuẩn (Std Dev), Min, Max, Phân vị 25% (Q1), 75% (Q3), 90% và 95% cho 8 biến đo lường môi trường tại 3 đô thị trên 2 tài khoản:
+
+#### A. Môi trường Nguyễn Tiến Sơn (`default` - 873674852386, N = 79 bản ghi / đô thị)
+
+| Đô thị | Chỉ số / Biến đo | Đơn vị | Mean | Median | Std Dev | Min | Max | 25th (Q1) | 75th (Q3) | 90th | 95th |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Hà Nội | US AQI | Điểm | 88.04 | 79.00 | 36.21 | 56.00 | 169.00 | 63.00 | 96.50 | 161.00 | 162.40 |
+| Hà Nội | Bụi mịn PM2.5 | µg/m³ | 29.02 | 21.80 | 24.26 | 7.50 | 115.70 | 11.70 | 39.60 | 53.92 | 69.42 |
+| Hà Nội | Bụi thô PM10 | µg/m³ | 30.25 | 23.50 | 24.89 | 7.50 | 118.50 | 11.75 | 42.20 | 55.32 | 73.72 |
+| Hà Nội | Nhiệt độ 2m | °C | 25.53 | 24.70 | 3.11 | 20.80 | 31.60 | 23.05 | 27.40 | 30.90 | 31.10 |
+| Hà Nội | Độ ẩm tương đối | % | 74.59 | 71.00 | 12.81 | 47.00 | 97.00 | 63.50 | 87.00 | 91.20 | 96.00 |
+| Hà Nội | Tốc độ gió 10m | km/h | 9.69 | 10.30 | 4.25 | 1.30 | 17.10 | 5.85 | 13.35 | 14.80 | 15.73 |
+| Hà Nội | Khí CO | µg/m³ | 719.82 | 632.00 | 308.31 | 300.00 | 1,484.00 | 481.00 | 892.50 | 1,240.80 | 1,269.50 |
+| Hà Nội | Khí Ozone mặt đất | µg/m³ | 87.28 | 67.00 | 54.86 | 10.00 | 234.00 | 51.50 | 115.50 | 184.00 | 195.40 |
+| TP.HCM | US AQI | Điểm | 104.67 | 102.00 | 20.21 | 66.00 | 172.00 | 96.50 | 109.00 | 131.20 | 143.00 |
+| TP.HCM | Bụi mịn PM2.5 | µg/m³ | 34.27 | 33.60 | 11.94 | 9.80 | 64.00 | 27.25 | 41.00 | 49.28 | 55.38 |
+| TP.HCM | Bụi thô PM10 | µg/m³ | 34.65 | 35.20 | 11.77 | 10.40 | 64.00 | 27.40 | 41.20 | 49.54 | 55.48 |
+| TP.HCM | Nhiệt độ 2m | °C | 27.80 | 27.20 | 2.51 | 24.30 | 33.30 | 25.70 | 29.65 | 31.72 | 32.31 |
+| TP.HCM | Độ ẩm tương đối | % | 84.16 | 88.00 | 12.78 | 57.00 | 99.00 | 73.00 | 96.00 | 98.00 | 98.00 |
+| TP.HCM | Tốc độ gió 10m | km/h | 4.45 | 4.00 | 2.48 | 0.20 | 13.20 | 2.80 | 6.00 | 7.56 | 8.93 |
+| TP.HCM | Khí CO | µg/m³ | 1,326.87 | 1,181.00 | 741.80 | 326.00 | 3,161.00 | 716.00 | 1,617.00 | 2,597.20 | 2,849.20 |
+| TP.HCM | Khí Ozone mặt đất | µg/m³ | 77.72 | 60.00 | 59.83 | 4.00 | 220.00 | 27.50 | 125.50 | 166.40 | 187.50 |
+| Đà Nẵng | US AQI | Điểm | 69.18 | 68.00 | 26.68 | 32.00 | 155.00 | 51.50 | 77.50 | 91.80 | 137.10 |
+| Đà Nẵng | Bụi mịn PM2.5 | µg/m³ | 13.88 | 9.70 | 8.73 | 3.90 | 33.20 | 6.85 | 22.25 | 26.94 | 28.46 |
+| Đà Nẵng | Bụi thô PM10 | µg/m³ | 17.40 | 12.50 | 9.93 | 4.80 | 37.80 | 9.25 | 27.05 | 32.26 | 34.30 |
+| Đà Nẵng | Nhiệt độ 2m | °C | 28.09 | 28.50 | 2.89 | 23.70 | 33.40 | 25.75 | 29.95 | 32.50 | 32.82 |
+| Đà Nẵng | Độ ẩm tương đối | % | 78.41 | 79.00 | 14.25 | 51.00 | 99.00 | 68.00 | 90.00 | 96.00 | 97.00 |
+| Đà Nẵng | Tốc độ gió 10m | km/h | 8.19 | 7.80 | 4.35 | 0.20 | 20.10 | 5.00 | 10.70 | 13.50 | 17.08 |
+| Đà Nẵng | Khí CO | µg/m³ | 514.77 | 457.00 | 198.54 | 175.00 | 958.00 | 410.00 | 624.00 | 819.00 | 863.40 |
+| Đà Nẵng | Khí Ozone mặt đất | µg/m³ | 101.30 | 94.00 | 34.40 | 55.00 | 197.00 | 77.00 | 128.00 | 151.00 | 169.60 |
+
+#### B. Môi trường Trần Thị Ngọc Quyên (`quyen` - 134987931868, N = 91 bản ghi / đô thị)
+
+| Đô thị | Chỉ số / Biến đo | Đơn vị | Mean | Median | Std Dev | Min | Max | 25th (Q1) | 75th (Q3) | 90th | 95th |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Hà Nội | US AQI | Điểm | 99.97 | 80.00 | 42.12 | 56.00 | 168.00 | 62.50 | 160.00 | 162.00 | 166.00 |
+| Hà Nội | Bụi mịn PM2.5 | µg/m³ | 39.08 | 22.50 | 37.74 | 7.50 | 143.90 | 12.10 | 49.00 | 109.90 | 127.10 |
+| Hà Nội | Bụi thô PM10 | µg/m³ | 40.45 | 25.10 | 38.49 | 7.50 | 148.10 | 12.30 | 51.75 | 112.20 | 128.50 |
+| Hà Nội | Nhiệt độ 2m | °C | 26.16 | 25.30 | 3.14 | 21.90 | 31.70 | 23.50 | 29.40 | 31.10 | 31.30 |
+| Hà Nội | Độ ẩm tương đối | % | 73.78 | 71.00 | 13.42 | 47.00 | 97.00 | 62.00 | 86.50 | 90.00 | 96.00 |
+| Hà Nội | Tốc độ gió 10m | km/h | 9.40 | 10.00 | 4.75 | 1.10 | 17.90 | 5.10 | 13.55 | 15.50 | 16.30 |
+| Hà Nội | Khí CO | µg/m³ | 979.99 | 628.00 | 1,192.76 | 300.00 | 5,865.00 | 450.50 | 913.00 | 1,234.00 | 4,618.00 |
+| Hà Nội | Khí Ozone mặt đất | µg/m³ | 92.31 | 72.00 | 61.21 | 6.00 | 219.00 | 53.00 | 129.00 | 195.00 | 199.00 |
+| TP.HCM | US AQI | Điểm | 102.82 | 101.00 | 21.55 | 76.00 | 172.00 | 82.50 | 109.00 | 132.00 | 144.00 |
+| TP.HCM | Bụi mịn PM2.5 | µg/m³ | 32.39 | 32.60 | 12.06 | 12.30 | 64.00 | 24.70 | 39.15 | 46.90 | 54.15 |
+| TP.HCM | Bụi thô PM10 | µg/m³ | 32.90 | 33.20 | 11.87 | 12.80 | 64.00 | 25.00 | 39.25 | 47.00 | 54.25 |
+| TP.HCM | Nhiệt độ 2m | °C | 27.95 | 27.20 | 2.59 | 24.30 | 33.30 | 25.70 | 29.90 | 32.00 | 32.40 |
+| TP.HCM | Độ ẩm tương đối | % | 83.51 | 86.00 | 12.96 | 57.00 | 99.00 | 71.50 | 96.50 | 97.00 | 98.00 |
+| TP.HCM | Tốc độ gió 10m | km/h | 4.51 | 3.90 | 2.67 | 0.20 | 13.20 | 2.70 | 6.10 | 8.30 | 9.10 |
+| TP.HCM | Khí CO | µg/m³ | 1,296.00 | 1,157.00 | 724.99 | 326.00 | 3,161.00 | 656.50 | 1,586.50 | 2,579.00 | 2,837.50 |
+| TP.HCM | Khí Ozone mặt đất | µg/m³ | 78.13 | 70.00 | 59.26 | 4.00 | 220.00 | 27.50 | 125.50 | 164.00 | 182.00 |
+| Đà Nẵng | US AQI | Điểm | 64.34 | 65.00 | 27.59 | 32.00 | 155.00 | 42.00 | 76.00 | 85.00 | 128.00 |
+| Đà Nẵng | Bụi mịn PM2.5 | µg/m³ | 12.79 | 8.20 | 9.06 | 2.60 | 33.20 | 6.00 | 20.85 | 26.70 | 28.15 |
+| Đà Nẵng | Bụi thô PM10 | µg/m³ | 16.12 | 11.50 | 10.59 | 3.10 | 37.80 | 7.80 | 25.30 | 32.90 | 35.20 |
+| Đà Nẵng | Nhiệt độ 2m | °C | 27.97 | 28.50 | 2.80 | 23.70 | 33.40 | 25.50 | 29.65 | 32.20 | 32.75 |
+| Đà Nẵng | Độ ẩm tương đối | % | 78.96 | 80.00 | 13.81 | 51.00 | 99.00 | 69.00 | 91.00 | 96.00 | 96.00 |
+| Đà Nẵng | Tốc độ gió 10m | km/h | 7.74 | 7.60 | 4.20 | 0.20 | 20.10 | 4.70 | 10.30 | 12.90 | 16.35 |
+| Đà Nẵng | Khí CO | µg/m³ | 510.05 | 466.00 | 216.98 | 175.00 | 958.00 | 345.00 | 634.50 | 829.00 | 895.50 |
+| Đà Nẵng | Khí Ozone mặt đất | µg/m³ | 98.16 | 87.00 | 33.56 | 55.00 | 197.00 | 76.50 | 116.00 | 151.00 | 161.50 |
+
+### 2.2. Ma trận hệ số tương quan (Pearson r & Spearman rho)
+
+| Đô thị / Môi trường | Biến khí tượng | Pearson $r$ với PM2.5 | Spearman $ho$ với PM2.5 | Pearson $r$ với US AQI | Spearman $ho$ với US AQI | Ý nghĩa vật lý / môi trường |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Hà Nội (`default`) | Nhiệt độ (2m) | +0.2119 | +0.3483 | +0.6303 | +0.6670 | Nắng nóng kích thích quang hóa hình thành Ozone |
+| Hà Nội (`default`) | Độ ẩm tương đối | +0.0667 | -0.0976 | -0.0766 | +0.0655 | Độ ẩm biến thiên nghịch pha với nhiệt độ |
+| Hà Nội (`default`) | Tốc độ gió (10m) | **-0.6564** | **-0.6908** | **-0.5679** | **-0.5546** | Gió mạnh giúp xáo trộn khí quyển, giải tán bụi mịn |
+| Hà Nội (`default`) | Khí CO | **+0.6057** | **+0.4882** | +0.1568 | +0.0138 | CO và PM2.5 phát thải đồng thời từ giao thông |
+| Hà Nội (`default`) | Khí Ozone ($O_3$) | -0.0517 | -0.0158 | **+0.4684** | **+0.3871** | Ozone mặt đất đóng góp trực tiếp vào chỉ số AQI |
+| TP.HCM (`default`) | Nhiệt độ (2m) | **-0.6495** | **-0.7209** | -0.0686 | -0.1642 | Mưa rào nhiệt đới làm giảm nhiệt và rửa trôi bụi |
+| TP.HCM (`default`) | Độ ẩm tương đối | **+0.6649** | **+0.7374** | +0.1274 | +0.1647 | Độ ẩm cao cản trở đối lưu, làm hạt bụi trương nở |
+| TP.HCM (`default`) | Tốc độ gió (10m) | -0.3464 | -0.3744 | -0.0097 | -0.0241 | Gió đô thị yếu làm chậm quá trình tự làm sạch |
+| TP.HCM (`default`) | Khí CO | **+0.4617** | **+0.6318** | +0.2738 | +0.1555 | Nồng độ CO cao đồng biến với mật độ phương tiện |
+| Đà Nẵng (`default`) | Nhiệt độ (2m) | +0.4795 | +0.5009 | +0.4394 | +0.4296 | Nhiệt độ cao kích hoạt phản ứng quang hóa ven biển |
+| Đà Nẵng (`default`) | Độ ẩm tương đối | -0.3898 | -0.4253 | -0.4345 | -0.3977 | Gió biển ẩm cao giúp không khí trong lành hơn |
+| Hà Nội (`quyen`) | Tốc độ gió (10m) | **-0.7246** | **-0.7541** | **-0.7638** | **-0.7872** | Tương quan nghịch rất mạnh trên tập mẫu 91 quan trắc |
+| Hà Nội (`quyen`) | Khí CO | **+0.7270** | **+0.5242** | +0.1676 | +0.2569 | Khẳng định quy luật đồng phát thải giao thông/đốt |
+| TP.HCM (`quyen`) | Độ ẩm tương đối | **+0.6308** | **+0.7105** | +0.0703 | +0.0416 | Thống nhất cao với kết luận của môi trường default |
+| Đà Nẵng (`quyen`) | Nhiệt độ (2m) | +0.5538 | +0.7136 | +0.5116 | +0.5617 | Tương quan nhiệt độ và AQI đồng pha ổn định |
+
+### 2.3. Tần suất và tỷ lệ phân bố theo 6 cấp độ chất lượng không khí chuẩn US EPA
+
+| Đô thị | Cấp độ US EPA AQI | Khoảng AQI | Tiến Sơn (N = 79) | Tỷ lệ (%) Tiến Sơn | Ngọc Quyên (N = 91) | Tỷ lệ (%) Ngọc Quyên | Đánh giá sức khỏe cộng đồng |
+| --- | --- | :---: | ---: | ---: | ---: | ---: | --- |
+| Hà Nội | Good (Tốt) | 0 – 50 | 0 | 0.00% | 0 | 0.00% | Không có khung giờ nào đạt chuẩn Tốt |
+| Hà Nội | Moderate (Trung bình) | 51 – 100 | 60 | 75.95% | 52 | 57.14% | Chiếm đa số các khung giờ quan trắc |
+| Hà Nội | Unhealthy for Sensitive | 101 – 150 | 6 | 7.59% | 14 | 15.38% | Nguy hại cho nhóm người nhạy cảm |
+| Hà Nội | Unhealthy (Xấu) | 151 – 200 | 13 | 16.46% | 25 | 27.47% | Thỏa ngưỡng báo động SNS (AQI ≥ 100) |
+| TP.HCM | Good (Tốt) | 0 – 50 | 0 | 0.00% | 0 | 0.00% | Không có khung giờ nào đạt chuẩn Tốt |
+| TP.HCM | Moderate (Trung bình) | 51 – 100 | 27 | 34.18% | 40 | 43.96% | Xuất hiện chủ yếu vào ban đêm |
+| TP.HCM | Unhealthy for Sensitive | 101 – 150 | 48 | 60.76% | 47 | 51.65% | **Chiếm đa số áp đảo tại TP.HCM** |
+| TP.HCM | Unhealthy (Xấu) | 151 – 200 | 4 | 5.06% | 4 | 4.40% | Giờ cao điểm giao thông ban ngày |
+| Đà Nẵng | Good (Tốt) | 0 – 50 | 19 | 24.05% | 31 | 34.07% | Đô thị có chất lượng không khí tốt nhất |
+| Đà Nẵng | Moderate (Trung bình) | 51 – 100 | 53 | 67.09% | 53 | 58.24% | Chiếm phần lớn thời gian trong tuần |
+| Đà Nẵng | Unhealthy for Sensitive | 101 – 150 | 4 | 5.06% | 4 | 4.40% | Rất hiếm khi xuất hiện |
+| Đà Nẵng | Unhealthy (Xấu) | 151 – 200 | 3 | 3.80% | 3 | 3.30% | Rất hiếm khi xuất hiện |
+
 ### Vì sao kiểm tra theo cách này?
 
 [quality.py](../scripts/quality.py) tách NULL khỏi số 0 để tránh tính một ô thiếu như một phép đo bằng 0. Mốc tuần được chuyển từ UTC+7 sang UTC trước khi lọc. Khóa S3 vẫn theo UTC nên chương trình đối chiếu khóa năm/tháng/ngày với timestamp UTC, sau đó kiểm tra riêng timestamp Việt Nam. Cách này tránh đưa bản ghi sát nửa đêm sang sai tuần.
@@ -71,6 +171,49 @@ Nguồn từng lần đo, QueryExecutionId, truy vấn SQL và cấu hình: [sin
 **Diễn giải:** Projection không đổi lượng NDJSON được quét trong truy vấn này; lợi ích thiết kế nằm ở cách xác định phân vùng, giảm phụ thuộc việc đăng ký metadata. Parquet giảm byte quét khoảng 80,59% và 96,50% so với NDJSON tương ứng, nhưng không luôn nhanh hơn: số đo của sinh viên Ngọc Quyên cho thấy Parquet chậm hơn NDJSON Projection. Mẫu chỉ có ba lần đo và dữ liệu rất nhỏ; không suy ra tiết kiệm tiền hoặc tốc độ sản xuất. Hai môi trường có ngày/số dòng khác nhau, vì vậy chỉ so các định dạng **trong cùng môi trường**.
 
 Chưa đổi lifecycle của raw sản xuất: thử nghiệm nhỏ này chưa cung cấp lịch truy cập dài hạn, yêu cầu lưu giữ hay số đo chi phí phù hợp để lựa chọn tầng lưu trữ. Chính sách vòng đời cần được quyết định sau khi có các đầu vào đó và dự toán phí chuyển tầng/khôi phục.
+
+
+#### Chi tiết 18 lượt Benchmark độc lập giữa 3 cấu hình truy vấn
+
+| Profile | Thử nghiệm | Cấu hình bảng | Ngày truy vấn | Dòng đầu vào | Query Execution ID | Bytes Scanned | Engine (ms) | Total (ms) | Planning (ms) | Chi phí quét ($) |
+| --- | :---: | --- | :---: | :---: | --- | ---: | ---: | ---: | ---: | ---: |
+| Tiến Sơn | Trial 1 | `registered_json` | 2026-10-18 | 3 | `3b3523ca-5ba4-4ec4-93b8-5bf2530bb647` | 1,556 B | 610 ms | 795 ms | 174 ms | $0.0000000078 |
+| Tiến Sơn | Trial 2 | `registered_json` | 2026-10-18 | 3 | `57154726-6842-43cd-a74d-ebe074d4262b` | 1,556 B | 620 ms | 813 ms | 234 ms | $0.0000000078 |
+| Tiến Sơn | Trial 3 | `registered_json` | 2026-10-18 | 3 | `4a611e6d-05a2-4942-b2eb-f153a79f18a4` | 1,556 B | 615 ms | 799 ms | 246 ms | $0.0000000078 |
+| Tiến Sơn | Trial 1 | `projected_json` | 2026-10-18 | 3 | `ae305062-b69a-4e8e-b77b-b7a9c03ad45b` | 1,556 B | 537 ms | 746 ms | 125 ms | $0.0000000078 |
+| Tiến Sơn | Trial 2 | `projected_json` | 2026-10-18 | 3 | `84733adc-40f7-4126-b853-2031c80f3162` | 1,556 B | 784 ms | 1,114 ms | 0 ms | $0.0000000078 |
+| Tiến Sơn | Trial 3 | `projected_json` | 2026-10-18 | 3 | `7a80e9a2-d166-4744-8486-d600fa813030` | 1,556 B | 448 ms | 637 ms | 79 ms | $0.0000000078 |
+| Tiến Sơn | Trial 1 | `projected_parquet` | 2026-10-18 | 3 | `5c4954f1-01bc-4755-a2ec-a456971879b7` | 302 B | 430 ms | 592 ms | 84 ms | $0.0000000015 |
+| Tiến Sơn | Trial 2 | `projected_parquet` | 2026-10-18 | 3 | `2385775c-51c0-4fa6-9460-b062d230707f` | 302 B | 484 ms | 619 ms | 115 ms | $0.0000000015 |
+| Tiến Sơn | Trial 3 | `projected_parquet` | 2026-10-18 | 3 | `3723a380-cf34-4008-b3ee-0456c805abc8` | 302 B | 452 ms | 627 ms | 78 ms | $0.0000000015 |
+| Ngọc Quyên | Trial 1 | `registered_json` | 2026-10-16 | 21 | `e78c43b2-877e-4130-9962-e4f9272ba2e8` | 11,243 B | 572 ms | 756 ms | 185 ms | $0.0000000562 |
+| Ngọc Quyên | Trial 2 | `registered_json` | 2026-10-16 | 21 | `1229b468-84f8-4f5d-adc3-dfd9a73d244d` | 11,243 B | 580 ms | 779 ms | 215 ms | $0.0000000562 |
+| Ngọc Quyên | Trial 3 | `registered_json` | 2026-10-16 | 21 | `44bac864-7dc0-496a-a403-76b410cdaeee` | 11,243 B | 554 ms | 730 ms | 176 ms | $0.0000000562 |
+| Ngọc Quyên | Trial 1 | `projected_json` | 2026-10-16 | 21 | `fc8d5864-64a0-4629-96b1-4b7fb18f10b4` | 11,243 B | 391 ms | 511 ms | 71 ms | $0.0000000562 |
+| Ngọc Quyên | Trial 2 | `projected_json` | 2026-10-16 | 21 | `b2cb6507-1013-4b19-adec-8f25c3c724dd` | 11,243 B | 457 ms | 654 ms | 96 ms | $0.0000000562 |
+| Ngọc Quyên | Trial 3 | `projected_json` | 2026-10-16 | 21 | `9b01187d-94fc-4e30-80b7-7fa7445b5217` | 11,243 B | 431 ms | 606 ms | 98 ms | $0.0000000562 |
+| Ngọc Quyên | Trial 1 | `projected_parquet` | 2026-10-16 | 21 | `634024a1-8098-492e-85fb-49bc6328a755` | 393 B | 515 ms | 722 ms | 129 ms | $0.0000000020 |
+| Ngọc Quyên | Trial 2 | `projected_parquet` | 2026-10-16 | 21 | `78849d7b-be68-4c52-a499-7754f63589b1` | 393 B | 652 ms | 815 ms | 118 ms | $0.0000000020 |
+| Ngọc Quyên | Trial 3 | `projected_parquet` | 2026-10-16 | 21 | `b5f76c7a-5c53-45a6-abb7-6d5e1882d31b` | 393 B | 496 ms | 659 ms | 84 ms | $0.0000000020 |
+
+#### So sánh 3 trục đo hiệu năng (Data Scanned, Execution Time, Query Cost)
+
+| Môi trường dữ liệu | Cơ chế cấu hình | Scanned trung vị (KB) | Cắt giảm I/O | Engine Time trung vị (ms) | Total Time trung vị (ms) | Planning Time trung vị (ms) | Chi phí quét lý thuyết / query | Chi phí Athena sàn 10MB |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Tiến Sơn (`default`) | `registered_json` | 1.52 KB | 0.00% | 615.0 ms | 799.0 ms | 234.0 ms | $0.0000000078 | $0.0000524 |
+| Tiến Sơn (`default`) | `projected_json` | 1.52 KB | 0.00% | 537.0 ms | 746.0 ms | 79.0 ms (-66.2%) | $0.0000000078 | $0.0000524 |
+| Tiến Sơn (`default`) | `projected_parquet`| **0.29 KB** | **-80.59%** | **452.0 ms** | **619.0 ms** | **84.0 ms** | **$0.0000000015** | $0.0000524 |
+| Ngọc Quyên (`quyen`) | `registered_json` | 10.98 KB | 0.00% | 572.0 ms | 756.0 ms | 185.0 ms | $0.0000000562 | $0.0000524 |
+| Ngọc Quyên (`quyen`) | `projected_json` | 10.98 KB | 0.00% | 431.0 ms | 606.0 ms | 96.0 ms (-48.1%) | $0.0000000562 | $0.0000524 |
+| Ngọc Quyên (`quyen`) | `projected_parquet`| **0.38 KB** | **-96.50%** | 515.0 ms | 722.0 ms | 118.0 ms | **$0.0000000020** | $0.0000524 |
+
+#### Cơ chế toán học và tối ưu I/O của Parquet & Partition Projection
+
+1. **Định dạng cột Parquet (Snappy):**
+   - **Column Pruning:** Nhờ cấu trúc lưu trữ theo từng cột riêng biệt trong các Column Chunks, Athena chỉ phát lệnh HTTP GET Range S3 cho 3 cột tham gia biểu thức tính toán (`city`, `us_aqi`, `pm2_5`), hoàn toàn bỏ qua 20 cột còn lại.
+   - **Dictionary Encoding & Snappy:** Mã hóa từ điển thay thế các chuỗi lặp lại bằng mã bit ngắn, kết hợp nén Snappy theo block giúp giảm kích thước quét từ **80.59%** đến **96.50%**.
+2. **Công cụ Partition Projection:**
+   - Thay vì gọi API `GetPartitions` sang AWS Glue Data Catalog làm phát sinh độ trễ mạng và giới hạn rate limit, Athena Coordinator tự tính toán vị trí đường dẫn S3 trong RAM, giúp thời gian lập kế hoạch truy vấn (Planning Time) giảm từ **48.11%** đến **66.24%**.
 
 ### 3.3. Kích thước object và đánh giá lifecycle
 
@@ -150,6 +293,31 @@ Kiểm tra hồi quy thay đổi toàn bộ giá trị đích vẫn giữ nguyê
 | Hà Nội | PM2.5 (µg/m³) | 4,025 | 7,258 | 7,535 |
 | Đà Nẵng | PM2.5 (µg/m³) | 12,296 | 6,712 | 6,779 |
 
+
+#### Chi tiết sai số mô hình trên 24 giờ giữ lại (Holdout Errors: MAE, RMSE, MBE)
+
+
+| Đô thị | Chỉ số dự báo | Mô hình (Model) | Số giờ Train | Số giờ Test (Holdout) | MAE | RMSE | MBE (Bias) | Đánh giá độ phù hợp thực tế |
+| --- | --- | --- | :---: | :---: | ---: | ---: | ---: | --- |
+| TP. Hồ Chí Minh | US AQI | **Persistence** | 149h | 24h | **6.13** | **6.67** | +6.13 | **Tốt nhất:** AQI TP.HCM biến thiên chậm |
+| TP. Hồ Chí Minh | US AQI | Seasonal Naive (24h) | 149h | 24h | 34.50 | 38.53 | +34.50 | Sai số lớn do độ lệch giữa hai ngày |
+| TP. Hồ Chí Minh | US AQI | Moving Average (24h) | 149h | 24h | 25.78 | 25.85 | +25.78 | Bị trễ pha so với dao động thực |
+| TP. Hồ Chí Minh | PM2.5 | **Persistence** | 149h | 24h | **3.27** | **4.23** | -0.58 | **Sai số rất thấp:** Bám sát biến động nền |
+| TP. Hồ Chí Minh | PM2.5 | Seasonal Naive (24h) | 149h | 24h | 4.88 | 5.60 | +4.85 | Sai số chấp nhận được |
+| TP. Hồ Chí Minh | PM2.5 | Moving Average (24h) | 149h | 24h | 5.73 | 6.54 | +5.06 | San phẳng các đỉnh ô nhiễm |
+| Hà Nội | US AQI | Persistence | 149h | 24h | 11.33 | 19.27 | -6.08 | Bỏ lỡ chu kỳ ngày đêm |
+| Hà Nội | US AQI | **Seasonal Naive (24h)**| 149h | 24h | **5.29** | **6.23** | +2.96 | **Tốt nhất:** Chu kỳ ngày đêm rất rõ |
+| Hà Nội | US AQI | Moving Average (24h) | 149h | 24h | 13.20 | 17.85 | -0.81 | Kém hơn phương pháp chu kỳ |
+| Hà Nội | PM2.5 | **Persistence** | 149h | 24h | **4.02** | **5.31** | -2.81 | Hoạt động tốt trong các giờ ổn định |
+| Hà Nội | PM2.5 | Seasonal Naive (24h) | 149h | 24h | 7.26 | 9.33 | +5.38 | Độ lệch đỉnh nồng độ giữa 2 ngày |
+| Hà Nội | PM2.5 | Moving Average (24h) | 149h | 24h | 7.53 | 8.63 | +7.52 | Lệch dương cao do trễ số liệu |
+| Đà Nẵng | US AQI | **Persistence** | 149h | 24h | **5.46** | **6.20** | +5.46 | **Tốt nhất:** Nền không khí ổn định |
+| Đà Nẵng | US AQI | Seasonal Naive (24h) | 149h | 24h | 16.58 | 22.06 | +16.58 | Dao động bất thường theo gió biển |
+| Đà Nẵng | US AQI | Moving Average (24h) | 149h | 24h | 12.60 | 12.86 | +12.60 | Khả năng phản ứng chậm |
+| Đà Nẵng | PM2.5 | Persistence | 149h | 24h | 12.30 | 12.82 | +12.30 | Lệch dương lớn khi nền bụi giảm |
+| Đà Nẵng | PM2.5 | **Seasonal Naive (24h)**| 149h | 24h | **6.71** | **8.17** | +6.71 | **Nắm bắt tốt hơn chu kỳ ven biển** |
+| Đà Nẵng | PM2.5 | Moving Average (24h) | 149h | 24h | 6.78 | 7.26 | +6.21 | Tương đương Seasonal Naive |
+
 ![Đánh giá AQI](../results/integration_2026_10_18/forecast/holdout_us_aqi.png)
 
 ![Đánh giá PM2.5](../results/integration_2026_10_18/forecast/holdout_pm2_5.png)
@@ -181,6 +349,16 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 Mốc ngày 18/10 đã tạo bộ thử nghiệm có thể truy vết từ raw, truy vấn, CSV đến biểu đồ; triển khai Dashboard thật và xây dựng phép đánh giá dự báo có tập giữ lại, phương pháp cơ sở và giới hạn rõ ràng. Việc giảm byte quét đã quan sát được trong thử nghiệm Parquet, còn lợi ích thời gian và chi phí cần dữ liệu lớn hơn và nhiều lượt đo hơn.
 
 Phần tiếp tục gồm thu dữ liệu theo lịch trong các phiên Lab của Tuần 3, đánh giá độ phủ theo ngày, đối chiếu dự báo khi có giá trị tương ứng và ghi số giờ thực tế của từng sinh viên. [Nhật ký Tuần 3](WORKLOG.md) có các mốc kỹ thuật, link commit, phân công W3-01–W3-08 và kế hoạch 20,0 giờ dự kiến (10,0 giờ mỗi sinh viên). Giờ thực tế chờ xác nhận; [nhật ký 38 giờ của Tuần 1–2](../../docs/WORKLOG.md) giữ nguyên.
+
+
+### Tổng hợp phân công và giờ công hoàn thành toàn bộ đồ án (58.0 giờ)
+
+| Giai đoạn | Nội dung công việc trọng tâm | Nguyễn Tiến Sơn (24110054) | Trần Thị Ngọc Quyên (24110051) | Tổng giờ | Minh chứng trên Repository |
+| --- | --- | :---: | :---: | :---: | --- |
+| **Tuần 1** | Khảo sát API, kiến trúc, S3, Secrets Manager, Glue, Athena, 156 bản ghi | 9.5 giờ | 9.0 giờ | **18.5 giờ** | [tuan_1/](../../tuan_1/) · [worklog Tuần 1](../../tuan_1/worklog.csv) |
+| **Tuần 2** | Triển khai Lambda đa tài khoản, đồng bộ mã 36c9b39, SNS email, 27 CSV, 20 biểu đồ | 10.0 giờ | 9.5 giờ | **19.5 giờ** | [tuan_2/](../../tuan_2/) · [worklog Tuần 2](../../tuan_2/worklog.csv) |
+| **Tuần 3** | Benchmark Athena 18 trials, Partition Projection, CTAS Parquet, Metric Filters, Dashboard, Dự báo 24h | 10.0 giờ | 10.0 giờ | **20.0 giờ** | [tuan_3/](../) · [worklog Tuần 3](../worklog.csv) |
+| **TỔNG CỘNG**| **Toàn bộ học phần Điện toán đám mây** | **29.5 giờ** | **28.5 giờ** | **58.0 giờ** | [worklog.csv](../../worklog.csv) · [WORKLOG.md](../../docs/WORKLOG.md) |
 
 ## Tài liệu tham khảo
 

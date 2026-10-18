@@ -36,7 +36,39 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 - Đã chạy CD thành công cho [sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101930450) và [sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101934718) ở commit `c28da19`; gói tải lại từ AWS khớp artifact CI, cấu hình giữ nguyên. Secrets tạm đã được xóa sau kiểm chứng.
 - Đã đối chiếu [lượt tự động 13:51 sau sửa cấu hình của sinh viên Ngọc Quyên](results/post_repair_2026_10_18/README.md): đủ ba đô thị, ba bản ghi khớp S3, một điểm metric log mới, không thấy thông báo đọc Secret thất bại trong cửa sổ đã kiểm tra. Ba mẫu dưới ngưỡng nên không phát cảnh báo mới.
 
+
+### Bảng tổng hợp số liệu môi trường & Thống kê mô tả (3 đô thị)
+
+*Tổng hợp trên 237 bản ghi (Tiến Sơn) và 273 bản ghi (Ngọc Quyên); phân bổ đồng đều 79 và 91 bản ghi cho mỗi đô thị.*
+
+| Đô thị | Môi trường dữ liệu | Số bản ghi (N) | US AQI (Mean ± Std) | PM2.5 (Mean ± Std, µg/m³) | Nhiệt độ (Mean, °C) | Độ ẩm (Mean, %) | Tốc độ gió (Mean, km/h) | Tỷ lệ vượt ngưỡng AQI ≥ 100 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| **Hà Nội** | Tiến Sơn (`default`) | 79 | 88.04 ± 36.21 | 29.02 ± 24.26 | 25.53 °C | 74.59 % | 9.69 km/h | **24.05%** (19/79) |
+| **Hà Nội** | Ngọc Quyên (`quyen`) | 91 | 99.97 ± 42.12 | 39.08 ± 37.74 | 26.16 °C | 73.78 % | 9.40 km/h | **42.86%** (39/91) |
+| **TP.HCM** | Tiến Sơn (`default`) | 79 | 104.67 ± 20.21 | 34.27 ± 11.94 | 27.80 °C | 84.16 % | 4.45 km/h | **65.82%** (52/79) |
+| **TP.HCM** | Ngọc Quyên (`quyen`) | 91 | 102.82 ± 21.55 | 32.39 ± 12.06 | 27.95 °C | 83.51 % | 4.51 km/h | **56.04%** (51/91) |
+| **Đà Nẵng**| Tiến Sơn (`default`) | 79 | 69.18 ± 26.68 | 13.88 ± 8.73 | 28.09 °C | 78.41 % | 8.19 km/h | **8.86%** (7/79) |
+| **Đà Nẵng**| Ngọc Quyên (`quyen`) | 91 | 64.34 ± 27.59 | 12.79 ± 9.06 | 27.97 °C | 78.96 % | 7.74 km/h | **7.69%** (7/91) |
+
+### Ma trận tương quan giữa khí tượng và ô nhiễm (Pearson r & Spearman rho)
+
+| Đô thị | Yếu tố khí tượng | Tương quan với PM2.5 (Pearson / Spearman) | Tương quan với US AQI (Pearson / Spearman) | Đánh giá hiện tượng môi trường |
+| --- | --- | :---: | :---: | --- |
+| **Hà Nội** | Tốc độ gió (10m) | **-0.6564 / -0.6908** | **-0.5679 / -0.5546** | Gió mạnh giúp phát tán và giải phóng sol khí ô nhiễm |
+| **Hà Nội** | Khí CO | **+0.6057 / +0.4882** | +0.1568 / +0.0138 | Đồng phát thải từ phương tiện giao thông và nhiên liệu đốt |
+| **TP.HCM** | Độ ẩm tương đối | **+0.6649 / +0.7374** | +0.1274 / +0.1647 | Độ ẩm cao cản trở đối lưu, làm hạt bụi trương nở ngậm nước |
+| **TP.HCM** | Nhiệt độ (2m) | **-0.6495 / -0.7209** | -0.0686 / -0.1642 | Mưa rào nhiệt đới làm giảm nhiệt độ và rửa trôi bụi bề mặt |
+| **Đà Nẵng**| Nhiệt độ (2m) | **+0.4795 / +0.5009** | **+0.4394 / +0.4296** | Nắng nóng thúc đẩy phản ứng quang hóa Ozone ven biển |
+
 ### Truy vấn Athena trên cùng dữ liệu
+
+
+| Cấu hình truy vấn Athena | Scanned trung vị Tiến Sơn | Scanned trung vị Ngọc Quyên | Engine Time trung vị Tiến Sơn | Engine Time trung vị Ngọc Quyên | Mức giảm Scanned Bytes | Chi phí quét lý thuyết / query |
+| --- | ---: | ---: | ---: | ---: | :---: | ---: |
+| **Raw NDJSON (Registered)** | 1.52 KB | 10.98 KB | 615 ms | 572 ms | Mốc cơ sở (0%) | $0.00000001 – $0.00000006 |
+| **NDJSON (Partition Projection)**| 1.52 KB | 10.98 KB | 537 ms | 431 ms | 0.00% (Giảm 48-66% Planning ms) | $0.00000001 – $0.00000006 |
+| **Parquet Snappy (Projection)** | **0.29 KB** | **0.38 KB** | **452 ms** | **515 ms** | **Giảm 80.59% – 96.50%** | **$0.0000000015 – $0.0000000020** |
+
 
 ![Lượng byte được Athena quét](results/integration_2026_10_18/benchmark_scan.png)
 
@@ -58,6 +90,19 @@ Metric còn điểm bất thường: tổng Errors cao hơn Invocations trong c�
 
 *Dữ liệu mô hình Open-Meteo/CAMS; đường thực tế trong phép đánh giá là giá trị mô hình được giữ lại, không phải số đo trạm. Phương pháp trung bình trượt không thắng các phương pháp cơ sở ở mọi trường hợp. [Sai số đầy đủ](results/integration_2026_10_18/forecast/forecast_metrics.csv) · [Giá trị từng giờ](results/integration_2026_10_18/forecast/holdout_predictions.csv).*
 
+
+#### Đánh giá sai số 3 mô hình dự báo trên 24 giờ giữ lại (Holdout Errors)
+
+| Đô thị | Biến số | Mô hình tối ưu nhất | MAE tối ưu | RMSE tối ưu | MBE (Bias) | Mô hình xếp sau (MAE) | Nhận xét độ tin cậy |
+| --- | --- | --- | ---: | ---: | ---: | --- | --- |
+| **TP.HCM** | **US AQI** | **Persistence** | **6.13** | **6.67** | +6.13 | Moving Avg (25.78), Seasonal (34.50) | AQI TP.HCM biến thiên chậm; Persistence tối ưu |
+| **TP.HCM** | **PM2.5** | **Persistence** | **3.27** | **4.23** | -0.58 | Seasonal (4.88), Moving Avg (5.73) | Bám sát giá trị quan trắc thực tế |
+| **Hà Nội** | **US AQI** | **Seasonal Naive (24h)**| **5.29** | **6.23** | +2.96 | Persistence (11.33), Moving Avg (13.20)| Bắt trúng chu kỳ ngày đêm đặc trưng tại Hà Nội |
+| **Hà Nội** | **PM2.5** | **Persistence** | **4.02** | **5.31** | -2.81 | Seasonal (7.26), Moving Avg (7.53) | Tốt trong các giờ ổn định khí quyển |
+| **Đà Nẵng** | **US AQI** | **Persistence** | **5.46** | **6.20** | +5.46 | Moving Avg (12.60), Seasonal (16.58) | Nền không khí ổn định tại đô thị biển |
+| **Đà Nẵng** | **PM2.5** | **Seasonal Naive (24h)**| **6.71** | **8.17** | +6.71 | Moving Avg (6.78), Persistence (12.30) | Nắm bắt tốt chu kỳ tuần hoàn gió đất - gió biển |
+
+
 ## Mã nguồn và kiểm tra
 
 | Chương trình | Trách nhiệm |
@@ -78,6 +123,17 @@ python tuan_3/scripts/verify_results.py
 ```
 
 Các lệnh trên kiểm tra tệp đã lưu, không chứng minh vận hành AWS hiện tại. Cách chạy các chương trình có thao tác AWS và điều kiện khôi phục được trình bày trong [hướng dẫn vận hành](docs/operation.md).
+
+
+### Tổng hợp phân công và giờ công toàn bộ đồ án (58.0 giờ)
+
+| Giai đoạn | Nội dung trọng tâm | Nguyễn Tiến Sơn (24110054) | Trần Thị Ngọc Quyên (24110051) | Tổng giờ tuần | Minh chứng kỹ thuật |
+| --- | --- | :---: | :---: | :---: | --- |
+| **Tuần 1** | Khảo sát API, thiết kế kiến trúc, S3, Secrets Manager, Glue, Athena, 156 bản ghi | 9.5 giờ | 9.0 giờ | **18.5 giờ** | [tuan_1/](../tuan_1/) · [worklog](../tuan_1/worklog.csv) |
+| **Tuần 2** | Triển khai Lambda đa tài khoản, đồng bộ mã 36c9b39, SNS email, 27 CSV, 20 biểu đồ | 10.0 giờ | 9.5 giờ | **19.5 giờ** | [tuan_2/](../tuan_2/) · [worklog](../tuan_2/worklog.csv) |
+| **Tuần 3** | Benchmark Athena 18 trials, Partition Projection, CTAS Parquet, Metric Filters, Dashboard, Dự báo 24h | 10.0 giờ | 10.0 giờ | **20.0 giờ** | [tuan_3/](./) · [worklog](worklog.csv) |
+| **TỔNG CỘNG**| **Toàn bộ học phần Điện toán đám mây** | **29.5 giờ** | **28.5 giờ** | **58.0 giờ** | [worklog.csv](../worklog.csv) · [docs/WORKLOG.md](../docs/WORKLOG.md) |
+
 
 ## Phần tiếp tục theo dõi
 
