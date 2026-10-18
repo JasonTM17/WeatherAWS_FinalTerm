@@ -327,6 +327,24 @@ IF((inv>0) AND (FILL(err,-1)>=0) AND (err<=inv),100*err/inv)
 
 Ảnh giữ nguyên điểm Errors = 3 lúc 09:15. Đã sửa cách tính/hiển thị; nguyên nhân sâu hơn của điểm native thiếu cặp vẫn chưa xác định từ các bằng chứng hiện có. Không đổi số nguồn để tạo một tỷ lệ toàn cửa sổ bằng 0.
 
+### 4.4. Truy nguyên bổ sung điểm lỗi 09:15 UTC
+
+Đợt đọc bắt đầu 11:31:58 UTC ngày 18/10 đã kiểm tra thêm metric bất đồng bộ, đọc trực tiếp sáu log stream và tra lịch sử Lambda, EventBridge, IAM, Logs, STS. [Hồ sơ điều tra và JSON nguồn](../results/native_error_investigation_2026_10_18/README.md) ghi rõ trạng thái từng phép đọc.
+
+| Phút UTC / Việt Nam | Errors (Sum) | Invocations | Throttles | Nhận sự kiện bất đồng bộ | Bỏ sự kiện bất đồng bộ | Tuổi sự kiện lớn nhất (ms) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 09:15 / 16:15 | 1 | — | 0 | 1 | — | 72 |
+| 09:16 / 16:16 | 1 | — | 0 | — | — | 60.364 |
+| 09:18 / 16:18 | 1 | — | 0 | — | 1 | 167.598 |
+
+Dấu “—” là không có điểm trả về. **Errors = 3 là tổng của ba điểm lỗi một phút**, không phải lỗi nhân số trong báo cáo. Nhịp thời gian và tuổi sự kiện phù hợp với thử lại bất đồng bộ, sau đó có một sự kiện bị bỏ. Theo [cơ chế retry của AWS](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-error-handling.html), lỗi hàm mặc định có thể được thử lại thêm hai lần. Dữ liệu tổng hợp không nối được từng lỗi với cùng một ID sự kiện; không tự điền Invocations = 3 hoặc khẳng định đã tìm được ngoại lệ cụ thể.
+
+CloudTrail có AssumeRole thành công nhắm đúng vai trò thực thi tại 09:15:43, 09:16:43 và 09:18:30 UTC. Hai lỗi AccessDenied lúc 09:23:36 và 09:24:59 thuộc vai trò gọi API kiểm tra khác vai trò thực thi. Các thay đổi IAM quan sát được không nêu execution role và không nhắm policy hiện gắn với role đó; ba trong bảy tài liệu policy hiện tại không đọc được. Vì vậy, chưa có căn cứ quy nguyên nhân cho quyền Lambda hoặc thay đổi IAM.
+
+Mã hiện tại có hash khớp gói CD đã lưu, LastModified 05:50:53 UTC; lịch sử quản trị Lambda/EventBridge truy vấn trong cửa sổ chỉ có thao tác đọc. Đọc trực tiếp log vẫn có hai lượt complete tại 08:15 và 10:15, không có lifecycle/ngoại lệ khởi tạo tương ứng khoảng lỗi. Inventory hiện tại trả 0 trail và 0 event data store trong phạm vi nhìn thấy; [CloudTrail Event history](https://docs.aws.amazon.com/lambda/latest/dg/logging-using-cloudtrail.html) không thay thế lịch sử Invoke data events. Các quan sát này chưa giải thích được vì sao Invocations và mẫu Duration bị thiếu.
+
+**Kết luận:** đã làm rõ cấu thành ba lỗi và ghi nhận dấu vết sự kiện bị bỏ; nguyên nhân sâu hơn vẫn chưa xác định. Giữ nguyên metric gốc và bộ lọc tỷ lệ lỗi đã kiểm chứng. Đợt điều tra không sửa mã/cấu hình Lambda hoặc IAM khi chưa có nguyên nhân được chứng minh. Nếu tái diễn, cần failure payload/log runtime và lịch sử quyền đúng thời điểm; hồ sơ hiện tại không có payload sự kiện đã bị bỏ.
+
 ## 5. Dự báo theo giờ và đánh giá
 
 ### 5.1. Nguồn dữ liệu và cách chia tập

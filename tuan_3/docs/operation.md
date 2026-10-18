@@ -11,7 +11,7 @@ python tuan_3/scripts/verify_results.py
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 359 tệp trong 11 manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của các mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Mốc cập nhật 246/285 dòng bổ sung kiểm tra 96 dòng thống kê, 120 dòng tương quan, 24 bộ sai số/576 dòng đánh giá và 12 dòng đối chiếu với dữ liệu mô hình tải về sau, cùng tổng giờ Tuần 3 đã xác nhận. Bản dự báo đã phát hành có 144 giá trị cho 24 giờ đích, ba đô thị và hai chỉ số; tất cả giờ đích đều sau thời điểm phát hành. Mốc cũ có 12 giá trị cho hai giờ đích; mốc mới cutoff 11:00 UTC có 24 giá trị cho bốn giờ đích, vẫn chưa đủ cả 24 giờ. Các kiểm tra này không cần khóa AWS và không chứng minh dịch vụ hiện tại.
+`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 361 tệp trong 12 manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của các mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Mốc cập nhật 246/285 dòng bổ sung kiểm tra 96 dòng thống kê, 120 dòng tương quan, 24 bộ sai số/576 dòng đánh giá và 12 dòng đối chiếu với dữ liệu mô hình tải về sau, cùng tổng giờ Tuần 3 đã xác nhận. Bản dự báo đã phát hành có 144 giá trị cho 24 giờ đích, ba đô thị và hai chỉ số; tất cả giờ đích đều sau thời điểm phát hành. Mốc cũ có 12 giá trị cho hai giờ đích; mốc mới cutoff 11:00 UTC có 24 giá trị cho bốn giờ đích, vẫn chưa đủ cả 24 giờ. Các kiểm tra này không cần khóa AWS và không chứng minh dịch vụ hiện tại.
 
 [Bản xuất raw mới 246/288 dòng](../results/raw_export_2026_10_18/README.md) bổ sung 96 tệp minh chứng: JSON gốc, CSV, inventory, chất lượng và thời điểm đọc. Verifier đối chiếu từng byte/hash, từng trường JSON–CSV và bảo toàn toàn bộ bản ghi của snapshot trước. Một hồi quy mới kiểm tra lưu byte nguyên vẹn, từ chối đường dẫn vượt thư mục và từ chối ghi đè tệp đã có.
 
@@ -65,7 +65,7 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 
 ## 4. Kết quả thực hiện
 
-- Bộ hồi quy hiện có 48 trường hợp, gồm năm trường hợp về hạng đồng hạng, thống kê, MA 3 giờ và loại giờ chưa hoàn tất khi đối chiếu mô hình tải về sau. Bảy kiểm tra tập trung vào đóng gói/cập nhật/khôi phục trước đó đã đạt; hai trường hợp lỗi triển khai đã tái hiện trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 359 tệp manifest và các phép tính lại được thực hiện riêng; kết quả toàn bộ bộ thử được ghi theo lượt CI.
+- Bộ hồi quy hiện có 52 trường hợp, gồm năm trường hợp về hạng đồng hạng, thống kê, MA 3 giờ và loại giờ chưa hoàn tất khi đối chiếu mô hình tải về sau. Bảy kiểm tra tập trung vào đóng gói/cập nhật/khôi phục trước đó đã đạt; hai trường hợp lỗi triển khai đã tái hiện trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 361 tệp manifest và các phép tính lại được thực hiện riêng; kết quả toàn bộ bộ thử được ghi theo lượt CI.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
 - [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
 - [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.
@@ -123,7 +123,7 @@ Hồ sơ ghi nhận **các sản phẩm công việc tích hợp Tuần 3 đã h
 | Thu thập và email | Các lượt theo lịch có log–S3 đối chiếu; email ngày 16/10 đã có xác nhận của hai người nhận | [Theo lịch và email](../../docs/scheduled-run-verification.md) · [Sau sửa cấu hình](../results/post_repair_2026_10_18/README.md). Lượt mới dưới ngưỡng có 0 cảnh báo, không được gọi là một phép kiểm chứng nhận email mới |
 | Giám sát | Đã ghép theo timestamp và sửa IF phẳng; Dashboard hai môi trường đọc lại khớp, sáu phép thử metric math chỉ đọc mỗi môi trường đạt | [Native/log đối chiếu](../results/monitoring_followup_2026_10_18/README.md) · [Dashboard cuối](../results/monitoring_dashboard_repair_2026_10_18/README.md). Điểm Errors = 3 thiếu Invocations của sinh viên Tiến Sơn giữ nguyên; không tính tỷ lệ toàn cửa sổ từ điểm này |
 | Giờ công | Tuần 1: 18,5 giờ; Tuần 2: 19,5 giờ; Tuần 3: 20,0 giờ; cộng 58,0 giờ | [Worklog và bảng từng sinh viên](WORKLOG.md#3-tổng-giờ-theo-tuần-đã-xác-nhận) · [CSV Tuần 3](../worklog.csv). Căn cứ: **Tổng theo tuần đã xác nhận** |
-| Tính toàn vẹn hồ sơ | Verifier tính lại số liệu và đối chiếu 359 tệp trong 11 manifest; audit kiểm tra danh mục CSV và liên kết nội bộ | [Verifier](../scripts/verify_results.py) · [Audit repository](../../tuan_2/scripts/repository_audit.py). Các kiểm tra này chạy trên tệp đã lưu |
+| Tính toàn vẹn hồ sơ | Verifier tính lại số liệu và đối chiếu 361 tệp trong 12 manifest; audit kiểm tra danh mục CSV và liên kết nội bộ | [Verifier](../scripts/verify_results.py) · [Audit repository](../../tuan_2/scripts/repository_audit.py). Các kiểm tra này chạy trên tệp đã lưu |
 
 Ba mốc mã trực tiếp cho công việc Tuần 3: [tích hợp công cụ `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e), [gói triển khai `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356) và [raw nguyên bản/worklog `7ec1b32`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/7ec1b3269388214111c96466a01a7fc9541e58b1). [CI của bản xuất raw](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39118199735) đã đạt 40 kiểm tra Tuần 3 và phép đối chiếu 315 tệp. Kết quả từng phiên bản tiếp theo được đọc tại [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions).
 
@@ -146,3 +146,15 @@ Lệnh monitoring mặc định chỉ đọc AWS. Muốn cập nhật đúng Das
 Tài liệu kỹ thuật: [AWS — định nghĩa Invocations/Errors](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html), [AWS — metric math và IF](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html), [GetMetricStatistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html) và [GetMetricData](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html).
 
 [Báo cáo](FINAL_REPORT.md) · [Trang Tuần 3](../README.md)
+
+## 10. Điều tra native Errors = 3 thiếu Invocations
+
+[Hồ sơ điều tra ngày 18/10](../results/native_error_investigation_2026_10_18/README.md) và [mục 4.4 của báo cáo](FINAL_REPORT.md#44-truy-nguyên-bổ-sung-điểm-lỗi-0915-utc) bổ sung dữ liệu phút, hàng đợi bất đồng bộ, log stream và lịch sử quản trị. Tổng Errors = 3 được phân giải thành ba điểm Errors = 1 ở 09:15, 09:16, 09:18 UTC. Một điểm AsyncEventsDropped = 1 và tuổi sự kiện tăng hỗ trợ giả thuyết retry/drop; chưa xác định ngoại lệ hay giải thích được Invocations thiếu.
+
+```bash
+python tuan_3/scripts/investigate_native_errors.py --profile default --output output/native-error-new/probe.json
+```
+
+Chương trình chỉ đọc AWS, xuất trường đã chọn, chỉ giữ mã lỗi API và hash định danh. Các phép đọc policy không được cấp quyền giữ trạng thái riêng, không làm mất lịch sử đã đọc được. Việc đối chiếu ARN chỉ diễn ra trong bộ nhớ. Ba tài liệu policy hiện tại chưa đọc được; số trail/store nhìn thấy bằng 0 không đại diện cho lịch sử hay mọi vùng. Lỗi quyền của người gọi API kiểm tra không được gán cho execution role.
+
+Rà soát độc lập snapshot và phép tính lại không phát hiện mâu thuẫn với cách diễn giải có giới hạn; nguyên nhân chính xác vẫn chưa xác định. Đợt này không sửa IAM/Lambda, không tạo lượt chạy hoặc cảnh báo thử. Bốn hồi quy mới kiểm tra loại thông tin riêng, chuẩn hóa UTC, bảo toàn kết quả đọc một phần và không bù Invocations/khẳng định nhân quả từ nhịp lỗi. Verifier tính lại findings và kiểm tra hai tệp JSON có manifest. Bộ thử tổng cộng 52 trường hợp; kết quả thực thi xem tại CI của commit tương ứng.

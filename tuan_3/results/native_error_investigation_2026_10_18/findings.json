@@ -1,0 +1,41 @@
+{
+  "status": "ROOT_CAUSE_UNRESOLVED",
+  "observed_minutes": [
+    {
+      "timestamp_utc": "2026-10-18T09:15:00+00:00",
+      "Errors": 1.0,
+      "Invocations": null,
+      "Throttles": 0.0,
+      "AsyncEventsReceived": 1.0,
+      "AsyncEventsDropped": null,
+      "AsyncEventAge": 72.0,
+      "Duration": null
+    },
+    {
+      "timestamp_utc": "2026-10-18T09:16:00+00:00",
+      "Errors": 1.0,
+      "Invocations": null,
+      "Throttles": 0.0,
+      "AsyncEventsReceived": null,
+      "AsyncEventsDropped": null,
+      "AsyncEventAge": 60364.0,
+      "Duration": null
+    },
+    {
+      "timestamp_utc": "2026-10-18T09:18:00+00:00",
+      "Errors": 1.0,
+      "Invocations": null,
+      "Throttles": 0.0,
+      "AsyncEventsReceived": null,
+      "AsyncEventsDropped": 1.0,
+      "AsyncEventAge": 167598.0,
+      "Duration": null
+    }
+  ],
+  "errors_sum_in_0915_five_minute_bucket": 3.0,
+  "interpretation": "Pattern is consistent with asynchronous failure/retry and a dropped event; individual events are not linked by request ID",
+  "missing_invocations_explained": false,
+  "application_exception_identified": false,
+  "lambda_or_iam_modified_by_investigation": false,
+  "whole_window_error_rate_percent": null
+}

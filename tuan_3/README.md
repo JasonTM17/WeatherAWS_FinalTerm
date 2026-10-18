@@ -20,6 +20,7 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 | Truy vấn, số đo Athena và cấu hình Projection | [Thí nghiệm Athena](results/integration_2026_10_18/benchmark/) |
 | Dashboard JSON, metric CSV và ảnh do AWS trả về | [Giám sát CloudWatch](results/integration_2026_10_18/dashboard/) |
 | Dashboard cập nhật và đối chiếu bộ đếm | [Mốc giám sát bổ sung](results/monitoring_2026_10_18/) |
+| Điều tra Errors = 3 thiếu Invocations của sinh viên Tiến Sơn | [Ba điểm lỗi phút, dấu vết retry/drop, lịch sử AWS và giới hạn kết luận](results/native_error_investigation_2026_10_18/README.md) |
 | Metric Filters, cấu hình JSON và đối chiếu log–S3 | [Hồ sơ vận hành bổ sung](results/operations_2026_10_18/) |
 | Lượt tự động sau sửa cấu hình của sinh viên Ngọc Quyên | [Log, ba bản ghi raw và metric lúc 13:51](results/post_repair_2026_10_18/README.md) |
 | CD thật, hash đọc lại từ AWS và dọn secrets | [Hồ sơ triển khai hai môi trường](results/cd_2026_10_18/) |

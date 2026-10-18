@@ -1,0 +1,1802 @@
+{
+  "student": "Sinh viên Tiến Sơn",
+  "captured_at_utc": "2026-10-18T11:31:58.789758+00:00",
+  "window_start_utc": "2026-10-18T07:40:00+00:00",
+  "window_end_exclusive_utc": "2026-10-18T11:00:00+00:00",
+  "read_only": true,
+  "configuration": {
+    "Runtime": "python3.12",
+    "Handler": "lambda_function.lambda_handler",
+    "Timeout": 60,
+    "MemorySize": 256,
+    "LastModified": "2026-10-18T05:50:53.000+0000",
+    "State": "Active",
+    "StateReasonCode": null,
+    "LastUpdateStatus": "Successful",
+    "LastUpdateStatusReasonCode": null,
+    "CodeSha256": "qM/rfT9WmjRXPRmGKZ2C7vvAQ7t0nj/jc0A3FmBKHqU=",
+    "Version": "$LATEST"
+  },
+  "logging": {
+    "LogFormat": "Text",
+    "default_log_group": true
+  },
+  "dead_letter_configured": false,
+  "probes": {
+    "minute_metrics": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "metric": "Errors",
+          "statistic": "Sum",
+          "points": [
+            {
+              "timestamp_utc": "2026-10-18T08:15:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:15:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:16:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:18:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T10:15:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            }
+          ]
+        },
+        {
+          "metric": "Invocations",
+          "statistic": "Sum",
+          "points": [
+            {
+              "timestamp_utc": "2026-10-18T08:15:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T10:15:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            }
+          ]
+        },
+        {
+          "metric": "Throttles",
+          "statistic": "Sum",
+          "points": [
+            {
+              "timestamp_utc": "2026-10-18T08:15:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:15:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:16:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:18:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T10:15:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            }
+          ]
+        },
+        {
+          "metric": "AsyncEventsReceived",
+          "statistic": "Sum",
+          "points": [
+            {
+              "timestamp_utc": "2026-10-18T08:15:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:15:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T10:15:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            }
+          ]
+        },
+        {
+          "metric": "AsyncEventsDropped",
+          "statistic": "Sum",
+          "points": [
+            {
+              "timestamp_utc": "2026-10-18T08:15:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:18:00+00:00",
+              "value": 1.0,
+              "unit": "Count"
+            },
+            {
+              "timestamp_utc": "2026-10-18T10:15:00+00:00",
+              "value": 0.0,
+              "unit": "Count"
+            }
+          ]
+        },
+        {
+          "metric": "AsyncEventAge",
+          "statistic": "Maximum",
+          "points": [
+            {
+              "timestamp_utc": "2026-10-18T08:15:00+00:00",
+              "value": 79.0,
+              "unit": "Milliseconds"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:15:00+00:00",
+              "value": 72.0,
+              "unit": "Milliseconds"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:16:00+00:00",
+              "value": 60364.0,
+              "unit": "Milliseconds"
+            },
+            {
+              "timestamp_utc": "2026-10-18T09:18:00+00:00",
+              "value": 167598.0,
+              "unit": "Milliseconds"
+            },
+            {
+              "timestamp_utc": "2026-10-18T10:15:00+00:00",
+              "value": 92.0,
+              "unit": "Milliseconds"
+            }
+          ]
+        },
+        {
+          "metric": "Duration",
+          "statistic": "SampleCount",
+          "points": [
+            {
+              "timestamp_utc": "2026-10-18T08:15:00+00:00",
+              "value": 1.0,
+              "unit": "Milliseconds"
+            },
+            {
+              "timestamp_utc": "2026-10-18T10:15:00+00:00",
+              "value": 1.0,
+              "unit": "Milliseconds"
+            }
+          ]
+        }
+      ]
+    },
+    "direct_stream_logs": {
+      "status": "READ_OK",
+      "data": {
+        "stream_counts": [
+          {
+            "stream_hash": "6b0f423dfc44e8a27792",
+            "events_in_window": 0,
+            "creation_time_utc": "2026-10-18T07:15:46.270000+00:00"
+          },
+          {
+            "stream_hash": "41e7506b4482c03153c9",
+            "events_in_window": 0,
+            "creation_time_utc": "2026-10-18T11:15:48.458000+00:00"
+          },
+          {
+            "stream_hash": "0c694e3c330e61f0e186",
+            "events_in_window": 7,
+            "creation_time_utc": "2026-10-18T08:15:49.798000+00:00"
+          },
+          {
+            "stream_hash": "d0a69bd14371e50b651a",
+            "events_in_window": 0,
+            "creation_time_utc": "2026-10-18T05:15:47.879000+00:00"
+          },
+          {
+            "stream_hash": "d4a968ff6ddf16607f36",
+            "events_in_window": 0,
+            "creation_time_utc": "2026-10-18T06:15:44.285000+00:00"
+          },
+          {
+            "stream_hash": "3f1bb8104e662d34c4e5",
+            "events_in_window": 9,
+            "creation_time_utc": "2026-10-18T10:15:44.876000+00:00"
+          }
+        ],
+        "lifecycle": [
+          {
+            "timestamp_utc": "2026-10-18T08:15:43.948000+00:00",
+            "event_hash": "d61cbb30968cb7d6521f",
+            "stream_hash": "0c694e3c330e61f0e186",
+            "kind": "START",
+            "request_hash": "a584c09d91ecc7ef3db7",
+            "status": "",
+            "reported_records": "",
+            "alerts_sent": ""
+          },
+          {
+            "timestamp_utc": "2026-10-18T08:15:46.806000+00:00",
+            "event_hash": "c96f2a390bb51269035c",
+            "stream_hash": "0c694e3c330e61f0e186",
+            "kind": "RESULT",
+            "request_hash": "",
+            "status": "complete",
+            "reported_records": 3,
+            "alerts_sent": 0
+          },
+          {
+            "timestamp_utc": "2026-10-18T08:15:46.808000+00:00",
+            "event_hash": "f5fc36ccb6ed87167e8c",
+            "stream_hash": "0c694e3c330e61f0e186",
+            "kind": "END",
+            "request_hash": "a584c09d91ecc7ef3db7",
+            "status": "",
+            "reported_records": "",
+            "alerts_sent": ""
+          },
+          {
+            "timestamp_utc": "2026-10-18T08:15:46.808000+00:00",
+            "event_hash": "3032a9a687185e4c4a73",
+            "stream_hash": "0c694e3c330e61f0e186",
+            "kind": "REPORT",
+            "request_hash": "a584c09d91ecc7ef3db7",
+            "status": "report_present",
+            "reported_records": "",
+            "alerts_sent": ""
+          },
+          {
+            "timestamp_utc": "2026-10-18T10:15:44.032000+00:00",
+            "event_hash": "cdd1bb51fcc887ddf6f8",
+            "stream_hash": "3f1bb8104e662d34c4e5",
+            "kind": "START",
+            "request_hash": "e6ca07b8c1d7c103d49d",
+            "status": "",
+            "reported_records": "",
+            "alerts_sent": ""
+          },
+          {
+            "timestamp_utc": "2026-10-18T10:15:46.967000+00:00",
+            "event_hash": "4c80cf35af3e59c1a082",
+            "stream_hash": "3f1bb8104e662d34c4e5",
+            "kind": "RESULT",
+            "request_hash": "",
+            "status": "complete",
+            "reported_records": 3,
+            "alerts_sent": 1
+          },
+          {
+            "timestamp_utc": "2026-10-18T10:15:46.969000+00:00",
+            "event_hash": "80234086c5416f7b9c4f",
+            "stream_hash": "3f1bb8104e662d34c4e5",
+            "kind": "END",
+            "request_hash": "e6ca07b8c1d7c103d49d",
+            "status": "",
+            "reported_records": "",
+            "alerts_sent": ""
+          },
+          {
+            "timestamp_utc": "2026-10-18T10:15:46.969000+00:00",
+            "event_hash": "4c2d3968c14fbaebdcd4",
+            "stream_hash": "3f1bb8104e662d34c4e5",
+            "kind": "REPORT",
+            "request_hash": "e6ca07b8c1d7c103d49d",
+            "status": "report_present",
+            "reported_records": "",
+            "alerts_sent": ""
+          }
+        ],
+        "summary": {
+          "events_in_window": 16,
+          "result_lines": 2,
+          "complete_results": 2,
+          "partial_results": 0,
+          "error_lines": 0,
+          "malformed_results": 0,
+          "unique_start_requests": 2,
+          "unique_end_requests": 2,
+          "unique_report_requests": 2,
+          "matched_start_end_report": 2,
+          "explicit_error_reports": 0,
+          "init_error_lines": 0,
+          "semantics": "Unique lifecycle request hashes and matching Result lines are distinct observations; no native error-rate inference from absent log lines",
+          "all_init_reports": 0,
+          "runtime_error_signatures": 0
+        },
+        "coverage": "Direct GetLogEvents for streams with date prefix; no raw messages retained"
+      }
+    },
+    "async_configuration": {
+      "status": "UNAVAILABLE",
+      "error_code": "ResourceNotFoundException"
+    },
+    "concurrency": {
+      "status": "READ_OK",
+      "data": {}
+    },
+    "role": {
+      "status": "READ_OK",
+      "data": {
+        "created": "2026-10-06T14:49:06+00:00",
+        "interpretation": "Current role exists; not historical permission proof"
+      }
+    },
+    "attached_policy_count": {
+      "status": "READ_OK",
+      "data": 7
+    },
+    "inline_policy_names": {
+      "status": "READ_OK",
+      "data": {
+        "count": 0
+      }
+    },
+    "iam_policy_timeline": {
+      "status": "READ_OK",
+      "data": {
+        "changes": [
+          {
+            "timestamp_utc": "2026-10-18T09:06:03+00:00",
+            "event": "CreatePolicyVersion",
+            "error_code": null,
+            "execution_role_named": false,
+            "currently_attached_policy_named": false,
+            "set_as_default": true,
+            "event_hash": "1a82cf8615d405455a57",
+            "policy_document": {
+              "sha256": "fb9d01b841b52539140ad09fa2d3d3646b769b20387b204b625a9d7c75ebc75a",
+              "statements": [
+                {
+                  "effect": "Deny",
+                  "actions": "*",
+                  "not_actions": null,
+                  "all_resources": true,
+                  "time_conditions": {},
+                  "other_condition_keys": [
+                    "aws:PrincipalArn",
+                    "aws:TokenIssueTime"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "timestamp_utc": "2026-10-18T09:06:03+00:00",
+            "event": "AttachRolePolicy",
+            "error_code": null,
+            "execution_role_named": false,
+            "currently_attached_policy_named": false,
+            "set_as_default": null,
+            "event_hash": "c589b97bc22b381325ff"
+          },
+          {
+            "timestamp_utc": "2026-10-18T09:06:03+00:00",
+            "event": "DeletePolicyVersion",
+            "error_code": null,
+            "execution_role_named": false,
+            "currently_attached_policy_named": false,
+            "set_as_default": null,
+            "event_hash": "dfca218ad78b421e1c03"
+          },
+          {
+            "timestamp_utc": "2026-10-18T09:27:40+00:00",
+            "event": "PutRolePolicy",
+            "error_code": null,
+            "execution_role_named": false,
+            "currently_attached_policy_named": false,
+            "set_as_default": null,
+            "event_hash": "96e840096282ac012591",
+            "policy_document": {
+              "sha256": "a7c2bbfa3f55d6b6d93edd0e94e6aa223c14389f671340d73a1a6bd4f9b52033",
+              "statements": [
+                {
+                  "effect": "Allow",
+                  "actions": [
+                    "events:PutEvents"
+                  ],
+                  "not_actions": null,
+                  "all_resources": false,
+                  "time_conditions": {},
+                  "other_condition_keys": []
+                }
+              ]
+            }
+          },
+          {
+            "timestamp_utc": "2026-10-18T09:27:44+00:00",
+            "event": "DeleteRolePolicy",
+            "error_code": "NoSuchEntityException",
+            "execution_role_named": false,
+            "currently_attached_policy_named": false,
+            "set_as_default": null,
+            "event_hash": "34e0013ed1c3f92481a2"
+          },
+          {
+            "timestamp_utc": "2026-10-18T09:27:44+00:00",
+            "event": "UpdateRole",
+            "error_code": null,
+            "execution_role_named": false,
+            "currently_attached_policy_named": false,
+            "set_as_default": null,
+            "event_hash": "951c194358804c1eeb73"
+          }
+        ],
+        "current_attached_policies": [
+          {
+            "status": "READ_OK",
+            "data": {
+              "updated_utc": "2019-05-23T16:54:21+00:00",
+              "default_version": "v2",
+              "document": {
+                "sha256": "c0ba7013a38c41f3ba3da38ce942664bc59eeb326b503c77995bd19bd7269de6",
+                "statements": [
+                  {
+                    "effect": "Allow",
+                    "actions": [
+                      "ssm:DescribeAssociation",
+                      "ssm:GetDeployablePatchSnapshotForInstance",
+                      "ssm:GetDocument",
+                      "ssm:DescribeDocument",
+                      "ssm:GetManifest",
+                      "ssm:GetParameter",
+                      "ssm:GetParameters",
+                      "ssm:ListAssociations",
+                      "ssm:ListInstanceAssociations",
+                      "ssm:PutInventory",
+                      "ssm:PutComplianceItems",
+                      "ssm:PutConfigurePackageResult",
+                      "ssm:UpdateAssociationStatus",
+                      "ssm:UpdateInstanceAssociationStatus",
+                      "ssm:UpdateInstanceInformation"
+                    ],
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": []
+                  },
+                  {
+                    "effect": "Allow",
+                    "actions": [
+                      "ssmmessages:CreateControlChannel",
+                      "ssmmessages:CreateDataChannel",
+                      "ssmmessages:OpenControlChannel",
+                      "ssmmessages:OpenDataChannel"
+                    ],
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": []
+                  },
+                  {
+                    "effect": "Allow",
+                    "actions": [
+                      "ec2messages:AcknowledgeMessage",
+                      "ec2messages:DeleteMessage",
+                      "ec2messages:FailMessage",
+                      "ec2messages:GetEndpoint",
+                      "ec2messages:GetMessages",
+                      "ec2messages:SendReply"
+                    ],
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": []
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "status": "READ_OK",
+            "data": {
+              "updated_utc": "2026-02-12T17:58:15+00:00",
+              "default_version": "v10",
+              "document": {
+                "sha256": "2a1bf99716111ce4faba1457a76c4a6233820cb2af724c9a186d2da73ea65b70",
+                "statements": [
+                  {
+                    "effect": "Allow",
+                    "actions": [
+                      "autoscaling:DescribeAutoScalingGroups",
+                      "autoscaling:UpdateAutoScalingGroup",
+                      "ec2:AttachVolume",
+                      "ec2:AuthorizeSecurityGroupIngress",
+                      "ec2:CreateRoute",
+                      "ec2:CreateSecurityGroup",
+                      "ec2:CreateTags",
+                      "ec2:CreateVolume",
+                      "ec2:DeleteRoute",
+                      "ec2:DeleteSecurityGroup",
+                      "ec2:DeleteVolume",
+                      "ec2:DescribeInstances",
+                      "ec2:DescribeRouteTables",
+                      "ec2:DescribeSecurityGroups",
+                      "ec2:DescribeSubnets",
+                      "ec2:DescribeVolumes",
+                      "ec2:DescribeVolumesModifications",
+                      "ec2:DescribeVpcs",
+                      "ec2:DescribeDhcpOptions",
+                      "ec2:DescribeNetworkInterfaces",
+                      "ec2:DescribeAvailabilityZones",
+                      "ec2:DetachVolume",
+                      "ec2:ModifyInstanceAttribute",
+                      "ec2:ModifyVolume",
+                      "ec2:RevokeSecurityGroupIngress",
+                      "ec2:DescribeAccountAttributes",
+                      "ec2:DescribeAddresses",
+                      "ec2:DescribeInternetGateways",
+                      "ec2:DescribeInstanceTopology",
+                      "elasticloadbalancing:AddTags",
+                      "elasticloadbalancing:ApplySecurityGroupsToLoadBalancer",
+                      "elasticloadbalancing:AttachLoadBalancerToSubnets",
+                      "elasticloadbalancing:ConfigureHealthCheck",
+                      "elasticloadbalancing:CreateListener",
+                      "elasticloadbalancing:CreateLoadBalancer",
+                      "elasticloadbalancing:CreateLoadBalancerListeners",
+                      "elasticloadbalancing:CreateLoadBalancerPolicy",
+                      "elasticloadbalancing:CreateTargetGroup",
+                      "elasticloadbalancing:DeleteListener",
+                      "elasticloadbalancing:DeleteLoadBalancer",
+                      "elasticloadbalancing:DeleteLoadBalancerListeners",
+                      "elasticloadbalancing:DeleteTargetGroup",
+                      "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+                      "elasticloadbalancing:DeregisterTargets",
+                      "elasticloadbalancing:DescribeListeners",
+                      "elasticloadbalancing:DescribeLoadBalancerAttributes",
+                      "elasticloadbalancing:DescribeLoadBalancerPolicies",
+                      "elasticloadbalancing:DescribeLoadBalancers",
+                      "elasticloadbalancing:DescribeTargetGroupAttributes",
+                      "elasticloadbalancing:DescribeTargetGroups",
+                      "elasticloadbalancing:DescribeTargetHealth",
+                      "elasticloadbalancing:DetachLoadBalancerFromSubnets",
+                      "elasticloadbalancing:ModifyListener",
+                      "elasticloadbalancing:ModifyLoadBalancerAttributes",
+                      "elasticloadbalancing:ModifyTargetGroup",
+                      "elasticloadbalancing:ModifyTargetGroupAttributes",
+                      "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+                      "elasticloadbalancing:RegisterTargets",
+                      "elasticloadbalancing:SetLoadBalancerPoliciesForBackendServer",
+                      "elasticloadbalancing:SetLoadBalancerPoliciesOfListener",
+                      "kms:DescribeKey"
+                    ],
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": []
+                  },
+                  {
+                    "effect": "Allow",
+                    "actions": "iam:CreateServiceLinkedRole",
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": [
+                      "iam:AWSServiceName"
+                    ]
+                  },
+                  {
+                    "effect": "Allow",
+                    "actions": "ec2:DeleteNetworkInterface",
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": [
+                      "ec2:ResourceTag/eks:eni:owner"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "status": "READ_OK",
+            "data": {
+              "updated_utc": "2019-12-10T20:56:32+00:00",
+              "default_version": "v3",
+              "document": {
+                "sha256": "176017f9d9f1e2fb5d0fd0c7aa319fdf24fe9804dac06d1c7d82b61af6e9b88f",
+                "statements": [
+                  {
+                    "effect": "Allow",
+                    "actions": [
+                      "ecr:GetAuthorizationToken",
+                      "ecr:BatchCheckLayerAvailability",
+                      "ecr:GetDownloadUrlForLayer",
+                      "ecr:GetRepositoryPolicy",
+                      "ecr:DescribeRepositories",
+                      "ecr:ListImages",
+                      "ecr:DescribeImages",
+                      "ecr:BatchGetImage",
+                      "ecr:GetLifecyclePolicy",
+                      "ecr:GetLifecyclePolicyPreview",
+                      "ecr:ListTagsForResource",
+                      "ecr:DescribeImageScanFindings"
+                    ],
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": []
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "status": "READ_OK",
+            "data": {
+              "updated_utc": "2023-11-27T00:06:13+00:00",
+              "default_version": "v3",
+              "document": {
+                "sha256": "efa5b8854e36a2b9472e03ac8d118fbbfbb48fd65347b060e2c3a17213d3b6e9",
+                "statements": [
+                  {
+                    "effect": "Allow",
+                    "actions": [
+                      "ec2:DescribeInstances",
+                      "ec2:DescribeInstanceTypes",
+                      "ec2:DescribeRouteTables",
+                      "ec2:DescribeSecurityGroups",
+                      "ec2:DescribeSubnets",
+                      "ec2:DescribeVolumes",
+                      "ec2:DescribeVolumesModifications",
+                      "ec2:DescribeVpcs",
+                      "eks:DescribeCluster",
+                      "eks-auth:AssumeRoleForPodIdentity"
+                    ],
+                    "not_actions": null,
+                    "all_resources": true,
+                    "time_conditions": {},
+                    "other_condition_keys": []
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "status": "UNAVAILABLE",
+            "error_code": "AccessDenied"
+          },
+          {
+            "status": "UNAVAILABLE",
+            "error_code": "AccessDenied"
+          },
+          {
+            "status": "UNAVAILABLE",
+            "error_code": "AccessDenied"
+          }
+        ],
+        "limitation": "Timeline and published documents do not prove a specific denied Lambda runtime operation"
+      }
+    },
+    "role_correlations": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "timestamp_utc": "2026-10-18T08:15:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "08bbcd6ab2c00a9ac8a1",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:15:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "ccd5cbbf0b969632d2f9",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:15:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "1d1c7737cbd68df66307",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:15:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "432bda158da62681d8b3",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:16:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "1887e51ae5b29f0bdad2",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:16:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "865f1f00627d96e22f60",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:18:30+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "3748877009a515263cc4",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:18:30+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "6bcda475cbd10a2f2f8a",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:23:36+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "error_code": "AccessDenied",
+          "event_hash": "78ad639f161e7df92964",
+          "caller_is_execution_role": false
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:24:59+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "error_code": "AccessDenied",
+          "event_hash": "84be30d95ef3b77787f7",
+          "caller_is_execution_role": false
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:15:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "161c22b61f25766ea028",
+          "execution_role_target": true,
+          "function_session_named": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:15:43+00:00",
+          "event": "AssumeRole",
+          "error_code": null,
+          "event_hash": "4dd527070298acd6c012",
+          "execution_role_target": true,
+          "function_session_named": true
+        }
+      ]
+    },
+    "history_lambda.amazonaws.com": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "timestamp_utc": "2026-10-18T08:27:08+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "deefe889d1bf12e18186",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:47:58+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "764c1f138d582de3a850",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:10+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "e6861647e7e9a52b5fe1",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:23:36+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": "AccessDenied",
+          "event_hash": "78ad639f161e7df92964",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:24:59+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": "AccessDenied",
+          "event_hash": "84be30d95ef3b77787f7",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:30:44+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "2a444bda27c54a3b963f",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:00:35+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "e53fd1fba88a30777e16",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:24+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "3dbdad8b8f5f102faa16",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:43:56+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "709ef7230336724e348d",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:53:22+00:00",
+          "event": "GetFunctionConfiguration20150331v2",
+          "source": "lambda.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "eafa67b8949e0e0e8d7c",
+          "target_function_named": true,
+          "management_event": true
+        }
+      ]
+    },
+    "history_events.amazonaws.com": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "timestamp_utc": "2026-10-18T08:27:45+00:00",
+          "event": "ListRules",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "c3bf4de9b2315866bfaf",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:40+00:00",
+          "event": "ListRules",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "a4f967a43d019b1c6e22",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:30:59+00:00",
+          "event": "DescribeRule",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "5600e286946050fb9c8d",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:30:59+00:00",
+          "event": "ListRuleNamesByTarget",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "5d3428a724b102243bfb",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:31:00+00:00",
+          "event": "ListTargetsByRule",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "b1372a1a0c503ba3de6d",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:39+00:00",
+          "event": "ListRuleNamesByTarget",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "07b807eefe69e7a8a4e3",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:39+00:00",
+          "event": "DescribeRule",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "a7710242d352e9208536",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:40+00:00",
+          "event": "ListTargetsByRule",
+          "source": "events.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "a3bc8e8ac833b049a640",
+          "target_function_named": false,
+          "management_event": true
+        }
+      ]
+    },
+    "history_iam.amazonaws.com": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "timestamp_utc": "2026-10-18T09:06:03+00:00",
+          "event": "CreatePolicyVersion",
+          "source": "iam.amazonaws.com",
+          "read_only": false,
+          "error_code": null,
+          "event_hash": "1a82cf8615d405455a57",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:06:03+00:00",
+          "event": "AttachRolePolicy",
+          "source": "iam.amazonaws.com",
+          "read_only": false,
+          "error_code": null,
+          "event_hash": "c589b97bc22b381325ff",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:06:03+00:00",
+          "event": "ListPolicyVersions",
+          "source": "iam.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "d142665b11576688fe08",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:06:03+00:00",
+          "event": "GetPolicy",
+          "source": "iam.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "dca90aa2a05e915f79d5",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:06:03+00:00",
+          "event": "DeletePolicyVersion",
+          "source": "iam.amazonaws.com",
+          "read_only": false,
+          "error_code": null,
+          "event_hash": "dfca218ad78b421e1c03",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:40+00:00",
+          "event": "GetRole",
+          "source": "iam.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "63d8ee243217bc519002",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:40+00:00",
+          "event": "PutRolePolicy",
+          "source": "iam.amazonaws.com",
+          "read_only": false,
+          "error_code": null,
+          "event_hash": "96e840096282ac012591",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:44+00:00",
+          "event": "ListPolicies",
+          "source": "iam.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "17a60c2cab91be3ea6ae",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:44+00:00",
+          "event": "GetPolicyVersion",
+          "source": "iam.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "1a496a6e3ad76ade9e8e",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:44+00:00",
+          "event": "DeleteRolePolicy",
+          "source": "iam.amazonaws.com",
+          "read_only": false,
+          "error_code": "NoSuchEntityException",
+          "event_hash": "34e0013ed1c3f92481a2",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:44+00:00",
+          "event": "GetRole",
+          "source": "iam.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "444b5c219955d1f29329",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:44+00:00",
+          "event": "UpdateRole",
+          "source": "iam.amazonaws.com",
+          "read_only": false,
+          "error_code": null,
+          "event_hash": "951c194358804c1eeb73",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:44+00:00",
+          "event": "GetPolicyVersion",
+          "source": "iam.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "dcec3968eadc9dfa02e1",
+          "target_function_named": false,
+          "management_event": true
+        }
+      ]
+    },
+    "history_logs.amazonaws.com": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "timestamp_utc": "2026-10-18T08:15:49+00:00",
+          "event": "CreateLogStream",
+          "source": "logs.amazonaws.com",
+          "read_only": false,
+          "error_code": null,
+          "event_hash": "eb7fe258924e0e9559cf",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:47:33+00:00",
+          "event": "DescribeMetricFilters",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "96b7921f4a26e93d0088",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:48:18+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "111c6645376bfa2192bb",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:48:23+00:00",
+          "event": "DescribeLogStreams",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "d139c8f04b3512dca276",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:48:29+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": "ResourceNotFoundException",
+          "event_hash": "dbb7b2baa111d8d39aa9",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:54+00:00",
+          "event": "DescribeLogStreams",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "3834ce290192be698c63",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:55+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "35c6008530b2310fa04c",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:55+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "4d1509e1b81e7de17192",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:56+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "65c63edda40cb47c44c5",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:56+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "7563ec6821d7c23bc010",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:57+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "230a6155804fb9fefb8c",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:57+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "74b0244411588a6b956a",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:58+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "9d13abdf28f79a82e8f5",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:59+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "47ca8ac4f3c65cbfd988",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:49:59+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "74ea2465fdbba5df703b",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:50:00+00:00",
+          "event": "GetLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "78785599a4e483505b1d",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:25+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "64ae5c680bee09e577b8",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:25+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "bcd0ee531b65dd668426",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:26+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "6f942d5a19457be7a6ec",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:27+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "1a5914c6b92a11cc2fe1",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:27+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "91c9b5d3e437a8dd7937",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:28+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "e65086fdd16458a8e3c6",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:04:29+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "9ef57266a1d418e86917",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:07:06+00:00",
+          "event": "DescribeMetricFilters",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": "AccessDenied",
+          "event_hash": "734b7e0606fdffdecbc4",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:31:02+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "1ecd10d94632225c18bd",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:31:02+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "549e91b84947b2866568",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:31:03+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "a8f1e76f7234f4a2d7e9",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:42+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "2266d69625e3f521b763",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:43+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "1cf9046d66c704d8b3b7",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:43+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "3c010449e59af0f5121f",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:15:44+00:00",
+          "event": "CreateLogStream",
+          "source": "logs.amazonaws.com",
+          "read_only": false,
+          "error_code": null,
+          "event_hash": "4270f49eb457058e2393",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:44:01+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "b419090efb24ef69163a",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:44:02+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "0f0d92e5e4314e7bbf56",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:44:02+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "62bc610c99b53bccebed",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:53:31+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "246d6481236e0eb1bb04",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:53:31+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "b0fe34b7b6ed87582304",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:53:31+00:00",
+          "event": "FilterLogEvents",
+          "source": "logs.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "cad1107d8abc8b4da240",
+          "target_function_named": true,
+          "management_event": true
+        }
+      ]
+    },
+    "history_sts.amazonaws.com": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "timestamp_utc": "2026-10-18T08:15:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "08bbcd6ab2c00a9ac8a1",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:15:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "ccd5cbbf0b969632d2f9",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:20:00+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "580b965b78b6ed468f50",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:21:21+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "221ebcbf66c6473e25ae",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:27:07+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "6fc8d9f7f2a5f86970a4",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T08:46:50+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "0d643f3202048b8d717e",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:06:04+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "7a74dc5f49ba2f63aa48",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:15:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "1d1c7737cbd68df66307",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:15:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "432bda158da62681d8b3",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:16:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "1887e51ae5b29f0bdad2",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:16:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "865f1f00627d96e22f60",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:18:30+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "3748877009a515263cc4",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:18:30+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "6bcda475cbd10a2f2f8a",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:23:34+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "cc70ecc647e946e64bc1",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:24:57+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "05c247f6525134709b5b",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:40+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "0cf8f801562c04bce5b4",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:42+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "f041de96059c8386c7f4",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:45+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "577dc96dc5035834198f",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:27:46+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "75ef38371b3c3db7f589",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:28:27+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "1e0c24e814b094195da7",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:28:53+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "7d214d5c54a3bb35a954",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:28:53+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "f6e82deac788da8d759a",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T09:30:43+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "4d342c0f80cb02fa6070",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:01:23+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "517a3d0654e96ddb50c6",
+          "target_function_named": false,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:15:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "161c22b61f25766ea028",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:15:43+00:00",
+          "event": "AssumeRole",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "4dd527070298acd6c012",
+          "target_function_named": true,
+          "management_event": true
+        },
+        {
+          "timestamp_utc": "2026-10-18T10:53:24+00:00",
+          "event": "GetCallerIdentity",
+          "source": "sts.amazonaws.com",
+          "read_only": true,
+          "error_code": null,
+          "event_hash": "d0b91ca3dda6148059cb",
+          "target_function_named": false,
+          "management_event": true
+        }
+      ]
+    },
+    "trail_inventory": {
+      "status": "READ_OK",
+      "data": {
+        "trail_count": 0,
+        "limitation": "Inventory alone does not prove data-event coverage"
+      }
+    },
+    "event_data_stores": {
+      "status": "READ_OK",
+      "data": {
+        "count": 0
+      }
+    },
+    "schedule": {
+      "status": "READ_OK",
+      "data": {
+        "ScheduleExpression": "rate(1 hour)",
+        "State": "ENABLED"
+      }
+    },
+    "target_retry": {
+      "status": "READ_OK",
+      "data": [
+        {
+          "targets_function": true,
+          "retry_policy": null,
+          "dead_letter_configured": false
+        }
+      ]
+    }
+  }
+}

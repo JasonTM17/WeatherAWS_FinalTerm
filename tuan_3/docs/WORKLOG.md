@@ -69,3 +69,5 @@ Snapshot phân tích trước có 246/285 bản ghi; mã Lambda ở mốc đó k
 **Bản xuất bổ sung lúc 17:02 ngày 18/10:** sinh viên Tiến Sơn có 246 bản ghi, sinh viên Ngọc Quyên có 288 bản ghi. Có thêm ba bản ghi của sinh viên Ngọc Quyên so với snapshot 246/285; toàn bộ bản ghi cũ được bảo toàn. [JSON/CSV, inventory và thời điểm đọc](../results/raw_export_2026_10_18/README.md).
 
 [Báo cáo kỹ thuật](FINAL_REPORT.md) · [Vận hành](operation.md) · [Hồ sơ Tuần 3](../README.md)
+
+**Bổ sung chẩn đoán ngày 18/10:** đã phân giải điểm Errors = 3 của sinh viên Tiến Sơn thành ba điểm một phút, đọc metric bất đồng bộ và lịch sử AWS, phân biệt lỗi quyền người gọi với execution role. [Minh chứng và giới hạn kết luận](../results/native_error_investigation_2026_10_18/README.md) giữ nguyên các điểm thiếu Invocations; không ghi là đã sửa nguyên nhân chưa được xác định. Phần bổ sung không tự cộng thêm giờ sinh viên hoặc sửa các tổng giờ đã xác nhận.

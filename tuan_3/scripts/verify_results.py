@@ -12,6 +12,61 @@ from reconcile_analysis import VARIABLES, WEATHER, correlation, descriptive, hou
 from forecast import score
 from forecast_followup import summarize
 from monitoring_followup import point_map
+from investigate_native_errors import summarize_evidence
+
+
+def verify_native_investigation(root):
+    folder = root / 'native_error_investigation_2026_10_18'
+    count = verify_manifest(folder)
+    probe = json.loads((folder / 'probe.json').read_text(encoding='utf-8'))
+    findings = json.loads((folder / 'findings.json').read_text(encoding='utf-8'))
+    if not probe['read_only'] or findings != summarize_evidence(probe):
+        raise ValueError('Native investigation derivation or read-only boundary differs')
+    if (findings['status'] != 'ROOT_CAUSE_UNRESOLVED' or findings['missing_invocations_explained']
+            or findings['application_exception_identified'] or findings['lambda_or_iam_modified_by_investigation']
+            or findings['whole_window_error_rate_percent'] is not None):
+        raise ValueError('Unsupported causal attribution or error rate')
+    probes = probe['probes']
+    native = {r['metric']: r['points'] for r in probes['minute_metrics']['data']}
+    expected = point_map(read_csv(root / 'monitoring_followup_2026_10_18/default/minute_statistics.csv'))
+    actual = {(name, p['timestamp_utc']): p['value'] for name in ('Errors', 'Invocations', 'Throttles')
+              for p in native[name]}
+    if actual != expected:
+        raise ValueError('Historical native minute observations changed')
+    rows = findings['observed_minutes']
+    if (len(rows) != 3 or findings['errors_sum_in_0915_five_minute_bucket'] != 3
+            or any(r['Invocations'] is not None or r['Duration'] is not None or r['Throttles'] != 0 or r['Errors'] != 1 for r in rows)
+            or rows[0]['AsyncEventsReceived'] != 1 or rows[-1]['AsyncEventsDropped'] != 1
+            or [r['AsyncEventAge'] for r in rows] != [72, 60364, 167598]):
+        raise ValueError('Minute-level anomaly interpretation differs')
+    direct = probes['direct_stream_logs']['data']
+    if (len(direct['stream_counts']) != 6 or sum(r['events_in_window'] for r in direct['stream_counts']) != 16
+            or direct['summary']['matched_start_end_report'] != 2
+            or any(r['timestamp_utc'].startswith(('2026-10-18T09:15', '2026-10-18T09:16', '2026-10-18T09:18'))
+                   for r in direct['lifecycle'])):
+        raise ValueError('Direct log coverage changed')
+    for source, expected_count in (('lambda.amazonaws.com', 10), ('events.amazonaws.com', 8)):
+        history = probes['history_' + source]['data']
+        if len(history) != expected_count or any(r['read_only'] is not True for r in history):
+            raise ValueError('Management history does not support report boundary')
+    policies = probes['iam_policy_timeline']['data']
+    if (sum(p['status'] == 'READ_OK' for p in policies['current_attached_policies']) != 4
+            or sum(p.get('error_code') == 'AccessDenied' for p in policies['current_attached_policies']) != 3
+            or any(r['execution_role_named'] or r['currently_attached_policy_named'] for r in policies['changes'])):
+        raise ValueError('IAM observation/coverage differs')
+    denied = [r for r in probes['role_correlations']['data'] if r.get('error_code')]
+    if len(denied) != 2 or any(r['caller_is_execution_role'] for r in denied):
+        raise ValueError('Caller-role correlation differs')
+    if (probes['trail_inventory']['data']['trail_count'] != 0
+            or probes['event_data_stores']['data']['count'] != 0
+            or probes['async_configuration'].get('error_code') != 'ResourceNotFoundException'
+            or probe['dead_letter_configured']):
+        raise ValueError('Historical diagnostic coverage differs')
+    import base64
+    package = json.loads((root / 'cd_2026_10_18/ci-artifact-verification.json').read_text())
+    if base64.b64decode(probe['configuration']['CodeSha256']).hex() != package['package_sha256']:
+        raise ValueError('Current package differs from retained CD identity')
+    return count
 
 
 def verify_followups(root):
@@ -395,6 +450,7 @@ def verify(folder):
     file_count += verify_raw_export(folder.parent / 'raw_export_2026_10_18')
     added,followup_hours,followup_values=verify_followups(folder.parent)
     file_count+=added
+    file_count+=verify_native_investigation(folder.parent)
     for profile in ('default', 'quyen'):
         observed = metric_consistency(read_csv(monitoring / profile / 'metrics.csv'))
         saved = json.loads((monitoring / profile / 'metric-consistency.json').read_text())
