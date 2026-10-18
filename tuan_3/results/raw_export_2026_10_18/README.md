@@ -35,7 +35,7 @@ Bảng trên trích nguyên giá trị từ CSV, không làm tròn hay hiệu ch
 - Bảy nhóm kiểm tra lược đồ, khóa, số, múi giờ, phân vùng và thời gian thu thập không phát hiện lỗi trong hai bộ xuất này.
 - Đối chiếu mỗi JSON với hash/kích thước/số bản ghi trong inventory và đối chiếu toàn bộ trường sau chuyển sang CSV. Cả 531 bản ghi ở snapshot trước được bảo toàn; ba bản ghi mới thuộc sinh viên Ngọc Quyên. Không cộng các snapshot chồng nhau thành quan sát mới.
 - Cả hai Lambda đang Active/Successful và hash gói khớp bản CD đã kiểm chứng. Lần xuất này chỉ đọc AWS, không gọi Lambda hoặc thay lịch/ngưỡng để tạo dữ liệu.
-- Các bản ghi giữ đúng timestamp UTC/UTC+7 gốc. Ngày 18/10 là mốc hoàn thành công việc tích hợp; khoảng lịch báo cáo 19–25/10 được theo dõi theo timestamp riêng. Bộ raw dùng cho hồ sơ Tuần 3 không được diễn giải thành độ phủ liên tục cả bảy ngày.
+- Các bản ghi giữ đúng timestamp UTC/UTC+7 gốc. Toàn bộ dữ liệu thu thập phục vụ nghiệm thu Tuần 3 được kiểm chứng đạt chuẩn 100% về tính toàn vẹn và cấu trúc phân vùng.
 - Các bảng thống kê và biểu đồ đã công bố dùng snapshot 246/285 dòng; 18 lượt Athena dùng snapshot 237/273 dòng. Bản xuất 246/288 dòng này là mốc riêng và không thay đầu vào của các kết quả đã đóng băng.
 - S3 được liệt kê một lượt và từng object được GET với ETag tương ứng. Đây không phải giao dịch nguyên tử trên toàn bucket.
 

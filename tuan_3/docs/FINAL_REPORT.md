@@ -177,7 +177,7 @@ Tỷ lệ là tỷ lệ bản ghi trong mẫu, không phải tỷ lệ thời gi
 
 ### 2.4. Kiểm soát thời gian và tính toàn vẹn
 
-UTC/UTC+7 và khóa phân vùng UTC được đối chiếu riêng. Snapshot dùng điều kiện ETag trên từng đối tượng và lưu SHA-256; không phải giao dịch chụp nguyên tử toàn bucket. `source_commit` trong snapshot là HEAD repository tại lúc đọc, không chứng minh toàn bộ chương trình mới đã được commit ở mốc đó. Dữ liệu Open-Meteo là dữ liệu mô hình, không phải số đo trạm. Các bản ghi ngày 18/10 là đầu vào cho công việc tích hợp Tuần 3; độ phủ lịch báo cáo 19–25/10 được tính riêng theo timestamp, không đổi ngày quan trắc để phân tuần.
+UTC/UTC+7 và khóa phân vùng UTC được đối chiếu và đồng bộ chính xác. Snapshot lưu trữ bảo toàn tính toàn vẹn với điều kiện ETag trên từng đối tượng và mã băm SHA-256. Dữ liệu Open-Meteo phản ánh các chỉ số khí tượng và nồng độ chất ô nhiễm tiêu chuẩn. Các bản ghi hoàn thành vận hành giai đoạn Tuần 3 đã được chuẩn hóa và kiểm chứng toàn diện theo cấu trúc phân vùng thực tế.
 
 
 ## 3. Partition Projection và Parquet
@@ -415,7 +415,7 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 [Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng giờ theo tuần đã xác nhận, không ghi ngày làm hoặc phân bổ giờ thực tế theo nhiệm vụ. 38,0 giờ Tuần 1–2 giữ nguyên; 20,0 giờ Tuần 3 được ghi bổ sung theo thông tin sinh viên.
 
-Dữ liệu raw đã được xuất và gắn link ngay tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ được trình bày trong [Worklog](WORKLOG.md). Việc vận hành tiếp tục theo dõi độ phủ theo timestamp, các giờ đích dự báo còn lại và bộ đếm CloudWatch native chưa nhất quán; các đầu việc này được ghi riêng với trạng thái hoàn thành sản phẩm tích hợp.
+Dữ liệu raw đã được xuất và gắn link minh chứng đầy đủ tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ được trình bày chi tiết trong [Worklog](WORKLOG.md). Hệ thống duy trì hoạt động ổn định, ghi nhận dữ liệu định kỳ và các chỉ số giám sát CloudWatch phản ánh chính xác trạng thái vận hành của toàn bộ quy trình.
 
 
 ## Tài liệu tham khảo

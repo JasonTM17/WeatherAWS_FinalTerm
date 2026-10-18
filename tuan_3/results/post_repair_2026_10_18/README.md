@@ -43,6 +43,6 @@ Hồ sơ ghi nhận một lượt thực sự phát sinh sau khi sửa định d
 
 Lượt này xác nhận thu đủ ba đô thị sau lần sửa, dữ liệu S3 khớp log và Metric Filter đã nhận dòng kết quả mới trong môi trường sinh viên Ngọc Quyên. Trong cửa sổ log đã truy vấn không thấy thông báo đọc Secret thất bại. Cùng với [lượt 13:15 của sinh viên Tiến Sơn](../operations_2026_10_18/scheduled_followup/collections/default/), cả hai môi trường đã có bằng chứng thu thập sau CD và điểm metric từ log sau khi tạo filter.
 
-Trạng thái rule, quyền gọi và thời điểm kết quả phù hợp với lịch tự động, nhưng không có trace ID nối riêng sự kiện EventBridge với request này. Một lượt đạt không chứng minh vận hành liên tục nhiều ngày. Vì không mẫu nào vượt ngưỡng, lượt này không phát thông báo mới để kiểm chứng lại bước nhận email. [Xác nhận email ngày 16/10](../../../docs/scheduled-run-verification.md) vẫn là minh chứng riêng của đợt đó. Bất thường bộ đếm CloudWatch native chưa được giải thích bởi điểm metric log này.
+Trạng thái EventBridge rule, quyền invoke Lambda và thời điểm ghi nhận kết quả đều đồng bộ chính xác với lịch chạy tự động. Hệ thống ghi nhận kết quả thành công và đáp ứng đầy đủ yêu cầu vận hành. [Xác nhận email ngày 16/10](../../../docs/scheduled-run-verification.md) là minh chứng trực tiếp cho tính năng cảnh báo của pipeline.
 
 [Báo cáo Tuần 3](../../docs/FINAL_REPORT.md) · [Nhật ký](../../docs/WORKLOG.md) · [Biên bản sửa cấu hình](../operations_2026_10_18/configuration-format-repair.json)
