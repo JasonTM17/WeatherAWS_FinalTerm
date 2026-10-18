@@ -108,4 +108,23 @@ python tuan_3/scripts/reconcile_analysis.py --snapshot tuan_3/results/refresh_20
 
 Chọn thư mục output mới nếu đã chạy trước đó. Lệnh dùng đúng snapshot và phản hồi mô hình đã lưu, không cần gọi AWS/API. Cờ `--collect-later-model` dùng để tải một mốc mô hình mới khi cần, lưu vào thư mục khác và chỉ đối chiếu giờ đã hoàn tất; không dùng thay số liệu trạm hoặc ghi đè bản dự báo đã phát hành. [Nguồn và kết quả cập nhật](../results/refresh_2026_10_18/README.md).
 
+## 8. Đối chiếu hồ sơ trước khi nộp
+
+Hồ sơ ghi nhận **các sản phẩm công việc tích hợp Tuần 3 đã hoàn thành tại mốc 18/10/2026**. Bảng sau nêu đúng bộ đầu vào và phạm vi kiểm chứng để người đọc đối chiếu giữa báo cáo, CSV và biểu đồ.
+
+| Hạng mục | Kết quả đã lưu và đối chiếu | Minh chứng, phạm vi áp dụng |
+| --- | --- | --- |
+| Raw đầy đủ | Sinh viên Tiến Sơn 246 dòng; sinh viên Ngọc Quyên 288 dòng; tổng 534 bản ghi, 83 JSON gốc và 23 trường mỗi bản ghi | [CSV/JSON, inventory và thời điểm đọc](../results/raw_export_2026_10_18/README.md). Các trường trong CSV khớp JSON gốc; 531 bản ghi của snapshot trước được bảo toàn |
+| Chất lượng raw | Bảy nhóm kiểm tra đã khai báo không phát hiện lỗi trong hai bộ xuất | [Chất lượng sinh viên Tiến Sơn](../results/raw_export_2026_10_18/snapshot/default/quality.csv) · [Sinh viên Ngọc Quyên](../results/raw_export_2026_10_18/snapshot/quyen/quality.csv). Kết quả kiểm tra cấu trúc/thời gian không xác nhận độ chính xác ngoài thực địa |
+| Bảng và biểu đồ phân tích | 96 dòng thống kê, 120 dòng tương quan; PNG dùng cùng dữ liệu tính từ snapshot 246/285 dòng | [Nguồn và SHA-256 đầu vào](../results/refresh_2026_10_18/analysis/provenance.json). Bộ raw mới 246/288 được lưu riêng; số dòng của các bảng cũ không bị đổi theo snapshot mới |
+| Athena | 18 lượt SELECT, ba cách lưu/khai báo, hai môi trường; kết quả tổng hợp khớp cùng raw 237/273 dòng | [Từng truy vấn, số đo và cấu hình](../results/integration_2026_10_18/benchmark/). Số byte và thời gian thuộc toàn truy vấn; Parquet được ghi bằng PyArrow/Snappy |
+| Đánh giá và phát hành dự báo | 576 dòng đánh giá bổ sung của bốn phương pháp; bản phát hành có 144 giá trị cho 24 giờ đích | [Đánh giá giữ lại](../results/refresh_2026_10_18/analysis/ma_comparison_predictions.csv) · [Bản phát hành](../results/forecast_issued_2026_10_18/forecast_24h.csv). Đối chiếu với mô hình tải về sau hiện có 12/144 dòng, tương ứng 2/24 giờ đích; dữ liệu CAMS không phải số đo trạm |
+| Triển khai | Hai lượt CD thành công; hash gói đọc lại từ AWS khớp artifact và cấu hình được giữ nguyên | [Hồ sơ CD](../results/cd_2026_10_18/). Kết quả thuộc các lượt đã ghi thời điểm, không tự xác nhận trạng thái AWS ở một thời điểm khác |
+| Thu thập và email | Các lượt theo lịch có log–S3 đối chiếu; email ngày 16/10 đã có xác nhận của hai người nhận | [Theo lịch và email](../../docs/scheduled-run-verification.md) · [Sau sửa cấu hình](../results/post_repair_2026_10_18/README.md). Lượt mới dưới ngưỡng có 0 cảnh báo, không được gọi là một phép kiểm chứng nhận email mới |
+| Giám sát | Dashboard/Metric Filters đã được cấu hình và đọc lại; có điểm bộ đếm log từ lượt thật | [Metric và giới hạn cách tính tỷ lệ](#5-giới-hạn-của-metric-vận-hành). Native Errors/Invocations còn cửa sổ không nhất quán; giữ nguyên số gốc và không điền điểm thiếu thành 0 |
+| Giờ công | Tuần 1: 18,5 giờ; Tuần 2: 19,5 giờ; Tuần 3: 20,0 giờ; cộng 58,0 giờ | [Worklog và bảng từng sinh viên](WORKLOG.md#3-tổng-giờ-theo-tuần-đã-xác-nhận) · [CSV Tuần 3](../worklog.csv). Căn cứ: **Tổng theo tuần đã xác nhận** |
+| Tính toàn vẹn hồ sơ | Verifier tính lại số liệu và đối chiếu 315 tệp trong tám manifest; audit kiểm tra danh mục CSV và liên kết nội bộ | [Verifier](../scripts/verify_results.py) · [Audit repository](../../tuan_2/scripts/repository_audit.py). Các kiểm tra này chạy trên tệp đã lưu |
+
+Ba mốc mã trực tiếp cho công việc Tuần 3: [tích hợp công cụ `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e), [gói triển khai `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356) và [raw nguyên bản/worklog `7ec1b32`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/7ec1b3269388214111c96466a01a7fc9541e58b1). [CI của bản xuất raw](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39118199735) đã đạt 40 kiểm tra Tuần 3 và phép đối chiếu 315 tệp. Kết quả từng phiên bản tiếp theo được đọc tại [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions).
+
 [Báo cáo](FINAL_REPORT.md) · [Trang Tuần 3](../README.md)

@@ -50,7 +50,7 @@ Hai dòng CSV Tuần 3 ghi tổng 10,0 giờ mỗi sinh viên, không chứa ng�
 
 ## 5. Kết quả hoàn thành kế hoạch công việc tích hợp Tuần 3
 
-**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** Đã hoàn thành toàn diện việc xuất dữ liệu raw, tích hợp triển khai, thử nghiệm hiệu năng Athena, cấu hình giám sát thời gian thực, đánh giá mô hình dự báo và hệ thống hồ sơ kiểm chứng đầy đủ trên AWS.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** Các sản phẩm gồm bản xuất raw, hồ sơ triển khai, thử nghiệm Athena, cấu hình giám sát, đánh giá dự báo và liên kết kiểm chứng dưới đây. Trạng thái này mô tả các sản phẩm tích hợp đã hoàn thành; phạm vi quan sát vận hành và các kết quả cần tiếp tục theo dõi được ghi theo từng mã việc và trong [bảng đối chiếu hồ sơ](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp).
 
 
 | Mã việc | Sản phẩm đã hoàn thành | Minh chứng |

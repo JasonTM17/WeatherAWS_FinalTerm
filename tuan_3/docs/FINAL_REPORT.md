@@ -177,7 +177,7 @@ Tỷ lệ là tỷ lệ bản ghi trong mẫu, không phải tỷ lệ thời gi
 
 ### 2.4. Kiểm soát thời gian và tính toàn vẹn
 
-UTC/UTC+7 và khóa phân vùng UTC được đối chiếu và đồng bộ chính xác. Snapshot lưu trữ bảo toàn tính toàn vẹn với điều kiện ETag trên từng đối tượng và mã băm SHA-256. Dữ liệu Open-Meteo phản ánh các chỉ số khí tượng và nồng độ chất ô nhiễm tiêu chuẩn. Các bản ghi hoàn thành vận hành giai đoạn Tuần 3 đã được chuẩn hóa và kiểm chứng toàn diện theo cấu trúc phân vùng thực tế.
+Đã đối chiếu UTC/UTC+7, khóa phân vùng UTC, lược đồ và các trường số theo bảy nhóm kiểm tra đã khai báo. Mỗi object S3 được đọc với điều kiện ETag và lưu SHA-256; toàn bộ trường JSON được đối chiếu với CSV. Thao tác này bảo vệ từng object tại lúc đọc, không tạo một giao dịch nguyên tử trên toàn bucket. Các giá trị Open-Meteo là dữ liệu mô hình, không phải số đo trực tiếp tại trạm. Raw ngày 18/10 được dùng cho công việc tích hợp Tuần 3 và giữ nguyên timestamp; độ phủ của khoảng lịch 19–25/10 được tính riêng theo thời điểm bản ghi.
 
 
 ## 3. Partition Projection và Parquet
@@ -415,7 +415,7 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 [Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng giờ theo tuần đã xác nhận, không ghi ngày làm hoặc phân bổ giờ thực tế theo nhiệm vụ. 38,0 giờ Tuần 1–2 giữ nguyên; 20,0 giờ Tuần 3 được ghi bổ sung theo thông tin sinh viên.
 
-Dữ liệu raw đã được xuất và gắn link minh chứng đầy đủ tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ được trình bày chi tiết trong [Worklog](WORKLOG.md). Hệ thống duy trì hoạt động ổn định, ghi nhận dữ liệu định kỳ và các chỉ số giám sát CloudWatch phản ánh chính xác trạng thái vận hành của toàn bộ quy trình.
+Dữ liệu raw đã được xuất và gắn link tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ đã xác nhận được trình bày trong [Worklog](WORKLOG.md). Hồ sơ có các lượt chạy theo lịch được đối chiếu log–S3 và xác nhận email ngày 16/10. Bộ đếm dòng log đã có điểm mới sau cấu hình Metric Filters; bộ đếm CloudWatch native còn điểm chưa nhất quán nên tỷ lệ lỗi chỉ được tính khi các đầu vào hợp lệ. Việc đối chiếu dự báo với mô hình tải về sau hiện bao phủ 2/24 giờ đích. [Bảng đối chiếu trước khi nộp](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) tổng hợp phạm vi của từng kết quả.
 
 
 ## Tài liệu tham khảo

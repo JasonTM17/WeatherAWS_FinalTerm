@@ -62,9 +62,17 @@ Hai môi trường đã có CD thành công, gói tải lại từ AWS khớp ar
 
 [Hồ sơ CD](tuan_3/results/cd_2026_10_18/) · [Lượt sau sửa cấu hình](tuan_3/results/post_repair_2026_10_18/README.md) · [Email đã được người nhận xác nhận ngày 16/10](docs/scheduled-run-verification.md).
 
-Hệ thống Metric Filters và CloudWatch Dashboard hoạt động chuẩn xác, ghi nhận đầy đủ các lượt thực thi và trạng thái bộ đếm log. Kênh cảnh báo email qua SNS và EventBridge kích hoạt tự động theo đúng thiết kế, đảm bảo quy trình vận hành liên tục và tin cậy.
+Đã cấu hình và đọc lại Dashboard cùng hai Metric Filters trong mỗi môi trường; các lượt theo lịch đã kiểm chứng có log và dữ liệu S3 tương ứng. Luồng email có xác nhận của người nhận tại các lượt ngày 16/10. Riêng bộ đếm CloudWatch native tại cửa sổ đã lưu có Errors lớn hơn Invocations, nên Dashboard chỉ hiển thị tỷ lệ lỗi khi đủ điều kiện tính; kết quả này được tách khỏi bộ đếm dòng log và xác nhận email. [Cửa sổ metric và cách xử lý](tuan_3/docs/operation.md#5-giới-hạn-của-metric-vận-hành).
 
 ## 7. Mã nguồn và commit minh chứng
+
+**Các thay đổi chính phục vụ Tuần 3:**
+
+- [0b26858 — tích hợp snapshot, thử nghiệm Athena, Dashboard và đánh giá dự báo](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e).
+- [c28da19 — chuẩn hóa gói Lambda để artifact Windows/Linux khớp byte, dùng cho hai lượt CD](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356).
+- [7ec1b32 — xuất CSV và 83 JSON raw nguyên bản, kiểm tra đối chiếu và đồng bộ worklog](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/7ec1b3269388214111c96466a01a7fc9541e58b1).
+
+**Các mốc thu thập, triển khai và hồi quy được kế thừa:**
 
 - [36c9b39 — mã Lambda và sửa xử lý thời gian](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/36c9b3966a8b6f645dc6bb1491ad6e2b40a78765).
 - [4a72d02 — đối chiếu triển khai, raw/truy vấn và email](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/4a72d0260ce7fbe5ff681e8ec73d17c03ab8859b).
@@ -90,4 +98,4 @@ Sinh viên Tiến Sơn phụ trách thu thập, cấu hình, triển khai và gi
 
 Kiểm tra tệp đã lưu: `python tuan_2/scripts/repository_audit.py --check`, `python tuan_3/scripts/verify_results.py`. Bộ hồi quy: `python -m unittest discover -s tuan_3/tests -v`. Các lệnh này không chứng minh dịch vụ AWS hiện tại; [workflow CI](.github/workflows/verify-repository.yml) và [các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) ghi kết quả riêng cho từng commit.
 
-Toàn bộ các mục tiêu kỹ thuật, sản phẩm tích hợp và kết quả đo kiểm Tuần 3 đã được hoàn thành 100%, có đầy đủ dữ liệu raw thực tế và liên kết minh chứng trực tiếp trên repository GitHub. Hệ thống vận hành ổn định trên cả hai tài khoản AWS, sẵn sàng cho việc nghiệm thu đồ án.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026**, với raw, thử nghiệm Athena, Dashboard/Metric Filters, đánh giá dự báo và CI/CD có liên kết minh chứng trực tiếp. Các tệp đã lưu được kiểm tra tính toàn vẹn và tính lại số liệu. Phạm vi theo dõi tiếp gồm độ phủ các lượt chạy theo thời gian, những giờ đích dự báo còn lại và bộ đếm CloudWatch native chưa nhất quán. [Bảng đối chiếu hồ sơ trước khi nộp](tuan_3/docs/operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) phân biệt rõ sản phẩm đã hoàn thành và phạm vi đã kiểm chứng.
