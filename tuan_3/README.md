@@ -12,7 +12,7 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 | --- | --- |
 | Báo cáo kỹ thuật, phương pháp và giới hạn | [Báo cáo chi tiết](docs/FINAL_REPORT.md) |
 | Hướng dẫn chạy, kiểm chứng và khôi phục | [Vận hành và CI/CD](docs/operation.md) |
-| Nhật ký có minh chứng, phân công và kế hoạch thời gian | [Nhật ký và kế hoạch Tuần 3](docs/WORKLOG.md) |
+| Nhật ký có minh chứng, phân công và kế hoạch thời gian | [Nhật ký và kế hoạch Tuần 3](docs/WORKLOG.md) · [CSV tổng hợp](worklog.csv) · [CSV chi tiết](docs/worklog.csv) |
 | Dữ liệu thô của từng sinh viên | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/raw_all.csv) |
 | Chất lượng và thống kê theo giờ | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/) |
 | Truy vấn, số đo Athena và cấu hình Projection | [Thí nghiệm Athena](results/integration_2026_10_18/benchmark/) |

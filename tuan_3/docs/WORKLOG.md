@@ -75,4 +75,4 @@ Mỗi sinh viên ghi một dòng cho mỗi buổi làm; nếu cùng làm một �
 - **Dự báo:** chưa có đủ giá trị đích để đánh giá toàn bộ 24 giờ dự báo mới; kết quả giữ lại không thay thế độ chính xác tương lai.
 - **Thời gian sinh viên:** kế hoạch đã có phân công và tổng giờ dự kiến; tổng giờ thực tế Tuần 3 chờ xác nhận trước khi chốt báo cáo cuối tuần.
 
-[Báo cáo kỹ thuật](FINAL_REPORT.md) · [Hướng dẫn vận hành](operation.md) · [Hồ sơ Tuần 3](../README.md) · [Nhật ký Tuần 1–2](../../docs/WORKLOG.md)
+[Báo cáo kỹ thuật](FINAL_REPORT.md) · [Hướng dẫn vận hành](operation.md) · [Hồ sơ Tuần 3](../README.md) · [CSV tổng hợp Tuần 3](../worklog.csv) · [CSV chi tiết Tuần 3](worklog.csv) · [Nhật ký Tuần 1–2](../../docs/WORKLOG.md)
