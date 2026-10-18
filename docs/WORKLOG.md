@@ -37,3 +37,8 @@ Lịch sử Git ghi nhận các lần cập nhật sản phẩm; tên người c
 | Theo dõi lịch tự động | Một lượt mỗi môi trường, tổng sáu bản ghi và bốn thông điệp SNS; người nhận xác nhận email mới | [Kết quả theo lịch](scheduled-run-verification.md) |
 
 Các mốc trên bổ sung minh chứng kỹ thuật; không tự cộng vào 38,0 giờ Tuần 1–2 đã xác nhận. Chưa điền số giờ Tuần 3 khi sinh viên chưa xác nhận thời gian thực tế. [Bảng tiến độ W3-01–W3-08](WEEK_3_PLAN.md#tiến-độ-theo-minh-chứng-đã-có) nêu rõ phần đã đạt và phần còn lại.
+
+
+## Bổ sung tổng giờ Tuần 3
+
+Sinh viên công bố 10,0 giờ cho sinh viên Tiến Sơn và 10,0 giờ cho sinh viên Ngọc Quyên, không ghi ngày hoặc phân bổ từng đầu việc. [Nhật ký và căn cứ Tuần 3](../tuan_3/docs/WORKLOG.md), [CSV tổng giờ](../tuan_3/worklog.csv). Các bảng Tuần 1–2 phía trên giữ nguyên tổng 38,0 giờ; cộng thêm 20,0 giờ công bố của Tuần 3 thành 58,0 giờ.

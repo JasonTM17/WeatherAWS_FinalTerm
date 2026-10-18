@@ -1,16 +1,12 @@
-# Nhật ký kỹ thuật và kế hoạch công việc Tuần 3
+# Nhật ký kỹ thuật và tổng giờ sinh viên công bố — Tuần 3
 
-**Nguyễn Tiến Sơn — MSSV 24110054 · Trần Thị Ngọc Quyên — MSSV 24110051**
+**Nguyễn Tiến Sơn — 24110054 · Trần Thị Ngọc Quyên — 24110051**
 
-**Kỳ báo cáo:** 19–25/10/2026, múi giờ Việt Nam (UTC+7).
+## 1. Phạm vi ghi nhận
 
-**Mốc chuẩn bị đã có minh chứng:** 18/10/2026.
+Hồ sơ ghi các mốc kỹ thuật chuẩn bị ngày 18/10/2026 và tổng giờ hai sinh viên công bố cho công việc tích hợp Tuần 3. Kỳ Tuần 3 theo lịch là 19–25/10; dữ liệu ngày 18/10 được giữ đúng ngày thực tế, không đổi thành dữ liệu trong tuần sau. Thời điểm log/commit ở mục 2 là thời điểm hệ thống, không phải ngày hoặc ca làm việc của sinh viên.
 
-## 1. Phạm vi và cách ghi nhận
-
-Nhật ký liên kết công việc với mã nguồn, dữ liệu và kết quả kiểm chứng để giảng viên có thể đối chiếu trực tiếp. Phân công kế thừa [bảng thành phần của dự án](../../docs/components.md): sinh viên Tiến Sơn phụ trách thu thập, cấu hình, giám sát và triển khai; sinh viên Ngọc Quyên phụ trách dữ liệu, Athena và phân tích. Hai sinh viên cùng rà soát kết quả và hoàn thiện báo cáo.
-
-Các thao tác có minh chứng ngày 18/10 được ghi tại mục 2 như một mốc chuẩn bị. Mục 3 là **kế hoạch 20,0 giờ**, chưa phải số giờ đã thực hiện. Cột giờ thực tế để **“Chờ xác nhận”** và chưa được cộng vào [nhật ký Tuần 1–2](../../docs/WORKLOG.md), có tổng **38,0 giờ** đã xác nhận. Thời gian chạy AWS, thời điểm commit và thời gian kiểm thử không được dùng thay số giờ làm việc của sinh viên.
+Tổng thời gian được ghi theo thông tin sinh viên công bố, không suy từ AWS/commit và không tự chia thành giờ thực tế cho từng đầu việc. Không ghi ngày làm việc khi chưa có nhật ký ngày tương ứng.
 
 ## 2. Nhật ký chuẩn bị ngày 18/10/2026
 
@@ -31,48 +27,29 @@ Các thư mục kết quả là những mốc chụp riêng. Chẳng hạn, snap
 
 **Rà soát bổ sung ngày 18/10:** tính lại tổng hợp từ raw cho đủ 18 truy vấn Athena, đối chiếu các trung vị đã báo cáo và toàn bộ 432 dòng đánh giá của mỗi mốc dự báo; các giá trị khớp. Phát hiện và sửa nhánh xử lý lỗi của công cụ triển khai để ghi trạng thái thất bại khi không nhận được xác nhận cập nhật hoặc không đọc được RevisionId hiện tại. Hai hồi quy mới thất bại trước sửa và đạt sau sửa; cả bảy kiểm tra tập trung vào triển khai/khôi phục đạt. Không triển khai lại Lambda và không gây lỗi lên AWS thật trong lần rà soát này.
 
-## 3. Kế hoạch thực hiện và theo dõi thời gian
+## 3. Tổng giờ theo thông tin sinh viên công bố
 
-Ngày và thời lượng dưới đây là **dự kiến phân bổ cho tuần 19–25/10**, tập trung rà soát sản phẩm chuẩn bị và bổ sung quan sát trong tuần. Khi ghi giờ thực tế, cần thêm ngày làm, kết quả và minh chứng tương ứng. Không ghi lại công việc chuẩn bị ngày 18/10 thành công việc đã làm trong một ngày tương lai.
+| Giai đoạn | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Tổng | Căn cứ |
+| --- | --- | --- | --- | --- |
+| Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ | Tổng theo tuần đã xác nhận |
+| Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ | Tổng theo tuần đã xác nhận |
+| Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng do sinh viên công bố, không phân bổ ngày |
+| **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
 
-| Mã | Ngày dự kiến | Sinh viên phụ trách | Công việc dự kiến và sản phẩm bàn giao | Tiêu chí hoàn thành | Giờ dự kiến | Giờ thực tế |
-| --- | --- | --- | --- | --- | ---: | --- |
-| W3-01 | 19/10 | Sinh viên Tiến Sơn | Rà soát phiên bản Lambda sau CD, hash gói, trạng thái, cấu hình và phương án khôi phục; bổ sung mốc đọc lại khi có thay đổi. | Hash khớp bản phát hành; có biên bản trạng thái/cấu hình và đường dẫn gói khôi phục được bảo vệ. | 2,0 | Chờ xác nhận |
-| W3-02 | 19–20/10 | Sinh viên Tiến Sơn | Theo dõi các lượt thực sự chạy theo lịch trong phiên Lab; đối chiếu log, ba đô thị và đối tượng S3; ghi các khoảng thiếu dữ liệu. | Mỗi lượt được kết luận có log và raw đối chiếu; số bản ghi, lỗi và cảnh báo khớp; chưa quan sát thì ghi rõ. | 2,0 | Chờ xác nhận |
-| W3-03 | 20/10 | Sinh viên Ngọc Quyên | Rà soát thí nghiệm Projection/Parquet; đối chiếu lược đồ, phạm vi ngày, số dòng, truy vấn và trung vị ba lần đo; giải thích lợi ích cùng giới hạn. | 18 lượt có đầu vào và tổng hợp khớp; phân biệt byte quét, thời gian chạy và chi phí; chỉ đo lại khi thay đầu vào hoặc có lỗi cần kiểm chứng. | 3,0 | Chờ xác nhận |
-| W3-04 | 20–21/10 | Sinh viên Ngọc Quyên | Xuất snapshot mới khi có dữ liệu trong tuần; kiểm tra lược đồ, kiểu số, thời gian UTC/Việt Nam, phân vùng và độ phủ đô thị–giờ. | Có raw, bảng chất lượng và phạm vi thời gian; số liệu trong báo cáo/biểu đồ truy về đúng snapshot, giữ nguyên raw lịch sử. | 2,0 | Chờ xác nhận |
-| W3-05 | 21–22/10 | Sinh viên Tiến Sơn | Kiểm tra điểm metric phát sinh sau Metric Filters của cả hai môi trường; đối chiếu Dashboard, log và bộ đếm native đang bất thường. | Lưu cấu hình, cửa sổ quan sát và điểm metric thực; không coi thiếu điểm là 0; bất thường chưa giải thích được tiếp tục ghi là giới hạn. | 2,5 | Chờ xác nhận |
-| W3-06 | 22/10 | Sinh viên Tiến Sơn | Rà soát điều kiện AQI/PM2.5 và luồng cảnh báo email; đối chiếu số cảnh báo với raw. Nếu có cảnh báo mới, bổ sung bằng chứng SNS và xác nhận người nhận. | Mẫu dưới ngưỡng có 0 cảnh báo là hợp lệ; chỉ xác nhận gửi/nhận email mới khi có minh chứng tương ứng. Giữ email là kênh duy nhất. | 1,5 | Chờ xác nhận |
-| W3-07 | 22–23/10 | Sinh viên Ngọc Quyên | Rà soát phép chia theo thời gian và ba phương pháp dự báo; đối chiếu các giờ đích đã qua khi đủ dữ liệu cùng định nghĩa; bổ sung MAE/RMSE/Bias và biểu đồ màu. | Không dùng dữ liệu đích để dự báo ngược; CSV và biểu đồ khớp; phân biệt đánh giá giữ lại, dữ liệu mô hình và dự báo thực sự phát hành trước giờ đích. | 3,5 | Chờ xác nhận |
-| W3-08-S | 24–25/10 | Sinh viên Tiến Sơn | Rà soát tài liệu vận hành, minh chứng CI/CD và triển khai; cùng hoàn thiện nội dung kết luận, link commit và nhật ký. | Link truy cập đúng; chỉ ghi gate đã chạy; không đưa khóa phiên hoặc cấu hình bí mật vào hồ sơ; xác nhận giờ làm của mình. | 2,0 | Chờ xác nhận |
-| W3-08-Q | 24–25/10 | Sinh viên Ngọc Quyên | Rà soát raw/CSV/biểu đồ, cách diễn giải số liệu và giới hạn kết luận; đối chiếu phân công với sản phẩm và nhật ký. | Mỗi nhận định có dữ liệu hỗ trợ; số liệu và tên sinh viên nhất quán; xác nhận giờ làm của mình. | 1,5 | Chờ xác nhận |
+[CSV tổng giờ Tuần 3](../worklog.csv) · [Bản CSV trong hồ sơ](worklog.csv) · [Tổng Tuần 1–2](../../worklog.csv).
 
-### Tổng thời gian dự kiến
+Hai dòng CSV Tuần 3 ghi tổng 10,0 giờ mỗi sinh viên, không chứa ngày làm hoặc phân bổ giờ theo nhiệm vụ. Các mốc kỹ thuật là căn cứ về sản phẩm, không tự chứng minh thời lượng lao động.
 
-| Sinh viên | Các đầu việc | Giờ dự kiến | Tổng giờ thực tế |
-| --- | --- | ---: | --- |
-| Sinh viên Tiến Sơn | W3-01, W3-02, W3-05, W3-06, W3-08-S | 10,0 | Chờ xác nhận |
-| Sinh viên Ngọc Quyên | W3-03, W3-04, W3-07, W3-08-Q | 10,0 | Chờ xác nhận |
-| **Tổng** | | **20,0** | **Chưa chốt** |
+## 4. Phân công và rà soát cập nhật
 
-Các giờ dự kiến là phân bổ ban đầu, có thể điều chỉnh theo công việc thực hiện. Không xem tổng 20,0 giờ là tổng đã hoàn thành hoặc cộng vào 38,0 giờ của Tuần 1–2.
+- Sinh viên Tiến Sơn: phiên bản triển khai, lịch thu thập, cấu hình, giám sát và cảnh báo email.
+- Sinh viên Ngọc Quyên: raw, Glue/Athena, thống kê, đối chiếu dự báo và CSV/biểu đồ.
+- Hai sinh viên: đối chiếu kết quả, rà soát báo cáo và các liên kết minh chứng.
 
-## 4. Mẫu bổ sung nhật ký thực tế
+Đợt đọc mới sau cập nhật phiên Lab có 246/285 bản ghi; mã Lambda khớp gói đã kiểm chứng. [Hồ sơ mới](../results/refresh_2026_10_18/README.md) bổ sung thống kê tái lập, so sánh MA 3 giờ và đối chiếu được 2/24 giờ đích với dữ liệu mô hình tải về sau. Không ghi 2 giờ này là toàn bộ 24 giờ đã đánh giá.
 
-Mỗi sinh viên ghi một dòng cho mỗi buổi làm; nếu cùng làm một đầu việc thì ghi thời gian riêng của từng người. Chỉ tính thời gian trực tiếp thực hiện/rà soát công việc, không tính toàn bộ khoảng máy chủ chạy tự động hoặc khoảng chờ lịch.
+## 5. Phần cần tiếp tục theo dõi
 
-| Ngày thực hiện | Sinh viên | Mã đầu việc | Nội dung đã thực hiện và kết quả | Số giờ thực tế | Link minh chứng | Xác nhận |
-| --- | --- | --- | --- | --- | --- | --- |
-| Chờ cập nhật | Sinh viên Tiến Sơn | Chờ cập nhật | Chờ cập nhật sau buổi làm | Chờ xác nhận | Chờ bổ sung | Chưa xác nhận |
-| Chờ cập nhật | Sinh viên Ngọc Quyên | Chờ cập nhật | Chờ cập nhật sau buổi làm | Chờ xác nhận | Chờ bổ sung | Chưa xác nhận |
+Raw hiện có 0 bản ghi thuộc kỳ 19–25/10. Các bộ đếm CloudWatch native không nhất quán vẫn là giới hạn chưa xác định nguyên nhân. Xác nhận email ngày 16/10 là bằng chứng của đợt đó; lượt dưới ngưỡng không chứng minh nhận email mới. Số giờ sinh viên công bố được ghi riêng với độ phủ dữ liệu và trạng thái kỹ thuật.
 
-## 5. Trạng thái cần tiếp tục theo dõi
-
-- **Sinh viên Ngọc Quyên:** lượt 13:51 sau sửa JSON đã khớp log/raw và có metric mới; tiếp tục theo dõi các lượt trong tuần để đánh giá độ phủ. Lượt đơn lẻ không chứng minh vận hành liên tục.
-- **Bộ đếm CloudWatch native:** hai API trả cùng các điểm đã lưu nhưng Errors cao hơn Invocations; chưa xác định nguyên nhân. Không dùng tỷ lệ lỗi của cửa sổ đó làm kết luận vận hành ổn định.
-- **Độ phủ Tuần 3:** tại mốc chuẩn bị ngày 18/10 có 0 bản ghi thuộc 19–25/10. Chỉ cập nhật độ phủ sau khi có dữ liệu đúng khoảng ngày.
-- **Email:** xác nhận nhận thư ngày 16/10 là bằng chứng của lượt lịch sử đó. Những lượt mới không vượt ngưỡng không chứng minh lại bước nhận email.
-- **Dự báo:** chưa có đủ giá trị đích để đánh giá toàn bộ 24 giờ dự báo mới; kết quả giữ lại không thay thế độ chính xác tương lai.
-- **Thời gian sinh viên:** kế hoạch đã có phân công và tổng giờ dự kiến; tổng giờ thực tế Tuần 3 chờ xác nhận trước khi chốt báo cáo cuối tuần.
-
-[Báo cáo kỹ thuật](FINAL_REPORT.md) · [Hướng dẫn vận hành](operation.md) · [Hồ sơ Tuần 3](../README.md) · [CSV tổng hợp Tuần 3](../worklog.csv) · [CSV chi tiết Tuần 3](worklog.csv) · [Nhật ký Tuần 1–2](../../docs/WORKLOG.md)
+[Báo cáo kỹ thuật](FINAL_REPORT.md) · [Vận hành](operation.md) · [Hồ sơ Tuần 3](../README.md)

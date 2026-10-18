@@ -1,0 +1,134 @@
+{
+  "files": [
+    {
+      "path": "analysis/city_hour_aqi.png",
+      "sha256": "7053dedf1aab49d7aaa3750d801ebc0cc1e8bf0a7af7730ddd9f3864d645914c",
+      "bytes": 51796
+    },
+    {
+      "path": "analysis/correlations.csv",
+      "sha256": "01463bfe49aa02c9dda511b18c263b2a29fca56e456bff0e15d6a6790e116b81",
+      "bytes": 12245
+    },
+    {
+      "path": "analysis/descriptive.csv",
+      "sha256": "e488fd90789c9d3ee0dfbe08fef395e2ab35825a3f48574c94d843c47c286f32",
+      "bytes": 17916
+    },
+    {
+      "path": "analysis/holdout_ma_comparison.png",
+      "sha256": "b4b3957ceffaee39f27b9db3980ab7ca5d53b139c6769383311245e249c8e3b4",
+      "bytes": 68678
+    },
+    {
+      "path": "analysis/hourly_correlations.png",
+      "sha256": "e25d2426c7288e6514628cf039c5e745924e6622b1642ad22f090297e8d520f3",
+      "bytes": 111459
+    },
+    {
+      "path": "analysis/later_model/comparison.csv",
+      "sha256": "b854933c5fff0e3d7a06d54c672c316b79d42706118f78cef138ca477f6b1e0c",
+      "bytes": 3209
+    },
+    {
+      "path": "analysis/later_model/DaNang_api.json",
+      "sha256": "99b4df63a2382f9509cc005cc16dfa433ff4116ec79b41f1b249d539b12092e2",
+      "bytes": 10107
+    },
+    {
+      "path": "analysis/later_model/HaNoi_api.json",
+      "sha256": "c032922eb9f0c96fc7fe501377a3377d41e701449e84198779652bc1f2c574a1",
+      "bytes": 10342
+    },
+    {
+      "path": "analysis/later_model/history.csv",
+      "sha256": "2a518a4b9cdf6cb72766e2cb4695356656f807bfec595cdd68e6179389769602",
+      "bytes": 26518
+    },
+    {
+      "path": "analysis/later_model/HoChiMinh_api.json",
+      "sha256": "f27bc690d35ed049a3654b6ae80c79069e9022589579cf9cf9e42b61f2afc243",
+      "bytes": 10213
+    },
+    {
+      "path": "analysis/later_model/provenance.json",
+      "sha256": "3019c0d9f1e7e39aa1c043db47bcbf2d9810c2a609b5c78610e1caf11d47fdc2",
+      "bytes": 1784
+    },
+    {
+      "path": "analysis/ma_comparison_metrics.csv",
+      "sha256": "b4a53aa9d678ed275f214ca18f4a31f36a7fc034bf1f2edea92f68da28d195cb",
+      "bytes": 4684
+    },
+    {
+      "path": "analysis/ma_comparison_predictions.csv",
+      "sha256": "0412aa2bec9271499eacc9e9fe3f5b1a2964fea899122e9ca0faed6b947dfc62",
+      "bytes": 51800
+    },
+    {
+      "path": "analysis/provenance.json",
+      "sha256": "f4a07beeb5fce3528d687a37550531b44a2da591181365ab4875a74fcb7e3f0c",
+      "bytes": 1390
+    },
+    {
+      "path": "snapshot/default/hourly_city.csv",
+      "sha256": "7ca44800366807e5794429dc59d7037c2615655c8c874637f792dbcf82512aad",
+      "bytes": 13111
+    },
+    {
+      "path": "snapshot/default/object_inventory.csv",
+      "sha256": "667923d76f243a91a50686c9d551cbf7c0bee8a6988dabcc072b3e10f0a6fffb",
+      "bytes": 6029
+    },
+    {
+      "path": "snapshot/default/quality.csv",
+      "sha256": "dfdb1ee6e1d23b65f29402255ab2f173f5903e7a8012bea3ccf530d7ea28c6e1",
+      "bytes": 226
+    },
+    {
+      "path": "snapshot/default/raw_all.csv",
+      "sha256": "6bb7173508f5ebdbdeb735430b4fb02811504c5ad2db14b90ae3f88b59f3b14d",
+      "bytes": 61964
+    },
+    {
+      "path": "snapshot/default/recent_collections.csv",
+      "sha256": "912e303ef7fc991fdfd0de9063aea50d43193ef04b62d2dc27dbf0a65aa44af6",
+      "bytes": 318
+    },
+    {
+      "path": "snapshot/default/snapshot.json",
+      "sha256": "f74a733198ac5066b7e49c0700b1b5569efc577347f859dd2c8fddc48fa25644",
+      "bytes": 1322
+    },
+    {
+      "path": "snapshot/quyen/hourly_city.csv",
+      "sha256": "22c71227267f94f17c26eb3184e4274729dbea45322413206379c293c67aa8e0",
+      "bytes": 12777
+    },
+    {
+      "path": "snapshot/quyen/object_inventory.csv",
+      "sha256": "a49dc0596fec9f84a9d8b2fa5d69a7985fa76e3210d220513507e127433a7f35",
+      "bytes": 7663
+    },
+    {
+      "path": "snapshot/quyen/quality.csv",
+      "sha256": "dfdb1ee6e1d23b65f29402255ab2f173f5903e7a8012bea3ccf530d7ea28c6e1",
+      "bytes": 226
+    },
+    {
+      "path": "snapshot/quyen/raw_all.csv",
+      "sha256": "135164e58200e2c49926c0a6e5c0b04ef2238a836b43aa3a060fcff4a721cea4",
+      "bytes": 71591
+    },
+    {
+      "path": "snapshot/quyen/recent_collections.csv",
+      "sha256": "bb4bda1c1a5f7b84740af8d0be36e642afd739c3edd89cda593fd039416b323e",
+      "bytes": 318
+    },
+    {
+      "path": "snapshot/quyen/snapshot.json",
+      "sha256": "7abd349d9982efee278913119821ed620d9fb438dc0b61e8397d2781197a1c18",
+      "bytes": 1476
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "created_at": "2026-10-18T09:33:27.779100+00:00",
+  "repository_head_at_capture": "68e0784648ce98a048848051874a5ade83989926",
+  "analysis_script_sha256_lf": "4e3cdc98a47dbcb12b60aa11ccfeb89cbdeb89f0ef7ecf485a54f91d080dbc4b",
+  "inputs": [
+    {
+      "profile": "default",
+      "path": "tuan_3/results/refresh_2026_10_18/snapshot/default/raw_all.csv",
+      "sha256": "6bb7173508f5ebdbdeb735430b4fb02811504c5ad2db14b90ae3f88b59f3b14d",
+      "records": 246
+    },
+    {
+      "profile": "quyen",
+      "path": "tuan_3/results/refresh_2026_10_18/snapshot/quyen/raw_all.csv",
+      "sha256": "135164e58200e2c49926c0a6e5c0b04ef2238a836b43aa3a060fcff4a721cea4",
+      "records": 285
+    }
+  ],
+  "statistics": "Raw and separately equal-weighted city-hour means; sample SD ddof1; linear percentiles; average tied ranks",
+  "ma3_experiment": "Post-hoc exploratory comparison after reviewing the original holdout; no production model change or independent generalization claim",
+  "aws_refresh": "Input snapshots retain their capture time/source/rules; consult snapshot.json for current AWS evidence",
+  "later_model": {
+    "status": "COLLECTED",
+    "matched_prediction_rows": 12,
+    "issued_prediction_rows": 144,
+    "matched_hours_per_city_variable": 2,
+    "target_values_complete": false
+  },
+  "figures_rebuilt_at": "2026-10-18T09:34:16.456447+00:00"
+}

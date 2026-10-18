@@ -1,0 +1,30 @@
+{
+  "sources": [
+    {
+      "city": "HoChiMinh",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=10.8231&longitude=106.6297&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-18T09:29:12.477650+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-18T09:00:00+00:00",
+      "retained_hours": 177,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    },
+    {
+      "city": "HaNoi",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=21.0285&longitude=105.8542&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-18T09:29:13.527122+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-18T09:00:00+00:00",
+      "retained_hours": 177,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    },
+    {
+      "city": "DaNang",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=16.0544&longitude=108.2022&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-18T09:29:14.358678+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-18T09:00:00+00:00",
+      "retained_hours": 177,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    }
+  ],
+  "cutoff_exclusive_utc": "2026-10-18T09:00:00+00:00",
+  "comparison_kind": "Previously issued predictions vs later downloaded CAMS model values, not station truth; retrospective model revisions possible"
+}

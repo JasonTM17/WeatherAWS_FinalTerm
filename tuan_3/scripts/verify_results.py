@@ -8,6 +8,96 @@ from common import ROOT, digest, read_csv
 from dashboard import metric_consistency
 from forecast import evaluate, future_forecast
 from quality import inspect_rows
+from reconcile_analysis import VARIABLES, WEATHER, correlation, descriptive, hourly_rows, partial_comparison, ranks, recursive_mean
+from forecast import score
+
+
+def verify_refresh(folder):
+    count = verify_manifest(folder)
+    analysis = folder / 'analysis'
+    stats = read_csv(analysis / 'descriptive.csv')
+    corrs = read_csv(analysis / 'correlations.csv')
+    if len(stats) != 96 or len(corrs) != 120:
+        raise ValueError('Supplementary statistics dimensions differ')
+    for profile in ('default', 'quyen'):
+        raw = read_csv(folder / 'snapshot' / profile / 'raw_all.csv')
+        saved = json.loads((folder / 'snapshot' / profile / 'snapshot.json').read_text(encoding='utf-8'))
+        quality, _ = inspect_rows(raw)
+        if any(quality[k] != saved[k] for k in ('records', 'issues', 'week3_calendar_records', 'city_hour_groups')) or not saved['lambda']['matches_reviewed_release_package']:
+            raise ValueError('Refreshed raw/source proof differs')
+        for scope, records in (('raw', raw), ('city_hour', hourly_rows(raw))):
+            for city in sorted({r['city'] for r in records}):
+                group = [r for r in records if r['city'] == city]
+                for variable in VARIABLES:
+                    selected = [r for r in stats if (r['profile'], r['scope'], r['city'], r['variable']) == (profile, scope, city, variable)]
+                    if len(selected) != 1:
+                        raise ValueError('Descriptive key missing or repeated')
+                    for key, value in descriptive([r[variable] for r in group]).items():
+                        if value is None and selected[0][key] != '' or value is not None and not math.isclose(float(selected[0][key]), value, rel_tol=1e-11, abs_tol=1e-9):
+                            raise ValueError('Descriptive value differs from retained raw')
+                for target in ('pm2_5', 'us_aqi'):
+                    for variable in WEATHER:
+                        selected = [r for r in corrs if (r['profile'], r['scope'], r['city'], r['target'], r['variable']) == (profile, scope, city, target, variable)]
+                        if len(selected) != 1:
+                            raise ValueError('Correlation key missing or repeated')
+                        x, y = [float(r[variable]) for r in group], [float(r[target]) for r in group]
+                        for key, value in (('pearson_r', correlation(x, y)), ('spearman_rho', correlation(ranks(x), ranks(y)))):
+                            if value is None and selected[0][key] != '' or value is not None and not math.isclose(float(selected[0][key]), value, rel_tol=1e-11, abs_tol=1e-9):
+                                raise ValueError('Correlation differs from retained raw')
+    history = read_csv(folder.parent / 'integration_2026_10_18/forecast/hourly_model_history.csv')
+    predictions = read_csv(analysis / 'ma_comparison_predictions.csv')
+    metrics = read_csv(analysis / 'ma_comparison_metrics.csv')
+    if len(predictions) != 576 or len(metrics) != 24:
+        raise ValueError('MA experiment dimensions differ')
+    for city in sorted({r['city'] for r in history}):
+        series = sorted((r for r in history if r['city'] == city), key=lambda r:r['timestamp_utc'])
+        for variable in ('us_aqi', 'pm2_5'):
+            _, expected, _ = evaluate(series, variable)
+            estimates = recursive_mean([r[variable] for r in series[:-24]], 3)
+            expected.extend({'model':'moving_average_3h', 'timestamp_utc':r['timestamp_utc'], 'actual':float(r[variable]), 'predicted':p}
+                            for r,p in zip(series[-24:], estimates))
+            for row in expected:
+                selected = [r for r in predictions if (r['city'], r['variable'], r['model'], r['timestamp_utc']) == (city, variable, row['model'], row['timestamp_utc'])]
+                if len(selected) != 1 or any(not math.isclose(float(selected[0][k]),row[k],rel_tol=1e-11,abs_tol=1e-9) for k in ('actual','predicted')):
+                    raise ValueError('MA experiment prediction/target differs')
+            for model in {r['model'] for r in expected}:
+                group = [r for r in expected if r['model'] == model]
+                selected = [r for r in metrics if (r['city'],r['variable'],r['model']) == (city,variable,model)]
+                calculated = score([r['actual'] for r in group],[r['predicted'] for r in group])
+                if len(selected) != 1 or any(not math.isclose(float(selected[0][k]),v,rel_tol=1e-11,abs_tol=1e-9) for k,v in calculated.items()):
+                    raise ValueError('MA experiment score differs')
+    later = read_csv(analysis / 'later_model/history.csv')
+    provenance = json.loads((analysis / 'later_model/provenance.json').read_text(encoding='utf-8'))
+    for source in provenance['sources']:
+        payload = json.loads((analysis / 'later_model' / f"{source['city']}_api.json").read_text(encoding='utf-8'))
+        actual = [r for r in later if r['city'] == source['city']]
+        cutoff = datetime.fromisoformat(source['historical_cutoff_exclusive_utc'])
+        hourly = payload['hourly']
+        indexed = {datetime.fromisoformat(t).replace(tzinfo=cutoff.tzinfo).isoformat():i for i,t in enumerate(hourly['time'])}
+        if payload['utc_offset_seconds'] != 0 or len(actual) != source['retained_hours']:
+            raise ValueError('Later-model source timezone/row count differs')
+        for row in actual:
+            if datetime.fromisoformat(row['timestamp_utc']) >= cutoff or row['timestamp_utc'] not in indexed:
+                raise ValueError('Later-model history includes unavailable hour')
+            i = indexed[row['timestamp_utc']]
+            if any(not math.isclose(float(row[k]),float(hourly[k][i]),rel_tol=1e-11,abs_tol=1e-9) for k in ('pm2_5','us_aqi')):
+                raise ValueError('Later-model CSV differs from archived API response')
+    issued = read_csv(folder.parent / 'forecast_issued_2026_10_18/forecast_24h.csv')
+    expected = partial_comparison(issued,later,datetime.fromisoformat(provenance['cutoff_exclusive_utc']))
+    saved = read_csv(analysis / 'later_model/comparison.csv')
+    if len(saved) != len(expected) or not saved or len(saved) >= len(issued):
+        raise ValueError('Partial later-model comparison must remain explicitly partial')
+    for a,b in zip(saved,expected):
+        if any(a[k] != str(b[k]) for k in b):
+            raise ValueError('Later-model comparison differs from issued predictions/history')
+    worklog = read_csv(ROOT / 'tuan_3/worklog.csv')
+    if worklog != read_csv(ROOT / 'tuan_3/docs/worklog.csv') or len(worklog) != 2:
+        raise ValueError('Week3 reported-hour mirrors differ')
+    if {r['student_id']:float(r['duration_hours']) for r in worklog} != {'24110054':10.0,'24110051':10.0} or any('công bố' not in r['time_basis'] for r in worklog):
+        raise ValueError('Week3 hours differ from student-reported totals')
+    if any(r.get('date') for r in worklog):
+        raise ValueError('Reported weekly totals must not invent work dates')
+    return count
 
 
 def verify_manifest(folder):
@@ -162,6 +252,7 @@ def verify(folder):
     file_count += verify_operations(folder.parent / 'operations_2026_10_18')
     file_count += verify_issued_forecast(folder.parent / 'forecast_issued_2026_10_18')
     file_count += verify_post_repair(folder.parent / 'post_repair_2026_10_18')
+    file_count += verify_refresh(folder.parent / 'refresh_2026_10_18')
     for profile in ('default', 'quyen'):
         observed = metric_consistency(read_csv(monitoring / profile / 'metrics.csv'))
         saved = json.loads((monitoring / profile / 'metric-consistency.json').read_text())
@@ -182,7 +273,10 @@ def verify(folder):
                 or cleanup['delete_success_count'] != 8 or any(cleanup['remaining_secret_names'].values())):
             raise ValueError('Temporary secret cleanup incomplete')
     return {'status': 'PASS', 'manifest_files': file_count, 'profiles': 2, 'benchmark_trials': 18,
-            'forecast_metrics': len(metrics), 'cd_environments': 2, 'temporary_secrets_remaining': 0}
+            'forecast_metrics': len(metrics), 'cd_environments': 2, 'temporary_secrets_remaining': 0,
+            'supplementary_descriptive_rows': 96, 'supplementary_ma_metrics': 24,
+            'later_model_comparison_rows': len(read_csv(folder.parent / 'refresh_2026_10_18/analysis/later_model/comparison.csv')),
+            'week3_student_reported_hours': 20}
 
 
 if __name__ == '__main__':

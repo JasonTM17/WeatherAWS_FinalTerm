@@ -11,7 +11,7 @@ python tuan_3/scripts/verify_results.py
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 193 tệp trong sáu manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của hai mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Mốc sau sửa cấu hình được kiểm tra riêng về thời gian, lịch, raw ba đô thị, điều kiện cảnh báo và metric log mới. Phần dự báo mới kiểm tra đủ 144 giờ đích đều sau thời điểm phát hành và khớp phép tính lại. Các kiểm tra này không cần khóa AWS. Đây là kiểm tra tệp đã lưu, không phải kiểm tra dịch vụ hiện tại.
+`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 219 tệp trong bảy manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của các mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Mốc cập nhật 246/285 dòng bổ sung kiểm tra 96 dòng thống kê, 120 dòng tương quan, 24 bộ sai số/576 dòng đánh giá và 12 dòng đối chiếu với dữ liệu mô hình tải về sau, cùng tổng giờ Tuần 3 do sinh viên công bố. Phần dự báo đã phát hành được kiểm tra đủ 144 giờ đích đều sau thời điểm phát hành; chưa coi 12 dòng đối chiếu là toàn bộ 24 giờ đã được đánh giá. Các kiểm tra này không cần khóa AWS và không chứng minh dịch vụ hiện tại.
 
 ## 2. Chạy một mốc mới trên AWS
 
@@ -63,7 +63,7 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 
 ## 4. Kết quả thực hiện
 
-- Bộ hồi quy hiện có 34 trường hợp, gồm hai trường hợp bổ sung về lỗi cập nhật/không đọc được RevisionId. Bảy kiểm tra tập trung vào đóng gói, cập nhật và khôi phục đã chạy đạt sau sửa; hai trường hợp mới đã tái hiện lỗi trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 193 tệp manifest và các phép tính lại đã đạt; kết quả toàn bộ bộ thử được ghi riêng theo lượt CI.
+- Bộ hồi quy hiện có 39 trường hợp, gồm năm trường hợp về hạng đồng hạng, thống kê, MA 3 giờ và loại giờ chưa hoàn tất khi đối chiếu mô hình tải về sau. Bảy kiểm tra tập trung vào đóng gói/cập nhật/khôi phục trước đó đã đạt; hai trường hợp lỗi triển khai đã tái hiện trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 219 tệp manifest và các phép tính lại được thực hiện riêng; kết quả toàn bộ bộ thử được ghi theo lượt CI.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
 - [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
 - [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.
@@ -90,5 +90,13 @@ Dashboard dùng `IF(inv>0,IF(FILL(err,-1)>=0,IF(err<=inv,100*err/inv)))` cho t�
 ## 6. Lượt theo lịch sau sửa cấu hình
 
 [Hồ sơ 13:51 của sinh viên Ngọc Quyên](../results/post_repair_2026_10_18/README.md) có ba bản ghi khớp log/S3, đủ ba đô thị, không có đô thị lỗi; AQI/PM2.5 dưới ngưỡng nên không phát cảnh báo mới. Một điểm `ResultLogLines` đã được CloudWatch ghi nhận sau tạo filter/sửa cấu hình; không có sự kiện khớp thông báo đọc Secret thất bại trong cửa sổ log đã kiểm tra. Chương trình quan sát không gọi Lambda và không thay đổi lịch. Đây là minh chứng thu thập và metric mới, không phải bằng chứng nhận email mới hoặc vận hành liên tục.
+
+## 7. Tái lập phân tích cập nhật từ tệp đã lưu
+
+```bash
+python tuan_3/scripts/reconcile_analysis.py --snapshot tuan_3/results/refresh_2026_10_18/snapshot --later-source tuan_3/results/refresh_2026_10_18/analysis/later_model --output output/week3-recompute-new
+```
+
+Chọn thư mục output mới nếu đã chạy trước đó. Lệnh dùng đúng snapshot và phản hồi mô hình đã lưu, không cần gọi AWS/API. Cờ `--collect-later-model` dùng để tải một mốc mô hình mới khi cần, lưu vào thư mục khác và chỉ đối chiếu giờ đã hoàn tất; không dùng thay số liệu trạm hoặc ghi đè bản dự báo đã phát hành. [Nguồn và kết quả cập nhật](../results/refresh_2026_10_18/README.md).
 
 [Báo cáo](FINAL_REPORT.md) · [Trang Tuần 3](../README.md)
