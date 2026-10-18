@@ -8,12 +8,25 @@ import unittest
 from unittest.mock import MagicMock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from snapshot import reviewed_release, result_counts
+from snapshot import archive_source, reviewed_release, result_counts
 from metric_filters import SAMPLES, configure, definitions, validate_match
 from check_operations import expected_alerts, policy_allows, saved_object
 
 
 class OperationsTests(unittest.TestCase):
+    def test_raw_archive_keeps_bytes_and_rejects_unsafe_or_existing_paths(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            key = 'raw/year=2026/month=10/day=18/data_example.json'
+            blob = '{"city":"Hà Nội"}\r\n'.encode('utf-8')
+            archive_source(folder, key, blob)
+            self.assertEqual((folder / 'objects' / key).read_bytes(), blob)
+            with self.assertRaises(FileExistsError):
+                archive_source(folder, key, blob)
+            for invalid in ('raw/../outside.json', '/raw/outside.json', 'raw/C:/outside.json', 'raw/a\\b.json', 'raw//outside.json'):
+                with self.subTest(key=invalid), self.assertRaises(ValueError):
+                    archive_source(folder, invalid, blob)
+
     def test_saved_files_uses_actual_lambda_descriptor_and_rejects_unsafe_keys(self):
         key = 'raw/year=2026/month=10/day=18/data_example.json'
         self.assertEqual(saved_object({'s3_key': key, 'count': 3}), (key, 3))

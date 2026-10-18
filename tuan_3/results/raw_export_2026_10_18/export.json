@@ -1,0 +1,33 @@
+{
+  "scope": "Raw inputs for Week 3 integration work; observations retain original timestamps",
+  "method": "Read-only SDK S3 list and ETag-conditional GET; original NDJSON bytes and lossless CSV export",
+  "lambda_invoked": false,
+  "aws_configuration_changed": false,
+  "observation_calendar_week3": {
+    "start_utc": "2026-10-18T17:00:00+00:00",
+    "end_exclusive_utc": "2026-10-25T17:00:00+00:00"
+  },
+  "snapshot_script_sha256_lf": "55040b8ea613fae8c1e29667d00f8aceac223ba1fe5068abcd081cbc13b928d3",
+  "profiles": {
+    "default": {
+      "student": "Sinh viên Tiến Sơn",
+      "records": 246,
+      "source_objects": 36,
+      "city_hour_groups": 234,
+      "captured_at_utc": "2026-10-18T10:01:39.572642+00:00",
+      "last_record_utc": "2026-10-18 08:15:46",
+      "previous_records_preserved": 246,
+      "new_records": 0
+    },
+    "quyen": {
+      "student": "Sinh viên Ngọc Quyên",
+      "records": 288,
+      "source_objects": 47,
+      "city_hour_groups": 231,
+      "captured_at_utc": "2026-10-18T10:02:04.810297+00:00",
+      "last_record_utc": "2026-10-18 09:51:05",
+      "previous_records_preserved": 285,
+      "new_records": 3
+    }
+  }
+}

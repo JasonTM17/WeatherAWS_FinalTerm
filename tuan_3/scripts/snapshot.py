@@ -30,7 +30,19 @@ def result_counts(entries):
             'recent_partial_log_results': sum(r['collection_status'] == 'partial' for r in entries)}
 
 
-def collect(profile, folder, proof_folder=ROOT / 'tuan_3/results/cd_2026_10_18'):
+def archive_source(folder, key, blob):
+    """Keep exact S3 bytes beneath the selected snapshot, without unsafe keys."""
+    parts = key.split('/')
+    if (not key.startswith('raw/') or not key.endswith('.json')
+            or any(part in ('', '.', '..') or '\\' in part or ':' in part for part in parts)):
+        raise ValueError('Unsafe raw object path')
+    target = folder / 'objects' / key
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with target.open('xb') as handle:
+        handle.write(blob)
+
+
+def collect(profile, folder, proof_folder=ROOT / 'tuan_3/results/cd_2026_10_18', archive_objects=False):
     sess = session(profile)
     account = client(sess, 'sts').get_caller_identity()['Account']
     lamb = client(sess, 'lambda')
@@ -45,6 +57,8 @@ def collect(profile, folder, proof_folder=ROOT / 'tuan_3/results/cd_2026_10_18')
         response = s3.get_object(Bucket=bucket, Key=item['Key'], IfMatch=item['ETag'])
         blob = response['Body'].read()
         records = ndjson_rows(blob)
+        if archive_objects:
+            archive_source(folder, item['Key'], blob)
         rows.extend(records)
         inventory.append({'key': item['Key'], 'records': len(records), 'bytes': len(blob), 'sha256': digest(blob), 'last_modified': item['LastModified'].isoformat()})
     if not rows:
@@ -89,12 +103,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--release-proof', type=Path, default=ROOT / 'tuan_3/results/cd_2026_10_18')
+    parser.add_argument('--archive-source', action='store_true', help='Retain each original NDJSON object byte for byte alongside the CSV')
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError('Use a new output directory; snapshots are immutable')
     args.output.mkdir(parents=True)
     for profile in PROFILES:
-        result = collect(profile, args.output / profile, args.release_proof)
+        result = collect(profile, args.output / profile, args.release_proof, args.archive_source)
         print(json.dumps({'profile': profile, 'records': result['records'], 'week3_calendar_records': result['week3_calendar_records'], 'recent_collections': result['recent_success_log_results'], 'lambda_matches': result['lambda']['matches_reviewed_release_package']}), flush=True)
 
 

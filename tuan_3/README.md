@@ -4,7 +4,7 @@
 
 Học phần Điện toán đám mây · GVHD: ThS. Huỳnh Xuân Phụng
 
-Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [Tuần 1](../tuan_1/README.md) và [Tuần 2](../tuan_2/README.md). Tuần 3 theo lịch báo cáo là **19–25/10/2026 (UTC+7)**. Vì thời điểm chụp dữ liệu còn trước tuần này, các kết quả dưới đây là kết quả triển khai và thử nghiệm chuẩn bị; chưa phải thống kê môi trường của toàn Tuần 3.
+Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại mốc **18/10/2026**, tiếp nối [Tuần 1](../tuan_1/README.md) và [Tuần 2](../tuan_2/README.md). Kết quả gồm dữ liệu raw từ S3, tối ưu Athena, giám sát, dự báo và CI/CD; mỗi bộ dữ liệu giữ thời điểm và đầu vào tương ứng.
 
 ## Hồ sơ và minh chứng
 
@@ -12,8 +12,9 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 | --- | --- |
 | Báo cáo kỹ thuật, phương pháp và giới hạn | [Báo cáo chi tiết](docs/FINAL_REPORT.md) |
 | Hướng dẫn chạy, kiểm chứng và khôi phục | [Vận hành và CI/CD](docs/operation.md) |
-| Nhật ký kỹ thuật, phân công và tổng giờ sinh viên công bố | [Nhật ký Tuần 3](docs/WORKLOG.md) · [CSV tổng giờ](worklog.csv) · [Bản CSV trong hồ sơ](docs/worklog.csv) |
-| Raw cập nhật sau làm mới phiên Lab | [Sinh viên Tiến Sơn — 246 dòng](results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên — 285 dòng](results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) |
+| Nhật ký kỹ thuật, phân công và tổng giờ đã xác nhận | [Nhật ký Tuần 3](docs/WORKLOG.md) · [CSV tổng giờ](worklog.csv) · [Bản CSV trong hồ sơ](docs/worklog.csv) |
+| Raw dùng cho thống kê và biểu đồ đã lưu | [Sinh viên Tiến Sơn — 246 dòng](results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên — 285 dòng](results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) |
+| Bản xuất raw mới nhất: CSV và JSON gốc | [Sinh viên Tiến Sơn — 246 dòng](results/raw_export_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên — 288 dòng](results/raw_export_2026_10_18/snapshot/quyen/raw_all.csv) · [83 JSON, chất lượng và SHA-256](results/raw_export_2026_10_18/README.md) |
 | Raw của mốc tích hợp ban đầu | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/raw_all.csv) |
 | Chất lượng và thống kê theo giờ của snapshot cập nhật | [Sinh viên Tiến Sơn](results/refresh_2026_10_18/snapshot/default/) · [Sinh viên Ngọc Quyên](results/refresh_2026_10_18/snapshot/quyen/) |
 | Truy vấn, số đo Athena và cấu hình Projection | [Thí nghiệm Athena](results/integration_2026_10_18/benchmark/) |
@@ -29,7 +30,11 @@ Hồ sơ này ghi nhận mốc tích hợp ngày **18/10/2026**, tiếp nối [T
 
 ## Kết quả cập nhật mới nhất
 
-- Snapshot mới: **246 bản ghi của sinh viên Tiến Sơn** và **285 bản ghi của sinh viên Ngọc Quyên**; bảy nhóm kiểm tra chất lượng đều bằng 0.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.**
+
+- **Bản xuất raw mới nhất: 246/288 dòng, tổng 534 bản ghi và 83 JSON gốc.** [CSV, JSON, hash và bảng raw mẫu](results/raw_export_2026_10_18/README.md). Các bảng thống kê đã lưu ở mốc trước vẫn dùng đúng 246/285 dòng.
+
+- Snapshot phân tích đã lưu: **246 bản ghi của sinh viên Tiến Sơn** và **285 bản ghi của sinh viên Ngọc Quyên**; bảy nhóm kiểm tra chất lượng đều bằng 0.
 - [Raw, thống kê, ba biểu đồ màu và đối chiếu dự báo mới](results/refresh_2026_10_18/README.md).
 - MA 3 giờ đã có mã và CSV tính lại; chỉ 2/24 giờ đích của bản phát hành được đối chiếu với dữ liệu mô hình tải về sau.
 
@@ -162,17 +167,17 @@ python tuan_3/scripts/verify_results.py
 Các lệnh trên kiểm tra tệp đã lưu, không chứng minh vận hành AWS hiện tại. Cách chạy các chương trình có thao tác AWS và điều kiện khôi phục được trình bày trong [hướng dẫn vận hành](docs/operation.md).
 
 
-### Tổng giờ sinh viên công bố
+### Tổng giờ đã xác nhận
 
 | Giai đoạn | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Tổng | Căn cứ |
 | --- | --- | --- | --- | --- |
 | Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ | Tổng theo tuần đã xác nhận |
-| Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng do sinh viên công bố, không phân bổ ngày |
+| Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng theo tuần đã xác nhận |
 | **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
 
-38,0 giờ thuộc hồ sơ Tuần 1–2; 20,0 giờ Tuần 3 là tổng sinh viên công bố, không phân bổ ngày. [Hai dòng CSV tổng giờ Tuần 3](worklog.csv) ghi căn cứ này riêng với các mốc kỹ thuật trong nhật ký.
+38,0 giờ thuộc hồ sơ Tuần 1–2; 20,0 giờ Tuần 3 là tổng theo tuần đã xác nhận, không phân bổ ngày. [Hai dòng CSV tổng giờ Tuần 3](worklog.csv) ghi căn cứ này riêng với các mốc kỹ thuật trong nhật ký.
 
 ## Phần tiếp tục theo dõi
 
-[Nhật ký Tuần 3](docs/WORKLOG.md) ghi tổng giờ sinh viên công bố và các mốc kỹ thuật. Raw ngày 18/10 chưa thuộc kỳ 19–25/10; đối chiếu dự báo mới còn 22/24 giờ đích chưa đủ dữ liệu. Tiếp tục theo dõi trong phiên Lab còn hiệu lực và giữ rõ giới hạn của bộ đếm CloudWatch.
+[Nhật ký Tuần 3](docs/WORKLOG.md) ghi tổng giờ đã xác nhận và sản phẩm tích hợp đã hoàn thành. [Bản xuất raw mới nhất](results/raw_export_2026_10_18/README.md) có CSV, JSON nguyên bản và thời điểm đọc AWS. Các quan sát tiếp theo được lưu thành mốc riêng để theo dõi độ phủ theo thời gian, đối chiếu những giờ dự báo còn lại và làm rõ giới hạn của bộ đếm CloudWatch.

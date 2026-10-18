@@ -11,14 +11,16 @@ python tuan_3/scripts/verify_results.py
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 219 tệp trong bảy manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của các mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Mốc cập nhật 246/285 dòng bổ sung kiểm tra 96 dòng thống kê, 120 dòng tương quan, 24 bộ sai số/576 dòng đánh giá và 12 dòng đối chiếu với dữ liệu mô hình tải về sau, cùng tổng giờ Tuần 3 do sinh viên công bố. Phần dự báo đã phát hành được kiểm tra đủ 144 giờ đích đều sau thời điểm phát hành; chưa coi 12 dòng đối chiếu là toàn bộ 24 giờ đã được đánh giá. Các kiểm tra này không cần khóa AWS và không chứng minh dịch vụ hiện tại.
+`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 315 tệp trong tám manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của các mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Mốc cập nhật 246/285 dòng bổ sung kiểm tra 96 dòng thống kê, 120 dòng tương quan, 24 bộ sai số/576 dòng đánh giá và 12 dòng đối chiếu với dữ liệu mô hình tải về sau, cùng tổng giờ Tuần 3 đã xác nhận. Phần dự báo đã phát hành được kiểm tra đủ 144 giờ đích đều sau thời điểm phát hành; chưa coi 12 dòng đối chiếu là toàn bộ 24 giờ đã được đánh giá. Các kiểm tra này không cần khóa AWS và không chứng minh dịch vụ hiện tại.
+
+[Bản xuất raw mới 246/288 dòng](../results/raw_export_2026_10_18/README.md) bổ sung 96 tệp minh chứng: JSON gốc, CSV, inventory, chất lượng và thời điểm đọc. Verifier đối chiếu từng byte/hash, từng trường JSON–CSV và bảo toàn toàn bộ bản ghi của snapshot trước. Một hồi quy mới kiểm tra lưu byte nguyên vẹn, từ chối đường dẫn vượt thư mục và từ chối ghi đè tệp đã có.
 
 ## 2. Chạy một mốc mới trên AWS
 
 Hai profile SDK hiện dùng là `default` cho sinh viên Tiến Sơn và `quyen` cho sinh viên Ngọc Quyên, vùng `us-east-1`. Cấp khóa phiên bằng cơ chế bảo mật của môi trường; không đặt khóa trong tham số, mã nguồn hay tệp được Git theo dõi. Các chương trình không sử dụng AWS CLI.
 
 ```bash
-python tuan_3/scripts/snapshot.py --output output/week3-new-snapshot
+python tuan_3/scripts/snapshot.py --output output/week3-new-snapshot --archive-source
 python tuan_3/scripts/benchmark.py --snapshot output/week3-new-snapshot --output output/week3-new-benchmark --run-id rnew
 python tuan_3/scripts/dashboard.py --output output/week3-new-dashboard --backup output/week3-private-backups
 python tuan_3/scripts/forecast.py --output output/week3-new-forecast
@@ -26,7 +28,7 @@ python tuan_3/scripts/metric_filters.py --output output/week3-new-filters --back
 python tuan_3/scripts/check_operations.py --output output/week3-new-checks --release-proof tuan_3/results/cd_2026_10_18
 ```
 
-Thay `rnew` bằng mã lượt hợp lệ, chưa dùng; không ghi đè kết quả cũ. `snapshot.py` đọc AWS; `benchmark.py` tạo object/bảng riêng và chạy SELECT có phát sinh sử dụng dịch vụ; `dashboard.py` thay toàn bộ nội dung Dashboard riêng `WeatherAirQuality-Week3` sau khi sao lưu; `forecast.py` gọi API Open-Meteo. Đọc các điều kiện trong [kế hoạch](../../docs/WEEK_3_PLAN.md) trước khi thực hiện trên môi trường khác.
+Thay `rnew` bằng mã lượt hợp lệ, chưa dùng; không ghi đè kết quả cũ. `snapshot.py --archive-source` chỉ đọc AWS và lưu nguyên byte từng JSON dưới `objects/raw/` cùng CSV, inventory/hash và thời điểm thu thập; `benchmark.py` tạo object/bảng riêng và chạy SELECT có phát sinh sử dụng dịch vụ; `dashboard.py` thay toàn bộ nội dung Dashboard riêng `WeatherAirQuality-Week3` sau khi sao lưu; `forecast.py` gọi API Open-Meteo. Đọc các điều kiện trong [kế hoạch](../../docs/WEEK_3_PLAN.md) trước khi thực hiện trên môi trường khác.
 
 Thử nghiệm không thay raw hoặc bảng Glue sản xuất. Để thu hồi tài nguyên thử nghiệm, xác minh đúng bucket/prefix/tên bảng của lượt, rồi chỉ xóa các object dưới prefix thử nghiệm và ba bảng `w3_<run-id>_*` tương ứng. Không chạy thao tác xóa theo tên rút gọn chưa đối chiếu. Dashboard cũ được phục hồi từ bản sao riêng bằng PutDashboard; nếu trước đó không có Dashboard thì có thể xóa đúng Dashboard vừa tạo. Dữ liệu Athena dưới prefix kết quả truy vấn cần được xử lý riêng theo chính sách lưu giữ.
 
@@ -63,7 +65,7 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 
 ## 4. Kết quả thực hiện
 
-- Bộ hồi quy hiện có 39 trường hợp, gồm năm trường hợp về hạng đồng hạng, thống kê, MA 3 giờ và loại giờ chưa hoàn tất khi đối chiếu mô hình tải về sau. Bảy kiểm tra tập trung vào đóng gói/cập nhật/khôi phục trước đó đã đạt; hai trường hợp lỗi triển khai đã tái hiện trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 219 tệp manifest và các phép tính lại được thực hiện riêng; kết quả toàn bộ bộ thử được ghi theo lượt CI.
+- Bộ hồi quy hiện có 40 trường hợp, gồm năm trường hợp về hạng đồng hạng, thống kê, MA 3 giờ và loại giờ chưa hoàn tất khi đối chiếu mô hình tải về sau. Bảy kiểm tra tập trung vào đóng gói/cập nhật/khôi phục trước đó đã đạt; hai trường hợp lỗi triển khai đã tái hiện trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 315 tệp manifest và các phép tính lại được thực hiện riêng; kết quả toàn bộ bộ thử được ghi theo lượt CI.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
 - [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
 - [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.
@@ -73,7 +75,7 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 
 Đợt rà soát dùng cách tính riêng bằng thư viện chuẩn Python để đối chiếu 96 dòng thống kê (độ lệch chuẩn mẫu, phân vị tuyến tính), 120 dòng tương quan (hạng trung bình cho các giá trị bằng nhau), 24 bộ sai số/576 dòng giữ lại và 12 dòng so sánh với phản hồi mô hình tải về sau. Các giá trị khớp CSV. Kết quả 18 lượt Athena và trung vị cũng được đối chiếu với đúng bộ raw đầu vào ban đầu; raw cập nhật không thay đầu vào lịch sử đó.
 
-Các bảng thống kê, tương quan, phân bố AQI, từng lượt Athena và sai số trong báo cáo được so lại với CSV nguồn; biểu đồ màu dùng cùng các tệp. Tổng 38,0 giờ Tuần 1–2 giữ nguyên, 20,0 giờ Tuần 3 ghi là tổng sinh viên công bố, không tự gán ngày hoặc phân bổ thời lượng theo nhiệm vụ. Việc rà soát không mở rộng 2 giờ đích đã đối chiếu thành kết luận cho cả 24 giờ.
+Các bảng thống kê, tương quan, phân bố AQI, từng lượt Athena và sai số trong báo cáo được so lại với CSV nguồn; biểu đồ màu dùng cùng các tệp. Tổng 38,0 giờ Tuần 1–2 giữ nguyên, 20,0 giờ Tuần 3 ghi là tổng theo tuần đã xác nhận, không tự gán ngày hoặc phân bổ thời lượng theo nhiệm vụ. Việc rà soát không mở rộng 2 giờ đích đã đối chiếu thành kết luận cho cả 24 giờ.
 
 | Môi trường | Lượt CD đã thành công | Đọc lại trực tiếp từ AWS |
 | --- | --- | --- |

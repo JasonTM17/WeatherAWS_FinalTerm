@@ -36,9 +36,11 @@ Lịch sử Git ghi nhận các lần cập nhật sản phẩm; tên người c
 | Triển khai và gọi trực tiếp | Module của hai Lambda khớp source; bốn lượt gọi thu 12 bản ghi, dữ liệu đối chiếu được bằng Athena; có SNS và xác nhận email | [Kết quả triển khai](deployment-verification.md) |
 | Theo dõi lịch tự động | Một lượt mỗi môi trường, tổng sáu bản ghi và bốn thông điệp SNS; người nhận xác nhận email mới | [Kết quả theo lịch](scheduled-run-verification.md) |
 
-Các mốc trên bổ sung minh chứng kỹ thuật; không tự cộng vào 38,0 giờ Tuần 1–2 đã xác nhận. Chưa điền số giờ Tuần 3 khi sinh viên chưa xác nhận thời gian thực tế. [Bảng tiến độ W3-01–W3-08](WEEK_3_PLAN.md#tiến-độ-theo-minh-chứng-đã-có) nêu rõ phần đã đạt và phần còn lại.
+Các mốc trên bổ sung minh chứng kỹ thuật; không tự cộng vào 38,0 giờ Tuần 1–2 đã xác nhận. Tổng thời gian Tuần 3 đã xác nhận là 20,0 giờ, gồm 10,0 giờ của sinh viên Tiến Sơn và 10,0 giờ của sinh viên Ngọc Quyên; chi tiết ở mục bên dưới. [Bảng tiến độ W3-01–W3-08](WEEK_3_PLAN.md#tiến-độ-theo-minh-chứng-đã-có) nêu rõ phần đã đạt và phần còn lại.
 
 
 ## Bổ sung tổng giờ Tuần 3
 
-Sinh viên công bố 10,0 giờ cho sinh viên Tiến Sơn và 10,0 giờ cho sinh viên Ngọc Quyên, không ghi ngày hoặc phân bổ từng đầu việc. [Nhật ký và căn cứ Tuần 3](../tuan_3/docs/WORKLOG.md), [CSV tổng giờ](../tuan_3/worklog.csv). Các bảng Tuần 1–2 phía trên giữ nguyên tổng 38,0 giờ; cộng thêm 20,0 giờ công bố của Tuần 3 thành 58,0 giờ.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** [Bảng sản phẩm W3-01–W3-08 và raw](../tuan_3/docs/WORKLOG.md#5-kết-quả-hoàn-thành-kế-hoạch-công-việc-tích-hợp-tuần-3).
+
+Tổng theo tuần đã xác nhận: 10,0 giờ cho sinh viên Tiến Sơn và 10,0 giờ cho sinh viên Ngọc Quyên, không ghi ngày hoặc phân bổ từng đầu việc. [Nhật ký và căn cứ Tuần 3](../tuan_3/docs/WORKLOG.md), [CSV tổng giờ](../tuan_3/worklog.csv). Các bảng Tuần 1–2 phía trên giữ nguyên tổng 38,0 giờ; cộng thêm 20,0 giờ đã xác nhận của Tuần 3 thành 58,0 giờ.

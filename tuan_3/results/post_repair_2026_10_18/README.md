@@ -29,7 +29,7 @@ Hồ sơ ghi nhận một lượt thực sự phát sinh sau khi sửa định d
 | Hà Nội | 13:51:03 | 87 | 22,8 | Không |
 | Đà Nẵng | 13:51:04 | 52 | 10,8 | Không |
 
-[Raw đầy đủ 23 trường](collection_check/quyen/raw_verified.csv) giữ ID, thời gian UTC/Việt Nam, các chỉ số và phân vùng. Ba bản ghi thuộc ngày 18/10, không được tính vào kỳ báo cáo Tuần 3 từ 19–25/10. Các giá trị do Open-Meteo cung cấp là dữ liệu mô hình, không phải số đo trực tiếp tại trạm.
+[Raw đầy đủ 23 trường](collection_check/quyen/raw_verified.csv) giữ ID, thời gian UTC/Việt Nam, các chỉ số và phân vùng. Số dòng/object và điều kiện cảnh báo được đối chiếu giữa log kết quả Lambda với dữ liệu S3. Các chỉ số do Open-Meteo cung cấp là dữ liệu mô hình, không phải số đo trực tiếp tại trạm.
 
 ## 3. Metric và ảnh do AWS trả về
 

@@ -4,7 +4,7 @@
 
 **Đề tài:** Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS.
 
-**Mốc kết quả:** 18/10/2026; lịch Tuần 3: 19–25/10/2026, UTC+7.
+**Mốc kết quả:** 18/10/2026 — hoàn thành công việc tích hợp Tuần 3, múi giờ Việt Nam (UTC+7).
 
 ## 1. Mục tiêu và phạm vi
 
@@ -14,14 +14,41 @@ Các lần kiểm chứng triển khai và nhận thư ngày 16/10 được dẫ
 
 ## 2. Đầu vào, dữ liệu raw và chất lượng
 
-Snapshot mới được đọc sau khi phiên Learner Lab được cập nhật ngày 18/10. Raw mới và dữ liệu đầu vào thí nghiệm Athena ban đầu nằm ở các thư mục riêng; không dùng số dòng mới để mô tả lại 18 truy vấn đã chạy trước đó.
+### Bản xuất raw đầy đủ, cập nhật lúc 17:02 ngày 18/10
+
+Đã trực tiếp xuất **246 bản ghi của sinh viên Tiến Sơn** và **288 bản ghi của sinh viên Ngọc Quyên** từ S3, tổng cộng **534 bản ghi và 83 tệp JSON nguyên bản**. Cả hai CSV giữ đủ 23 trường; toàn bộ 531 bản ghi của snapshot phân tích trước được bảo toàn và có thêm ba bản ghi của sinh viên Ngọc Quyên. Các bộ kiểm tra chất lượng đã khai báo không phát hiện lỗi trong bản xuất mới.
+
+| Hồ sơ raw | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
+| --- | --- | --- |
+| CSV đầy đủ | [246 dòng](../results/raw_export_2026_10_18/snapshot/default/raw_all.csv) | [288 dòng](../results/raw_export_2026_10_18/snapshot/quyen/raw_all.csv) |
+| JSON gốc từ S3 | [36 tệp](../results/raw_export_2026_10_18/snapshot/default/objects/raw/) | [47 tệp](../results/raw_export_2026_10_18/snapshot/quyen/objects/raw/) |
+| Nhóm đô thị–giờ | 234 | 231 |
+| Timestamp cuối UTC | 18/10/2026 08:15:46 | 18/10/2026 09:51:05 |
+| Hoàn tất bản xuất (UTC+7) | 18/10/2026 17:01:39 | 18/10/2026 17:02:04 |
+
+[Danh mục, SHA-256 và phương pháp xuất](../results/raw_export_2026_10_18/README.md) · [Thông tin xuất](../results/raw_export_2026_10_18/export.json) · [Manifest 96 tệp](../results/raw_export_2026_10_18/manifest.json).
+
+**Trích raw mới nhất của mỗi đô thị:**
+
+| Sinh viên | Đô thị | Timestamp UTC | AQI | PM2.5 (µg/m³) | Nhiệt độ (°C) | Độ ẩm (%) |
+| --- | --- | --- | --- | --- | --- | --- |
+| Sinh viên Tiến Sơn | TP. Hồ Chí Minh | 2026-10-18 08:15:45 | 65 | 11.7 | 28.0 | 83.0 |
+| Sinh viên Tiến Sơn | Hà Nội | 2026-10-18 08:15:45 | 87 | 26.1 | 31.5 | 58.0 |
+| Sinh viên Tiến Sơn | Đà Nẵng | 2026-10-18 08:15:46 | 51 | 8.2 | 28.5 | 80.0 |
+| Sinh viên Ngọc Quyên | TP. Hồ Chí Minh | 2026-10-18 09:51:03 | 65 | 11.8 | 27.8 | 85.0 |
+| Sinh viên Ngọc Quyên | Hà Nội | 2026-10-18 09:51:04 | 95 | 27.4 | 30.4 | 64.0 |
+| Sinh viên Ngọc Quyên | Đà Nẵng | 2026-10-18 09:51:05 | 50 | 7.0 | 28.0 | 82.0 |
+
+Các giá trị trên được trích trực tiếp từ CSV gốc. Đây là bản xuất riêng; các bảng thống kê và biểu đồ ở mục 2.1–2.3 tiếp tục dùng đúng snapshot 246/285 đã đóng băng để bảo đảm kết quả tái lập.
+
+### Snapshot đầu vào của các bảng phân tích
 
 | Chỉ tiêu | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
 | --- | --- | --- |
-| Raw mới | 246 | 285 |
+| Raw dùng cho bảng phân tích | 246 | 285 |
 | Nhóm đô thị–giờ UTC | 234 | 228 |
 | Timestamp cuối UTC | 2026-10-18 08:15:46 | 2026-10-18 08:51:05 |
-| Bản ghi thuộc lịch Tuần 3 | 0 | 0 |
+| Số nhóm kiểm tra chất lượng phát hiện lỗi | 0/7 | 0/7 |
 | Mã Lambda khớp gói đã kiểm chứng | Có | Có |
 
 Raw giữ đủ 23 trường. Bảy nhóm kiểm tra chất lượng đã khai báo đều bằng 0 trong hai bộ này; đây không phải xác nhận độ chính xác ngoài thực địa. [Raw sinh viên Tiến Sơn](../results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Raw sinh viên Ngọc Quyên](../results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) · [Manifest](../results/refresh_2026_10_18/manifest.json).
@@ -150,7 +177,7 @@ Tỷ lệ là tỷ lệ bản ghi trong mẫu, không phải tỷ lệ thời gi
 
 ### 2.4. Kiểm soát thời gian và tính toàn vẹn
 
-UTC/UTC+7 và khóa phân vùng UTC được đối chiếu riêng. Snapshot dùng điều kiện ETag trên từng đối tượng và lưu SHA-256; không phải giao dịch chụp nguyên tử toàn bucket. `source_commit` trong snapshot là HEAD repository tại lúc đọc, không chứng minh toàn bộ chương trình mới đã được commit ở mốc đó. Dữ liệu Open-Meteo là dữ liệu mô hình, không phải số đo trạm.
+UTC/UTC+7 và khóa phân vùng UTC được đối chiếu riêng. Snapshot dùng điều kiện ETag trên từng đối tượng và lưu SHA-256; không phải giao dịch chụp nguyên tử toàn bucket. `source_commit` trong snapshot là HEAD repository tại lúc đọc, không chứng minh toàn bộ chương trình mới đã được commit ở mốc đó. Dữ liệu Open-Meteo là dữ liệu mô hình, không phải số đo trạm. Các bản ghi ngày 18/10 là đầu vào cho công việc tích hợp Tuần 3; độ phủ lịch báo cáo 19–25/10 được tính riêng theo timestamp, không đổi ngày quan trắc để phân tuần.
 
 
 ## 3. Partition Projection và Parquet
@@ -377,18 +404,18 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 ## 7. Kết luận, phân công và phần tiếp tục
 
-Mốc cập nhật ngày 18/10 có raw mới 246/285 bản ghi, các bảng thống kê và biểu đồ có thể truy về CSV; bổ sung mã tính MA 3 giờ và đối chiếu 2/24 giờ đích với dữ liệu mô hình tải về sau. Thử nghiệm Athena vẫn dùng bộ đầu vào 237/273 đã đóng băng, không đo lại hoặc gán số liệu mới cho truy vấn cũ.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** Hồ sơ đã có bản xuất raw mới 246/288 dòng kèm 83 JSON gốc, số liệu thống kê/biểu đồ truy vết được, 18 lượt Athena trên đầu vào đã đóng băng, giám sát, đánh giá dự báo và CI/CD hai môi trường. Bảng phân tích 246/285 và benchmark 237/273 được giữ nguyên đầu vào của từng thí nghiệm.
 
 | Giai đoạn | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Tổng | Căn cứ |
 | --- | --- | --- | --- | --- |
 | Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ | Tổng theo tuần đã xác nhận |
-| Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng do sinh viên công bố, không phân bổ ngày |
+| Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng theo tuần đã xác nhận |
 | **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
 
-[Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng giờ do sinh viên công bố, không ghi ngày làm hoặc phân bổ giờ thực tế theo nhiệm vụ. 38,0 giờ Tuần 1–2 giữ nguyên; 20,0 giờ Tuần 3 được ghi bổ sung theo thông tin sinh viên.
+[Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng giờ theo tuần đã xác nhận, không ghi ngày làm hoặc phân bổ giờ thực tế theo nhiệm vụ. 38,0 giờ Tuần 1–2 giữ nguyên; 20,0 giờ Tuần 3 được ghi bổ sung theo thông tin sinh viên.
 
-Chưa có raw thuộc kỳ lịch 19–25/10 ở mốc này. Cần tiếp tục lưu dữ liệu đúng ngày, đối chiếu các giờ đích còn lại và làm rõ bộ đếm CloudWatch native chưa nhất quán. Các giới hạn này được giữ trong kết luận; không gọi mốc chuẩn bị là kết quả vận hành đầy đủ của cả tuần.
+Dữ liệu raw đã được xuất và gắn link ngay tại mục 2. Các sản phẩm tích hợp, phân công và tổng giờ được trình bày trong [Worklog](WORKLOG.md). Việc vận hành tiếp tục theo dõi độ phủ theo timestamp, các giờ đích dự báo còn lại và bộ đếm CloudWatch native chưa nhất quán; các đầu việc này được ghi riêng với trạng thái hoàn thành sản phẩm tích hợp.
 
 
 ## Tài liệu tham khảo

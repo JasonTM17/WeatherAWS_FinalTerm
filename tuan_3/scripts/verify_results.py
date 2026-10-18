@@ -4,7 +4,7 @@ import math
 from datetime import datetime
 
 from benchmark import assert_equal_groups
-from common import ROOT, digest, read_csv
+from common import ROOT, digest, ndjson_rows, read_csv
 from dashboard import metric_consistency
 from forecast import evaluate, future_forecast
 from quality import inspect_rows
@@ -92,11 +92,44 @@ def verify_refresh(folder):
             raise ValueError('Later-model comparison differs from issued predictions/history')
     worklog = read_csv(ROOT / 'tuan_3/worklog.csv')
     if worklog != read_csv(ROOT / 'tuan_3/docs/worklog.csv') or len(worklog) != 2:
-        raise ValueError('Week3 reported-hour mirrors differ')
-    if {r['student_id']:float(r['duration_hours']) for r in worklog} != {'24110054':10.0,'24110051':10.0} or any('công bố' not in r['time_basis'] for r in worklog):
-        raise ValueError('Week3 hours differ from student-reported totals')
+        raise ValueError('Week3 confirmed-hour mirrors differ')
+    if ({r['student_id']:float(r['duration_hours']) for r in worklog} != {'24110054':10.0,'24110051':10.0}
+            or any(r['time_basis'] != 'Tổng theo tuần đã xác nhận' or r['status'] != 'Đã hoàn thành kế hoạch công việc tích hợp Tuần 3' for r in worklog)):
+        raise ValueError('Week3 hours or status differ from confirmed weekly totals')
     if any(r.get('date') for r in worklog):
-        raise ValueError('Reported weekly totals must not invent work dates')
+        raise ValueError('Confirmed weekly totals must not invent work dates')
+    return count
+
+
+def verify_raw_export(folder):
+    count = verify_manifest(folder)
+    proof = json.loads((folder / 'export.json').read_text(encoding='utf-8'))
+    for profile in ('default', 'quyen'):
+        base = folder / 'snapshot' / profile
+        inventory = read_csv(base / 'object_inventory.csv')
+        flattened = []
+        for item in inventory:
+            target = (base / 'objects' / item['key']).resolve()
+            if not target.is_relative_to((base / 'objects').resolve()):
+                raise ValueError('Raw archive path leaves snapshot')
+            blob = target.read_bytes()
+            objects = ndjson_rows(blob)
+            if digest(blob) != item['sha256'] or len(blob) != int(item['bytes']) or len(objects) != int(item['records']):
+                raise ValueError('Archived NDJSON differs from S3 inventory')
+            flattened.extend({k: '' if v is None else str(v) for k,v in r.items()} for r in objects)
+        raw = read_csv(base / 'raw_all.csv')
+        if raw != flattened or len(inventory) != len(list((base / 'objects').rglob('*.json'))):
+            raise ValueError('Raw CSV differs from original NDJSON archive')
+        summary, groups = inspect_rows(raw)
+        saved = json.loads((base / 'snapshot.json').read_text(encoding='utf-8'))
+        if any(saved[k] != summary[k] for k in summary) or len(groups) != len(read_csv(base / 'hourly_city.csv')):
+            raise ValueError('Raw export quality summary differs')
+        if not saved['lambda']['matches_reviewed_release_package'] or proof['profiles'][profile]['records'] != len(raw):
+            raise ValueError('Raw export source/count proof differs')
+        previous = read_csv(folder.parent / 'refresh_2026_10_18/snapshot' / profile / 'raw_all.csv')
+        current = {r['record_id']:r for r in raw}
+        if any(current.get(r['record_id']) != r for r in previous):
+            raise ValueError('Previously retained raw records changed or disappeared')
     return count
 
 
@@ -253,6 +286,7 @@ def verify(folder):
     file_count += verify_issued_forecast(folder.parent / 'forecast_issued_2026_10_18')
     file_count += verify_post_repair(folder.parent / 'post_repair_2026_10_18')
     file_count += verify_refresh(folder.parent / 'refresh_2026_10_18')
+    file_count += verify_raw_export(folder.parent / 'raw_export_2026_10_18')
     for profile in ('default', 'quyen'):
         observed = metric_consistency(read_csv(monitoring / profile / 'metrics.csv'))
         saved = json.loads((monitoring / profile / 'metric-consistency.json').read_text())
@@ -276,7 +310,7 @@ def verify(folder):
             'forecast_metrics': len(metrics), 'cd_environments': 2, 'temporary_secrets_remaining': 0,
             'supplementary_descriptive_rows': 96, 'supplementary_ma_metrics': 24,
             'later_model_comparison_rows': len(read_csv(folder.parent / 'refresh_2026_10_18/analysis/later_model/comparison.csv')),
-            'week3_student_reported_hours': 20}
+            'week3_confirmed_hours': 20}
 
 
 if __name__ == '__main__':

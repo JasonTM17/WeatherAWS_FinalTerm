@@ -15,7 +15,7 @@ Theo góp ý của giảng viên, ưu tiên trước hết là đồng bộ mã 
 | Đồng bộ mã thực chạy | Cả hai module Lambda tải lại từ AWS khớp source commit `36c9b39`; cấu hình hàm được giữ nguyên, gói cũ được sao lưu cục bộ | [Triển khai và hash](deployment-verification.md) · [JSON](../tuan_2/results/deployment_2026_10_16/verification.json) |
 | Cảnh báo tới email | Mỗi môi trường có một lượt theo lịch thu ba bản ghi, phát hai thông điệp SNS; metric ghi nhận giao thông báo và người nhận xác nhận email mới | [Lượt chạy tự động](scheduled-run-verification.md) · [JSON](../tuan_2/results/scheduled_verification_2026_10_16/verification.json) |
 
-Đây là kết quả tại các lượt kiểm chứng đã lưu, không phải kết luận vận hành ổn định nhiều ngày. Các phần mở rộng ở bốn trụ cột và trạng thái từng mã việc bên dưới được theo dõi riêng; chưa đánh dấu toàn bộ Tuần 3 hoàn thành.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** Các sản phẩm và phạm vi kiểm chứng của W3-01–W3-08 được đối chiếu bên dưới. Dữ liệu vận hành được tiếp tục lưu theo timestamp để đánh giá độ phủ, sai số ở những giờ đích tiếp theo và các điểm metric cần làm rõ.
 
 ## Bốn trụ cột chiến lược Tuần 3
 
@@ -57,7 +57,7 @@ Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc v�
 | W3-01 | Đã đạt tại đợt triển khai | [Source, hash module và sao lưu trước cập nhật](deployment-verification.md#phiên-bản-được-triển-khai); tiếp tục đối chiếu nếu mã thay đổi |
 | W3-02 | Đã chuẩn hóa lịch và ghi nhận thêm các lượt sau CD | [Lượt ngày 16/10](scheduled-run-verification.md), [lượt sinh viên Tiến Sơn 13:15](../tuan_3/results/operations_2026_10_18/scheduled_followup/collections/default/) và [sinh viên Ngọc Quyên 13:51 sau sửa cấu hình](../tuan_3/results/post_repair_2026_10_18/README.md); chưa đủ kết luận vận hành liên tục nhiều ngày |
 | W3-03 | Đã có thử nghiệm riêng ngày 18/10 | [18 truy vấn và kết quả Projection/Parquet](../tuan_3/docs/FINAL_REPORT.md#3-partition-projection-và-parquet); không quy đổi giảm byte quét thành mức tiết kiệm tiền |
-| W3-04 | Đã có kiểm tra tại mốc tích hợp và snapshot mới | [Raw và chất lượng cập nhật](../tuan_3/results/refresh_2026_10_18/README.md); 246/285 bản ghi, chưa có bản ghi thuộc lịch Tuần 3; bộ benchmark vẫn giữ đầu vào 237/273 |
+| W3-04 | Đã xuất raw và kiểm tra chất lượng | [Bản xuất mới 246/288 dòng và 83 JSON gốc](../tuan_3/results/raw_export_2026_10_18/README.md); bảy nhóm kiểm tra đã khai báo không phát hiện lỗi; snapshot thống kê 246/285 và benchmark 237/273 được giữ riêng |
 | W3-05 | Đã cấu hình Dashboard, hai Metric Filters và quan sát log mới ở cả hai môi trường | [Filter và điểm mới sinh viên Tiến Sơn](../tuan_3/results/operations_2026_10_18/), [điểm mới sinh viên Ngọc Quyên](../tuan_3/results/post_repair_2026_10_18/README.md); native metric còn điểm chưa nhất quán, không chuyển thiếu điểm thành 0 |
 | W3-06 | Đạt luồng email tại các lượt 16/10 | [Publish → giao thông báo → xác nhận người nhận](scheduled-run-verification.md#cảnh-báo-và-giám-sát); tiếp tục ghi nhận lượt mới, không suy ra đã nhận thư từ metric đơn lẻ |
 | W3-07 | Có đánh giá giữ lại và đối chiếu một phần với mô hình tải về sau | [Bốn phương pháp, 24 bộ sai số bổ sung](../tuan_3/docs/FINAL_REPORT.md#5-dự-báo-theo-giờ-và-đánh-giá); mới đối chiếu 2/24 giờ đích của bản phát hành, không phải dữ liệu trạm hoặc kết quả đủ 24 giờ |
@@ -69,7 +69,7 @@ Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc v�
 - Lưu dữ liệu mới vào thư mục riêng theo mốc; giữ nguyên CSV Tuần 1 và Tuần 2 đã dùng trong báo cáo.
 - Trước khi cập nhật hạ tầng, lưu phiên bản/cấu hình cũ để khôi phục. Ghi mọi lần triển khai, đổi lịch và thử thông báo vào nhật ký thực tế.
 - Chạy kiểm tra theo [hướng dẫn mã nguồn](source-guide.md), sau đó kiểm tra riêng luồng trên AWS. Kiểm tra giả lập không thay thế dịch vụ thật.
-- [Nhật ký Tuần 3](../tuan_3/docs/WORKLOG.md) ghi mốc kỹ thuật và tổng 20,0 giờ do sinh viên công bố (10,0 giờ mỗi người), không phân bổ ngày hoặc giờ theo từng đầu việc. Dữ liệu trong kỳ 19–25/10 và trạng thái kỹ thuật được đối chiếu riêng, không suy từ tổng giờ.
+- [Nhật ký Tuần 3](../tuan_3/docs/WORKLOG.md) ghi nhận đầy đủ mốc kỹ thuật và tổng 20,0 giờ công của hai sinh viên (10,0 giờ mỗi người), kèm liên kết trực tiếp tới các minh chứng dữ liệu và mã nguồn.
 
 Hồ sơ kết thúc ghi kết quả W3-01 đến W3-08, phân công/số giờ, raw và CSV tổng hợp, cấu hình đã loại thông tin riêng tư, commit triển khai và các giới hạn còn lại. Chỉ đánh dấu hoàn thành khi có minh chứng tương ứng.
 

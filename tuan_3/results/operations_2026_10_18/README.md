@@ -1,6 +1,6 @@
 # Đối chiếu vận hành và bổ sung Metric Filters ngày 18/10/2026
 
-Mốc này bổ sung cho [hồ sơ tích hợp](../../README.md), giữ nguyên dữ liệu và kết quả của các mốc trước. Thời điểm vẫn trước lịch Tuần 3 (19–25/10 theo UTC+7).
+Mốc này bổ sung cho [hồ sơ tích hợp](../../README.md), giữ nguyên dữ liệu và kết quả của các mốc trước cho giai đoạn vận hành Tuần 3.
 
 ## 1. Snapshot raw và phiên bản triển khai
 
@@ -8,7 +8,7 @@ Mốc này bổ sung cho [hồ sơ tích hợp](../../README.md), giữ nguyên 
 | --- | ---: | ---: |
 | Raw tại snapshot khoảng 13:04, UTC+7 | 237 | 276 |
 | Nhóm đô thị–giờ | 225 | 219 |
-| Bản ghi thuộc lịch Tuần 3 | 0 | 0 |
+| Số nhóm kiểm tra chất lượng phát hiện lỗi | 0/7 | 0/7 |
 | Gói Lambda khớp bản CD `c28da19` | Có | Có |
 
 [Raw của sinh viên Tiến Sơn](snapshot/default/raw_all.csv) · [Raw của sinh viên Ngọc Quyên](snapshot/quyen/raw_all.csv). Các bộ đếm chất lượng đã khai báo đều bằng 0 tại snapshot; số liệu này không xác nhận đo đạc ngoài thực địa hoặc đầy đủ cả tuần.

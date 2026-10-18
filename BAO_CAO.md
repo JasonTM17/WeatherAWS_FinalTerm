@@ -12,9 +12,13 @@ Repository: [https://github.com/JasonTM17/WeatherAWS_FinalTerm](https://github.c
 
 Chúng em đã xây dựng luồng thu thập dữ liệu Open-Meteo theo lịch EventBridge, xử lý bằng Lambda, lưu raw phân vùng ngày trên S3 và truy vấn bằng Glue/Athena. SNS giữ kênh cảnh báo email; CloudWatch lưu log/metric và Dashboard. Dữ liệu thời tiết/chất lượng không khí là dữ liệu mô hình, không phải phép đo trực tiếp tại trạm.
 
-Tuần 1 tập trung kiến trúc, nền tảng lưu trữ/cấu hình và bộ dữ liệu 156 bản ghi. Tuần 2 hoàn thiện thu thập, truy vấn/phân tích, triển khai mã và kiểm chứng cảnh báo. Mốc chuẩn bị ngày 18/10 bổ sung thử nghiệm Projection/Parquet, Dashboard/Metric Filters, đánh giá dự báo và CI/CD. Kỳ Tuần 3 theo lịch là 19–25/10; mốc này chưa đại diện cho toàn kỳ đó.
+Tuần 1 tập trung kiến trúc, nền tảng lưu trữ/cấu hình và bộ dữ liệu 156 bản ghi. Tuần 2 hoàn thiện thu thập, truy vấn/phân tích, triển khai mã và kiểm chứng cảnh báo. **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** Các sản phẩm gồm bản xuất raw, thử nghiệm Projection/Parquet, Dashboard/Metric Filters, đánh giá dự báo và CI/CD.
 
 ## 2. Dữ liệu mới và chất lượng
+
+**Raw đã được xuất đầy đủ cho hồ sơ Tuần 3:** [246 dòng của sinh viên Tiến Sơn](tuan_3/results/raw_export_2026_10_18/snapshot/default/raw_all.csv), [288 dòng của sinh viên Ngọc Quyên](tuan_3/results/raw_export_2026_10_18/snapshot/quyen/raw_all.csv), kèm [83 tệp JSON gốc, hash, thời điểm và bảng mẫu](tuan_3/results/raw_export_2026_10_18/README.md). Tổng 534 bản ghi, giữ đủ 23 trường và bảo toàn dữ liệu cũ.
+
+**Snapshot dùng cho các bảng phân tích bên dưới:**
 
 Sau khi cập nhật phiên Lab, snapshot đọc được **246 bản ghi của sinh viên Tiến Sơn** và **285 bản ghi của sinh viên Ngọc Quyên**. Timestamp cuối lần lượt là 18/10 08:15:46 và 08:51:05 UTC. Bảy nhóm kiểm tra chất lượng đã khai báo không phát hiện lỗi. Cả hai Lambda khớp gói đã được triển khai và kiểm chứng.
 
@@ -69,21 +73,21 @@ Metric native có cửa sổ Errors cao hơn Invocations, chưa xác định ngu
 
 Các commit được dẫn theo nội dung thực sự thay đổi. Minh chứng runtime và kiểm tra giả lập được ghi riêng trong [hướng dẫn vận hành](tuan_3/docs/operation.md).
 
-## 8. Phân công và tổng giờ sinh viên công bố
+## 8. Phân công và tổng giờ đã xác nhận
 
 | Giai đoạn | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Tổng | Căn cứ |
 | --- | --- | --- | --- | --- |
 | Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ | Tổng theo tuần đã xác nhận |
-| Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng do sinh viên công bố, không phân bổ ngày |
+| Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng theo tuần đã xác nhận |
 | **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
 
 Sinh viên Tiến Sơn phụ trách thu thập, cấu hình, triển khai và giám sát/cảnh báo; sinh viên Ngọc Quyên phụ trách Glue/Athena, thống kê và dự báo. Hai sinh viên cùng rà soát tài liệu và số liệu.
 
-[Nhật ký kỹ thuật và tổng giờ Tuần 3](tuan_3/docs/WORKLOG.md) · [CSV Tuần 3](tuan_3/worklog.csv) · [38 giờ Tuần 1–2](worklog.csv). Tổng 20 giờ bổ sung được ghi theo thông tin sinh viên công bố; không tự gán ngày làm hoặc chia thành giờ thực tế của từng đầu việc.
+[Nhật ký kỹ thuật và tổng giờ Tuần 3](tuan_3/docs/WORKLOG.md) · [CSV Tuần 3](tuan_3/worklog.csv) · [38 giờ Tuần 1–2](worklog.csv). Tổng 20 giờ bổ sung được ghi theo tổng giờ đã xác nhận của từng sinh viên; không tự gán ngày làm hoặc chia thành giờ thực tế của từng đầu việc.
 
 ## 9. Kiểm tra, kết luận và phần tiếp tục
 
 Kiểm tra tệp đã lưu: `python tuan_2/scripts/repository_audit.py --check`, `python tuan_3/scripts/verify_results.py`. Bộ hồi quy: `python -m unittest discover -s tuan_3/tests -v`. Các lệnh này không chứng minh dịch vụ AWS hiện tại; [workflow CI](.github/workflows/verify-repository.yml) và [các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) ghi kết quả riêng cho từng commit.
 
-Mốc cập nhật có raw mới, thống kê và biểu đồ truy vết được, thử nghiệm dự báo bổ sung và kết quả đối chiếu một phần với dữ liệu mô hình tải về sau. Cần tiếp tục ghi dữ liệu trong kỳ 19–25/10, đối chiếu các giờ đích còn lại và làm rõ metric native. Các kết quả hiện có chưa được dùng để khẳng định độ phủ cả tuần, hiệu quả dự báo tổng quát hoặc mức tiết kiệm chi phí sản xuất.
+Đã hoàn thành các sản phẩm tích hợp Tuần 3 nêu trong báo cáo, có raw và liên kết minh chứng trực tiếp. Các lượt thu thập tiếp theo, đối chiếu giờ đích dự báo còn lại và chẩn đoán bộ đếm CloudWatch native được tiếp tục theo dõi; không suy độ phủ trọn tuần hoặc độ chính xác tổng quát chỉ từ bộ mẫu hiện có.

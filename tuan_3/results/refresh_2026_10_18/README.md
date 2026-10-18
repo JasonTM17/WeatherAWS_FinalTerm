@@ -1,6 +1,6 @@
 # Snapshot và phân tích cập nhật ngày 18/10/2026
 
-Đọc S3/Lambda bằng SDK sau khi cập nhật phiên Lab; không gọi Lambda thủ công, không thay mã/lịch/ngưỡng hoặc kênh email. Dữ liệu được lưu đúng ngày 18/10, trước kỳ báo cáo 19–25/10.
+Đọc S3/Lambda bằng SDK sau khi cập nhật phiên Lab; không gọi Lambda thủ công, không thay mã/lịch/ngưỡng hoặc kênh email. Đây là snapshot 246/285 dùng cho thống kê và biểu đồ; [bản xuất sau lúc 17:02](../raw_export_2026_10_18/README.md) giữ riêng 246/288 dòng cùng JSON gốc.
 
 | Chỉ tiêu | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
 | --- | --- | --- |
@@ -8,7 +8,7 @@
 | Nhóm đô thị–giờ | 234 | 228 |
 | Timestamp cuối UTC | 2026-10-18 08:15:46 | 2026-10-18 08:51:05 |
 | Mã khớp gói đã kiểm chứng | Có | Có |
-| Bản ghi thuộc lịch Tuần 3 | 0 | 0 |
+| Số nhóm kiểm tra chất lượng phát hiện lỗi | 0/7 | 0/7 |
 
 ## Nguồn và cách tổng hợp
 

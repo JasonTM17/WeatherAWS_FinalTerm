@@ -2,7 +2,7 @@
 
 Đồ án thực hành học phần **Điện toán đám mây**: xây dựng luồng thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai, lưu bản ghi thô trên Amazon S3, truy vấn bằng Amazon Athena, sau đó tổng hợp kết quả thành CSV và biểu đồ có thể đối chiếu với dữ liệu đầu vào.
 
-Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày tiến độ Tuần 1–2 cùng mốc tích hợp chuẩn bị Tuần 3 ngày 18/10/2026: thử nghiệm Athena, kiểm tra dữ liệu, Dashboard, dự báo và CI/CD. Mốc này chưa đại diện cho toàn bộ lịch Tuần 3 (19–25/10).
+Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày kết quả Tuần 1–2 và các công việc tích hợp Tuần 3 đã hoàn thành tại mốc ngày 18/10/2026: dữ liệu raw, thử nghiệm Athena, Dashboard, dự báo và CI/CD.
 
 | Thông tin | Chi tiết |
 | --- | --- |
@@ -24,8 +24,9 @@
 | Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [Markdown](tuan_2/docs/FINAL_REPORT.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 | CSV và hình Tuần 2 | [CSV Athena đã lưu](tuan_2/results/week2_live/) · [27 bảng phân tích](tuan_2/results/week2_analysis/) · [20 biểu đồ](tuan_2/results/week2_charts/) · [Raw và metadata](tuan_2/results/week2_evidence/) |
 | Mốc tích hợp Tuần 3 | [Trang Tuần 3 có biểu đồ](tuan_3/README.md) · [Báo cáo kỹ thuật](tuan_3/docs/FINAL_REPORT.md) · [Raw, Athena, metric và dự báo](tuan_3/results/integration_2026_10_18/) · [Lượt tự động sau sửa cấu hình](tuan_3/results/post_repair_2026_10_18/README.md) · [CI/CD và vận hành](tuan_3/docs/operation.md) |
-| Snapshot cập nhật ngày 18/10 | [246/285 bản ghi và thống kê mới](tuan_3/results/refresh_2026_10_18/README.md) · [CSV thống kê](tuan_3/results/refresh_2026_10_18/analysis/descriptive.csv) · [Đối chiếu dự báo với mô hình tải về sau](tuan_3/results/refresh_2026_10_18/analysis/later_model/comparison.csv) |
-| Phân công và thời gian | [Worklog và tổng hợp các tuần](docs/WORKLOG.md) · [CSV Tuần 1–2 đã xác nhận](worklog.csv) · [Nhật ký kỹ thuật và tổng giờ Tuần 3 sinh viên công bố](tuan_3/docs/WORKLOG.md) |
+| Raw Tuần 3 mới nhất: CSV và JSON nguyên bản | [246/288 bản ghi, 83 JSON, chất lượng và hash](tuan_3/results/raw_export_2026_10_18/README.md) |
+| Snapshot phân tích ngày 18/10 | [246/285 bản ghi và thống kê mới](tuan_3/results/refresh_2026_10_18/README.md) · [CSV thống kê](tuan_3/results/refresh_2026_10_18/analysis/descriptive.csv) · [Đối chiếu dự báo với mô hình tải về sau](tuan_3/results/refresh_2026_10_18/analysis/later_model/comparison.csv) |
+| Phân công và thời gian | [Worklog và tổng hợp các tuần](docs/WORKLOG.md) · [CSV Tuần 1–2 đã xác nhận](worklog.csv) · [Nhật ký kỹ thuật và tổng giờ Tuần 3 đã xác nhận](tuan_3/docs/WORKLOG.md) |
 | Kiến trúc và mã nguồn | [Sơ đồ kiến trúc](docs/architecture.md) · [Hướng dẫn đọc mã](docs/source-guide.md) · [Cấu trúc repository](docs/repository-layout.md) · [Chỉ mục thành phần và commit](docs/components.md) |
 | Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Minh chứng vận hành đã lưu](docs/saved-evidence.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
 | AWS và kế hoạch tiếp theo | [Snapshot AWS ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) · [Kế hoạch Tuần 3](docs/WEEK_3_PLAN.md) |
@@ -320,7 +321,7 @@ Tuần 3 tập trung tích hợp và giám sát theo [tám đầu việc W3-01�
 
 ## Kết luận tiến độ
 
-Hồ sơ hai tuần đã có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công có thể đối chiếu trên GitHub. Bộ Tuần 1 giữ 156 bản ghi đã dùng trong báo cáo; bộ Tuần 2 tách rõ dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, kèm nguồn của từng hình. Mốc tích hợp ngày 18/10 bổ sung thử nghiệm Projection/Parquet, Dashboard thật, đánh giá dự báo và đường CI/CD. Phần tiếp tục là độ phủ vận hành, dữ liệu theo lịch Tuần 3 và giờ làm việc thực tế; kết quả chi tiết nằm trong [hồ sơ Tuần 3](tuan_3/README.md).
+Hồ sơ Tuần 1–2 có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công để đối chiếu trên GitHub. Công việc tích hợp Tuần 3 đã hoàn thành tại mốc 18/10, có bản xuất raw mới 246/288 dòng, 83 JSON gốc, thử nghiệm Projection/Parquet, Dashboard, đánh giá dự báo và CI/CD. Tổng giờ ba tuần đã xác nhận là 58,0 giờ; các lượt thu thập và quan sát tiếp theo được lưu riêng trong [hồ sơ Tuần 3](tuan_3/README.md).
 
 ## Tài liệu chi tiết
 
