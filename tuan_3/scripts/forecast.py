@@ -21,6 +21,16 @@ LABELS = {'HoChiMinh': 'TP. Hồ Chí Minh', 'HaNoi': 'Hà Nội', 'DaNang': 'Đ
 MODELS = ('persistence', 'seasonal_naive_24h', 'moving_average_24h')
 
 
+def moving_predictions(train, steps):
+    history = [float(x) for x in train]
+    predictions = []
+    for _ in range(steps):
+        prediction = statistics.mean(history[-24:])
+        predictions.append(prediction)
+        history.append(prediction)
+    return predictions
+
+
 def predict(train, horizon=24, model='moving_average_24h'):
     if len(train) < 24 or horizon != 24 or any(not math.isfinite(float(x)) for x in train):
         raise ValueError('Need 24 finite training observations and a 24h horizon')
@@ -30,13 +40,7 @@ def predict(train, horizon=24, model='moving_average_24h'):
         return [float(x) for x in train[-24:]]
     if model == 'moving_average_24h':
         # Fixed-origin recursive prediction; no actual holdout values fed back.
-        history = [float(x) for x in train]
-        predictions = []
-        for _ in range(horizon):
-            prediction = statistics.mean(history[-24:])
-            predictions.append(prediction)
-            history.append(prediction)
-        return predictions
+        return moving_predictions(train, horizon)
     raise ValueError('Unknown forecasting model')
 
 
@@ -63,7 +67,31 @@ def consecutive_tail(records, variable):
     return list(reversed(tail))
 
 
-def evaluate(records, variable):
+def future_forecast(records, variable, issued_at):
+    if issued_at.tzinfo is None:
+        raise ValueError('Forecast issuance must have an explicit timezone')
+    issued_at = issued_at.astimezone(timezone.utc)
+    series = consecutive_tail(records, variable)
+    if len(series) < 24:
+        raise ValueError('Need at least 24 consecutive completed observation hours')
+    origin = datetime.fromisoformat(series[-1]['timestamp_utc']).astimezone(timezone.utc)
+    issue_hour = issued_at.replace(minute=0, second=0, microsecond=0)
+    if origin >= issue_hour:
+        raise ValueError('Training data includes an incomplete or future hour')
+    first_target = issue_hour + timedelta(hours=1)
+    gap = (first_target-origin).total_seconds()/3600
+    if not gap.is_integer() or not 1 <= gap <= 24:
+        raise ValueError('Observation-to-target gap is not an integral hour or exceeds 24 hours')
+    gap = int(gap)
+    # Bridge the unobserved current hour recursively, then emit 24 strictly future targets.
+    estimates = moving_predictions([float(r[variable]) for r in series], gap+23)
+    return [{'variable': variable, 'model': 'moving_average_24h', 'origin_utc': origin.isoformat(),
+             'issued_at_utc': issued_at.isoformat(), 'forecast_hour': i+1, 'horizon_hours': gap+i,
+             'timestamp_utc': (first_target+timedelta(hours=i)).isoformat(), 'predicted': estimates[gap-1+i],
+             'status': 'unevaluated_future_prediction'} for i in range(24)]
+
+
+def evaluate(records, variable, issued_at=None):
     series = consecutive_tail(records, variable)
     if len(series) < 96:
         raise ValueError('Need at least 72 contiguous training hours plus 24 holdout hours')
@@ -83,7 +111,9 @@ def evaluate(records, variable):
     origin = datetime.fromisoformat(series[-1]['timestamp_utc'])
     future_rows = [{'variable': variable, 'model': 'moving_average_24h', 'origin_utc': origin.isoformat(), 'horizon_hours': i + 1,
                     'timestamp_utc': (origin + timedelta(hours=i+1)).isoformat(), 'predicted': value,
-                    'status': 'unevaluated_future_prediction'} for i, value in enumerate(future)]
+                    'status': 'retrospective_continuation_not_live_forecast'} for i, value in enumerate(future)]
+    if issued_at is not None:
+        future_rows = future_forecast(series, variable, issued_at)
     return metrics, predictions, future_rows
 
 
@@ -134,7 +164,7 @@ def plots(output, holdout, future):
         for city, color in zip(CITIES, ['#2563eb', '#dc2626', '#059669']):
             selected = [r for r in future if r['city'] == city and r['variable'] == variable]
             ax.plot(range(1, 25), [r['predicted'] for r in selected], label=LABELS[city], color=color)
-        ax.set(xlabel='Giờ sau mốc dự báo (1–24)', ylabel=unit, title='Dự báo trung bình trượt 24 giờ — chưa có dữ liệu thực tế để đánh giá')
+        ax.set(xlabel='Thứ tự 24 giờ đích sau thời điểm phát hành', ylabel=unit, title='Dự báo trung bình trượt 24 giờ — chưa có dữ liệu thực tế để đánh giá')
         ax.legend(); ax.grid(alpha=.2); fig.tight_layout(); fig.savefig(output / f'forecast_{variable}.png', dpi=180); plt.close(fig)
 
 
@@ -150,14 +180,16 @@ def main():
         records, source = collect(city, lat, lon, args.output)
         all_records.extend(records); sources.append(source)
         for variable in ('us_aqi', 'pm2_5'):
-            scored, checked, estimated = evaluate(records, variable)
+            scored, checked, estimated = evaluate(records, variable, issued_at=datetime.now(timezone.utc))
             for target, entries in [(metrics, scored), (holdout, checked), (future, estimated)]:
                 target.extend({'city': city, **r} for r in entries)
     for name, rows in [('hourly_model_history', all_records), ('forecast_metrics', metrics), ('holdout_predictions', holdout), ('forecast_24h', future)]:
         write_csv(args.output / f'{name}.csv', rows, list(rows[0]))
     write_json(args.output / 'provenance.json', {'sources': sources, 'method': 'Fixed recursive trailing24-hour arithmetic mean; chronological24h holdout; persistence/seasonal-naive baselines',
                'model_selected_using_test_set': False, 'evaluation_kind': 'Retrospective CAMS model reconstruction, not archived forecast-vintage skill',
-               'future_predictions_evaluated': False, 'attribution': 'Open-Meteo; CAMS ENSEMBLE; source terms https://open-meteo.com/en/docs/air-quality-api'})
+               'future_predictions_evaluated': False,
+               'future_target_rule': '24 whole-hour timestamps strictly after issued_at_utc; bridge unobserved hours recursively; horizon_hours is relative to last observation, forecast_hour is 1..24',
+               'attribution': 'Open-Meteo; Copernicus Atmosphere Monitoring Service (CAMS); source terms https://open-meteo.com/en/docs/air-quality-api'})
     plots(args.output, holdout, future)
     print(json.dumps({'historical_model_rows': len(all_records), 'evaluation_rows': len(holdout), 'metrics_rows': len(metrics), 'future_prediction_rows': len(future)}))
 

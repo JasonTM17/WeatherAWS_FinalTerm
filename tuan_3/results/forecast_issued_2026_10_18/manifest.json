@@ -1,0 +1,64 @@
+{
+  "files": [
+    {
+      "path": "DaNang_api.json",
+      "sha256": "20d3096da8f53e44092bf979fd36bc53bf552d0607d6cb7b56c16178664cdb89",
+      "bytes": 10107
+    },
+    {
+      "path": "forecast_24h.csv",
+      "sha256": "9ebfd3aca39d6b71c816f42e366d4b7c505c48530df8ce6fdd7096f5e68e159a",
+      "bytes": 27721
+    },
+    {
+      "path": "forecast_metrics.csv",
+      "sha256": "919fbe69a0c35cb661795a9a58ccaaccd93b5246cdd274ab936f348cefc04a15",
+      "bytes": 3465
+    },
+    {
+      "path": "forecast_pm2_5.png",
+      "sha256": "2216d8b6d462ea7a81a9b5f20bfdc6478aa23ef1698ccb7cbcb873b7a6b9fc31",
+      "bytes": 69493
+    },
+    {
+      "path": "forecast_us_aqi.png",
+      "sha256": "48b72b8b7899b7430a1d66ab781b49ad68cb5356e6e3cae2da6859192654453e",
+      "bytes": 62078
+    },
+    {
+      "path": "HaNoi_api.json",
+      "sha256": "b6ec7da60e833c38341b0c88f1b89e14fbb5092ac635a9a46bd2e282cfc54602",
+      "bytes": 10342
+    },
+    {
+      "path": "HoChiMinh_api.json",
+      "sha256": "3b8229ab81e8a1499750613345a89b6df27bb55b86a27ff300b02d5042341a86",
+      "bytes": 10214
+    },
+    {
+      "path": "holdout_pm2_5.png",
+      "sha256": "760db0eb74441d12da746dfd66ca04c4bd09826b8c88553ea20459b64ec84a7b",
+      "bytes": 273188
+    },
+    {
+      "path": "holdout_predictions.csv",
+      "sha256": "c48b2abf4d20bb953e5aed38d9492a9971eaac30fa4beea9f1d5e130ddbe886c",
+      "bytes": 38038
+    },
+    {
+      "path": "holdout_us_aqi.png",
+      "sha256": "2ab2ab420eb74f74569c51384579532015d2390e388a4d5c9b6805b1b08358cf",
+      "bytes": 229138
+    },
+    {
+      "path": "hourly_model_history.csv",
+      "sha256": "e592a59cf87e7b0fa5857952916ab7f2e584498b0b6d14266bf2fbd93ad376be",
+      "bytes": 26073
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "c8f8b91cc7e40a8e37c19f054c6551e704c05c6b85142eafb14c29290b82c59e",
+      "bytes": 2223
+    }
+  ]
+}

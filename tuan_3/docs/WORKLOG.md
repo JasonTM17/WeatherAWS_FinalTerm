@@ -19,4 +19,6 @@ Mốc bổ sung ngày 18/10 lưu thêm [431 dòng metric và Dashboard có kiể
 
 Đợt đối chiếu tiếp theo bổ sung [Metric Filters và hồ sơ log–S3](../results/operations_2026_10_18/), sửa định dạng JSON cấu hình của sinh viên Ngọc Quyên và thay baseline snapshot bằng hồ sơ CD công khai. Lượt 13:15 của sinh viên Tiến Sơn có ba bản ghi đúng theo log và đã tạo một điểm metric log mới; sinh viên Ngọc Quyên còn chờ lượt sau tạo filter/sửa cấu hình. Bộ hồi quy sau bổ sung có 29 trường hợp. Không phát sinh số giờ worklog được tự suy đoán từ các thao tác này.
 
+Đối chiếu thời gian dự báo phát hiện sáu dòng của bản đầu có giờ đích trước lúc lấy nguồn. Bản sửa ghi thời điểm phát hành, bắc cầu các giờ chưa quan sát bằng dự báo đệ quy và chỉ xuất 24 giờ đích sau phát hành; [mốc mới](../results/forecast_issued_2026_10_18/) có 144 dòng được kiểm tra lại. Ba hồi quy thời gian mới nâng tổng số trường hợp lên 32; chưa ghi độ chính xác tương lai khi chưa có dữ liệu đích.
+
 **Cần bổ sung khi kết thúc tuần:** ngày làm, công việc thực tế, số giờ được từng sinh viên xác nhận và các lượt chạy trong lịch 19–25/10/2026. Nhật ký [Tuần 1–2](../../docs/WORKLOG.md) giữ tổng 38,0 giờ đã xác nhận.

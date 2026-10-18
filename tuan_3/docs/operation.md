@@ -11,7 +11,7 @@ python tuan_3/scripts/verify_results.py
 python tuan_2/scripts/repository_audit.py --check
 ```
 
-`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 172 tệp trong bốn manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, 18 bộ sai số dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Các kiểm tra này không cần khóa AWS. Đây là kiểm tra tệp đã lưu, không phải kiểm tra dịch vụ hiện tại.
+`verify_results.py` kiểm tra đường dẫn/hash/kích thước của 184 tệp trong năm manifest, tính lại chất lượng raw, đối chiếu 18 kết quả truy vấn, sai số của hai mốc dự báo, cấu hình Metric Filters, metric giữa hai API, kết quả thu thập với raw S3 và hồ sơ CD/dọn secrets. Phần dự báo mới kiểm tra đủ 144 giờ đích đều sau thời điểm phát hành và khớp phép tính lại. Các kiểm tra này không cần khóa AWS. Đây là kiểm tra tệp đã lưu, không phải kiểm tra dịch vụ hiện tại.
 
 ## 2. Chạy một mốc mới trên AWS
 
@@ -61,7 +61,7 @@ Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc em
 
 ## 4. Kết quả thực hiện
 
-- Kiểm tra cục bộ: 29 hồi quy Tuần 3 đạt; đối chiếu 172 tệp manifest, 18 kết quả Athena và 18 bộ sai số đạt.
+- Kiểm tra hồi quy gồm 32 trường hợp sau phần bổ sung thời điểm phát hành; đối chiếu 184 tệp manifest và các phép tính lại đã đạt. Kết quả toàn bộ bộ thử được ghi riêng theo lượt CI.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
 - [CI của bản tích hợp `0b26858`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101602570): thành công, gồm kiểm tra hồ sơ/chức năng/phân tích/Tuần 3 và tạo artifact.
 - [CI của bản sửa ZIP `c28da19`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39101839037): thành công. Artifact tải từ Linux khớp từng byte với gói dựng trên Windows, trước khi cấp lại secrets cho đợt kiểm chứng.

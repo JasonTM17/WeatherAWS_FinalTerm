@@ -148,7 +148,15 @@ Kiểm tra hồi quy thay đổi toàn bộ giá trị đích vẫn giữ nguyê
 
 Trung bình trượt không có MAE tốt nhất trong sáu trường hợp. Vì vậy chưa có cơ sở xem đây là mô hình nên đưa vào cảnh báo thật. [CSV sai số](../results/integration_2026_10_18/forecast/forecast_metrics.csv) giữ cả RMSE và Bias; [432 dòng đánh giá](../results/integration_2026_10_18/forecast/holdout_predictions.csv) cho phép tính lại từng sai số.
 
-Chương trình vẫn xuất [144 giá trị dự báo](../results/integration_2026_10_18/forecast/forecast_24h.csv) cho ba đô thị, hai chỉ số, 24 giờ tiếp theo bằng phương pháp trung bình trượt đã định trước. Các dòng được đánh dấu chưa đánh giá bằng dữ liệu tương lai, không được dùng như kết quả quan sát.
+Chương trình ban đầu xuất [144 giá trị tiếp diễn chuỗi](../results/integration_2026_10_18/forecast/forecast_24h.csv) sau mốc dữ liệu cuối 04:00 UTC. Khi đối chiếu với thời điểm lấy dữ liệu khoảng 05:32 UTC, có sáu dòng mang giờ đích 05:00 UTC. Vì vậy không coi toàn bộ tệp ban đầu là 24 giờ dự báo tương lai tại thời điểm phát hành. Tệp gốc được giữ nguyên; bản sửa thời gian nằm ở mục tiếp theo.
+
+### 5.4. Bản dự báo có thời điểm phát hành
+
+[Mốc dự báo bổ sung](../results/forecast_issued_2026_10_18/) dùng 522 dòng mô hình, 174 giờ mỗi đô thị; phần đánh giá mới chia 150 giờ đầu/24 giờ giữ lại. Dữ liệu và sai số của mốc mới nằm trong thư mục riêng, không thay các bảng và hình của phép đánh giá ban đầu.
+
+Chương trình ghi `issued_at_utc`, lấy giờ đích đầu là đầu giờ kế tiếp sau phát hành và xuất 24 giờ đích. Giờ chưa quan sát giữa dữ liệu cuối và giờ đích đầu được tính đệ quy, không lấy giá trị tương lai làm đầu vào. Với mốc phát hành khoảng 18/10 06:24 UTC, các giờ đích là 18/10 07:00 đến 19/10 06:00 UTC; toàn bộ 144 dòng có timestamp lớn hơn thời điểm phát hành.
+
+`forecast_hour` là thứ tự 1–24 sau phát hành, còn `horizon_hours` tính từ dữ liệu cuối nên bằng 2–25 trong trường hợp có một giờ trung gian. [CSV](../results/forecast_issued_2026_10_18/forecast_24h.csv), [biểu đồ AQI](../results/forecast_issued_2026_10_18/forecast_us_aqi.png) và [biểu đồ PM2.5](../results/forecast_issued_2026_10_18/forecast_pm2_5.png) dùng cùng dữ liệu. Bộ kiểm tra đối chiếu cả giờ đích, thời điểm phát hành và từng giá trị dự báo đệ quy; chưa tuyên bố độ chính xác của 24 giờ tương lai khi chưa có các giá trị đích tương ứng.
 
 ## 6. Kiểm tra và triển khai
 

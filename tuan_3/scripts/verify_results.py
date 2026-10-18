@@ -6,7 +6,7 @@ from datetime import datetime
 from benchmark import assert_equal_groups
 from common import ROOT, digest, read_csv
 from dashboard import metric_consistency
-from forecast import evaluate
+from forecast import evaluate, future_forecast
 from quality import inspect_rows
 
 
@@ -57,6 +57,35 @@ def verify_operations(folder):
     return count
 
 
+def verify_issued_forecast(folder):
+    count = verify_manifest(folder)
+    history = read_csv(folder / 'hourly_model_history.csv')
+    forecasts = read_csv(folder / 'forecast_24h.csv')
+    metrics = read_csv(folder / 'forecast_metrics.csv')
+    if len(forecasts) != 144 or len(metrics) != 18:
+        raise ValueError('Issued forecast/evaluation dimensions differ')
+    for city in sorted({r['city'] for r in history}):
+        selected = [r for r in history if r['city'] == city]
+        for variable in ('us_aqi', 'pm2_5'):
+            rows = [r for r in forecasts if r['city'] == city and r['variable'] == variable]
+            if len(rows) != 24 or len({r['issued_at_utc'] for r in rows}) != 1:
+                raise ValueError('Forecast must have exactly 24 targets for one issuance')
+            issued = datetime.fromisoformat(rows[0]['issued_at_utc'])
+            expected = future_forecast(selected, variable, issued)
+            for actual, calculated in zip(rows, expected):
+                if (datetime.fromisoformat(actual['timestamp_utc']) <= issued or actual['timestamp_utc'] != calculated['timestamp_utc']
+                        or int(actual['forecast_hour']) != calculated['forecast_hour']
+                        or int(actual['horizon_hours']) != calculated['horizon_hours']
+                        or not math.isclose(float(actual['predicted']), calculated['predicted'], rel_tol=1e-11, abs_tol=1e-9)):
+                    raise ValueError('Forecast target/issuance/recursive prediction mismatch')
+            expected_metrics, _, _ = evaluate(selected, variable)
+            for item in expected_metrics:
+                saved = next(r for r in metrics if r['city'] == city and r['variable'] == variable and r['model'] == item['model'])
+                if any(not math.isclose(float(saved[k]), item[k], rel_tol=1e-11, abs_tol=1e-9) for k in ('mae', 'rmse', 'bias')):
+                    raise ValueError('Updated holdout metrics mismatch')
+    return count
+
+
 def verify(folder):
     file_count = verify_manifest(folder)
     for profile in ('default', 'quyen'):
@@ -92,6 +121,7 @@ def verify(folder):
     cd = folder.parent / 'cd_2026_10_18'
     file_count += verify_manifest(monitoring) + verify_manifest(cd)
     file_count += verify_operations(folder.parent / 'operations_2026_10_18')
+    file_count += verify_issued_forecast(folder.parent / 'forecast_issued_2026_10_18')
     for profile in ('default', 'quyen'):
         observed = metric_consistency(read_csv(monitoring / profile / 'metrics.csv'))
         saved = json.loads((monitoring / profile / 'metric-consistency.json').read_text())
