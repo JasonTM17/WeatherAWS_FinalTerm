@@ -17,7 +17,7 @@ python tuan_2/scripts/repository_audit.py --check
 
 ## 2. Chạy một mốc mới trên AWS
 
-Hai profile SDK hiện dùng là `default` cho sinh viên Tiến Sơn và `quyen` cho sinh viên Ngọc Quyên, vùng `us-east-1`. Cấp khóa phiên bằng cơ chế bảo mật của môi trường; không đặt khóa trong tham số, mã nguồn hay tệp được Git theo dõi. Các chương trình không sử dụng AWS CLI.
+Các thao tác với dịch vụ AWS được thực hiện bằng Python SDK Boto3. Hai profile SDK hiện dùng là `default` cho sinh viên Tiến Sơn và `quyen` cho sinh viên Ngọc Quyên, vùng `us-east-1`. Cấp khóa phiên bằng cơ chế bảo mật của môi trường; không đặt khóa trong tham số, mã nguồn hay tệp được Git theo dõi.
 
 ```bash
 python tuan_3/scripts/snapshot.py --output output/week3-new-snapshot --archive-source --release-proof tuan_3/results/daily_update_2026_10_19/release

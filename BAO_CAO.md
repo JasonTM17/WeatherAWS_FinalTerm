@@ -10,9 +10,11 @@
 
 ## 1. Mục tiêu và phạm vi thực hiện
 
-Trong Tuần 3, chúng em tập trung hoàn thiện luồng tích hợp, giám sát vận hành bằng CloudWatch, kiểm chứng cảnh báo email SNS và đồng bộ mã Lambda triển khai với repository. Đồng thời, chúng em thực nghiệm Partition Projection/Parquet trên Athena, bổ sung kiểm tra chất lượng dữ liệu và đánh giá dự báo AQI, PM2.5 theo giờ.
+Trên cơ sở kết quả của hai tuần đầu, Tuần 3 tập trung hoàn thiện việc tích hợp các thành phần của hệ thống, đồng bộ mã nguồn triển khai, bổ sung giám sát CloudWatch và đối chiếu luồng cảnh báo email qua SNS. Song song với phần vận hành, chúng em thực nghiệm Partition Projection/Parquet trên Athena, kiểm tra chất lượng dữ liệu và đánh giá dự báo AQI, PM2.5 theo giờ.
 
-Hệ thống tiếp tục thu thập dữ liệu của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng trong AWS Learner Lab tại vùng us-east-1. EventBridge kích hoạt Lambda theo lịch; Lambda đọc cấu hình từ Secrets Manager, gọi Open-Meteo, chuẩn hóa bản ghi và lưu trên S3. Glue Data Catalog cung cấp lược đồ để Athena truy vấn; các chương trình Python tạo bảng phân tích và biểu đồ. SNS xử lý cảnh báo theo ngưỡng, còn CloudWatch lưu log, metric và Dashboard phục vụ đối chiếu vận hành.
+Hệ thống được triển khai trong AWS Learner Lab tại vùng `us-east-1`, phục vụ thu thập dữ liệu của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. EventBridge kích hoạt Lambda theo lịch; Lambda đọc cấu hình từ Secrets Manager, gọi API Open-Meteo, chuẩn hóa kết quả và lưu dữ liệu gốc trên S3. Glue Data Catalog quản lý lược đồ để Athena truy vấn. Các chương trình Python thực hiện kiểm tra, tổng hợp số liệu và xây dựng biểu đồ; SNS và CloudWatch đảm nhiệm cảnh báo, ghi nhận nhật ký và giám sát.
+
+Các thao tác quản lý tài nguyên, triển khai Lambda, đọc dữ liệu S3 và thực thi truy vấn Athena được thực hiện qua Python SDK Boto3. Các tệp PowerShell là điểm vào gọi chương trình Python tương ứng. Mã nguồn, hướng dẫn vận hành và minh chứng triển khai cùng sử dụng phương thức này.
 
 Hồ sơ tổng quan Tuần 3: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/README.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/README.md).
 
@@ -20,7 +22,9 @@ Kiến trúc và vai trò các dịch vụ: [https://github.com/JasonTM17/Weathe
 
 ## 2. Phân công trách nhiệm và thời gian thực hiện
 
-**Sinh viên Tiến Sơn** phụ trách S3, Secrets Manager, Lambda, EventBridge, SNS và CloudWatch; tập trung đối chiếu phiên bản triển khai, lịch thu thập, cấu hình giám sát và luồng cảnh báo email. **Sinh viên Ngọc Quyên** phụ trách Glue/Athena, kiểm tra raw, xuất CSV, thống kê, thực nghiệm truy vấn, biểu đồ và dự báo. Hai sinh viên cùng tích hợp hệ thống, rà soát số liệu, kiểm tra liên kết minh chứng và hoàn thiện báo cáo.
+**Sinh viên Tiến Sơn** phụ trách S3, Secrets Manager, Lambda, EventBridge, SNS và CloudWatch. Công việc trọng tâm gồm kiểm tra phiên bản triển khai, đối chiếu lịch thu thập, cấu hình giám sát và kiểm chứng luồng cảnh báo email.
+
+**Sinh viên Ngọc Quyên** phụ trách Glue, Athena, kiểm tra dữ liệu gốc, xuất CSV, phân tích thống kê, thực nghiệm truy vấn, xây dựng biểu đồ và đánh giá dự báo. Hai sinh viên phối hợp tích hợp hệ thống, đối chiếu kết quả, rà soát minh chứng và hoàn thiện báo cáo.
 
 Thời gian Tuần 3 đã được xác nhận của sinh viên Tiến Sơn là **10,0 giờ**, của sinh viên Ngọc Quyên là **10,0 giờ**, tổng cộng **20,0 giờ**. Nhật ký liên kết các công việc với sản phẩm và ghi tổng giờ theo tuần đã xác nhận.
 
@@ -34,7 +38,7 @@ Mã Lambda được tổ chức theo các chức năng đọc cấu hình, gọi
 
 Phần lấy lịch sử ghép hai chuỗi thời tiết và chất lượng không khí theo timestamp, chọn đúng khoảng giờ được yêu cầu và chỉ đưa các giờ đã hoàn tất vào thống kê. Bản cập nhật ngày 19/10 bổ sung đúng dữ liệu của ngày UTC hiện tại. Kết quả xử lý ghi số bản ghi, object đã lưu và trạng thái của các đô thị để đối chiếu Lambda với S3. Cảnh báo SNS áp dụng ở nhánh thời gian thực; chế độ lịch sử lưu dữ liệu với kết quả 0 cảnh báo lịch sử.
 
-Các chương trình Tuần 3 được tách theo nhiệm vụ: snapshot và chất lượng, benchmark Athena, Dashboard/Metric Filters, dự báo, tổng hợp dữ liệu theo ngày và kiểm tra minh chứng. Cách tổ chức này cho phép tính lại bảng từ CSV và truy từ biểu đồ về dữ liệu nguồn.
+Các chương trình Tuần 3 được tổ chức theo nhiệm vụ: xuất dữ liệu và kiểm tra chất lượng, thực nghiệm Athena, cấu hình Dashboard/Metric Filters, dự báo, tổng hợp dữ liệu theo ngày và xác minh hồ sơ. Cách tổ chức này giúp xác định chương trình tạo từng đầu ra, tính lại bảng từ CSV và đối chiếu biểu đồ với dữ liệu nguồn.
 
 Mã nguồn Lambda dùng chung: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py).
 
@@ -48,7 +52,7 @@ Ba commit trực tiếp thể hiện các thay đổi chính:
 
 ## 4. Quy mô dữ liệu raw và kiểm tra chất lượng
 
-Bản xuất S3 ngày **19/10/2026**, chốt lúc **14:22–14:23 UTC+7**, lưu **302 bản ghi của sinh viên Tiến Sơn và 339 bản ghi của sinh viên Ngọc Quyên**, tổng cộng **641 bản ghi trong 95 tệp JSON gốc**. Trong đó, sinh viên Tiến Sơn có 43 tệp JSON, sinh viên Ngọc Quyên có 52 tệp. CSV giữ đủ 23 trường, gồm định danh, đô thị, tọa độ, thời gian, các chỉ số khí tượng/chất lượng không khí và khóa phân vùng.
+Bản xuất S3 ngày **19/10/2026**, chốt lúc **14:22–14:23 UTC+7**, lưu **302 bản ghi của sinh viên Tiến Sơn và 339 bản ghi của sinh viên Ngọc Quyên**, tổng cộng **641 bản ghi trong 95 tệp JSON gốc**. Trong đó, sinh viên Tiến Sơn có 43 tệp JSON, sinh viên Ngọc Quyên có 52 tệp. CSV giữ đủ 23 trường, gồm định danh, đô thị, tọa độ, thời gian, các chỉ số khí tượng, chất lượng không khí và khóa phân vùng.
 
 Riêng dữ liệu mang ngày 19/10 theo UTC+7 có **45 bản ghi của sinh viên Tiến Sơn và 42 bản ghi của sinh viên Ngọc Quyên**. Hai lượt Lambda ở chế độ lấy lịch sử đã thu bổ sung chuỗi mô hình từ **00:00 đến 13:00**, mỗi lượt **14 giờ × 3 đô thị = 42 bản ghi**. Thống kê so sánh dùng cùng 14 giờ hoàn tất của mỗi sinh viên. Ba bản ghi trong giờ 14 của sinh viên Tiến Sơn được giữ riêng trong raw. Nguồn từng bản ghi phân biệt chế độ lấy lịch sử với các lượt thu khác.
 
@@ -70,7 +74,7 @@ Trong cùng 14 giờ hoàn tất ngày 19/10, AQI trung bình của TP. Hồ Ch�
 
 Ví dụ tại **13:00 ngày 19/10**, raw của TP. Hồ Chí Minh ghi AQI 55, PM2.5 11,3 µg/m³; Hà Nội ghi AQI 96, PM2.5 23,5 µg/m³; Đà Nẵng ghi AQI 53, PM2.5 11,4 µg/m³. Đây là giá trị từng bản ghi tại một giờ, được trình bày riêng với trung bình 14 giờ ở trên.
 
-Phần phân tích mốc 18/10 còn lưu **96 dòng thống kê mô tả và 120 dòng tương quan Pearson/Spearman**, có quy định rõ tập raw và tập đô thị–giờ. Các mốc dữ liệu được lưu riêng, phục vụ đối chiếu kết quả theo thời điểm.
+Phần phân tích tại mốc ngày 18/10 lưu **96 dòng thống kê mô tả và 120 dòng tương quan Pearson/Spearman**, phân biệt tập bản ghi gốc với tập tổng hợp theo đô thị–giờ. Các kết quả và biểu đồ được giữ theo đúng bộ đầu vào tương ứng.
 
 Bảng thống kê, mẫu raw và biểu đồ ngày 19/10: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/README.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/README.md).
 
@@ -78,7 +82,7 @@ Thống kê và tương quan tại mốc 18/10: [https://github.com/JasonTM17/We
 
 ## 6. Thực nghiệm Partition Projection và Parquet trên Athena
 
-Chúng em thực hiện **18 lượt đo**, gồm ba lần cho mỗi cấu hình trong hai môi trường: NDJSON có phân vùng đăng ký, NDJSON dùng Partition Projection và Parquet Snappy dùng Partition Projection. Mỗi môi trường sử dụng cùng bộ raw đã chốt để tạo các định dạng thử nghiệm. Các bảng/prefix thử nghiệm được tách riêng; chức năng sử dụng lại kết quả bị tắt và thứ tự cấu hình được luân phiên giữa các lần đo.
+Chúng em thực hiện **18 lượt đo**, gồm ba lần cho mỗi cấu hình trong hai môi trường: NDJSON có phân vùng đăng ký, NDJSON dùng Partition Projection và Parquet Snappy dùng Partition Projection. Các cấu hình trong mỗi môi trường được so sánh trên cùng bộ dữ liệu đã chốt. Bảng và vị trí lưu dữ liệu thử nghiệm được tách riêng; chức năng sử dụng lại kết quả được tắt và thứ tự cấu hình được luân phiên giữa các lần đo.
 
 Partition Projection xác định phân vùng từ cấu hình bảng, giảm phụ thuộc thao tác đăng ký metadata. Parquet tổ chức dữ liệu theo cột và nén Snappy để đánh giá lượng byte Athena cần đọc cho các cột được truy vấn. Chương trình đối chiếu kết quả SQL với tổng hợp từ CSV trước khi báo số đo.
 
@@ -92,7 +96,7 @@ Mã thực nghiệm Athena: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/b
 
 ## 7. Giám sát CloudWatch và cảnh báo email SNS
 
-Dashboard tổng hợp các chỉ số Lambda, SNS và lịch thu thập: số lượt gọi, Errors, Throttles, thời gian thực thi, số thông điệp và kết quả từ log. Hai Metric Filters trong mỗi môi trường đếm các dòng kết quả và dòng lỗi khớp mẫu; các chỉ số log được lưu riêng với native metric của dịch vụ.
+CloudWatch Dashboard tổng hợp số lượt gọi Lambda, lỗi, lượt bị giới hạn thực thi, thời gian xử lý, thông điệp SNS và các chỉ số từ nhật ký. Hai Metric Filters trong mỗi môi trường ghi nhận các dòng kết quả và dòng lỗi khớp mẫu, phục vụ đối chiếu với chỉ số của dịch vụ.
 
 Tỷ lệ lỗi dùng các cặp Errors/Invocations cùng hàm, dimension, timestamp UTC và chu kỳ 300 giây, với Invocations > 0 và Errors ≤ Invocations. Chúng em đã kiểm chứng biểu thức Dashboard qua sáu trường hợp trong mỗi môi trường, đọc lại cấu hình và lưu ảnh metric do AWS trả về. Các lượt thu thập theo lịch được đối chiếu theo request, số đô thị, số bản ghi và object S3.
 
@@ -120,7 +124,7 @@ Bản dự báo phát hành gốc: [https://github.com/JasonTM17/WeatherAWS_Fina
 
 ## 9. Kiểm tra mã nguồn và quy trình CI/CD
 
-Workflow CI tự động kiểm tra cấu trúc hồ sơ, CSV/worklog, chức năng thu thập, xử lý dữ liệu, phân tích, dự báo và quy trình phát hành; đồng thời tạo gói Lambda có thể đối chiếu bằng hash. Bộ hồ sơ dữ liệu ngày 19/10 có **57 trường hợp kiểm tra Tuần 3**, cùng đối chiếu **492 tệp minh chứng trong 14 manifest**. Các kiểm tra mã/tệp được lưu riêng với minh chứng thực thi AWS.
+Quy trình CI kiểm tra cấu trúc hồ sơ, CSV, worklog, chức năng thu thập, xử lý dữ liệu, phân tích, dự báo và quy trình phát hành; đồng thời tạo gói Lambda có thể đối chiếu bằng hash. Bộ hồ sơ dữ liệu ngày 19/10 có **57 trường hợp kiểm tra Tuần 3**, cùng đối chiếu **492 tệp minh chứng trong 14 manifest**. Kết quả kiểm tra mã nguồn và tệp dữ liệu được lưu riêng với minh chứng thực thi trên AWS.
 
 Workflow CD Lambda chạy thủ công trên main, yêu cầu chọn và xác nhận môi trường. Hai lượt CD ngày 18/10 thành công trên môi trường sinh viên Tiến Sơn và sinh viên Ngọc Quyên; gói tải lại từ AWS khớp artifact và cấu hình giữ nguyên. Lượt cập nhật qua SDK ngày 19/10 tiếp tục kiểm tra phiên bản, sao lưu và đọc lại hash/cấu hình cho commit 62f1c08. Nhật ký triển khai ghi riêng phương thức và thời điểm của từng lượt.
 
@@ -138,7 +142,7 @@ Kế hoạch gồm tám đầu việc W4-01–W4-08, có phụ thuộc, sản ph
 
 Kế hoạch Tuần 4: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md).
 
-**Chúng em đã hoàn thành kế hoạch công việc tích hợp Tuần 3 và bổ sung dữ liệu ngày 19/10.** Kết quả gồm raw/CSV có nguồn, thực nghiệm Athena, Dashboard và cảnh báo email theo mốc kiểm chứng, bản dự báo đã đối chiếu đủ kỳ, cùng hồ sơ CI/CD. Phân công và tổng 20,0 giờ được ghi trong worklog; các kết quả có liên kết tới mã nguồn, commit và tệp minh chứng để giảng viên thuận tiện kiểm tra.
+**Chúng em đã hoàn thành kế hoạch công việc tích hợp Tuần 3 và bổ sung dữ liệu ngày 19/10.** Các sản phẩm gồm dữ liệu gốc có nguồn, bảng thống kê và biểu đồ, kết quả thực nghiệm Athena, cấu hình giám sát, minh chứng cảnh báo email, đánh giá dự báo đủ kỳ và hồ sơ triển khai. Tổng thời gian thực hiện đã xác nhận là 20,0 giờ. Báo cáo liên kết trực tiếp từng kết quả với mã nguồn, commit, dữ liệu và nhật ký để giảng viên thuận tiện kiểm tra, đối chiếu.
 
 **Các liên kết tổng hợp của hồ sơ:**
 
