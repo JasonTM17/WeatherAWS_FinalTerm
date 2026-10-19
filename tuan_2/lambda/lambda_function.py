@@ -195,6 +195,11 @@ def fetch_historical_series(city_info, past_hours=48, context=None):
     """
     Thu thập chuỗi dữ liệu lịch sử n giờ gần nhất cho thành phố (phục vụ phân tích Athena & biểu đồ).
     """
+    if type(past_hours) is not int or past_hours < 1:
+        raise ValueError('past_hours must be a positive integer.')
+    collected = datetime.datetime.now(datetime.timezone.utc)
+    cutoff = collected.replace(minute=0, second=0, microsecond=0)
+    window_start = cutoff - datetime.timedelta(hours=past_hours)
     city = city_info['city']
     lat = city_info['lat']
     lon = city_info['lon']
@@ -204,7 +209,7 @@ def fetch_historical_series(city_info, past_hours=48, context=None):
     aq_url = (
         f"https://air-quality-api.open-meteo.com/v1/air-quality?"
         f"latitude={lat}&longitude={lon}&hourly=pm10,pm2_5,carbon_monoxide,"
-        f"nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&past_days={past_days}&forecast_days=0"
+        f"nitrogen_dioxide,sulphur_dioxide,ozone,us_aqi&past_days={past_days}&forecast_days=1&timezone=UTC"
     )
     aq_json = _fetch_api_json(aq_url, context)
     hourly_aq = _api_section(aq_json, 'hourly', AIR_FIELDS, 'Air quality')
@@ -212,23 +217,20 @@ def fetch_historical_series(city_info, past_hours=48, context=None):
     w_url = (
         f"https://api.open-meteo.com/v1/forecast?"
         f"latitude={lat}&longitude={lon}&hourly=temperature_2m,relative_humidity_2m,"
-        f"surface_pressure,wind_speed_10m&past_days={past_days}&forecast_days=0"
+        f"surface_pressure,wind_speed_10m&past_days={past_days}&forecast_days=1&timezone=UTC"
     )
     w_json = _fetch_api_json(w_url, context)
     hourly_w = _api_section(w_json, 'hourly', WEATHER_FIELDS, 'Weather')
 
     times = hourly_aq.get('time', [])
     records = []
-    collected_at = datetime.datetime.now(datetime.timezone.utc).isoformat()
-
-    total_times = len(times)
-    start_idx = max(0, total_times - past_hours)
+    collected_at = collected.isoformat()
     weather_indices = {timestamp: index for index, timestamp in enumerate(hourly_w.get('time', []))}
     def weather_value(name, index):
         values = hourly_w.get(name, [])
         return values[index] if index is not None and index < len(values) else None
 
-    for idx in range(start_idx, total_times):
+    for idx in range(len(times)):
         t_str = times[idx]
         try:
             dt = datetime.datetime.fromisoformat(t_str)
@@ -240,6 +242,8 @@ def fetch_historical_series(city_info, past_hours=48, context=None):
             if dt.tzinfo is None
             else dt.astimezone(datetime.timezone.utc)
         )
+        if not window_start <= dt_utc < cutoff:
+            continue
         dt_vn = dt_utc + datetime.timedelta(hours=7)
 
         us_aqi_raw = hourly_aq.get('us_aqi', [])[idx] if idx < len(hourly_aq.get('us_aqi', [])) else None
@@ -406,6 +410,9 @@ def lambda_handler(event, context):
                 if not recs:
                     raise RuntimeError('No historical records returned.')
                 all_records.extend(recs)
+                if len(recs) != int(backfill_hours) or len({r['timestamp_utc'] for r in recs}) != int(backfill_hours):
+                    failed_cities.append(loc.get('city', 'unknown'))
+                    print(f"[WARN] Incomplete historical hour coverage for {loc.get('city', 'unknown')}.")
             except Exception as e:
                 failed_cities.append(loc.get('city', 'unknown'))
                 print(f"[ERROR] Failed historical fetch for {loc.get('city', 'unknown')}: {e}")

@@ -75,7 +75,9 @@ class TestWeatherCollectorLambda(unittest.TestCase):
                     0, (60 - elapsed[0]) * 1000))
                 with patch.object(lambda_function, 'fetch_secrets', return_value={'locations': locations}), \
                      patch.object(lambda_function.urllib.request, 'urlopen', side_effect=slow_open), \
-                     patch.object(lambda_function, 'save_records_to_s3', return_value=[]) as save:
+                     patch.object(lambda_function, 'save_records_to_s3', return_value=[]) as save, \
+                     patch('lambda_function.datetime.datetime', wraps=datetime) as clock:
+                    clock.now.return_value = datetime(2026, 10, 14, 1, 30, tzinfo=timezone.utc)
                     result = lambda_function.lambda_handler(event, context)
                 self.assertLess(elapsed[0], 60)
                 self.assertEqual(result['collection_status'], 'partial')
@@ -253,7 +255,9 @@ class TestWeatherCollectorLambda(unittest.TestCase):
 
         loc = {"city": "DaNang", "lat": 16.0544, "lon": 108.2022}
         # Request 10 hours even though only 3 are available
-        records = lambda_function.fetch_historical_series(loc, past_hours=10)
+        with patch('lambda_function.datetime.datetime', wraps=datetime) as clock:
+            clock.now.return_value = datetime(2026, 10, 6, 3, 30, tzinfo=timezone.utc)
+            records = lambda_function.fetch_historical_series(loc, past_hours=10)
 
         self.assertEqual(len(records), 3, "All 3 records must be kept without dropping")
         self.assertEqual(records[0]["us_aqi"], 40)
@@ -344,7 +348,9 @@ class TestWeatherCollectorLambda(unittest.TestCase):
             {'hourly': {'time': ['2026-10-06T00:00','2026-10-06T01:00'], 'us_aqi': [40,75]}},
             {'hourly': {'time': ['2026-10-06T01:00','2026-10-06T00:00'], 'temperature_2m': [31,24]}},
         ]
-        records = lambda_function.fetch_historical_series({'city':'HaNoi','lat':21,'lon':105},2)
+        with patch('lambda_function.datetime.datetime', wraps=datetime) as clock:
+            clock.now.return_value = datetime(2026, 10, 6, 2, 30, tzinfo=timezone.utc)
+            records = lambda_function.fetch_historical_series({'city':'HaNoi','lat':21,'lon':105},2)
         self.assertEqual([r['temperature_2m'] for r in records],[24.0,31.0])
 
     @patch('lambda_function.http_get_json')
@@ -354,7 +360,7 @@ class TestWeatherCollectorLambda(unittest.TestCase):
             {'hourly': {'time': times, 'us_aqi': [40, 75]}},
             {'hourly': {'time': times, 'temperature_2m': [24, 25]}},
         ]
-        collected = datetime(2026, 10, 16, 7, 30, tzinfo=timezone.utc)
+        collected = datetime(2026, 10, 6, 2, 30, tzinfo=timezone.utc)
         with patch('lambda_function.datetime.datetime', wraps=datetime) as clock:
             clock.now.return_value = collected
             records = lambda_function.fetch_historical_series(
@@ -376,9 +382,11 @@ class TestWeatherCollectorLambda(unittest.TestCase):
             {'hourly': {'time': times, 'us_aqi': [40]}},
             {'hourly': {'time': times, 'temperature_2m': [24]}},
         ]
-        record = lambda_function.fetch_historical_series(
-            {'city': 'HaNoi', 'lat': 21, 'lon': 105}, 1
-        )[0]
+        with patch('lambda_function.datetime.datetime', wraps=datetime) as clock:
+            clock.now.return_value = datetime(2026, 10, 5, 18, 30, tzinfo=timezone.utc)
+            record = lambda_function.fetch_historical_series(
+                {'city': 'HaNoi', 'lat': 21, 'lon': 105}, 1
+            )[0]
         self.assertEqual(record['timestamp_utc'], '2026-10-05 17:00:00')
         self.assertEqual(record['timestamp_vn'], '2026-10-06 00:00:00')
         self.assertEqual(
