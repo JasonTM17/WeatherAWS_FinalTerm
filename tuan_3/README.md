@@ -10,7 +10,7 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 
 | Nội dung | Liên kết |
 | --- | --- |
-| Báo cáo kỹ thuật, kết quả và phương pháp | [Báo cáo chi tiết](docs/FINAL_REPORT.md) · [Nội dung nộp LMS](../BAO_CAO.md) |
+| Báo cáo kỹ thuật, kết quả và phương pháp | [Báo cáo chi tiết](docs/FINAL_REPORT.md) · [Nội dung Tuần 3 để nộp LMS](../BAO_CAO.md) |
 | Dữ liệu ngày 19/10 và raw tích lũy mới | [45/42 dòng trong ngày, 302/339 dòng tích lũy, 95 JSON gốc](results/daily_update_2026_10_19/README.md) |
 | Đối chiếu đủ kỳ dự báo | [24/24 giờ đích, 144/144 giá trị và nguồn CAMS tải ngày 19/10](results/forecast_followup_2026_10_19/README.md) |
 | Hướng dẫn chạy, kiểm chứng và khôi phục | [Vận hành và CI/CD](docs/operation.md) |
