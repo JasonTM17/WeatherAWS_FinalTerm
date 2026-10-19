@@ -133,7 +133,7 @@ Trong lần kiểm chứng này, lịch thu thập hiện hữu được giữ n
 
 ## 8. Kiểm tra mã và hướng hoàn thiện theo kế hoạch
 
-24 hồi quy thuộc bộ công cụ mới đạt, gồm trường hợp billing chính xác, thiếu metric, nhầm lịch, thay target, mất phản hồi và ghi tệp khôi phục lỗi. Hai điểm phát hiện ở lượt review độc lập đã được sửa và kiểm tra lại. [Manifest](../results/verification_2026_10_19/manifest.json) kiểm tra toàn vẹn các tệp minh chứng của đợt này.
+34 kiểm thử Tuần 4 đã đạt trên máy Windows, gồm trường hợp billing chính xác, thiếu metric, nhầm lịch, thay target, mất phản hồi, ghi tệp khôi phục lỗi, tái lập báo cáo và truyền tham số PowerShell. Hai điểm phát hiện ở lượt review độc lập đã được sửa và kiểm tra lại. [Manifest](../results/verification_2026_10_19/manifest.json) kiểm tra toàn vẹn các tệp minh chứng của đợt này.
 
 Các kỳ dữ liệu/dự báo kế tiếp, nhật ký giờ công và video thực tế được bổ sung theo [kế hoạch Tuần 4](../../docs/WEEK_4_PLAN.md). Các kết quả trên là mốc kiểm chứng ngày 19/10, giúp chuẩn bị bảo vệ trên source, dữ liệu và thao tác có thể đối chiếu.
 
