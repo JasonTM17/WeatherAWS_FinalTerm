@@ -1,0 +1,46 @@
+{
+  "records": 339,
+  "week3_calendar_records": 42,
+  "city_hour_groups": 282,
+  "multiple_collection_city_hours": 54,
+  "issues": {
+    "duplicate_record_ids": 0,
+    "schema_mismatch_rows": 0,
+    "missing_numeric_cells": 0,
+    "invalid_numeric_cells": 0,
+    "timezone_mismatch_rows": 0,
+    "partition_mismatch_rows": 0,
+    "collection_before_observation_rows": 0
+  },
+  "first_utc": "2026-10-04 00:00:00",
+  "last_utc": "2026-10-19 06:00:00",
+  "profile": "quyen",
+  "student": "Sinh viên Ngọc Quyên",
+  "captured_at": "2026-10-19T07:23:28.300704+00:00",
+  "source_commit": "62f1c08e20e7a31447f10d713d4e115d4147c650",
+  "lambda": {
+    "state": "Active",
+    "update": "Successful",
+    "code_sha256": "9K4CWzXwRAPeQ/9UJ9jb2ZL0y3tWKz8/4TQYwMIlF5w=",
+    "reviewed_release_commit": "62f1c08e20e7a31447f10d713d4e115d4147c650",
+    "matches_reviewed_release_package": true
+  },
+  "rules": [
+    {
+      "name": "WeatherCollectionHourlyRule",
+      "state": "DISABLED",
+      "schedule": "rate(1 hour)",
+      "matching_targets": 1
+    },
+    {
+      "name": "WeatherCollectionSchedule",
+      "state": "ENABLED",
+      "schedule": "rate(1 hour)",
+      "matching_targets": 1
+    }
+  ],
+  "recent_result_log_entries": 7,
+  "recent_success_log_results": 7,
+  "recent_partial_log_results": 0,
+  "snapshot_semantics": "All raw objects listed once; conditional GET protects each ETag; not an atomic multi-object AWS snapshot"
+}

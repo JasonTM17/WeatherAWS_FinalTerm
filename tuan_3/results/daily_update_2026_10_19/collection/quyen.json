@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "student_profile": "quyen",
+  "mode": "manual_model_backfill",
+  "backfill_hours": 14,
+  "requested_window_start_utc": "2026-10-18T17:00:00+00:00",
+  "requested_window_end_exclusive_utc": "2026-10-19T07:00:00+00:00",
+  "started_at_utc": "2026-10-19T07:22:53.088635+00:00",
+  "finished_at_utc": "2026-10-19T07:22:57.972891+00:00",
+  "request_id_hash": "5914ce2588c0ca9a7d18",
+  "source_commit": "62f1c08e20e7a31447f10d713d4e115d4147c650",
+  "payload_sha256": "6cc2f3f5af8b6c3566cc3d451d4665dae80284af4aa95301b21e9b7551cb2a48",
+  "collection_status": "complete",
+  "records_collected": 42,
+  "alerts_sent": 0,
+  "failed_cities": [],
+  "saved_files": [
+    {
+      "s3_key": "raw/year=2026/month=10/day=18/data_20261018_b05d709e.json",
+      "count": 21
+    },
+    {
+      "s3_key": "raw/year=2026/month=10/day=19/data_20261019_f63ca2a2.json",
+      "count": 21
+    }
+  ],
+  "semantics": "Historical model series collected now through authenticated Lambda; not evidence of earlier scheduled invocations"
+}

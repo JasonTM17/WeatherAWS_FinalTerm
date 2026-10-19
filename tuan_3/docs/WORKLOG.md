@@ -46,7 +46,7 @@ Hai dòng CSV Tuần 3 ghi tổng 10,0 giờ mỗi sinh viên, không chứa ng�
 - Sinh viên Ngọc Quyên: raw, Glue/Athena, thống kê, đối chiếu dự báo và CSV/biểu đồ.
 - Hai sinh viên: đối chiếu kết quả, rà soát báo cáo và các liên kết minh chứng.
 
-Snapshot phân tích trước có 246/285 bản ghi; mã Lambda ở mốc đó khớp gói đã kiểm chứng. [Hồ sơ của mốc trước](../results/refresh_2026_10_18/README.md) bổ sung thống kê tái lập, so sánh MA 3 giờ và đối chiếu 2/24 giờ đích với mô hình tải về sau. Bản cập nhật bổ sung bên dưới nâng phạm vi đối chiếu lên 4/24 giờ đích, giữ nguyên các tệp của mốc trước.
+Snapshot phân tích trước có 246/285 bản ghi; mã Lambda ở mốc đó khớp gói đã kiểm chứng. [Hồ sơ của mốc trước](../results/refresh_2026_10_18/README.md) bổ sung thống kê tái lập, so sánh MA 3 giờ và đối chiếu 2/24 giờ đích với mô hình tải về sau. Mốc cập nhật ngày 18/10 nâng phạm vi lên 4/24 giờ đích; phần bổ sung ngày 19/10 ở mục 6 đã đối chiếu đủ 24/24 giờ đích, giữ nguyên các tệp của mốc trước.
 
 **Cập nhật đối chiếu bổ sung:** [metric/log cùng cửa sổ](../results/monitoring_followup_2026_10_18/README.md), [Dashboard cuối sau sửa IF](../results/monitoring_dashboard_repair_2026_10_18/README.md) và [24 giá trị đối chiếu cho bốn giờ đích](../results/forecast_followup_2026_10_18/README.md). Đã sửa cách ghép/tính/hiển thị; giữ nguyên điểm Errors thiếu Invocations của sinh viên Tiến Sơn để chẩn đoán. Không cộng thêm giờ làm từ thời gian chương trình chạy.
 
@@ -60,7 +60,7 @@ Snapshot phân tích trước có 246/285 bản ghi; mã Lambda ở mốc đó k
 | W3-01 | Đồng bộ và đọc lại hash gói Lambda của cả hai sinh viên, có sao lưu trước cập nhật | [Hồ sơ CD](../results/cd_2026_10_18/) |
 | W3-02 | Chuẩn hóa lịch EventBridge và kiểm chứng thu thập theo lịch sau triển khai/sửa cấu hình | [Các lượt 16/10](../../docs/scheduled-run-verification.md) · [Lượt sau sửa](../results/post_repair_2026_10_18/README.md) |
 | W3-03 | 18 lượt Athena, đối chiếu cùng đầu vào giữa NDJSON đăng ký phân vùng, Projection và Parquet Snappy | [Benchmark](../results/integration_2026_10_18/benchmark/) |
-| W3-04 | Xuất 246/288 dòng raw, lưu 83 JSON gốc, đối chiếu chất lượng; có 96 dòng thống kê và 120 dòng tương quan ở snapshot phân tích 246/285 | [Raw mới nhất](../results/raw_export_2026_10_18/README.md) · [Phân tích](../results/refresh_2026_10_18/analysis/) |
+| W3-04 | Xuất 246/288 dòng raw, lưu 83 JSON gốc, đối chiếu chất lượng; có 96 dòng thống kê và 120 dòng tương quan ở snapshot phân tích 246/285 | [Raw ngày 18/10](../results/raw_export_2026_10_18/README.md) · [Phân tích](../results/refresh_2026_10_18/analysis/) |
 | W3-05 | Tạo Dashboard, hai Metric Filters mỗi môi trường, đọc lại cấu hình và lưu ảnh/CSV AWS; ghi riêng điểm native metric cần làm rõ | [Dashboard](../results/integration_2026_10_18/dashboard/) · [Metric Filters](../results/operations_2026_10_18/) |
 | W3-06 | Kiểm chứng Publish, giao thông báo và người nhận xác nhận email tại các lượt 16/10; các lượt mới dưới ngưỡng không phát thêm cảnh báo | [Xác nhận email](../../docs/scheduled-run-verification.md#cảnh-báo-và-giám-sát) |
 | W3-07 | Đánh giá trên 24 giờ giữ lại, phát hành 144 giá trị cho 24 giờ đích sau phát hành; bổ sung MA 3 giờ và cập nhật đối chiếu 4/24 giờ đích, 24/144 giá trị với mô hình tải về sau | [Dự báo đã phát hành](../results/forecast_issued_2026_10_18/) · [Phân tích bổ sung](../results/refresh_2026_10_18/README.md) |
@@ -71,3 +71,13 @@ Snapshot phân tích trước có 246/285 bản ghi; mã Lambda ở mốc đó k
 [Báo cáo kỹ thuật](FINAL_REPORT.md) · [Vận hành](operation.md) · [Hồ sơ Tuần 3](../README.md)
 
 **Bổ sung chẩn đoán ngày 18/10:** đã phân giải điểm Errors = 3 của sinh viên Tiến Sơn thành ba điểm một phút, đọc metric bất đồng bộ và lịch sử AWS, phân biệt lỗi quyền người gọi với execution role. [Minh chứng và giới hạn kết luận](../results/native_error_investigation_2026_10_18/README.md) giữ nguyên các điểm thiếu Invocations; không ghi là đã sửa nguyên nhân chưa được xác định. Phần bổ sung không tự cộng thêm giờ sinh viên hoặc sửa các tổng giờ đã xác nhận.
+
+## 6. Bổ sung dữ liệu và rà soát ngày 19/10
+
+- Sinh viên Tiến Sơn: triển khai có backup và đọc lại source sửa giới hạn giờ backfill trên hai môi trường; mỗi môi trường thu 42 bản ghi qua Lambda, 0 cảnh báo lịch sử.
+- Sinh viên Ngọc Quyên: đối chiếu bản xuất S3 mới 302/339 dòng, riêng ngày 19/10 có 45/42 dòng; thống kê so sánh trên cùng 14 giờ hoàn tất và 95 JSON gốc được lưu.
+- Hai sinh viên: rà các bảng/biểu đồ/liên kết; cập nhật đối chiếu đủ 24 giờ đích, giữ nguyên dự báo đã phát hành và các snapshot ngày 18/10.
+
+[Source 62f1c08](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650) · [CI source](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39215400909) · [Raw và chứng cứ Lambda–S3](../results/daily_update_2026_10_19/README.md) · [Đối chiếu đủ kỳ dự báo](../results/forecast_followup_2026_10_19/README.md).
+
+Đây là cập nhật nhật ký kỹ thuật. Tổng giờ đã xác nhận ở mục 3 và hai CSV worklog được giữ nguyên; không tự cộng giờ từ thời gian chạy chương trình.

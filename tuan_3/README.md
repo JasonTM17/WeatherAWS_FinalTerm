@@ -4,17 +4,19 @@
 
 Học phần Điện toán đám mây · GVHD: ThS. Huỳnh Xuân Phụng
 
-Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại mốc **18/10/2026**, tiếp nối [Tuần 1](../tuan_1/README.md) và [Tuần 2](../tuan_2/README.md). Kết quả gồm dữ liệu raw từ S3, tối ưu Athena, giám sát, dự báo và CI/CD; mỗi bộ dữ liệu giữ thời điểm và đầu vào tương ứng.
+Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại mốc **18/10/2026**, cập nhật dữ liệu ngày **19/10/2026**, tiếp nối [Tuần 1](../tuan_1/README.md) và [Tuần 2](../tuan_2/README.md). Kết quả gồm dữ liệu raw từ S3, tối ưu Athena, giám sát, dự báo và CI/CD; mỗi bộ dữ liệu giữ thời điểm và đầu vào tương ứng.
 
 ## Hồ sơ và minh chứng
 
 | Nội dung | Liên kết |
 | --- | --- |
-| Báo cáo kỹ thuật, phương pháp và giới hạn | [Báo cáo chi tiết](docs/FINAL_REPORT.md) |
+| Báo cáo kỹ thuật, phương pháp và giới hạn | [Báo cáo chi tiết](docs/FINAL_REPORT.md) · [Nội dung nộp LMS](../BAO_CAO.md) |
+| Dữ liệu ngày 19/10 và raw tích lũy mới | [45/42 dòng trong ngày, 302/339 dòng tích lũy, 95 JSON gốc](results/daily_update_2026_10_19/README.md) |
+| Đối chiếu đủ kỳ dự báo | [24/24 giờ đích, 144/144 giá trị và nguồn CAMS tải ngày 19/10](results/forecast_followup_2026_10_19/README.md) |
 | Hướng dẫn chạy, kiểm chứng và khôi phục | [Vận hành và CI/CD](docs/operation.md) |
 | Nhật ký kỹ thuật, phân công và tổng giờ đã xác nhận | [Nhật ký Tuần 3](docs/WORKLOG.md) · [CSV tổng giờ](worklog.csv) · [Bản CSV trong hồ sơ](docs/worklog.csv) |
 | Raw dùng cho thống kê và biểu đồ đã lưu | [Sinh viên Tiến Sơn — 246 dòng](results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên — 285 dòng](results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) |
-| Bản xuất raw mới nhất: CSV và JSON gốc | [Sinh viên Tiến Sơn — 246 dòng](results/raw_export_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên — 288 dòng](results/raw_export_2026_10_18/snapshot/quyen/raw_all.csv) · [83 JSON, chất lượng và SHA-256](results/raw_export_2026_10_18/README.md) |
+| Bản xuất raw ngày 18/10: CSV và JSON gốc | [Sinh viên Tiến Sơn — 246 dòng](results/raw_export_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên — 288 dòng](results/raw_export_2026_10_18/snapshot/quyen/raw_all.csv) · [83 JSON, chất lượng và SHA-256](results/raw_export_2026_10_18/README.md) |
 | Raw của mốc tích hợp ban đầu | [Sinh viên Tiến Sơn](results/integration_2026_10_18/snapshot/default/raw_all.csv) · [Sinh viên Ngọc Quyên](results/integration_2026_10_18/snapshot/quyen/raw_all.csv) |
 | Chất lượng và thống kê theo giờ của snapshot cập nhật | [Sinh viên Tiến Sơn](results/refresh_2026_10_18/snapshot/default/) · [Sinh viên Ngọc Quyên](results/refresh_2026_10_18/snapshot/quyen/) |
 | Truy vấn, số đo Athena và cấu hình Projection | [Thí nghiệm Athena](results/integration_2026_10_18/benchmark/) |
@@ -32,12 +34,21 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 
 **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.**
 
-- **Bản xuất raw mới nhất: 246/288 dòng, tổng 534 bản ghi và 83 JSON gốc.** [CSV, JSON, hash và bảng raw mẫu](results/raw_export_2026_10_18/README.md). Các bảng thống kê đã lưu ở mốc trước vẫn dùng đúng 246/285 dòng.
+- **Bản xuất ngày 19/10: 302/339 bản ghi tích lũy, riêng trong ngày 45/42 bản ghi và 95 JSON gốc.** [Raw, nguồn từng bản ghi và thống kê trên cùng 14 giờ hoàn tất](results/daily_update_2026_10_19/README.md).
 
 - Snapshot phân tích đã lưu: **246 bản ghi của sinh viên Tiến Sơn** và **285 bản ghi của sinh viên Ngọc Quyên**; bảy nhóm kiểm tra chất lượng đều bằng 0.
-- [Raw, thống kê, ba biểu đồ màu và đối chiếu dự báo mới](results/refresh_2026_10_18/README.md).
-- Đã đối chiếu mới **4/24 giờ đích, 24/144 giá trị**, giữ nguyên bản dự báo phát hành. [Nguồn, sai số và biểu đồ](results/forecast_followup_2026_10_18/README.md).
+- [Raw, thống kê và ba biểu đồ màu của mốc 18/10](results/refresh_2026_10_18/README.md).
+- Mốc raw ngày 18/10 được lưu giữ riêng: [246/288 dòng, 83 JSON gốc và bảng mẫu](results/raw_export_2026_10_18/README.md).
+- Đã đối chiếu đủ **24/24 giờ đích, 144/144 giá trị**, giữ nguyên bản dự báo phát hành. [Nguồn, sai số và biểu đồ ngày 19/10](results/forecast_followup_2026_10_19/README.md).
 - Đã đối chiếu số liệu theo timestamp và kiểm chứng biểu thức Dashboard; [hai API/dimension/chu kỳ và log](results/monitoring_followup_2026_10_18/README.md) được kiểm tra, [cấu hình Dashboard](results/monitoring_dashboard_repair_2026_10_18/README.md) đã đọc lại khớp trong cả hai môi trường. Kết quả tỷ lệ được giới hạn ở các khoảng đủ dữ liệu.
+
+## Dữ liệu bổ sung ngày 19/10
+
+Hai lượt Lambda backfill đã thu đủ 14 giờ hoàn tất cho ba đô thị, mỗi lượt 42 bản ghi và 0 cảnh báo lịch sử. Số liệu ngày 19/10 được tách khỏi các snapshot cũ. Thống kê dùng 00:00–13:00 UTC+7; ba bản ghi trong giờ đang diễn ra của sinh viên Tiến Sơn chỉ nằm trong raw.
+
+![AQI và PM2.5 ngày 19/10](results/daily_update_2026_10_19/daily_aqi_pm25.png)
+
+[CSV ngày 19/10 và nguồn từng bản ghi](results/daily_update_2026_10_19/README.md) · [Đối chiếu đủ kỳ dự báo](results/forecast_followup_2026_10_19/README.md).
 
 ## Kết quả chính tại mốc tích hợp ban đầu
 
@@ -157,6 +168,7 @@ Bản cập nhật cutoff 11:00 UTC đã so được **4/24 giờ đích (24/144
 | [forecast_followup.py](scripts/forecast_followup.py) | Giữ nguyên dự báo đã phát hành, tải nguồn mô hình mới và tính sai số trên các giờ đích đã hoàn tất |
 | [forecast.py](scripts/forecast.py) | Thu dữ liệu mô hình theo giờ, chia tập theo thời gian, dự báo và tính sai số |
 | [release.py](scripts/release.py) | Đóng gói xác định, kiểm tra tài khoản, triển khai chỉ mã, xác minh và khôi phục có kiểm soát phiên bản |
+| [daily_snapshot.py](scripts/daily_snapshot.py) | Chọn ngày UTC+7 từ S3 đã xuất, giữ provenance, thống kê theo giờ đã hoàn tất và vẽ biểu đồ |
 | [verify_results.py](scripts/verify_results.py) | Đối chiếu hash, raw, kết quả Athena và sai số đã lưu mà không gọi AWS |
 | [reconcile_analysis.py](scripts/reconcile_analysis.py) | Tính thống kê raw/theo giờ, tương quan, thử nghiệm MA 3 giờ và đối chiếu bản phát hành với dữ liệu mô hình tải về sau |
 | [test_week3.py](tests/test_week3.py) | Các kiểm tra hồi quy về dữ liệu, thời gian, dự báo và an toàn triển khai |
@@ -183,4 +195,4 @@ Các lệnh trên kiểm tra tệp đã lưu, không chứng minh vận hành AW
 
 ## Phần tiếp tục theo dõi
 
-[Nhật ký Tuần 3](docs/WORKLOG.md) ghi tổng giờ đã xác nhận và sản phẩm tích hợp đã hoàn thành. [Bản xuất raw mới nhất](results/raw_export_2026_10_18/README.md) có CSV, JSON nguyên bản và thời điểm đọc AWS. Các quan sát tiếp theo được lưu thành mốc riêng để theo dõi độ phủ theo thời gian, đối chiếu những giờ dự báo còn lại và làm rõ giới hạn của bộ đếm CloudWatch.
+[Nhật ký Tuần 3](docs/WORKLOG.md) ghi tổng giờ đã xác nhận và sản phẩm tích hợp đã hoàn thành. [Bản xuất raw cập nhật ngày 19/10](results/daily_update_2026_10_19/README.md) có CSV, JSON nguyên bản và thời điểm đọc AWS. Các quan sát tiếp theo được lưu thành mốc riêng để theo dõi độ phủ theo thời gian, đánh giá các kỳ dự báo tiếp theo và làm rõ giới hạn của bộ đếm CloudWatch.

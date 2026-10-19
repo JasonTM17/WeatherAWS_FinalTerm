@@ -1,0 +1,66 @@
+{
+  "day_local": "2026-10-19",
+  "timezone": "UTC+7",
+  "day_start_utc": "2026-10-18T17:00:00+00:00",
+  "day_end_exclusive_utc": "2026-10-19T17:00:00+00:00",
+  "profiles": {
+    "default": {
+      "student": "Sinh viên Tiến Sơn",
+      "captured_at_utc": "2026-10-19T07:22:37.945322+00:00",
+      "all_records": 302,
+      "previous_snapshot_records_preserved": 246,
+      "new_records_since_previous_export": 56,
+      "day_records": 45,
+      "day_city_hour_groups": 45,
+      "completed_city_hour_groups": 42,
+      "analysis_completed_before_utc": "2026-10-19T07:00:00+00:00",
+      "completed_day_records": 42,
+      "current_hour_records": 3,
+      "day_first_utc": "2026-10-18 17:00:00",
+      "day_last_utc": "2026-10-19 07:15:46",
+      "day_distinct_hours": 15,
+      "manual_backfill_day_records": 42,
+      "original_objects": 43,
+      "quality_issue_counts": {
+        "duplicate_record_ids": 0,
+        "schema_mismatch_rows": 0,
+        "missing_numeric_cells": 0,
+        "invalid_numeric_cells": 0,
+        "timezone_mismatch_rows": 0,
+        "partition_mismatch_rows": 0,
+        "collection_before_observation_rows": 0
+      },
+      "lambda_matches_new_release": true
+    },
+    "quyen": {
+      "student": "Sinh viên Ngọc Quyên",
+      "captured_at_utc": "2026-10-19T07:23:28.300704+00:00",
+      "all_records": 339,
+      "previous_snapshot_records_preserved": 288,
+      "new_records_since_previous_export": 51,
+      "day_records": 42,
+      "day_city_hour_groups": 42,
+      "completed_city_hour_groups": 42,
+      "analysis_completed_before_utc": "2026-10-19T07:00:00+00:00",
+      "completed_day_records": 42,
+      "current_hour_records": 0,
+      "day_first_utc": "2026-10-18 17:00:00",
+      "day_last_utc": "2026-10-19 06:00:00",
+      "day_distinct_hours": 14,
+      "manual_backfill_day_records": 42,
+      "original_objects": 52,
+      "quality_issue_counts": {
+        "duplicate_record_ids": 0,
+        "schema_mismatch_rows": 0,
+        "missing_numeric_cells": 0,
+        "invalid_numeric_cells": 0,
+        "timezone_mismatch_rows": 0,
+        "partition_mismatch_rows": 0,
+        "collection_before_observation_rows": 0
+      },
+      "lambda_matches_new_release": true
+    }
+  },
+  "source_semantics": "Authenticated Lambda historical-model backfill saved on S3, exported by conditional GET; not recovered scheduled runs",
+  "script_sha256_lf": "b95ecaa7528b1b85f74382a1e5eeef86a93df9e25aabc5a1cca80aae80fbb4a1"
+}

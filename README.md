@@ -2,7 +2,7 @@
 
 Đồ án thực hành học phần **Điện toán đám mây**: xây dựng luồng thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai, lưu bản ghi thô trên Amazon S3, truy vấn bằng Amazon Athena, sau đó tổng hợp kết quả thành CSV và biểu đồ có thể đối chiếu với dữ liệu đầu vào.
 
-Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày kết quả Tuần 1–2 và các công việc tích hợp Tuần 3 đã hoàn thành tại mốc ngày 18/10/2026: dữ liệu raw, thử nghiệm Athena, Dashboard, dự báo và CI/CD.
+Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày kết quả Tuần 1–2 và các công việc tích hợp Tuần 3 đã hoàn thành tại mốc ngày 18/10/2026, cập nhật dữ liệu ngày 19/10: raw, thử nghiệm Athena, Dashboard, dự báo và CI/CD.
 
 | Thông tin | Chi tiết |
 | --- | --- |
@@ -24,7 +24,8 @@
 | Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [Markdown](tuan_2/docs/FINAL_REPORT.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
 | CSV và hình Tuần 2 | [CSV Athena đã lưu](tuan_2/results/week2_live/) · [27 bảng phân tích](tuan_2/results/week2_analysis/) · [20 biểu đồ](tuan_2/results/week2_charts/) · [Raw và metadata](tuan_2/results/week2_evidence/) |
 | Mốc tích hợp Tuần 3 | [Trang Tuần 3 có biểu đồ](tuan_3/README.md) · [Báo cáo kỹ thuật](tuan_3/docs/FINAL_REPORT.md) · [Raw, Athena, metric và dự báo](tuan_3/results/integration_2026_10_18/) · [Lượt tự động sau sửa cấu hình](tuan_3/results/post_repair_2026_10_18/README.md) · [CI/CD và vận hành](tuan_3/docs/operation.md) |
-| Raw Tuần 3 mới nhất: CSV và JSON nguyên bản | [246/288 bản ghi, 83 JSON, chất lượng và hash](tuan_3/results/raw_export_2026_10_18/README.md) |
+| Dữ liệu Tuần 3 cập nhật ngày 19/10 | [45/42 dòng trong ngày, 302/339 dòng tích lũy và 95 JSON gốc](tuan_3/results/daily_update_2026_10_19/README.md) · [Đối chiếu đủ 24/24 giờ dự báo](tuan_3/results/forecast_followup_2026_10_19/README.md) |
+| Snapshot raw ngày 18/10 | [246/288 bản ghi, 83 JSON, chất lượng và hash](tuan_3/results/raw_export_2026_10_18/README.md) |
 | Snapshot phân tích ngày 18/10 | [246/285 bản ghi và thống kê mới](tuan_3/results/refresh_2026_10_18/README.md) · [CSV thống kê](tuan_3/results/refresh_2026_10_18/analysis/descriptive.csv) · [Đối chiếu dự báo với mô hình tải về sau](tuan_3/results/refresh_2026_10_18/analysis/later_model/comparison.csv) |
 | Đối chiếu CloudWatch và dự báo bổ sung | [Số liệu và phương pháp đối chiếu](tuan_3/results/monitoring_followup_2026_10_18/README.md) · [Dashboard và kiểm chứng cấu hình](tuan_3/results/monitoring_dashboard_repair_2026_10_18/README.md) · [24 giá trị đối chiếu cho 4/24 giờ đích](tuan_3/results/forecast_followup_2026_10_18/README.md) |
 | Phân công và thời gian | [Worklog và tổng hợp các tuần](docs/WORKLOG.md) · [CSV Tuần 1–2 đã xác nhận](worklog.csv) · [Nhật ký kỹ thuật và tổng giờ Tuần 3 đã xác nhận](tuan_3/docs/WORKLOG.md) |

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "previous_package_sha256": "a8cfeb7d3f569a34573d1986299d82eefbc043bb749e3fe373403716604a1ea5",
+  "requested_package_sha256": "f4ae025b35f04403de43ff5427d8dbd992f4cb7b562b3f3fe13418c0c225179c",
+  "code_only": true,
+  "configuration_unchanged": true,
+  "state": "Active",
+  "last_update_status": "Successful",
+  "deployed_package_sha256": "f4ae025b35f04403de43ff5427d8dbd992f4cb7b562b3f3fe13418c0c225179c",
+  "target": "ngoc-quyen",
+  "commit": "62f1c08e20e7a31447f10d713d4e115d4147c650",
+  "module_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219",
+  "final_aws_readback": "PASS",
+  "started_at_utc": "2026-10-19T07:22:42.883245+00:00",
+  "checked_at": "2026-10-19T07:22:53.080229+00:00",
+  "release_method": "Authenticated local SDK, code-only, revision guard and private backup",
+  "thresholds_schedule_environment_changed": false
+}

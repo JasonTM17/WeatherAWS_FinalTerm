@@ -55,3 +55,5 @@ EventBridge tách lịch khỏi xử lý; Lambda chuẩn hóa bản ghi theo cù
 Mã SDK dùng chung nằm trong `tuan_2/`; hai script nền tảng Tuần 1 gọi module này. Đường dẫn hiện tại không đồng nghĩa toàn bộ nội dung tệp đã tồn tại từ Tuần 1. Hồ sơ lịch sử và mốc truy vấn được giữ riêng.
 
 Chi tiết hàm, NULL và timeout nằm trong [hướng dẫn mã nguồn](source-guide.md); thao tác triển khai nằm trong [vận hành](operation.md).
+
+Phần cập nhật ngày 19/10 dùng [daily_snapshot.py](../tuan_3/scripts/daily_snapshot.py) để tách ngày UTC+7, bảo toàn raw và tính thống kê trên giờ hoàn tất; [verify_daily_update.py](../tuan_3/scripts/verify_daily_update.py) đối chiếu từ JSON S3 đến CSV/bảng số và kỳ dự báo. [Bản sửa backfill 62f1c08](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650) thay cách chọn giờ lịch sử, giữ nhánh realtime/ngưỡng/cảnh báo. [Hồ sơ triển khai SDK và dữ liệu](../tuan_3/results/daily_update_2026_10_19/README.md) tách rõ lượt backfill với các lượt chạy tự động.

@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "student_profile": "default",
+  "mode": "manual_model_backfill",
+  "backfill_hours": 14,
+  "requested_window_start_utc": "2026-10-18T17:00:00+00:00",
+  "requested_window_end_exclusive_utc": "2026-10-19T07:00:00+00:00",
+  "started_at_utc": "2026-10-19T07:22:06.438066+00:00",
+  "finished_at_utc": "2026-10-19T07:22:10.253343+00:00",
+  "request_id_hash": "9e06d0d39a890fce5e66",
+  "source_commit": "62f1c08e20e7a31447f10d713d4e115d4147c650",
+  "payload_sha256": "3fa33e788a91cf4cd45406d22febe7aefe9deef163d633c876b4e1fafbd7310e",
+  "collection_status": "complete",
+  "records_collected": 42,
+  "alerts_sent": 0,
+  "failed_cities": [],
+  "saved_files": [
+    {
+      "s3_key": "raw/year=2026/month=10/day=18/data_20261018_94d57dbd.json",
+      "count": 21
+    },
+    {
+      "s3_key": "raw/year=2026/month=10/day=19/data_20261019_97a314c6.json",
+      "count": 21
+    }
+  ],
+  "semantics": "Historical model series collected now through authenticated Lambda; not evidence of earlier scheduled invocations"
+}

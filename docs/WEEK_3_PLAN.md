@@ -50,17 +50,17 @@ Hai sinh viên phối hợp đối chiếu ở tất cả đầu việc. W3-01 v
 
 ## Tiến độ theo minh chứng đã có
 
-Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc với các hồ sơ ngày 16/10 và mốc chuẩn bị ngày 18/10; không suy ra số giờ làm việc từ commit hoặc thời gian chạy chương trình.
+Trạng thái dưới đây đối chiếu các hồ sơ ngày 16–19/10 với tiêu chí của từng mã việc; không suy ra số giờ làm việc từ commit hoặc thời gian chạy chương trình.
 
 | Mã việc | Trạng thái có thể xác nhận | Minh chứng và phần còn lại |
 | --- | --- | --- |
 | W3-01 | Đã đạt tại đợt triển khai | [Source, hash module và sao lưu trước cập nhật](deployment-verification.md#phiên-bản-được-triển-khai); tiếp tục đối chiếu nếu mã thay đổi |
 | W3-02 | Đã chuẩn hóa lịch và ghi nhận thêm các lượt sau CD | [Lượt ngày 16/10](scheduled-run-verification.md), [lượt sinh viên Tiến Sơn 13:15](../tuan_3/results/operations_2026_10_18/scheduled_followup/collections/default/) và [sinh viên Ngọc Quyên 13:51 sau sửa cấu hình](../tuan_3/results/post_repair_2026_10_18/README.md); chưa đủ kết luận vận hành liên tục nhiều ngày |
 | W3-03 | Đã có thử nghiệm riêng ngày 18/10 | [18 truy vấn và kết quả Projection/Parquet](../tuan_3/docs/FINAL_REPORT.md#3-partition-projection-và-parquet); không quy đổi giảm byte quét thành mức tiết kiệm tiền |
-| W3-04 | Đã xuất raw và kiểm tra chất lượng | [Bản xuất mới 246/288 dòng và 83 JSON gốc](../tuan_3/results/raw_export_2026_10_18/README.md); bảy nhóm kiểm tra đã khai báo không phát hiện lỗi; snapshot thống kê 246/285 và benchmark 237/273 được giữ riêng |
+| W3-04 | Đã xuất raw và kiểm tra chất lượng | [Bản xuất ngày 19/10 có 302/339 dòng tích lũy, 45/42 dòng trong ngày và 95 JSON gốc](../tuan_3/results/daily_update_2026_10_19/README.md); thống kê dùng cùng 14 giờ hoàn tất; các snapshot ngày 18/10 được giữ riêng |
 | W3-05 | Đã cấu hình Dashboard, hai Metric Filters và quan sát log mới ở cả hai môi trường | [Filter và điểm mới sinh viên Tiến Sơn](../tuan_3/results/operations_2026_10_18/), [điểm mới sinh viên Ngọc Quyên](../tuan_3/results/post_repair_2026_10_18/README.md); native metric còn điểm chưa nhất quán, không chuyển thiếu điểm thành 0 |
 | W3-06 | Đạt luồng email tại các lượt 16/10 | [Publish → giao thông báo → xác nhận người nhận](scheduled-run-verification.md#cảnh-báo-và-giám-sát); tiếp tục ghi nhận lượt mới, không suy ra đã nhận thư từ metric đơn lẻ |
-| W3-07 | Có đánh giá giữ lại và đối chiếu một phần với mô hình tải về sau | [Bốn phương pháp, 24 bộ sai số bổ sung](../tuan_3/docs/FINAL_REPORT.md#5-dự-báo-theo-giờ-và-đánh-giá); đã cập nhật đối chiếu 4/24 giờ đích, 24/144 giá trị của bản phát hành, không phải dữ liệu trạm hoặc kết quả đủ 24 giờ |
+| W3-07 | Có đánh giá giữ lại và đối chiếu đủ kỳ dự báo đã phát hành | [Bốn phương pháp, 24 bộ sai số bổ sung](../tuan_3/docs/FINAL_REPORT.md#5-dự-báo-theo-giờ-và-đánh-giá); [mốc 19/10 đối chiếu đủ 24/24 giờ đích, 144/144 giá trị](../tuan_3/results/forecast_followup_2026_10_19/README.md) với mô hình tải về sau, không phải số đo trạm |
 | W3-08 | CI và CD hai môi trường đã có lượt thành công | [Kết quả CI/CD, hash AWS và dọn secrets](../tuan_3/docs/operation.md#4-kết-quả-thực-hiện); độ phủ vận hành theo lịch và giờ làm Tuần 3 vẫn ghi riêng |
 
 ## Điều kiện và hồ sơ kết thúc
@@ -74,3 +74,9 @@ Trạng thái dưới đây đối chiếu tiêu chí của từng mã việc v�
 Hồ sơ kết thúc ghi kết quả W3-01 đến W3-08, phân công/số giờ, raw và CSV tổng hợp, cấu hình đã loại thông tin riêng tư, commit triển khai và các giới hạn còn lại. Chỉ đánh dấu hoàn thành khi có minh chứng tương ứng.
 
 [Báo cáo nộp lại](../BAO_CAO.md) · [Nhật ký hai tuần](WORKLOG.md) · [Mã nguồn theo thành phần](components.md) · [Vận hành](operation.md)
+
+## Cập nhật hồ sơ ngày 19/10/2026
+
+- W3-01/W3-04: source sửa backfill đã qua CI và triển khai bằng SDK với backup/readback. Hai lượt thu mới mỗi lượt 42 bản ghi; bản xuất tích lũy 302/339 dòng, riêng ngày 19/10 có 45/42 dòng. Thống kê dùng cùng 14 giờ hoàn tất. [Dữ liệu và minh chứng](../tuan_3/results/daily_update_2026_10_19/README.md).
+- W3-07: đã đối chiếu đủ 24/24 giờ đích và 144/144 giá trị của bản phát hành ngày 18/10 với dữ liệu mô hình tải về sau. Đây không phải số đo trạm hay 24 giờ đầy đủ của riêng ngày 19/10. [Nguồn và sai số](../tuan_3/results/forecast_followup_2026_10_19/README.md).
+- W3-05/W3-06: giữ cấu hình giám sát/ngưỡng/lịch đã kiểm chứng. Backfill không gửi SNS lịch sử; xác nhận email 16/10 vẫn được ghi đúng mốc. Tổng giờ công không thay đổi.

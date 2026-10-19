@@ -13,6 +13,7 @@ from forecast import score
 from forecast_followup import summarize
 from monitoring_followup import point_map
 from investigate_native_errors import summarize_evidence
+from verify_daily_update import verify_daily
 
 
 def verify_native_investigation(root):
@@ -451,6 +452,8 @@ def verify(folder):
     added,followup_hours,followup_values=verify_followups(folder.parent)
     file_count+=added
     file_count+=verify_native_investigation(folder.parent)
+    daily_count, daily_summary=verify_daily(folder.parent, verify_manifest)
+    file_count+=daily_count
     for profile in ('default', 'quyen'):
         observed = metric_consistency(read_csv(monitoring / profile / 'metrics.csv'))
         saved = json.loads((monitoring / profile / 'metric-consistency.json').read_text())
@@ -474,7 +477,11 @@ def verify(folder):
             'forecast_metrics': len(metrics), 'cd_environments': 2, 'temporary_secrets_remaining': 0,
             'supplementary_descriptive_rows': 96, 'supplementary_ma_metrics': 24,
             'later_model_comparison_rows': len(read_csv(folder.parent / 'refresh_2026_10_18/analysis/later_model/comparison.csv')),
-            'week3_confirmed_hours': 20,'followup_target_hours':followup_hours,'followup_comparison_values':followup_values}
+            'week3_confirmed_hours': 20,'historical_followup_target_hours':followup_hours,
+            'historical_followup_comparison_values':followup_values,
+            'followup_target_hours':daily_summary['target_hours'],'followup_comparison_values':daily_summary['comparison_values'],
+            'daily_local_date':daily_summary['daily_local_date'],'daily_records':daily_summary['daily_records'],
+            'current_export_records':daily_summary['all_records']}
 
 
 if __name__ == '__main__':

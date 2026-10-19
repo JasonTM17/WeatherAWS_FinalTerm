@@ -1,0 +1,619 @@
+{
+  "files": [
+    {
+      "path": "collection/default.json",
+      "sha256": "cfbde0c871b5b71be0fb508e8b10722734c72f9f38fc75a651fa2421d8823bec",
+      "bytes": 1057
+    },
+    {
+      "path": "collection/quyen.json",
+      "sha256": "b87f027403a7e1d3b115d4fa0e4699a1627a9a57874f1a2867706fc15a08e038",
+      "bytes": 1055
+    },
+    {
+      "path": "daily/default/descriptive.csv",
+      "sha256": "45239feaa8d8763474c80ffa25d56ab12578584e01971e446cacfa402397dac1",
+      "bytes": 6909
+    },
+    {
+      "path": "daily/default/hourly_city.csv",
+      "sha256": "0145385db2e31602d7dde20a7c1d96daffd4ecdf4e39273abf6c6d194bef5c35",
+      "bytes": 4251
+    },
+    {
+      "path": "daily/default/quality.json",
+      "sha256": "804756c6189379473dcc882e31e338dd52efce5874677abcdb466aef1747d245",
+      "bytes": 501
+    },
+    {
+      "path": "daily/default/raw_today.csv",
+      "sha256": "2de1deb08c0ba6ccd7d4469a52ccf26f92582701e6cdfc2d554c80574205ee2c",
+      "bytes": 11441
+    },
+    {
+      "path": "daily/default/record_sources.csv",
+      "sha256": "31c35abe5fe7e2c205c43cd7f859c232932df1c42e8de5afdde0d9ebb5b94272",
+      "bytes": 5146
+    },
+    {
+      "path": "daily/quyen/descriptive.csv",
+      "sha256": "ef6e3c2b872d86840b334ed9f4d220e3739f8152dd74cb29ff49c01d5d8fec85",
+      "bytes": 7002
+    },
+    {
+      "path": "daily/quyen/hourly_city.csv",
+      "sha256": "34e251f7686d96a217646af1168b96b9783bad2e782dd2784fe2c725ddeb0d9b",
+      "bytes": 4252
+    },
+    {
+      "path": "daily/quyen/quality.json",
+      "sha256": "753e572f804c93fab37c994434b301d1e377c5b3fd5cd41e04c14b9c2e46b825",
+      "bytes": 501
+    },
+    {
+      "path": "daily/quyen/raw_today.csv",
+      "sha256": "54a369fc0abaa6cd269da39ea0ea9d3539f3969a0e996292c4322d797138d098",
+      "bytes": 10691
+    },
+    {
+      "path": "daily/quyen/record_sources.csv",
+      "sha256": "0ef5ce890e4232a3d4705616c704a4b1668c1012786048ac6767cf9f032a4026",
+      "bytes": 4817
+    },
+    {
+      "path": "daily_aqi_pm25.png",
+      "sha256": "15ee3a8826e0c5f14049b69ba5c1858952aaac2d9e69d8ae1bc3b7a45794ebce",
+      "bytes": 201960
+    },
+    {
+      "path": "release/ngoc-quyen.json",
+      "sha256": "fc1fd972a0aac14d9697195c05699cdd52bdcdb44ad5d383da337bc87d40e7aa",
+      "bytes": 902
+    },
+    {
+      "path": "release/tien-son.json",
+      "sha256": "2318cebef21ca42f495130b3096808f0df6faff48f6a04ed97e73a2de02c3834",
+      "bytes": 900
+    },
+    {
+      "path": "snapshot/default/hourly_city.csv",
+      "sha256": "1dc3c60b4fd52a45a2182992f4bdc27a316f1471b33ab00ac8772e3c9c23c361",
+      "bytes": 16219
+    },
+    {
+      "path": "snapshot/default/object_inventory.csv",
+      "sha256": "bbf38f2ff286733010999283a26b1d325faa9121e410d0ccc63b96a36dd93413",
+      "bytes": 7195
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=04/data_20261004_95f5f5f2.json",
+      "sha256": "93d60e7c083b1aedc8dcea828ec6dd6707d2f5ff20aa19383e42ff975f9dc9b4",
+      "bytes": 40561
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=05/data_20261005_e868a4e2.json",
+      "sha256": "2d6ec2c4a5ab387e983835337903f38fdffa808e7777cd282af2eba728a02712",
+      "bytes": 40126
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=06/data_20261006_246526ad.json",
+      "sha256": "9e04c6ee9747257a73ab6d0278e09f3f1184559f69a1a18d36ad326f7535985b",
+      "bytes": 1716
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=06/data_20261006_3ae37b10.json",
+      "sha256": "4d193f53831806b5962a26e1f036c4cc71a1ccca372f4c01bc71076aa55dd7ef",
+      "bytes": 1716
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=06/data_20261006_65689c22.json",
+      "sha256": "2fbae0ef273d0c79442293037d1c0678032355cd8a29334e2d5d4de1ed0aa3c9",
+      "bytes": 1716
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=06/data_20261006_878b4174.json",
+      "sha256": "2c3384eac57ae3462cc288f4a34ac7c30d1891636617c4432696c13ee5f2a05e",
+      "bytes": 1716
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=06/data_20261006_ace96b34.json",
+      "sha256": "e4d18ebd2892f84148a8d747d40a2e25a181bfe26a24f5fe3d42740faa4fa854",
+      "bytes": 1716
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=06/data_20261006_b7990e2f.json",
+      "sha256": "5f8e7c876684b0e52094ed5a38221301fd9540dfa5b07d6f6069e5729da1fecb",
+      "bytes": 1716
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=06/data_20261006_ca623f1f.json",
+      "sha256": "612ca7c270fc2a9893a6e64864ff2369a95b9c62ab3da1b816c24eda9c0d6ea2",
+      "bytes": 1716
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=07/data_20261007_0d400b0a.json",
+      "sha256": "82e0380b3e8ef58a9ad95b1178e4639c521d4021a98d14ac43fd628dd4a76858",
+      "bytes": 1711
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=07/data_20261007_1f0389c5.json",
+      "sha256": "4873e65fec0532cf3f68330ebd3f441893f1c410edb20f88520ba2c2f61bfa94",
+      "bytes": 1711
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=07/data_20261007_9ea575fc.json",
+      "sha256": "479ea4238d66bc26e360e100a0991c273f8d1dbf1c43366e147ddfc50a9c5160",
+      "bytes": 1711
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=07/data_20261007_b697a908.json",
+      "sha256": "6a3074445b64ec71c03229ba1c3c914f8cb3a750b302bf107f39fc12927c2753",
+      "bytes": 1711
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_1223076d.json",
+      "sha256": "e73af88a8335581d4dfb9e5c9c53faf1a6481205d23d40c9051b9745dd5ad086",
+      "bytes": 1686
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_1d5171ed.json",
+      "sha256": "524a787ac5b8370ffa809009d5ce0ac14f7e3d294afba8763ccd9cf4879df824",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_3520f85d.json",
+      "sha256": "527fea4ec33f321e0387e72511110875f9cbdb432cb09db2bd3f6ef2dcfdd60d",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_3f4d0e1a.json",
+      "sha256": "9a7ae469bc774ea78573c611f08bc167a35c87416dd69e9a3af0877788826910",
+      "bytes": 1686
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_4ba7ce03.json",
+      "sha256": "53ab696028fd4b42650035694ff208fc330428c4afc1aa1b658c39d8b8c93ac8",
+      "bytes": 1689
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_c8667783.json",
+      "sha256": "2870d3913ce3c5b3ec6b842d5f62f238bd24023f1bdd5d85c490c77989e24747",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_d62f78bc.json",
+      "sha256": "727db07a05340328a26c90e3457bffa4608f92c773686d831ac0da8552d80dcd",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=13/data_20261013_f793d633.json",
+      "sha256": "4f471dbc7cc81c5fe54e77e0c4d1a10b7699013edbcd32d8b6b5006850089e7c",
+      "bytes": 1685
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=14/data_20261014_348cbe96.json",
+      "sha256": "7c1a62fd33cb2221567eeb08baeafb0404eae996c444deefd31a89b59b5c92b5",
+      "bytes": 1687
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=14/data_20261014_37ef48f1.json",
+      "sha256": "f0ae3b8dea7cd66562a714c35472093fbb6254334cb01d82fcccd01cd10970bc",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=14/data_20261014_4a4e8803.json",
+      "sha256": "8bd5e5c5d9cf0c8ecc8ef5c9a55f719dc16e2a9f2a2f83536e305287478f6cdb",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=14/data_20261014_8968e0b7.json",
+      "sha256": "dfc3da082d1f54bbccca999d86f1724a8651a887dc487d271492984935d26544",
+      "bytes": 1687
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=14/data_20261014_d2841150.json",
+      "sha256": "3b85ec06facde4c0e44d71e56fd52fec1dadd73af74337265384259ef57c6418",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=15/data_20261015_ef427825.json",
+      "sha256": "ff43ed3720dc9f71abe5624379404ce327c7dd84d3cc31bdd2ce84061e79608d",
+      "bytes": 1734
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=16/data_20261016_1810726a.json",
+      "sha256": "a8e0beaaa0f0c38808d71d2cbf14f17fb0cfa276fe905e8420f7015fc5beba78",
+      "bytes": 1739
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=16/data_20261016_543f2b79.json",
+      "sha256": "54613f83d67e0e9d3cee8d19932fda01183697f1d9fbf4e547b6c604ce9332e6",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=16/data_20261016_ab66e07b.json",
+      "sha256": "2499a2471940311a7f0d7a5f805d08c9f9e28240082f0e94a055a14562d5b977",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=16/data_20261016_d402284c.json",
+      "sha256": "3d1bf382e9d9ebfa386432b98d8ea69c7f9ba121f1055280d8b9005d0ae90655",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=16/data_20261016_edfeeaf5.json",
+      "sha256": "e4d97aa7de7e6edf084aca15402bd37644b57362445eb3738ad25a7183ea2568",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_5cd550ec.json",
+      "sha256": "0c15146c3691f19cb25ebf126d5a5ff807f57b77fa23e682167a39df44ea9e16",
+      "bytes": 1689
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_703201aa.json",
+      "sha256": "399276af5947aa0ff9f90d50aeb80dfdf159a702ad2b6d4a209f9ef8af6634eb",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_78dcb0a5.json",
+      "sha256": "110f70e2f1fc5a485167cf10003a3df58501c079738e61522d35d6388a5f4f0e",
+      "bytes": 1691
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_7c4d3919.json",
+      "sha256": "0a13104b6882088aa3809e6e5c070073b081ffe001d714db5ec3f017760fe768",
+      "bytes": 1709
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_94d57dbd.json",
+      "sha256": "f6e35e3b7971e93d804f2c924db67c64ed7506aa4ec2482618067de4287f0ea6",
+      "bytes": 11769
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_a2543971.json",
+      "sha256": "4be453278cf32644bed735690ed2deb8118dd488b2d0edb872b3dd0407aa049f",
+      "bytes": 1140
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_c353f294.json",
+      "sha256": "696c88399711408632d6f2b47fcb9c07ea5004db8f9a723b09beaebb8c805242",
+      "bytes": 1711
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_ce603e7e.json",
+      "sha256": "aa9936a48fa63b515821194ebf8e9f8344a5e01fd16bdc4568b00aad91d361af",
+      "bytes": 1709
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=18/data_20261018_f90be826.json",
+      "sha256": "dbf60527f81babd20329568882aaed4913d769bcb858079788128eb2528c28d2",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=19/data_20261019_97a314c6.json",
+      "sha256": "71333edfd54537601d503ec905ae12330d876415ca8b1d6fcc85b59905839d53",
+      "bytes": 11773
+    },
+    {
+      "path": "snapshot/default/objects/raw/year=2026/month=10/day=19/data_20261019_b6bba1fc.json",
+      "sha256": "a918193d73970f435f90f61f3e517235a0d6b23ccb6fe74faaada162cd53c47b",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/default/quality.csv",
+      "sha256": "dfdb1ee6e1d23b65f29402255ab2f173f5903e7a8012bea3ccf530d7ea28c6e1",
+      "bytes": 226
+    },
+    {
+      "path": "snapshot/default/raw_all.csv",
+      "sha256": "d2ab854c5e7ebd14d93dc068adb7b521f8a728857250ed5cc58e9a3e66e0f344",
+      "bytes": 75937
+    },
+    {
+      "path": "snapshot/default/recent_collections.csv",
+      "sha256": "978264198054e22a4c0b712e54233e60e7d85dfce529d4e4ddbbf991b10f5cb6",
+      "bytes": 492
+    },
+    {
+      "path": "snapshot/default/snapshot.json",
+      "sha256": "2fb06efc8acb31ad7d2465b778662146b1229e2fe3433646779ebfeffa0e3781",
+      "bytes": 1323
+    },
+    {
+      "path": "snapshot/quyen/hourly_city.csv",
+      "sha256": "5bf13a7cbb2a5f9403145999fef5db0376c46a0badf97ca8b1ff6c2af92eaa7e",
+      "bytes": 15776
+    },
+    {
+      "path": "snapshot/quyen/object_inventory.csv",
+      "sha256": "1368dbe778b13b2a3547a31a67651e7389f5f14849d991f39ac067034b3fcce3",
+      "bytes": 8663
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=04/data_20261004.json",
+      "sha256": "eb83144001cc488f20ac62641b4517a04b9ce848fb02800de0cbe4fb03f122c9",
+      "bytes": 40489
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=05/data_20261005.json",
+      "sha256": "7541b0bd98f827be2e05d52635931bf0a8098b632600b7245684d92c77ec5cd0",
+      "bytes": 40054
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=06/data_20261006.json",
+      "sha256": "655a15e68ad0cbe6618cd7c13b7b89bd393e9570515506a18d0c8392e9441be4",
+      "bytes": 6707
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=07/data_20261007_48ca06df.json",
+      "sha256": "ea756820d5a253d680779d616bfc19c27a1c8627687563d03f9b76e5de03f1cd",
+      "bytes": 1741
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=07/data_20261007_5503d292.json",
+      "sha256": "62cf329f925255c856c87a40063e22c6a1fe8f9b586ba6725439181d377e8061",
+      "bytes": 1741
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=07/data_20261007_66fb5e54.json",
+      "sha256": "de2bb1723b72495103cce8dfe8746510113a936873e3d86fb1b595f981bb242b",
+      "bytes": 1717
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=07/data_20261007_abdec53f.json",
+      "sha256": "8b716390df7b9c41e2e96638bbd980809842b6c437872ae615fd80e9222cf6c9",
+      "bytes": 1741
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=07/data_20261007_b8968c5c.json",
+      "sha256": "54f1b24e0440d08bc42acb83b692aa512062a85372370686beb82e1b8742ff2d",
+      "bytes": 1741
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=07/data_20261007_d42c2c18.json",
+      "sha256": "1fb098f64c22f84fd6b7880f35081f2ae6c4098b058b081c924867a3fac02701",
+      "bytes": 1717
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_07623ce3.json",
+      "sha256": "c52040702a729248115f4024c8b0a465e3b01203854db959231f195a8152e4c0",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_1661417e.json",
+      "sha256": "82be431a7462006db25ba19ba8c9ca7f342535322f384d2547e59a7346819608",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_1e9392d8.json",
+      "sha256": "ecd3f253764884aa3e1084b755989c036e1a4672bc66c49f1606751486925ee4",
+      "bytes": 1685
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_35250138.json",
+      "sha256": "d268afb3bc23538a2aabf575df0cc75ab58c68cedb88d29c4b84b94a60710503",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_5e5147aa.json",
+      "sha256": "166be683fa075f3e2a5e39e2cfc00ec503a179c8706a049d230c0503a4602b86",
+      "bytes": 1686
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_5f6a2570.json",
+      "sha256": "a0cb5523d49364e1aad8a1f445d53cb744dfe370c78ba6eec0828b16378e08fa",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_5f787bf6.json",
+      "sha256": "123f39e1c2159d51bdd73f1a7b805fa5e6448d6a57ec5ca4cd017188cc1cd7d1",
+      "bytes": 1686
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_6ed539c9.json",
+      "sha256": "a48048a3b70008d7821c9355c3c7a20b121c94f9f3a816a831cd4dd060c5ef17",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_75bc411f.json",
+      "sha256": "cb551eb5b01d0d865c659bb85bac143c2fb63bb64defd7d6d68848f03f0c2786",
+      "bytes": 1685
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_877ca225.json",
+      "sha256": "49f42df2badf6ef8472ab7802d066dcffe89f669fdb9bb409e1716e2fb5d684c",
+      "bytes": 1686
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_92561847.json",
+      "sha256": "e2be83acf02245679c69f1f3f159babf4c3215b87cd0e184bed600ca4040f10f",
+      "bytes": 1691
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_9a41f21e.json",
+      "sha256": "d916375ef87e151a1c10a3ee7ddc62aba5c130c1b313d5cc99256fba894a03a1",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_a5c50ac3.json",
+      "sha256": "999dc5560132fd5b36209b92960f44824b78439028c0814dd7e5da27a3c4e72f",
+      "bytes": 1686
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_b5126cfd.json",
+      "sha256": "810d0cfa470bf3754e91dff26b8bb21b869bcbd49bc24ebd3cbc679ef3ec0b88",
+      "bytes": 1691
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_bd7bec4b.json",
+      "sha256": "e06acd1527734919234187e2a499f9448e8e65ccdc943f9a4cd2a845aebd7207",
+      "bytes": 1685
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=13/data_20261013_c60e5760.json",
+      "sha256": "01669662cce8fa741bfedf66ab9c7887236f75c418584c911050f509954476d3",
+      "bytes": 1685
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_0677910d.json",
+      "sha256": "161218e05ffd87f28490200d8c8875ed67a9c7c9cd2facf5b7a2a43a647fd2da",
+      "bytes": 1689
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_06e98b7b.json",
+      "sha256": "9987807b6eea39f9a359d86b53c624d753b685bf7c93e0a19ad49210877f1403",
+      "bytes": 1687
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_2f95bc3b.json",
+      "sha256": "d7c3ea123af508101101cee9c8859e3225acd5e9badc1b258bb32b5bdbc8e337",
+      "bytes": 1687
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_304bded1.json",
+      "sha256": "08d18463f2ce806bf2757d02e1b78e74257b8f4ce8fa3136ab03be58b4069683",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_67dcbe23.json",
+      "sha256": "f3fce1c78804d2c1f788cc53df0dc157750da73139ee24aab3369915af32ad09",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_95311eec.json",
+      "sha256": "9acb6ecac0a507224c74caeb8d559250f5e003f6808ae84d643b6442b176a6d5",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_c64914ef.json",
+      "sha256": "e037f724422c7f3a1a16c4d2e19ef1a7dc85c8aed1bf411936927c5f648d4dc4",
+      "bytes": 1687
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_cc3ae4a6.json",
+      "sha256": "858a195d69ba33a0862610dffbeaec5f35491b96221df496d5de15dc181f8349",
+      "bytes": 1689
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=14/data_20261014_dfc8f8f7.json",
+      "sha256": "ad0e340c4cf67dcf836ff897293743c811b6e2262325b96c165773928e4ff888",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=15/data_20261015_a4efde70.json",
+      "sha256": "4ca0d9e780fdeacb252b8227fbe62392070f05b5c0ea56a8c60e3b29066452b1",
+      "bytes": 1734
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=16/data_20261016_0f12b1b5.json",
+      "sha256": "a205293cae8b917925abfcdaff4759fd16c039c51112ef1524526812f03e4a78",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=16/data_20261016_3fa99465.json",
+      "sha256": "dfbac876deb624fbb65c77287843c299a4f7f298aeccd10de4018c145e09a3db",
+      "bytes": 1739
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=16/data_20261016_7bb591a2.json",
+      "sha256": "2abea548fe01ed30ead50470cac8d7715f49fd0d22523d40b4d8dc778d9b2190",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=16/data_20261016_7c114aac.json",
+      "sha256": "f74fa536fe0aad11d80f492a0d3c76b3f9f6b682305d8f405c7fad7ddfa97816",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=16/data_20261016_98d7ce2e.json",
+      "sha256": "712692d60d4a924e94fae022b5beec0b94ddf8bded5ac14595973f615c7ed70d",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=16/data_20261016_cb884a3e.json",
+      "sha256": "98ca1579f70a568bcf1de131926fd9e4ae4683125cff49e8a225dc18ebe64c13",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=16/data_20261016_f995d19a.json",
+      "sha256": "2348658473c231f3b61d67daa4e5195eea90378a2bb1e32d75465fd58788ae5e",
+      "bytes": 1738
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_1386b24e.json",
+      "sha256": "1ec6e3208f147e07595e2f0a2305bd25cc87c3a76b5d61daad58d84feb5b75dc",
+      "bytes": 1710
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_1c4f6c9d.json",
+      "sha256": "571545885b7ee74e05769cd9ffd5f8c672bb6a1e521c42fcb24a567085c9cd56",
+      "bytes": 1688
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_30ef611d.json",
+      "sha256": "772e7d03bd40b7cb756e2e46b0600546dc8f2188b686a169d9916248a336ca4a",
+      "bytes": 1710
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_506351bc.json",
+      "sha256": "0942db935e601cb4871ac76ede1494bb4082638511394d5617068e92d1c85fb6",
+      "bytes": 1689
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_561e6cf0.json",
+      "sha256": "2ed50d28083367cf56e881dabb774bbd39abbdd633a7bc45092d105bec80bc5c",
+      "bytes": 1689
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_5b8f0d3e.json",
+      "sha256": "653099d7104a90ae5ab127cd1b99a02f7f16f6f1751801775d28f7b1feeb27dd",
+      "bytes": 1711
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_b05d709e.json",
+      "sha256": "1eebcc863a1ad8ba29962d09b31246910a515a665c969eb4d91dccb6a2fc0423",
+      "bytes": 11769
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_d233754d.json",
+      "sha256": "117c19e1eaef45670b38c6c38f91fc1506ada1d46eb96881c8c1623ddc5fa04a",
+      "bytes": 1682
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=18/data_20261018_e3ec30fa.json",
+      "sha256": "77ccad453218ed18f7a3e841f34afd39c750c349a550e9c699fd8a76acb2bafb",
+      "bytes": 1690
+    },
+    {
+      "path": "snapshot/quyen/objects/raw/year=2026/month=10/day=19/data_20261019_f63ca2a2.json",
+      "sha256": "efb91261fa525d6ce41f2eae5c22c41e5fca8069388ec987531e5ccf2653ef2f",
+      "bytes": 11774
+    },
+    {
+      "path": "snapshot/quyen/quality.csv",
+      "sha256": "dfdb1ee6e1d23b65f29402255ab2f173f5903e7a8012bea3ccf530d7ea28c6e1",
+      "bytes": 226
+    },
+    {
+      "path": "snapshot/quyen/raw_all.csv",
+      "sha256": "17295c558b02eac37565d3cd5ef575232d87989fe4537a13c794ee875502eca7",
+      "bytes": 85045
+    },
+    {
+      "path": "snapshot/quyen/recent_collections.csv",
+      "sha256": "c5cddf4bc915718793532241b3c1d182e4b8ce651a614ec2e5128aa9ad3c0987",
+      "bytes": 493
+    },
+    {
+      "path": "snapshot/quyen/snapshot.json",
+      "sha256": "b2fa69b33c0a028292b290bd5018325fdba42e7bf61075e4e66fca8ba7ab303b",
+      "bytes": 1477
+    },
+    {
+      "path": "summary.json",
+      "sha256": "26b1e7bd626726c7a5539d438baf77c26a10b2306c25878a4bbefe06a760461e",
+      "bytes": 2532
+    }
+  ]
+}
