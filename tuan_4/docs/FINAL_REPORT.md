@@ -135,7 +135,7 @@ Trong lần kiểm chứng này, lịch thu thập hiện hữu được giữ n
 
 34 kiểm thử Tuần 4 đã đạt trên máy Windows, gồm trường hợp billing chính xác, thiếu metric, nhầm lịch, thay target, mất phản hồi, ghi tệp khôi phục lỗi, tái lập báo cáo và truyền tham số PowerShell. Hai điểm phát hiện ở lượt review độc lập đã được sửa và kiểm tra lại. [Manifest](../results/verification_2026_10_19/manifest.json) kiểm tra toàn vẹn các tệp minh chứng của đợt này.
 
-Các kỳ dữ liệu/dự báo kế tiếp, nhật ký giờ công và video thực tế được bổ sung theo [kế hoạch Tuần 4](../../docs/WEEK_4_PLAN.md). Các kết quả trên là mốc kiểm chứng ngày 19/10, giúp chuẩn bị bảo vệ trên source, dữ liệu và thao tác có thể đối chiếu.
+[Báo cáo tổng kết đồ án](../../docs/FINAL_PROJECT_REPORT.md) nối kết kết quả Tuần 1–4, phân tích thực nghiệm Athena, đánh giá dự báo và đối chiếu yêu cầu cuối kỳ. Nhật ký giờ công đã được xác nhận tại mục 9. Video thực tế cần được quay và bổ sung đường dẫn theo kịch bản; các kỳ đánh giá dữ liệu tiếp theo trong [kế hoạch](../../docs/WEEK_4_PLAN.md) được theo dõi riêng với kết quả đã kiểm chứng ngày 19/10.
 
 [Hồ sơ Tuần 4](../README.md) · [Nhật ký sản phẩm](WORKLOG.md) · [Kế hoạch](../../docs/WEEK_4_PLAN.md)
 
@@ -158,6 +158,8 @@ Căn cứ: **Tổng theo tuần đã xác nhận**. Giờ công thực tế Tu�
 Đợt kiểm chứng đã nối được source triển khai, request thực thi, ba bản ghi S3 và truy vấn Athena ở mỗi môi trường. Nhánh cảnh báo được đối chiếu với ngưỡng thật và xác nhận email mới của hai sinh viên. Hồ sơ chi phí, bảo mật và hạ tầng dùng cùng nguồn bằng chứng và có đường dẫn tái lập.
 
 Repository giữ một template chính, các chương trình xuất báo cáo có kiểm tra nguồn và một kịch bản quay khoảng 9 phút. Các bước tạo stack mới, quản lý lịch cuối phiên và các kỳ đánh giá kế tiếp được thực hiện theo checklist tương ứng, ghi nhận theo kết quả thực tế.
+
+Phần tổng kết xuyên suốt về mục tiêu, lựa chọn kiến trúc, phương pháp phân tích và sản phẩm bàn giao được trình bày tại [Báo cáo tổng kết đồ án](../../docs/FINAL_PROJECT_REPORT.md).
 
 ### Phiên bản hoàn thiện hồ sơ Tuần 4
 

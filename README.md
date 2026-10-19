@@ -2,7 +2,7 @@
 
 Đồ án thực hành học phần **Điện toán đám mây**: xây dựng luồng thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai, lưu bản ghi thô trên Amazon S3, truy vấn bằng Amazon Athena, sau đó tổng hợp kết quả thành CSV và biểu đồ có thể đối chiếu với dữ liệu đầu vào.
 
-Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ trình bày kết quả Tuần 1–2 và các công việc tích hợp Tuần 3 đã hoàn thành tại mốc ngày 18/10/2026, cập nhật dữ liệu ngày 19/10: raw, thử nghiệm Athena, Dashboard, dự báo và CI/CD.
+Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ gồm kết quả Tuần 1–4, cập nhật đến ngày 19/10/2026: dữ liệu raw, phân tích, thực nghiệm Athena, dashboard, dự báo, CI/CD và kiểm chứng vận hành. [Báo cáo tổng kết đồ án](docs/FINAL_PROJECT_REPORT.md) liên kết các kết quả và giải thích lựa chọn kỹ thuật, phương pháp đánh giá cùng sản phẩm bàn giao.
 
 | Thông tin | Chi tiết |
 | --- | --- |
@@ -18,6 +18,7 @@
 
 | Nội dung | Tài liệu hoặc dữ liệu |
 | --- | --- |
+| Tổng kết toàn đồ án | [Mục tiêu, kiến trúc, phân tích chuyên sâu, kết luận và đối chiếu yêu cầu cuối kỳ](docs/FINAL_PROJECT_REPORT.md) |
 | Danh mục minh chứng theo tuần | [Đầy đủ địa chỉ GitHub, dữ liệu, biểu đồ, mã nguồn và commit](docs/EVIDENCE_INDEX.md) |
 | Tổng kết và chuẩn bị bảo vệ Tuần 4 | [Trang Tuần 4](tuan_4/README.md) · [Báo cáo](tuan_4/docs/FINAL_REPORT.md) · [Lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) · [Template](tuan_4/infrastructure/weather-stack.json) · [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Chi phí](tuan_4/docs/COST_REPORT.md) |
 | Hồ sơ Tuần 1 | [Trang Tuần 1](tuan_1/README.md) · [Markdown](tuan_1/docs/FINAL_REPORT.md) · [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
@@ -311,21 +312,22 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 
 **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc 18/10, cập nhật dữ liệu ngày 19/10/2026.** [Bảng W3-01–W3-08](docs/WEEK_3_PLAN.md) liên kết các sản phẩm; [báo cáo Tuần 3](tuan_3/docs/FINAL_REPORT.md) trình bày số liệu và minh chứng.
 
-**Tuần 4** tiếp tục vận hành, đánh giá và hoàn thiện hồ sơ theo [kế hoạch W4-01–W4-08](docs/WEEK_4_PLAN.md). Lịch đề xuất 26/10–01/11/2026, thực hiện theo lịch học và thông báo của giảng viên.
+**Mốc tổng kết ngày 19/10:** hồ sơ Tuần 4 đã bổ sung kiểm chứng realtime, đối chiếu log–metric–S3, chi phí, bảo mật và template hạ tầng. [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md) giữ các mục tiêu ban đầu; [báo cáo tổng kết](docs/FINAL_PROJECT_REPORT.md) đối chiếu sản phẩm thực tế với yêu cầu cuối kỳ.
 
-| Hướng công việc Tuần 4 | Phụ trách | Sản phẩm dự kiến |
+| Nội dung bàn giao | Phụ trách | Sản phẩm và trạng thái |
 | --- | --- | --- |
-| Phiên bản, raw theo ngày và giám sát | Sinh viên Tiến Sơn | Baseline, JSON/CSV/hash, bảng đối chiếu log–metric–S3, Dashboard |
-| Cảnh báo email | Sinh viên Tiến Sơn; sinh viên Ngọc Quyên rà soát | Minh chứng kiểm tra ngưỡng, SNS và xác nhận người nhận của lượt mới |
-| Athena và thống kê | Sinh viên Ngọc Quyên | Đầu vào cố định, 18 lượt đo, CSV phân tích và biểu đồ màu |
-| Dự báo nhiều kỳ | Sinh viên Ngọc Quyên | Mục tiêu ba kỳ phát hành 24 giờ, đối chiếu giá trị đích và sai số theo kỳ |
-| Mã nguồn và hồ sơ nộp | Hai sinh viên | CI theo commit, báo cáo có liên kết nguồn, worklog và kịch bản demo |
+| Phiên bản, raw và giám sát | Sinh viên Tiến Sơn | Có JSON/CSV/hash, bảng đối chiếu log–metric–S3 và dashboard |
+| Cảnh báo email | Sinh viên Tiến Sơn; sinh viên Ngọc Quyên rà soát | Có kiểm tra ngưỡng, SNS và xác nhận người nhận của lượt mới |
+| Athena và thống kê | Sinh viên Ngọc Quyên | Có 18 lượt đo Tuần 3 trên đầu vào cố định, CSV và biểu đồ |
+| Dự báo | Sinh viên Ngọc Quyên | Đã đối chiếu đủ 144 giá trị của một kỳ phát hành; mục tiêu nhiều kỳ được theo dõi riêng |
+| Hạ tầng và vận hành cuối phiên | Hai sinh viên | Template 17 tài nguyên đã kiểm tra; có checklist tạo stack và kết thúc Lab |
+| Hồ sơ nộp và video | Hai sinh viên | Có báo cáo, worklog và lời thoại; cần quay, kiểm tra và bổ sung liên kết video thực tế |
 
-## Kết luận tiến độ và Hoàn thành Toàn diện Đồ án
+## Kết luận toàn đồ án
 
-Hồ sơ Tuần 1–2 có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công để đối chiếu trên GitHub. Công việc tích hợp Tuần 3 hoàn thành tại mốc 18/10 và cập nhật ngày 19/10/2026. Tuần 4 đã hoàn thành xuất sắc toàn bộ các đầu việc vận hành, kiểm thử, báo cáo chi phí, đóng gói IaC CloudFormation và rà soát an toàn thông tin (Security Audit).
+Hồ sơ Tuần 1–4 kết nối dữ liệu gốc, truy vấn, bảng phân tích, biểu đồ và bằng chứng vận hành trên GitHub. Đợt kiểm chứng ngày 19/10 xác nhận luồng source–Lambda–S3–Athena và cảnh báo email ở hai môi trường. Báo cáo tổng kết giải thích lựa chọn kiến trúc, ý nghĩa thực nghiệm và sản phẩm bàn giao; trạng thái kiểm tra template, thao tác kết thúc phiên và video được ghi theo kết quả thực tế.
 
-Tổng thời gian làm việc toàn bộ đồ án đã được hai sinh viên xác nhận chính thức là **78,0 giờ** (Tuần 1: 18,5h; Tuần 2: 19,5h; Tuần 3: 20,0h; Tuần 4: 20,0h), bảo đảm tính minh bạch, khả năng tái lập và chất lượng kỹ thuật cao nhất.
+Tổng thời gian làm việc đã được hai sinh viên xác nhận là **78,0 giờ** (Tuần 1: 18,5 giờ; Tuần 2: 19,5 giờ; Tuần 3: 20,0 giờ; Tuần 4: 20,0 giờ). Nhật ký liên kết các tổng giờ với phân công và sản phẩm theo tuần.
 
 ## Tài liệu chi tiết
 

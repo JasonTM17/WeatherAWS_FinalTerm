@@ -5,6 +5,7 @@
 
 | Nội dung | Tài liệu và minh chứng |
 | --- | --- |
+| Tổng kết toàn đồ án | [Kết quả Tuần 1–4, phân tích chuyên sâu và bàn giao](../docs/FINAL_PROJECT_REPORT.md) |
 | Báo cáo chính | [Kết quả, phương pháp, phân công và kết luận](docs/FINAL_REPORT.md) |
 | Vận hành | [Hai request có kiểm soát](docs/LOG_METRIC_S3_RECONCILIATION.md) · [Raw/log/metric/Athena trực tiếp](results/verification_2026_10_19/README.md) |
 | Chi phí | [Cost Explorer đúng kỳ](docs/COST_REPORT.md) · [CSV theo dịch vụ](results/cost/learner_lab_cost_breakdown.csv) |

@@ -8,6 +8,8 @@
 
 Danh mục liên kết báo cáo với raw, truy vấn, bảng phân tích, biểu đồ, mã nguồn và nhật ký theo từng tuần. Địa chỉ được hiển thị đầy đủ để giảng viên có thể bấm mở hoặc sao chép. Liên kết tệp dùng `blob/main`, thư mục dùng `tree/main`, commit dẫn tới đúng mốc thay đổi.
 
+**Tổng kết toàn đồ án và phân tích chuyên sâu:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md).
+
 ## 1. Các bộ dữ liệu dùng trong báo cáo
 
 | Bộ hồ sơ | Bản ghi | Tệp JSON gốc | Phạm vi đối chiếu |
