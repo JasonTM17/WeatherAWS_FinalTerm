@@ -74,7 +74,7 @@ tuan_4/
 Để thực hiện kiểm tra toàn bộ kết quả Tuần 4 từ thư mục gốc repository:
 
 ```bash
-# 1. Kiểm thử toàn bộ unit tests của Tuần 4 (41 test cases):
+# 1. Kiểm thử toàn bộ unit tests của Tuần 4 (42 test cases):
 py -3.14 -m unittest discover -s tuan_4/tests -v
 
 # 2. Chạy kịch bản tái lập đối chiếu log-metric-S3:
@@ -103,3 +103,4 @@ Tuân thủ nghiêm ngặt chỉ đạo của Giảng viên hướng dẫn:
 - **[`d513f21`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/d513f21774e1d752aa40e791e8139589d97a618e)** — `docs(week3): link verified data CI and current release baseline`
 - **[`fa67191`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fa67191eb946e300959247cead8f903a4531d044)** — `docs(week4): detail next-week plan and refine submission reports`
 - **[`5047515`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/50475156a0eecfe33486df815a5f6e80b435ff51)** — `docs(week3): use dates in submission narrative`
+- **[`e497754`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36)** — `feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script`

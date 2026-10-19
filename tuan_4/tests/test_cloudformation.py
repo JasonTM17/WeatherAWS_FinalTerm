@@ -200,6 +200,16 @@ class TestCloudFormationTemplate(unittest.TestCase):
         self.assertIn("pm2_5", cols)
         self.assertIn("us_aqi", cols)
 
+        loc = params["storage.location.template"]
+        loc_str = loc["Sub"] if isinstance(loc, dict) else str(loc)
+        self.assertNotIn("$${", loc_str, "CloudFormation Fn::Sub must escape literal variables with ${!var}, not $${var}")
+        self.assertIn("${!year}", loc_str)
+
+        json_table = self.json_data["Resources"]["RawTable"]["Properties"]["TableInput"]
+        json_loc = json_table["Parameters"]["storage.location.template"]["Fn::Sub"]
+        self.assertNotIn("$${", json_loc)
+        self.assertIn("${!year}", json_loc)
+
     def test_athena_workgroup_cost_guardrail(self):
         wg = self.yaml_data["Resources"]["QueryWorkgroup"]["Properties"][
             "WorkGroupConfiguration"

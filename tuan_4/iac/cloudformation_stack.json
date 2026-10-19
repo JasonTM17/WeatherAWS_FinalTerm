@@ -439,7 +439,7 @@
             "projection.day.range": "1,31",
             "projection.day.digits": "2",
             "storage.location.template": {
-              "Fn::Sub": "s3://${DataBucket}/raw/year=$${year}/month=$${month}/day=$${day}/"
+              "Fn::Sub": "s3://${DataBucket}/raw/year=${!year}/month=${!month}/day=${!day}/"
             }
           },
           "PartitionKeys": [

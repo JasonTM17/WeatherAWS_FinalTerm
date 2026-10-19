@@ -134,7 +134,7 @@ Trước khi bấm nút ghi hình, hai sinh viên chuẩn bị sẵn các tab tr
   > *"Về quy trình phát triển và kiểm thử:
   > Mọi thay đổi mã nguồn đều được tích hợp liên tục (CI) qua GitHub Actions.
   > *(Thao tác: Chạy lệnh `py -3.14 -m unittest discover -s tuan_4/tests -v` trên Terminal)*
-  > *Như Thầy thấy trên màn hình Terminal, toàn bộ 41 test cases của Tuần 4 kiểm thử cú pháp CloudFormation, đối chiếu log-metric-S3 và kịch bản vận hành đều đạt trạng thái **OK (100% PASS)**.*
+  > *Như Thầy thấy trên màn hình Terminal, toàn bộ 42 test cases của Tuần 4 kiểm thử cú pháp CloudFormation, đối chiếu log-metric-S3 và kịch bản vận hành đều đạt trạng thái **OK (100% PASS)**.*
   > *Bộ kiểm thử tổng thể repository gồm hơn 80 tests cũng đã vượt qua tất cả các bài kiểm tra chấp nhận E2E.*
   > *Bên cạnh đó, nhóm đã hoàn thành script `cleanup_resources.ps1` và `start_resources.ps1` giúp tạm dừng EventBridge rule sau mỗi buổi thực hành để bảo toàn credit."*
 - **Lời thoại (Nguyễn Tiến Sơn — 9:15 - 9:50):**

@@ -347,5 +347,6 @@ Tổng thời gian làm việc toàn bộ đồ án đã được hai sinh viên
 - [Danh mục CSV, số dòng và SHA-256](docs/csv_catalog.csv)
 - [Kết quả kế hoạch Tuần 3](docs/WEEK_3_PLAN.md)
 - [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md)
+- [Commit tổng kết Tuần 4 — e497754](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36) — `feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script`
 
 Repository công khai: [JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm).

@@ -136,6 +136,7 @@ Thực hiện đúng yêu cầu của Giảng viên hướng dẫn: *"Tuần sau
 | **`d513f21`** | `docs(week3): link verified data CI and current release baseline` | [Commit d513f21](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/d513f21774e1d752aa40e791e8139589d97a618e) |
 | **`fa67191`** | `docs(week4): detail next-week plan and refine submission reports` | [Commit fa67191](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fa67191eb946e300959247cead8f903a4531d044) |
 | **`5047515`** | `docs(week3): use dates in submission narrative` | [Commit 5047515](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/50475156a0eecfe33486df815a5f6e80b435ff51) |
+| **`e497754`** | `feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script` | [Commit e497754](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36) |
 
 ---
 
