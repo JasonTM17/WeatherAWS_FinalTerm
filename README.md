@@ -19,7 +19,7 @@
 | Nội dung | Tài liệu hoặc dữ liệu |
 | --- | --- |
 | Danh mục minh chứng theo tuần | [Đầy đủ địa chỉ GitHub, dữ liệu, biểu đồ, mã nguồn và commit](docs/EVIDENCE_INDEX.md) |
-| Tổng kết và chuẩn bị bảo vệ Tuần 4 | [Trang Tuần 4](tuan_4/README.md) · [Báo cáo Tổng kết](tuan_4/docs/FINAL_REPORT.md) · [Kịch bản Demo dưới 10 phút](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) · [CloudFormation IaC](tuan_4/iac/cloudformation_stack.yaml) · [Rà soát An toàn](tuan_4/docs/SECURITY_AUDIT.md) · [Báo cáo Chi phí](tuan_4/docs/COST_REPORT.md) · [Đối chiếu Log-Metric-S3](tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md) |
+| Tổng kết và chuẩn bị bảo vệ Tuần 4 | [Trang Tuần 4](tuan_4/README.md) · [Báo cáo](tuan_4/docs/FINAL_REPORT.md) · [Lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) · [Template](tuan_4/infrastructure/weather-stack.json) · [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Chi phí](tuan_4/docs/COST_REPORT.md) |
 | Hồ sơ Tuần 1 | [Trang Tuần 1](tuan_1/README.md) · [Markdown](tuan_1/docs/FINAL_REPORT.md) · [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
 | CSV Tuần 1 | [Sáu CSV đã dùng trong báo cáo](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) · [Chín biểu đồ](tuan_2/results/charts/) |
 | Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [Markdown](tuan_2/docs/FINAL_REPORT.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
@@ -29,7 +29,7 @@
 | Snapshot raw ngày 18/10 | [246/288 bản ghi, 83 JSON, chất lượng và hash](tuan_3/results/raw_export_2026_10_18/README.md) |
 | Snapshot phân tích ngày 18/10 | [246/285 bản ghi và thống kê mới](tuan_3/results/refresh_2026_10_18/README.md) · [CSV thống kê](tuan_3/results/refresh_2026_10_18/analysis/descriptive.csv) · [Đối chiếu dự báo với mô hình tải về sau](tuan_3/results/refresh_2026_10_18/analysis/later_model/comparison.csv) |
 | Đối chiếu CloudWatch và dự báo bổ sung | [Số liệu và phương pháp đối chiếu](tuan_3/results/monitoring_followup_2026_10_18/README.md) · [Dashboard và kiểm chứng cấu hình](tuan_3/results/monitoring_dashboard_repair_2026_10_18/README.md) · [24 giá trị đối chiếu cho 4/24 giờ đích](tuan_3/results/forecast_followup_2026_10_18/README.md) |
-| Phân công và thời gian | [Worklog và tổng hợp các tuần](docs/WORKLOG.md) · [CSV Tuần 1–2 đã xác nhận](worklog.csv) · [Nhật ký kỹ thuật và tổng giờ Tuần 3 đã xác nhận](tuan_3/docs/WORKLOG.md) |
+| Phân công và thời gian | [Worklog và tổng hợp các tuần](docs/WORKLOG.md) · [CSV giờ công Tuần 1–4 đã xác nhận](worklog.csv) · [Nhật ký kỹ thuật và tổng giờ Tuần 3 đã xác nhận](tuan_3/docs/WORKLOG.md) |
 | Kiến trúc và mã nguồn | [Sơ đồ kiến trúc](docs/architecture.md) · [Hướng dẫn đọc mã](docs/source-guide.md) · [Cấu trúc repository](docs/repository-layout.md) · [Chỉ mục thành phần và commit](docs/components.md) |
 | Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Minh chứng vận hành đã lưu](docs/saved-evidence.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
 | AWS và kế hoạch tiếp theo | [Snapshot AWS ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) · [Kết quả kế hoạch Tuần 3](docs/WEEK_3_PLAN.md) · [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md) |
@@ -334,7 +334,7 @@ Tổng thời gian làm việc toàn bộ đồ án đã được hai sinh viên
 - [Mốc tích hợp Tuần 3](tuan_3/README.md)
 - [Hồ sơ tổng kết Tuần 4](tuan_4/README.md)
 - [Báo cáo kỹ thuật Tuần 4](tuan_4/docs/FINAL_REPORT.md)
-- [Hạ tầng CloudFormation IaC](tuan_4/iac/cloudformation_stack.yaml)
+- [Hạ tầng CloudFormation IaC](tuan_4/infrastructure/weather-stack.json)
 - [Báo cáo Rà soát An toàn (Security Audit)](tuan_4/docs/SECURITY_AUDIT.md)
 - [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md)
 - [Đối chiếu Log – Metric – S3 Data Lake](tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md)

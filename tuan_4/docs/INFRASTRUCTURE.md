@@ -2,7 +2,7 @@
 
 ## 1. Thành phần và cách thiết kế
 
-[weather-stack.json](../infrastructure/weather-stack.json) khai báo **15 tài nguyên** trong một template. Các tài nguyên mới có tên bắt đầu bằng `weather-w4-`; không nhập hoặc thay thế bucket, Lambda và lịch đang vận hành của Tuần 1–3.
+[weather-stack.json](../infrastructure/weather-stack.json) khai báo **17 tài nguyên** trong một template. Các tài nguyên mới có tên bắt đầu bằng `weather-w4-`; không nhập hoặc thay thế bucket, Lambda và lịch đang vận hành của Tuần 1–3.
 
 | Thành phần | Cấu hình và lý do |
 | --- | --- |
@@ -13,7 +13,7 @@
 | EventBridge + Lambda Permission | Chu kỳ một giờ, ban đầu DISABLED; quyền gọi gắn đúng ARN rule và tài khoản. Chỉ bật sau bước kiểm chứng trực tiếp |
 | Glue Database + RawTable | 20 cột nội dung và 3 cột phân vùng; Partition Projection xác định đường dẫn `raw/year=.../month=.../day=.../`. JSON hỏng không bị âm thầm bỏ qua |
 | Athena WorkGroup | S3 đầu ra riêng, SSE_S3, giới hạn quét 10 MiB mỗi truy vấn; cấu hình workgroup được cưỡng chế |
-| Alarm + TopicPolicy + Dashboard | Theo dõi Errors, Invocations và SNS; TopicPolicy chỉ cho CloudWatch Publish từ ARN alarm của stack và đúng tài khoản; alarm giữ trạng thái thiếu dữ liệu khi chưa có metric. Không coi thiếu điểm là số lỗi bằng 0 |
+| Metric Filters + Alarm + TopicPolicy + Dashboard | Hai Metric Filters đếm dòng Result/Error trong namespace riêng theo môi trường. Theo dõi Errors, Invocations và SNS; TopicPolicy chỉ cho CloudWatch Publish từ ARN alarm của stack và đúng tài khoản; alarm giữ trạng thái thiếu dữ liệu khi chưa có metric. Không coi thiếu điểm là số lỗi bằng 0 |
 
 Các giá trị ngưỡng vẫn là `AQI >= 100 OR PM2.5 >= 35.5`. Kênh cảnh báo sử dụng email. Hệ thống không cần khóa API Open-Meteo trong template.
 
@@ -75,3 +75,5 @@ Khi kết thúc thử nghiệm: xuất dữ liệu và checksum trước, dừng
 [Hồ sơ Tuần 4](../README.md) · [Hướng dẫn quay demo](DEMO_GUIDE.md)
 
 Tham khảo quyền gửi alarm: [CloudWatch alarm → SNS](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Notify_Users_Alarm_Changes.html).
+
+[Minh chứng ValidateTemplate của bản 17 tài nguyên](../results/template_validation_2026_10_19/README.md).

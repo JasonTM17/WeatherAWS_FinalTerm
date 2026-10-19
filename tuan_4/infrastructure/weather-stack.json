@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "WeatherAWS Week 4 isolated serverless stack. Uses an existing LabRole. Starts with schedule disabled and retains evidence.",
+  "Description": "WeatherAWS Week 4 isolated serverless stack with bounded permissions and collection log metrics. Existing LabRole; disabled initial schedule; retained evidence.",
   "Parameters": {
     "EnvironmentName": {
       "Type": "String",
@@ -185,20 +185,38 @@
     "AlarmTopicPolicy": {
       "Type": "AWS::SNS::TopicPolicy",
       "Properties": {
-        "Topics": [{"Ref": "AlertTopic"}],
+        "Topics": [
+          {
+            "Ref": "AlertTopic"
+          }
+        ],
         "PolicyDocument": {
           "Version": "2012-10-17",
-          "Statement": [{
-            "Sid": "AllowOnlyStackAlarm",
-            "Effect": "Allow",
-            "Principal": {"Service": "cloudwatch.amazonaws.com"},
-            "Action": "sns:Publish",
-            "Resource": {"Ref": "AlertTopic"},
-            "Condition": {
-              "ArnEquals": {"aws:SourceArn": {"Fn::Sub": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:weather-w4-${EnvironmentName}-errors"}},
-              "StringEquals": {"aws:SourceAccount": {"Ref": "AWS::AccountId"}}
+          "Statement": [
+            {
+              "Sid": "AllowOnlyStackAlarm",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudwatch.amazonaws.com"
+              },
+              "Action": "sns:Publish",
+              "Resource": {
+                "Ref": "AlertTopic"
+              },
+              "Condition": {
+                "ArnEquals": {
+                  "aws:SourceArn": {
+                    "Fn::Sub": "arn:${AWS::Partition}:cloudwatch:${AWS::Region}:${AWS::AccountId}:alarm:weather-w4-${EnvironmentName}-errors"
+                  }
+                },
+                "StringEquals": {
+                  "aws:SourceAccount": {
+                    "Ref": "AWS::AccountId"
+                  }
+                }
+              }
             }
-          }]
+          ]
         }
       }
     },
@@ -570,6 +588,44 @@
             }
           ]
         }
+      }
+    },
+    "ResultMetricFilter": {
+      "Type": "AWS::Logs::MetricFilter",
+      "Properties": {
+        "LogGroupName": {
+          "Ref": "CollectorLogs"
+        },
+        "FilterPattern": "\"[INFO] Result:\"",
+        "MetricTransformations": [
+          {
+            "MetricNamespace": {
+              "Fn::Sub": "WeatherAWS/Week4/${EnvironmentName}"
+            },
+            "MetricName": "ResultLogLines",
+            "MetricValue": "1",
+            "Unit": "Count"
+          }
+        ]
+      }
+    },
+    "ErrorMetricFilter": {
+      "Type": "AWS::Logs::MetricFilter",
+      "Properties": {
+        "LogGroupName": {
+          "Ref": "CollectorLogs"
+        },
+        "FilterPattern": "\"[ERROR]\"",
+        "MetricTransformations": [
+          {
+            "MetricNamespace": {
+              "Fn::Sub": "WeatherAWS/Week4/${EnvironmentName}"
+            },
+            "MetricName": "ErrorLogLines",
+            "MetricValue": "1",
+            "Unit": "Count"
+          }
+        ]
       }
     }
   },

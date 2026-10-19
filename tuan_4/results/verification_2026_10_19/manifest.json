@@ -48,5 +48,8 @@
   "environment/quyen/template.json": "3dba8f2d4c101760f7ee03610cd8e1f1dec04626dd2d2eff15397a54aa01a63d",
   "environment/summary.json": "83ee184accc488930f48bb6386a4b61fd51415e0e0bc0cdd242c99d3a4c5a402",
   "local_checks.json": "8493a23a0ae5984c60d29dc8182356c57de94d69f77a139e779099e05ce3f695",
-  "README.md": "0d9411ba9781d57059e00a8bdb0f7ef3aafa56bf3f1aa27614b5f985232d560a"
+  "README.md": "29cb2a99b82656921c10c4cf3804908a4f964d8052f0fd134f95d94c7bbe05bc",
+  "recipient_confirmation.json": "bb95fda9b83d47b861b171960dd6869205db663fbb65fbbf0edbdc371aded1e1",
+  "template.json": "9eb1f328c93884569bc0130174e50c48bc5769b4ead393b2c1395aed63d6a322",
+  "worklog_confirmation.json": "3e4048b0e9dc78a9c2d0712fa0880d9d372ea80dbf4f9ddfea892bcbe311b0f5"
 }

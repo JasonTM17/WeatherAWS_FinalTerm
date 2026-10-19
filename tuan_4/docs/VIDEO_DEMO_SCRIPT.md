@@ -1,157 +1,171 @@
-# Kịch bản Video Demo Đồ án Cuối kỳ (Dưới 10 Phút)
+# Lời thoại demo WeatherAWS — khoảng 9 phút
 
-**Học phần:** Điện toán đám mây · **Lớp:** 261CLCO332779_05 · **GVHD:** ThS. Huỳnh Xuân Phụng.  
-**Nhóm sinh viên thực hiện:**  
-1. **Nguyễn Tiến Sơn** — MSSV: 24110054 (Phụ trách: Serverless Architecture, IaC CloudFormation, Lambda, EventBridge, CloudWatch, SNS, Security).  
-2. **Trần Thị Ngọc Quyên** — MSSV: 24110051 (Phụ trách: S3 Data Lake, Athena Partition Projection, Parquet Benchmark, Cost Analysis, CI/CD & Testing).  
+Chỉ đọc phần **Lời thoại**. Phần **Bấm** là hướng dẫn thao tác, không đọc thành tiếng. Các mốc dưới đây gồm cả thời gian chuyển tab và chờ kết quả; diễn tập trước một lượt.
 
-**Thời lượng mục tiêu:** **9 phút 30 giây – 9 phút 50 giây** (Tuân thủ nghiêm ngặt quy định: Không quá 10 phút).  
-**Công cụ quay màn hình đề xuất:** OBS Studio (độ phân giải 1080p, 60fps), micro rõ ràng, không lẫn tạp âm.
+## Trước khi quay
 
----
+- Start Lab, đợi phiên hoạt động, chọn vùng N. Virginia/us-east-1.
+- Mở sẵn GitHub, EventBridge, Lambda, CloudWatch Logs, S3, Athena, SNS, hộp thư và Dashboard. Chi phí/template mở sẵn ở tab riêng.
+- Chuẩn bị test event Private tên `demo-week4`, nội dung `{}`; không dùng backfill cho phần demo cảnh báo.
+- Mở cửa sổ trình duyệt riêng, không để credentials hoặc Secret value trong vùng ghi hình.
+- Windows 11: Windows + Shift + R → kéo vùng quay → kiểm tra micro → Start. Quay thử 10 giây và nghe lại trước bản chính.
 
-## 1. Chuẩn bị Trước khi Quay (Pre-recording Checklist)
+## 1. Giới thiệu — 00:00–00:40
 
-Trước khi bấm nút ghi hình, hai sinh viên chuẩn bị sẵn các tab trình duyệt và cửa sổ sau:
-- [ ] **Tab 1 — Slide trình bày:** Slide bìa giới thiệu nhóm, kiến trúc tổng thể AWS và mục tiêu đồ án.
-- [ ] **Tab 2 — AWS Management Console (us-east-1):**
-  - S3 Console: Thư mục Data Lake `weather-airquality-datalake-...` chứa phân vùng `raw/year=2026/...`.
-  - Athena Query Editor: Database `weather_aqi_db` và bảng `weather_airquality_records`.
-  - Lambda Console: Hàm `WeatherCollectorLambda` và cấu hình biến môi trường.
-  - EventBridge Console: Rule `WeatherCollectionSchedule` đang ở trạng thái kích hoạt.
-  - CloudWatch Console: Dashboard `WeatherAirQuality-FullStack` và Log Group `/aws/lambda/WeatherCollectorLambda`.
-  - SNS Console: Topic cảnh báo ô nhiễm và Subscription email xác nhận.
-- [ ] **Cửa sổ VS Code / Terminal:**
-  - Mở sẵn repository `AWS_Final_Term`.
-  - Cửa sổ PowerShell sẵn sàng chạy lệnh kiểm thử tự động.
-- [ ] **Tab 3 — GitHub Repository & Actions:**
-  - Trang chủ repository, cấu trúc thư mục từ `tuan_1` đến `tuan_4`.
-  - Tab GitHub Actions hiển thị các workflow CI/CD màu xanh (100% Passed).
+**Bấm:** mở repository `https://github.com/JasonTM17/WeatherAWS_FinalTerm`, dừng ở tên đề tài và sơ đồ kiến trúc.
 
----
+**Lời thoại:**
 
-## 2. Kịch bản Chi tiết Từng Phút (Minute-by-Minute Timeline)
+> Kính chào thầy. Em là Nguyễn Tiến Sơn, mã số sinh viên 24110054, thực hiện đề tài cùng sinh viên Trần Thị Ngọc Quyên, mã số sinh viên 24110051.
+>
+> Đề tài của chúng em là hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS cho Thành phố Hồ Chí Minh, Hà Nội và Đà Nẵng. Trong video này, em trình bày một lượt thu thập thực tế, kiểm tra dữ liệu lưu trữ, truy vấn, cảnh báo và cách quản lý hệ thống.
 
+## 2. Lịch EventBridge — 00:40–01:15
+
+**Bấm:** EventBridge → Rules → bus `default` → `WeatherCollectionSchedule` → xem trạng thái, Schedule và Targets.
+
+**Lời thoại:**
+
+> Đầu tiên là lịch thu thập trên EventBridge. Rule này có chu kỳ một giờ và gọi hàm WeatherCollectorLambda.
+>
+> Em kiểm tra lịch đang bật và target trỏ đúng hàm thu thập. Mỗi môi trường sử dụng một lịch đang hoạt động cho collector, giúp kiểm soát số lượt chạy và tránh gửi cảnh báo hai lần do hai lịch cùng gọi một hàm.
+
+**Đối chiếu trước khi đọc:** chỉ nói lịch đang bật nếu state là Enabled và chu kỳ đúng `rate(1 hour)`.
+
+## 3. Chạy Lambda — 01:15–02:20
+
+**Bấm:** Lambda → `WeatherCollectorLambda` → Test → chọn `demo-week4`, JSON `{}` → Test một lần. Khi xong mở Execution result → Details.
+
+**Lời thoại lúc bấm Test:**
+
+> Tiếp theo, em chạy một lượt kiểm tra trực tiếp bằng event rỗng. Đây là nhánh thu thập dữ liệu hiện tại.
+>
+> Hàm đọc vị trí và ngưỡng từ Secrets Manager, gọi API Open-Meteo cho ba đô thị, sau đó lưu kết quả lên S3. Điều kiện cảnh báo là AQI từ 100 hoặc PM2.5 từ 35,5 microgam trên mét khối.
+
+**Khi thấy complete, 3 bản ghi và failed_cities rỗng, đọc tiếp:**
+
+> Kết quả trả về cho thấy lượt thu thập hoàn tất, có ba bản ghi và không có đô thị thất bại. Phần saved_files cho biết object S3 vừa được tạo; phần alerts_sent thể hiện số lần gửi cảnh báo được hàm ghi nhận thành công.
+
+**Không bấm Test liên tiếp khi đang chờ. Nếu kết quả khác, mô tả kết quả thật và kiểm tra log.**
+
+## 4. Từ log đến S3 — 02:20–03:30
+
+**Bấm:** Lambda → Monitor → View CloudWatch logs → stream của lượt vừa chạy → tìm `[INFO] Result:`. Chỉ ra START, END, REPORT và key S3 trong Result. Chuyển tab S3, mở đúng bucket/key → Download và mở JSON.
+
+**Lời thoại:**
+
+> Để kiểm tra lượt chạy, em mở CloudWatch Logs. Các dòng START, END và REPORT ghi nhận vòng đời thực thi; dòng Result ghi trạng thái thu thập, số bản ghi và đường dẫn dữ liệu.
+>
+> Từ đường dẫn này, em mở đúng object trên S3. Dữ liệu được lưu theo ngày UTC và mỗi dòng là một bản ghi JSON.
+>
+> Em kiểm tra số dòng, tên ba đô thị, mã bản ghi và các trường AQI, PM2.5, nhiệt độ. Như vậy, kết quả Lambda được đối chiếu với dữ liệu thực sự lưu trên S3.
+
+**Giữ lại ba record_id trong JSON để dùng bước tiếp theo.**
+
+## 5. Athena — 03:30–04:45
+
+**Bấm:** Athena → Query editor → data source `AwsDataCatalog` → database `weather_aqi_db`. Dán câu SQL bên dưới, thay ngày theo partition S3 và thay ba ID bằng record_id trong JSON vừa mở → Run.
+
+```sql
+SELECT record_id, city, timestamp_vn, us_aqi, pm2_5
+FROM weather_aqi_db.weather_airquality_records
+WHERE year = '2026' AND month = '10' AND day = '19'
+  AND record_id IN (
+    'DAN_RECORD_ID_TP_HCM',
+    'DAN_RECORD_ID_HA_NOI',
+    'DAN_RECORD_ID_DA_NANG'
+  )
+ORDER BY city;
 ```
-+---------------------------------------------------------------------------------------------------+
-| THỜI LƯỢNG      | NỘI DUNG CHÍNH                            | NGƯỜI NÓI          | MÀN HÌNH QUAY   |
-+-----------------+-------------------------------------------+--------------------+-----------------+
-| 00:00 - 01:30   | Giới thiệu nhóm & Kiến trúc tổng thể      | Tiến Sơn & Ngọc Quyên | Slide Trình chiếu|
-| 01:30 - 03:30   | S3 Data Lake & Thực nghiệm Athena         | Ngọc Quyên         | AWS S3 & Athena |
-| 03:30 - 05:30   | Lambda, EventBridge & Thực thi Realtime   | Tiến Sơn           | AWS Lambda & Log|
-| 05:30 - 07:00   | CloudWatch Dashboard & Cảnh báo Email SNS | Tiến Sơn           | CW & Hộp thư    |
-| 07:00 - 08:30   | Nâng cao: CloudFormation IaC & Rà Bảo mật | Tiến Sơn & Ngọc Quyên | VS Code & Report|
-| 08:30 - 10:00   | GitHub, CI/CD, Test Suite & Báo cáo Phí  | Ngọc Quyên & Tiến Sơn | GitHub & Terminal|
-+---------------------------------------------------------------------------------------------------+
-```
 
----
+**Ba chuỗi DAN_RECORD_ID... là chỗ cần thay, không phải dữ liệu để chạy nguyên văn.** Chuẩn bị sẵn khung SQL trước buổi quay để chỉ phải dán ba ID.
 
-### Phút 00:00 – 01:30: Giới thiệu & Tổng quan Kiến trúc Hệ thống
+**Lời thoại lúc chạy:**
 
-- **Màn hình quay:** Slide trình bày PowerPoint / PDF (Hiển thị tên đề tài, thông tin 2 sinh viên, GVHD và sơ đồ kiến trúc Serverless).
-- **Lời thoại (Nguyễn Tiến Sơn — 0:00 - 0:45):**
-  > *"Kính chào Thầy Huỳnh Xuân Phụng và các bạn. Chúng em là nhóm sinh viên thực hiện đồ án môn Điện toán đám mây, gồm em là Nguyễn Tiến Sơn (MSSV 24110054) và bạn Trần Thị Ngọc Quyên (MSSV 24110051). Đề tài của nhóm em là: **'Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí đa đô thị trên nền tảng AWS Serverless'**.*
-  > *Đồ án được thiết kế hoàn chỉnh theo mô hình Event-driven Serverless, tự động hóa 100% từ khâu thu thập, lưu trữ Data Lake, phân tích dữ liệu lớn đến giám sát và phát cảnh báo thời gian thực."*
-- **Lời thoại (Trần Thị Ngọc Quyên — 0:45 - 1:30):**
-  > *"Về mặt kiến trúc, hệ thống gồm 5 phân tầng cốt lõi:
-  > 1. **Tầng Kích hoạt:** Amazon EventBridge Scheduler kích hoạt định kỳ mỗi giờ.
-  > 2. **Tầng Tính toán:** AWS Lambda chạy Python 3.12, lấy cấu hình từ AWS Secrets Manager, gọi API Open-Meteo cho 3 đô thị lớn gồm TP. Hồ Chí Minh, Hà Nội và Đà Nẵng.
-  > 3. **Tầng Lưu trữ:** Amazon S3 đóng vai trò Data Lake, lưu trữ NDJSON thô phân vùng theo chuẩn Hive.
-  > 4. **Tầng Phân tích:** AWS Glue Data Catalog và Amazon Athena hỗ trợ Partition Projection và định dạng Parquet Snappy để tối ưu truy vấn.
-  > 5. **Tầng Giám sát & Cảnh báo:** Amazon CloudWatch thu thập log, metric filters, kết hợp Amazon SNS gửi email cảnh báo ngay lập tức khi AQI vượt ngưỡng 100."*
+> Tiếp theo, em dùng Athena để truy vấn dữ liệu trên S3 thông qua lược đồ trong Glue Data Catalog. Câu truy vấn lọc theo ngày và ba mã bản ghi của lượt vừa chạy, vì vậy kết quả có thể đối chiếu trực tiếp với JSON nguồn.
 
----
+**Khi query Succeeded và trả đúng ba bản ghi, đọc:**
 
-### Phút 01:30 – 03:30: Amazon S3 Data Lake & Thực nghiệm Amazon Athena
+> Truy vấn đã thành công và trả về đúng ba bản ghi của ba đô thị. Em đối chiếu mã bản ghi cùng giá trị AQI và PM2.5 với dữ liệu raw. Phần thống kê của Athena cho biết thời gian thực thi và lượng dữ liệu đã quét.
 
-- **Màn hình quay:** Chuyển sang trình duyệt: AWS S3 Console, sau đó sang Athena Query Editor.
-- **Lời thoại (Trần Thị Ngọc Quyên):**
-  > *(Thao tác: Mở S3 Console, click vào bucket `weather-airquality-datalake-...`)*
-  > *"Em xin trình bày tầng Lưu trữ và Phân tích dữ liệu.
-  > Trên Amazon S3, bucket Data Lake được bật 100% Block Public Access và mã hóa AES-256. Dữ liệu thô được tổ chức theo cấu trúc phân vùng Hive: `raw/year=YYYY/month=MM/day=DD/`. Trong mỗi thư mục ngày, các tệp NDJSON lưu giữ trọn vẹn 23 trường thông tin gồm tọa độ, thời gian UTC, giờ Việt Nam, các thông số khí tượng như nhiệt độ, độ ẩm và các chỉ số ô nhiễm không khí như PM2.5, PM10, CO, NO2, O3 và US AQI.*
-  > *(Thao tác: Chuyển sang tab Athena Query Editor)*
-  > *Trên Amazon Athena, nhóm em đã triển khai kỹ thuật **Partition Projection**. Thay vì phải chạy lệnh `MSCK REPAIR TABLE` thủ công gây trễ và tốn chi phí, Athena tự động tính toán các phân vùng ngày giờ trực tiếp từ metadata.*
-  > *(Thao tác: Nhập câu lệnh SELECT và bấm 'Run query')*
-  > *Ví dụ, khi em thực hiện truy vấn so sánh AQI trung bình giữa 3 thành phố: Câu lệnh hoàn tất chỉ trong 450 mili-giây.
-  > Đặc biệt, trong bài toán so sánh hiệu năng ở Tuần 3, định dạng **Parquet nén Snappy** giúp giảm tới **96.5% dung lượng byte quét** (từ 11.2 KB xuống chỉ còn 393 byte) so với NDJSON truyền thống, chứng minh khả năng tối ưu hóa chi phí vượt trội khi vận hành trên dữ liệu lớn."*
+## 6. SNS và email — 04:45–05:30
 
----
+**Bấm:** SNS → Topics → `weather-airquality-alerts` → Subscriptions. Sau đó mở hộp thư và tìm `[AWS ALERT]`.
 
-### Phút 03:30 – 05:30: AWS Lambda, EventBridge & Thực thi Thu thập Realtime
+**Lời thoại chung:**
 
-- **Màn hình quay:** AWS Lambda Console, EventBridge Console, CloudWatch Log Stream.
-- **Lời thoại (Nguyễn Tiến Sơn):**
-  > *(Thao tác: Mở Lambda Console, tab Configuration & Code)*
-  > *"Tiếp theo, em xin demo luồng thực thi của AWS Lambda và EventBridge Scheduler.
-  > Hàm `WeatherCollectorLambda` chạy runtime Python 3.12 với cấu hình 256MB RAM và 60 giây Timeout. Toàn bộ thông tin cấu hình nhạy cảm và ngưỡng cảnh báo được bảo vệ trong AWS Secrets Manager, không có bất kỳ secret nào bị hardcode trong mã nguồn.*
-  > *(Thao tác: Chuyển sang EventBridge Console)*
-  > *Rule `WeatherCollectionSchedule` được cấu hình kích hoạt tự động theo biểu thức `cron(0 * * * ? *)` mỗi giờ một lần. Quyền gọi hàm được phân quyền chặt chẽ thông qua Resource-based Policy của Lambda.
-  > *(Thao tác: Bấm nút 'Test' trên Lambda Console để kích hoạt 1 lần chạy trực tiếp)*
-  > *Bây giờ, em thực hiện một lượt chạy trực tiếp. Chỉ sau 620ms, hàm trả về kết quả thành công HTTP 200, hoàn tất thu thập đủ 3/3 đô thị.*
-  > *(Thao tác: Mở CloudWatch Log Streams, click vào log stream mới nhất)*
-  > *Trong CloudWatch Logs, chúng ta thấy rõ cấu trúc log chuẩn: `START RequestId` -> nạp Secrets Manager -> gọi API Open-Meteo -> đánh giá ngưỡng cảnh báo -> ghi tệp S3 -> và xuất dòng kết quả chuẩn hóa `[INFO] Result:` chứa đầy đủ metadata."*
+> Nhánh cảnh báo sử dụng Amazon SNS. Em kiểm tra đăng ký email đã được xác nhận. Khi dữ liệu thỏa điều kiện ngưỡng, Lambda Publish thông báo lên topic này để gửi đến người nhận.
 
----
+**Nếu lượt vừa chạy có cảnh báo và thư mới đã đến, đọc:**
 
-### Phút 05:30 – 07:00: CloudWatch Dashboard, Metric Filters & Cảnh báo Email SNS
+> Đây là email của lượt kiểm tra vừa thực hiện. Em đối chiếu đô thị, chỉ số và ngưỡng cảnh báo với dữ liệu đã thu thập. Bước này kiểm tra thêm việc thư tới hộp thư người nhận, bên cạnh kết quả Publish của Lambda.
 
-- **Màn hình quay:** CloudWatch Dashboard `WeatherAirQuality-FullStack`, sau đó mở hộp thư Email nhận thông báo.
-- **Lời thoại (Nguyễn Tiến Sơn):**
-  > *(Thao tác: Mở CloudWatch Dashboard)*
-  > *"Đây là CloudWatch Dashboard toàn diện mà nhóm đã thiết lập để theo dõi sức khỏe hệ thống thời gian thực theo chu kỳ 300 giây:
-  > - Widget 1 hiển thị số lượt gọi Lambda Invocations (màu xanh lá) và Errors (màu đỏ).
-  > - Widget 2 biểu diễn bộ đếm **Metric Filters** độc lập: nhóm đã cài đặt 2 filter tách biệt gồm `ResultLogLines` (đếm số lần thu thập thành công) và `ErrorLogLines` (bắt các dòng lỗi), giúp đối chiếu chéo với chỉ số của hạ tầng.
-  > - Widget 3 hiển thị thời gian thực thi trung bình và tối đa (Average/Max Duration).
-  > - Widget 4 giám sát trạng thái phát thông điệp và tỷ lệ gửi thành công của Amazon SNS.
-  > *(Thao tác: Mở tab Gmail/Outlook)*
-  > *Về luồng cảnh báo: Khi hàm Lambda phát hiện chất lượng không khí tại Hà Nội có AQI đạt mức 105 (vượt ngưỡng 100), Lambda tự động publish thông điệp khẩn cấp tới Amazon SNS Topic. Trên màn hình là email cảnh báo thực tế nhận được trong hộp thư của sinh viên với tiêu đề '[ALERT] High Air Pollution Detected at HaNoi', cung cấp đầy đủ giá trị AQI, nồng độ bụi PM2.5 và thời điểm quan trắc."*
+**Nếu alerts_sent bằng 0, thay đoạn trên bằng:**
 
----
+> Lượt hiện tại không phát cảnh báo. Để minh họa nội dung thư, em mở email của đợt kiểm chứng đã lưu trước đó; ngày kiểm chứng được thể hiện trong hồ sơ.
 
-### Phút 07:00 – 08:30: Yêu cầu Nâng cao — IaC CloudFormation Stack & Rà soát An toàn
+**Nếu có Publish nhưng thư đang chờ:** nói “SNS đã tiếp nhận thông báo; em tiếp tục kiểm tra hộp thư để xác nhận bước giao email.” Không gọi thư cũ là thư mới.
 
-- **Màn hình quay:** VS Code hiển thị file `tuan_4/iac/cloudformation_stack.yaml` và báo cáo `tuan_4/docs/SECURITY_AUDIT.md`.
-- **Lời thoại (Nguyễn Tiến Sơn — 7:00 - 7:45):**
-  > *(Thao tác: Mở file `cloudformation_stack.yaml` trong VS Code, cuộn qua các Resource chính)*
-  > *"Thực hiện đúng theo yêu cầu nâng cao mà Thầy đã giao trong nhận xét Tuần 3, nhóm em đã đóng gói toàn bộ kiến trúc Serverless bằng một CloudFormation Template hoàn chỉnh tại `tuan_4/iac/cloudformation_stack.yaml`:
-  > Template tự động hóa việc khởi tạo đồng bộ 16 tài nguyên: từ S3 Data Lake (bật SSE AES-256 và Versioning), Secrets Manager, SNS Topic, Lambda Collector, EventBridge Schedule, Glue Catalog Database, Athena Table Partition Projection, đến CloudWatch Metric Filters, Alarms và Dashboard.
-  > Toàn bộ cú pháp và thuộc tính của template đã được kiểm thử tự động 100% PASS qua file `test_cloudformation.py`."*
-- **Lời thoại (Trần Thị Ngọc Quyên — 7:45 - 8:30):**
-  > *(Thao tác: Mở file `tuan_4/docs/SECURITY_AUDIT.md`)*
-  > *"Song song với IaC, nhóm đã tiến hành rà soát an toàn thông tin toàn diện theo chuẩn AWS Well-Architected Security:
-  > 1. Xác thực S3 Block Public Access 100% trên cả 4 thiết lập, kèm Bucket Policy bắt buộc mã hóa truyền tải TLS 1.3.
-  > 2. Đánh giá quyền hạn của IAM LabRole trong môi trường Learner Lab: Nhận diện LabRole có quyền rộng, nhóm đã thiết kế chính sách quyền tối thiểu chuẩn mực tại `collector-policy.example.json` chỉ cấp đúng 5 quyền tối thiểu với Resource ARN xác định.
-  > 3. Tuyệt đối không hardcode bí mật, không commit khóa AWS lên Git, và khử định danh nhật ký CloudWatch."*
+## 7. CloudWatch Dashboard — 05:30–06:15
 
----
+**Bấm:** CloudWatch → Dashboards → `WeatherAirQuality-Week3` → chọn cửa sổ có lượt chạy, ví dụ 3h → Refresh. Chỉ vào Invocations, Errors, Duration và SNS.
 
-### Phút 08:30 – 10:00: GitHub Repository, CI/CD Actions, Test Suite & Báo cáo Chi phí
+**Lời thoại:**
 
-- **Màn hình quay:** GitHub Repository, tab GitHub Actions, Terminal chạy lệnh test, file `tuan_4/docs/COST_REPORT.md`.
-- **Lời thoại (Trần Thị Ngọc Quyên — 8:30 - 9:15):**
-  > *(Thao tác: Mở GitHub Actions hiển thị các runs xanh lá; mở Terminal VS Code)*
-  > *"Về quy trình phát triển và kiểm thử:
-  > Mọi thay đổi mã nguồn đều được tích hợp liên tục (CI) qua GitHub Actions.
-  > *(Thao tác: Chạy lệnh `py -3.14 -m unittest discover -s tuan_4/tests -v` trên Terminal)*
-  > *Như Thầy thấy trên màn hình Terminal, toàn bộ 42 test cases của Tuần 4 kiểm thử cú pháp CloudFormation, đối chiếu log-metric-S3 và kịch bản vận hành đều đạt trạng thái **OK (100% PASS)**.*
-  > *Bộ kiểm thử tổng thể repository gồm hơn 80 tests cũng đã vượt qua tất cả các bài kiểm tra chấp nhận E2E.*
-  > *Bên cạnh đó, nhóm đã hoàn thành script `cleanup_resources.ps1` và `start_resources.ps1` giúp tạm dừng EventBridge rule sau mỗi buổi thực hành để bảo toàn credit."*
-- **Lời thoại (Nguyễn Tiến Sơn — 9:15 - 9:50):**
-  > *(Thao tác: Mở file `COST_REPORT.md` và bảng breakdown chi phí)*
-  > *"Cuối cùng là Báo cáo Chi phí AWS Cost Explorer:
-  > Nhờ kiến trúc Serverless tối ưu, Lambda, S3, CloudWatch và SNS đều được bao phủ 100% bởi AWS Free Tier. Chi phí duy nhất phát sinh là $0.40/tháng cho AWS Secrets Manager. Tổng chi phí vận hành thực tế của cả học kỳ chỉ khoảng **$1.21 USD**, tiêu tốn chưa tới **2.5% ngân sách $50 của Learner Lab**.
-  > Nhóm cũng đã hoàn thiện đầy đủ hồ sơ nộp, nhật ký công việc 78.0 giờ đã xác nhận của 2 sinh viên, và đồng bộ chính xác từng commit message nguyên bản cạnh link commit theo đúng góp ý của Thầy.*
-  > *Nhóm em xin chân thành cảm ơn Thầy Huỳnh Xuân Phụng đã tận tình hướng dẫn chúng em hoàn thành xuất sắc đồ án này!"*
-  > *(Kết thúc video tại mốc 9 phút 45 giây).*
+> Dashboard tổng hợp số lượt gọi, số lỗi, thời gian thực thi và các chỉ số SNS. Khi đối chiếu, em sử dụng cùng hàm, cùng khoảng quan sát và chu kỳ 300 giây.
+>
+> Log giúp xác định request và đường dẫn S3; metric giúp theo dõi hoạt động theo từng chu kỳ. Tỷ lệ lỗi chỉ được tính khi có đủ cặp Errors và Invocations hợp lệ. Email nhận được được xác nhận riêng với các bộ đếm trên Dashboard.
 
----
+**Nếu metric chưa cập nhật:** mở bảng kiểm chứng đã lưu và nêu đúng ngày, không gọi đó là metric tức thời của lượt mới.
 
-## 3. Danh mục Kiểm tra Hoàn tất Trước khi Nộp Video (Submission Checklist)
+## 8. Chi phí — 06:15–06:50
 
-1. [ ] Video có độ phân giải từ 720p trở lên, âm thanh rõ ràng, không rè.
-2. [ ] Thời lượng chính xác: **Dưới 10 phút**.
-3. [ ] Cả hai sinh viên (Nguyễn Tiến Sơn và Trần Thị Ngọc Quyên) đều xuất hiện giọng nói và trình bày phần việc của mình.
-4. [ ] Xuất hiện đầy đủ minh chứng thực tế trên AWS Console: S3, Athena, Lambda, EventBridge, CloudWatch Dashboard và Email SNS.
-5. [ ] Minh họa mã nguồn CloudFormation IaC và chạy bộ test tự động đạt 100% PASS trên terminal.
-6. [ ] Tải video lên Google Drive / YouTube (chế độ Unlisted/Công khai) và đính kèm đường link truy cập vào báo cáo nộp LMS.
+**Bấm:** Cost Explorer → Cost and usage → chọn kỳ của báo cáo, Daily, nhóm Service. Nếu không mở được Console, dùng CSV Cost Explorer đã xuất đúng kỳ.
+
+**Lời thoại:**
+
+> Phần chi phí được tổng hợp từ Cost Explorer theo ngày và dịch vụ, đơn vị là đô la Mỹ. Báo cáo giữ thông tin Estimated để phân biệt số liệu đang được AWS tổng hợp.
+>
+> Em tách số liệu chi phí do AWS trả về với mức dự kiến của bài thực hành. Kỳ và phạm vi thống kê được ghi rõ để người đọc có thể đối chiếu lại dữ liệu nguồn.
+
+## 9. Bảo mật và CloudFormation — 06:50–08:05
+
+**Bấm:** S3 → bucket → Permissions → Block public access → xem bốn mục bật. Chuyển Properties → Default encryption. Sau đó mở template canonical đã được chốt; đường dẫn là `tuan_4/infrastructure/weather-stack.json`.
+
+**Lời thoại:**
+
+> Về lưu trữ, bucket đã bật các thiết lập Block Public Access và mã hóa mặc định. Em kiểm tra cấu hình này để bảo vệ dữ liệu và kiểm soát quyền truy cập.
+>
+> Về tự động hóa hạ tầng, chúng em chuẩn bị template CloudFormation mô tả các thành phần của ứng dụng, gồm lưu trữ, cấu hình, Lambda, lịch thu thập, cảnh báo, catalog, truy vấn và giám sát.
+>
+> Cấu hình stack mới khởi tạo với lịch tắt để kiểm thử trước khi bật tự động. Dữ liệu phục vụ báo cáo được giữ lại theo chính sách lưu giữ.
+>
+> Trong Learner Lab, hệ thống dùng LabRole do môi trường học phần cấp. Mẫu quyền runtime trong repository giới hạn theo bucket, Secret, topic và log group của ứng dụng, phục vụ đối chiếu khi sử dụng execution role riêng.
+
+**Nếu chỉ đang mở template:** nói “template đã chuẩn bị/kiểm tra”, không nói đã triển khai stack. Chỉ mở Resources/Outputs và nói đã tạo stack khi có CREATE_COMPLETE thật.
+
+## 10. CI, kết thúc phiên và kết luận — 08:05–09:00
+
+**Bấm:** GitHub → Actions → mở lần kiểm tra thành công của đúng phiên bản đang trình bày → xem commit với message gốc. Mở checklist cuối phiên.
+
+**Lời thoại:**
+
+> Mã nguồn và các kiểm tra của dự án được quản lý trên GitHub. Mỗi phiên bản có commit cụ thể; nội dung báo cáo dẫn tới source và minh chứng tương ứng.
+>
+> Sau buổi thực hành, chúng em chờ các lượt đang chạy kết thúc, xuất dữ liệu và kết quả kiểm chứng, rồi tạm dừng lịch thu thập trước khi kết thúc Learner Lab. Việc thu hồi tài nguyên thử nghiệm được thực hiện sau khi đã xác định phạm vi và lưu sản phẩm cần giữ.
+>
+> Qua phần demo, em đã trình bày luồng thu thập, lưu trữ, truy vấn, cảnh báo và theo dõi hệ thống. Toàn bộ mã nguồn cùng dữ liệu đối chiếu được tổ chức trong repository để thầy kiểm tra. Em cảm ơn thầy đã theo dõi.
+
+**Kết thúc:** Stop → xem lại → Save. Chỉ Disable rule/End Lab khi cả hai sinh viên đã kết thúc sử dụng môi trường; không cần thực hiện thay đổi đó ngay giữa video.
+
+## Mẹo giữ video dưới 10 phút
+
+- Chỉ đọc phần lời thoại; không đọc tên menu, SQL, JSON hoặc toàn bộ bảng.
+- Chọn một môi trường làm demo chính; không lặp lại toàn bộ thao tác ở tài khoản thứ hai.
+- Mở tab và chuẩn bị SQL trước. Không cài đặt hoặc tạo stack trong lúc quay.
+- Nếu bị chờ dịch vụ, cắt đoạn chờ trước khi nộp và giữ nguyên kết quả thực thi.
+- Mục tiêu khoảng 9 phút để có một phút dự phòng; diễn tập một lần bằng đồng hồ trước bản chính.
+
+Tài liệu thao tác đối chiếu: [AWS Lambda Test](https://docs.aws.amazon.com/lambda/latest/dg/testing-functions.html), [Athena query results](https://docs.aws.amazon.com/athena/latest/ug/querying.html), [Microsoft Snipping Tool](https://support.microsoft.com/en-us/windows/apps/use-snipping-tool-to-capture-screenshots).
+
+[Báo cáo chính](FINAL_REPORT.md) · [Checklist cuối phiên](SESSION_CHECKLIST.md)

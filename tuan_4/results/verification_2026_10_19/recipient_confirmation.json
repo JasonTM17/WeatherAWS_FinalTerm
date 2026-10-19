@@ -1,0 +1,6 @@
+{
+  "date": "2026-10-19",
+  "basis": "Direct user confirmation for the two controlled realtime invocations",
+  "default": "CONFIRMED_BY_RECIPIENT",
+  "quyen": "CONFIRMED_BY_RECIPIENT"
+}

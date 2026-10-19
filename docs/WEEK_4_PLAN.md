@@ -157,7 +157,7 @@ Thực hiện trong phiên AWS Learner Lab còn hiệu lực. Chốt cấu hình
 
 ## 9. Nhật ký và cách tổng hợp báo cáo
 
-Tổng giờ Tuần 1–3 đã xác nhận là **58,0 giờ**. Tuần 4 ghi nhật ký theo công việc thực hiện, sản phẩm, liên kết commit/minh chứng và số giờ từng sinh viên xác nhận. Khi công việc được thực hiện, cập nhật trạng thái từng mã W4 và kết quả kiểm tra tương ứng.
+Tổng giờ Tuần 1–3 đã xác nhận là **58,0 giờ**. Tuần 4 đã xác nhận thêm **20,0 giờ thực tế** (10,0 giờ mỗi sinh viên), tổng cộng **78,0 giờ**. Nhật ký ghi sản phẩm, liên kết commit/minh chứng và trạng thái từng phép kiểm chứng. Khi công việc được thực hiện, cập nhật trạng thái từng mã W4 và kết quả kiểm tra tương ứng.
 
 Kết cấu báo cáo dự kiến: **mục tiêu → phiên bản/cấu hình → raw và chất lượng → vận hành và email → Athena/thống kê → dự báo → kiểm chứng → phân công và kết luận**. Mỗi hình có CSV nguồn; mỗi số đo có cửa sổ thời gian; mỗi kết quả triển khai có commit và hash đọc lại.
 

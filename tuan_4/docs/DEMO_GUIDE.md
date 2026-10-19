@@ -142,7 +142,7 @@ Nếu chưa có nhóm chi phí trong ngày hoặc tài khoản không cho mở C
 
 Chuyển GitHub → `tuan_4/infrastructure/weather-stack.json`; lần lượt tìm `DataBucket`, `Collector`, `HourlyRule`, `SchedulePermission`, `RawTable`. Nếu đã tạo stack thật, mở CloudFormation → stack → **Resources/Outputs**; nếu chỉ đang trình bày mã template, gọi đúng là cấu hình IaC đã kiểm tra.
 
-**Nói:** “Một template khai báo 15 tài nguyên ứng dụng. Bucket riêng tư và mã hóa; source Lambda được đóng gói theo hash và version artifact. Stack mới khởi tạo với lịch tắt, bật sau kiểm thử. LabRole là role do môi trường học phần cung cấp; em không sửa role dùng chung và đã tách mẫu quyền runtime giới hạn theo bucket, Secret, topic và log group.”
+**Nói:** “Một template khai báo 17 tài nguyên ứng dụng. Bucket riêng tư và mã hóa; source Lambda được đóng gói theo hash và version artifact. Stack mới khởi tạo với lịch tắt, bật sau kiểm thử. LabRole là role do môi trường học phần cung cấp; em không sửa role dùng chung và đã tách mẫu quyền runtime giới hạn theo bucket, Secret, topic và log group.”
 
 ### Bước J — Kết thúc và bàn giao
 

@@ -19,7 +19,8 @@ def validate_contract(template):
     resources = template['Resources']
     required = {'DataBucket', 'BucketPolicy', 'ApiConfig', 'AlertTopic', 'EmailSubscription',
                 'Collector', 'CollectorLogs', 'HourlyRule', 'SchedulePermission', 'Database',
-                'RawTable', 'QueryWorkgroup', 'ErrorsAlarm', 'Dashboard', 'AlarmTopicPolicy'}
+                'RawTable', 'QueryWorkgroup', 'ErrorsAlarm', 'Dashboard', 'AlarmTopicPolicy',
+                'ResultMetricFilter', 'ErrorMetricFilter'}
     if not required <= resources.keys():
         raise ValueError('Incomplete stack')
     if any(r['Type'].startswith('AWS::IAM::') for r in resources.values()):
@@ -48,17 +49,18 @@ def validate_contract(template):
 
 
 def build(output):
-    template = json.loads(TEMPLATE.read_text(encoding='utf-8'))
+    template_bytes = TEMPLATE.read_text(encoding='utf-8').encode('utf-8')
+    template = json.loads(template_bytes)
     checks = validate_contract(template)
     output.mkdir(parents=True, exist_ok=False)
     source = (ROOT / 'tuan_2/lambda/lambda_function.py').read_text(encoding='utf-8').replace('\r\n', '\n').encode()
     artifact = package(source)
     (output / 'collector.zip').write_bytes(artifact)
-    (output / TEMPLATE.name).write_bytes(TEMPLATE.read_bytes())
+    (output / TEMPLATE.name).write_bytes(template_bytes)
     proof = {'status': 'PASS', **checks, 'source_path': 'tuan_2/lambda/lambda_function.py',
              'source_sha256': hashlib.sha256(source).hexdigest(),
              'artifact_sha256': hashlib.sha256(artifact).hexdigest(),
-             'template_sha256': hashlib.sha256(TEMPLATE.read_bytes()).hexdigest(),
+             'template_sha256': hashlib.sha256(template_bytes).hexdigest(),
              'aws_stack_created': False}
     write_json(output / 'build.json', proof)
     return proof

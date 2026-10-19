@@ -24,7 +24,7 @@ class TemplateTests(unittest.TestCase):
         self.template = json.loads(stack.TEMPLATE.read_text(encoding='utf-8'))
 
     def test_complete_stack_has_no_iam_mutation(self):
-        self.assertEqual(stack.validate_contract(self.template)['resource_count'], 15)
+        self.assertEqual(stack.validate_contract(self.template)['resource_count'], 17)
 
     def test_alarm_topic_policy_must_bind_source_alarm(self):
         statement = self.template['Resources']['AlarmTopicPolicy']['Properties']['PolicyDocument']['Statement'][0]

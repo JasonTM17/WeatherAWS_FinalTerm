@@ -8,7 +8,7 @@
 | 4 | [Nhật ký Tuần 4](../tuan_4/docs/WORKLOG.md) · [CSV](../tuan_4/worklog.csv) | Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 10,0 giờ; tổng 20,0 giờ |
 | Toàn bộ | [CSV tổng hợp](../worklog.csv) | Tổng cộng 78,0 giờ (Tiến Sơn: 39,5 giờ; Ngọc Quyên: 38,5 giờ) |
 
-Phân công và số giờ được nhóm xác nhận và ghi nhất quán trong từng báo cáo. Tổng thời gian toàn bộ đồ án bốn tuần là 78,0 giờ. Tuần 1 giữ nguyên bộ CSV 156 bản ghi đã nộp. Phân tích bổ sung Tuần 2 dùng hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tuần 3 tích hợp đầy đủ hệ thống, Athena, Dashboard và dự báo. Tuần 4 hoàn thành IaC CloudFormation, kiểm thử tổng thể, đối chiếu log-metric-S3, báo cáo chi phí, rà soát an toàn thông tin và kịch bản video demo.
+Phân công và số giờ được nhóm xác nhận và ghi nhất quán trong từng báo cáo. Tổng thời gian toàn bộ đồ án bốn tuần là 78,0 giờ. Tuần 1 giữ nguyên bộ CSV 156 bản ghi đã nộp. Phân tích bổ sung Tuần 2 dùng hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tuần 3 tích hợp đầy đủ hệ thống, Athena, Dashboard và dự báo. Tuần 4 có bộ hạ tầng CloudFormation, công cụ kiểm thử và mốc đối chiếu trực tiếp ngày 19/10; hồ sơ chi phí, bảo mật và kịch bản video dẫn tới sản phẩm tương ứng.
 
 [Minh chứng vận hành đã lưu](saved-evidence.md) tổng hợp phản hồi Lambda và năm mã truy vấn đã đối chiếu với CSV.
 
@@ -47,9 +47,9 @@ Các mốc trên bổ sung minh chứng kỹ thuật; không tự cộng vào 38
 
 Tổng theo tuần đã xác nhận: 10,0 giờ cho sinh viên Tiến Sơn và 10,0 giờ cho sinh viên Ngọc Quyên, không ghi ngày hoặc phân bổ từng đầu việc. [Nhật ký và căn cứ Tuần 3](../tuan_3/docs/WORKLOG.md), [CSV tổng giờ](../tuan_3/worklog.csv). Các bảng Tuần 1–2 phía trên giữ nguyên tổng 38,0 giờ; cộng thêm 20,0 giờ đã xác nhận của Tuần 3 thành 58,0 giờ.
 
-## Bổ sung tổng giờ Tuần 4 (Tuần cuối hoàn thành đồ án)
+## Bổ sung giờ công Tuần 4
 
-**Đã hoàn thành xuất sắc toàn bộ kế hoạch Tuần 4 và đồ án môn học.** [Bảng sản phẩm W4-01–W4-08 và hồ sơ](../tuan_4/docs/WORKLOG.md).
+**Tổng theo tuần đã xác nhận: 20,0 giờ thực tế Tuần 4.** [Bảng sản phẩm W4-01–W4-08 và hồ sơ](../tuan_4/docs/WORKLOG.md).
 
 Tổng theo tuần đã xác nhận Tuần 4: **10,0 giờ cho sinh viên Nguyễn Tiến Sơn** và **10,0 giờ cho sinh viên Trần Thị Ngọc Quyên**.
 - [Nhật ký và căn cứ Tuần 4](../tuan_4/docs/WORKLOG.md)

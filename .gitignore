@@ -52,6 +52,13 @@ ORIGINAL_REQUEST.md
 /TEST_READY.md
 /docs/testing.md
 
+# Superseded Week 4 templates and assumption-only tables remain local.
+/tuan_4/iac/cloudformation_stack.json
+/tuan_4/iac/cloudformation_stack.yaml
+/tuan_4/results/cost/projected_cost_scenarios.csv
+/tuan_4/results/cost/cost_optimization_recommendations.csv
+/tuan_4/docs/worklog.csv
+
 # Superseded report aliases and copied logs are retained locally.
 /docs/worklog.csv
 /tuan_1/docs/worklog.csv

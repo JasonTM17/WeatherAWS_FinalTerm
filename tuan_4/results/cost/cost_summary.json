@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "profiles": [
+    {
+      "profile": "default",
+      "student": "Sinh viên Tiến Sơn",
+      "rows": 70,
+      "start_inclusive": "2026-10-12",
+      "end_exclusive": "2026-10-20",
+      "total_unblended_usd": "-3.390E-7",
+      "display_usd": "0.00",
+      "scope": "Account by service and record type, not allocated project/monthly billing"
+    },
+    {
+      "profile": "quyen",
+      "student": "Sinh viên Ngọc Quyên",
+      "rows": 47,
+      "start_inclusive": "2026-10-12",
+      "end_exclusive": "2026-10-20",
+      "total_unblended_usd": "0.1364702401",
+      "display_usd": "0.14",
+      "scope": "Account by service and record type, not allocated project/monthly billing"
+    }
+  ],
+  "source": "verification_2026_10_19/environment/*/cost_by_service.csv"
+}

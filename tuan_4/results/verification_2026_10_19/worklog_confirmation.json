@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-19",
+  "basis": "Direct user confirmation of actual hours",
+  "week4_hours": {
+    "24110054": "10.0",
+    "24110051": "10.0"
+  },
+  "total_week4_hours": "20.0",
+  "all_weeks_hours": "78.0"
+}
