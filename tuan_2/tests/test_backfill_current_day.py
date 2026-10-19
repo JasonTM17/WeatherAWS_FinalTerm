@@ -1,9 +1,12 @@
 """Fixed-clock regressions for collecting the latest completed UTC hours."""
 from datetime import datetime, timedelta, timezone
+import sys
+from pathlib import Path
 from unittest.mock import patch
 import unittest
 from urllib.parse import parse_qs, urlparse
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from test_lambda_function import lambda_function
 
 
