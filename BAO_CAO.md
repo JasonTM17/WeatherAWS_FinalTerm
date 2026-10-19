@@ -6,7 +6,7 @@
 
 **Học phần:** Điện toán đám mây · **Lớp:** 261CLCO332779_05 · **Giảng viên hướng dẫn:** ThS. Huỳnh Xuân Phụng.
 
-**Mốc tích hợp:** 18/10/2026 · **Cập nhật dữ liệu và hồ sơ:** 19/10/2026, múi giờ Việt Nam (UTC+7).
+**Mốc tích hợp:** 18/10/2026 · **Cập nhật dữ liệu và hồ sơ:** 19/10/2026.
 
 ## 1. Mục tiêu và phạm vi thực hiện
 
@@ -52,9 +52,9 @@ Ba commit trực tiếp thể hiện các thay đổi chính:
 
 ## 4. Quy mô dữ liệu raw và kiểm tra chất lượng
 
-Bản xuất S3 ngày **19/10/2026**, chốt lúc **14:22–14:23 UTC+7**, lưu **302 bản ghi của sinh viên Tiến Sơn và 339 bản ghi của sinh viên Ngọc Quyên**, tổng cộng **641 bản ghi trong 95 tệp JSON gốc**. Trong đó, sinh viên Tiến Sơn có 43 tệp JSON, sinh viên Ngọc Quyên có 52 tệp. CSV giữ đủ 23 trường, gồm định danh, đô thị, tọa độ, thời gian, các chỉ số khí tượng, chất lượng không khí và khóa phân vùng.
+Bản xuất S3 cập nhật ngày **19/10/2026** lưu **302 bản ghi của sinh viên Tiến Sơn và 339 bản ghi của sinh viên Ngọc Quyên**, tổng cộng **641 bản ghi trong 95 tệp JSON gốc**. Trong đó, sinh viên Tiến Sơn có 43 tệp JSON, sinh viên Ngọc Quyên có 52 tệp. CSV giữ đủ 23 trường, gồm định danh, đô thị, tọa độ, thời gian, các chỉ số khí tượng, chất lượng không khí và khóa phân vùng.
 
-Riêng dữ liệu mang ngày 19/10 theo UTC+7 có **45 bản ghi của sinh viên Tiến Sơn và 42 bản ghi của sinh viên Ngọc Quyên**. Hai lượt Lambda ở chế độ lấy lịch sử đã thu bổ sung chuỗi mô hình từ **00:00 đến 13:00**, mỗi lượt **14 giờ × 3 đô thị = 42 bản ghi**. Thống kê so sánh dùng cùng 14 giờ hoàn tất của mỗi sinh viên. Ba bản ghi trong giờ 14 của sinh viên Tiến Sơn được giữ riêng trong raw. Nguồn từng bản ghi phân biệt chế độ lấy lịch sử với các lượt thu khác.
+Tính đến lần xuất dữ liệu ngày 19/10, các bản ghi mang ngày này theo UTC+7 gồm **45 bản ghi của sinh viên Tiến Sơn và 42 bản ghi của sinh viên Ngọc Quyên**. Hai lượt Lambda ở chế độ lấy lịch sử đã thu bổ sung các giờ hoàn tất trong ngày, mỗi lượt **14 giờ × 3 đô thị = 42 bản ghi**. Thống kê so sánh dùng cùng 14 giờ hoàn tất của mỗi sinh viên. Ba bản ghi thuộc giờ đang diễn ra của sinh viên Tiến Sơn được giữ riêng trong raw. Nguồn từng bản ghi phân biệt chế độ lấy lịch sử với các lượt thu khác.
 
 Chúng em đối chiếu theo bảy nhóm kiểm tra: mã bản ghi, lược đồ, trường số bị thiếu, giá trị số không hợp lệ, UTC/UTC+7, phân vùng và thứ tự thời gian thu thập so với thời gian dữ liệu. Bản xuất của cả hai sinh viên đều đạt các kiểm tra đã khai báo. Mỗi object có đường dẫn, số dòng, thời điểm và SHA-256; toàn bộ bản ghi của bản xuất trước được bảo toàn.
 
@@ -72,7 +72,7 @@ Chúng em tổng hợp theo đô thị–giờ để các giờ có cùng trọn
 
 Trong cùng 14 giờ hoàn tất ngày 19/10, AQI trung bình của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng lần lượt là **55,857; 91,071; 47,143**. PM2.5 trung bình tương ứng là **11,557; 35,914; 13,086 µg/m³**. Các giá trị AQI và PM2.5 trung bình này bằng nhau trong hai bộ báo cáo dữ liệu do cùng nguồn mô hình, tọa độ và tập giờ đã lưu. Hà Nội có giá trị trung bình cao nhất trong ba đô thị ở mốc phân tích này.
 
-Ví dụ tại **13:00 ngày 19/10**, raw của TP. Hồ Chí Minh ghi AQI 55, PM2.5 11,3 µg/m³; Hà Nội ghi AQI 96, PM2.5 23,5 µg/m³; Đà Nẵng ghi AQI 53, PM2.5 11,4 µg/m³. Đây là giá trị từng bản ghi tại một giờ, được trình bày riêng với trung bình 14 giờ ở trên.
+Một số bản ghi minh họa ngày **19/10** ghi nhận TP. Hồ Chí Minh có AQI 55, PM2.5 11,3 µg/m³; Hà Nội có AQI 96, PM2.5 23,5 µg/m³; Đà Nẵng có AQI 53, PM2.5 11,4 µg/m³. Đây là giá trị của các bản ghi tại một thời điểm, được trình bày riêng với trung bình 14 giờ ở trên.
 
 Phần phân tích tại mốc ngày 18/10 lưu **96 dòng thống kê mô tả và 120 dòng tương quan Pearson/Spearman**, phân biệt tập bản ghi gốc với tập tổng hợp theo đô thị–giờ. Các kết quả và biểu đồ được giữ theo đúng bộ đầu vào tương ứng.
 
@@ -100,9 +100,9 @@ CloudWatch Dashboard tổng hợp số lượt gọi Lambda, lỗi, lượt bị
 
 Tỷ lệ lỗi dùng các cặp Errors/Invocations cùng hàm, dimension, timestamp UTC và chu kỳ 300 giây, với Invocations > 0 và Errors ≤ Invocations. Chúng em đã kiểm chứng biểu thức Dashboard qua sáu trường hợp trong mỗi môi trường, đọc lại cấu hình và lưu ảnh metric do AWS trả về. Các lượt thu thập theo lịch được đối chiếu theo request, số đô thị, số bản ghi và object S3.
 
-Nhánh thời gian thực kiểm tra điều kiện **AQI ≥ ngưỡng AQI hoặc PM2.5 ≥ ngưỡng PM2.5**; giá trị mặc định trong mã là 100 và 35,5 µg/m³, ngưỡng thực thi được đọc từ cấu hình môi trường. Trong lượt tự động **13:51 UTC+7 ngày 18/10** của sinh viên Ngọc Quyên, Lambda thu đủ ba đô thị, S3 có đủ ba bản ghi và kết quả 0 cảnh báo khớp các mẫu dưới ngưỡng.
+Nhánh thời gian thực kiểm tra điều kiện **AQI ≥ ngưỡng AQI hoặc PM2.5 ≥ ngưỡng PM2.5**; giá trị mặc định trong mã là 100 và 35,5 µg/m³, ngưỡng thực thi được đọc từ cấu hình môi trường. Trong một lượt tự động ngày **18/10** của sinh viên Ngọc Quyên, Lambda thu đủ ba đô thị, S3 có đủ ba bản ghi và kết quả 0 cảnh báo khớp các mẫu dưới ngưỡng.
 
-Minh chứng email được ghi đúng mốc kiểm chứng: các lượt theo lịch ngày **16/10**, khoảng **14:51 đối với sinh viên Ngọc Quyên và 15:15 đối với sinh viên Tiến Sơn**, mỗi lượt thu ba bản ghi và phát hai thông điệp SNS. Cả hai sinh viên đã xác nhận nhận email mới của các lượt này. Hồ sơ liên kết dữ liệu, log, metric SNS và xác nhận người nhận.
+Minh chứng email được ghi theo các lượt kiểm chứng ngày **16/10** của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Mỗi lượt thu ba bản ghi và phát hai thông điệp SNS. Cả hai sinh viên đã xác nhận nhận email mới của các lượt này. Hồ sơ liên kết dữ liệu, log, metric SNS và xác nhận người nhận.
 
 Dashboard và kiểm chứng cấu hình: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/monitoring_dashboard_repair_2026_10_18](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/monitoring_dashboard_repair_2026_10_18).
 
@@ -114,7 +114,7 @@ Luồng theo lịch và xác nhận email ngày 16/10: [https://github.com/Jason
 
 Chúng em đánh giá ba phương pháp cơ sở: giữ giá trị cuối, lặp lại giá trị 24 giờ trước và trung bình trượt 24 giờ. MA 3 giờ được tính bổ sung trên cùng tập giữ lại. Các phương pháp có mã nguồn, bảng dự báo và MAE/RMSE/Bias để so sánh theo từng đô thị, chỉ số. Dự báo trung bình trượt sử dụng kết quả đệ quy cho các bước tiếp theo; giá trị đích được giữ riêng khỏi đầu vào.
 
-Bản dự báo phát hành khoảng **06:24 UTC ngày 18/10** lưu **24 giờ đích × 3 đô thị × 2 chỉ số = 144 giá trị**. Kỳ đích từ **18/10 14:00 đến 19/10 13:00 UTC+7**. Đến mốc tải ngày 19/10, chúng em đã đối chiếu đủ **24/24 giờ đích và 144/144 giá trị** với nguồn mô hình CAMS tải về sau; bản dự báo phát hành được giữ nguyên cùng SHA-256.
+Bản dự báo phát hành ngày **18/10** gồm **144 giá trị**, tương ứng **24 giờ đích × 3 đô thị × 2 chỉ số**. Các giờ đích thuộc ngày **18/10 và 19/10**. Đến mốc cập nhật ngày **19/10**, chúng em đã đối chiếu đủ **24/24 giờ đích và 144/144 giá trị** với dữ liệu mô hình CAMS tải về sau. Bản dự báo phát hành được giữ nguyên và kiểm tra bằng SHA-256.
 
 MAE của AQI tại TP. Hồ Chí Minh, Hà Nội và Đà Nẵng lần lượt là **10,221; 11,031; 12,320 điểm**. MAE của PM2.5 tương ứng là **6,178; 6,619; 3,126 µg/m³**. CSV còn lưu RMSE và Bias; Bias được tính bằng trung bình của dự báo trừ giá trị mô hình tải về sau. Báo cáo gắn các sai số với đúng bản phát hành, nguồn dữ liệu và kỳ đích đã đối chiếu.
 
