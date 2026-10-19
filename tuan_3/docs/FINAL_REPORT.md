@@ -518,6 +518,8 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 ### 6.1. Cập nhật triển khai và thu dữ liệu ngày 19/10
 
+[CI hồ sơ ngày 19/10 tại commit 9471ec3](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39216764078) đã đạt 57 kiểm tra Tuần 3 và đối chiếu 492 tệp trong 14 manifest, gồm bộ raw mới và đủ 144 giá trị đối chiếu dự báo. Kết quả này kiểm chứng tính nhất quán của hồ sơ đã lưu; không được dùng thay cho bằng chứng thực thi Lambda bên dưới.
+
 [Bản sửa backfill 62f1c08](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650) đã có [CI thành công](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39215400909), sau đó được triển khai qua SDK trên hai profile AWS. Có gói sao lưu riêng, kiểm tra RevisionId và đọc lại hash/cấu hình; ngưỡng, lịch, biến môi trường được giữ nguyên. Hai lượt backfill mỗi lượt trả complete, 42 bản ghi, không có đô thị thất bại và 0 cảnh báo. Kết quả được đối chiếu với đúng object S3 đã ghi. Đây là lượt triển khai SDK ngày 19/10, tách khỏi hai lượt CD GitHub Actions ngày 18/10. [Hồ sơ triển khai và thu thập mới](../results/daily_update_2026_10_19/README.md).
 
 ## 7. Kết luận, phân công và phần tiếp tục

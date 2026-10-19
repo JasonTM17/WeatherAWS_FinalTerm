@@ -110,6 +110,8 @@ Sinh viên Tiến Sơn phụ trách thu thập, cấu hình, triển khai và gi
 
 ## 9. Kiểm tra, kết luận và phần tiếp tục
 
+Kiểm tra hồ sơ cập nhật ngày 19/10 đã đạt **57 trường hợp Tuần 3 và đối chiếu 492 tệp minh chứng trong 14 manifest**, gồm raw ngày 19/10 và đủ 24 giờ đích dự báo. CI theo đúng commit dữ liệu: https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39216764078 .
+
 Kiểm tra tệp đã lưu: `python tuan_2/scripts/repository_audit.py --check`, `python tuan_3/scripts/verify_results.py`. Bộ hồi quy: `python -m unittest discover -s tuan_3/tests -v`. Các lệnh này không chứng minh dịch vụ AWS hiện tại; [workflow CI](.github/workflows/verify-repository.yml) và [các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) ghi kết quả riêng cho từng commit.
 
 **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026**, với raw, thử nghiệm Athena, Dashboard/Metric Filters, đánh giá dự báo và CI/CD có liên kết minh chứng trực tiếp. Các tệp đã lưu được kiểm tra tính toàn vẹn và tính lại số liệu. Cập nhật ngày 19/10 bổ sung raw trong ngày, thống kê trên cùng 14 giờ hoàn tất và đối chiếu đủ 24 giờ đích dự báo. Phạm vi theo dõi tiếp là độ phủ các lượt chạy theo lịch; số liệu trong ngày được chốt theo thời điểm xuất, chưa đại diện cả 24 giờ. [Bảng đối chiếu hồ sơ trước khi nộp](tuan_3/docs/operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) phân biệt rõ sản phẩm đã hoàn thành và phạm vi đã kiểm chứng.

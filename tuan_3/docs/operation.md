@@ -20,19 +20,19 @@ python tuan_2/scripts/repository_audit.py --check
 Hai profile SDK hiện dùng là `default` cho sinh viên Tiến Sơn và `quyen` cho sinh viên Ngọc Quyên, vùng `us-east-1`. Cấp khóa phiên bằng cơ chế bảo mật của môi trường; không đặt khóa trong tham số, mã nguồn hay tệp được Git theo dõi. Các chương trình không sử dụng AWS CLI.
 
 ```bash
-python tuan_3/scripts/snapshot.py --output output/week3-new-snapshot --archive-source
+python tuan_3/scripts/snapshot.py --output output/week3-new-snapshot --archive-source --release-proof tuan_3/results/daily_update_2026_10_19/release
 python tuan_3/scripts/benchmark.py --snapshot output/week3-new-snapshot --output output/week3-new-benchmark --run-id rnew
 python tuan_3/scripts/dashboard.py --output output/week3-new-dashboard --backup output/week3-private-backups
 python tuan_3/scripts/forecast.py --output output/week3-new-forecast
 python tuan_3/scripts/metric_filters.py --output output/week3-new-filters --backup output/week3-private-filter-backups
-python tuan_3/scripts/check_operations.py --output output/week3-new-checks --release-proof tuan_3/results/cd_2026_10_18
+python tuan_3/scripts/check_operations.py --output output/week3-new-checks --release-proof tuan_3/results/daily_update_2026_10_19/release
 ```
 
 Thay `rnew` bằng mã lượt hợp lệ, chưa dùng; không ghi đè kết quả cũ. `snapshot.py --archive-source` chỉ đọc AWS và lưu nguyên byte từng JSON dưới `objects/raw/` cùng CSV, inventory/hash và thời điểm thu thập; `benchmark.py` tạo object/bảng riêng và chạy SELECT có phát sinh sử dụng dịch vụ; `dashboard.py` thay toàn bộ nội dung Dashboard riêng `WeatherAirQuality-Week3` sau khi sao lưu; `forecast.py` gọi API Open-Meteo. Đọc các điều kiện trong [kế hoạch](../../docs/WEEK_3_PLAN.md) trước khi thực hiện trên môi trường khác.
 
 Thử nghiệm không thay raw hoặc bảng Glue sản xuất. Để thu hồi tài nguyên thử nghiệm, xác minh đúng bucket/prefix/tên bảng của lượt, rồi chỉ xóa các object dưới prefix thử nghiệm và ba bảng `w3_<run-id>_*` tương ứng. Không chạy thao tác xóa theo tên rút gọn chưa đối chiếu. Dashboard cũ được phục hồi từ bản sao riêng bằng PutDashboard; nếu trước đó không có Dashboard thì có thể xóa đúng Dashboard vừa tạo. Dữ liệu Athena dưới prefix kết quả truy vấn cần được xử lý riêng theo chính sách lưu giữ.
 
-`snapshot.py` đối chiếu gói hiện hành với hồ sơ CD được công bố; dùng `--release-proof` để chọn mốc đã kiểm chứng khác, không trỏ ngầm tới bản sao riêng trên máy. Kết quả partial được đếm riêng. `check_operations.py` chỉ đọc AWS, giữ dữ liệu raw của các object được log khai báo và đối chiếu cả số dòng lẫn ngưỡng cảnh báo; không tạo lượt gọi Lambda hay thông báo mới.
+`snapshot.py` đối chiếu gói hiện hành với hồ sơ triển khai được công bố. Các lệnh trên chọn bản triển khai SDK ngày 19/10 bằng `--release-proof`; nếu bỏ cờ, chương trình vẫn dùng mốc CD ngày 18/10 và sẽ báo không khớp khi đối chiếu gói mới. Khi có lần triển khai khác, chỉ định đúng mốc đã kiểm chứng, không trỏ ngầm tới bản sao riêng trên máy. Kết quả partial được đếm riêng. `check_operations.py` chỉ đọc AWS, giữ dữ liệu raw của các object được log khai báo và đối chiếu cả số dòng lẫn ngưỡng cảnh báo; không tạo lượt gọi Lambda hay thông báo mới.
 
 `metric_filters.py` tạo hai bộ đếm dòng log trong mỗi môi trường sau khi AWS kiểm tra chính xác các mẫu; từ chối ghi đè filter cùng tên nhưng khác thiết lập. Có thể dùng `--observe-only --output output/week3-new-filter-observation` để chỉ đọc điểm metric. Không chèn log giả để chứng minh chạy thật. Filter mới không hồi tố log cũ và có thể phát sinh phí custom metrics. Nếu cần khôi phục, đối chiếu bản sao riêng: xóa đúng filter vừa tạo nếu trước đó chưa tồn tại, hoặc phục hồi đúng định nghĩa cũ; không xóa các filter khác trong log group.
 
@@ -64,6 +64,8 @@ Gói khôi phục trong runner là tệp riêng tạm thời, không được up
 Workflow không gọi trực tiếp Lambda để tạo thêm bản ghi hoặc email. Triển khai thành công chỉ chứng minh gói/cấu hình đúng tại thời điểm kiểm tra; kiểm chứng luồng theo lịch và xác nhận người nhận là bước riêng.
 
 ## 4. Kết quả thực hiện
+
+- [CI của hồ sơ cập nhật ngày 19/10, commit 9471ec3](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39216764078): thành công, 57 hồi quy Tuần 3, đối chiếu 492 tệp minh chứng trong 14 manifest, 45/42 dòng raw trong ngày và đủ 24/24 giờ đích dự báo. Đây là kiểm tra dữ liệu đã lưu; các lượt triển khai và backfill SDK có minh chứng riêng ở mục 11.
 
 - Bộ hồi quy hiện có 57 trường hợp, gồm năm trường hợp về hạng đồng hạng, thống kê, MA 3 giờ và loại giờ chưa hoàn tất khi đối chiếu mô hình tải về sau. Bảy kiểm tra tập trung vào đóng gói/cập nhật/khôi phục trước đó đã đạt; hai trường hợp lỗi triển khai đã tái hiện trước sửa. Đây là kiểm tra giả lập, chưa phải phép gây lỗi trên AWS thật. Đối chiếu 492 tệp manifest và các phép tính lại được thực hiện riêng; kết quả toàn bộ bộ thử được ghi theo lượt CI.
 - Snapshot AWS, thử nghiệm Athena và Dashboard: đã có dữ liệu thật tại [mốc 18/10](../results/integration_2026_10_18/).
