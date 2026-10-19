@@ -22,7 +22,7 @@ WeatherAWS_FinalTerm/
     docs/                    Báo cáo Word/PDF/Excel và nhật ký Tuần 2
     results/                 Bộ đầu vào, kết quả và metadata đã lưu
   tuan_3/
-    README.md                Mốc tích hợp chuẩn bị Tuần 3
+    README.md                Kết quả tích hợp và dữ liệu Tuần 3
     scripts/                 Snapshot, chất lượng, benchmark, Dashboard, dự báo, release
     tests/                   Hồi quy dữ liệu, thời gian, dự báo và triển khai
     docs/                    Báo cáo Markdown, vận hành và nhật ký kỹ thuật
@@ -48,7 +48,7 @@ WeatherAWS_FinalTerm/
 
 ## Dữ liệu và tệp tạo ra
 
-[Danh mục kết quả](../tuan_2/results/README.md) giải thích từng tập dữ liệu, các bản sao cùng số liệu và đường từ CSV tới hình. README từng tuần và bản Markdown `FINAL_REPORT.md` là nội dung đọc trực tiếp trên GitHub; Word/PDF/Excel được giữ làm bản lưu bổ sung. Hình PNG vẫn được theo dõi để xem mà không cần chạy Python. [Danh mục CSV](csv_catalog.csv), [worklog](../worklog.csv), [chỉ mục commit](components.md) và [kế hoạch Tuần 3](WEEK_3_PLAN.md) liên kết các phần của hồ sơ.
+[Danh mục kết quả](../tuan_2/results/README.md) giải thích từng tập dữ liệu, các bản sao cùng số liệu và đường từ CSV tới hình. README từng tuần và bản Markdown `FINAL_REPORT.md` là nội dung đọc trực tiếp trên GitHub; Word/PDF/Excel được giữ làm bản lưu bổ sung. Hình PNG vẫn được theo dõi để xem mà không cần chạy Python. [Danh mục CSV](csv_catalog.csv), [worklog](../worklog.csv), [chỉ mục commit](components.md), [kết quả kế hoạch Tuần 3](WEEK_3_PLAN.md) và [kế hoạch Tuần 4](WEEK_4_PLAN.md) liên kết các phần của hồ sơ.
 
 Các lượt xuất tùy chọn nên ghi vào `output/`, được Git bỏ qua. Cache Python, tệp tạm Office, gói triển khai Lambda và thư mục làm báo cáo tạm cũng được bỏ qua. Tệp CSV ZIP cũ được giữ ở máy; repo cung cấp thư mục CSV đã giải nén để xem trực tiếp.
 

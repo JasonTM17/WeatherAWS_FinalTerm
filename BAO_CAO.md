@@ -10,13 +10,13 @@ Repository: [https://github.com/JasonTM17/WeatherAWS_FinalTerm](https://github.c
 
 ## 1. Kết quả và phạm vi báo cáo
 
-Chúng em đã xây dựng luồng thu thập dữ liệu Open-Meteo theo lịch EventBridge, xử lý bằng Lambda, lưu raw phân vùng ngày trên S3 và truy vấn bằng Glue/Athena. SNS giữ kênh cảnh báo email; CloudWatch lưu log/metric và Dashboard. Dữ liệu thời tiết/chất lượng không khí là dữ liệu mô hình, không phải phép đo trực tiếp tại trạm.
+Chúng em đã xây dựng luồng thu thập dữ liệu Open-Meteo theo lịch EventBridge, xử lý bằng Lambda, lưu raw phân vùng ngày trên S3 và truy vấn bằng Glue/Athena. SNS giữ kênh cảnh báo email; CloudWatch lưu log/metric và Dashboard. Dữ liệu thời tiết và chất lượng không khí được cung cấp từ mô hình Open-Meteo/CAMS, có ghi nguồn và thời điểm tải.
 
 Tuần 1 tập trung kiến trúc, nền tảng lưu trữ/cấu hình và bộ dữ liệu 156 bản ghi. Tuần 2 hoàn thiện thu thập, truy vấn/phân tích, triển khai mã và kiểm chứng cảnh báo. **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** Các sản phẩm gồm bản xuất raw, thử nghiệm Projection/Parquet, Dashboard/Metric Filters, đánh giá dự báo và CI/CD.
 
 ## 2. Dữ liệu mới và chất lượng
 
-**Cập nhật ngày 19/10/2026:** đã dùng phiên AWS của hai sinh viên để thu chuỗi lịch sử bằng Lambda và đọc lại S3. Raw tích lũy hiện có **302 bản ghi của sinh viên Tiến Sơn và 339 của sinh viên Ngọc Quyên**, tổng **641 bản ghi, 95 JSON gốc**. Riêng ngày 19/10 có **45 và 42 bản ghi** đến lúc xuất 14:22–14:23. Thống kê dùng cùng **14 giờ hoàn tất, 00:00–13:00 UTC+7**, tương ứng 42 bản ghi mỗi sinh viên. Ba bản ghi trong giờ đang diễn ra của sinh viên Tiến Sơn được giữ riêng ở raw. Chuỗi backfill được thu bổ sung từ mô hình, không xem là các lượt tự động đã chạy trước đó.
+**Cập nhật ngày 19/10/2026:** đã dùng phiên AWS của hai sinh viên để thu chuỗi lịch sử bằng Lambda và đọc lại S3. Raw tích lũy hiện có **302 bản ghi của sinh viên Tiến Sơn và 339 của sinh viên Ngọc Quyên**, tổng **641 bản ghi, 95 JSON gốc**. Riêng ngày 19/10 có **45 và 42 bản ghi** đến lúc xuất 14:22–14:23. Thống kê dùng cùng **14 giờ hoàn tất, 00:00–13:00 UTC+7**, tương ứng 42 bản ghi mỗi sinh viên. Ba bản ghi trong giờ đang diễn ra của sinh viên Tiến Sơn được giữ riêng ở raw. Chuỗi backfill là phần thu bổ sung từ mô hình; nguồn và chế độ thu được ghi theo từng bản ghi, riêng với các lượt theo lịch.
 
 Dữ liệu ngày 19/10, CSV/JSON và minh chứng Lambda–S3: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/README.md .
 
@@ -30,9 +30,9 @@ Dữ liệu ngày 19/10, CSV/JSON và minh chứng Lambda–S3: https://github.c
 
 Sau khi cập nhật phiên Lab, snapshot đọc được **246 bản ghi của sinh viên Tiến Sơn** và **285 bản ghi của sinh viên Ngọc Quyên**. Timestamp cuối lần lượt là 18/10 08:15:46 và 08:51:05 UTC. Bảy nhóm kiểm tra chất lượng đã khai báo không phát hiện lỗi. Cả hai Lambda khớp gói đã được triển khai và kiểm chứng.
 
-[Raw sinh viên Tiến Sơn](tuan_3/results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Raw sinh viên Ngọc Quyên](tuan_3/results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) · [Nguồn, cửa sổ và giới hạn snapshot](tuan_3/results/refresh_2026_10_18/README.md).
+[Raw sinh viên Tiến Sơn](tuan_3/results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Raw sinh viên Ngọc Quyên](tuan_3/results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) · [Nguồn và thời điểm chốt dữ liệu](tuan_3/results/refresh_2026_10_18/README.md).
 
-Raw được giữ nguyên từng lượt. Phân tích theo đô thị–giờ lấy trung bình các lượt cùng giờ để tránh cho giờ có nhiều lượt thu trọng số cao hơn. Các tỷ lệ bản ghi không được diễn giải thành tỷ lệ thời gian của toàn tuần; tương quan không được dùng để kết luận quan hệ nhân quả.
+Raw được giữ nguyên từng lượt. Phân tích theo đô thị–giờ lấy trung bình các lượt cùng giờ để tránh cho giờ có nhiều lượt thu trọng số cao hơn. Tỷ lệ được tính trên các bản ghi đã lưu; hệ số tương quan mô tả mức liên hệ giữa các chỉ số trong cùng tập phân tích.
 
 ## 3. Thống kê mô tả và liên hệ giữa các chỉ số
 
@@ -48,19 +48,19 @@ Raw được giữ nguyên từng lượt. Phân tích theo đô thị–giờ l
 
 Thử nghiệm đã chạy 18 truy vấn: ba lần đo cho mỗi cấu hình trong mỗi môi trường, tắt sử dụng lại kết quả. Ba cấu hình gồm NDJSON có phân vùng đăng ký, NDJSON với Projection và Parquet Snappy với Projection. Dữ liệu Parquet được tạo bằng PyArrow, không dùng CTAS. Thử nghiệm dùng bộ raw ban đầu 237/273 đã đóng băng; snapshot mới không thay đầu vào của các truy vấn lịch sử.
 
-Parquet giảm byte quét khoảng 80,59% và 96,50% trong từng môi trường. Tuy nhiên, Parquet không luôn nhanh hơn NDJSON Projection: với sinh viên Ngọc Quyên, engine trung vị 515 ms so với 431 ms. Không quy giảm byte quét thành mức tiết kiệm tiền. Byte/thời gian đo thuộc toàn truy vấn trả ba đô thị, không phân bổ thành số đo riêng của mỗi đô thị.
+Parquet giảm byte quét khoảng 80,59% và 96,50% trong từng môi trường. Thời gian được đánh giá riêng: ở môi trường sinh viên Ngọc Quyên, engine trung vị của Parquet là 515 ms, NDJSON Projection là 431 ms. Byte và thời gian là số đo của toàn truy vấn trả ba đô thị; chi phí được theo dõi riêng bằng Cost Explorer.
 
 [18 lượt đo và query ID](tuan_3/results/integration_2026_10_18/benchmark/) · [Bảng chi tiết và kết quả từng đô thị](tuan_3/docs/FINAL_REPORT.md#3-partition-projection-và-parquet).
 
 ## 5. Dự báo và đối chiếu dữ liệu tải về sau
 
-Phép đánh giá ban đầu dùng 149 giờ huấn luyện và 24 giờ giữ lại cho mỗi đô thị/chỉ số, so sánh giá trị cuối, lặp 24 giờ trước và MA 24 giờ. Đợt cập nhật bổ sung MA 3 giờ đệ quy, có mã tính và CSV riêng. Đây là phân tích bổ sung sau khi đã xem tập giữ lại, không phải một phép đánh giá độc lập mới để lựa chọn mô hình.
+Phép đánh giá ban đầu dùng 149 giờ huấn luyện và 24 giờ giữ lại cho mỗi đô thị/chỉ số, so sánh giá trị cuối, lặp 24 giờ trước và MA 24 giờ. Đợt cập nhật bổ sung MA 3 giờ đệ quy, có mã tính và CSV riêng. MA 3 giờ được trình bày là phân tích khám phá bổ sung trên cùng tập giữ lại; các kỳ dự báo phát hành trước giờ đích được theo dõi riêng.
 
 [Mã phân tích bổ sung](tuan_3/scripts/reconcile_analysis.py) · [24 bộ sai số MAE/RMSE/Bias](tuan_3/results/refresh_2026_10_18/analysis/ma_comparison_metrics.csv) · [576 dòng giá trị đích/dự báo](tuan_3/results/refresh_2026_10_18/analysis/ma_comparison_predictions.csv).
 
 ![So sánh các phương pháp trên cùng tập giữ lại](tuan_3/results/refresh_2026_10_18/analysis/holdout_ma_comparison.png)
 
-Bản cập nhật ngày **19/10**, cutoff **07:00 UTC**, đã đối chiếu đủ **24/24 giờ đích, 144/144 giá trị** với dữ liệu CAMS tải về sau. Giữ nguyên bản dự báo phát hành khoảng 06:24 UTC ngày 18/10. Kỳ đối chiếu từ 18/10 14:00 đến 19/10 13:00 UTC+7; đây không phải 24 giờ trọn ngày 19/10 hoặc số đo trạm.
+Bản cập nhật ngày **19/10**, cutoff **07:00 UTC**, đã đối chiếu đủ **24/24 giờ đích, 144/144 giá trị** với dữ liệu CAMS tải về sau. Giữ nguyên bản dự báo phát hành khoảng 06:24 UTC ngày 18/10. Kỳ đối chiếu từ 18/10 14:00 đến 19/10 13:00 UTC+7, sử dụng giá trị mô hình CAMS tải về sau theo đúng từng giờ đích.
 
 Bản phát hành gốc: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/forecast_issued_2026_10_18/forecast_24h.csv .
 
@@ -74,7 +74,7 @@ Hai môi trường đã có CD thành công, gói tải lại từ AWS khớp ar
 
 [Hồ sơ CD](tuan_3/results/cd_2026_10_18/) · [Lượt sau sửa cấu hình](tuan_3/results/post_repair_2026_10_18/README.md) · [Email đã được người nhận xác nhận ngày 16/10](docs/scheduled-run-verification.md).
 
-Đã đối chiếu số liệu CloudWatch theo timestamp UTC và kiểm chứng biểu thức Dashboard trên sáu trường hợp trong mỗi môi trường; cấu hình đọc lại khớp. Trong cửa sổ 07:40–10:40 UTC, sinh viên Tiến Sơn có hai khoảng và sinh viên Ngọc Quyên có ba khoảng đủ cặp bộ đếm hợp lệ; tỷ lệ lỗi trên các khoảng này là 0%. Phạm vi kết quả giới hạn ở các khoảng đủ dữ liệu, không đại diện cho toàn bộ cửa sổ. Minh chứng Dashboard: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/monitoring_dashboard_repair_2026_10_18/README.md .
+Đã đối chiếu số liệu CloudWatch theo timestamp UTC và kiểm chứng biểu thức Dashboard trên sáu trường hợp trong mỗi môi trường; cấu hình đọc lại khớp. Trong cửa sổ 07:40–10:40 UTC, sinh viên Tiến Sơn có hai khoảng và sinh viên Ngọc Quyên có ba khoảng đủ cặp bộ đếm hợp lệ; tỷ lệ lỗi trên các khoảng này là 0%. Mẫu số của tỷ lệ là các khoảng đủ cặp nêu trên; phương pháp ghép và dữ liệu theo thời gian được lưu trong hồ sơ kỹ thuật. Minh chứng Dashboard: https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/monitoring_dashboard_repair_2026_10_18/README.md .
 
 ## 7. Mã nguồn và commit minh chứng
 
@@ -102,16 +102,30 @@ Các commit được dẫn theo nội dung thực sự thay đổi. Minh chứng
 | Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng theo tuần đã xác nhận |
-| **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
+| **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Tổng theo tuần đã xác nhận |
 
 Sinh viên Tiến Sơn phụ trách thu thập, cấu hình, triển khai và giám sát/cảnh báo; sinh viên Ngọc Quyên phụ trách Glue/Athena, thống kê và dự báo. Hai sinh viên cùng rà soát tài liệu và số liệu.
 
-[Nhật ký kỹ thuật và tổng giờ Tuần 3](tuan_3/docs/WORKLOG.md) · [CSV Tuần 3](tuan_3/worklog.csv) · [38 giờ Tuần 1–2](worklog.csv). Tổng 20 giờ bổ sung được ghi theo tổng giờ đã xác nhận của từng sinh viên; không tự gán ngày làm hoặc chia thành giờ thực tế của từng đầu việc.
+[Nhật ký kỹ thuật và tổng giờ Tuần 3](tuan_3/docs/WORKLOG.md) · [CSV Tuần 3](tuan_3/worklog.csv) · [38 giờ Tuần 1–2](worklog.csv). Tổng 20 giờ Tuần 3 được tổng hợp theo xác nhận của từng sinh viên, kèm các mốc kỹ thuật và sản phẩm trong nhật ký.
 
-## 9. Kiểm tra, kết luận và phần tiếp tục
+## 9. Kiểm tra và kết luận
 
 Kiểm tra hồ sơ cập nhật ngày 19/10 đã đạt **57 trường hợp Tuần 3 và đối chiếu 492 tệp minh chứng trong 14 manifest**, gồm raw ngày 19/10 và đủ 24 giờ đích dự báo. CI theo đúng commit dữ liệu: https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39216764078 .
 
-Kiểm tra tệp đã lưu: `python tuan_2/scripts/repository_audit.py --check`, `python tuan_3/scripts/verify_results.py`. Bộ hồi quy: `python -m unittest discover -s tuan_3/tests -v`. Các lệnh này không chứng minh dịch vụ AWS hiện tại; [workflow CI](.github/workflows/verify-repository.yml) và [các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) ghi kết quả riêng cho từng commit.
+Kiểm tra tệp đã lưu: `python tuan_2/scripts/repository_audit.py --check`, `python tuan_3/scripts/verify_results.py`. Bộ hồi quy: `python -m unittest discover -s tuan_3/tests -v`. Các lệnh kiểm tra tính nhất quán của mã và hồ sơ đã lưu; minh chứng thực thi AWS được dẫn riêng tại mục 6. [Workflow CI](.github/workflows/verify-repository.yml) và [các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) ghi kết quả riêng cho từng commit.
 
-**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026**, với raw, thử nghiệm Athena, Dashboard/Metric Filters, đánh giá dự báo và CI/CD có liên kết minh chứng trực tiếp. Các tệp đã lưu được kiểm tra tính toàn vẹn và tính lại số liệu. Cập nhật ngày 19/10 bổ sung raw trong ngày, thống kê trên cùng 14 giờ hoàn tất và đối chiếu đủ 24 giờ đích dự báo. Phạm vi theo dõi tiếp là độ phủ các lượt chạy theo lịch; số liệu trong ngày được chốt theo thời điểm xuất, chưa đại diện cả 24 giờ. [Bảng đối chiếu hồ sơ trước khi nộp](tuan_3/docs/operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) phân biệt rõ sản phẩm đã hoàn thành và phạm vi đã kiểm chứng.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026**, với raw, thử nghiệm Athena, Dashboard/Metric Filters, đánh giá dự báo và CI/CD có liên kết minh chứng trực tiếp. Các tệp đã lưu được kiểm tra tính toàn vẹn và tính lại số liệu. Cập nhật ngày 19/10 bổ sung raw trong ngày, thống kê trên cùng 14 giờ hoàn tất và đối chiếu đủ 24 giờ đích dự báo. Dữ liệu ngày 19/10 được chốt lúc 14:22–14:23 UTC+7, với bảng thống kê 00:00–13:00 và nguồn từng bản ghi. [Bảng đối chiếu hồ sơ trước khi nộp](tuan_3/docs/operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) liên kết kết quả với dữ liệu, chương trình và minh chứng vận hành.
+
+## 10. Kế hoạch Tuần 4
+
+Tuần 4 dự kiến tập trung vận hành theo lịch, đối chiếu giám sát, kiểm chứng email và đánh giá dữ liệu qua nhiều mốc. Kế hoạch có tám đầu việc W4-01–W4-08, người phụ trách, sản phẩm, phụ thuộc và tiêu chí nghiệm thu. Lịch đề xuất 26/10–01/11/2026; mốc nộp theo thông báo của giảng viên.
+
+| Trọng tâm | Phân công | Sản phẩm dự kiến |
+| --- | --- | --- |
+| Phiên bản, thu thập và CloudWatch | Sinh viên Tiến Sơn | Baseline hai môi trường; raw theo ngày; bảng log–metric–S3 và Dashboard |
+| Cảnh báo AQI/PM2.5 qua email | Sinh viên Tiến Sơn; sinh viên Ngọc Quyên rà soát | Kiểm tra dưới/vượt ngưỡng, minh chứng SNS và xác nhận email theo lượt mới |
+| Athena và phân tích | Sinh viên Ngọc Quyên | 18 lượt đo trên đầu vào cố định; thống kê và biểu đồ màu khớp CSV |
+| Dự báo theo nhiều kỳ | Sinh viên Ngọc Quyên | Mục tiêu ba kỳ phát hành, mỗi kỳ 24 giờ đích; sai số theo từng đô thị/chỉ số |
+| Kiểm tra và hồ sơ nộp | Hai sinh viên | CI theo commit; báo cáo, nhật ký, liên kết mã nguồn và kịch bản trình bày |
+
+Kế hoạch chi tiết: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md). Công việc Tuần 4 được cập nhật theo sản phẩm thực hiện; giờ công được tổng hợp riêng khi hai sinh viên xác nhận.

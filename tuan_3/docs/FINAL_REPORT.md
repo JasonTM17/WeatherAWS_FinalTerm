@@ -10,7 +10,7 @@
 
 Mốc này bổ sung phần tối ưu Athena, kiểm tra chất lượng dữ liệu, CloudWatch Dashboard, thử nghiệm dự báo và đường triển khai Lambda qua GitHub Actions. Luồng thu thập hiện hành vẫn dùng mã [Lambda Tuần 2](../../tuan_2/lambda/lambda_function.py); phần mới nằm trong [các chương trình Tuần 3](../scripts/). Cảnh báo được giữ ở kênh email theo phạm vi đã thống nhất.
 
-Các lần kiểm chứng triển khai và nhận thư ngày 16/10 được dẫn lại như minh chứng lịch sử tại [hồ sơ triển khai](../../docs/deployment-verification.md) và [hồ sơ chạy theo lịch](../../docs/scheduled-run-verification.md). Việc bổ sung chương trình và Dashboard ngày 18/10 không tự tạo ra một xác nhận nhận email mới.
+Các lần kiểm chứng triển khai và nhận thư ngày 16/10 được dẫn lại như minh chứng lịch sử tại [hồ sơ triển khai](../../docs/deployment-verification.md) và [hồ sơ chạy theo lịch](../../docs/scheduled-run-verification.md). Các kết quả Dashboard ngày 18/10 và thu thập bổ sung ngày 19/10 được trình bày theo mốc thực hiện tương ứng.
 
 ### 1.1. Đối chiếu trọng tâm Tuần 3
 
@@ -45,7 +45,7 @@ Các lần kiểm chứng triển khai và nhận thư ngày 16/10 được dẫ
 | Giờ đã hoàn tất cho mỗi đô thị | 14 | 14 |
 | Bản ghi trong giờ đang diễn ra, chỉ giữ ở raw | 3 | 0 |
 
-Hai lượt backfill thu chuỗi mô hình 00:00–13:00 UTC+7 của ngày 19/10, không khôi phục các lượt tự động trong quá khứ và không gửi cảnh báo lịch sử. Ba bản ghi khác của sinh viên Tiến Sơn ở khoảng 14:15 vẫn được giữ; thống kê so sánh chỉ dùng giờ hoàn tất trước 14:00. Bản chốt giữa ngày không đại diện đủ 24 giờ ngày 19/10.
+Hai lượt backfill thu bổ sung chuỗi mô hình 00:00–13:00 UTC+7 của ngày 19/10, có chế độ lịch sử và kết quả 0 cảnh báo. Bảng nguồn từng bản ghi phân biệt backfill với các lượt thu khác. Ba bản ghi của sinh viên Tiến Sơn ở khoảng 14:15 được giữ trong raw; bảng thống kê sử dụng 14 giờ hoàn tất trước 14:00, theo bản xuất lúc 14:22–14:23.
 
 | Sinh viên | Đô thị | Giờ hoàn tất | AQI TB | PM2.5 TB (µg/m³) | Nhiệt độ TB (°C) | Độ ẩm TB (%) | Gió TB (km/h) |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -56,7 +56,7 @@ Hai lượt backfill thu chuỗi mô hình 00:00–13:00 UTC+7 của ngày 19/10
 | Sinh viên Ngọc Quyên | Hà Nội | 14 | 91,071 | 35,914 | 27,293 | 82,929 | 4,171 |
 | Sinh viên Ngọc Quyên | Đà Nẵng | 14 | 47,143 | 13,086 | 26,914 | 86,571 | 5,107 |
 
-AQI/PM2.5 ở cùng giờ có thể bằng nhau vì hai sinh viên dùng cùng tọa độ và nguồn mô hình. Hai bộ báo cáo không được xem là hai nguồn đo độc lập. CSV còn lưu trung vị, độ lệch chuẩn mẫu và phân vị, tách phạm vi raw với đô thị–giờ.
+AQI/PM2.5 ở cùng giờ có thể bằng nhau vì hai sinh viên dùng cùng tọa độ và nguồn mô hình. Hai bộ báo cáo cùng sử dụng nguồn mô hình Open-Meteo/CAMS, với nguồn và thời điểm thu được lưu riêng. CSV còn lưu trung vị, độ lệch chuẩn mẫu và phân vị, tách phạm vi raw với đô thị–giờ.
 
 [Raw ngày 19/10, JSON gốc, chất lượng và provenance](../results/daily_update_2026_10_19/README.md) · [45 dòng sinh viên Tiến Sơn](../results/daily_update_2026_10_19/daily/default/raw_today.csv) · [42 dòng sinh viên Ngọc Quyên](../results/daily_update_2026_10_19/daily/quyen/raw_today.csv).
 
@@ -71,7 +71,7 @@ AQI/PM2.5 ở cùng giờ có thể bằng nhau vì hai sinh viên dùng cùng t
 | Sinh viên Ngọc Quyên | Hà Nội | 2026-10-19 13:00:00 | 96 | 23,5 | 31,7 | 61,0 |
 | Sinh viên Ngọc Quyên | Đà Nẵng | 2026-10-19 13:00:00 | 53 | 11,4 | 29,5 | 74,0 |
 
-Đây là một phần các trường raw để minh họa, không phải giá trị trung bình. CSV nguồn giữ đủ 23 trường, bao gồm `record_id`, `timestamp_utc` và `collected_at`; dấu thời gian của mô hình được giữ riêng với lúc Lambda thu bổ sung.
+Bảng trích các giá trị của từng bản ghi raw tại giờ 13:00. CSV nguồn giữ đủ 23 trường, bao gồm `record_id`, `timestamp_utc` và `collected_at`; dấu thời gian của mô hình được giữ riêng với lúc Lambda thu bổ sung.
 
 ![AQI và PM2.5 ngày 19/10 trên 14 giờ đã hoàn tất](../results/daily_update_2026_10_19/daily_aqi_pm25.png)
 
@@ -112,7 +112,7 @@ Các giá trị trên được trích trực tiếp từ CSV gốc. Đây là b�
 | Số nhóm kiểm tra chất lượng phát hiện lỗi | 0/7 | 0/7 |
 | Mã Lambda khớp gói đã kiểm chứng | Có | Có |
 
-Raw giữ đủ 23 trường. Bảy nhóm kiểm tra chất lượng đã khai báo đều bằng 0 trong hai bộ này; đây không phải xác nhận độ chính xác ngoài thực địa. [Raw sinh viên Tiến Sơn](../results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Raw sinh viên Ngọc Quyên](../results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) · [Manifest](../results/refresh_2026_10_18/manifest.json).
+Raw giữ đủ 23 trường. Cả hai bộ đều đạt bảy nhóm kiểm tra chất lượng dữ liệu đã khai báo. [Raw sinh viên Tiến Sơn](../results/refresh_2026_10_18/snapshot/default/raw_all.csv) · [Raw sinh viên Ngọc Quyên](../results/refresh_2026_10_18/snapshot/quyen/raw_all.csv) · [Manifest](../results/refresh_2026_10_18/manifest.json).
 
 ### 2.1. Thống kê mô tả tính lại từ raw
 
@@ -180,7 +180,7 @@ Raw giữ đủ 23 trường. Bảy nhóm kiểm tra chất lượng đã khai b
 
 ![AQI theo giờ](../results/refresh_2026_10_18/analysis/city_hour_aqi.png)
 
-Thanh sai số là độ lệch chuẩn giữa các giá trị giờ, không phải khoảng tin cậy. n trên hình là số nhóm đô thị–giờ; không phải số ngày hay tổng số raw.
+Thanh sai số biểu diễn độ lệch chuẩn giữa các giá trị giờ; n trên hình là số nhóm đô thị–giờ dùng để tính thống kê.
 
 ### 2.2. Liên hệ Pearson và Spearman theo đô thị–giờ
 
@@ -234,11 +234,11 @@ Các hệ số mô tả liên hệ trong tập đã lưu. Không dùng tương q
 | Sinh viên Ngọc Quyên | Hà Nội | 95 | 0 (0,00%) | 56 (58,95%) | 14 (14,74%) | 25 (26,32%) | 0 (0,00%) | 0 (0,00%) |
 | Sinh viên Ngọc Quyên | Đà Nẵng | 95 | 31 (32,63%) | 57 (60,00%) | 4 (4,21%) | 3 (3,16%) | 0 (0,00%) | 0 (0,00%) |
 
-Tỷ lệ là tỷ lệ bản ghi trong mẫu, không phải tỷ lệ thời gian của cả tuần. AQI trung bình theo giờ và phân bố từng bản ghi là hai phép tổng hợp khác nhau. Các mức dùng để mô tả dữ liệu, không thay thế khuyến cáo y tế.
+Mẫu số của tỷ lệ là số bản ghi trong từng đô thị/bộ dữ liệu. Bảng phân bố mô tả cấp AQI của các bản ghi; hình trung bình theo giờ sử dụng phép tổng hợp đô thị–giờ.
 
 ### 2.4. Kiểm soát thời gian và tính toàn vẹn
 
-Đã đối chiếu UTC/UTC+7, khóa phân vùng UTC, lược đồ và các trường số theo bảy nhóm kiểm tra đã khai báo. Mỗi object S3 được đọc với điều kiện ETag và lưu SHA-256; toàn bộ trường JSON được đối chiếu với CSV. Thao tác này bảo vệ từng object tại lúc đọc, không tạo một giao dịch nguyên tử trên toàn bucket. Các giá trị Open-Meteo là dữ liệu mô hình, không phải số đo trực tiếp tại trạm. Raw ngày 18/10 được dùng cho công việc tích hợp Tuần 3 và giữ nguyên timestamp; độ phủ của khoảng lịch 19–25/10 được tính riêng theo thời điểm bản ghi.
+Đã đối chiếu UTC/UTC+7, khóa phân vùng UTC, lược đồ và các trường số theo bảy nhóm kiểm tra đã khai báo. Mỗi object S3 được đọc với điều kiện ETag và lưu SHA-256; toàn bộ trường JSON được đối chiếu với CSV. Thời điểm đọc, ETag và hash được ghi cho từng object. Các giá trị thời tiết và chất lượng không khí sử dụng nguồn mô hình Open-Meteo/CAMS. Raw ngày 18/10 được dùng cho công việc tích hợp Tuần 3 và giữ nguyên timestamp; độ phủ của khoảng lịch 19–25/10 được tính riêng theo thời điểm bản ghi.
 
 
 ## 3. Partition Projection và Parquet
@@ -272,9 +272,9 @@ Truy vấn lọc ngày gần nhất của mỗi bộ dữ liệu, nhóm theo đ�
 
 Nguồn từng lần đo, QueryExecutionId, truy vấn SQL và cấu hình: [sinh viên Tiến Sơn](../results/integration_2026_10_18/benchmark/default/), [sinh viên Ngọc Quyên](../results/integration_2026_10_18/benchmark/quyen/).
 
-**Diễn giải:** Projection không đổi lượng NDJSON được quét trong truy vấn này; lợi ích thiết kế nằm ở cách xác định phân vùng, giảm phụ thuộc việc đăng ký metadata. Parquet giảm byte quét khoảng 80,59% và 96,50% so với NDJSON tương ứng, nhưng không luôn nhanh hơn: số đo của sinh viên Ngọc Quyên cho thấy Parquet chậm hơn NDJSON Projection. Mẫu chỉ có ba lần đo và dữ liệu rất nhỏ; không suy ra tiết kiệm tiền hoặc tốc độ sản xuất. Hai môi trường có ngày/số dòng khác nhau, vì vậy chỉ so các định dạng **trong cùng môi trường**.
+**Diễn giải:** Projection xác định phân vùng từ cấu hình, giảm phụ thuộc việc đăng ký metadata; lượng NDJSON được quét trong phép đo này giữ nguyên. Parquet giảm byte quét khoảng 80,59% và 96,50% so với NDJSON tương ứng. Thời gian được đánh giá riêng: với sinh viên Ngọc Quyên, engine trung vị của Parquet là 515 ms và NDJSON Projection là 431 ms. Kết quả là trung vị của ba lần đo mỗi cấu hình. Các định dạng được so sánh **trong cùng môi trường**, trên cùng ngày và số dòng đầu vào.
 
-Chưa đổi lifecycle của raw sản xuất: thử nghiệm nhỏ này chưa cung cấp lịch truy cập dài hạn, yêu cầu lưu giữ hay số đo chi phí phù hợp để lựa chọn tầng lưu trữ. Chính sách vòng đời cần được quyết định sau khi có các đầu vào đó và dự toán phí chuyển tầng/khôi phục.
+Raw sản xuất tiếp tục được giữ ở chính sách lưu trữ hiện hành để phục vụ Athena. Hướng đánh giá lifecycle sử dụng kích thước object, thời gian lưu, tần suất truy cập và chi phí chuyển tầng/khôi phục làm đầu vào.
 
 ### 3.3. Kích thước object và đánh giá lifecycle
 
@@ -283,9 +283,9 @@ Chưa đổi lifecycle của raw sản xuất: thử nghiệm nhỏ này chưa c
 | Sinh viên Tiến Sơn | 9 | 123.172 | 75.947 | 37.393 |
 | Sinh viên Ngọc Quyên | 8 | 141.734 | 69.721 | 37.321 |
 
-Nguồn: [inventory sinh viên Tiến Sơn](../results/integration_2026_10_18/benchmark/default/storage_inventory.csv), [inventory sinh viên Ngọc Quyên](../results/integration_2026_10_18/benchmark/quyen/storage_inventory.csv). Đây là object thử nghiệm cùng 20 cột nội dung, không phải tổng dung lượng toàn bộ bucket sản xuất. Mọi object trong cả hai tập đều nhỏ hơn 128 KiB.
+Nguồn: [inventory sinh viên Tiến Sơn](../results/integration_2026_10_18/benchmark/default/storage_inventory.csv), [inventory sinh viên Ngọc Quyên](../results/integration_2026_10_18/benchmark/quyen/storage_inventory.csv). Dung lượng trong bảng được tính cho các object thử nghiệm có cùng 20 cột nội dung. Mọi object trong cả hai tập đều nhỏ hơn 128 KiB.
 
-Theo [điều kiện chuyển tầng S3 Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html), cấu hình mới mặc định không chuyển các object dưới 128 KB; phí yêu cầu chuyển tầng có thể vượt lợi ích lưu trữ với object nhỏ. Glacier Flexible Retrieval còn cần khôi phục trước khi đọc và có thời hạn lưu tối thiểu. Vì vậy chưa áp dụng chuyển tầng cho raw đang được Athena đọc thường xuyên. Cần đánh giá gộp object, thời gian lưu và tần suất truy cập trước; chưa có căn cứ báo một khoản tiền tiết kiệm cụ thể.
+Theo [điều kiện chuyển tầng S3 Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html), cấu hình mới mặc định không chuyển các object dưới 128 KB; phí yêu cầu chuyển tầng có thể vượt lợi ích lưu trữ với object nhỏ. Glacier Flexible Retrieval còn cần khôi phục trước khi đọc và có thời hạn lưu tối thiểu. Vì vậy raw phục vụ Athena được giữ ở tầng hiện hành; bước đánh giá tiếp theo xem xét gộp object, thời gian lưu và tần suất truy cập. Chi phí thực hành được theo dõi riêng bằng Cost Explorer.
 
 ### 3.4. Số đo từng lượt và kết quả theo đô thị
 
@@ -339,19 +339,19 @@ Dashboard gồm số lần gọi/lỗi/throttles Lambda, thời gian thực thi,
 
 ![Metric SNS của sinh viên Ngọc Quyên](../results/integration_2026_10_18/dashboard/quyen/cloudwatch_04.png)
 
-Ảnh là đầu ra thật của [GetMetricWidgetImage](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricWidgetImage.html), không phải ảnh màn hình AWS Console. Cửa sổ và kết quả xác minh nằm trong [hồ sơ Dashboard](../results/integration_2026_10_18/dashboard/). Số metric giao SNS không đồng nghĩa thư đã được đọc. Hai sinh viên đã xác nhận nhận thư của các lượt theo lịch ngày 16/10; không dùng xác nhận cũ để khẳng định có thư mới ngày 18/10.
+Ảnh được AWS trả về qua [GetMetricWidgetImage](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricWidgetImage.html), kèm cửa sổ và dữ liệu trong [hồ sơ Dashboard](../results/integration_2026_10_18/dashboard/). Hồ sơ SNS theo dõi riêng Publish, giao thông báo và xác nhận người nhận. Hai sinh viên đã xác nhận nhận email của các lượt theo lịch ngày 16/10 trong [biên bản kiểm chứng](../../docs/scheduled-run-verification.md).
 
-Phạm vi diễn giải: tỷ lệ lỗi chỉ sử dụng các khoảng có đủ cặp bộ đếm hợp lệ; dữ liệu giám sát hiện có chưa đủ để kết luận hệ thống vận hành liên tục trong toàn bộ cửa sổ.
+Tỷ lệ lỗi được tính theo các khoảng có đủ cặp bộ đếm hợp lệ; bảng mục 4.3 ghi số khoảng sử dụng làm mẫu số và số request đối chiếu.
 
-Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `WeatherCollectionHourlyRule` dư trong môi trường sinh viên Ngọc Quyên đã được tắt ở đợt trước. Snapshot ngày 18/10 tiếp tục kiểm tra rule/target. Log 24 giờ có ít lượt thành công như bảng mục 2; chưa đủ chứng minh chạy liên tục 24–48 giờ trong Learner Lab.
+Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `WeatherCollectionHourlyRule` dư trong môi trường sinh viên Ngọc Quyên đã được tắt ở đợt trước. Snapshot ngày 18/10 tiếp tục kiểm tra rule/target. Các lượt thu thập được đối chiếu riêng theo request, thời điểm và object S3 trong phiên Learner Lab.
 
 ### 4.1. Bổ sung kiểm chứng vận hành
 
 [Mốc khoảng 13:04 UTC+7](../results/operations_2026_10_18/) lưu 237/276 bản ghi; ba dòng mới trong báo cáo dữ liệu của sinh viên Ngọc Quyên được giữ riêng với mốc ban đầu 237/273. Các phép đo Athena và biểu đồ đã đóng băng vẫn dùng đúng bộ đầu vào ban đầu.
 
-Đã tạo hai Metric Filters cho từng log group: đếm dòng `Result:` và dòng `[ERROR]`, không lấp khoảng trống bằng 0 và không tạo dimension theo từng request. Các mẫu complete/partial/error/WARN/INFO được AWS kiểm tra trước khi tạo; đọc lại cấu hình khớp. Dashboard có thêm widget thứ sáu. Bộ đếm dòng log không phải số lần Lambda thất bại và không hồi tố log cũ; cần ghi riêng bằng chứng nhận log mới.
+Đã tạo hai Metric Filters cho từng log group: đếm dòng `Result:` và dòng `[ERROR]`, không lấp khoảng trống bằng 0 và không tạo dimension theo từng request. Các mẫu complete/partial/error/WARN/INFO được AWS kiểm tra trước khi tạo; đọc lại cấu hình khớp. Dashboard có thêm widget thứ sáu. Metric Filters đếm các dòng log khớp mẫu từ khi cấu hình có hiệu lực; native Errors ghi riêng chỉ số lỗi Lambda. Hồ sơ kèm các điểm metric nhận từ log mới.
 
-Đợt này còn phát hiện Secret cấu hình của sinh viên Ngọc Quyên sai định dạng JSON, khiến mã dùng dự phòng. Đã chuẩn hóa định dạng, giữ nguyên các trường vận hành, đọc lại xác minh và giữ phiên bản cũ để khôi phục. [Biên bản loại thông tin bí mật](../results/operations_2026_10_18/configuration-format-repair.json) ghi các kiểm tra đã thực hiện. [CSV đối chiếu log và raw S3](../results/operations_2026_10_18/scheduled_followup/) cho phép xem từng lượt, số bản ghi và số cảnh báo phù hợp với ngưỡng.
+Đã chuẩn hóa cấu hình JSON của sinh viên Ngọc Quyên, giữ nguyên các trường vận hành, đọc lại xác minh và giữ phiên bản cũ để khôi phục. [Biên bản loại thông tin bí mật](../results/operations_2026_10_18/configuration-format-repair.json) ghi các kiểm tra đã thực hiện. [CSV đối chiếu log và raw S3](../results/operations_2026_10_18/scheduled_followup/) cho phép xem từng lượt, số bản ghi và số cảnh báo phù hợp với ngưỡng.
 
 ### 4.2. Lượt tự động sau sửa cấu hình của sinh viên Ngọc Quyên
 
@@ -359,7 +359,7 @@ Mỗi môi trường giữ lịch chuẩn `WeatherCollectionSchedule`; lịch `W
 
 Metric Filter nhận điểm `ResultLogLines = 1` tại 06:51 UTC; [CSV](../results/post_repair_2026_10_18/filter_observation/quyen/log_metrics.csv) và [ảnh do AWS trả về](../results/post_repair_2026_10_18/cloudwatch_log_metrics.png) được giữ cùng cửa sổ. Trong truy vấn log từ 60 giây trước đến 5 giây sau dòng kết quả không có sự kiện khớp thông báo đọc Secret thất bại. Không có điểm `ErrorLogLines` được giữ là `null`, không đổi thành 0.
 
-Kết quả bổ sung xác nhận một lượt thu thập đầy đủ và nhận metric log mới ở môi trường sinh viên Ngọc Quyên sau chuẩn hóa cấu hình. Mẫu không vượt ngưỡng nên không phát sinh email cảnh báo mới; kết quả được giới hạn trong lượt kiểm chứng này, không thay thế theo dõi dài ngày.
+Kết quả bổ sung xác nhận một lượt thu thập đầy đủ và nhận metric log mới ở môi trường sinh viên Ngọc Quyên sau chuẩn hóa cấu hình. Với dữ liệu dưới ngưỡng, kết quả 0 cảnh báo khớp quy tắc đã cấu hình; log, raw và metric của lượt kiểm chứng được lưu cùng thời điểm.
 
 ### 4.3. Kiểm chứng số liệu giám sát
 
@@ -372,7 +372,7 @@ Số liệu CloudWatch được đối chiếu theo cùng hàm, timestamp UTC v�
 | Request có đủ START/END/REPORT | 2 | 3 |
 | Dòng kết quả thu thập complete | 2 | 3 |
 
-Tỷ lệ trên chỉ mô tả các khoảng đủ dữ liệu, không đại diện cho toàn bộ cửa sổ hoặc chứng minh vận hành liên tục. Những khoảng chưa đủ điều kiện được giữ ngoài phép tính. [Số liệu và phương pháp đối chiếu](../results/monitoring_followup_2026_10_18/README.md).
+Tỷ lệ 0% được tính trên hai khoảng hợp lệ của sinh viên Tiến Sơn và ba khoảng hợp lệ của sinh viên Ngọc Quyên. Danh sách khoảng và quy tắc ghép được lưu cùng dữ liệu nguồn. [Số liệu và phương pháp đối chiếu](../results/monitoring_followup_2026_10_18/README.md).
 
 Dashboard đã được đọc lại khớp cấu hình trong cả hai môi trường. Sáu trường hợp kiểm chứng biểu thức chỉ đọc trên dịch vụ ở mỗi môi trường đều đạt; cấu hình trước cập nhật được sao lưu để khôi phục khi cần. [Cấu hình và minh chứng kiểm chứng](../results/monitoring_dashboard_repair_2026_10_18/README.md).
 
@@ -380,7 +380,7 @@ Dashboard đã được đọc lại khớp cấu hình trong cả hai môi trư
 
 ### 5.1. Nguồn dữ liệu và cách chia tập
 
-Dữ liệu dùng cho thử nghiệm này được lấy trực tiếp từ Air Quality API của Open-Meteo, lưu nguyên phản hồi tại [thư mục dự báo](../results/integration_2026_10_18/forecast/) cùng [nguồn và mốc thời gian](../results/integration_2026_10_18/forecast/provenance.json). Đây là **dữ liệu mô hình CAMS**, khác với tập các lượt Lambda đã lưu. Không ghép thêm dữ liệu này vào raw thu thập và không mô tả là số đo trạm.
+Dữ liệu dùng cho thử nghiệm này được lấy trực tiếp từ Air Quality API của Open-Meteo, lưu nguyên phản hồi tại [thư mục dự báo](../results/integration_2026_10_18/forecast/) cùng [nguồn và mốc thời gian](../results/integration_2026_10_18/forecast/provenance.json). Đây là **dữ liệu mô hình CAMS**, được lưu riêng với raw của các lượt Lambda, có phản hồi API và mốc tải để truy vết.
 
 Chương trình chỉ giữ các giờ đã kết thúc trước giờ thu thập hiện tại. Mỗi đô thị có 173 giờ liên tiếp: 149 giờ đầu làm đầu vào, 24 giờ cuối được giữ lại. Tập đánh giá chung là **17/10/2026 05:00 đến 18/10/2026 04:00 UTC**. Các giờ thiếu hoặc số không hữu hạn làm đứt chuỗi; không nội suy để che khoảng trống.
 
@@ -392,7 +392,7 @@ Chương trình chỉ giữ các giờ đã kết thúc trước giờ thu thậ
 - **Seasonal naive 24 giờ:** dùng lại giá trị của từng giờ trong ngày trước; kiểm tra lợi ích của chu kỳ ngày.
 - **Trung bình trượt 24 giờ:** lấy trung bình 24 giá trị gần nhất, sau đó đưa dự báo vừa tính vào cửa sổ để dự báo giờ kế tiếp. Không đưa giá trị thực của tập giữ lại vào vòng dự báo.
 
-Kiểm tra hồi quy thay đổi toàn bộ giá trị đích vẫn giữ nguyên các dự báo, nhằm phát hiện rò rỉ tập đánh giá. MAE/RMSE/Bias được tính trên cùng 24 thời điểm; Bias = trung bình(dự báo − giá trị giữ lại). Đây là đánh giá hồi cứu trên dữ liệu mô hình được API trả về hiện tại, chưa phải đánh giá các bản dự báo lưu từ trước thời điểm đích.
+Kiểm tra hồi quy thay đổi toàn bộ giá trị đích vẫn giữ nguyên các dự báo, nhằm phát hiện rò rỉ tập đánh giá. MAE/RMSE/Bias được tính trên cùng 24 thời điểm; Bias = trung bình(dự báo − giá trị giữ lại). Đây là đánh giá hồi cứu trên dữ liệu mô hình được API trả về; bản dự báo có thời điểm phát hành và đối chiếu giờ đích được trình bày riêng ở mục 5.4–5.8.
 
 ### 5.3. Sai số MAE
 
@@ -409,7 +409,7 @@ Kiểm tra hồi quy thay đổi toàn bộ giá trị đích vẫn giữ nguyê
 
 ![Đánh giá PM2.5](../results/integration_2026_10_18/forecast/holdout_pm2_5.png)
 
-Trung bình trượt không có MAE tốt nhất trong sáu trường hợp. Vì vậy chưa có cơ sở xem đây là mô hình nên đưa vào cảnh báo thật. [CSV sai số](../results/integration_2026_10_18/forecast/forecast_metrics.csv) giữ cả RMSE và Bias; [432 dòng đánh giá](../results/integration_2026_10_18/forecast/holdout_predictions.csv) cho phép tính lại từng sai số.
+Trong sáu trường hợp, giá trị MAE thấp nhất thuộc các phương pháp cơ sở như bảng trên; trung bình trượt được giữ làm phương pháp đối chiếu. [CSV sai số](../results/integration_2026_10_18/forecast/forecast_metrics.csv) lưu cả RMSE và Bias; [432 dòng đánh giá](../results/integration_2026_10_18/forecast/holdout_predictions.csv) cho phép tính lại từng sai số. Nhánh cảnh báo thời gian thực tiếp tục sử dụng quy tắc ngưỡng AQI/PM2.5.
 
 Chương trình ban đầu xuất [144 giá trị tiếp diễn chuỗi](../results/integration_2026_10_18/forecast/forecast_24h.csv) sau mốc dữ liệu cuối 04:00 UTC. Khi đối chiếu với thời điểm lấy dữ liệu khoảng 05:32 UTC, có sáu dòng mang giờ đích 05:00 UTC. Vì vậy không coi toàn bộ tệp ban đầu là 24 giờ dự báo tương lai tại thời điểm phát hành. Tệp gốc được giữ nguyên; bản sửa thời gian nằm ở mục tiếp theo.
 
@@ -419,11 +419,11 @@ Chương trình ban đầu xuất [144 giá trị tiếp diễn chuỗi](../resu
 
 Chương trình ghi `issued_at_utc`, lấy giờ đích đầu là đầu giờ kế tiếp sau phát hành và xuất 24 giờ đích. Giờ chưa quan sát giữa dữ liệu cuối và giờ đích đầu được tính đệ quy, không lấy giá trị tương lai làm đầu vào. Với mốc phát hành khoảng 18/10 06:24 UTC, các giờ đích là 18/10 07:00 đến 19/10 06:00 UTC; toàn bộ 144 dòng có timestamp lớn hơn thời điểm phát hành.
 
-`forecast_hour` là thứ tự 1–24 sau phát hành, còn `horizon_hours` tính từ dữ liệu cuối nên bằng 2–25 trong trường hợp có một giờ trung gian. [CSV](../results/forecast_issued_2026_10_18/forecast_24h.csv), [biểu đồ AQI](../results/forecast_issued_2026_10_18/forecast_us_aqi.png) và [biểu đồ PM2.5](../results/forecast_issued_2026_10_18/forecast_pm2_5.png) dùng cùng dữ liệu. Bộ kiểm tra đối chiếu cả giờ đích, thời điểm phát hành và từng giá trị dự báo đệ quy; chưa tuyên bố độ chính xác của 24 giờ tương lai khi chưa có các giá trị đích tương ứng.
+`forecast_hour` là thứ tự 1–24 sau phát hành, còn `horizon_hours` tính từ dữ liệu cuối nên bằng 2–25 trong trường hợp có một giờ trung gian. [CSV](../results/forecast_issued_2026_10_18/forecast_24h.csv), [biểu đồ AQI](../results/forecast_issued_2026_10_18/forecast_us_aqi.png) và [biểu đồ PM2.5](../results/forecast_issued_2026_10_18/forecast_pm2_5.png) dùng cùng dữ liệu. Bộ kiểm tra đối chiếu giờ đích, thời điểm phát hành và từng giá trị dự báo đệ quy. Mục 5.8 cập nhật kết quả đánh giá đủ 24 giờ đích của bản phát hành này.
 
 ### 5.5. Thử nghiệm bổ sung MA 3 giờ có thể tính lại
 
-[reconcile_analysis.py](../scripts/reconcile_analysis.py) bổ sung MA 3 giờ đệ quy trên cùng lịch sử và tập giữ lại ban đầu (149 giờ huấn luyện/24 giờ giữ lại). Giá trị dự báo được đưa trở lại cửa sổ; không dùng giá trị đích để dự báo bước tiếp theo. Đây là phân tích bổ sung sau khi đã xem kết quả giữ lại, không phải một tập đánh giá độc lập mới và không dùng để tuyên bố khả năng tổng quát hay thay mô hình cảnh báo đang chạy.
+[reconcile_analysis.py](../scripts/reconcile_analysis.py) bổ sung MA 3 giờ đệ quy trên cùng lịch sử và tập giữ lại ban đầu (149 giờ huấn luyện/24 giờ giữ lại). Giá trị dự báo được đưa trở lại cửa sổ; không dùng giá trị đích để dự báo bước tiếp theo. Đây là phân tích khám phá bổ sung sau khi đã xem kết quả giữ lại, dùng cùng tập đánh giá để mô tả sự khác nhau giữa các cửa sổ trung bình trượt. Nhánh cảnh báo thời gian thực tiếp tục dùng ngưỡng cấu hình.
 
 | Đô thị | Chỉ số | Phương pháp | MAE | RMSE | Bias |
 | --- | --- | --- | --- | --- | --- |
@@ -456,7 +456,7 @@ Chương trình ghi `issued_at_utc`, lấy giờ đích đầu là đầu giờ 
 
 ![So sánh MA 3/24 giờ và phương pháp cơ sở](../results/refresh_2026_10_18/analysis/holdout_ma_comparison.png)
 
-MA 3 giờ không tốt hơn ở mọi chỉ số/đô thị: với PM2.5 Đà Nẵng, MAE khoảng 11,600, cao hơn MA 24 giờ khoảng 6,779. Các giá trị trong bảng chỉ hỗ trợ nhận xét trên tập giữ lại này, không đủ kết luận hiệu quả theo mùa hay cả năm.
+Trên tập giữ lại này, MA 3 giờ có MAE của PM2.5 Đà Nẵng khoảng 11,600, so với khoảng 6,779 của MA 24 giờ. Bảng sai số theo đô thị và chỉ số cho thấy kết quả phụ thuộc phương pháp và chuỗi dữ liệu; các kỳ phát hành kế tiếp được đánh giá riêng.
 
 ### 5.6. Đối chiếu một phần với dữ liệu mô hình tải về sau
 
@@ -464,7 +464,7 @@ MA 3 giờ không tốt hơn ở mọi chỉ số/đô thị: với PM2.5 Đà N
 
 [CSV đối chiếu từng giá trị](../results/refresh_2026_10_18/analysis/later_model/comparison.csv) · [Lịch sử mô hình tải về sau](../results/refresh_2026_10_18/analysis/later_model/history.csv) · [Nguồn và thời điểm tải](../results/refresh_2026_10_18/analysis/later_model/provenance.json).
 
-Đây là so sánh với giá trị CAMS tải về sau; dữ liệu mô hình có thể được tái dựng/cập nhật và không phải số đo trạm. Chưa đủ 24 giờ đích nên chưa tính một chỉ số độ chính xác đại diện cho toàn bộ kỳ dự báo. Không thay đổi các giá trị đã phát hành trong tệp gốc.
+Đây là mốc lưu sớm gồm hai giờ đích, sử dụng giá trị CAMS tải về sau và giữ nguyên tệp dự báo gốc. Kết quả cập nhật đủ 24 giờ nằm ở mục 5.8; phản hồi nguồn của từng mốc được lưu riêng.
 
 ### 5.7. Cập nhật đối chiếu giờ đích đã hoàn tất
 
@@ -479,7 +479,7 @@ Mốc tải mới giữ dữ liệu mô hình hoàn tất trước **11:00 UTC n
 | Đà Nẵng | US AQI | 4/24 | 12,032 | 12,140 | 12,032 |
 | Đà Nẵng | PM2.5 (µg/m³) | 4/24 | 2,235 | 2,335 | 2,235 |
 
-MAE/RMSE cùng đơn vị với chỉ số; Bias = dự báo trừ giá trị mô hình tải về sau. Sai số mô tả bốn giờ đã đối chiếu, không phải toàn bộ 24 giờ hay hiệu năng trên số đo trạm. Phản hồi CAMS có thể được cập nhật hồi cứu.
+MAE/RMSE cùng đơn vị với chỉ số; Bias = dự báo trừ giá trị mô hình tải về sau. Bảng là kết quả lịch sử tại mốc bốn giờ đích trên nguồn CAMS tải về sau; số liệu đủ kỳ được trình bày ở mục 5.8.
 
 [CSV 24 giá trị đối chiếu](../results/forecast_followup_2026_10_18/comparison.csv) · [Sáu bộ sai số](../results/forecast_followup_2026_10_18/comparison_metrics.csv) · [537 dòng lịch sử và nguồn API](../results/forecast_followup_2026_10_18/README.md).
 
@@ -498,7 +498,7 @@ Mốc tải ngày 19/10 với cutoff **07:00 UTC (14:00 UTC+7)** đã đối chi
 | Đà Nẵng | US AQI | 24/24 | 12,320 | 12,833 | 12,320 |
 | Đà Nẵng | PM2.5 (µg/m³) | 24/24 | 3,126 | 3,699 | -1,369 |
 
-Các chỉ số được tính lại từ bản dự báo nguyên gốc và giá trị CAMS tải về sau, không huấn luyện lại. Đủ kỳ đích không đồng nghĩa đã kiểm chứng trên số đo trạm hoặc đủ dữ liệu để đánh giá các ngày khác. Bias là trung bình của dự báo trừ giá trị mô hình tải về sau.
+Các chỉ số được tính từ bản dự báo nguyên gốc giữ nguyên và giá trị CAMS tải về sau cho đủ 24 giờ đích. Bias là trung bình của dự báo trừ giá trị mô hình tải về sau. Việc đánh giá thêm các kỳ phát hành được đưa vào kế hoạch Tuần 4.
 
 [CSV 144 giá trị và nguồn API](../results/forecast_followup_2026_10_19/README.md) · [Sáu bộ sai số](../results/forecast_followup_2026_10_19/comparison_metrics.csv).
 
@@ -518,11 +518,11 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 
 ### 6.1. Cập nhật triển khai và thu dữ liệu ngày 19/10
 
-[CI hồ sơ ngày 19/10 tại commit 9471ec3](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39216764078) đã đạt 57 kiểm tra Tuần 3 và đối chiếu 492 tệp trong 14 manifest, gồm bộ raw mới và đủ 144 giá trị đối chiếu dự báo. Kết quả này kiểm chứng tính nhất quán của hồ sơ đã lưu; không được dùng thay cho bằng chứng thực thi Lambda bên dưới.
+[CI hồ sơ ngày 19/10 tại commit 9471ec3](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39216764078) đã đạt 57 kiểm tra Tuần 3 và đối chiếu 492 tệp trong 14 manifest, gồm bộ raw mới và đủ 144 giá trị đối chiếu dự báo. CI kiểm chứng tính nhất quán của mã và hồ sơ đã lưu; minh chứng thực thi Lambda được trình bày bên dưới theo từng môi trường.
 
 [Bản sửa backfill 62f1c08](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650) đã có [CI thành công](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/runs/39215400909), sau đó được triển khai qua SDK trên hai profile AWS. Có gói sao lưu riêng, kiểm tra RevisionId và đọc lại hash/cấu hình; ngưỡng, lịch, biến môi trường được giữ nguyên. Hai lượt backfill mỗi lượt trả complete, 42 bản ghi, không có đô thị thất bại và 0 cảnh báo. Kết quả được đối chiếu với đúng object S3 đã ghi. Đây là lượt triển khai SDK ngày 19/10, tách khỏi hai lượt CD GitHub Actions ngày 18/10. [Hồ sơ triển khai và thu thập mới](../results/daily_update_2026_10_19/README.md).
 
-## 7. Kết luận, phân công và phần tiếp tục
+## 7. Kết luận và phân công
 
 **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc 18/10 và cập nhật dữ liệu ngày 19/10/2026.** Hồ sơ bám theo ba trọng tâm: tích hợp hệ thống, giám sát CloudWatch và cảnh báo AQI qua SNS. Bản xuất mới có 641 bản ghi tích lũy, 95 JSON gốc; riêng ngày 19/10 có 45/42 bản ghi và thống kê cùng 14 giờ hoàn tất của mỗi đô thị. Đã đối chiếu đủ 24 giờ đích của bản dự báo đã phát hành. Các mốc phân tích 246/285, raw 246/288 và benchmark 237/273 được giữ nguyên để truy vết kết quả lịch sử.
 
@@ -531,12 +531,26 @@ Kết quả chạy thật: [CI `c28da19`](https://github.com/JasonTM17/WeatherAW
 | Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng theo tuần đã xác nhận |
-| **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
+| **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Tổng theo tuần đã xác nhận |
 
-[Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng giờ theo tuần đã xác nhận, không ghi ngày làm hoặc phân bổ giờ thực tế theo nhiệm vụ. 38,0 giờ Tuần 1–2 giữ nguyên; 20,0 giờ Tuần 3 được ghi bổ sung theo thông tin sinh viên.
+[Worklog Tuần 3](WORKLOG.md) và [CSV](../worklog.csv) ghi tổng theo tuần đã xác nhận, kèm các mốc kỹ thuật và liên kết sản phẩm. Tổng 58,0 giờ gồm 38,0 giờ Tuần 1–2 và 20,0 giờ Tuần 3.
 
-Dữ liệu raw và các tệp minh chứng được liên kết tại mục 2. Phân công và tổng giờ đã xác nhận được tổng hợp trong [Worklog](WORKLOG.md). Các lượt chạy theo lịch đã được đối chiếu log–S3; xác nhận nhận email ngày 16/10 được lưu theo đúng mốc kiểm chứng. Dashboard của cả hai môi trường đã được đọc lại khớp cấu hình, với phương pháp kiểm soát dữ liệu giám sát tại mục 4.3. Phần dự báo cập nhật ngày 19/10 đã có 144 giá trị đối chiếu cho đủ 24 giờ đích; dữ liệu ngày 19/10 trong raw vẫn được giới hạn theo thời điểm xuất giữa ngày. [Bảng đối chiếu hồ sơ](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) giúp truy vết từng kết quả về dữ liệu và chương trình tương ứng.
+Dữ liệu raw và các tệp minh chứng được liên kết tại mục 2. Phân công và tổng giờ đã xác nhận được tổng hợp trong [Worklog](WORKLOG.md). Các lượt chạy theo lịch đã được đối chiếu log–S3; xác nhận nhận email ngày 16/10 được lưu theo đúng mốc kiểm chứng. Dashboard của cả hai môi trường đã được đọc lại khớp cấu hình, với phương pháp kiểm soát dữ liệu giám sát tại mục 4.3. Phần dự báo cập nhật ngày 19/10 đã có 144 giá trị đối chiếu cho đủ 24 giờ đích; raw ngày 19/10 được chốt lúc 14:22–14:23 UTC+7, với thống kê chung trên 00:00–13:00. [Bảng đối chiếu hồ sơ](operation.md#8-đối-chiếu-hồ-sơ-trước-khi-nộp) giúp truy vết từng kết quả về dữ liệu và chương trình tương ứng.
 
+
+## 8. Kế hoạch Tuần 4
+
+Tuần 4 tập trung vận hành, đánh giá và hoàn thiện hồ sơ, tiếp nối các kết quả tích hợp đã hoàn thành. [Kế hoạch W4-01–W4-08](../../docs/WEEK_4_PLAN.md) có phân công, đầu vào, đầu ra, thứ tự thực hiện và tiêu chí nghiệm thu. Lịch đề xuất 26/10–01/11/2026; mốc nộp thực hiện theo thông báo của giảng viên.
+
+| Nhóm công việc | Phụ trách | Kết quả dự kiến |
+| --- | --- | --- |
+| W4-01–W4-03: phiên bản, raw và giám sát | Sinh viên Tiến Sơn | Baseline hai môi trường; JSON/CSV/hash theo ngày; bảng ghép log–metric–S3 và Dashboard |
+| W4-04: cảnh báo email | Sinh viên Tiến Sơn; sinh viên Ngọc Quyên rà soát | Kiểm tra dưới/vượt ngưỡng; minh chứng Publish, giao thông báo và xác nhận email của lượt mới |
+| W4-05: truy vấn và thống kê | Sinh viên Ngọc Quyên | 18 lượt đo Athena trên đầu vào cố định; thống kê, CSV và biểu đồ màu |
+| W4-06: các kỳ dự báo kế tiếp | Sinh viên Ngọc Quyên | Mục tiêu ba kỳ phát hành 24 giờ; đối chiếu giá trị đích và MAE/RMSE/Bias theo kỳ |
+| W4-07–W4-08: kiểm tra và hồ sơ | Hai sinh viên | CI theo commit, kiểm chứng triển khai khi có thay đổi mã, báo cáo, worklog và kịch bản demo |
+
+Đầu ra Tuần 4 được lưu theo mốc riêng và liên kết về source/commit. Nhật ký, trạng thái hoàn thành và giờ công được cập nhật theo công việc thực hiện và xác nhận của từng sinh viên. [Danh sách nghiệm thu cuối tuần](../../docs/WEEK_4_PLAN.md#72-hồ-sơ-nghiệm-thu-cuối-tuần) hướng dẫn đối chiếu từng sản phẩm trước khi nộp.
 
 ## Tài liệu tham khảo
 

@@ -10,7 +10,7 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 
 | Nội dung | Liên kết |
 | --- | --- |
-| Báo cáo kỹ thuật, phương pháp và giới hạn | [Báo cáo chi tiết](docs/FINAL_REPORT.md) · [Nội dung nộp LMS](../BAO_CAO.md) |
+| Báo cáo kỹ thuật, kết quả và phương pháp | [Báo cáo chi tiết](docs/FINAL_REPORT.md) · [Nội dung nộp LMS](../BAO_CAO.md) |
 | Dữ liệu ngày 19/10 và raw tích lũy mới | [45/42 dòng trong ngày, 302/339 dòng tích lũy, 95 JSON gốc](results/daily_update_2026_10_19/README.md) |
 | Đối chiếu đủ kỳ dự báo | [24/24 giờ đích, 144/144 giá trị và nguồn CAMS tải ngày 19/10](results/forecast_followup_2026_10_19/README.md) |
 | Hướng dẫn chạy, kiểm chứng và khôi phục | [Vận hành và CI/CD](docs/operation.md) |
@@ -28,6 +28,7 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 | Dữ liệu mô hình, dự báo và sai số | [Hồ sơ dự báo](results/integration_2026_10_18/forecast/) |
 | Dự báo đã kiểm tra giờ đích sau phát hành | [Bản phát hành dự báo mới](results/forecast_issued_2026_10_18/) |
 | Tính toàn vẹn các tệp kết quả | [Manifest mốc đầu](results/integration_2026_10_18/manifest.json) · [Manifest snapshot cập nhật](results/refresh_2026_10_18/manifest.json) · [Kiểm tra toàn bộ các mốc](scripts/verify_results.py) |
+| Kế hoạch tiếp theo | [Tuần 4: phân công, sản phẩm và tiêu chí nghiệm thu](../docs/WEEK_4_PLAN.md) |
 | Kiểm tra tự động và triển khai | [CI](../.github/workflows/verify-repository.yml) · [Workflow triển khai Lambda](../.github/workflows/week3-release.yml) · [Các lượt Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) |
 
 ## Kết quả cập nhật mới nhất
@@ -40,7 +41,7 @@ Hồ sơ ghi nhận các công việc tích hợp Tuần 3 hoàn thành tại m�
 - [Raw, thống kê và ba biểu đồ màu của mốc 18/10](results/refresh_2026_10_18/README.md).
 - Mốc raw ngày 18/10 được lưu giữ riêng: [246/288 dòng, 83 JSON gốc và bảng mẫu](results/raw_export_2026_10_18/README.md).
 - Đã đối chiếu đủ **24/24 giờ đích, 144/144 giá trị**, giữ nguyên bản dự báo phát hành. [Nguồn, sai số và biểu đồ ngày 19/10](results/forecast_followup_2026_10_19/README.md).
-- Đã đối chiếu số liệu theo timestamp và kiểm chứng biểu thức Dashboard; [hai API/dimension/chu kỳ và log](results/monitoring_followup_2026_10_18/README.md) được kiểm tra, [cấu hình Dashboard](results/monitoring_dashboard_repair_2026_10_18/README.md) đã đọc lại khớp trong cả hai môi trường. Kết quả tỷ lệ được giới hạn ở các khoảng đủ dữ liệu.
+- Đã đối chiếu số liệu theo timestamp và kiểm chứng biểu thức Dashboard; [hai API/dimension/chu kỳ và log](results/monitoring_followup_2026_10_18/README.md) được kiểm tra, [cấu hình Dashboard](results/monitoring_dashboard_repair_2026_10_18/README.md) đã đọc lại khớp trong cả hai môi trường. Tỷ lệ được tính theo các khoảng có đủ cặp Errors/Invocations hợp lệ, có bảng đối chiếu theo thời gian.
 
 ## Dữ liệu bổ sung ngày 19/10
 
@@ -89,7 +90,7 @@ Mỗi giờ có trọng số bằng nhau sau khi lấy trung bình các lượt 
 | Sinh viên Ngọc Quyên | Hà Nội | 0,140 | 0,121 | -0,672 |
 | Sinh viên Ngọc Quyên | Đà Nẵng | 0,510 | -0,406 | -0,086 |
 
-Hệ số mô tả liên hệ trong mẫu, không chứng minh quan hệ nhân quả. [Đủ Pearson/Spearman và hai chỉ số đích](results/refresh_2026_10_18/analysis/correlations.csv).
+Hệ số Pearson/Spearman mô tả mức liên hệ trong tập phân tích, có số nhóm giờ và cách xử lý đồng hạng đi kèm. [Đủ hai hệ số và hai chỉ số đích](results/refresh_2026_10_18/analysis/correlations.csv).
 
 ![Ma trận liên hệ theo giờ](results/refresh_2026_10_18/analysis/hourly_correlations.png)
 
@@ -102,7 +103,7 @@ Hệ số mô tả liên hệ trong mẫu, không chứng minh quan hệ nhân q
 | NDJSON, Partition Projection | 1.556 | 11.243 | 537 | 431 |
 | Parquet Snappy, Partition Projection | 302 | 393 | 452 | 515 |
 
-Dấu chấm trong hai cột byte phân cách hàng nghìn. Số đo thuộc toàn truy vấn; không phải chi phí hóa đơn. Parquet giảm byte quét 80,59% trong báo cáo dữ liệu của sinh viên Tiến Sơn và 96,50% trong báo cáo dữ liệu của sinh viên Ngọc Quyên, nhưng chưa đủ căn cứ quy thành số tiền tiết kiệm. Các trung vị planning/total và từng lượt được lưu trong [bảng đo gốc](results/integration_2026_10_18/benchmark/).
+Dấu chấm trong hai cột byte phân cách hàng nghìn. Parquet giảm byte quét 80,59% trong báo cáo dữ liệu của sinh viên Tiến Sơn và 96,50% trong báo cáo dữ liệu của sinh viên Ngọc Quyên. Các trung vị planning/total và từng lượt được lưu trong [bảng đo gốc](results/integration_2026_10_18/benchmark/); chi phí thực hành được theo dõi riêng bằng Cost Explorer.
 
 #### Kết quả truy vấn tổng hợp ba đô thị
 
@@ -122,19 +123,19 @@ Byte quét, thời gian và planning được đo cho cả truy vấn trả ba �
 
 *Trung vị của ba lần đo, tắt sử dụng lại kết quả. CSV từng lượt: [sinh viên Tiến Sơn](results/integration_2026_10_18/benchmark/default/benchmark.csv), [sinh viên Ngọc Quyên](results/integration_2026_10_18/benchmark/quyen/benchmark.csv). Mỗi môi trường dùng ngày có dữ liệu gần nhất của chính môi trường đó; không dùng biểu đồ để so tốc độ giữa hai sinh viên.*
 
-Parquet giảm byte quét trong thử nghiệm nhỏ này. Projection trên cùng NDJSON giữ nguyên byte quét. Thời gian thực thi không giảm đồng đều: trong báo cáo dữ liệu của sinh viên Ngọc Quyên, trung vị Parquet là 515 ms, cao hơn Projection NDJSON 431 ms. Các số đo này chưa đủ để kết luận tiết kiệm chi phí hoặc hiệu năng ở quy mô lớn.
+Projection trên cùng NDJSON giữ nguyên byte quét; Parquet giảm byte quét theo kết quả trong bảng. Thời gian engine được đánh giá riêng: với sinh viên Ngọc Quyên, trung vị Parquet là 515 ms, so với 431 ms của NDJSON Projection. Mỗi số đo gắn với cấu hình, bộ đầu vào và ba lượt chạy trong môi trường tương ứng.
 
 ### Giám sát dịch vụ thật
 
 Dashboard tổng hợp số lần gọi, thời gian thực thi, thông báo SNS và lịch thu thập. Cấu hình của hai môi trường đã được đọc lại khớp; [hồ sơ kiểm chứng và ảnh metric do AWS trả về](results/monitoring_dashboard_repair_2026_10_18/README.md) được lưu để đối chiếu.
 
-Số liệu giám sát được kiểm tra tính hợp lệ trước khi tính tỷ lệ. Chỉ diễn giải các khoảng đủ dữ liệu; kết quả hiện có không đại diện cho toàn bộ thời gian vận hành. [Phương pháp và phạm vi kiểm chứng](docs/FINAL_REPORT.md#43-kiểm-chứng-số-liệu-giám-sát).
+Số liệu giám sát được đối chiếu trước khi tính tỷ lệ: hai khoảng hợp lệ của sinh viên Tiến Sơn và ba khoảng của sinh viên Ngọc Quyên, trong cửa sổ 07:40–10:40 UTC ngày 18/10. [Bộ đếm, số request và phương pháp tính](docs/FINAL_REPORT.md#43-kiểm-chứng-số-liệu-giám-sát).
 
 ### Đối chiếu dự báo với dữ liệu giữ lại
 
 ![Đánh giá AQI trên 24 giờ giữ lại](results/integration_2026_10_18/forecast/holdout_us_aqi.png)
 
-*Dữ liệu mô hình Open-Meteo/CAMS; đường thực tế trong phép đánh giá là giá trị mô hình được giữ lại, không phải số đo trạm. Phương pháp trung bình trượt không thắng các phương pháp cơ sở ở mọi trường hợp. [Sai số đầy đủ](results/integration_2026_10_18/forecast/forecast_metrics.csv) · [Giá trị từng giờ](results/integration_2026_10_18/forecast/holdout_predictions.csv).*
+*Dữ liệu mô hình Open-Meteo/CAMS; đường tham chiếu là giá trị mô hình trong 24 giờ giữ lại. Kết quả từng phương pháp được tính riêng theo đô thị/chỉ số. [Sai số đầy đủ](results/integration_2026_10_18/forecast/forecast_metrics.csv) · [Giá trị từng giờ](results/integration_2026_10_18/forecast/holdout_predictions.csv).*
 
 #### Thử nghiệm MA 3 giờ bổ sung trên cùng tập giữ lại
 
@@ -147,13 +148,17 @@ Số liệu giám sát được kiểm tra tính hợp lệ trước khi tính t
 | Đà Nẵng | US AQI | persistence | 5,458 | 6,201 | 5,630 | 12,598 |
 | Đà Nẵng | PM2.5 | seasonal_naive_24h | 6,712 | 8,171 | 11,600 | 6,779 |
 
-MA 3 giờ được tính bổ sung sau khi xem kết quả giữ lại; đây không phải tập đánh giá độc lập để lựa chọn mô hình triển khai. Không suy kết quả của 24 giờ thành độ chính xác dài hạn. [24 bộ sai số và nguồn](results/refresh_2026_10_18/analysis/ma_comparison_metrics.csv).
+MA 3 giờ là phân tích khám phá bổ sung sau khi xem kết quả giữ lại, sử dụng cùng tập đánh giá để đối chiếu các cửa sổ trung bình trượt. [24 bộ sai số và nguồn](results/refresh_2026_10_18/analysis/ma_comparison_metrics.csv).
 
 ![So sánh MA 3/24 giờ và cơ sở](results/refresh_2026_10_18/analysis/holdout_ma_comparison.png)
 
-Bản cập nhật cutoff 11:00 UTC đã so được **4/24 giờ đích (24/144 giá trị)** với dữ liệu CAMS tải về sau, giữ nguyên các giá trị dự báo đã phát hành; đây không phải số đo trạm. [CSV đối chiếu, sáu bộ sai số và nguồn](results/forecast_followup_2026_10_18/README.md).
+**Mốc lịch sử ngày 18/10, cutoff 11:00 UTC:** đã so được 4/24 giờ đích (24/144 giá trị) với dữ liệu CAMS tải về sau. [CSV và nguồn của mốc lịch sử](results/forecast_followup_2026_10_18/README.md).
 
 ![Đối chiếu bốn giờ đích](results/forecast_followup_2026_10_18/issued_vs_later_model.png)
+
+**Cập nhật mới nhất ngày 19/10, cutoff 07:00 UTC:** đã đối chiếu đủ **24/24 giờ đích, 144/144 giá trị**, giữ nguyên bản dự báo phát hành ngày 18/10. [CSV, sai số và nguồn của kết quả đủ kỳ](results/forecast_followup_2026_10_19/README.md).
+
+![Đối chiếu đủ kỳ dự báo](results/forecast_followup_2026_10_19/issued_vs_later_model.png)
 
 
 ## Mã nguồn và kiểm tra
@@ -179,7 +184,7 @@ python -m unittest discover -s tuan_3/tests -v
 python tuan_3/scripts/verify_results.py
 ```
 
-Các lệnh trên kiểm tra tệp đã lưu, không chứng minh vận hành AWS hiện tại. Cách chạy các chương trình có thao tác AWS và điều kiện khôi phục được trình bày trong [hướng dẫn vận hành](docs/operation.md).
+Các lệnh trên kiểm tra mã và tính nhất quán của hồ sơ đã lưu; minh chứng AWS được liên kết theo từng mốc thực thi. Cách chạy các chương trình có thao tác AWS và điều kiện khôi phục được trình bày trong [hướng dẫn vận hành](docs/operation.md).
 
 
 ### Tổng giờ đã xác nhận
@@ -189,10 +194,12 @@ Các lệnh trên kiểm tra tệp đã lưu, không chứng minh vận hành AW
 | Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ | Tổng theo tuần đã xác nhận |
 | Tuần 3 — công việc tích hợp | 10,0 giờ | 10,0 giờ | 20,0 giờ | Tổng theo tuần đã xác nhận |
-| **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Không suy số giờ từ thời gian hệ thống chạy |
+| **Cộng dồn** | **29,5 giờ** | **28,5 giờ** | **58,0 giờ** | Tổng theo tuần đã xác nhận |
 
 38,0 giờ thuộc hồ sơ Tuần 1–2; 20,0 giờ Tuần 3 là tổng theo tuần đã xác nhận, không phân bổ ngày. [Hai dòng CSV tổng giờ Tuần 3](worklog.csv) ghi căn cứ này riêng với các mốc kỹ thuật trong nhật ký.
 
-## Phần tiếp tục theo dõi
+## Kế hoạch Tuần 4
 
-[Nhật ký Tuần 3](docs/WORKLOG.md) ghi tổng giờ đã xác nhận và sản phẩm tích hợp đã hoàn thành. [Bản xuất raw cập nhật ngày 19/10](results/daily_update_2026_10_19/README.md) có CSV, JSON nguyên bản và thời điểm đọc AWS. Các quan sát tiếp theo được lưu thành mốc riêng để theo dõi độ phủ theo thời gian, đánh giá các kỳ dự báo tiếp theo và làm rõ giới hạn của bộ đếm CloudWatch.
+[Kế hoạch W4-01–W4-08](../docs/WEEK_4_PLAN.md) tiếp nối kết quả tích hợp Tuần 3: thu raw theo ngày, đối chiếu CloudWatch/log–S3, kiểm chứng cảnh báo email, đo Athena và đánh giá thêm ba kỳ dự báo có thời điểm phát hành. Sinh viên Tiến Sơn phụ trách vận hành/triển khai/giám sát; sinh viên Ngọc Quyên phụ trách truy vấn/phân tích/dự báo; hai sinh viên cùng rà soát hồ sơ và nhật ký.
+
+Kế hoạch có lịch đề xuất 26/10–01/11/2026, đầu ra, phụ thuộc và tiêu chí nghiệm thu cho từng đầu việc. [Nhật ký Tuần 3](docs/WORKLOG.md) giữ tổng giờ đã xác nhận; sản phẩm và giờ công Tuần 4 sẽ cập nhật theo công việc thực hiện.

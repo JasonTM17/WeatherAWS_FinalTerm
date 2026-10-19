@@ -80,3 +80,7 @@ Hồ sơ kết thúc ghi kết quả W3-01 đến W3-08, phân công/số giờ,
 - W3-01/W3-04: source sửa backfill đã qua CI và triển khai bằng SDK với backup/readback. Hai lượt thu mới mỗi lượt 42 bản ghi; bản xuất tích lũy 302/339 dòng, riêng ngày 19/10 có 45/42 dòng. Thống kê dùng cùng 14 giờ hoàn tất. [Dữ liệu và minh chứng](../tuan_3/results/daily_update_2026_10_19/README.md).
 - W3-07: đã đối chiếu đủ 24/24 giờ đích và 144/144 giá trị của bản phát hành ngày 18/10 với dữ liệu mô hình tải về sau. Đây không phải số đo trạm hay 24 giờ đầy đủ của riêng ngày 19/10. [Nguồn và sai số](../tuan_3/results/forecast_followup_2026_10_19/README.md).
 - W3-05/W3-06: giữ cấu hình giám sát/ngưỡng/lịch đã kiểm chứng. Backfill không gửi SNS lịch sử; xác nhận email 16/10 vẫn được ghi đúng mốc. Tổng giờ công không thay đổi.
+
+## Chuyển tiếp Tuần 4
+
+[Kế hoạch Tuần 4](WEEK_4_PLAN.md) xác định tám đầu việc về vận hành theo lịch, dữ liệu theo ngày, CloudWatch, email, Athena, dự báo, kiểm tra và hồ sơ nộp. Mỗi đầu việc có người phụ trách, sản phẩm, phụ thuộc và tiêu chí nghiệm thu. Lịch đề xuất 26/10–01/11/2026; nhật ký và giờ công cập nhật riêng theo công việc thực hiện.

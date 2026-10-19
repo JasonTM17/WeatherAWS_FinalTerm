@@ -31,7 +31,7 @@
 | Phân công và thời gian | [Worklog và tổng hợp các tuần](docs/WORKLOG.md) · [CSV Tuần 1–2 đã xác nhận](worklog.csv) · [Nhật ký kỹ thuật và tổng giờ Tuần 3 đã xác nhận](tuan_3/docs/WORKLOG.md) |
 | Kiến trúc và mã nguồn | [Sơ đồ kiến trúc](docs/architecture.md) · [Hướng dẫn đọc mã](docs/source-guide.md) · [Cấu trúc repository](docs/repository-layout.md) · [Chỉ mục thành phần và commit](docs/components.md) |
 | Phương pháp và kiểm chứng | [Phân tích dữ liệu](docs/data-analysis.md) · [Vận hành](docs/operation.md) · [Minh chứng vận hành đã lưu](docs/saved-evidence.md) · [Danh mục CSV và SHA-256](docs/csv_catalog.csv) |
-| AWS và kế hoạch tiếp theo | [Snapshot AWS ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) · [Kế hoạch Tuần 3](docs/WEEK_3_PLAN.md) |
+| AWS và kế hoạch tiếp theo | [Snapshot AWS ngày 16/10/2026](tuan_2/results/review_2026_10_16/README.md) · [Kết quả kế hoạch Tuần 3](docs/WEEK_3_PLAN.md) · [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md) |
 | Triển khai đã kiểm chứng | [Mã Lambda, thu thập thực tế, Athena và email cảnh báo](docs/deployment-verification.md) |
 | Chạy tự động sau triển khai | [EventBridge, log Lambda, dữ liệu mới và cảnh báo của hai lượt theo lịch](docs/scheduled-run-verification.md) |
 
@@ -51,7 +51,7 @@ Dự án trình bày một quy trình xử lý dữ liệu đầu-cuối ở quy
 
 Repository gồm mã nguồn, truy vấn SQL, nhật ký công việc, các bộ dữ liệu đã lưu, báo cáo Word/PDF/Excel và biểu đồ. Các đầu ra được tách theo từng mốc để người đọc truy vết từ bản ghi gốc, qua kết quả truy vấn và bảng phân tích, đến CSV nguồn của từng biểu đồ.
 
-Dự án **không** coi dữ liệu API là phép đo trực tiếp tại trạm, không xem một mẫu ngắn là đại diện cho toàn bộ tuần và không suy luận quan hệ nhân quả từ tương quan. Các giới hạn cụ thể được nêu ở [phần diễn giải dữ liệu](#giới-hạn-và-cách-diễn-giải) và trong [tài liệu phương pháp](docs/data-analysis.md).
+Kết quả được diễn giải theo nguồn mô hình, thời điểm chốt và tập giờ của từng bộ dữ liệu. [Nguồn dữ liệu và phương pháp diễn giải](#nguồn-dữ-liệu-và-phương-pháp-diễn-giải) cùng [tài liệu phân tích](docs/data-analysis.md) trình bày các quy tắc tính và đối chiếu.
 
 ## Luồng xử lý dữ liệu
 
@@ -297,33 +297,32 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 
 Để phân tích hoặc dựng biểu đồ từ đầu, xem [hướng dẫn tái lập và các điểm vào](docs/source-guide.md). Các chương trình tạo bảng/hình ghi vào thư mục kết quả có theo dõi bằng Git; hãy dùng bản sao làm việc và kiểm tra phần thay đổi trước khi thay thế các tệp kết quả đã lưu. Thao tác với dịch vụ AWS cần phiên Boto3 hợp lệ được cấu hình bên ngoài repository; xem [hướng dẫn vận hành](docs/operation.md). Quy trình CI được khai báo trong [.github/workflows/verify-repository.yml](.github/workflows/verify-repository.yml); trạng thái từng lần chạy xem tại [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions).
 
-## Giới hạn và cách diễn giải
+## Nguồn dữ liệu và phương pháp diễn giải
 
-- Dữ liệu chất lượng không khí từ Open-Meteo dựa trên mô hình CAMS; đây không phải phép đo tại trạm quan trắc cụ thể.
-- Bộ Tuần 2 đã lưu chỉ có dữ liệu ở hai ngày và chín khung giờ. Tỷ lệ, trung bình và tương quan trong báo cáo mô tả đúng mẫu đã lưu, không đại diện cho toàn tuần hoặc xu hướng dài hạn.
-- Các ngưỡng AQI và PM2.5 là cấu hình của đồ án. SNS nhận thông điệp hoặc có đăng ký đã xác nhận không chứng minh email được gửi tới, nhận hoặc đọc.
-- Snapshot trước triển khai ngày 16/10 ghi nhận Alarm INSUFFICIENT_DATA và mã Lambda chưa đồng bộ. [Đợt triển khai tiếp theo](docs/deployment-verification.md) xác nhận module đã đồng bộ, các lượt gọi trực tiếp thành công và Alarm OK tại lần đọc cuối; chưa chứng minh vận hành liên tục nhiều ngày.
-- Cost Explorer có cờ Estimated; số hiển thị không thay cho hóa đơn cuối cùng. Mức dự kiến do sinh viên xác nhận được báo riêng.
-- Giá trị thiếu/không chuyển đổi được có thể đi qua chính sách mặc định của mã nguồn. Khi diễn giải số 0, hãy đối chiếu dữ liệu gốc, quy tắc chuẩn hóa và bảng chất lượng dữ liệu.
-- Tương quan không chứng minh quan hệ nhân quả. Mẫu ít và thời điểm lấy mẫu khác nhau cần được nêu cùng mọi kết luận so sánh.
+- Chất lượng không khí dùng nguồn mô hình CAMS qua Open-Meteo; mỗi bộ dữ liệu giữ phản hồi nguồn và thời điểm tải.
+- Thống kê được trình bày theo bản chốt dữ liệu, đô thị và tập giờ tương ứng. Bộ Tuần 2 có dữ liệu ở hai ngày, chín khung giờ; bản cập nhật ngày 19/10 thống kê cùng 14 giờ hoàn tất cho mỗi sinh viên.
+- Cảnh báo dùng ngưỡng cấu hình của đồ án. Hồ sơ theo dõi riêng dữ liệu vượt ngưỡng, SNS Publish, giao thông báo và xác nhận người nhận; [các lượt ngày 16/10](docs/scheduled-run-verification.md) đã có xác nhận email.
+- Phiên bản triển khai, trạng thái dịch vụ và metric gắn với timestamp của từng lượt kiểm chứng. [Phương pháp vận hành](tuan_3/docs/operation.md) giải thích cách ghép bộ đếm và đối chiếu log–S3.
+- Cost Explorer được báo kèm cờ Estimated, đơn vị và thời điểm truy vấn; mức dự kiến do sinh viên xác nhận có cột riêng.
+- Bảng chất lượng ghi rõ giá trị thiếu và quy tắc chuẩn hóa; tương quan Pearson/Spearman mô tả liên hệ trong tập phân tích. Chi tiết nằm trong [tài liệu phương pháp](docs/data-analysis.md).
 
 ## Kế hoạch tiếp theo
 
-Tuần 3 tập trung tích hợp và giám sát theo [tám đầu việc W3-01–W3-08](docs/WEEK_3_PLAN.md). Các phần dưới đây là kế hoạch, được đánh giá bằng sản phẩm và số đo sau khi thực hiện.
+**Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc 18/10, cập nhật dữ liệu ngày 19/10/2026.** [Bảng W3-01–W3-08](docs/WEEK_3_PLAN.md) liên kết các sản phẩm; [báo cáo Tuần 3](tuan_3/docs/FINAL_REPORT.md) trình bày số liệu và minh chứng.
 
-[Đợt triển khai ngày 16/10](docs/deployment-verification.md) đã có bằng chứng đồng bộ mã, chỉnh lịch dư và kiểm chứng cảnh báo qua các lượt gọi trực tiếp. Các tiêu chí theo dõi lịch tự động, vận hành dài hạn và tối ưu truy vấn vẫn cần thực hiện; kết quả này không đồng nghĩa toàn bộ kế hoạch Tuần 3 đã hoàn thành.
+**Tuần 4** tiếp tục vận hành, đánh giá và hoàn thiện hồ sơ theo [kế hoạch W4-01–W4-08](docs/WEEK_4_PLAN.md). Lịch đề xuất 26/10–01/11/2026, thực hiện theo lịch học và thông báo của giảng viên.
 
-| Hướng công việc | Kết quả cần kiểm chứng |
-| --- | --- |
-| Đồng bộ phiên bản triển khai | Xác định commit và hash của gói Lambda thực chạy; lưu phiên bản trước khi cập nhật |
-| Chuẩn hóa lịch thu thập | Đối chiếu rule, target và quyền gọi hàm; giải thích lịch đang bật trước khi đánh giá mật độ dữ liệu |
-| Chất lượng dữ liệu và truy vấn | Giữ raw đầy đủ, đối chiếu thời gian, thử Partition Projection/Parquet và đo bytes quét trên cùng dữ liệu |
-| Giám sát và cảnh báo | Đối chiếu metric cùng cửa sổ thời gian; xác nhận riêng vượt ngưỡng, SNS nhận Publish và người nhận nhận thông báo |
-| Kiểm tra tự động và phân tích tiếp | Duy trì CI, đánh giá độ phủ chuỗi thời gian trước khi thử dự báo và ghi nhận sai số |
+| Hướng công việc Tuần 4 | Phụ trách | Sản phẩm dự kiến |
+| --- | --- | --- |
+| Phiên bản, raw theo ngày và giám sát | Sinh viên Tiến Sơn | Baseline, JSON/CSV/hash, bảng đối chiếu log–metric–S3, Dashboard |
+| Cảnh báo email | Sinh viên Tiến Sơn; sinh viên Ngọc Quyên rà soát | Minh chứng kiểm tra ngưỡng, SNS và xác nhận người nhận của lượt mới |
+| Athena và thống kê | Sinh viên Ngọc Quyên | Đầu vào cố định, 18 lượt đo, CSV phân tích và biểu đồ màu |
+| Dự báo nhiều kỳ | Sinh viên Ngọc Quyên | Mục tiêu ba kỳ phát hành 24 giờ, đối chiếu giá trị đích và sai số theo kỳ |
+| Mã nguồn và hồ sơ nộp | Hai sinh viên | CI theo commit, báo cáo có liên kết nguồn, worklog và kịch bản demo |
 
 ## Kết luận tiến độ
 
-Hồ sơ Tuần 1–2 có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công để đối chiếu trên GitHub. Công việc tích hợp Tuần 3 đã hoàn thành tại mốc 18/10, có bản xuất raw mới 246/288 dòng, 83 JSON gốc, thử nghiệm Projection/Parquet, Dashboard, đánh giá dự báo và CI/CD. Tổng giờ ba tuần đã xác nhận là 58,0 giờ; các lượt thu thập và quan sát tiếp theo được lưu riêng trong [hồ sơ Tuần 3](tuan_3/README.md).
+Hồ sơ Tuần 1–2 có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công để đối chiếu trên GitHub. Công việc tích hợp Tuần 3 đã hoàn thành tại mốc 18/10, gồm thử nghiệm Projection/Parquet, Dashboard, đánh giá dự báo và CI/CD. Bản xuất ngày 19/10 có 302/339 dòng tích lũy, 95 JSON gốc; kỳ dự báo phát hành đã đối chiếu đủ 24/24 giờ đích. Tổng giờ ba tuần đã xác nhận là 58,0 giờ; các lượt thu thập và quan sát tiếp theo được lưu riêng trong [hồ sơ Tuần 3](tuan_3/README.md).
 
 ## Tài liệu chi tiết
 
@@ -336,6 +335,7 @@ Hồ sơ Tuần 1–2 có dữ liệu gốc, kết quả truy vấn, bảng tổ
 - [Cài đặt và vận hành](docs/operation.md)
 - [Nhật ký công việc](docs/WORKLOG.md)
 - [Danh mục CSV, số dòng và SHA-256](docs/csv_catalog.csv)
-- [Kế hoạch Tuần 3](docs/WEEK_3_PLAN.md)
+- [Kết quả kế hoạch Tuần 3](docs/WEEK_3_PLAN.md)
+- [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md)
 
 Repository công khai: [JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm).

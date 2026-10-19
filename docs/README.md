@@ -2,7 +2,7 @@
 
 Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS Serverless, lớp 261CLCO332779_05.
 
-- [Báo cáo Nộp lại toàn diện theo nhận xét GVHD](../BAO_CAO.md)
+- [Báo cáo tiến độ nộp LMS](../BAO_CAO.md)
 - [Kiến trúc và trách nhiệm dịch vụ](architecture.md)
 - [Mô hình dữ liệu và cách phân tích](data-analysis.md)
 - [Cài đặt và vận hành](operation.md)
@@ -10,10 +10,11 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [Lượt chạy tự động theo lịch sau triển khai](scheduled-run-verification.md)
 - [Hướng dẫn đọc mã nguồn đồ án](source-guide.md)
 - [Sơ đồ mã nguồn và tệp chuẩn](repository-layout.md)
-- [Nhật ký và số giờ của nhóm](WORKLOG.md)
+- [Nhật ký và số giờ của hai sinh viên](WORKLOG.md)
 - [CSV worklog tổng hợp](../worklog.csv)
 - [Mã nguồn và commit từng thành phần](components.md)
-- [Kế hoạch Tuần 3 về tích hợp và giám sát](WEEK_3_PLAN.md)
+- [Kết quả kế hoạch Tuần 3 về tích hợp và giám sát](WEEK_3_PLAN.md)
+- [Kế hoạch Tuần 4: phân công, sản phẩm và tiêu chí nghiệm thu](WEEK_4_PLAN.md)
 - [Danh mục CSV với số dòng, cột và SHA-256](csv_catalog.csv)
 - [Đợt kiểm chứng AWS ngày 16/10](../tuan_2/results/review_2026_10_16/README.md)
 - [Minh chứng vận hành đã lưu](saved-evidence.md)
@@ -23,7 +24,7 @@ Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượ
 - [Danh mục dữ liệu và hình](../tuan_2/results/README.md)
 - [CSV Athena Tuần 2](../tuan_2/results/week2_live/) và [phân tích Tuần 2](../tuan_2/results/week2_analysis/)
 
-Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng tuần, Word, PDF, Excel và biểu đồ dùng cùng dữ liệu nguồn. Tuần 1 giữ bộ xuất 156 dòng, bao gồm dữ liệu lịch sử nạp bổ sung; Tuần 2 giữ riêng 27/57 lượt ghi gốc của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Sau khi nhóm theo đô thị và giờ UTC, mỗi sinh viên có 27 nhóm, gồm 21 nhóm chung để đối chiếu trực tiếp. Mục 3.12 trong báo cáo Tuần 2 đối chiếu với bộ Tuần 1 đã lưu và phân biệt phép lọc lại theo ranh giới tuần.
+Mục lục Word/PDF có liên kết tới các chương và mục. Trong từng tuần, Word, PDF, Excel và biểu đồ dùng cùng dữ liệu nguồn. Tuần 1 giữ bộ xuất 156 dòng, bao gồm dữ liệu lịch sử nạp bổ sung; Tuần 2 giữ riêng 27/57 lượt ghi gốc của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Sau khi tổng hợp theo đô thị và giờ UTC, mỗi sinh viên có 27 nhóm, gồm 21 nhóm chung để đối chiếu trực tiếp. Mục 3.12 trong báo cáo Tuần 2 đối chiếu với bộ Tuần 1 đã lưu và phân biệt phép lọc lại theo ranh giới tuần.
 
 ## Phân tích sâu Tuần 2
 
