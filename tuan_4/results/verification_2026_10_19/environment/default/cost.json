@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "start_inclusive": "2026-10-12",
+  "end_exclusive": "2026-10-20",
+  "rows": 70,
+  "total_unblended_usd": "-3.390E-7",
+  "negative_rows": 26,
+  "scope": "Account service and record-type totals; not isolated project billing",
+  "zero_rows_mean": "No reported groups, not a measured zero charge"
+}

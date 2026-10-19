@@ -1,0 +1,2 @@
+"timestamp_utc","request_hash","mode","collection_status","reported_records","verified_records","cities","reported_alerts","expected_alerts","status"
+"2026-10-19T12:38:09.620000+00:00","415b1e3881f4cfca8559","realtime","complete","3","3","3","1","","PASS"

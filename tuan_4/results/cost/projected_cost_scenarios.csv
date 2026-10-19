@@ -1,0 +1,6 @@
+"scenario","duration","lambda_cost_usd","s3_cost_usd","secrets_manager_cost_usd","athena_cost_usd","cloudwatch_cost_usd","sns_cost_usd","total_monthly_cost_usd","learner_lab_budget_pct"
+"Current AWS Learner Lab Baseline (3 cities, hourly)","1 Month","0.0000","0.0000","0.4036","0.0001","0.0000","0.0000","0.4037","0.81%"
+"Quarterly Academic Operation (3 cities, hourly)","3 Months","0.0000","0.0000","1.2108","0.0003","0.0000","0.0000","1.2111","2.42%"
+"Semester Production Operation (3 cities, hourly)","6 Months","0.0000","0.0001","2.4216","0.0006","0.0000","0.0000","2.4223","4.84%"
+"Full Academic Year Operation (3 cities, hourly)","12 Months","0.0000","0.0003","4.8432","0.0012","0.0000","0.0000","4.8447","9.69%"
+"Scaled Enterprise Fleet (100 cities nationwide, hourly)","1 Month","0.0002","0.0150","0.4500","0.0050","0.0000","0.0100","0.4802","0.96%"

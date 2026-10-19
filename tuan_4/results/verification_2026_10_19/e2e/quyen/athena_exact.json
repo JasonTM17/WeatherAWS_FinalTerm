@@ -1,0 +1,10 @@
+{
+  "name": "athena_exact",
+  "query_id": "dc942aa4-a7f8-486a-ac15-eb09b1bbcc0c",
+  "status": "SUCCEEDED",
+  "bytes_scanned": 20251,
+  "engine_ms": 584,
+  "total_ms": 747,
+  "planning_ms": 168,
+  "result_reused": false
+}

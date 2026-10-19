@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-10-19T12:40:16.357917+00:00",
+  "source_commit": "5047515bcba961f399bef567a28c99e74d81a70c",
+  "profiles": {
+    "default": {
+      "cost": "PASS",
+      "template": "PASS",
+      "source": "PASS",
+      "schedule": "PASS",
+      "storage": "PASS",
+      "role": "BLOCKED_CAPABILITY",
+      "operations": "PASS"
+    },
+    "quyen": {
+      "cost": "PASS",
+      "template": "PASS",
+      "source": "PASS",
+      "schedule": "PASS",
+      "storage": "PASS",
+      "role": "BLOCKED_CAPABILITY",
+      "operations": "PASS"
+    }
+  },
+  "aws_mutations": false
+}

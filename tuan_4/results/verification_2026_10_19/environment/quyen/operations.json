@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "window_start": "2026-10-19T10:40:00+00:00",
+  "window_end": "2026-10-19T12:40:00+00:00",
+  "results_verified": 2,
+  "matched_request_lifecycles": 2,
+  "objects_verified": 2,
+  "distinct_object_records": 6,
+  "metric_alignment_status": "UNPAIRED_PERIODS",
+  "lifecycle_summary": {
+    "events_in_window": 16,
+    "result_lines": 2,
+    "complete_results": 2,
+    "partial_results": 0,
+    "error_lines": 0,
+    "malformed_results": 0,
+    "unique_start_requests": 2,
+    "unique_end_requests": 2,
+    "unique_report_requests": 2,
+    "matched_start_end_report": 2,
+    "explicit_error_reports": 0,
+    "init_error_lines": 0,
+    "semantics": "Unique lifecycle request hashes and matching Result lines are distinct observations; no native error-rate inference from absent log lines"
+  },
+  "semantics": "Request/log/S3 reconciliation and native metric alignment are separate checks; no inferred email receipt",
+  "invoked_by_audit": false
+}

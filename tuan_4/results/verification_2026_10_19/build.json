@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "resource_count": 15,
+  "shared_role_changed": false,
+  "schedule_initial_state": "DISABLED",
+  "data_retained": true,
+  "source_path": "tuan_2/lambda/lambda_function.py",
+  "source_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219",
+  "artifact_sha256": "f4ae025b35f04403de43ff5427d8dbd992f4cb7b562b3f3fe13418c0c225179c",
+  "template_sha256": "9eb1f328c93884569bc0130174e50c48bc5769b4ead393b2c1395aed63d6a322",
+  "aws_stack_created": false
+}

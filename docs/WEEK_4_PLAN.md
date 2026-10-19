@@ -4,7 +4,7 @@
 
 **Học phần:** Điện toán đám mây · Lớp 261CLCO332779_05 · **GVHD:** ThS. Huỳnh Xuân Phụng.
 
-**Ngày lập:** 19/10/2026 · **Trạng thái:** Kế hoạch triển khai tiếp theo.
+**Ngày lập:** 19/10/2026 · **Trạng thái:** Đã bổ sung yêu cầu tổng kết theo nhận xét giảng viên; kiểm chứng chuẩn bị được lưu riêng theo ngày thực hiện.
 
 **Lịch đề xuất:** 26/10–01/11/2026, tiếp nối lịch Tuần 3 ngày 19–25/10. Đây là lịch dự kiến để tổ chức công việc; mốc nộp thực hiện theo thông báo của giảng viên.
 
@@ -54,6 +54,17 @@ Các mã W4-01–W4-08 dưới đây là **đầu việc dự kiến**. Đườn
 | W4-06 | **Đánh giá các kỳ dự báo kế tiếp** — sinh viên Ngọc Quyên | Dự báo có issued_at, phản hồi nguồn, bảng đối chiếu và MAE/RMSE/Bias theo đô thị/chỉ số | Mục tiêu ba kỳ phát hành cách nhau 24 giờ, mỗi kỳ 24 giờ đích cho ba đô thị và hai chỉ số; cố định phương pháp trước khi xem giá trị đích; lưu nguyên bản phát hành |
 | W4-07 | **Kiểm tra mã và quy trình phát hành** — sinh viên Tiến Sơn; hai sinh viên rà soát | Kết quả hồi quy, artifact xác định, CI theo commit; hồ sơ phát hành nếu có thay đổi source | Các kiểm tra liên quan đạt; source/artifact có hash; nếu triển khai, đọc lại mã và cấu hình của từng môi trường, có bản sao khôi phục riêng |
 | W4-08 | **Tổng hợp hồ sơ và trình bày** — hai sinh viên | README Tuần 4, báo cáo, worklog, chỉ mục dữ liệu/commit và kịch bản demo | Tất cả liên kết công khai mở đúng tệp; số liệu trong báo cáo khớp CSV; ghi trạng thái từng đầu việc theo minh chứng và giờ công theo xác nhận thực tế |
+| W4-09 | **Báo cáo chi phí** — sinh viên Ngọc Quyên | CSV Cost Explorer theo ngày, service, record type, USD và Estimated | Giữ nguyên giá trị gốc; phân biệt chi phí tài khoản và mức dự kiến; nhóm chưa được AWS trả về không coi là chi phí 0 |
+| W4-10 | **Kết thúc phiên Lab** — sinh viên Tiến Sơn; hai sinh viên đối chiếu | Checklist xuất minh chứng, preview/pause/restore và state file riêng | Đọc lại đúng rule/target; giữ dữ liệu; không tự thu hồi toàn dự án khi kết thúc một buổi |
+| W4-11 | **Đóng gói hạ tầng** — sinh viên Tiến Sơn | Một template CloudFormation, ZIP đúng source, hash và hướng dẫn triển khai Console | Template được kiểm tra schema; stack mới có tên riêng, lịch ban đầu tắt và dữ liệu Retain; kết quả tạo stack được ghi riêng khi thực hiện |
+| W4-12 | **Rà soát bảo mật** — sinh viên Tiến Sơn; sinh viên Ngọc Quyên kiểm tra | BPA, mã hóa, ACL/policy status, rule binding và scope LabRole | Bốn BPA bật, không public ACL/policy; không sửa role học phần dùng chung; mẫu policy runtime giới hạn theo tài nguyên |
+
+### Bổ sung theo nhận xét duyệt Tuần 3
+
+- Cạnh mỗi link commit trong nội dung nộp ghi **đúng message gốc của Git**; phần giải thích tiếng Việt có thể đặt sau nhưng không thay message.
+- Video demo tối đa **10 phút**. [Kịch bản 9 phút 30 giây](../tuan_4/docs/DEMO_GUIDE.md) nêu tab, nút bấm, kết quả cần quan sát và lời giải thích.
+- [Hồ sơ Tuần 4](../tuan_4/README.md) tập hợp source kiểm chứng, một template ứng dụng và quy trình [kết thúc phiên Lab](../tuan_4/docs/SESSION_CHECKLIST.md).
+- Các lần chuẩn bị/kiểm chứng ngày 19/10 được ghi đúng ngày thực hiện; không thay thế các kỳ thu thập và dự báo dự kiến trong lịch tuần bên dưới.
 
 ### 4.1. Trình tự và phụ thuộc
 

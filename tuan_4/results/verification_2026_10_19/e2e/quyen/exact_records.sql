@@ -1,0 +1,1 @@
+SELECT record_id, city, us_aqi, pm2_5 FROM weather_airquality_records WHERE ((year='2026' AND month='10' AND day='19')) AND record_id IN ('HoChiMinh_20261019123817_394ef4','HaNoi_20261019123818_673fb0','DaNang_20261019123818_5241a3') ORDER BY city;

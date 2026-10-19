@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "module_matches_repository": true,
+  "module_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219",
+  "runtime": "python3.12",
+  "lambda_state": "Active",
+  "update_status": "Successful"
+}

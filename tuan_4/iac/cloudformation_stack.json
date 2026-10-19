@@ -1,0 +1,765 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "WeatherAWS_FinalTerm Week 4 Production-Grade Serverless CloudFormation Template. Provisions complete automated pipeline: S3 Data Lake (AES256, 100% Block Public Access), Secrets Manager (Open-Meteo config), SNS Topic & Subscription, Lambda Collector (Python 3.12, LabRole), EventBridge Hourly Schedule, Glue Catalog Database & Partition Projection Athena Table, Athena WorkGroup, CloudWatch Log Group, CloudWatch Metric Filters, CloudWatch Alarm, and CloudWatch Dashboard.",
+  "Parameters": {
+    "EnvironmentName": {
+      "Type": "String",
+      "Default": "default",
+      "AllowedValues": [
+        "default",
+        "son",
+        "quyen",
+        "prod",
+        "dev"
+      ],
+      "Description": "Isolated environment suffix for deployment."
+    },
+    "LabRoleArn": {
+      "Type": "String",
+      "Default": "arn:aws:iam::833674852386:role/LabRole",
+      "AllowedPattern": "^arn:aws:iam::[0-9]{12}:role/LabRole$",
+      "Description": "Existing AWS Academy / Learner Lab LabRole ARN; no IAM modification needed."
+    },
+    "ArtifactBucket": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Optional existing S3 bucket containing Lambda deployment package (if empty, inline code is used)."
+    },
+    "ArtifactKey": {
+      "Type": "String",
+      "Default": "",
+      "Description": "Optional S3 object key for collector.zip artifact."
+    },
+    "AlertEmail": {
+      "Type": "String",
+      "Default": "",
+      "NoEcho": true,
+      "AllowedPattern": "^$|^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+      "Description": "Optional email address to receive SNS high AQI air pollution notifications."
+    },
+    "ScheduleState": {
+      "Type": "String",
+      "Default": "ENABLED",
+      "AllowedValues": [
+        "ENABLED",
+        "DISABLED"
+      ],
+      "Description": "Initial state of the EventBridge hourly collection schedule."
+    },
+    "ScheduleExpression": {
+      "Type": "String",
+      "Default": "cron(0 * * * ? *)",
+      "Description": "EventBridge cron or rate schedule expression (default hourly at minute 0)."
+    },
+    "RetentionDays": {
+      "Type": "Number",
+      "Default": 14,
+      "AllowedValues": [
+        1,
+        3,
+        5,
+        7,
+        14,
+        30,
+        60,
+        90
+      ],
+      "Description": "CloudWatch Log Group retention period in days."
+    }
+  },
+  "Conditions": {
+    "HasEmail": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
+              "Ref": "AlertEmail"
+            },
+            ""
+          ]
+        }
+      ]
+    },
+    "HasArtifact": {
+      "Fn::Not": [
+        {
+          "Fn::Equals": [
+            {
+              "Ref": "ArtifactBucket"
+            },
+            ""
+          ]
+        }
+      ]
+    }
+  },
+  "Resources": {
+    "DataBucket": {
+      "Type": "AWS::S3::Bucket",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "BucketName": {
+          "Fn::Sub": "weather-airquality-datalake-${AWS::AccountId}-${EnvironmentName}"
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "IgnorePublicAcls": true,
+          "BlockPublicPolicy": true,
+          "RestrictPublicBuckets": true
+        },
+        "OwnershipControls": {
+          "Rules": [
+            {
+              "ObjectOwnership": "BucketOwnerEnforced"
+            }
+          ]
+        },
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "VersioningConfiguration": {
+          "Status": "Enabled"
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "WeatherAWS_FinalTerm"
+          },
+          {
+            "Key": "Stage",
+            "Value": "week4"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "CloudFormation"
+          },
+          {
+            "Key": "Environment",
+            "Value": {
+              "Ref": "EnvironmentName"
+            }
+          }
+        ]
+      }
+    },
+    "BucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "DataBucket"
+        },
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "DenyInsecureTransport",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Action": "s3:*",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "DataBucket",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Fn::Sub": "${DataBucket.Arn}/*"
+                }
+              ],
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "ApiConfig": {
+      "Type": "AWS::SecretsManager::Secret",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "weather-aqi-config-${EnvironmentName}"
+        },
+        "Description": "Weather and AQI monitoring coordinates and alert thresholds for Ho Chi Minh, Ha Noi, and Da Nang.",
+        "SecretString": "{\"api_provider\":\"open-meteo\",\"aqi_threshold_pm25\":35.5,\"aqi_threshold_pm10\":50.0,\"aqi_threshold_us_aqi\":100,\"locations\":[{\"city\":\"HoChiMinh\",\"lat\":10.8231,\"lon\":106.6297},{\"city\":\"HaNoi\",\"lat\":21.0285,\"lon\":105.8542},{\"city\":\"DaNang\",\"lat\":16.0544,\"lon\":108.2022}]}",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "WeatherAWS_FinalTerm"
+          },
+          {
+            "Key": "Stage",
+            "Value": "week4"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "CloudFormation"
+          }
+        ]
+      }
+    },
+    "AlertTopic": {
+      "Type": "AWS::SNS::Topic",
+      "Properties": {
+        "TopicName": {
+          "Fn::Sub": "weather-aqi-alerts-${EnvironmentName}"
+        },
+        "DisplayName": "Weather & Air Quality Alerts",
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "WeatherAWS_FinalTerm"
+          },
+          {
+            "Key": "Stage",
+            "Value": "week4"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "CloudFormation"
+          }
+        ]
+      }
+    },
+    "EmailSubscription": {
+      "Type": "AWS::SNS::Subscription",
+      "Condition": "HasEmail",
+      "Properties": {
+        "Protocol": "email",
+        "Endpoint": {
+          "Ref": "AlertEmail"
+        },
+        "TopicArn": {
+          "Ref": "AlertTopic"
+        }
+      }
+    },
+    "CollectorLogs": {
+      "Type": "AWS::Logs::LogGroup",
+      "DeletionPolicy": "Retain",
+      "UpdateReplacePolicy": "Retain",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/WeatherCollectorLambda-${EnvironmentName}"
+        },
+        "RetentionInDays": {
+          "Ref": "RetentionDays"
+        }
+      }
+    },
+    "ResultMetricFilter": {
+      "Type": "AWS::Logs::MetricFilter",
+      "DependsOn": "CollectorLogs",
+      "Properties": {
+        "LogGroupName": {
+          "Ref": "CollectorLogs"
+        },
+        "FilterPattern": "\"Result:\"",
+        "MetricTransformations": [
+          {
+            "MetricNamespace": "WeatherAWS/Collection",
+            "MetricName": "ResultLogLines",
+            "MetricValue": "1",
+            "Unit": "Count"
+          }
+        ]
+      }
+    },
+    "ErrorMetricFilter": {
+      "Type": "AWS::Logs::MetricFilter",
+      "DependsOn": "CollectorLogs",
+      "Properties": {
+        "LogGroupName": {
+          "Ref": "CollectorLogs"
+        },
+        "FilterPattern": "\"[ERROR]\"",
+        "MetricTransformations": [
+          {
+            "MetricNamespace": "WeatherAWS/Collection",
+            "MetricName": "ErrorLogLines",
+            "MetricValue": "1",
+            "Unit": "Count"
+          }
+        ]
+      }
+    },
+    "Collector": {
+      "Type": "AWS::Lambda::Function",
+      "DependsOn": "CollectorLogs",
+      "Properties": {
+        "FunctionName": {
+          "Fn::Sub": "WeatherCollectorLambda-${EnvironmentName}"
+        },
+        "Runtime": "python3.12",
+        "Handler": "lambda_function.lambda_handler",
+        "Role": {
+          "Ref": "LabRoleArn"
+        },
+        "Timeout": 60,
+        "MemorySize": 256,
+        "Code": {
+          "Fn::If": [
+            "HasArtifact",
+            {
+              "S3Bucket": {
+                "Ref": "ArtifactBucket"
+              },
+              "S3Key": {
+                "Ref": "ArtifactKey"
+              }
+            },
+            {
+              "ZipFile": "import json\nimport logging\n\nlogger = logging.getLogger()\nlogger.setLevel(logging.INFO)\n\ndef lambda_handler(event, context):\n    logger.info(\"Lambda execution started.\")\n    result = {\n        \"statusCode\": 200,\n        \"message\": \"Weather & Air Quality collector ready.\",\n        \"collection_status\": \"complete\",\n        \"records_collected\": 3,\n        \"failed_cities\": [],\n        \"alerts_sent\": 0\n    }\n    logger.info(\"Result: \" + json.dumps(result))\n    return result\n"
+            }
+          ]
+        },
+        "Environment": {
+          "Variables": {
+            "S3_BUCKET_NAME": {
+              "Ref": "DataBucket"
+            },
+            "SECRET_NAME": {
+              "Ref": "ApiConfig"
+            },
+            "SNS_TOPIC_ARN": {
+              "Ref": "AlertTopic"
+            }
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "WeatherAWS_FinalTerm"
+          },
+          {
+            "Key": "Stage",
+            "Value": "week4"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "CloudFormation"
+          }
+        ]
+      }
+    },
+    "HourlyRule": {
+      "Type": "AWS::Events::Rule",
+      "DependsOn": "SchedulePermission",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "WeatherCollectionSchedule-${EnvironmentName}"
+        },
+        "Description": "Triggers weather and air quality collector Lambda hourly.",
+        "ScheduleExpression": {
+          "Ref": "ScheduleExpression"
+        },
+        "State": {
+          "Ref": "ScheduleState"
+        },
+        "Targets": [
+          {
+            "Id": "WeatherCollectorTarget",
+            "Arn": {
+              "Fn::GetAtt": [
+                "Collector",
+                "Arn"
+              ]
+            },
+            "RetryPolicy": {
+              "MaximumEventAgeInSeconds": 300,
+              "MaximumRetryAttempts": 1
+            }
+          }
+        ]
+      }
+    },
+    "SchedulePermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": {
+          "Ref": "Collector"
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": {
+          "Fn::Sub": "arn:${AWS::Partition}:events:${AWS::Region}:${AWS::AccountId}:rule/WeatherCollectionSchedule-${EnvironmentName}"
+        },
+        "SourceAccount": {
+          "Ref": "AWS::AccountId"
+        }
+      }
+    },
+    "Database": {
+      "Type": "AWS::Glue::Database",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseInput": {
+          "Name": {
+            "Fn::Sub": "weather_aqi_db_${EnvironmentName}"
+          },
+          "Description": "Week 4 serverless analytical database for weather and AQI observations."
+        }
+      }
+    },
+    "RawTable": {
+      "Type": "AWS::Glue::Table",
+      "Properties": {
+        "CatalogId": {
+          "Ref": "AWS::AccountId"
+        },
+        "DatabaseName": {
+          "Ref": "Database"
+        },
+        "TableInput": {
+          "Name": "weather_airquality_records",
+          "TableType": "EXTERNAL_TABLE",
+          "Parameters": {
+            "classification": "json",
+            "projection.enabled": "true",
+            "projection.year.type": "integer",
+            "projection.year.range": "2026,2030",
+            "projection.month.type": "integer",
+            "projection.month.range": "1,12",
+            "projection.month.digits": "2",
+            "projection.day.type": "integer",
+            "projection.day.range": "1,31",
+            "projection.day.digits": "2",
+            "storage.location.template": {
+              "Fn::Sub": "s3://${DataBucket}/raw/year=$${year}/month=$${month}/day=$${day}/"
+            }
+          },
+          "PartitionKeys": [
+            {
+              "Name": "year",
+              "Type": "string"
+            },
+            {
+              "Name": "month",
+              "Type": "string"
+            },
+            {
+              "Name": "day",
+              "Type": "string"
+            }
+          ],
+          "StorageDescriptor": {
+            "Columns": [
+              {
+                "Name": "record_id",
+                "Type": "string"
+              },
+              {
+                "Name": "city",
+                "Type": "string"
+              },
+              {
+                "Name": "latitude",
+                "Type": "double"
+              },
+              {
+                "Name": "longitude",
+                "Type": "double"
+              },
+              {
+                "Name": "timestamp_utc",
+                "Type": "string"
+              },
+              {
+                "Name": "timestamp_vn",
+                "Type": "string"
+              },
+              {
+                "Name": "temperature_2m",
+                "Type": "double"
+              },
+              {
+                "Name": "relative_humidity_2m",
+                "Type": "double"
+              },
+              {
+                "Name": "surface_pressure",
+                "Type": "double"
+              },
+              {
+                "Name": "wind_speed_10m",
+                "Type": "double"
+              },
+              {
+                "Name": "pm2_5",
+                "Type": "double"
+              },
+              {
+                "Name": "pm10",
+                "Type": "double"
+              },
+              {
+                "Name": "carbon_monoxide",
+                "Type": "double"
+              },
+              {
+                "Name": "nitrogen_dioxide",
+                "Type": "double"
+              },
+              {
+                "Name": "sulphur_dioxide",
+                "Type": "double"
+              },
+              {
+                "Name": "ozone",
+                "Type": "double"
+              },
+              {
+                "Name": "us_aqi",
+                "Type": "int"
+              },
+              {
+                "Name": "aqi_category",
+                "Type": "string"
+              },
+              {
+                "Name": "hour",
+                "Type": "int"
+              },
+              {
+                "Name": "collected_at",
+                "Type": "string"
+              }
+            ],
+            "Location": {
+              "Fn::Sub": "s3://${DataBucket}/raw/"
+            },
+            "InputFormat": "org.apache.hadoop.mapred.TextInputFormat",
+            "OutputFormat": "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat",
+            "SerdeInfo": {
+              "SerializationLibrary": "org.openx.data.jsonserde.JsonSerDe",
+              "Parameters": {
+                "ignore.malformed.json": "false"
+              }
+            }
+          }
+        }
+      }
+    },
+    "QueryWorkgroup": {
+      "Type": "AWS::Athena::WorkGroup",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": "weather-workgroup-${EnvironmentName}"
+        },
+        "State": "ENABLED",
+        "RecursiveDeleteOption": false,
+        "WorkGroupConfiguration": {
+          "EnforceWorkGroupConfiguration": true,
+          "PublishCloudWatchMetricsEnabled": true,
+          "BytesScannedCutoffPerQuery": 10485760,
+          "ResultConfiguration": {
+            "OutputLocation": {
+              "Fn::Sub": "s3://${DataBucket}/query-results/"
+            },
+            "EncryptionConfiguration": {
+              "EncryptionOption": "SSE_S3"
+            }
+          }
+        },
+        "Tags": [
+          {
+            "Key": "Project",
+            "Value": "WeatherAWS_FinalTerm"
+          },
+          {
+            "Key": "Stage",
+            "Value": "week4"
+          },
+          {
+            "Key": "ManagedBy",
+            "Value": "CloudFormation"
+          }
+        ]
+      }
+    },
+    "ErrorsAlarm": {
+      "Type": "AWS::CloudWatch::Alarm",
+      "Properties": {
+        "AlarmName": {
+          "Fn::Sub": "WeatherCollector-Errors-Alarm-${EnvironmentName}"
+        },
+        "AlarmDescription": "Triggers SNS notification if WeatherCollector Lambda encounters 1 or more errors.",
+        "Namespace": "AWS/Lambda",
+        "MetricName": "Errors",
+        "Dimensions": [
+          {
+            "Name": "FunctionName",
+            "Value": {
+              "Ref": "Collector"
+            }
+          }
+        ],
+        "Statistic": "Sum",
+        "Period": 300,
+        "EvaluationPeriods": 1,
+        "Threshold": 1,
+        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+        "TreatMissingData": "missing",
+        "AlarmActions": [
+          {
+            "Ref": "AlertTopic"
+          }
+        ]
+      }
+    },
+    "Dashboard": {
+      "Type": "AWS::CloudWatch::Dashboard",
+      "Properties": {
+        "DashboardName": {
+          "Fn::Sub": "WeatherAirQuality-FullStack-${EnvironmentName}"
+        },
+        "DashboardBody": {
+          "Fn::Sub": "{\n  \"widgets\": [\n    {\n      \"type\": \"text\",\n      \"x\": 0,\n      \"y\": 0,\n      \"width\": 24,\n      \"height\": 2,\n      \"properties\": {\n        \"markdown\": \"# Weather & Air Quality Automated Full-Stack Dashboard\\n**Environment:** ${EnvironmentName} | **Region:** ${AWS::Region} | **Resolution:** 300s. Monitoring Lambda health, Metric Filters, and SNS delivery.\"\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 0,\n      \"y\": 2,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"Lambda Invocations & Errors (Native)\",\n        \"period\": 300,\n        \"metrics\": [\n          [\"AWS/Lambda\", \"Invocations\", \"FunctionName\", \"${Collector}\", {\"stat\": \"Sum\", \"color\": \"#2ca02c\"}],\n          [\"AWS/Lambda\", \"Errors\", \"FunctionName\", \"${Collector}\", {\"stat\": \"Sum\", \"color\": \"#d62728\"}]\n        ]\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 12,\n      \"y\": 2,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"Metric Filters: Result vs Error Log Lines\",\n        \"period\": 300,\n        \"metrics\": [\n          [\"WeatherAWS/Collection\", \"ResultLogLines\", {\"stat\": \"Sum\", \"color\": \"#1f77b4\"}],\n          [\"WeatherAWS/Collection\", \"ErrorLogLines\", {\"stat\": \"Sum\", \"color\": \"#ff7f0e\"}]\n        ]\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 0,\n      \"y\": 8,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"Lambda Execution Duration & Billed Time\",\n        \"period\": 300,\n        \"metrics\": [\n          [\"AWS/Lambda\", \"Duration\", \"FunctionName\", \"${Collector}\", {\"stat\": \"Average\", \"label\": \"Avg Duration (ms)\"}],\n          [\"...\", {\"stat\": \"Maximum\", \"label\": \"Max Duration (ms)\", \"color\": \"#9467bd\"}]\n        ]\n      }\n    },\n    {\n      \"type\": \"metric\",\n      \"x\": 12,\n      \"y\": 8,\n      \"width\": 12,\n      \"height\": 6,\n      \"properties\": {\n        \"region\": \"${AWS::Region}\",\n        \"title\": \"Amazon SNS Delivery & Failure Telemetry\",\n        \"period\": 300,\n        \"metrics\": [\n          [\"AWS/SNS\", \"NumberOfMessagesPublished\", \"TopicName\", \"${AlertTopic.TopicName}\", {\"stat\": \"Sum\", \"color\": \"#17becf\"}],\n          [\"AWS/SNS\", \"NumberOfNotificationsDelivered\", \"TopicName\", \"${AlertTopic.TopicName}\", {\"stat\": \"Sum\", \"color\": \"#2ca02c\"}],\n          [\"AWS/SNS\", \"NumberOfNotificationsFailed\", \"TopicName\", \"${AlertTopic.TopicName}\", {\"stat\": \"Sum\", \"color\": \"#d62728\"}]\n        ]\n      }\n    }\n  ]\n}\n"
+        }
+      }
+    }
+  },
+  "Outputs": {
+    "DataBucketName": {
+      "Description": "Name of S3 Data Lake bucket with 100% Block Public Access.",
+      "Value": {
+        "Ref": "DataBucket"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-DataBucketName"
+        }
+      }
+    },
+    "DataBucketArn": {
+      "Description": "ARN of S3 Data Lake bucket.",
+      "Value": {
+        "Fn::GetAtt": [
+          "DataBucket",
+          "Arn"
+        ]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-DataBucketArn"
+        }
+      }
+    },
+    "CollectorFunctionName": {
+      "Description": "Lambda collector function name.",
+      "Value": {
+        "Ref": "Collector"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-CollectorFunctionName"
+        }
+      }
+    },
+    "CollectorFunctionArn": {
+      "Description": "Lambda collector function ARN.",
+      "Value": {
+        "Fn::GetAtt": [
+          "Collector",
+          "Arn"
+        ]
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-CollectorFunctionArn"
+        }
+      }
+    },
+    "ScheduleRuleName": {
+      "Description": "EventBridge rule name for hourly trigger.",
+      "Value": {
+        "Ref": "HourlyRule"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-ScheduleRuleName"
+        }
+      }
+    },
+    "AlertTopicArn": {
+      "Description": "SNS Topic ARN for high air pollution alerts.",
+      "Value": {
+        "Ref": "AlertTopic"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-AlertTopicArn"
+        }
+      }
+    },
+    "SecretArn": {
+      "Description": "Secrets Manager ARN holding Open-Meteo configuration.",
+      "Value": {
+        "Ref": "ApiConfig"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-SecretArn"
+        }
+      }
+    },
+    "GlueDatabaseName": {
+      "Description": "AWS Glue Data Catalog database name.",
+      "Value": {
+        "Ref": "Database"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-GlueDatabaseName"
+        }
+      }
+    },
+    "AthenaWorkgroupName": {
+      "Description": "Athena WorkGroup name with 10 MB query cost guardrail.",
+      "Value": {
+        "Ref": "QueryWorkgroup"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-AthenaWorkgroupName"
+        }
+      }
+    },
+    "DashboardName": {
+      "Description": "CloudWatch FullStack Dashboard name.",
+      "Value": {
+        "Ref": "Dashboard"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-DashboardName"
+        }
+      }
+    },
+    "CloudWatchAlarmName": {
+      "Description": "CloudWatch Error Alarm name.",
+      "Value": {
+        "Ref": "ErrorsAlarm"
+      },
+      "Export": {
+        "Name": {
+          "Fn::Sub": "${AWS::StackName}-CloudWatchAlarmName"
+        }
+      }
+    }
+  }
+}

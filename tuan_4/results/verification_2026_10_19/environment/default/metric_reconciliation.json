@@ -1,0 +1,32 @@
+{
+  "status": "UNPAIRED_PERIODS",
+  "periods": [
+    {
+      "timestamp_utc": "2026-10-19T11:15:00+00:00",
+      "invocations": null,
+      "errors": 3.0,
+      "status": "MISSING_INVOCATIONS",
+      "error_rate_percent": null
+    },
+    {
+      "timestamp_utc": "2026-10-19T12:15:00+00:00",
+      "invocations": null,
+      "errors": 3.0,
+      "status": "MISSING_INVOCATIONS",
+      "error_rate_percent": null
+    },
+    {
+      "timestamp_utc": "2026-10-19T12:35:00+00:00",
+      "invocations": 1.0,
+      "errors": 0.0,
+      "status": "VALID",
+      "error_rate_percent": 0.0
+    }
+  ],
+  "valid_periods": 1,
+  "unpaired_periods": 2,
+  "paired_invocations": 1.0,
+  "paired_errors": 0.0,
+  "paired_error_rate_percent": 0.0,
+  "overall_error_rate_percent": null
+}

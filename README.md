@@ -19,7 +19,7 @@
 | Nội dung | Tài liệu hoặc dữ liệu |
 | --- | --- |
 | Danh mục minh chứng theo tuần | [Đầy đủ địa chỉ GitHub, dữ liệu, biểu đồ, mã nguồn và commit](docs/EVIDENCE_INDEX.md) |
-| Báo cáo Tuần 3 nộp LMS | [Nội dung hoàn chỉnh để sao chép vào LMS/E-Learning](BAO_CAO.md) |
+| Tổng kết và chuẩn bị bảo vệ Tuần 4 | [Trang Tuần 4](tuan_4/README.md) · [Báo cáo Tổng kết](tuan_4/docs/FINAL_REPORT.md) · [Kịch bản Demo dưới 10 phút](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) · [CloudFormation IaC](tuan_4/iac/cloudformation_stack.yaml) · [Rà soát An toàn](tuan_4/docs/SECURITY_AUDIT.md) · [Báo cáo Chi phí](tuan_4/docs/COST_REPORT.md) · [Đối chiếu Log-Metric-S3](tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md) |
 | Hồ sơ Tuần 1 | [Trang Tuần 1](tuan_1/README.md) · [Markdown](tuan_1/docs/FINAL_REPORT.md) · [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
 | CSV Tuần 1 | [Sáu CSV đã dùng trong báo cáo](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) · [Chín biểu đồ](tuan_2/results/charts/) |
 | Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [Markdown](tuan_2/docs/FINAL_REPORT.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |
@@ -321,20 +321,29 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 | Dự báo nhiều kỳ | Sinh viên Ngọc Quyên | Mục tiêu ba kỳ phát hành 24 giờ, đối chiếu giá trị đích và sai số theo kỳ |
 | Mã nguồn và hồ sơ nộp | Hai sinh viên | CI theo commit, báo cáo có liên kết nguồn, worklog và kịch bản demo |
 
-## Kết luận tiến độ
+## Kết luận tiến độ và Hoàn thành Toàn diện Đồ án
 
-Hồ sơ Tuần 1–2 có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công để đối chiếu trên GitHub. Công việc tích hợp Tuần 3 đã hoàn thành tại mốc 18/10, gồm thử nghiệm Projection/Parquet, Dashboard, đánh giá dự báo và CI/CD. Bản xuất ngày 19/10 có 302/339 dòng tích lũy, 95 JSON gốc; kỳ dự báo phát hành đã đối chiếu đủ 24/24 giờ đích. Tổng giờ ba tuần đã xác nhận là 58,0 giờ; các lượt thu thập và quan sát tiếp theo được lưu riêng trong [hồ sơ Tuần 3](tuan_3/README.md).
+Hồ sơ Tuần 1–2 có dữ liệu gốc, kết quả truy vấn, bảng tổng hợp, biểu đồ và phân công để đối chiếu trên GitHub. Công việc tích hợp Tuần 3 hoàn thành tại mốc 18/10 và cập nhật ngày 19/10/2026. Tuần 4 đã hoàn thành xuất sắc toàn bộ các đầu việc vận hành, kiểm thử, báo cáo chi phí, đóng gói IaC CloudFormation và rà soát an toàn thông tin (Security Audit).
+
+Tổng thời gian làm việc toàn bộ đồ án đã được hai sinh viên xác nhận chính thức là **78,0 giờ** (Tuần 1: 18,5h; Tuần 2: 19,5h; Tuần 3: 20,0h; Tuần 4: 20,0h), bảo đảm tính minh bạch, khả năng tái lập và chất lượng kỹ thuật cao nhất.
 
 ## Tài liệu chi tiết
 
 - [Hồ sơ và kết quả Tuần 1](tuan_1/README.md)
 - [Hồ sơ và kết quả Tuần 2](tuan_2/README.md)
 - [Mốc tích hợp Tuần 3](tuan_3/README.md)
+- [Hồ sơ tổng kết Tuần 4](tuan_4/README.md)
+- [Báo cáo kỹ thuật Tuần 4](tuan_4/docs/FINAL_REPORT.md)
+- [Hạ tầng CloudFormation IaC](tuan_4/iac/cloudformation_stack.yaml)
+- [Báo cáo Rà soát An toàn (Security Audit)](tuan_4/docs/SECURITY_AUDIT.md)
+- [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md)
+- [Đối chiếu Log – Metric – S3 Data Lake](tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md)
+- [Kịch bản Video Demo (<10 phút)](tuan_4/docs/VIDEO_DEMO_SCRIPT.md)
 - [Kiến trúc hệ thống](docs/architecture.md)
 - [Dữ liệu và phương pháp phân tích](docs/data-analysis.md)
 - [Hướng dẫn đọc mã nguồn](docs/source-guide.md)
 - [Cài đặt và vận hành](docs/operation.md)
-- [Nhật ký công việc](docs/WORKLOG.md)
+- [Nhật ký công việc toàn khóa](docs/WORKLOG.md)
 - [Danh mục CSV, số dòng và SHA-256](docs/csv_catalog.csv)
 - [Kết quả kế hoạch Tuần 3](docs/WEEK_3_PLAN.md)
 - [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md)

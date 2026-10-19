@@ -4,9 +4,11 @@
 | --- | --- | --- |
 | 1 | [Nhật ký Tuần 1](../tuan_1/docs/WORKLOG.md) · [CSV](../tuan_1/worklog.csv) | Nguyễn Tiến Sơn: 9,5 giờ; Trần Thị Ngọc Quyên: 9,0 giờ; tổng 18,5 giờ |
 | 2 | [Nhật ký Tuần 2](../tuan_2/docs/WORKLOG.md) · [CSV](../tuan_2/worklog.csv) | Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 9,5 giờ; tổng 19,5 giờ |
-| Toàn bộ | [CSV tổng hợp](../worklog.csv) | Tổng cộng 38,0 giờ (Tiến Sơn: 19,5 giờ; Ngọc Quyên: 18,5 giờ) |
+| 3 | [Nhật ký Tuần 3](../tuan_3/docs/WORKLOG.md) · [CSV](../tuan_3/worklog.csv) | Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 10,0 giờ; tổng 20,0 giờ |
+| 4 | [Nhật ký Tuần 4](../tuan_4/docs/WORKLOG.md) · [CSV](../tuan_4/worklog.csv) | Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 10,0 giờ; tổng 20,0 giờ |
+| Toàn bộ | [CSV tổng hợp](../worklog.csv) | Tổng cộng 78,0 giờ (Tiến Sơn: 39,5 giờ; Ngọc Quyên: 38,5 giờ) |
 
-Phân công và số giờ được nhóm xác nhận và ghi nhất quán trong từng báo cáo. Tổng thời gian hai tuần là 38,0 giờ. Tuần 1 giữ nguyên bộ CSV 156 bản ghi đã nộp. Phân tích bổ sung Tuần 2 dùng hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên: 204/231 bản ghi toàn bộ, trong đó 27/57 thuộc Tuần 2. Các quan trắc cùng đô thị và thời điểm được đối chiếu; thống kê giữ riêng theo bộ dữ liệu của từng sinh viên.
+Phân công và số giờ được nhóm xác nhận và ghi nhất quán trong từng báo cáo. Tổng thời gian toàn bộ đồ án bốn tuần là 78,0 giờ. Tuần 1 giữ nguyên bộ CSV 156 bản ghi đã nộp. Phân tích bổ sung Tuần 2 dùng hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tuần 3 tích hợp đầy đủ hệ thống, Athena, Dashboard và dự báo. Tuần 4 hoàn thành IaC CloudFormation, kiểm thử tổng thể, đối chiếu log-metric-S3, báo cáo chi phí, rà soát an toàn thông tin và kịch bản video demo.
 
 [Minh chứng vận hành đã lưu](saved-evidence.md) tổng hợp phản hồi Lambda và năm mã truy vấn đã đối chiếu với CSV.
 
@@ -44,3 +46,17 @@ Các mốc trên bổ sung minh chứng kỹ thuật; không tự cộng vào 38
 **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc ngày 18/10/2026.** [Bảng sản phẩm W3-01–W3-08 và raw](../tuan_3/docs/WORKLOG.md#5-kết-quả-hoàn-thành-kế-hoạch-công-việc-tích-hợp-tuần-3).
 
 Tổng theo tuần đã xác nhận: 10,0 giờ cho sinh viên Tiến Sơn và 10,0 giờ cho sinh viên Ngọc Quyên, không ghi ngày hoặc phân bổ từng đầu việc. [Nhật ký và căn cứ Tuần 3](../tuan_3/docs/WORKLOG.md), [CSV tổng giờ](../tuan_3/worklog.csv). Các bảng Tuần 1–2 phía trên giữ nguyên tổng 38,0 giờ; cộng thêm 20,0 giờ đã xác nhận của Tuần 3 thành 58,0 giờ.
+
+## Bổ sung tổng giờ Tuần 4 (Tuần cuối hoàn thành đồ án)
+
+**Đã hoàn thành xuất sắc toàn bộ kế hoạch Tuần 4 và đồ án môn học.** [Bảng sản phẩm W4-01–W4-08 và hồ sơ](../tuan_4/docs/WORKLOG.md).
+
+Tổng theo tuần đã xác nhận Tuần 4: **10,0 giờ cho sinh viên Nguyễn Tiến Sơn** và **10,0 giờ cho sinh viên Trần Thị Ngọc Quyên**.
+- [Nhật ký và căn cứ Tuần 4](../tuan_4/docs/WORKLOG.md)
+- [CSV tổng giờ Tuần 4](../tuan_4/worklog.csv)
+- [Hồ sơ tổng kết Tuần 4](../tuan_4/README.md)
+- [Báo cáo chi phí](../tuan_4/docs/COST_REPORT.md)
+- [Báo cáo an toàn thông tin](../tuan_4/docs/SECURITY_AUDIT.md)
+- [Kịch bản video demo](../tuan_4/docs/VIDEO_DEMO_SCRIPT.md)
+
+**Tổng thời gian thực hiện toàn bộ đồ án 4 tuần:** **78,0 giờ** (Tiến Sơn: 39,5 giờ; Ngọc Quyên: 38,5 giờ). [CSV tổng hợp toàn đồ án](../worklog.csv).

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "canonical_rule": "WeatherCollectionSchedule",
+  "state": "ENABLED",
+  "schedule": "rate(1 hour)",
+  "one_matching_target": true,
+  "source_rule_permission": true,
+  "enabled_rules_for_collector": 1
+}

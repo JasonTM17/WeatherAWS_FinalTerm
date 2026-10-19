@@ -1,0 +1,38 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "WriteRawOnly",
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": "arn:aws:s3:::<data-bucket>/raw/*"
+    },
+    {
+      "Sid": "ReadProjectConfig",
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:GetSecretValue"
+      ],
+      "Resource": "<secret-arn>"
+    },
+    {
+      "Sid": "PublishProjectAlert",
+      "Effect": "Allow",
+      "Action": [
+        "sns:Publish"
+      ],
+      "Resource": "<topic-arn>"
+    },
+    {
+      "Sid": "WriteExistingCollectorLogs",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:us-east-1:<account-id>:log-group:/aws/lambda/<function-name>:*"
+    }
+  ]
+}

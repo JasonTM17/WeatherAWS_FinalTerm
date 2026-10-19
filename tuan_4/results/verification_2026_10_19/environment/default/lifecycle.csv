@@ -1,0 +1,5 @@
+"timestamp_utc","event_hash","stream_hash","kind","request_hash","status","reported_records","alerts_sent"
+"2026-10-19T12:38:06.535000+00:00","f2d69e4070db5ba3b721","011bbaa7d3b205106608","START","415b1e3881f4cfca8559","","",""
+"2026-10-19T12:38:09.620000+00:00","747c964e15ee6c9a94c7","011bbaa7d3b205106608","RESULT","","complete","3","1"
+"2026-10-19T12:38:09.622000+00:00","c76a5a546cf0a751f896","011bbaa7d3b205106608","END","415b1e3881f4cfca8559","","",""
+"2026-10-19T12:38:09.622000+00:00","4af936bb874f506dded6","011bbaa7d3b205106608","REPORT","415b1e3881f4cfca8559","report_present","",""

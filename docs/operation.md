@@ -39,6 +39,8 @@ Khi cập nhật Lambda đã tồn tại, `deploy-lambda` đặt lại runtime P
 
 ## Thu hồi tài nguyên
 
+Để kết thúc một buổi thực hành, dùng [checklist xuất minh chứng và tạm dừng/khôi phục lịch](../tuan_4/docs/SESSION_CHECKLIST.md). Chức năng thu hồi toàn dự án bên dưới dành cho khi đã kết thúc sử dụng các tài nguyên và đã xác định phạm vi xóa; không dùng làm thao tác mặc định cuối mỗi buổi.
+
 ```powershell
 python tuan_2/scripts/aws_project.py cleanup --confirm-account ACCOUNT_ID
 python tuan_2/scripts/aws_project.py cleanup --confirm-account ACCOUNT_ID --delete-data

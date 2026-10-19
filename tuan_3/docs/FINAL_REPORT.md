@@ -580,11 +580,11 @@ Danh mục sau liên kết trực tiếp tới dữ liệu và mã nguồn đã 
 
 - **Mã Lambda hiện tại:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py).
 
-- **Commit tích hợp Athena, Dashboard và dự báo — 0b26858:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e).
+- **0b26858 — `feat(week3): add measured Athena experiments, monitoring and guarded CD`:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e).
 
-- **Commit artifact và phát hành Lambda — c28da19:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356).
+- **c28da19 — `fix(cd): make Lambda archive identical across Windows and Linux`:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356).
 
-- **Commit sửa giờ backfill đã triển khai — 62f1c08:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650).
+- **62f1c08 — `fix(lambda): collect completed current-day hours in backfill`:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650).
 
 - **Chỉ mục thành phần và commit:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/components.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/components.md).
 

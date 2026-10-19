@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "template_sha256": "9eb1f328c93884569bc0130174e50c48bc5769b4ead393b2c1395aed63d6a322",
+  "parameters_validated": 6,
+  "resource_count": 15,
+  "shared_role_changed": false,
+  "schedule_initial_state": "DISABLED",
+  "data_retained": true,
+  "stack_created": false
+}

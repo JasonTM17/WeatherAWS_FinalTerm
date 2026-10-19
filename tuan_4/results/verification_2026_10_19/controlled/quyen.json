@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "student": "Sinh viên Ngọc Quyên",
+  "request_hash": "6ae57d0f48ce98e59fd3",
+  "metric_period_utc": "2026-10-19T12:35:00+00:00",
+  "native_invocations": 1.0,
+  "native_errors": 0.0,
+  "controlled_period_error_rate_percent": 0.0,
+  "result_log_entries": 1,
+  "s3_records": 3,
+  "sns_acceptances": 1,
+  "athena_status": "PASS",
+  "email_receipt": "PENDING_RECIPIENT_CONFIRMATION",
+  "scope": "Only the controlled invocation period; not the full observation window"
+}

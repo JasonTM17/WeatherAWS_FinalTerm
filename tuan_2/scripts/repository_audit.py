@@ -190,17 +190,23 @@ def validate_worklogs():
         ("Tuần 1", "24110051"): Decimal("9.0"),
         ("Tuần 2", "24110054"): Decimal("10.0"),
         ("Tuần 2", "24110051"): Decimal("9.5"),
+        ("Tuần 3", "24110054"): Decimal("10.0"),
+        ("Tuần 3", "24110051"): Decimal("10.0"),
+        ("Tuần 4", "24110054"): Decimal("10.0"),
+        ("Tuần 4", "24110051"): Decimal("10.0"),
     }
     actual = {(r["week"], r["student_id"]): Decimal(r["duration_hours"]) for r in rows}
-    if len(rows) != 4 or actual != expected:
+    if len(rows) != len(expected) or actual != expected:
         raise ValueError("Weekly hours differ from confirmed student totals")
     for row in rows:
         for relative in row["evidence_paths"].split("; "):
-            path = (ROOT / relative).resolve()
+            relative_clean = relative.rstrip("/\\")
+            path = (ROOT / relative_clean).resolve()
             if not path.is_relative_to(ROOT) or not path.exists():
                 raise ValueError(f"Missing worklog evidence: {relative}")
-    for week in (1, 2):
-        if csv_rows(ROOT / f"tuan_{week}/worklog.csv")[1] != [
+    for week in (1, 2, 3, 4):
+        target = ROOT / f"tuan_{week}/worklog.csv"
+        if target.exists() and csv_rows(target)[1] != [
             r for r in rows if r["week"] == f"Tuần {week}"
         ]:
             raise ValueError("Weekly CSV differs from root worklog")

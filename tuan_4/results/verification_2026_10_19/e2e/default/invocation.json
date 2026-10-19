@@ -1,0 +1,15 @@
+{
+  "student": "Sinh viên Tiến Sơn",
+  "captured_at": "2026-10-19T12:38:04.058588+00:00",
+  "status": "PASS",
+  "records": 3,
+  "expected_alerts": 1,
+  "reported_sns_acceptances": 1,
+  "threshold_aqi": 100.0,
+  "threshold_pm2_5": 35.5,
+  "email_receipt": "PENDING_RECIPIENT_CONFIRMATION",
+  "request_hash": "415b1e3881f4cfca8559",
+  "module_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219",
+  "secret_changed": false,
+  "schedule_changed": false
+}

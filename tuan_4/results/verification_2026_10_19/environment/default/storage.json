@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "all_public_access_blocks": true,
+  "public_policy": false,
+  "public_acl": false,
+  "bucket_policy": "NO_BUCKET_POLICY",
+  "encryption_algorithms": [
+    "AES256"
+  ],
+  "versioning": "NOT_ENABLED"
+}

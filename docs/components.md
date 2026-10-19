@@ -57,3 +57,13 @@ Mã SDK dùng chung nằm trong `tuan_2/`; hai script nền tảng Tuần 1 gọ
 Chi tiết hàm, NULL và timeout nằm trong [hướng dẫn mã nguồn](source-guide.md); thao tác triển khai nằm trong [vận hành](operation.md).
 
 Phần cập nhật ngày 19/10 dùng [daily_snapshot.py](../tuan_3/scripts/daily_snapshot.py) để tách ngày UTC+7, bảo toàn raw và tính thống kê trên giờ hoàn tất; [verify_daily_update.py](../tuan_3/scripts/verify_daily_update.py) đối chiếu từ JSON S3 đến CSV/bảng số và kỳ dự báo. [Bản sửa backfill 62f1c08](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650) thay cách chọn giờ lịch sử, giữ nhánh realtime/ngưỡng/cảnh báo. [Hồ sơ triển khai SDK và dữ liệu](../tuan_3/results/daily_update_2026_10_19/README.md) tách rõ lượt backfill với các lượt chạy tự động.
+
+## Message gốc của các commit tích hợp Tuần 3
+
+Message bên cạnh liên kết được lấy trực tiếp từ lịch sử Git. Phần giải thích tiếng Việt ở các mục trên mô tả phạm vi công việc.
+
+| Commit | Message gốc |
+| --- | --- |
+| [0b26858](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e) | `feat(week3): add measured Athena experiments, monitoring and guarded CD` |
+| [c28da19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356) | `fix(cd): make Lambda archive identical across Windows and Linux` |
+| [62f1c08](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650) | `fix(lambda): collect completed current-day hours in backfill` |
