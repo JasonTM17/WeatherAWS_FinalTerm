@@ -82,7 +82,7 @@ Kết quả chi tiết: [sinh viên Tiến Sơn](../results/verification_2026_10
 
 ### 4.2. Kiểm tra nhánh cảnh báo
 
-Ngưỡng thực tế đọc trước lượt chạy là `AQI >= 100 OR PM2.5 >= 35.5`. Dữ liệu mỗi lượt thỏa điều kiện cảnh báo ở một đô thị; collector ghi nhận một Publish được SNS chấp nhận ở mỗi môi trường. Trạng thái xác nhận email của đúng lượt mới được lưu riêng trong `recipient_confirmation.json` khi người nhận xác nhận; phản hồi Publish không được dùng thay cho xác nhận email đã tới hộp thư.
+Ngưỡng thực tế đọc trước lượt chạy là `AQI >= 100 OR PM2.5 >= 35.5`. Dữ liệu mỗi lượt thỏa điều kiện cảnh báo ở một đô thị; collector ghi nhận một Publish được SNS chấp nhận ở mỗi môi trường. Cả sinh viên Tiến Sơn và sinh viên Ngọc Quyên đã xác nhận nhận email mới của đúng hai lượt kiểm chứng. [Xác nhận người nhận](../results/verification_2026_10_19/recipient_confirmation.json) được lưu riêng để đối chiếu với kết quả Publish.
 
 Các ca biên bằng ngưỡng, dưới ngưỡng và điều kiện OR được kiểm tra trong bộ hồi quy. Ca dữ liệu lịch sử không được dùng để kiểm chứng email realtime.
 
@@ -151,7 +151,7 @@ Sinh viên Tiến Sơn phụ trách hạ tầng, S3, cấu hình, Lambda, lịch
 | Tuần 4 | 10,0 giờ | 10,0 giờ | 20,0 giờ |
 | Tổng | 39,5 giờ | 38,5 giờ | **78,0 giờ** |
 
-Căn cứ: **Tổng theo tuần đã xác nhận**. Người dùng xác nhận 10 giờ thực tế Tuần 4 cho mỗi sinh viên; [bản ghi xác nhận](../results/verification_2026_10_19/worklog_confirmation.json), [CSV Tuần 4](../worklog.csv), [nhật ký](WORKLOG.md). Giờ công ghi nhận công việc thực tế, tách với trạng thái từng phép kiểm chứng dịch vụ.
+Căn cứ: **Tổng theo tuần đã xác nhận**. Giờ công thực tế Tuần 4 đã xác nhận là 10 giờ cho mỗi sinh viên; [bản ghi xác nhận](../results/verification_2026_10_19/worklog_confirmation.json), [CSV Tuần 4](../worklog.csv), [nhật ký](WORKLOG.md). Giờ công ghi nhận công việc thực tế, tách với trạng thái từng phép kiểm chứng dịch vụ.
 
 ## 10. Kết luận
 

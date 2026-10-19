@@ -1,7 +1,7 @@
 # Nhật ký sản phẩm và giờ công Tuần 4
 
 **Sinh viên:** Nguyễn Tiến Sơn — 24110054; Trần Thị Ngọc Quyên — 24110051.
-**Căn cứ:** Tổng theo tuần đã xác nhận. Người dùng xác nhận 10 giờ thực tế của mỗi sinh viên; không tự chia giờ theo ngày hoặc đầu việc.
+**Căn cứ:** Tổng theo tuần đã xác nhận. Giờ công thực tế Tuần 4 đã xác nhận là 10 giờ cho mỗi sinh viên. Nhật ký trình bày tổng theo tuần, không phân bổ số giờ theo ngày hoặc đầu việc.
 
 | Tuần | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Tổng |
 | --- | --- | --- | --- |

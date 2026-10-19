@@ -130,7 +130,7 @@ ORDER BY city;
 
 ## 9. Bảo mật và CloudFormation — 06:50–08:05
 
-**Bấm:** S3 → bucket → Permissions → Block public access → xem bốn mục bật. Chuyển Properties → Default encryption. Sau đó mở template canonical đã được chốt; đường dẫn là `tuan_4/infrastructure/weather-stack.json`.
+**Bấm:** S3 → bucket → Permissions → Block public access → xem bốn mục bật. Chuyển Properties → Default encryption. Sau đó mở template chính của dự án tại `tuan_4/infrastructure/weather-stack.json`.
 
 **Lời thoại:**
 

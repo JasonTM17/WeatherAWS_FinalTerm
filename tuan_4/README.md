@@ -37,6 +37,6 @@ cfn-lint --template tuan_4/infrastructure/weather-stack.json --regions us-east-1
 
 Các lệnh trên kiểm tra snapshot hoặc dựng artifact; không gọi Lambda, thay ngưỡng hoặc tắt lịch. Muốn đọc trạng thái AWS mới, dùng [verify_environment.py](scripts/verify_environment.py) với phiên Lab hợp lệ và thư mục đầu ra mới. Muốn tạo đúng một lượt realtime, dùng [run_demo_check.py](scripts/run_demo_check.py) và tùy chọn `--invoke`; mặc định chỉ xem trước.
 
-Mã nguồn, báo cáo và bằng chứng phân biệt kiểm thử cục bộ, API kiểm tra template và triển khai stack. Bản template trong snapshot ngày 19/10 là phiên bản 17 tài nguyên đã kiểm chứng lúc chụp; source chính hiện tại bổ sung hai metric filter và có hồ sơ kiểm tra riêng khi phát hành.
+Mã nguồn, báo cáo và bằng chứng phân biệt kiểm thử cục bộ, API kiểm tra template và triển khai stack. [Template trong snapshot ban đầu ngày 19/10](results/verification_2026_10_19/template.json) có 15 tài nguyên; [template chính hiện tại](infrastructure/weather-stack.json) bổ sung hai metric filter, có 17 tài nguyên và đã được kiểm tra riêng tại [hồ sơ ValidateTemplate](results/template_validation_2026_10_19/README.md).
 
 [Trang chính](../README.md) · [Tuần 3](../tuan_3/README.md)
