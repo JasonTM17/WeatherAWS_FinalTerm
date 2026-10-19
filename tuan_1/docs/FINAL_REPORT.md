@@ -392,3 +392,29 @@ Dung lượng lưu trữ và số lượt gọi ở mốc quan sát đều nhỏ
 ### 5.3 Kết luận
 
 Trong Tuần 1, bộ kết quả Athena dùng trong báo cáo gồm 156 bản ghi gốc, năm truy vấn thành công và chín biểu đồ từ CSV. Chúng em đã xây dựng kiến trúc, cấu hình các dịch vụ nền tảng và phân tích số liệu của ba đô thị. Phân công của chúng em được trình bày tại Bảng 2.1; các kết quả được đánh giá trong phạm vi bộ dữ liệu đã lưu.
+
+## Phụ lục A Liên kết minh chứng trực tiếp trên GitHub
+
+Danh mục liên kết bổ sung ngày 19/10/2026 giúp đối chiếu kết quả Tuần 1 với dữ liệu và mã nguồn. Các đường dẫn hiển thị đầy đủ để có thể sao chép từ báo cáo.
+
+- **Báo cáo đầy đủ và hồ sơ Tuần 1:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/FINAL_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/FINAL_REPORT.md).
+
+- **CSV raw Tuần 1: 156 bản ghi, 23 trường:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv).
+
+- **Sáu CSV truy vấn và bảng đo Athena:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051).
+
+- **Chín biểu đồ Tuần 1 và bảng nguồn:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/charts](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/charts).
+
+- **Nhật ký và phân công Tuần 1: 18,5 giờ:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/WORKLOG.md).
+
+- **Mã nguồn nền tảng S3 và cấu hình:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/scripts](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/scripts).
+
+- **Commit nền tảng Tuần 1 — 425b24a:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/425b24a747965783c019b8fe2fd62a47611fb03a](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/425b24a747965783c019b8fe2fd62a47611fb03a).
+
+- **Commit bổ sung biểu đồ trong hồ sơ hai tuần — 351f5be:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/351f5be44737843a123e7f8586ba849f3a4f9cc0](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/351f5be44737843a123e7f8586ba849f3a4f9cc0).
+
+- **Commit đối chiếu giờ công và minh chứng — 0d0df38:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0d0df38148d0b702cbfc1635c39c7338ca0871d3](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0d0df38148d0b702cbfc1635c39c7338ca0871d3).
+
+Các đường dẫn nhánh `main` mở phiên bản hiện tại; liên kết commit ghi mốc thay đổi cụ thể của mã nguồn hoặc hồ sơ. Dữ liệu và số giờ được trình bày theo tuần tương ứng.
+
+Danh mục minh chứng Tuần 1–3: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md).

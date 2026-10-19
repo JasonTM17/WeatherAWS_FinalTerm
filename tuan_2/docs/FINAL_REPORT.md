@@ -915,3 +915,33 @@ Bảng B.3b Giá trị khí tượng, chất lượng không khí và phân vùn
 | NQ-017 | 28.5 | 80.0 | 1016.2 | 4.8 | 9.7 | 12.5 | 345.0 | 6.7 | 4.1 | 78.0 | 42 | Good | 2 | 2026 | 10 | 14 |
 | NQ-018 | 28.5 | 80.0 | 1016.2 | 4.8 | 9.7 | 12.5 | 345.0 | 6.7 | 4.1 | 78.0 | 42 | Good | 2 | 2026 | 10 | 14 |
 | NQ-019 | 28.5 | 80.0 | 1016.2 | 4.8 | 9.7 | 12.5 | 345.0 | 6.7 | 4.1 | 78.0 | 42 | Good | 2 | 2026 | 10 | 14 |
+
+## Phụ lục C Liên kết minh chứng trực tiếp trên GitHub
+
+Danh mục liên kết bổ sung ngày 19/10/2026 giúp đối chiếu kết quả Tuần 2 với dữ liệu và mã nguồn. Các đường dẫn hiển thị đầy đủ để có thể sao chép từ báo cáo.
+
+- **Báo cáo đầy đủ Tuần 2:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/docs/FINAL_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/docs/FINAL_REPORT.md).
+
+- **Raw và metadata: 27/57 bản ghi thuộc Tuần 2:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_evidence](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_evidence).
+
+- **24 CSV kết quả Athena của hai sinh viên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_live](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_live).
+
+- **27 CSV phân tích và đối chiếu theo giờ:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_analysis](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_analysis).
+
+- **20 biểu đồ và dữ liệu dùng để dựng hình:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_charts](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/week2_charts).
+
+- **Mã nguồn Lambda hiện tại dùng chung:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py).
+
+- **Nhật ký và phân công Tuần 2: 19,5 giờ:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/docs/WORKLOG.md).
+
+- **Các lượt theo lịch và xác nhận email ngày 16/10:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/scheduled-run-verification.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/scheduled-run-verification.md).
+
+- **Commit khởi tạo triển khai Tuần 2 — 0166b40:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0166b402afbde753378718f2f847160b83c74a1a](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0166b402afbde753378718f2f847160b83c74a1a).
+
+- **Commit báo cáo và phân tích hai bộ dữ liệu — 96ce0a3:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96ce0a34e4f7d1a253c387a5ffd1d7a53170dc6a](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96ce0a34e4f7d1a253c387a5ffd1d7a53170dc6a).
+
+- **Commit chuẩn hóa thời gian thu thập/phân vùng — 36c9b39:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/36c9b3966a8b6f645dc6bb1491ad6e2b40a78765](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/36c9b3966a8b6f645dc6bb1491ad6e2b40a78765).
+
+Các đường dẫn nhánh `main` mở phiên bản hiện tại; liên kết commit ghi mốc thay đổi cụ thể của mã nguồn hoặc hồ sơ. Dữ liệu và số giờ được trình bày theo tuần tương ứng.
+
+Danh mục minh chứng Tuần 1–3: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md).

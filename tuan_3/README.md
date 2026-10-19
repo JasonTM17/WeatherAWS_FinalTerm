@@ -203,3 +203,27 @@ Các lệnh trên kiểm tra mã và tính nhất quán của hồ sơ đã lưu
 [Kế hoạch W4-01–W4-08](../docs/WEEK_4_PLAN.md) tiếp nối kết quả tích hợp Tuần 3: thu raw theo ngày, đối chiếu CloudWatch/log–S3, kiểm chứng cảnh báo email, đo Athena và đánh giá thêm ba kỳ dự báo có thời điểm phát hành. Sinh viên Tiến Sơn phụ trách vận hành/triển khai/giám sát; sinh viên Ngọc Quyên phụ trách truy vấn/phân tích/dự báo; hai sinh viên cùng rà soát hồ sơ và nhật ký.
 
 Kế hoạch có lịch đề xuất 26/10–01/11/2026, đầu ra, phụ thuộc và tiêu chí nghiệm thu cho từng đầu việc. [Nhật ký Tuần 3](docs/WORKLOG.md) giữ tổng giờ đã xác nhận; sản phẩm và giờ công Tuần 4 sẽ cập nhật theo công việc thực hiện.
+
+## Liên kết minh chứng để sao chép
+
+- **Báo cáo kỹ thuật Tuần 3:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/FINAL_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/FINAL_REPORT.md).
+
+- **Raw cập nhật 19/10: 641 bản ghi, 95 JSON gốc:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/daily_update_2026_10_19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/daily_update_2026_10_19).
+
+- **Danh mục 43 JSON của sinh viên Tiến Sơn và SHA-256:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/default/object_inventory.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/default/object_inventory.csv).
+
+- **Danh mục 52 JSON của sinh viên Ngọc Quyên và SHA-256:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/quyen/object_inventory.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/quyen/object_inventory.csv).
+
+- **Mốc raw 18/10: 534 bản ghi, 83 JSON gốc:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/raw_export_2026_10_18](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/raw_export_2026_10_18).
+
+- **Dự báo: đủ 24/24 giờ đích, 144 giá trị đối chiếu:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/forecast_followup_2026_10_19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/forecast_followup_2026_10_19).
+
+- **Athena: 18 lượt đo và query ID của mốc tích hợp:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/integration_2026_10_18/benchmark](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/integration_2026_10_18/benchmark).
+
+- **Nhật ký và tổng giờ Tuần 3: 20,0 giờ:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/WORKLOG.md).
+
+- **Các lượt GitHub Actions:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions).
+
+- **Kế hoạch Tuần 4 và tiêu chí nghiệm thu:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md).
+
+Danh mục Tuần 1–3, commit trực tiếp và cách đối chiếu: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md).

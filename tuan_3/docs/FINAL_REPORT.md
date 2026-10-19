@@ -552,6 +552,52 @@ Tuần 4 tập trung vận hành, đánh giá và hoàn thiện hồ sơ, tiếp
 
 Đầu ra Tuần 4 được lưu theo mốc riêng và liên kết về source/commit. Nhật ký, trạng thái hoàn thành và giờ công được cập nhật theo công việc thực hiện và xác nhận của từng sinh viên. [Danh sách nghiệm thu cuối tuần](../../docs/WEEK_4_PLAN.md#72-hồ-sơ-nghiệm-thu-cuối-tuần) hướng dẫn đối chiếu từng sản phẩm trước khi nộp.
 
+## 9. Liên kết minh chứng trực tiếp trên GitHub
+
+Danh mục sau liên kết trực tiếp tới dữ liệu và mã nguồn đã dùng trong hồ sơ Tuần 3. Các địa chỉ hiển thị đầy đủ để thuận tiện sao chép.
+
+- **Báo cáo kỹ thuật Tuần 3:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/FINAL_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/FINAL_REPORT.md).
+
+- **Raw cập nhật 19/10: 641 bản ghi, 95 JSON gốc:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/daily_update_2026_10_19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/daily_update_2026_10_19).
+
+- **Danh mục 43 JSON của sinh viên Tiến Sơn và SHA-256:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/default/object_inventory.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/default/object_inventory.csv).
+
+- **Danh mục 52 JSON của sinh viên Ngọc Quyên và SHA-256:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/quyen/object_inventory.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/snapshot/quyen/object_inventory.csv).
+
+- **Mốc raw 18/10: 534 bản ghi, 83 JSON gốc:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/raw_export_2026_10_18](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/raw_export_2026_10_18).
+
+- **CSV và biểu đồ ngày 19/10: 14 giờ hoàn tất:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/README.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/README.md).
+
+- **Dự báo: đủ 24/24 giờ đích, 144 giá trị đối chiếu:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/forecast_followup_2026_10_19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/forecast_followup_2026_10_19).
+
+- **Athena: 18 lượt đo và query ID của mốc tích hợp:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/integration_2026_10_18/benchmark](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/integration_2026_10_18/benchmark).
+
+- **Dashboard và cấu hình đọc lại từ AWS:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/monitoring_dashboard_repair_2026_10_18](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_3/results/monitoring_dashboard_repair_2026_10_18).
+
+- **Triển khai SDK, hash và kết quả thu bổ sung ngày 19/10:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/README.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/results/daily_update_2026_10_19/README.md).
+
+- **Nhật ký và tổng giờ Tuần 3: 20,0 giờ:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_3/docs/WORKLOG.md).
+
+- **Mã Lambda hiện tại:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py).
+
+- **Commit tích hợp Athena, Dashboard và dự báo — 0b26858:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/0b2685883c92eba1f31e27c735fdc48c94a8a12e).
+
+- **Commit artifact và phát hành Lambda — c28da19:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/c28da19568a7bbe4b5be60d844574ad2853bf356).
+
+- **Commit sửa giờ backfill đã triển khai — 62f1c08:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62f1c08e20e7a31447f10d713d4e115d4147c650).
+
+- **Chỉ mục thành phần và commit:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/components.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/components.md).
+
+- **Workflow CI kiểm tra repository:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/.github/workflows/verify-repository.yml](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/.github/workflows/verify-repository.yml).
+
+- **Workflow CD Lambda chạy thủ công:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/.github/workflows/week3-release.yml](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/.github/workflows/week3-release.yml).
+
+- **Các lượt GitHub Actions:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions).
+
+- **Kế hoạch Tuần 4 và tiêu chí nghiệm thu:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/WEEK_4_PLAN.md).
+
+Danh mục đầy đủ ba tuần: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md).
+
 ## Tài liệu tham khảo
 
 - [AWS — Partition Projection](https://docs.aws.amazon.com/athena/latest/ug/partition-projection.html), [cách cấu hình](https://docs.aws.amazon.com/athena/latest/ug/partition-projection-setting-up.html).

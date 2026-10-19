@@ -3,6 +3,7 @@
 Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS Serverless, lớp 261CLCO332779_05.
 
 - [Báo cáo tiến độ nộp LMS](../BAO_CAO.md)
+- [Danh mục minh chứng trực tiếp của Tuần 1–3](EVIDENCE_INDEX.md)
 - [Kiến trúc và trách nhiệm dịch vụ](architecture.md)
 - [Mô hình dữ liệu và cách phân tích](data-analysis.md)
 - [Cài đặt và vận hành](operation.md)

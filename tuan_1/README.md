@@ -59,3 +59,19 @@ Tuần 1 đã hình thành luồng dữ liệu và bộ phân tích ban đầu c
 ## Các bản lưu bổ sung
 
 [Báo cáo chi tiết trên GitHub](docs/FINAL_REPORT.md) · [PDF](docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel số liệu và biểu đồ](docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx)
+
+## Liên kết minh chứng để sao chép
+
+- **Báo cáo đầy đủ và hồ sơ Tuần 1:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/FINAL_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/FINAL_REPORT.md).
+
+- **CSV raw Tuần 1: 156 bản ghi, 23 trường:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/raw_weather_aqi_records.csv).
+
+- **Sáu CSV truy vấn và bảng đo Athena:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051).
+
+- **Chín biểu đồ Tuần 1 và bảng nguồn:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/charts](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_2/results/charts).
+
+- **Nhật ký và phân công Tuần 1: 18,5 giờ:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_1/docs/WORKLOG.md).
+
+- **Mã nguồn nền tảng S3 và cấu hình:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/scripts](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_1/scripts).
+
+Danh mục Tuần 1–3, commit trực tiếp và cách đối chiếu: [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/EVIDENCE_INDEX.md).
