@@ -71,6 +71,7 @@ Repository có kiểm thử các ranh giới triển khai, môi trường, artif
 
 Các commit dưới đây giữ đúng message nguyên bản; mỗi liên kết dẫn đến thay đổi tương ứng trong Git:
 
+- **`feat(week4): verify live stacks and three historical backtest windows` — 58fdf22:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf).
 - **`feat(week4): add verify_stack script for isolated stack output verification` — 62673c4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62673c4824ce9a9b333bd762c266a91794f020e3](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62673c4824ce9a9b333bd762c266a91794f020e3).
 - **`docs(week4): synchronize verbatim commit history, add deploy_stack test suite, and finalize master report` — cb72600:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/cb72600708d2f674c2f50be8a33dbeeab8b15966](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/cb72600708d2f674c2f50be8a33dbeeab8b15966).
 - **`fix(worklog): require published evidence and exclude local demo guides` — 97cc67b:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/97cc67bda994cf3e6c04dfe3049d3a680b807470](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/97cc67bda994cf3e6c04dfe3049d3a680b807470).

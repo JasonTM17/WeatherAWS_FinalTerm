@@ -141,3 +141,7 @@ Các đường dẫn nhánh `main` mở nội dung hiện tại; liên kết com
 
 - **Hai stack, raw, 18 truy vấn, metric, email và quản lý phiên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20).
 - **Backtest ba cửa sổ lịch sử và 432 dự đoán:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/backtest_2026_10_20](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/backtest_2026_10_20).
+
+### Commit triển khai và backtest ngày 20/10
+
+- **`feat(week4): verify live stacks and three historical backtest windows` — 58fdf22:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf).

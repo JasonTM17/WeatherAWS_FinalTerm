@@ -16,6 +16,8 @@
 
 ## Bổ sung nâng cao thực tế ngày 20/10/2026
 
+- **`feat(week4): verify live stacks and three historical backtest windows` — 58fdf22:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf).
+
 - **CloudFormation:** hai stack weather-w4-son/weather-w4-quyen CREATE_COMPLETE; cùng source/ZIP đúng hash, mỗi Lambda thu ba đô thị và SELECT đúng database/workgroup mới. [Minh chứng triển khai](tuan_4/results/advanced_live_2026_10_20/README.md).
 - **Raw và vận hành:** 700 bản ghi tích lũy/115 JSON gốc; mỗi stack mới có một Invocation/0 Errors trong chu kỳ kiểm chứng. Hai lịch chuẩn đã pause/restore thực tế; lịch mới vẫn DISABLED.
 - **SNS:** topic mới đã confirmed, mỗi topic có một thư thử được người nhận xác nhận. Lượt E2E mới dưới ngưỡng nên 0 cảnh báo; cảnh báo dữ liệu vượt ngưỡng ngày 19/10 được giữ riêng.
