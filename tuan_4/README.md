@@ -7,6 +7,7 @@
 | --- | --- |
 | Tổng kết toàn đồ án | [Kết quả Tuần 1–4, phân tích chuyên sâu và bàn giao](../docs/FINAL_PROJECT_REPORT.md) |
 | Báo cáo chính | [Kết quả, phương pháp, phân công và kết luận](docs/FINAL_REPORT.md) |
+| Nội dung nộp thầy | [Văn bản Tuần 4 có địa chỉ GitHub đầy đủ để sao chép](docs/SUBMISSION.md) |
 | Vận hành | [Hai request có kiểm soát](docs/LOG_METRIC_S3_RECONCILIATION.md) · [Raw/log/metric/Athena trực tiếp](results/verification_2026_10_19/README.md) |
 | Chi phí | [Cost Explorer đúng kỳ](docs/COST_REPORT.md) · [CSV theo dịch vụ](results/cost/learner_lab_cost_breakdown.csv) |
 | Hạ tầng | [Một template CloudFormation — 17 tài nguyên](infrastructure/weather-stack.json) · [Cách triển khai](docs/INFRASTRUCTURE.md) |

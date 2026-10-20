@@ -21,6 +21,7 @@
 | Tổng kết toàn đồ án | [Mục tiêu, kiến trúc, phân tích chuyên sâu, kết luận và đối chiếu yêu cầu cuối kỳ](docs/FINAL_PROJECT_REPORT.md) |
 | Danh mục minh chứng theo tuần | [Đầy đủ địa chỉ GitHub, dữ liệu, biểu đồ, mã nguồn và commit](docs/EVIDENCE_INDEX.md) |
 | Tổng kết và chuẩn bị bảo vệ Tuần 4 | [Trang Tuần 4](tuan_4/README.md) · [Báo cáo](tuan_4/docs/FINAL_REPORT.md) · [Lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) · [Template](tuan_4/infrastructure/weather-stack.json) · [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Chi phí](tuan_4/docs/COST_REPORT.md) |
+| Nội dung nộp Tuần 4 | [Văn bản có liên kết đầy đủ để sao chép vào hệ thống của lớp](tuan_4/docs/SUBMISSION.md) |
 | Hồ sơ Tuần 1 | [Trang Tuần 1](tuan_1/README.md) · [Markdown](tuan_1/docs/FINAL_REPORT.md) · [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
 | CSV Tuần 1 | [Sáu CSV đã dùng trong báo cáo](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) · [Chín biểu đồ](tuan_2/results/charts/) |
 | Hồ sơ Tuần 2 | [Trang Tuần 2](tuan_2/README.md) · [Markdown](tuan_2/docs/FINAL_REPORT.md) · [PDF](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.pdf) · [Word](tuan_2/docs/Bao_cao_Tuan_2_24110054_24110051.docx) · [Excel](tuan_2/docs/Du_lieu_phan_tich_Tuan_2_24110054_24110051.xlsx) |

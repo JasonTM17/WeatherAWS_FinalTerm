@@ -5,6 +5,22 @@
 **Học phần:** Điện toán đám mây · **Lớp:** 261CLCO332779_05 · **GVHD:** ThS. Huỳnh Xuân Phụng.
 **Ngày kiểm chứng:** 19/10/2026. **Phạm vi:** thực hiện các yêu cầu bổ sung sau khi báo cáo Tuần 3 được duyệt, làm đầu vào cho tổng kết Tuần 4.
 
+**Ngày hoàn thiện tài liệu:** 20/10/2026. Số liệu thực thi trong báo cáo giữ mốc kiểm chứng ngày 19/10; việc biên tập tài liệu không tạo thêm lượt chạy AWS.
+
+## Tóm tắt
+
+Tuần 4 tập trung kiểm chứng luồng thu thập, lưu trữ, truy vấn và cảnh báo trên hai môi trường thực hành. Mỗi sinh viên có một lượt realtime thu đủ ba đô thị; raw tải lại từ S3 khớp SELECT theo record_id. Cùng chu kỳ kiểm chứng, mỗi môi trường ghi nhận một Invocation, không có Error và một thông điệp được SNS chấp nhận. Hai người nhận đã xác nhận email mới của đợt này.
+
+Hồ sơ bổ sung Cost Explorer đúng kỳ, rà soát cấu hình S3, một template CloudFormation 17 tài nguyên đã kiểm tra và công cụ quản lý lịch cuối phiên. Các phần sau giải thích dữ liệu raw, điều kiện cảnh báo và phương pháp đối chiếu, đồng thời dẫn tới source, truy vấn, nhật ký và sản phẩm trình bày. [Nội dung nộp Tuần 4 có liên kết đầy đủ](SUBMISSION.md) được chuẩn bị riêng để sao chép vào hệ thống của lớp.
+
+## Mục tiêu và phương pháp
+
+Phép kiểm chứng đi theo một lượt xử lý xác định: source/gói triển khai → request → log → object S3 → CSV → SELECT Athena. Nhánh SNS được kiểm tra bằng dữ liệu và ngưỡng thật, kết quả Publish, sau đó xác nhận người nhận. Các kết luận sử dụng đúng request, cùng môi trường và cùng phạm vi thời gian.
+
+![Kiến trúc thu thập và phân tích dữ liệu](../../docs/architecture.png)
+
+*Hình 1. Kiến trúc ứng dụng được kiểm chứng trong Tuần 4. Sơ đồ thể hiện quan hệ thành phần; bảng kết quả và raw ở mục 3–4 ghi nhận thực thi của đợt ngày 19/10.*
+
 ## 1. Các nội dung thực hiện theo góp ý giảng viên
 
 | Yêu cầu | Sản phẩm và bằng chứng |
@@ -39,6 +55,26 @@ ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219
 
 Các lượt kiểm tra không thay source, ngưỡng, Secret hoặc lịch hiện hữu. [Bản dựng](../results/verification_2026_10_19/build.json), [source sinh viên Tiến Sơn](../results/verification_2026_10_19/environment/default/source.json), [source sinh viên Ngọc Quyên](../results/verification_2026_10_19/environment/quyen/source.json).
 
+### 2.1. Cách source tạo ra kết quả kiểm chứng
+
+| Thành phần trong source | Vai trò | Sản phẩm dùng để kiểm tra |
+| --- | --- | --- |
+| `fetch_secrets` và biến môi trường | Xác định vị trí, ngưỡng, bucket và topic; có nhánh cấu hình dự phòng khi đọc Secret thất bại | Cấu hình môi trường và log của lượt chạy |
+| `fetch_city_data` | Gọi dữ liệu chất lượng không khí và thời tiết, chuẩn hóa thành bản ghi | Tên đô thị, record_id, thời gian và các giá trị raw |
+| `lambda_handler` | Chọn realtime khi event `{}`; kiểm tra từng đô thị và ngưỡng cảnh báo | `collection_status`, `failed_cities`, `records_collected`, `alerts_sent` |
+| `send_sns_alert` | Publish thông điệp; trả kết quả chấp nhận gửi cho handler | Số Publish được chấp nhận và xác nhận email lưu riêng |
+| `save_records_to_s3` | Gom bản ghi theo ngày UTC và ghi NDJSON | `saved_files`, key và số dòng object tải lại |
+
+Điều kiện trong [source chính](../../tuan_2/lambda/lambda_function.py) là:
+
+```python
+if rec['pm2_5'] >= threshold_pm25 or rec['us_aqi'] >= threshold_aqi:
+    if send_sns_alert(rec, threshold_pm25, threshold_aqi):
+        alerts_sent += 1
+```
+
+Phép so sánh lấy cả giá trị bằng ngưỡng và dùng điều kiện OR. `alerts_sent` chỉ tăng sau khi hàm gửi trả về thành công. Trạng thái `complete` mô tả thu thập; để đánh giá cảnh báo cần xem thêm dữ liệu, log gửi SNS và xác nhận người nhận. Nhánh backfill chủ động không gửi cảnh báo lịch sử.
+
 ## 3. Kiểm thử realtime → S3 → Athena
 
 Mỗi môi trường được gọi một lần với event `{}`. Collector đọc cấu hình, thu thập dữ liệu của ba đô thị và trả trạng thái complete. Các object được tải lại nguyên byte từ S3; bản CSV được giữ cạnh JSON gốc để đối chiếu.
@@ -62,6 +98,39 @@ Hai SELECT trên kiểm tra đúng dữ liệu của lượt vừa chạy. Đây
 - [Raw và kết quả sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/).
 - [SQL theo đúng record_id của sinh viên Tiến Sơn](../results/verification_2026_10_19/e2e/default/exact_records.sql).
 - [SQL theo đúng record_id của sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/exact_records.sql).
+
+### 3.1. Bảng dữ liệu raw của hai lượt realtime
+
+Các giá trị sau được trích trực tiếp từ [CSV raw sinh viên Tiến Sơn](../results/verification_2026_10_19/e2e/default/raw_invocation.csv) và [CSV raw sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/raw_invocation.csv), cùng ngày kiểm chứng 19/10/2026. Mỗi hàng là một bản ghi, không phải trung bình theo ngày.
+
+| Sinh viên | Đô thị | US AQI | PM2.5, µg/m³ | Nhiệt độ, °C | Độ ẩm, % |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Sinh viên Tiến Sơn | TP. Hồ Chí Minh | 61 | 22,1 | 26,7 | 89,0 |
+| Sinh viên Tiến Sơn | Hà Nội | 101 | 29,9 | 27,3 | 81,0 |
+| Sinh viên Tiến Sơn | Đà Nẵng | 52 | 7,3 | 25,3 | 92,0 |
+| Sinh viên Ngọc Quyên | TP. Hồ Chí Minh | 61 | 22,1 | 26,7 | 89,0 |
+| Sinh viên Ngọc Quyên | Hà Nội | 101 | 29,9 | 27,3 | 81,0 |
+| Sinh viên Ngọc Quyên | Đà Nẵng | 52 | 7,3 | 25,3 | 92,0 |
+
+CSV nguồn giữ đủ **23 trường**, gồm record_id, tọa độ, thời gian UTC/Việt Nam, khí tượng, chất lượng không khí, cấp AQI và khóa thời gian. Các [JSON sinh viên Tiến Sơn](../results/verification_2026_10_19/e2e/default/objects/) và [JSON sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/objects/) giữ byte gốc tải lại từ S3.
+
+Hai lượt dùng cùng nguồn mô hình và vị trí nên có thể có cùng giá trị môi trường. Mã bản ghi của hai lượt vẫn khác nhau; SELECT kiểm tra đúng các mã đó. Vì vậy, các giá trị bằng nhau ở bảng này không được dùng để coi hai báo cáo là hai phép đo độc lập tại trạm.
+
+### 3.2. Từ dữ liệu đến quyết định cảnh báo
+
+| Đô thị trong mỗi lượt | AQI ≥ 100 | PM2.5 ≥ 35,5 µg/m³ | Kết quả điều kiện OR |
+| --- | --- | --- | --- |
+| TP. Hồ Chí Minh | Không: 61 | Không: 22,1 | Không phát sinh yêu cầu cảnh báo |
+| Hà Nội | Có: 101 | Không: 29,9 | Phát sinh một yêu cầu cảnh báo |
+| Đà Nẵng | Không: 52 | Không: 7,3 | Không phát sinh yêu cầu cảnh báo |
+
+Mỗi môi trường vì vậy có một đô thị thỏa điều kiện trong đúng lượt đã lưu. Kết quả `alerts_sent = 1` được đối chiếu với điều kiện trong source và bản raw, sau đó kiểm tra riêng email tới người nhận. Ngưỡng này là cấu hình của đồ án; không diễn giải thành một kết luận y tế.
+
+### 3.3. Cách đọc một lượt demo mới
+
+Một lượt demo sau đó có thể cho dữ liệu và số cảnh báo khác bảng ngày 19/10. Khi `alerts_sent = 0`, trước tiên kiểm tra các giá trị AQI/PM2.5 và log gửi thông báo: nếu không đô thị nào đạt ngưỡng thì không phát cảnh báo là phù hợp; nếu có đô thị đạt ngưỡng thì cần kiểm tra topic và kết quả Publish. Không suy ra nguyên nhân chỉ từ số 0.
+
+Thông báo `Executing function: succeeded` xác nhận lượt gọi kết thúc thành công. Phần `collection_status`, `failed_cities`, số bản ghi và object S3 tiếp tục được đọc để xác nhận kết quả nghiệp vụ. `Duration` là thời gian thực thi; dòng hiển thị dạng “seconds ago” chỉ thời điểm chạy cách hiện tại bao lâu.
 
 ## 4. Đối chiếu vận hành và cảnh báo
 
@@ -160,6 +229,31 @@ Căn cứ: **Tổng theo tuần đã xác nhận**. Giờ công thực tế Tu�
 Repository giữ một template chính, các chương trình xuất báo cáo có kiểm tra nguồn và một kịch bản quay khoảng 9 phút. Các bước tạo stack mới, quản lý lịch cuối phiên và các kỳ đánh giá kế tiếp được thực hiện theo checklist tương ứng, ghi nhận theo kết quả thực tế.
 
 Phần tổng kết xuyên suốt về mục tiêu, lựa chọn kiến trúc, phương pháp phân tích và sản phẩm bàn giao được trình bày tại [Báo cáo tổng kết đồ án](../../docs/FINAL_PROJECT_REPORT.md).
+
+## 11. Đối chiếu sản phẩm cuối kỳ và cách kiểm tra lại
+
+| Nội dung | Tài liệu kiểm tra | Kết quả bàn giao |
+| --- | --- | --- |
+| Source, raw và SELECT của lượt thật | Mục 2–3; [bộ raw và truy vấn](../results/verification_2026_10_19/e2e/) | Hai lượt, sáu bản ghi; SELECT khớp mã và giá trị raw |
+| Log, metric và cảnh báo | [Bảng đối chiếu](LOG_METRIC_S3_RECONCILIATION.md); [xác nhận email](../results/verification_2026_10_19/recipient_confirmation.json) | Có số liệu cùng chu kỳ; email đã được hai người nhận xác nhận |
+| Chi phí và bảo mật | [Chi phí](COST_REPORT.md); [cấu hình bảo mật](SECURITY_AUDIT.md) | Có kỳ, nguồn và phân biệt cấu hình hiện hữu/thiết kế mới |
+| Hạ tầng dưới dạng mã | [Template](../infrastructure/weather-stack.json); [kết quả kiểm tra](../results/template_validation_2026_10_19/README.md) | Một template 17 tài nguyên đã kiểm tra; việc tạo stack mới có quy trình riêng |
+| Quản lý sau buổi thực hành | [Checklist](SESSION_CHECKLIST.md) | Có preview/pause/restore và thứ tự xuất minh chứng trước khi kết thúc Lab |
+| Phân công và giờ công | [Nhật ký](WORKLOG.md); [CSV](../worklog.csv) | 20 giờ Tuần 4; 78 giờ toàn đồ án đã xác nhận |
+| Video trình bày | [Lời thoại](VIDEO_DEMO_SCRIPT.md); [hướng dẫn thao tác](DEMO_GUIDE.md) | Có kịch bản dưới 10 phút; đường dẫn video thực tế bổ sung sau khi quay |
+| Nội dung nộp và tổng kết | [Nội dung nộp Tuần 4](SUBMISSION.md); [tổng kết toàn đồ án](../../docs/FINAL_PROJECT_REPORT.md) | Có văn bản và liên kết đầy đủ để sao chép |
+
+Các phép kiểm tra dưới đây đọc hồ sơ đã lưu, không gọi Lambda hoặc thay đổi cấu hình AWS:
+
+```powershell
+python tuan_2/scripts/repository_audit.py --check
+python tuan_4/scripts/verify_results.py
+python tuan_4/scripts/cost_analysis.py --check
+python tuan_4/scripts/reconcile_ops.py --check
+python tuan_4/scripts/security_report.py --check
+```
+
+Kiểm tra mã và cơ chế quản lý phiên: `python -m unittest discover -s tuan_4/tests -v`. Quy trình CI chạy theo từng commit tại [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/workflows/verify-repository.yml). Kết quả kiểm tra tệp đã lưu, kiểm thử chương trình và quan sát trực tiếp AWS được trình bày theo từng nguồn bằng chứng tương ứng.
 
 ### Phiên bản hoàn thiện hồ sơ Tuần 4
 

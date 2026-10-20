@@ -36,6 +36,8 @@ Chỉ đọc phần **Lời thoại**. Phần **Bấm** là hướng dẫn thao 
 
 **Bấm:** Lambda → `WeatherCollectorLambda` → Test → chọn `demo-week4`, JSON `{}` → Test một lần. Khi xong mở Execution result → Details.
 
+Nếu đang ở trình soạn thảo Code của Lambda, có thể bấm **Create new test event** trong TEST EVENTS ở cạnh trái, đặt tên `demo-week4`, nhập `{}`, chọn Private và lưu; nút **Test** nằm dưới **Deploy**. CloudWatch Logs là trang xem nhật ký, không có tab Test của Lambda. Nếu chỉ kiểm tra mã đang triển khai, không cần bấm Deploy.
+
 **Lời thoại lúc bấm Test:**
 
 > Tiếp theo, em chạy một lượt kiểm tra trực tiếp bằng event rỗng. Đây là nhánh thu thập dữ liệu hiện tại.
@@ -100,9 +102,11 @@ ORDER BY city;
 
 > Đây là email của lượt kiểm tra vừa thực hiện. Em đối chiếu đô thị, chỉ số và ngưỡng cảnh báo với dữ liệu đã thu thập. Bước này kiểm tra thêm việc thư tới hộp thư người nhận, bên cạnh kết quả Publish của Lambda.
 
-**Nếu alerts_sent bằng 0, thay đoạn trên bằng:**
+**Nếu alerts_sent bằng 0:** đối chiếu raw và log trước khi kết luận nguyên nhân. Khi không có đô thị nào đạt ngưỡng, thay đoạn trên bằng:
 
 > Lượt hiện tại không phát cảnh báo. Để minh họa nội dung thư, em mở email của đợt kiểm chứng đã lưu trước đó; ngày kiểm chứng được thể hiện trong hồ sơ.
+
+Nếu raw có đô thị đạt ngưỡng nhưng số chấp nhận gửi vẫn bằng 0, kiểm tra cấu hình topic và log Publish; không nói dữ liệu chưa vượt ngưỡng. Một dòng succeeded xác nhận lượt gọi kết thúc thành công, còn trạng thái thu thập và gửi cảnh báo được đọc riêng.
 
 **Nếu có Publish nhưng thư đang chờ:** nói “SNS đã tiếp nhận thông báo; em tiếp tục kiểm tra hộp thư để xác nhận bước giao email.” Không gọi thư cũ là thư mới.
 

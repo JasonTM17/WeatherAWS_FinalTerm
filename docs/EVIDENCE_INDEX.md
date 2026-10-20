@@ -10,6 +10,8 @@ Danh mục liên kết báo cáo với raw, truy vấn, bảng phân tích, bi�
 
 **Tổng kết toàn đồ án và phân tích chuyên sâu:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md).
 
+**Nội dung nộp Tuần 4 có liên kết đầy đủ:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SUBMISSION.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SUBMISSION.md).
+
 ## 1. Các bộ dữ liệu dùng trong báo cáo
 
 | Bộ hồ sơ | Bản ghi | Tệp JSON gốc | Phạm vi đối chiếu |

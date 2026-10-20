@@ -76,6 +76,8 @@ Các đường dẫn Console cần đăng nhập bằng phiên Lab. Nếu Consol
 
 **Cần thấy:** `collection_status: complete`, `records_collected: 3`, `failed_cities: []`, `saved_files` và `alerts_sent`. Kiểm tra kết quả thật, không đọc thuộc một số cảnh báo cố định.
 
+**Nếu đang ở giao diện soạn thảo Code:** TEST EVENTS bên trái có **Create new test event**; nút **Test** nằm dưới **Deploy**. Tạo event Private `{}` rồi Test, không cần triển khai lại nếu không sửa source. Trang CloudWatch log group không có chức năng tạo test event. Trong kết quả, **Duration** là thời gian thực thi; “seconds ago” mô tả thời điểm chạy cách hiện tại bao lâu.
+
 **Nói:** “Event rỗng chạy nhánh realtime. Hàm đọc vị trí và ngưỡng, gọi API cho ba đô thị, lưu bản ghi theo ngày UTC lên S3. Cảnh báo được xét khi AQI từ 100 hoặc PM2.5 từ 35,5. Số cảnh báo trên màn hình là kết quả của lượt chạy này.”
 
 **Chú ý:** Không dùng `backfill_hours` cho phần demo cảnh báo: nhánh lịch sử chủ động không gửi email lịch sử. Nếu nút Test mất phản hồi, mở log trước khi chạy lại để tránh tạo hai lượt.
@@ -118,7 +120,7 @@ LIMIT 9;
 
 **Nói:** “Điều kiện cảnh báo nằm trong collector. `alerts_sent` ghi số lần SNS chấp nhận Publish. Subscription phải được xác nhận; em kiểm tra thêm thư đến để xác nhận tới người nhận.”
 
-Nếu `alerts_sent = 0`, nói dữ liệu lượt này chưa vượt ngưỡng. Có thể mở thư cảnh báo đã lưu trước đó và nêu đúng ngày kiểm chứng. Không gọi thư cũ là thư của lượt mới và không hạ ngưỡng trong lúc quay.
+Nếu `alerts_sent = 0`, kiểm tra AQI/PM2.5 của từng đô thị và log gửi SNS. Chỉ nói dữ liệu chưa đạt ngưỡng khi các bản ghi xác nhận điều đó. Nếu có bản ghi đạt ngưỡng, kiểm tra cấu hình topic và kết quả Publish. Có thể mở thư cảnh báo đã lưu trước đó và nêu đúng ngày kiểm chứng. Không gọi thư cũ là thư của lượt mới và không hạ ngưỡng trong lúc quay.
 
 ### Bước G — CloudWatch và đối chiếu vận hành
 
