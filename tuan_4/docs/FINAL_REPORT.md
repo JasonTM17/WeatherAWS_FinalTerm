@@ -221,10 +221,11 @@ Trích xuất từ [SECURITY_AUDIT.md](SECURITY_AUDIT.md) và [security_controls
 
 ## 8. Kiểm thử tự động và Đảm bảo chất lượng phần mềm
 
-Toàn bộ repository được bảo vệ bởi bộ kiểm thử tự động gồm **164 unit test** (trong đó có 34 unit test chuyên biệt cho Tuần 4):
+Toàn bộ repository được bảo vệ bởi bộ kiểm thử tự động gồm **168 unit test** (trong đó có 38 unit test chuyên biệt cho Tuần 4):
 - `tuan_4/tests/test_cloudformation.py`: Kiểm thử cấu trúc và tính toàn vẹn của template CloudFormation.
 - `tuan_4/tests/test_final_week.py`: Kiểm thử hợp đồng, ranh giới lỗi, logic cảnh báo, và cơ chế session control.
 - `tuan_4/tests/test_week4_operations.py`: Kiểm thử tính tái lập fail-closed của các báo cáo chi phí, an ninh, và đối chiếu.
+- `tuan_4/tests/test_public_worklog.py`: Kiểm thử ràng buộc minh chứng nhật ký công việc chỉ chấp nhận tài liệu đã công bố.
 - Các bộ kiểm thử Tuần 3 (57 tests) và Tuần 2 (73 tests) duy trì pass 100%.
 
 Lệnh thực thi toàn bộ test suite:
@@ -262,15 +263,18 @@ Báo cáo tổng hợp xuyên suốt toàn bộ đề tài được lưu trữ t
 
 Mọi liên kết commit dưới đây đều được dẫn kèm commit message nguyên bản trong Git:
 
-- **`feat(week4): complete final week verification, consolidate CloudFormation infrastructure, and update catalog` — 96bedec:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093).
-- **`docs(week4): synchronize final report test count to 34` — e9704bf:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5).
-- **`fix(evidence): preserve Week 4 snapshot bytes across platforms` — 892861e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5).
-- **`docs(week4): link verified integration commits with exact subjects` — fdbf633:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf633c3bf88a38ecae1d5306e00b84dfd8fc39](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf633c3bf88a38ecae1d5306e00b84dfd8fc39).
-- **`docs(week4): reconcile template history and confirmed email wording` — 9cac06e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06ee8542c8646b9aeb61f06f52988cb6bf42](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06ee8542c8646b9aeb61f06f52988cb6bf42).
+- **`docs(repo): keep video preparation guides local` — 84686c5:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/84686c51606c750d27dc9942fb2fc8968375765b](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/84686c51606c750d27dc9942fb2fc8968375765b).
+- **`docs(week4): unify master report, expand 11-control security audit, and detail dual-speaker demo script` — dd17f7f:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/dd17f7f2614256c28d2da7cdf636267276e7af84](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/dd17f7f2614256c28d2da7cdf636267276e7af84).
+- **`docs(readme): showcase advanced features and final week results` — 915e8c6:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/915e8c6f4e636628172ca4a367778c90fc93f5e6](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/915e8c6f4e636628172ca4a367778c90fc93f5e6).
+- **`docs(week4): expand raw evidence analysis and submission guide` — 2548138:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/25481381772288597af36e84093a89d41d080c64](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/25481381772288597af36e84093a89d41d080c64).
 - **`docs(report): add final project synthesis and acceptance mapping` — f6921e7:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/f6921e7dc0e26245ca5d33dd0b7288dc11120f0d](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/f6921e7dc0e26245ca5d33dd0b7288dc11120f0d).
-- **`docs(week4): expand raw evidence analysis and submission guide` — 2548138:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/2548138ee19fb59f2e329ceab1c04ce945f061f0](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/2548138ee19fb59f2e329ceab1c04ce945f061f0).
-- **`feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script` — e497754:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e4977549ea5b84964ea4753086eb293df65fa506](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e4977549ea5b84964ea4753086eb293df65fa506).
-- **`fix(iac): fix CloudFormation partition projection escaping and synchronize week 4 documentation` — 59a992a:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992acfe4e5a953930492cb4120ec04c45b843](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992acfe4e5a953930492cb4120ec04c45b843).
+- **`docs(week4): reconcile template history and confirmed email wording` — 9cac06e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06e43299e25061e7cc90b11dda2017448350](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06e43299e25061e7cc90b11dda2017448350).
+- **`docs(week4): link verified integration commits with exact subjects` — fdbf633:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf63330805c676fcb23c324685cce4d8049ae4](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf63330805c676fcb23c324685cce4d8049ae4).
+- **`fix(evidence): preserve Week 4 snapshot bytes across platforms` — 892861e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5).
+- **`docs(week4): synchronize final report test count to 34` — e9704bf:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5).
+- **`feat(week4): complete final week verification, consolidate CloudFormation infrastructure, and update catalog` — 96bedec:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093).
+- **`fix(iac): fix CloudFormation partition projection escaping and synchronize week 4 documentation` — 59a992a:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992a104932a190b15eab7b44f08d89a899b11](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992a104932a190b15eab7b44f08d89a899b11).
+- **`feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script` — e497754:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36).
 
 ### Danh mục tệp báo cáo kỹ thuật Tuần 4
 - [Báo cáo đối chiếu 3 chiều Log–Metric–S3](LOG_METRIC_S3_RECONCILIATION.md)

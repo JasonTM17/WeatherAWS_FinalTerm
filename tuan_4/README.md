@@ -37,7 +37,7 @@ Trong tuần này, nhóm đã hoàn thành xuất sắc 100% các mục tiêu c�
 | **07** | **Mẫu IAM Policy tối thiểu** | [infrastructure/collector-policy.example.json](infrastructure/collector-policy.example.json) | **100% HOÀN THÀNH** | Rà soát cấu trúc JSON |
 | **08** | **Quản lý tài nguyên cuối phiên** | [docs/SESSION_CHECKLIST.md](docs/SESSION_CHECKLIST.md) · [scripts/cleanup_resources.ps1](scripts/cleanup_resources.ps1) | **100% HOÀN THÀNH** | `python tuan_4/scripts/session_control.py pause --help` |
 | **09** | **Dữ liệu kiểm chứng trực tiếp** | [results/verification_2026_10_19/README.md](results/verification_2026_10_19/README.md) | **100% HOÀN THÀNH** | `python tuan_4/scripts/verify_results.py` |
-| **10** | **Bộ kiểm thử tự động Tuần 4** | [tests/](tests/) (34 test cases) | **PASS 100%** | `python -m unittest discover -s tuan_4/tests -v` |
+| **10** | **Bộ kiểm thử tự động Tuần 4** | [tests/](tests/) (38 test cases) | **PASS 100%** | `python -m unittest discover -s tuan_4/tests -v` |
 | **11** | **Nhật ký giờ công Tuần 4 & Tổng thể** | [docs/WORKLOG.md](docs/WORKLOG.md) · [worklog.csv](worklog.csv) | **78,0 giờ ĐÃ XÁC NHẬN** | `python tuan_2/scripts/repository_audit.py --check` |
 
 ---
@@ -68,6 +68,7 @@ tuan_4/
 │   ├── reconcile_ops.py                    # Đối soát 3 chiều Log - Metric - S3
 │   ├── security_report.py                  # Tạo ma trận kiểm toán an ninh bảo mật
 │   ├── prepare_stack.py                    # Đóng gói artifact và kiểm tra hợp đồng template
+│   ├── deploy_stack.py                     # Triển khai stack độc lập từ artifact bất biến
 │   ├── session_control.py                  # Quản lý trạng thái lịch (preview / pause / restore)
 │   ├── cleanup_resources.ps1               # Script PowerShell dọn dẹp tài nguyên cuối phiên
 │   ├── start_resources.ps1                 # Script PowerShell khôi phục tài nguyên đầu phiên
@@ -79,9 +80,10 @@ tuan_4/
 │   ├── cost/                               # Bộ dữ liệu chi phí FinOps (117 bản ghi CSV)
 │   ├── monitoring/                         # Bộ dữ liệu đối chiếu 3 chiều CSV & JSON
 │   └── security/                           # Ma trận kiểm toán bảo mật 16 dòng CSV
-└── tests/                                  # Bộ kiểm thử đơn vị tự động (34 tests)
+└── tests/                                  # Bộ kiểm thử đơn vị tự động (38 tests)
     ├── test_cloudformation.py              # Kiểm thử cấu trúc CloudFormation
     ├── test_final_week.py                  # Kiểm thử hợp đồng và ranh giới vận hành
+    ├── test_public_worklog.py              # Kiểm thử ràng buộc minh chứng công bố worklog
     └── test_week4_operations.py            # Kiểm thử tái lập báo cáo fail-closed
 ```
 
