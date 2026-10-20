@@ -8,13 +8,15 @@
 
 **Sinh viên thực hiện:** Nguyễn Tiến Sơn — 24110054; Trần Thị Ngọc Quyên — 24110051.
 
-**Ngày tổng hợp:** 19/10/2026.
+**Ngày cập nhật:** 20/10/2026. Các bộ số liệu giữ riêng ngày chốt và phạm vi kiểm chứng.
 
 ## Tóm tắt
 
 Đồ án xây dựng một luồng xử lý dữ liệu môi trường cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng trên AWS Learner Lab. EventBridge kích hoạt Lambda; Lambda đọc cấu hình, gọi Open-Meteo, chuẩn hóa bản ghi, lưu NDJSON trên S3 và gửi thông báo vượt ngưỡng qua SNS. Glue Data Catalog và Athena cung cấp lớp truy vấn; các chương trình Python xuất CSV, phân tích, tạo biểu đồ và đánh giá dự báo. CloudWatch cung cấp log, metric và dashboard phục vụ đối chiếu vận hành.
 
 Kết quả được trình bày theo bốn tuần, với các bộ dữ liệu và phiên bản mã được lưu riêng. Bản xuất tích lũy Tuần 3 ngày 19/10 có **641 bản ghi và 95 tệp JSON gốc**. Thực nghiệm Athena gồm **18 lượt truy vấn**; kỳ dự báo được đối chiếu đủ **144 giá trị**. Đợt kiểm chứng Tuần 4 nối được source đang triển khai, request thực thi, log, ba bản ghi S3 và SELECT tương ứng ở mỗi môi trường. Cả hai sinh viên đã xác nhận nhận email cảnh báo mới của đợt này. Template CloudFormation hiện tại khai báo **17 tài nguyên**, đã qua cfn-lint và AWS ValidateTemplate.
+
+Ngày 20/10, hồ sơ bổ sung **hai stack CloudFormation CREATE_COMPLETE**, kiểm chứng Lambda/S3/Athena trên tài nguyên mới, **700 bản ghi và 115 JSON gốc**, **18 truy vấn Athena mới**, cùng **backtest ba cửa sổ lịch sử với 432 dự đoán và 18 dòng sai số**. Hai topic mới có thư thử kênh email đã được người nhận xác nhận. Chi tiết và nguồn nằm ở mục 7.3 và [báo cáo Tuần 4](../tuan_4/docs/FINAL_REPORT.md).
 
 Tài liệu này tổng hợp kết quả toàn đồ án và giải thích ý nghĩa kỹ thuật. Báo cáo từng tuần tiếp tục giữ vai trò hồ sơ chi tiết theo đúng thời điểm chốt số liệu.
 
@@ -91,6 +93,8 @@ Các hàm `safe_float` và `safe_int` có giá trị dự phòng bằng 0 khi đ
 | Tuần 3, bản xuất ngày 19/10 | Sinh viên Tiến Sơn 302 dòng/43 JSON; sinh viên Ngọc Quyên 339 dòng/52 JSON | Tổng tích lũy 641 dòng/95 JSON của bản xuất này |
 | Dữ liệu riêng ngày 19/10 trong bản xuất Tuần 3 | Sinh viên Tiến Sơn 45 dòng; sinh viên Ngọc Quyên 42 dòng | Thống kê dùng cùng 14 giờ đã hoàn tất, tương ứng 42 bản ghi mỗi sinh viên |
 | Kiểm chứng realtime Tuần 4 ngày 19/10 | Ba bản ghi mới mỗi môi trường, sáu bản ghi cho hai lượt | Đối chiếu đúng record_id của request kiểm chứng, không cộng vào số tích lũy của snapshot Tuần 3 đã chốt trước đó |
+| Snapshot tích lũy ngày 20/10 | Sinh viên Tiến Sơn 331 dòng/53 JSON; sinh viên Ngọc Quyên 369 dòng/62 JSON | Tổng 700 dòng/115 JSON; có dữ liệu giao với snapshot cũ, không cộng hai bản xuất |
+| Backtest lịch sử ngày 20/10 | 519 dòng lịch sử mô hình, 432 dự đoán, 18 dòng MAE/RMSE/Bias | Ba cửa sổ đích liên tiếp, train trước gốc; tách với bản dự báo đã phát hành |
 
 Các hàng trong bảng có phạm vi giao nhau hoặc thời điểm chốt khác nhau, nên không cộng thành một “tổng số mẫu toàn đồ án”. Số dòng lớn hơn cũng không tự thể hiện số giờ được quan sát nhiều hơn. Khi so sánh hai báo cáo dữ liệu, đơn vị đô thị–giờ được dùng để giảm ảnh hưởng của việc một môi trường có nhiều lượt thu trong cùng giờ.
 
@@ -211,7 +215,7 @@ Công cụ quản lý phiên kiểm tra account/function/rule/target trước kh
 | Kiểm chứng tổng thể | Hai request realtime có source, log, S3, Athena, SNS và xác nhận email | Đã kiểm chứng trong phạm vi đợt ngày 19/10 |
 | Đối chiếu log–metric–S3 | Có bảng theo request và chu kỳ metric tương ứng | Đã tổng hợp |
 | Báo cáo chi phí và rà soát bảo mật | Có dữ liệu gốc, kỳ tính, kết quả đọc cấu hình và phân biệt thiết kế hạ tầng | Đã tổng hợp |
-| Một template CloudFormation | Bản 17 tài nguyên đã lint và ValidateTemplate | Hai stack CREATE_COMPLETE và E2E trên tài nguyên mới ngày 20/10 |
+| Một template CloudFormation | Bản 17 tài nguyên, artifact đúng version/hash | Hai stack CREATE_COMPLETE và E2E trên tài nguyên mới ngày 20/10 |
 | Quản lý tài nguyên cuối Lab | Có công cụ preview/pause/restore, kiểm thử và checklist | Thực hiện thao tác kết thúc phiên sau demo và xuất minh chứng |
 | Video không quá 10 phút | Trình bày luồng xử lý, kết quả phân tích và kiểm chứng vận hành | Cần quay, kiểm tra thời lượng và bổ sung đường dẫn video thực tế |
 | Nhật ký công việc | Tổng theo tuần đã xác nhận: 78 giờ | Đã lưu CSV và bảng phân công |

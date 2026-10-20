@@ -11,7 +11,7 @@
 
 ## 1. Phương pháp và mô hình đối chiếu 3 chiều (3-Way Reconciliation Framework)
 
-Trong các hệ thống phân tán Serverless, một yêu cầu xử lý trải qua nhiều tầng dịch vụ độc lập. Để khẳng định hệ thống vận hành chuẩn xác và không có dữ liệu ảo, nhóm áp dụng mô hình đối soát chéo 3 chiều kết hợp tầng xác nhận thông báo:
+Một lượt xử lý đi qua nhiều dịch vụ độc lập. Báo cáo ghép request với log, native metric, object S3, kết quả Athena và xác nhận thông báo để kiểm tra tính nhất quán của đúng lượt được chọn:
 
 ```
 [Kích hoạt Lambda] ────► [Tầng 1: CloudWatch Logs] ── (START/END/REPORT & [INFO] Result)
@@ -32,7 +32,7 @@ Trong các hệ thống phân tán Serverless, một yêu cầu xử lý trải 
 3. **Chiều 3 — Dữ liệu gốc S3 & Truy vấn kiểm toán Athena (S3 Storage & Athena SQL):**
    - Tải lại nguyên bản tệp NDJSON lưu trên S3 tại đường dẫn được báo cáo trong log.
    - Kiểm tra số dòng (3 dòng tương ứng 3 đô thị) và 23 trường thuộc tính của từng bản ghi.
-   - Thực thi câu lệnh Athena SQL lọc chính xác theo danh sách `record_id` của lượt chạy để chứng minh dữ liệu lưu trên S3 có thể truy vấn ngay lập tức qua Glue Data Catalog mà không cần quét lại dữ liệu cũ.
+   - Thực thi SELECT theo đúng `record_id` và phân vùng ngày, đối chiếu các trường đã chọn với raw. Athena vẫn có thể quét các bản ghi khác trong phân vùng; byte quét và thời gian được ghi riêng.
 4. **Chiều 4 — Cảnh báo thời gian thực & Xác nhận hộp thư (SNS & Email Recipient):**
    - Đối chiếu quyết định cảnh báo từ dữ liệu thời tiết thực tế (AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³) với số lệnh gọi `sns:Publish` được chấp nhận, và xác nhận nhận thư thực tế từ cả hai sinh viên.
 
@@ -55,11 +55,11 @@ Dưới đây là bảng đối soát chi tiết trích xuất từ dữ liệu 
 | **Native Errors (CloudWatch)** | **0.0** (chu kỳ 300s tương ứng) | **0.0** (chu kỳ 300s tương ứng) | Không phát sinh ngoại lệ runtime |
 | **Tỷ lệ lỗi chu kỳ kiểm chứng** | **0,0%** | **0,0%** | 0 lỗi / 1 invocation |
 | **Truy vấn Athena theo record_id** | Trả đúng 3 bản ghi, 0 lỗi | Trả đúng 3 bản ghi, 0 lỗi | Lọc chính xác 3 `record_id` |
-| **Lượng dữ liệu Athena quét** | **19.683 bytes** (~19,2 KB) | **20.251 bytes** (~19,8 KB) | Tối ưu nhờ Partition Projection |
+| **Lượng dữ liệu Athena quét** | **19.683 bytes** (~19,2 KiB) | **20.251 bytes** (~19,8 KiB) | Số đo của SELECT đã lưu; không quy kết mức cải thiện nếu chưa có đối chứng |
 | **Thời gian Engine Athena** | **674 ms** (Total: 888 ms) | **584 ms** (Total: 747 ms) | Serverless query dưới 1 giây |
 | **Lệnh Publish SNS chấp nhận** | **1 chấp nhận** (cho Hà Nội: AQI 101) | **1 chấp nhận** (cho Hà Nội: AQI 101) | Khớp điều kiện `AQI >= 100 OR PM2.5 >= 35.5` |
 | **Xác nhận người nhận email** | **ĐÃ XÁC NHẬN** (Hộp thư sinh viên) | **ĐÃ XÁC NHẬN** (Hộp thư sinh viên) | [recipient_confirmation.json](../results/verification_2026_10_19/recipient_confirmation.json) |
-| **Kết luận đối soát** | **MATCH (Khớp 100%)** | **MATCH (Khớp 100%)** | Toàn bộ 4 chiều dữ liệu khớp hoàn hảo |
+| **Kết luận đối soát** | **MATCH** | **MATCH** | Các trường và bộ đếm được kiểm tra khớp trong hai lượt đã chọn |
 
 ---
 

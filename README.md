@@ -267,11 +267,11 @@ Ngày 20/10, hai stack mới đạt **CREATE_COMPLETE**; mỗi Lambda mới thu 
 
 ### Phân công và thời gian đã xác nhận
 
-| Sinh viên | Phần việc chính | Tuần 1 | Tuần 2 | Tổng |
-| --- | --- | ---: | ---: | ---: |
-| Nguyễn Tiến Sơn (24110054) | S3, Secrets Manager, Lambda và SNS; phối hợp lịch và giám sát | 9,5 giờ | 10,0 giờ | 19,5 giờ |
-| Trần Thị Ngọc Quyên (24110051) | Glue, Athena, xuất CSV, biểu đồ và đối chiếu dữ liệu | 9,0 giờ | 9,5 giờ | 18,5 giờ |
-| Cả hai sinh viên | Kiến trúc, tích hợp và hoàn thiện hồ sơ | 18,5 giờ | 19,5 giờ | 38,0 giờ |
+| Sinh viên | Phần việc chính | Tuần 1 | Tuần 2 | Tuần 3 | Tuần 4 | Tổng |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Nguyễn Tiến Sơn (24110054) | S3, Secrets Manager, Lambda, SNS, hạ tầng và giám sát | 9,5 giờ | 10,0 giờ | 10,0 giờ | 10,0 giờ | 39,5 giờ |
+| Trần Thị Ngọc Quyên (24110051) | Glue, Athena, xuất CSV, phân tích, biểu đồ và đối chiếu dữ liệu | 9,0 giờ | 9,5 giờ | 10,0 giờ | 10,0 giờ | 38,5 giờ |
+| Cả hai sinh viên | Kiến trúc, tích hợp và hoàn thiện hồ sơ | 18,5 giờ | 19,5 giờ | 20,0 giờ | 20,0 giờ | 78,0 giờ |
 
 Số giờ là tổng theo tuần đã được xác nhận; không chia ngược thành giờ từng ngày từ lịch sử commit. Đối chiếu công việc và sản phẩm tại [worklog có minh chứng](docs/WORKLOG.md).
 

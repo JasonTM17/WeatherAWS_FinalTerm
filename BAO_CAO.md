@@ -28,26 +28,26 @@
 
 ## Tóm tắt tổng thể đồ án (Executive Summary)
 
-Đồ án xây dựng một giải pháp hoàn chỉnh theo mô hình **Serverless** trên nền tảng Amazon Web Services (AWS) nhằm thu thập, lưu trữ, xử lý, truy vấn phân tích dữ liệu lớn và cảnh báo chất lượng không khí thời gian thực cho ba đô thị trọng điểm của Việt Nam: **TP. Hồ Chí Minh, Hà Nội và Đà Nẵng**.
+Đồ án xây dựng một hệ thống **Serverless** trên Amazon Web Services (AWS) để thu thập, lưu trữ, truy vấn, phân tích dữ liệu thời tiết và gửi cảnh báo chất lượng không khí cho **TP. Hồ Chí Minh, Hà Nội và Đà Nẵng**. Kết quả được đánh giá trên các bộ dữ liệu và lượt thực thi đã lưu của môi trường học phần.
 
 Hệ thống được phát triển và kiểm chứng thực tế qua 4 tuần học phần trên môi trường AWS Academy Learner Lab tại vùng `us-east-1`:
 1. **Tuần 1 (Khởi động và Thiết kế kiến trúc):** Lựa chọn mô hình Serverless, thiết lập IAM, S3 bucket và cấu trúc khóa phân vùng.
 2. **Tuần 2 (Thu thập và Chuẩn hóa dữ liệu):** Triển khai AWS Lambda collector, tích hợp API Open-Meteo, chuẩn hóa 23 trường theo lược đồ dự án, phân loại US AQI, cấu hình AWS Glue Data Catalog và kiểm thử truy vấn Athena ban đầu.
 3. **Tuần 3 (Tích hợp, Giám sát, Benchmark và Dự báo):** Tích hợp hoàn chỉnh hệ thống, thiết lập CloudWatch Dashboard & Metric Filters, cấu hình cảnh báo email qua Amazon SNS, thực hiện 18 lượt benchmark Athena (chứng minh Parquet Snappy giảm 80,59% – 96,50% dữ liệu quét so với NDJSON), mô hình hóa dự báo AQI/PM2.5 24 giờ tới (đối chiếu đủ 144 điểm dữ liệu), và thiết lập guarded CD pipeline. **Tuần 3 đã được GVHD chính thức đánh giá ĐẠT.**
 4. **Tuần 4 (Kiểm chứng toàn diện, IaC CloudFormation, FinOps và An ninh bảo mật):**
-   - **Kiểm thử E2E có kiểm soát:** Thực hiện 2 lượt kích hoạt thời gian thực trên hai tài khoản AWS độc lập; đối chiếu nguyên vẹn byte NDJSON S3 với truy vấn Athena theo danh sách `record_id` cụ thể.
+   - **Kiểm thử E2E có kiểm soát:** Thực hiện hai lượt realtime ngày 19/10 trên hai môi trường độc lập; lưu nguyên byte object NDJSON từ S3, kiểm tra CSV raw và đối chiếu các trường đã chọn bằng Athena theo đúng `record_id`. Ngày 20/10 thực hiện thêm một lượt trên mỗi collector của stack mới.
    - **Đối chiếu 3 chiều Log – Metric – S3:** Xác thực khớp 1-1 giữa nhật ký CloudWatch Logs (`START`/`END`/`REPORT`/`[INFO] Result`), chỉ số vận hành CloudWatch Metrics (Invocations, 0 Errors, tỷ lệ lỗi 0,0%), tệp lưu trữ S3, và xác nhận nhận email cảnh báo vượt ngưỡng của cả hai sinh viên.
    - **Báo cáo tài chính đám mây FinOps (Cost Explorer):** Phân rã 117 nhóm bản ghi chi phí từ Cost Explorer API trong kỳ 12–19/10/2026; tổng chi phí hiển thị làm tròn đạt **0,00 USD** (Tiến Sơn) và **0,14 USD** (Ngọc Quyên) theo tổng hợp tài khoản của kỳ đã chọn.
    - **Tự động hóa vòng đời tài nguyên cuối phiên:** Xây dựng script PowerShell và công cụ Python `session_control.py` giúp tạm dừng/khôi phục EventBridge Rule, kiểm soát hoạt động thu thập theo phiên Lab.
    - **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template duy nhất ([weather-stack.json](tuan_4/infrastructure/weather-stack.json)) quản lý trọn vẹn **17 tài nguyên AWS Serverless**, đạt kiểm tra `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai môi trường.
-   - **Rà soát an ninh bảo mật 11 tiêu chuẩn:** Thực hiện kiểm toán toàn diện ([SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md)) bao gồm S3 Block Public Access 4/4 cờ, mã hóa tĩnh SSE-S3 AES256, thực thi HTTPS bắt buộc, đối chiếu phạm vi quyền đọc policy của `LabRole`, và cung cấp mẫu IAM Policy tối thiểu cho collector.
+   - **Rà soát bảo mật:** Đối chiếu 11 nội dung trong phạm vi đồ án ([SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md)), gồm BPA, AES256, versioning, HTTPS, ownership, quyền gọi Lambda và mẫu policy collector. Kết quả đọc cấu hình và thiết kế quyền được ghi riêng theo nguồn.
    - **Tổng kết giờ công toàn khóa học:** Tổng thời gian thực hiện Tuần 4 là **20,0 giờ**; tổng thời gian toàn bộ đồ án đạt **78,0 giờ** đã được xác nhận đầy đủ trong [worklog.csv](worklog.csv).
 
 ---
 
 ## Phần I: Kiến trúc tổng thể và Cơ sở lựa chọn công nghệ trên AWS
 
-Toàn bộ hệ thống được thiết kế theo nguyên tắc **Decoupled Serverless Architecture** (Kiến trúc phi máy chủ phân tách thành phần), bảo đảm tính sẵn sàng cao, co giãn tự động và chi phí tiệm cận 0:
+Hệ thống phân tách lịch kích hoạt, xử lý, lưu trữ, truy vấn và thông báo bằng các dịch vụ serverless. Cách thiết kế giảm phần máy chủ phải quản trị; hiệu năng, vận hành và chi phí được đánh giá bằng các phép đo trong báo cáo:
 
 ```
 [Amazon EventBridge] ──(rate: 1 hour)──► [AWS Lambda (Python 3.12)] ◄── [AWS Secrets Manager]
@@ -71,10 +71,10 @@ Toàn bộ hệ thống được thiết kế theo nguyên tắc **Decoupled Ser
 ### Vai trò và trách nhiệm của từng dịch vụ AWS:
 1. **Amazon EventBridge (CloudWatch Events):** Đảm nhiệm vai trò kích hoạt theo lịch định kỳ một giờ một lần (`rate(1 hour)`), kích hoạt Lambda thu thập tự động mà không cần máy chủ cron truyền thống.
 2. **AWS Lambda:** Xử lý logic nghiệp vụ chính (thu thập từ API Open-Meteo, chuẩn hóa dữ liệu, đánh giá ngưỡng cảnh báo logic OR, lưu trữ S3 và phát thông báo SNS).
-3. **AWS Secrets Manager:** Tách biệt cấu hình nhạy cảm (tọa độ địa lý ba thành phố, ngưỡng AQI và PM2.5, tên bucket, ARN topic) ra khỏi mã nguồn, bảo đảm tuân thủ nguyên tắc an ninh đám mây.
+3. **AWS Secrets Manager:** Lưu tọa độ ba đô thị và ngưỡng AQI/PM2.5 để collector đọc lúc chạy. Tên bucket, ARN topic và định danh Secret được truyền qua biến môi trường Lambda; không đưa credentials vào source.
 4. **Amazon S3:** Kho lưu trữ dữ liệu thô (Data Lake Storage) theo định dạng NDJSON, phân vùng tối ưu theo thời gian UTC: `raw/year=YYYY/month=MM/day=DD/`.
-5. **AWS Glue Data Catalog & Amazon Athena:** Cung cấp tầng truy vấn Serverless SQL trực tiếp trên dữ liệu S3 với cơ chế **Partition Projection**, cho phép phân tích dữ liệu lớn tức thời mà không cần quản lý máy chủ cơ sở dữ liệu quan hệ.
-6. **Amazon SNS (Simple Notification Service):** Kênh phát cảnh báo thời gian thực qua email đến người dùng khi chỉ số không khí vượt ngưỡng an toàn.
+5. **AWS Glue Data Catalog & Amazon Athena:** Lưu lược đồ và truy vấn SQL trực tiếp trên S3. **Partition Projection** ánh xạ khóa ngày sang đường dẫn dữ liệu; truy vấn sử dụng điều kiện phân vùng và được đo byte quét cùng độ trễ.
+6. **Amazon SNS (Simple Notification Service):** Phát email khi AQI hoặc PM2.5 đạt ngưỡng cấu hình của ứng dụng; xác nhận Publish và xác nhận người nhận được theo dõi riêng.
 7. **Amazon CloudWatch:** Giám sát toàn diện vòng đời thực thi qua CloudWatch Logs, theo dõi sức khỏe hệ thống qua CloudWatch Metrics (Invocations, Errors, Duration), Metric Filters và trực quan hóa tập trung trên CloudWatch Dashboard.
 
 ---
@@ -90,10 +90,10 @@ Toàn bộ hệ thống được thiết kế theo nguyên tắc **Decoupled Ser
 - Báo cáo chi tiết: [tuan_1/docs/FINAL_REPORT.md](tuan_1/docs/FINAL_REPORT.md).
 
 ### 2. Tuần 2: Thu thập Lambda, Chuẩn hóa 23 trường và Athena Catalog (19,5 giờ)
-- Phát triển mã nguồn [lambda_function.py](tuan_2/lambda/lambda_function.py) với 6 hàm chức năng cốt lõi: xử lý realtime, backfill lịch sử, chuẩn hóa 23 trường dữ liệu, tính toán cấp AQI theo chuẩn EPA Hoa Kỳ, và ghi S3 dạng NDJSON.
+- Phát triển [lambda_function.py](tuan_2/lambda/lambda_function.py): handler điều phối realtime/backfill, các hàm lấy dữ liệu và chuẩn hóa 23 trường, phân loại giá trị US AQI do API trả về, đánh giá ngưỡng, gửi SNS và ghi S3 dạng NDJSON.
 - Cấu hình AWS Glue Data Catalog và bảng `weather_airquality_records` với đầy đủ kiểu dữ liệu số học.
 - Xây dựng bộ công cụ kiểm toán kho lưu trữ tự động [repository_audit.py](tuan_2/scripts/repository_audit.py) kiểm tra tính toàn vẹn của liên kết Markdown, worklog CSV và các snapshot AWS.
-- Thu thập bộ dữ liệu kiểm chứng ban đầu (216 bản ghi sinh viên Tiến Sơn, 249 bản ghi sinh viên Ngọc Quyên).
+- Giữ riêng báo cáo Tuần 2 với CSV toàn bộ 204/231 dòng và phần thuộc tuần 27/57 dòng của sinh viên Tiến Sơn/sinh viên Ngọc Quyên. Snapshot bổ sung ngày 16/10 có 216/249 dòng, không thay đầu vào báo cáo đã chốt.
 - Thời gian thực hiện: Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 9,5 giờ. Tổng cộng: **19,5 giờ**.
 - Báo cáo chi tiết: [tuan_2/docs/FINAL_REPORT.md](tuan_2/docs/FINAL_REPORT.md).
 
@@ -113,7 +113,7 @@ Toàn bộ hệ thống được thiết kế theo nguyên tắc **Decoupled Ser
 - Lập báo cáo tài chính đám mây FinOps (Cost Explorer 12–19/10).
 - Tự động hóa dọn dẹp tài nguyên và bảo toàn credit cuối phiên.
 - Đóng gói 17 tài nguyên vào template CloudFormation [weather-stack.json](tuan_4/infrastructure/weather-stack.json).
-- Rà soát an ninh bảo mật theo 11 tiêu chuẩn [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md).
+- Rà soát 11 nội dung bảo mật trong phạm vi đồ án tại [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md).
 - Thời gian thực hiện: Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 10,0 giờ. Tổng cộng: **20,0 giờ**.
 - Báo cáo chi tiết: [tuan_4/docs/FINAL_REPORT.md](tuan_4/docs/FINAL_REPORT.md).
 
@@ -178,17 +178,17 @@ Hạ tầng được đặc tả toàn diện trong [weather-stack.json](tuan_4/
 
 Template đạt kiểm tra cú pháp với `cfn-lint 1.57.2` và xác thực qua API AWS `ValidateTemplate` trên cả hai tài khoản ([hồ sơ xác thực template](tuan_4/results/template_validation_2026_10_19/README.md)). Hướng dẫn triển khai xem tại [INFRASTRUCTURE.md](tuan_4/docs/INFRASTRUCTURE.md).
 
-### 6. Rà soát an ninh bảo mật theo 11 tiêu chuẩn (Security Audit)
+### 6. Rà soát 11 nội dung bảo mật
 
-Báo cáo [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md) và ma trận [security_controls_audit.csv](tuan_4/results/security/security_controls_audit.csv) đánh giá 11 tiêu chuẩn an toàn thông tin:
+Báo cáo [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md) tổng hợp 11 nội dung kiểm tra. Ma trận [security_controls_audit.csv](tuan_4/results/security/security_controls_audit.csv) là bảng dẫn xuất theo snapshot ngày 19/10; cấu hình mới ngày 20/10 được lưu riêng:
 1. **S3 Block Public Access:** Đạt 4/4 cờ bật trên cả hai tài khoản (**PASS**).
 2. **S3 Public ACL Absent:** Không có quyền công khai qua ACL (**PASS**).
 3. **S3 Public Policy Absent:** Không có bucket policy mở tự do (**PASS**).
 4. **S3 Encryption at Rest:** Bật mã hóa tĩnh SSE-S3 AES256 100% (**PASS**).
-5. **S3 Versioning:** Môi trường Lab ghi nhận trung thực `NOT_ENABLED` để tránh tốn credit; template chuẩn hóa khai báo `Enabled` (**DECLARED**).
-6. **S3 HTTPS-Only Transport:** Bucket policy từ chối yêu cầu không dùng HTTPS (**DECLARED**).
-7. **S3 BucketOwnerEnforced:** Vô hiệu hóa ACL, chủ bucket toàn quyền quản trị (**DECLARED**).
-8. **IAM Least Privilege Runtime:** Nhận diện trung thực việc API đọc chính sách LabRole bị từ chối, chưa xác định lớp policy gây từ chối (`BLOCKED_CAPABILITY`); cung cấp mẫu chính sách tối thiểu [collector-policy.example.json](tuan_4/infrastructure/collector-policy.example.json) giới hạn chỉ 4 quyền cần thiết.
+5. **S3 Versioning:** Bucket hiện hữu ngày 19/10 ghi `NOT_ENABLED`; hai bucket mới ngày 20/10 đọc lại `Enabled`.
+6. **S3 HTTPS-Only Transport:** Hai bucket mới đã đọc lại policy Deny yêu cầu không qua HTTPS.
+7. **S3 BucketOwnerEnforced:** Hai bucket mới đã đọc lại ownership ở trạng thái BucketOwnerEnforced.
+8. **IAM Least Privilege Runtime:** API đọc policy LabRole bị từ chối trong snapshot ngày 19/10, chưa xác định lớp policy gây từ chối. [Policy collector tham khảo](tuan_4/infrastructure/collector-policy.example.json) giới hạn theo tài nguyên cho bốn nhóm thao tác: ghi raw, đọc Secret, Publish và ghi log; không khẳng định effective permissions của LabRole đã tối thiểu.
 9. **EventBridge Invocation Boundary:** Resource policy Lambda ràng buộc đúng Rule ARN và SourceAccount (**PASS**).
 10. **SNS Topic Publish Boundary:** Ràng buộc SourceArn từ đúng CloudWatch Alarm ARN (**DECLARED**).
 11. **Log Hygiene & Secret Redaction:** Rà soát các tệp minh chứng được công bố để loại credentials, SecretString, email và URL có chữ ký; không khẳng định mọi log tương lai đã được kiểm tra.
