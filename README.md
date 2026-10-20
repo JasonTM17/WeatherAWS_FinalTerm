@@ -2,7 +2,9 @@
 
 Đồ án thực hành học phần **Điện toán đám mây**: xây dựng luồng thu thập dữ liệu thời tiết và chất lượng không khí từ API công khai, lưu bản ghi thô trên Amazon S3, truy vấn bằng Amazon Athena, sau đó tổng hợp kết quả thành CSV và biểu đồ có thể đối chiếu với dữ liệu đầu vào.
 
-Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ gồm kết quả Tuần 1–4, cập nhật đến ngày 19/10/2026: dữ liệu raw, phân tích, thực nghiệm Athena, dashboard, dự báo, CI/CD và kiểm chứng vận hành. [Báo cáo tổng kết đồ án](docs/FINAL_PROJECT_REPORT.md) liên kết các kết quả và giải thích lựa chọn kỹ thuật, phương pháp đánh giá cùng sản phẩm bàn giao.
+Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ Tuần 1–4 gồm dữ liệu raw, Athena Partition Projection/Parquet, dự báo AQI/PM2.5, CloudWatch, cảnh báo SNS email, CI/CD và CloudFormation IaC. Phần tổng kết bổ sung kiểm chứng đầu-cuối, chi phí, bảo mật và quy trình quản lý cuối phiên.
+
+**Hồ sơ hoàn thiện ngày 20/10/2026; các bộ số liệu giữ ngày chốt riêng, gồm mốc kiểm chứng ngày 19/10.** [Báo cáo tổng kết đồ án](docs/FINAL_PROJECT_REPORT.md) giải thích lựa chọn kỹ thuật, phương pháp đánh giá và sản phẩm bàn giao.
 
 | Thông tin | Chi tiết |
 | --- | --- |
@@ -13,6 +15,23 @@
 | Khu vực dữ liệu | TP. Hồ Chí Minh, Hà Nội và Đà Nẵng |
 | Nguồn dữ liệu | [Open-Meteo Weather API](https://open-meteo.com/en/docs) và [Air Quality API](https://open-meteo.com/en/docs/air-quality-api) |
 | Môi trường thực hành | AWS Learner Lab tại vùng `us-east-1`, dùng IAM LabRole có sẵn |
+
+## Kết quả nổi bật và các nội dung nâng cao
+
+| Nội dung | Kết quả và phạm vi đã kiểm chứng | Hồ sơ đối chiếu |
+| --- | --- | --- |
+| Dữ liệu raw có nguồn và hash | Bản xuất tích lũy Tuần 3 ngày 19/10 có **641 bản ghi, 95 JSON gốc**; CSV, object và SHA-256 được giữ cùng mốc | [Raw và provenance](tuan_3/results/daily_update_2026_10_19/README.md) |
+| Athena Partition Projection và Parquet | **18 lượt thử nghiệm**, ba phương án × ba lần × hai môi trường; kết quả tương đương. Parquet giảm byte quét **80,59%** và **96,50%** trong từng bộ đối chứng | [Thực nghiệm và thống kê](tuan_3/results/integration_2026_10_18/benchmark/) · [Phân tích kết quả](docs/FINAL_PROJECT_REPORT.md) |
+| Dự báo AQI và PM2.5 | Đối chiếu đủ **24 giờ đích, 144 giá trị** của một kỳ phát hành; giữ bản dự báo, nguồn mô hình tải về sau và MAE/RMSE/Bias | [CSV, biểu đồ và sai số](tuan_3/results/forecast_followup_2026_10_19/README.md) |
+| CloudWatch và kiểm chứng đầu-cuối | Tuần 4 nối source → request → log → S3 → Athena; mỗi môi trường có một lượt realtime, ba bản ghi và một Invocation/0 Errors trong đúng chu kỳ kiểm chứng | [Báo cáo Tuần 4](tuan_4/docs/FINAL_REPORT.md) · [Đối chiếu vận hành](tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md) |
+| Cảnh báo SNS email | Mỗi lượt kiểm chứng ngày 19/10 có một Publish được chấp nhận; cả hai người nhận xác nhận email mới | [Xác nhận email](tuan_4/results/verification_2026_10_19/recipient_confirmation.json) |
+| CI/CD Lambda | Có workflow kiểm tra repository, đóng gói source và triển khai có xác nhận môi trường; hai lượt CD ngày 18/10 có minh chứng đối chiếu artifact | [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) · [Minh chứng CD](tuan_3/results/cd_2026_10_18/) |
+| CloudFormation IaC | Một template **17 tài nguyên**, dùng source collector chính; đạt cfn-lint và AWS ValidateTemplate trên hai môi trường. Hồ sơ xác nhận kiểm tra template, chưa tạo stack mới trong đợt này | [Template](tuan_4/infrastructure/weather-stack.json) · [Kết quả kiểm tra](tuan_4/results/template_validation_2026_10_19/README.md) |
+| Rà soát bảo mật | Đối chiếu BPA, mã hóa và trạng thái truy cập công khai của S3; phân biệt cấu hình hiện hữu với thiết kế HTTPS/versioning và policy collector của stack mới | [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Phạm vi quyền](tuan_4/docs/SECURITY_REVIEW.md) |
+| Chi phí và quản lý phiên | Cost Explorer đúng kỳ 12–19/10, có Estimated; công cụ preview/pause/restore kèm kiểm tra target và trạng thái khôi phục | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
+| Hồ sơ bàn giao | Báo cáo Tuần 1–4, nội dung nộp có URL đầy đủ, **78 giờ công đã xác nhận** và kịch bản video dưới 10 phút | [Nội dung nộp Tuần 4](tuan_4/docs/SUBMISSION.md) · [Worklog](docs/WORKLOG.md) · [Lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) |
+
+Ba điểm vào để đọc hồ sơ: **[Tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md)** · **[Kiểm chứng Tuần 4](tuan_4/docs/FINAL_REPORT.md)** · **[Nội dung nộp thầy](tuan_4/docs/SUBMISSION.md)**.
 
 ## Điều hướng nhanh
 
@@ -38,9 +57,9 @@
 | Triển khai đã kiểm chứng | [Mã Lambda, thu thập thực tế, Athena và email cảnh báo](docs/deployment-verification.md) |
 | Chạy tự động sau triển khai | [EventBridge, log Lambda, dữ liệu mới và cảnh báo của hai lượt theo lịch](docs/scheduled-run-verification.md) |
 
-[Phạm vi](#mục-tiêu-và-phạm-vi) · [Luồng xử lý](#luồng-xử-lý-dữ-liệu) · [Mô hình và phương pháp](#mô-hình-dữ-liệu-và-phương-pháp) · [Kết quả từng tuần](#kết-quả-theo-tuần) · [Đối chiếu hai tuần](#đối-chiếu-bộ-báo-cáo-tuần-1-và-mẫu-tuần-2) · [Mã nguồn](#cấu-trúc-mã-nguồn) · [Cài đặt và kiểm tra](#cài-đặt-và-kiểm-tra) · [Kế hoạch](#kế-hoạch-tiếp-theo)
+[Nội dung nâng cao](#kết-quả-nổi-bật-và-các-nội-dung-nâng-cao) · [Phạm vi](#mục-tiêu-và-phạm-vi) · [Luồng xử lý](#luồng-xử-lý-dữ-liệu) · [Mô hình và phương pháp](#mô-hình-dữ-liệu-và-phương-pháp) · [Kết quả từng tuần](#kết-quả-theo-tuần) · [Đối chiếu hai tuần](#đối-chiếu-bộ-báo-cáo-tuần-1-và-mẫu-tuần-2) · [Mã nguồn](#cấu-trúc-mã-nguồn) · [Cài đặt và kiểm tra](#cài-đặt-và-kiểm-tra) · [Kế hoạch](#kế-hoạch-tiếp-theo)
 
-Để xem hồ sơ theo thứ tự, đọc phần kiến trúc, kết quả Tuần 1, kết quả Tuần 2 và bảng đối chiếu; sau đó mở CSV nguồn dưới mỗi hình. Các liên kết Word/PDF ở bảng trên dẫn tới bản báo cáo chính theo MSSV. Nhật ký có tổng giờ từng sinh viên và liên kết sản phẩm tương ứng.
+Để xem toàn bộ kết quả, đọc báo cáo tổng kết, kiến trúc và các phần Tuần 1–4; mở CSV nguồn dưới mỗi hình hoặc bảng để đối chiếu. Các liên kết Word/PDF ở bảng trên dẫn tới bản báo cáo theo MSSV của từng tuần. Hồ sơ Tuần 3–4 trình bày trực tiếp trên GitHub; nhật ký liên kết giờ công với sản phẩm tương ứng.
 
 ## Mục tiêu và phạm vi
 
@@ -212,6 +231,38 @@ Phép so sánh này dùng bộ 156 dòng Tuần 1 đã nộp. Bảng [weekly_com
 
 Các ảnh trong README dùng trực tiếp những PNG đã lưu của bộ báo cáo. Người đọc có thể mở CSV ngay dưới hình để kiểm tra giá trị; sơ đồ kiến trúc là hình mô tả thiết kế, còn các biểu đồ là kết quả dựng từ dữ liệu đã lưu.
 
+### Tuần 3: tích hợp, tối ưu truy vấn và đánh giá dự báo
+
+Mốc cập nhật ngày 19/10 có **302 bản ghi/43 JSON** của sinh viên Tiến Sơn và **339 bản ghi/52 JSON** của sinh viên Ngọc Quyên. Riêng dữ liệu mang ngày 19/10 theo UTC+7 có 45/42 bản ghi; thống kê so sánh dùng cùng 14 giờ đã hoàn tất, tương ứng 42 bản ghi mỗi sinh viên. Bản xuất tích lũy được giữ riêng với tập đầu vào của thực nghiệm Athena và kỳ phát hành dự báo.
+
+![AQI và PM2.5 trong khung giờ hoàn tất ngày 19/10 của hai sinh viên](tuan_3/results/daily_update_2026_10_19/daily_aqi_pm25.png)
+
+*Hình 8. Thống kê ngày 19/10 từ cùng tập giờ hoàn tất. [CSV, JSON và cách tổng hợp](tuan_3/results/daily_update_2026_10_19/README.md) giữ rõ nguồn dữ liệu thu bổ sung và mốc chốt.*
+
+**Tối ưu Athena:** ba cách tổ chức dữ liệu gồm JSON đăng ký phân vùng, JSON projection và Parquet projection được đo trên cùng dữ liệu trong từng môi trường. Parquet giảm lượng quét nhưng không luôn có thời gian thấp nhất: ở bộ của sinh viên Ngọc Quyên, engine của JSON projection có trung vị 431 ms, còn Parquet là 515 ms. [Báo cáo tổng kết](docs/FINAL_PROJECT_REPORT.md) giải thích riêng byte quét, thời gian và phạm vi đối chứng.
+
+**Dự báo:** mã nguồn đánh giá các phương pháp cơ sở; bản phát hành ngày 18/10 được giữ nguyên và đối chiếu đủ kỳ vào ngày 19/10. MAE, RMSE và Bias được tính riêng cho từng đô thị/chỉ số; dữ liệu đối chiếu là mô hình CAMS tải về sau.
+
+![Dự báo AQI và PM2.5 đã phát hành so với chuỗi mô hình đối chiếu](tuan_3/results/forecast_followup_2026_10_19/issued_vs_later_model.png)
+
+*Hình 9. Đối chiếu đủ 144 giá trị của kỳ dự báo. Nguồn: [comparison.csv](tuan_3/results/forecast_followup_2026_10_19/comparison.csv) và [comparison_metrics.csv](tuan_3/results/forecast_followup_2026_10_19/comparison_metrics.csv). Kết quả áp dụng cho kỳ phát hành đã lưu, không thay thế đánh giá trên các kỳ mới.*
+
+CloudWatch và quy trình phát hành tiếp tục được tích hợp trong Tuần 3. [Vận hành và CI/CD](tuan_3/docs/operation.md) dẫn tới workflow, source và bằng chứng triển khai. [Báo cáo Tuần 3](tuan_3/docs/FINAL_REPORT.md) trình bày đầy đủ raw, chất lượng, benchmark, dashboard và dự báo.
+
+### Tuần 4: kiểm chứng hệ thống, hạ tầng và bàn giao
+
+Đợt kiểm chứng ngày 19/10 xác nhận mã trên hai Lambda khớp source collector chính. Mỗi môi trường có một request realtime thu đủ ba đô thị, ba bản ghi; JSON tải lại từ S3, CSV và SELECT theo đúng record_id khớp nhau. Trong chu kỳ chứa request, mỗi môi trường ghi nhận một Invocation và không có Error. Nhánh cảnh báo có một Publish được SNS chấp nhận và email đã được người nhận xác nhận.
+
+| Hạng mục | Kết quả và tài liệu |
+| --- | --- |
+| Dữ liệu và vận hành | [Sáu bản ghi raw, điều kiện cảnh báo, SELECT và log–metric–S3](tuan_4/docs/FINAL_REPORT.md) |
+| CloudFormation | [Template 17 tài nguyên](tuan_4/infrastructure/weather-stack.json), [ValidateTemplate](tuan_4/results/template_validation_2026_10_19/README.md), [quy trình tạo stack](tuan_4/docs/INFRASTRUCTURE.md) |
+| Bảo mật và chi phí | [Ma trận cấu hình](tuan_4/docs/SECURITY_AUDIT.md) và [Cost Explorer đúng kỳ](tuan_4/docs/COST_REPORT.md) |
+| Quản lý tài nguyên | [Preview/pause/restore và checklist kết thúc Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
+| Nộp và bảo vệ | [Nội dung Tuần 4 có liên kết đầy đủ](tuan_4/docs/SUBMISSION.md), [lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md), [hướng dẫn từng bước bấm](tuan_4/docs/DEMO_GUIDE.md) |
+
+Template đã được kiểm tra cấu trúc và API, chưa tạo stack mới trong đợt này. Video thực tế được bổ sung sau khi quay; thao tác kết thúc phiên thực hiện sau khi xuất minh chứng và hoàn tất sử dụng Lab. [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) đối chiếu các sản phẩm này với yêu cầu cuối kỳ.
+
 ### Phân công và thời gian đã xác nhận
 
 | Sinh viên | Phần việc chính | Tuần 1 | Tuần 2 | Tổng |
@@ -254,6 +305,11 @@ Trong cửa sổ metric đã truy vấn, tổng Errors lớn hơn tổng Invocat
 | [tuan_2/analytics/](tuan_2/analytics/) | Phân tích hai bộ dữ liệu, tạo bảng CSV và dựng biểu đồ theo manifest |
 | [tuan_2/tests/](tuan_2/tests/) | Kiểm tra Lambda, SDK, CSV, dữ liệu và hồ sơ lưu cục bộ |
 | [tuan_2/results/](tuan_2/results/README.md) | CSV gốc/tổng hợp, hình, metadata và phân tách các mốc dữ liệu |
+| [tuan_3/scripts/](tuan_3/scripts/) | Snapshot, chất lượng, benchmark Projection/Parquet, dự báo, dashboard, đối chiếu và phát hành Lambda |
+| [tuan_3/results/](tuan_3/results/) | Các bản raw, truy vấn thực nghiệm, dự báo, provenance và minh chứng CI/CD theo mốc |
+| [tuan_4/infrastructure/](tuan_4/infrastructure/weather-stack.json) | Một template CloudFormation chính và policy collector tham khảo |
+| [tuan_4/scripts/](tuan_4/scripts/) | Kiểm chứng môi trường, demo đầu-cuối, chuẩn bị artifact, phân tích chi phí/bảo mật và quản lý phiên |
+| [tuan_4/docs/](tuan_4/docs/FINAL_REPORT.md) | Báo cáo kiểm chứng, nội dung nộp, worklog, hạ tầng và kịch bản video |
 | [.github/workflows/](.github/workflows/verify-repository.yml) | Quy trình CI để kiểm tra tính nhất quán của repository |
 
 Điểm vào phân tích và tệp có trách nhiệm chi tiết được liệt kê trong [chỉ mục mã nguồn](docs/components.md) và [hướng dẫn đọc mã nguồn](docs/source-guide.md).
@@ -265,6 +321,8 @@ Trong cửa sổ metric đã truy vấn, tổng Errors lớn hơn tổng Invocat
 3. Đọc [athena_export.py](tuan_2/scripts/athena_export.py) để xem cách chờ truy vấn, xử lý kết quả, giữ vị trí cột và bảo vệ tệp đích khi xuất thất bại.
 4. Đọc [analyze_week2_accounts.py](tuan_2/analytics/analyze_week2_accounts.py) để xem thống kê theo sinh viên, nhóm theo giờ, ghép thời điểm và cách tính tương quan trên các cặp giá trị hợp lệ.
 5. Đọc [generate_week2_charts.py](tuan_2/analytics/generate_week2_charts.py) cùng manifest để xác định CSV nguồn của từng hình; phần [đối chiếu hai tuần](tuan_2/analytics/weekly_comparison_charts.py) kiểm tra phạm vi bộ mốc trước khi vẽ.
+6. Đọc [benchmark.py](tuan_3/scripts/benchmark.py), [forecast.py](tuan_3/scripts/forecast.py) và [forecast_followup.py](tuan_3/scripts/forecast_followup.py) để theo dõi dữ liệu đóng băng, đối chứng truy vấn và đánh giá bản dự báo đã phát hành.
+7. Đọc [weather-stack.json](tuan_4/infrastructure/weather-stack.json), [run_demo_check.py](tuan_4/scripts/run_demo_check.py) và [session_control.py](tuan_4/scripts/session_control.py) để hiểu hạ tầng, cách tạo bằng chứng một lượt và cơ chế pause/restore.
 
 Các tệp PowerShell trong hồ sơ hai tuần chuyển tham số tới chương trình Python dùng chung. Phần triển khai và mã thu thập chính nằm tại `tuan_2/`; [sơ đồ repository](docs/repository-layout.md) giải thích các điểm vào dùng lại giữa hai tuần.
 
@@ -281,7 +339,9 @@ cd WeatherAWS_FinalTerm
 
 Cài dependencies từ gốc repository:
 
-    python -m pip install -r tuan_2/analytics/requirements.txt
+    python -m pip install -r tuan_3/requirements.txt cfn-lint==1.57.2
+
+Tệp [requirements Tuần 3](tuan_3/requirements.txt) cung cấp Boto3, Matplotlib, NumPy và PyArrow cho các phần dữ liệu nâng cao; cfn-lint dùng kiểm tra template hạ tầng. [Dependencies phân tích Tuần 2](tuan_2/analytics/requirements.txt) tiếp tục được giữ cùng module gốc.
 
 Tệp [tuan_2/lambda/requirements.txt](tuan_2/lambda/requirements.txt) chỉ phục vụ phát triển cục bộ cho Lambda; runtime Lambda Python 3.12 đã cung cấp sẵn boto3 và các thư viện chuẩn mà mã nguồn sử dụng.
 
@@ -293,6 +353,16 @@ Chạy các bộ kiểm tra chức năng và phân tích:
 
     python -m unittest discover -s tuan_2/tests -v
     python -m unittest discover -s tuan_2/analytics -p "test_*.py" -v
+    python -m unittest discover -s tuan_3/tests -v
+    python -m unittest discover -s tuan_4/tests -v
+
+Kiểm tra các bộ bằng chứng đã lưu và template chính:
+
+    python tuan_3/scripts/verify_results.py
+    python tuan_4/scripts/verify_results.py
+    cfn-lint --template tuan_4/infrastructure/weather-stack.json --regions us-east-1
+
+Các lệnh kiểm tra này không triển khai stack hoặc tạo lượt thu thập mới. Cách triển khai và kiểm chứng trực tiếp nằm trong [hướng dẫn hạ tầng Tuần 4](tuan_4/docs/INFRASTRUCTURE.md).
 
 Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào thư mục riêng:
 
@@ -337,6 +407,8 @@ Tổng thời gian làm việc đã được hai sinh viên xác nhận là **78
 - [Mốc tích hợp Tuần 3](tuan_3/README.md)
 - [Hồ sơ tổng kết Tuần 4](tuan_4/README.md)
 - [Báo cáo kỹ thuật Tuần 4](tuan_4/docs/FINAL_REPORT.md)
+- [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md)
+- [Nội dung nộp Tuần 4 với địa chỉ liên kết đầy đủ](tuan_4/docs/SUBMISSION.md)
 - [Hạ tầng CloudFormation IaC](tuan_4/infrastructure/weather-stack.json)
 - [Báo cáo Rà soát An toàn (Security Audit)](tuan_4/docs/SECURITY_AUDIT.md)
 - [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md)
@@ -350,6 +422,7 @@ Tổng thời gian làm việc đã được hai sinh viên xác nhận là **78
 - [Danh mục CSV, số dòng và SHA-256](docs/csv_catalog.csv)
 - [Kết quả kế hoạch Tuần 3](docs/WEEK_3_PLAN.md)
 - [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md)
-- [Commit tổng kết Tuần 4 — e497754](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36) — `feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script`
+- [Commit hoàn thiện báo cáo Tuần 4 — 2548138](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/25481381772288597af36e84093a89d41d080c64) — `docs(week4): expand raw evidence analysis and submission guide`
+- [Commit tổng kết toàn đồ án — f6921e7](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/f6921e7dc0e26245ca5d33dd0b7288dc11120f0d) — `docs(report): add final project synthesis and acceptance mapping`
 
 Repository công khai: [JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm).
