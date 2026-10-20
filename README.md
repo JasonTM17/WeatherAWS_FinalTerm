@@ -27,7 +27,7 @@
 | Cảnh báo SNS email | Mỗi lượt kiểm chứng ngày 19/10 có một Publish được chấp nhận; cả hai người nhận xác nhận email mới | [Xác nhận email](tuan_4/results/verification_2026_10_19/recipient_confirmation.json) |
 | CI/CD Lambda | Có workflow kiểm tra repository, đóng gói source và triển khai có xác nhận môi trường; hai lượt CD ngày 18/10 có minh chứng đối chiếu artifact | [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) · [Minh chứng CD](tuan_3/results/cd_2026_10_18/) |
 | CloudFormation IaC | Một template **17 tài nguyên**; hai stack đạt **CREATE_COMPLETE**, Lambda mới thu ba đô thị, SELECT trên database/workgroup mới và gói nguồn đúng hash | [Template](tuan_4/infrastructure/weather-stack.json) · [Triển khai thực tế](tuan_4/results/advanced_live_2026_10_20/README.md) |
-| Rà soát bảo mật | Đối chiếu BPA, mã hóa và trạng thái truy cập công khai của S3; phân biệt cấu hình hiện hữu với thiết kế HTTPS/versioning và policy collector của stack mới | [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Phạm vi quyền](tuan_4/docs/SECURITY_REVIEW.md) |
+| Rà soát bảo mật | Hai bucket mới đã đọc lại BPA, AES256, versioning Enabled, BucketOwnerEnforced và HTTPS-only; giữ riêng kết quả cấu hình hiện hữu và mẫu quyền collector | [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Phạm vi quyền](tuan_4/docs/SECURITY_REVIEW.md) |
 | Chi phí và quản lý phiên | Cost Explorer đúng kỳ 12–19/10, có Estimated; công cụ preview/pause/restore kèm kiểm tra target và trạng thái khôi phục | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
 | Hồ sơ bàn giao | Báo cáo Tuần 1–4, nội dung nộp có URL đầy đủ và **78 giờ công đã xác nhận** | [Nội dung nộp Tuần 4](tuan_4/docs/SUBMISSION.md) · [Worklog](docs/WORKLOG.md) |
 
@@ -258,12 +258,12 @@ CloudWatch và quy trình phát hành tiếp tục được tích hợp trong Tu
 | Hạng mục | Kết quả và tài liệu |
 | --- | --- |
 | Dữ liệu và vận hành | [Sáu bản ghi raw, điều kiện cảnh báo, SELECT và log–metric–S3](tuan_4/docs/FINAL_REPORT.md) |
-| CloudFormation | [Template 17 tài nguyên](tuan_4/infrastructure/weather-stack.json), [ValidateTemplate](tuan_4/results/template_validation_2026_10_19/README.md), [quy trình tạo stack](tuan_4/docs/INFRASTRUCTURE.md) |
+| CloudFormation | [Template 17 tài nguyên](tuan_4/infrastructure/weather-stack.json), [hai stack CREATE_COMPLETE và kiểm chứng tài nguyên mới ngày 20/10](tuan_4/results/advanced_live_2026_10_20/README.md), [quy trình triển khai](tuan_4/docs/INFRASTRUCTURE.md) |
 | Bảo mật và chi phí | [Ma trận cấu hình](tuan_4/docs/SECURITY_AUDIT.md) và [Cost Explorer đúng kỳ](tuan_4/docs/COST_REPORT.md) |
 | Quản lý tài nguyên | [Preview/pause/restore và checklist kết thúc Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
 | Nộp và bảo vệ | [Nội dung Tuần 4 có liên kết đầy đủ](tuan_4/docs/SUBMISSION.md), [tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) |
 
-Template đã được kiểm tra cấu trúc và API, chưa tạo stack mới trong đợt này. Video thực tế được bổ sung sau khi quay; thao tác kết thúc phiên thực hiện sau khi xuất minh chứng và hoàn tất sử dụng Lab. [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) đối chiếu các sản phẩm này với yêu cầu cuối kỳ.
+Ngày 20/10, hai stack mới đạt **CREATE_COMPLETE**; mỗi Lambda mới thu đủ ba đô thị, dữ liệu S3 được đối chiếu với SELECT trong database/workgroup của chính stack. Hai lịch chuẩn đã được tạm dừng rồi khôi phục; lịch mới giữ DISABLED. Cùng đợt này có [18 truy vấn Athena mới](tuan_4/results/advanced_live_2026_10_20/benchmark/) và [backtest ba cửa sổ lịch sử](tuan_4/results/backtest_2026_10_20/README.md). Video thực tế được bổ sung sau khi quay và kiểm tra quyền xem. [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) đối chiếu các sản phẩm với yêu cầu cuối kỳ.
 
 ### Phân công và thời gian đã xác nhận
 
@@ -385,20 +385,20 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 
 **Đã hoàn thành kế hoạch công việc tích hợp Tuần 3 tại mốc 18/10, cập nhật dữ liệu ngày 19/10/2026.** [Bảng W3-01–W3-08](docs/WEEK_3_PLAN.md) liên kết các sản phẩm; [báo cáo Tuần 3](tuan_3/docs/FINAL_REPORT.md) trình bày số liệu và minh chứng.
 
-**Mốc tổng kết ngày 19/10:** hồ sơ Tuần 4 đã bổ sung kiểm chứng realtime, đối chiếu log–metric–S3, chi phí, bảo mật và template hạ tầng. [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md) giữ các mục tiêu ban đầu; [báo cáo tổng kết](docs/FINAL_PROJECT_REPORT.md) đối chiếu sản phẩm thực tế với yêu cầu cuối kỳ.
+**Mốc tổng kết cập nhật ngày 20/10:** hồ sơ Tuần 4 có kiểm chứng realtime, log–metric–S3, email, chi phí, bảo mật, triển khai CloudFormation, benchmark mới và backtest lịch sử. [Kế hoạch Tuần 4](docs/WEEK_4_PLAN.md) ghi kết quả từng đầu việc và điều chỉnh phương án dự báo đã thống nhất; [báo cáo tổng kết](docs/FINAL_PROJECT_REPORT.md) đối chiếu sản phẩm thực tế với yêu cầu cuối kỳ.
 
 | Nội dung bàn giao | Phụ trách | Sản phẩm và trạng thái |
 | --- | --- | --- |
 | Phiên bản, raw và giám sát | Sinh viên Tiến Sơn | Có JSON/CSV/hash, bảng đối chiếu log–metric–S3 và dashboard |
 | Cảnh báo email | Sinh viên Tiến Sơn; sinh viên Ngọc Quyên rà soát | Có kiểm tra ngưỡng, SNS và xác nhận người nhận của lượt mới |
-| Athena và thống kê | Sinh viên Ngọc Quyên | Có 18 lượt đo Tuần 3 trên đầu vào cố định, CSV và biểu đồ |
-| Dự báo | Sinh viên Ngọc Quyên | Đã đối chiếu đủ 144 giá trị của một kỳ phát hành; mục tiêu nhiều kỳ được theo dõi riêng |
-| Hạ tầng và vận hành cuối phiên | Hai sinh viên | Template 17 tài nguyên đã kiểm tra; có checklist tạo stack và kết thúc Lab |
+| Athena và thống kê | Sinh viên Ngọc Quyên | Có 18 lượt đo mới Tuần 4 trên đầu vào cố định, bên cạnh bộ đo Tuần 3; lưu query ID, Statistics, CSV và kết quả tương đương |
+| Dự báo | Sinh viên Ngọc Quyên | Giữ kỳ phát hành đã đối chiếu 144 giá trị; bổ sung backtest ba cửa sổ lịch sử, 432 dự đoán và 18 dòng sai số |
+| Hạ tầng và vận hành cuối phiên | Hai sinh viên | Hai stack CREATE_COMPLETE từ template 17 tài nguyên, kiểm chứng Lambda/S3/Athena mới; pause/restore lịch chuẩn thực tế, lịch mới vẫn DISABLED |
 | Hồ sơ nộp và video | Hai sinh viên | Có báo cáo và worklog; video thực tế được bổ sung sau khi quay và kiểm tra quyền xem |
 
 ## Kết luận toàn đồ án
 
-Hồ sơ Tuần 1–4 kết nối dữ liệu gốc, truy vấn, bảng phân tích, biểu đồ và bằng chứng vận hành trên GitHub. Đợt kiểm chứng ngày 19/10 xác nhận luồng source–Lambda–S3–Athena và cảnh báo email ở hai môi trường. Báo cáo tổng kết giải thích lựa chọn kiến trúc, ý nghĩa thực nghiệm và sản phẩm bàn giao; trạng thái kiểm tra template, thao tác kết thúc phiên và video được ghi theo kết quả thực tế.
+Hồ sơ Tuần 1–4 kết nối dữ liệu gốc, truy vấn, bảng phân tích, biểu đồ và bằng chứng vận hành trên GitHub. Ngày 19/10 xác nhận luồng source–Lambda–S3–Athena và cảnh báo email của hệ thống hiện hữu; ngày 20/10 bổ sung triển khai và kiểm chứng hai stack mới, xác nhận email topic mới, benchmark và backtest lịch sử. Báo cáo tổng kết giải thích lựa chọn kiến trúc, kết quả thực nghiệm và sản phẩm bàn giao. Video thực tế được bổ sung sau khi quay.
 
 Tổng thời gian làm việc đã được hai sinh viên xác nhận là **78,0 giờ** (Tuần 1: 18,5 giờ; Tuần 2: 19,5 giờ; Tuần 3: 20,0 giờ; Tuần 4: 20,0 giờ). Nhật ký liên kết các tổng giờ với phân công và sản phẩm theo tuần.
 
