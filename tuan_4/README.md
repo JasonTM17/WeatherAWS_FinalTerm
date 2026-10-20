@@ -15,7 +15,7 @@
 | Dự báo | Backtest ba cửa sổ lịch sử: 432 dự đoán, 18 dòng MAE/RMSE/Bias | [Phương pháp và biểu đồ](results/backtest_2026_10_20/README.md) |
 | Quản lý phiên | Hai lịch chuẩn đã qua ENABLED → DISABLED → ENABLED; lịch mới vẫn tắt | [Pause và restore thực tế](results/advanced_live_2026_10_20/session/) |
 | Bảo mật | BPA, AES256, versioning, ownership và HTTPS của hai bucket mới được đọc lại | [Rà soát theo phạm vi](docs/SECURITY_AUDIT.md) |
-| Chi phí | **Tiến Sơn 0,25 USD; Ngọc Quyên 0,22 USD**; xác nhận ngày 20/10/2026 | [Báo cáo chi phí](docs/COST_REPORT.md) |
+| Chi phí | Cost Explorer kỳ 12–19/10: 0,00/0,14 USD đến cent, giữ số gốc và Estimated | [Báo cáo chi phí](docs/COST_REPORT.md) |
 | Nhật ký | Tuần 4: 20 giờ; tổng theo tuần đã xác nhận: 78 giờ | [Worklog](docs/WORKLOG.md) |
 
 **[Báo cáo chi tiết](docs/FINAL_REPORT.md)** · **[Nội dung nộp có đầy đủ URL](docs/SUBMISSION.md)** · **[Tổng kết toàn đồ án](../docs/FINAL_PROJECT_REPORT.md)**.
@@ -23,18 +23,6 @@
 ![Sai số backtest ba cửa sổ](results/backtest_2026_10_20/backtest_mae.png)
 
 Backtest sử dụng chuỗi mô hình lịch sử, mỗi gốc chỉ dùng 24 giờ trước đó. Ba cửa sổ này được phân biệt với kỳ dự báo đã phát hành của Tuần 3. Các phép đo byte quét và độ trễ Athena được trình bày riêng; không quy đổi trực tiếp thành tỷ lệ giảm hóa đơn.
-
-## Chi phí AWS Cost Explorer (FinOps)
-
-Chi phí cập nhật ngày **20/10/2026**, theo số liệu sinh viên xác nhận:
-
-| Sinh viên | Chi phí (USD) |
-| --- | ---: |
-| Sinh viên Tiến Sơn | **0,25** |
-| Sinh viên Ngọc Quyên | **0,22** |
-| **Tổng cộng** | **0,47** |
-
-Nguồn: [số liệu chi phí đã xác nhận](results/cost/confirmed_cost_summary.json). Các bản xuất Cost Explorer gốc được giữ riêng để đối chiếu; bảng cập nhật không lấy số nhóm bản ghi của kỳ cũ làm căn cứ cho số tiền mới.
 
 ## Dữ liệu và hồ sơ theo ngày
 

@@ -186,17 +186,11 @@ Minh chứng đầy đủ: [bộ kiểm chứng Tuần 4](../tuan_4/results/veri
 
 ### 7.1. Chi phí
 
-Chi phí cập nhật ngày **20/10/2026** theo số liệu sinh viên xác nhận:
+Kỳ Cost Explorer ngày **12–19/10** trả về 70 dòng nhóm dịch vụ/loại chi phí cho sinh viên Tiến Sơn và 47 dòng cho sinh viên Ngọc Quyên. Tổng hiển thị đến cent lần lượt là **0,00 USD** và **0,14 USD**. Dữ liệu giữ nguyên giá trị chính xác cùng cờ Estimated; việc hiển thị đến cent không thay đổi dữ liệu gốc.
 
-| Sinh viên | Chi phí (USD) |
-| --- | ---: |
-| Sinh viên Tiến Sơn | **0,25** |
-| Sinh viên Ngọc Quyên | **0,22** |
-| **Tổng cộng** | **0,47** |
+Đây là chi phí theo tài khoản trong kỳ đã chọn. Các mức dự kiến 0,05 USD và 0,03 USD của báo cáo Tuần 2 là số kế hoạch, được trình bày theo vai trò riêng. Không dùng số dự kiến thay cho Cost Explorer, hoặc quy kết toàn bộ chi phí tài khoản cho đồ án khi chưa có phân bổ theo tài nguyên.
 
-Nguồn: [confirmed_cost_summary.json](../tuan_4/results/cost/confirmed_cost_summary.json). Các bản Cost Explorer lịch sử giữ nguyên theo kỳ để đối chiếu. Đây là tổng theo tài khoản, chưa phân bổ riêng cho đồ án hoặc stack.
-
-Tối ưu được đánh giá bằng byte quét, thời gian Athena, dung lượng object và lịch thu thập. [Báo cáo chi phí](../tuan_4/docs/COST_REPORT.md) lưu nguồn xác nhận, dữ liệu API lịch sử và cách đối chiếu; [checklist phiên](../tuan_4/docs/SESSION_CHECKLIST.md) hướng dẫn quản lý tài nguyên sau thực hành.
+Tối ưu được đánh giá theo số liệu cụ thể: byte quét và thời gian Athena, dung lượng object, lịch thu thập và phạm vi thử nghiệm. Checklist cuối phiên yêu cầu xuất dữ liệu, dừng đúng lịch thu thập khi kết thúc thực hành và thu hồi tài nguyên thử nghiệm theo phạm vi đã xác định. [Báo cáo chi phí](../tuan_4/docs/COST_REPORT.md) lưu CSV nguồn và cách tính.
 
 ### 7.2. Bảo mật và hạ tầng
 

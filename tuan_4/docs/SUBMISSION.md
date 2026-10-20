@@ -48,15 +48,7 @@ Phần dự báo sử dụng phương án **backtest ba cửa sổ lịch sử**
 
 Hai bucket mới được đọc lại cấu hình: bốn thiết lập Block Public Access đều bật, AES256, versioning Enabled, BucketOwnerEnforced, không public ACL/policy và policy từ chối kết nối không qua HTTPS. Permission gọi Lambda gắn với ARN rule và SourceAccount. LabRole học phần được giữ nguyên, policy runtime giới hạn theo tài nguyên được cung cấp để tham khảo.
 
-Chi phí cập nhật ngày **20/10/2026** theo số liệu sinh viên xác nhận: **Tiến Sơn 0,25 USD**, **Ngọc Quyên 0,22 USD**, tổng **0,47 USD**. Các bản xuất Cost Explorer giữ nguyên dữ liệu gốc để đối chiếu theo kỳ; số tiền cập nhật chưa được phân bổ riêng cho từng stack.
-
-| Sinh viên | Chi phí (USD) |
-| --- | ---: |
-| Sinh viên Tiến Sơn | **0,25** |
-| Sinh viên Ngọc Quyên | **0,22** |
-| **Tổng cộng** | **0,47** |
-
-Nguồn hiển thị: [confirmed_cost_summary.json](../results/cost/confirmed_cost_summary.json), sinh viên xác nhận ngày 20/10/2026. Dữ liệu Cost Explorer lịch sử giữ riêng theo kỳ; chi phí chưa phân bổ riêng cho từng stack.
+Cost Explorer kỳ 12–19/10 có 117 nhóm ngày/dịch vụ/loại ghi nhận; tổng hiển thị đến cent là **0,00 USD của sinh viên Tiến Sơn** và **0,14 USD của sinh viên Ngọc Quyên**. CSV giữ giá trị gốc và Estimated; số liệu thuộc kỳ chi phí đã chọn.
 
 Ngày 20/10, công cụ quản lý phiên đã tạm dừng rồi khôi phục lịch chuẩn trên cả hai môi trường qua ENABLED → DISABLED → ENABLED, đối chiếu fingerprint môi trường/target không đổi và không xóa dữ liệu. Trạng thái phục hồi riêng được ghi trước thao tác.
 
