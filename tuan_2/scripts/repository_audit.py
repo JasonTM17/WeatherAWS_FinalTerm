@@ -185,6 +185,7 @@ def catalog_rows(paths):
 
 def validate_worklogs():
     _, rows = csv_rows(ROOT / "worklog.csv")
+    published = set(repository_paths())
     expected = {
         ("Tuần 1", "24110054"): Decimal("9.5"),
         ("Tuần 1", "24110051"): Decimal("9.0"),
@@ -204,6 +205,10 @@ def validate_worklogs():
             path = (ROOT / relative_clean).resolve()
             if not path.is_relative_to(ROOT) or not path.exists():
                 raise ValueError(f"Missing worklog evidence: {relative}")
+            name = path.relative_to(ROOT).as_posix()
+            if ((path.is_file() and name not in published) or
+                    (path.is_dir() and not any(p.startswith(name + "/") for p in published))):
+                raise ValueError(f"Worklog evidence is not published: {relative}")
     for week in (1, 2, 3, 4):
         target = ROOT / f"tuan_{week}/worklog.csv"
         if target.exists() and csv_rows(target)[1] != [
