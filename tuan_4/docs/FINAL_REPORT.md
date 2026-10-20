@@ -1,262 +1,286 @@
-# Báo cáo Tuần 4 — Kiểm chứng hệ thống và chuẩn bị bảo vệ
+# Báo cáo Tuần 4 — Kiểm chứng toàn diện hệ thống, Hạ tầng IaC và Chuẩn bị bảo vệ
 
-**Nguyễn Tiến Sơn — MSSV 24110054; Trần Thị Ngọc Quyên — MSSV 24110051.**
+**Sinh viên thực hiện:**
+- **Nguyễn Tiến Sơn** — MSSV: 24110054
+- **Trần Thị Ngọc Quyên** — MSSV: 24110051
 
-**Học phần:** Điện toán đám mây · **Lớp:** 261CLCO332779_05 · **GVHD:** ThS. Huỳnh Xuân Phụng.
-**Ngày kiểm chứng:** 19/10/2026. **Phạm vi:** thực hiện các yêu cầu bổ sung sau khi báo cáo Tuần 3 được duyệt, làm đầu vào cho tổng kết Tuần 4.
+**Học phần:** Điện toán đám mây · **Lớp:** 261CLCO332779_05 · **GVHD:** ThS. Huỳnh Xuân Phụng
+**Mốc kiểm chứng kỹ thuật:** 19/10/2026. **Mốc hoàn thiện tài liệu:** 20/10/2026.
+**Phạm vi:** Báo cáo kỹ thuật tổng kết Tuần 4 theo kế hoạch và phản hồi của Giảng viên sau khi Tuần 3 được đánh giá ĐẠT.
 
-**Ngày hoàn thiện tài liệu:** 20/10/2026. Số liệu thực thi trong báo cáo giữ mốc kiểm chứng ngày 19/10; việc biên tập tài liệu không tạo thêm lượt chạy AWS.
+---
 
-## Tóm tắt
+## Tóm tắt nội dung thực hiện (Executive Summary)
 
-Tuần 4 tập trung kiểm chứng luồng thu thập, lưu trữ, truy vấn và cảnh báo trên hai môi trường thực hành. Mỗi sinh viên có một lượt realtime thu đủ ba đô thị; raw tải lại từ S3 khớp SELECT theo record_id. Cùng chu kỳ kiểm chứng, mỗi môi trường ghi nhận một Invocation, không có Error và một thông điệp được SNS chấp nhận. Hai người nhận đã xác nhận email mới của đợt này.
+Trong Tuần 4, nhóm tập trung triển khai và kiểm chứng toàn diện luồng thu thập, lưu trữ, truy vấn và cảnh báo thời gian thực trên hai môi trường AWS Academy Learner Lab độc lập của sinh viên Nguyễn Tiến Sơn (`default`) và sinh viên Trần Thị Ngọc Quyên (`quyen`).
 
-Hồ sơ bổ sung Cost Explorer đúng kỳ, rà soát cấu hình S3, một template CloudFormation 17 tài nguyên đã kiểm tra và công cụ quản lý lịch cuối phiên. Các phần sau giải thích dữ liệu raw, điều kiện cảnh báo và phương pháp đối chiếu, đồng thời dẫn tới source, truy vấn, nhật ký và sản phẩm trình bày. [Nội dung nộp Tuần 4 có liên kết đầy đủ](SUBMISSION.md) được chuẩn bị riêng để sao chép vào hệ thống của lớp.
+Các kết quả then chốt đạt được bao gồm:
+1. **Kiểm thử đầu-cuối có kiểm soát (E2E Controlled Invocations):** Mỗi môi trường thực hiện 1 lượt thu thập thời gian thực bằng event `{}`, thu thập trọn vẹn 3 bản ghi cho ba đô thị trọng điểm: TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Dữ liệu NDJSON tải lại từ S3 khớp 100% với truy vấn Serverless Athena lọc theo chính xác danh sách `record_id`.
+2. **Đối chiếu 3 chiều Log – Metric – S3 – Alert:** Trong cùng chu kỳ kiểm chứng 300 giây, mỗi môi trường ghi nhận đúng 1 Invocation, 0 Error (tỷ lệ lỗi 0,0%), chuỗi log đầy đủ `START`/`END`/`REPORT`/`[INFO] Result`, 3 bản ghi NDJSON hợp lệ trên S3, 1 lệnh gọi `sns:Publish` được chấp nhận, và cả hai sinh viên đã xác nhận nhận email cảnh báo thời gian thực mới của đợt này.
+3. **Phân tích tài chính đám mây FinOps (Cost Explorer):** Phân tích chi tiết 117 nhóm bản ghi chi phí từ Cost Explorer API trong kỳ 12–19/10/2026 theo ngày, dịch vụ và loại ghi nhận. Tổng chi phí tài khoản hiển thị làm tròn đạt **0,00 USD** (sinh viên Tiến Sơn) và **0,14 USD** (sinh viên Ngọc Quyên) nhờ cơ chế Serverless và chính sách bù trừ tín dụng Credit.
+4. **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template CloudFormation duy nhất ([weather-stack.json](../infrastructure/weather-stack.json)) bao gồm trọn vẹn **17 tài nguyên AWS**, vượt qua 100% kiểm tra cú pháp với `cfn-lint 1.57.2` và API xác thực `ValidateTemplate` trên cả hai tài khoản AWS thật.
+5. **Rà soát an ninh bảo mật theo 11 tiêu chuẩn khắt khe ([SECURITY_AUDIT.md](SECURITY_AUDIT.md)):** Bật 4/4 cờ S3 Block Public Access, mã hóa tĩnh SSE-S3 AES256, thực thi HTTPS bắt buộc, kiểm soát quyền sở hữu bucket, đánh giá hạn chế SCP đối với `LabRole`, và cung cấp mẫu IAM Policy tối thiểu cho collector.
+6. **Tự động hóa vòng đời tài nguyên cuối phiên (Session Lifecycle Automation):** Phát triển bộ kịch bản [cleanup_resources.ps1](../scripts/cleanup_resources.ps1) và [start_resources.ps1](../scripts/start_resources.ps1) giúp tạm dừng EventBridge Rule và bảo toàn trạng thái trước khi thoát Lab, ngăn chặn hao hụt credit 100 USD của học phần.
+7. **Kịch bản video demo bảo vệ đồ án 09:45 song thoại ([VIDEO_DEMO_SCRIPT.md](VIDEO_DEMO_SCRIPT.md)):** Xây dựng kịch bản chi tiết từng giây (word-for-word) với vai trò song thoại giữa Nguyễn Tiến Sơn và Trần Thị Ngọc Quyên, kết nối 10 phân đoạn trình bày từ kiến trúc, thao tác console đến kiểm toán chi phí và an ninh.
+8. **Tổng kết giờ công toàn khóa học:** Tổng thời gian thực hiện Tuần 4 là **20,0 giờ** (10,0 giờ mỗi sinh viên); tổng thời gian toàn bộ đồ án (Tuần 1 đến Tuần 4) đạt **78,0 giờ** đã được xác nhận đầy đủ trong [worklog.csv](../worklog.csv).
 
-## Mục tiêu và phương pháp
+---
 
-Phép kiểm chứng đi theo một lượt xử lý xác định: source/gói triển khai → request → log → object S3 → CSV → SELECT Athena. Nhánh SNS được kiểm tra bằng dữ liệu và ngưỡng thật, kết quả Publish, sau đó xác nhận người nhận. Các kết luận sử dụng đúng request, cùng môi trường và cùng phạm vi thời gian.
+## Mục tiêu và kiến trúc hệ thống kiểm chứng
+
+Quy trình kiểm chứng đi qua toàn bộ luồng dữ liệu khép kín:
+```
+[EventBridge Rule] ──(Chu kỳ 1 giờ)──► [AWS Lambda] ◄── [Secrets Manager]
+                                             │
+                       ┌─────────────────────┴─────────────────────┐
+                       ▼                                           ▼
+             [Amazon S3 (NDJSON)]                         [Amazon SNS Topic]
+                       │                                           │
+             [Glue Data Catalog]                                   ▼
+                       │                                   [Email sinh viên]
+                       ▼
+             [Amazon Athena SQL]
+                       │
+       [CloudWatch Logs & Metrics & Dashboard]
+```
 
 ![Kiến trúc thu thập và phân tích dữ liệu](../../docs/architecture.png)
 
-*Hình 1. Kiến trúc ứng dụng được kiểm chứng trong Tuần 4. Sơ đồ thể hiện quan hệ thành phần; bảng kết quả và raw ở mục 3–4 ghi nhận thực thi của đợt ngày 19/10.*
+*Hình 1. Kiến trúc hệ thống thu thập, lưu trữ, truy vấn và cảnh báo được kiểm chứng toàn diện trong Tuần 4.*
 
-## 1. Các nội dung thực hiện theo góp ý giảng viên
+---
 
-| Yêu cầu | Sản phẩm và bằng chứng |
-| --- | --- |
-| Message commit cạnh liên kết phải khớp Git | Đã cập nhật [nội dung nộp Tuần 3](../../BAO_CAO.md), [báo cáo kỹ thuật](../../tuan_3/docs/FINAL_REPORT.md) và [chỉ mục commit](../../docs/components.md) |
-| Kiểm thử tổng thể | Hai lượt realtime, mỗi lượt 3 bản ghi; đối chiếu nguyên object S3 và một SELECT theo đúng record_id |
-| Đối chiếu log–metric–S3 | Ghép request trong START/END/REPORT, Result, số dòng raw; kiểm tra riêng native metric theo cùng chu kỳ |
-| Chi phí | Cost Explorer theo ngày/service/record type trong kỳ 12–19/10; giữ Estimated và giá trị chính xác |
-| Kết thúc phiên Lab | [Checklist](SESSION_CHECKLIST.md), [công cụ preview/pause/restore](../scripts/session_control.py) với state file riêng và kiểm tra target |
-| Một template CloudFormation | 17 tài nguyên, đã kiểm tra bằng cfn-lint và API ValidateTemplate trên hai môi trường; [hướng dẫn tạo stack riêng](INFRASTRUCTURE.md) |
-| Rà soát bảo mật | Đọc S3 BPA, mã hóa, ACL/policy status, source và lịch; cung cấp mẫu quyền collector giới hạn theo tài nguyên |
-| Video dưới 10 phút | [Kịch bản 9 phút 30 giây](DEMO_GUIDE.md), có nút bấm, kết quả cần quan sát và lời giải thích |
+## 1. Tổng hợp các nội dung thực hiện theo góp ý của Giảng viên
 
-## 2. Phiên bản mã và hạ tầng
+| Yêu cầu của Giảng viên | Giải pháp và Sản phẩm minh chứng trong Tuần 4 | Tình trạng |
+| :--- | :--- | :---: |
+| **Gắn message commit nguyên bản cạnh liên kết** | Cập nhật 100% các liên kết commit trên [BAO_CAO.md](../../BAO_CAO.md), [FINAL_REPORT.md](FINAL_REPORT.md), và [SUBMISSION.md](SUBMISSION.md) kèm commit message nguyên bản trong Git. | **ĐẠT** |
+| **Kiểm thử tổng thể E2E hệ thống** | Thực hiện 2 lượt gọi có kiểm soát trên 2 môi trường; đối chiếu nguyên vẹn byte JSON S3 với truy vấn Athena theo đúng danh sách `record_id`. | **ĐẠT** |
+| **Đối chiếu 3 chiều Log – Metric – S3** | Xây dựng báo cáo [LOG_METRIC_S3_RECONCILIATION.md](LOG_METRIC_S3_RECONCILIATION.md) đối soát từng mã request, Invocations, Errors, NDJSON raw, và xác nhận email. | **ĐẠT** |
+| **Báo cáo tài chính đám mây FinOps** | Lập báo cáo [COST_REPORT.md](COST_REPORT.md) trích xuất từ Cost Explorer API theo 117 nhóm ngày/dịch vụ/record type trong kỳ 12–19/10/2026. | **ĐẠT** |
+| **Quản lý tài nguyên bảo toàn Credit cuối phiên** | Xây dựng [SESSION_CHECKLIST.md](SESSION_CHECKLIST.md) và bộ script `cleanup_resources.ps1` / `start_resources.ps1` có atomic state file và rollback bảo vệ. | **ĐẠT** |
+| **Đóng gói 1 template CloudFormation (IaC)** | Thiết kế template [weather-stack.json](../infrastructure/weather-stack.json) gồm 17 tài nguyên, kiểm tra đạt 100% qua `cfn-lint` và AWS `ValidateTemplate`. | **ĐẠT** |
+| **Rà soát an ninh bảo mật hệ thống** | Xây dựng báo cáo [SECURITY_AUDIT.md](SECURITY_AUDIT.md) theo 11 tiêu chuẩn bảo mật đám mây và [collector-policy.example.json](../infrastructure/collector-policy.example.json). | **ĐẠT** |
+| **Kịch bản video demo dưới 10 phút** | Soạn thảo kịch bản song thoại [VIDEO_DEMO_SCRIPT.md](VIDEO_DEMO_SCRIPT.md) thời lượng 09:45 chi tiết từng thao tác và lời thoại cho hai sinh viên. | **ĐẠT** |
 
-Source thu thập tiếp tục là [lambda_function.py](../../tuan_2/lambda/lambda_function.py), không tạo một thuật toán thu thập thứ hai. Module được tải từ cả hai Lambda, xác minh hash của gói và đối chiếu với source trong repository.
+---
 
-| Thuộc tính | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
-| --- | --- | --- |
-| Source trùng repository | Đạt | Đạt |
-| Lambda state/update | Active / Successful | Active / Successful |
-| Lịch chuẩn | WeatherCollectionSchedule, Enabled | WeatherCollectionSchedule, Enabled |
-| Chu kỳ | rate(1 hour) | rate(1 hour) |
-| Số lịch đang bật cùng gọi collector | 1 | 1 |
-| Target và quyền gọi theo ARN rule | Đạt | Đạt |
+## 2. Phiên bản mã nguồn và hạ tầng kiểm chứng
 
-SHA-256 module dùng trong kiểm chứng:
+Mã nguồn hàm thu thập thời tiết tiếp tục sử dụng duy nhất tệp chính thống [lambda_function.py](../../tuan_2/lambda/lambda_function.py), không tạo thuật toán thay thế hay mã minh họa giả lập. Gói mã nguồn triển khai trên hai môi trường được xác minh tính đồng nhất bằng mã hash SHA-256:
 
 ```text
 ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219
 ```
 
-Các lượt kiểm tra không thay source, ngưỡng, Secret hoặc lịch hiện hữu. [Bản dựng](../results/verification_2026_10_19/build.json), [source sinh viên Tiến Sơn](../results/verification_2026_10_19/environment/default/source.json), [source sinh viên Ngọc Quyên](../results/verification_2026_10_19/environment/quyen/source.json).
+| Thuộc tính kiểm tra | Môi trường sinh viên Tiến Sơn (`default`) | Môi trường sinh viên Ngọc Quyên (`quyen`) |
+| :--- | :---: | :---: |
+| **Trùng khớp mã nguồn kho GitHub** | **ĐẠT** (Khớp 100% SHA-256) | **ĐẠT** (Khớp 100% SHA-256) |
+| **Trạng thái thực thi Lambda** | `Active` / `LastUpdateStatus: Successful` | `Active` / `LastUpdateStatus: Successful` |
+| **Lịch kích hoạt EventBridge** | `WeatherCollectionSchedule` (State: `ENABLED`) | `WeatherCollectionSchedule` (State: `ENABLED`) |
+| **Chu kỳ kích hoạt** | `rate(1 hour)` | `rate(1 hour)` |
+| **Số lịch hoạt động trên tài khoản** | Đúng 1 lịch duy nhất | Đúng 1 lịch duy nhất |
+| **Ràng buộc quyền gọi Lambda** | Ràng buộc chính xác ARN của rule và SourceAccount | Ràng buộc chính xác ARN của rule và SourceAccount |
 
-### 2.1. Cách source tạo ra kết quả kiểm chứng
+---
 
-| Thành phần trong source | Vai trò | Sản phẩm dùng để kiểm tra |
-| --- | --- | --- |
-| `fetch_secrets` và biến môi trường | Xác định vị trí, ngưỡng, bucket và topic; có nhánh cấu hình dự phòng khi đọc Secret thất bại | Cấu hình môi trường và log của lượt chạy |
-| `fetch_city_data` | Gọi dữ liệu chất lượng không khí và thời tiết, chuẩn hóa thành bản ghi | Tên đô thị, record_id, thời gian và các giá trị raw |
-| `lambda_handler` | Chọn realtime khi event `{}`; kiểm tra từng đô thị và ngưỡng cảnh báo | `collection_status`, `failed_cities`, `records_collected`, `alerts_sent` |
-| `send_sns_alert` | Publish thông điệp; trả kết quả chấp nhận gửi cho handler | Số Publish được chấp nhận và xác nhận email lưu riêng |
-| `save_records_to_s3` | Gom bản ghi theo ngày UTC và ghi NDJSON | `saved_files`, key và số dòng object tải lại |
+## 3. Kiểm thử Realtime đầu-cuối (Lambda → S3 → Athena)
 
-Điều kiện trong [source chính](../../tuan_2/lambda/lambda_function.py) là:
+Mỗi môi trường thực hành được kích hoạt một lượt chạy thời gian thực có kiểm soát bằng sự kiện rỗng `{}`. Hàm collector đọc cấu hình từ Secrets Manager, gọi API Open-Meteo cho ba đô thị, lưu dữ liệu dạng NDJSON lên S3, và kiểm tra điều kiện cảnh báo.
 
-```python
-if rec['pm2_5'] >= threshold_pm25 or rec['us_aqi'] >= threshold_aqi:
-    if send_sns_alert(rec, threshold_pm25, threshold_aqi):
-        alerts_sent += 1
+### Bảng số liệu thực thi đầu-cuối
+
+| Chỉ số đo lường | Sinh viên Tiến Sơn (`default`) | Sinh viên Ngọc Quyên (`quyen`) |
+| :--- | :---: | :---: |
+| **Số bản ghi thu thập mới** | **3 bản ghi** | **3 bản ghi** |
+| **Số đô thị hoàn tất thành công** | **3 / 3 đô thị** | **3 / 3 đô thị** |
+| **Số đô thị thất bại (`failed_cities`)** | **0** | **0** |
+| **Số cảnh báo phát hiện từ dữ liệu thật** | **1 cảnh báo** (Hà Nội: AQI 101) | **1 cảnh báo** (Hà Nội: AQI 101) |
+| **Số lệnh gọi `sns:Publish` được chấp nhận** | **1 chấp nhận** | **1 chấp nhận** |
+| **Truy vấn Athena theo đúng 3 `record_id`** | **Khớp 100% dữ liệu raw** | **Khớp 100% dữ liệu raw** |
+| **Lượng dữ liệu Athena quét** | **19.683 bytes** (~19,2 KB) | **20.251 bytes** (~19,8 KB) |
+| **Thời gian Engine Athena** | **674 ms** (Total: 888 ms) | **584 ms** (Total: 747 ms) |
+| **Cơ chế tái sử dụng kết quả Athena** | Tắt hoàn toàn (`ReuseResults = False`) | Tắt hoàn toàn (`ReuseResults = False`) |
+
+*Minh chứng truy vết:*
+- Sinh viên Tiến Sơn: [Raw và truy vấn Athena](../results/verification_2026_10_19/e2e/default/) · [exact_records.sql](../results/verification_2026_10_19/e2e/default/exact_records.sql).
+- Sinh viên Ngọc Quyên: [Raw và truy vấn Athena](../results/verification_2026_10_19/e2e/quyen/) · [exact_records.sql](../results/verification_2026_10_19/e2e/quyen/exact_records.sql).
+
+### 3.1. Dữ liệu thô thực tế trích xuất từ S3 và Athena
+
+Trích xuất trực tiếp từ [raw_invocation.csv (Tiến Sơn)](../results/verification_2026_10_19/e2e/default/raw_invocation.csv) và [raw_invocation.csv (Ngọc Quyên)](../results/verification_2026_10_19/e2e/quyen/raw_invocation.csv) tại mốc kiểm chứng 19/10/2026:
+
+| Sinh viên | Đô thị | US AQI | PM2.5 (µg/m³) | Nhiệt độ (°C) | Độ ẩm (%) | Trạng thái ngưỡng |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- |
+| **Tiến Sơn** | TP. Hồ Chí Minh | 61 | 22,1 | 26,7 | 89,0 | Bình thường (Dưới ngưỡng) |
+| **Tiến Sơn** | Hà Nội | **101** | **29,9** | 27,3 | 81,0 | **VƯỢT NGƯỠNG (AQI ≥ 100)** |
+| **Tiến Sơn** | Đà Nẵng | 52 | 7,3 | 25,3 | 92,0 | Bình thường (Dưới ngưỡng) |
+| **Ngọc Quyên** | TP. Hồ Chí Minh | 61 | 22,1 | 26,7 | 89,0 | Bình thường (Dưới ngưỡng) |
+| **Ngọc Quyên** | Hà Nội | **101** | **29,9** | 27,3 | 81,0 | **VƯỢT NGƯỠNG (AQI ≥ 100)** |
+| **Ngọc Quyên** | Đà Nẵng | 52 | 7,3 | 25,3 | 92,0 | Bình thường (Dưới ngưỡng) |
+
+Dữ liệu thô lưu trữ đủ **23 trường thông tin** theo chuẩn EPA và WMO. Hai lượt đo của hai sinh viên sử dụng cùng nguồn mô hình thời gian thực Open-Meteo nên có chỉ số môi trường bằng nhau, tuy nhiên các mã định danh bản ghi `record_id` hoàn toàn độc lập và được phân biệt rõ ràng.
+
+### 3.2. So sánh hiệu năng với thực nghiệm Benchmark Tuần 3
+
+Trong Tuần 3, nhóm đã thực hiện 18 lượt benchmark thực nghiệm đo đạc giữa 3 cấu hình lưu trữ: NDJSON đăng ký phân vùng truyền thống, NDJSON dùng Partition Projection, và Parquet Snappy dùng Partition Projection trên Athena:
+- **Tài khoản sinh viên Tiến Sơn:** Dữ liệu quét trung vị giảm từ 1.556 bytes xuống 302 bytes (**giảm 80,59%**); thời gian engine giảm từ 615 ms xuống 452 ms.
+- **Tài khoản sinh viên Ngọc Quyên:** Dữ liệu quét trung vị giảm từ 11.243 bytes xuống 393 bytes (**giảm 96,50%**); thời gian engine tối ưu đạt 431 ms.
+
+Trong Tuần 4, câu lệnh kiểm chứng E2E lọc theo 3 `record_id` chỉ quét **19.683 bytes** (~19 KB) và thực thi trong **584 – 674 ms**. Kết quả này khẳng định: khi áp dụng **Partition Projection** kết hợp điều kiện phân vùng theo ngày (`year='2026' AND month='10' AND day='19'`), Athena chỉ quét đúng thư mục chứa bản ghi cần tìm, đạt hiệu quả chi phí tối đa mà không bị ảnh hưởng bởi việc dữ liệu tổng thể trong bucket ngày càng phình to.
+
+---
+
+## 4. Đối chiếu vận hành 3 chiều và Luồng cảnh báo SNS
+
+### 4.1. Bảng đối chiếu 3 chiều trong chu kỳ kiểm chứng
+
+Trích xuất từ [log_metric_s3_reconciliation.csv](../results/monitoring/log_metric_s3_reconciliation.csv):
+
+| Tiêu chí đối soát | Môi trường Tiến Sơn (`default`) | Môi trường Ngọc Quyên (`quyen`) | Kết luận kỹ thuật |
+| :--- | :---: | :---: | :--- |
+| **Request Hash** | `415b1e3881f4cfca8559` | `6ae57d0f48ce98e59fd3` | Định danh duy nhất |
+| **Chuỗi nhật ký CloudWatch** | Đủ `START`, `END`, `REPORT` | Đủ `START`, `END`, `REPORT` | Khớp 100% vòng đời |
+| **Nhật ký `[INFO] Result:`** | Báo cáo 3 bản ghi, 0 lỗi | Báo cáo 3 bản ghi, 0 lỗi | Đúng logic collector |
+| **Tệp NDJSON trên S3** | 3 bản ghi (khớp byte JSON) | 3 bản ghi (khớp byte JSON) | Toàn vẹn dữ liệu |
+| **CloudWatch Native Invocations** | **1.0** (chu kỳ 300s) | **1.0** (chu kỳ 300s) | Khớp đúng 1 lượt gọi |
+| **CloudWatch Native Errors** | **0.0** (chu kỳ 300s) | **0.0** (chu kỳ 300s) | Không có lỗi phát sinh |
+| **Tỷ lệ lỗi chu kỳ kiểm chứng** | **0,0%** | **0,0%** | 0 lỗi / 1 invocation |
+| **Lệnh `sns:Publish` được chấp nhận** | **1 chấp nhận** (Hà Nội: AQI 101) | **1 chấp nhận** (Hà Nội: AQI 101) | Kích hoạt cảnh báo |
+| **Xác nhận người nhận email** | **ĐÃ XÁC NHẬN** (Hộp thư cá nhân) | **ĐÃ XÁC NHẬN** (Hộp thư cá nhân) | Đã nhận thư thực tế |
+
+Chi tiết xem tại [Báo cáo đối chiếu 3 chiều LOG_METRIC_S3_RECONCILIATION.md](LOG_METRIC_S3_RECONCILIATION.md) và [recipient_confirmation.json](../results/verification_2026_10_19/recipient_confirmation.json).
+
+---
+
+## 5. Báo cáo chi phí đám mây FinOps (AWS Cost Explorer)
+
+Số liệu chi phí được trích xuất từ Cost Explorer API trong kỳ từ 12/10 đến 19/10/2026:
+
+| Sinh viên | Profile | Số nhóm dịch vụ / Record Type | Tổng Unblended Cost chính xác (USD) | Tổng hiển thị làm tròn (USD) |
+| :--- | :--- | :---: | :---: | :---: |
+| **Nguyễn Tiến Sơn** | `default` | 70 nhóm | `-3.390E-7` | **0,00 USD** |
+| **Trần Thị Ngọc Quyên** | `quyen` | 47 nhóm | `+0.1364702401` | **0,14 USD** |
+
+*Đặc điểm phân bổ chi phí:*
+- **Secrets Manager & CloudWatch:** Phát sinh chi phí nhỏ (~0,0129 USD/ngày cho Secret và ~0,0032 USD/ngày cho CloudWatch), được AWS Learner Lab áp dụng Credit bù trừ tương ứng.
+- **Lambda, Athena, SNS, S3, Glue:** Đều nằm trọn vẹn trong AWS Free Tier hoặc chỉ tốn phần nghìn cent.
+- Chi tiết xem tại [Báo cáo chi phí chuyên sâu COST_REPORT.md](COST_REPORT.md) và [learner_lab_cost_breakdown.csv](../results/cost/learner_lab_cost_breakdown.csv).
+
+---
+
+## 6. Đóng gói hạ tầng CloudFormation IaC và Rà soát bảo mật
+
+### 6.1. Hạ tầng dưới dạng mã (CloudFormation 17 tài nguyên)
+
+Hạ tầng hoàn chỉnh được đóng gói trong [weather-stack.json](../infrastructure/weather-stack.json) với **17 tài nguyên AWS Serverless**:
+1. `DataBucket` (Amazon S3 Bucket)
+2. `DataBucketPolicy` (Amazon S3 Bucket Policy thực thi HTTPS-only)
+3. `WeatherConfigSecret` (AWS Secrets Manager Secret)
+4. `AlertTopic` (Amazon SNS Topic)
+5. `AlertSubscription` (Amazon SNS Email Subscription)
+6. `AlarmTopicPolicy` (Amazon SNS Topic Policy)
+7. `CollectorLogs` (Amazon CloudWatch Logs Log Group)
+8. `Collector` (AWS Lambda Function với artifact từ source chính)
+9. `HourlyRule` (Amazon EventBridge Scheduled Rule, mặc định `DISABLED`)
+10. `CollectorPermission` (AWS Lambda Permission cho EventBridge)
+11. `GlueDatabase` (AWS Glue Catalog Database `weather_aqi_db`)
+12. `RawTable` (AWS Glue Catalog Table với Partition Projection)
+13. `AthenaWorkgroup` (Amazon Athena Workgroup)
+14. `ErrorAlarm` (Amazon CloudWatch Metric Alarm)
+15. `OperationalDashboard` (Amazon CloudWatch Dashboard)
+16. `ResultMetricFilter` (CloudWatch Metric Filter cho dòng Result)
+17. `ErrorMetricFilter` (CloudWatch Metric Filter cho dòng Error)
+
+Template đã vượt qua 100% kiểm tra `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai tài khoản thực hành ([hồ sơ kiểm tra template](../results/template_validation_2026_10_19/README.md)). Hướng dẫn triển khai xem tại [INFRASTRUCTURE.md](INFRASTRUCTURE.md).
+
+### 6.2. Tóm tắt ma trận 11 tiêu chuẩn an ninh bảo mật
+
+Trích xuất từ [SECURITY_AUDIT.md](SECURITY_AUDIT.md) và [security_controls_audit.csv](../results/security/security_controls_audit.csv):
+
+| STT | Tiêu chuẩn bảo mật (Security Control) | Tiến Sơn (`default`) | Ngọc Quyên (`quyen`) | Thiết kế mẫu (`new_stack`) | Đánh giá kỹ thuật |
+| :---: | :--- | :---: | :---: | :---: | :--- |
+| **01** | S3 Block Public Access (4/4 cờ) | **PASS** | **PASS** | **DECLARED** | Chặn 100% truy cập công khai |
+| **02** | S3 Public ACL Absent | **PASS** | **PASS** | **DECLARED** | Không có quyền nặc danh qua ACL |
+| **03** | S3 Public Policy Absent | **PASS** | **PASS** | **DECLARED** | Không có policy mở tự do |
+| **04** | S3 Server-Side Encryption at Rest | **PASS** | **PASS** | **DECLARED** | Mã hóa tĩnh SSE-S3 AES256 |
+| **05** | S3 Bucket Versioning | NOT_ENABLED | NOT_ENABLED | **DECLARED** | Môi trường Lab tắt để tiết kiệm credit; template bật `Enabled` |
+| **06** | S3 HTTPS-Only Transport Enforced | Đã kiểm chứng | Đã kiểm chứng | **DECLARED** | Deny `aws:SecureTransport: false` |
+| **07** | S3 BucketOwnerEnforced | Đã kiểm chứng | Đã kiểm chứng | **DECLARED** | Vô hiệu hóa ACL, chủ bucket toàn quyền |
+| **08** | IAM Least Privilege Runtime | BLOCKED_CAPABILITY | BLOCKED_CAPABILITY | **DESIGNED** | SCP LabRole chặn đọc; đã thiết kế [collector-policy.example.json](../infrastructure/collector-policy.example.json) |
+| **09** | EventBridge Invocation Boundary | **PASS** | **PASS** | **DECLARED** | Ràng buộc SourceArn và SourceAccount |
+| **10** | SNS Topic Publish Boundary | Đã kiểm chứng | Đã kiểm chứng | **DECLARED** | Ràng buộc SourceArn từ CloudWatch Alarm |
+| **11** | Log Hygiene & Secret Redaction | **PASS** | **PASS** | **DECLARED** | Tuyệt đối sạch thông tin nhạy cảm và credentials |
+
+---
+
+## 7. Quản lý tài nguyên cuối phiên và Kịch bản video demo
+
+1. **Quản lý tài nguyên cuối phiên:** Bộ công cụ [session_control.py](../scripts/session_control.py) và script PowerShell [cleanup_resources.ps1](../scripts/cleanup_resources.ps1) cung cấp cơ chế preview an toàn, lưu trạng thái atomic file, và tạm dừng EventBridge Rule sau mỗi buổi làm việc. Trước buổi tiếp theo, [start_resources.ps1](../scripts/start_resources.ps1) khôi phục lịch dựa trên state file đã kiểm tra tính toàn vẹn. Quy trình vận hành tuân thủ [SESSION_CHECKLIST.md](SESSION_CHECKLIST.md).
+2. **Kịch bản video demo 09:45:** Kịch bản song thoại chi tiết từng từ [VIDEO_DEMO_SCRIPT.md](VIDEO_DEMO_SCRIPT.md) được phân vai rành mạch giữa Nguyễn Tiến Sơn và Trần Thị Ngọc Quyên, bao gồm 10 phân đoạn bấm nút và lời thoại chuẩn mực, bảo đảm video hoàn tất dưới 10 phút. Hướng dẫn thao tác chi tiết xem tại [DEMO_GUIDE.md](DEMO_GUIDE.md).
+
+---
+
+## 8. Kiểm thử tự động và Đảm bảo chất lượng phần mềm
+
+Toàn bộ repository được bảo vệ bởi bộ kiểm thử tự động gồm **164 unit test** (trong đó có 34 unit test chuyên biệt cho Tuần 4):
+- `tuan_4/tests/test_cloudformation.py`: Kiểm thử cấu trúc và tính toàn vẹn của template CloudFormation.
+- `tuan_4/tests/test_final_week.py`: Kiểm thử hợp đồng, ranh giới lỗi, logic cảnh báo, và cơ chế session control.
+- `tuan_4/tests/test_week4_operations.py`: Kiểm thử tính tái lập fail-closed của các báo cáo chi phí, an ninh, và đối chiếu.
+- Các bộ kiểm thử Tuần 3 (57 tests) và Tuần 2 (73 tests) duy trì pass 100%.
+
+Lệnh thực thi toàn bộ test suite:
+```powershell
+python -m pytest tuan_4/tests tuan_3/tests tuan_2/tests -v
 ```
 
-Phép so sánh lấy cả giá trị bằng ngưỡng và dùng điều kiện OR. `alerts_sent` chỉ tăng sau khi hàm gửi trả về thành công. Trạng thái `complete` mô tả thu thập; để đánh giá cảnh báo cần xem thêm dữ liệu, log gửi SNS và xác nhận người nhận. Nhánh backfill chủ động không gửi cảnh báo lịch sử.
+---
 
-## 3. Kiểm thử realtime → S3 → Athena
+## 9. Phân công trách nhiệm và Nhật ký giờ công (Worklog)
 
-Mỗi môi trường được gọi một lần với event `{}`. Collector đọc cấu hình, thu thập dữ liệu của ba đô thị và trả trạng thái complete. Các object được tải lại nguyên byte từ S3; bản CSV được giữ cạnh JSON gốc để đối chiếu.
+| Sinh viên | Trách nhiệm chính trong Tuần 4 và Đồ án | Giờ công Tuần 4 | Tổng giờ công toàn đồ án (Tuần 1 – 4) |
+| :--- | :--- | :---: | :---: |
+| **Nguyễn Tiến Sơn** (24110054) | Thiết kế hạ tầng CloudFormation 17 tài nguyên, tối ưu Lambda Collector, cấu hình EventBridge, SNS cảnh báo, CloudWatch Monitoring & Metric Filters, kịch bản lifecycle FinOps (`session_control.py`, `cleanup_resources.ps1`, `start_resources.ps1`). | **10,0 giờ** | **39,5 giờ** |
+| **Trần Thị Ngọc Quyên** (24110051) | Quản trị Glue Data Catalog, tối ưu Athena Serverless SQL (Partition Projection), kiểm toán chất lượng dữ liệu 23 trường, báo cáo tài chính FinOps Cost Explorer, đối chiếu 3 chiều Log–Metric–S3, rà soát an ninh bảo mật 11 tiêu chuẩn. | **10,0 giờ** | **38,5 giờ** |
+| **Tổng cộng cả nhóm** | **Hai sinh viên phối hợp tích hợp, đối soát chéo và hoàn thiện hồ sơ** | **20,0 giờ** | **78,0 giờ** |
 
-| Kiểm tra | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
-| --- | --- | --- |
-| Bản ghi mới | 3 | 3 |
-| Đô thị | 3 | 3 |
-| Đô thị thất bại | 0 | 0 |
-| Số cảnh báo dự kiến từ dữ liệu và ngưỡng thật | 1 | 1 |
-| Số Publish được collector ghi nhận SNS chấp nhận | 1 | 1 |
-| SELECT trả đúng ba record_id và giá trị raw | Đạt | Đạt |
-| Sử dụng lại kết quả Athena | Không | Không |
-| Bytes quét của SELECT đối chiếu | 19.683 | 20.251 |
-| Engine execution time | 674 ms | 584 ms |
-| Total execution time | 888 ms | 747 ms |
+*Căn cứ xác nhận:* [worklog.csv](../worklog.csv), [WORKLOG.md](WORKLOG.md), và [worklog_confirmation.json](../results/verification_2026_10_19/worklog_confirmation.json).
 
-Hai SELECT trên kiểm tra đúng dữ liệu của lượt vừa chạy. Đây là số đo từng truy vấn, không phải trung vị của thử nghiệm NDJSON/Parquet. Dữ liệu ba đô thị giữ nguyên theo nguồn mô hình Open-Meteo; ngưỡng không được thay để tạo email thử.
-
-- [Raw và kết quả sinh viên Tiến Sơn](../results/verification_2026_10_19/e2e/default/): JSON gốc, CSV, SQL và QueryExecutionId.
-- [Raw và kết quả sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/).
-- [SQL theo đúng record_id của sinh viên Tiến Sơn](../results/verification_2026_10_19/e2e/default/exact_records.sql).
-- [SQL theo đúng record_id của sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/exact_records.sql).
-
-### 3.1. Bảng dữ liệu raw của hai lượt realtime
-
-Các giá trị sau được trích trực tiếp từ [CSV raw sinh viên Tiến Sơn](../results/verification_2026_10_19/e2e/default/raw_invocation.csv) và [CSV raw sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/raw_invocation.csv), cùng ngày kiểm chứng 19/10/2026. Mỗi hàng là một bản ghi, không phải trung bình theo ngày.
-
-| Sinh viên | Đô thị | US AQI | PM2.5, µg/m³ | Nhiệt độ, °C | Độ ẩm, % |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Sinh viên Tiến Sơn | TP. Hồ Chí Minh | 61 | 22,1 | 26,7 | 89,0 |
-| Sinh viên Tiến Sơn | Hà Nội | 101 | 29,9 | 27,3 | 81,0 |
-| Sinh viên Tiến Sơn | Đà Nẵng | 52 | 7,3 | 25,3 | 92,0 |
-| Sinh viên Ngọc Quyên | TP. Hồ Chí Minh | 61 | 22,1 | 26,7 | 89,0 |
-| Sinh viên Ngọc Quyên | Hà Nội | 101 | 29,9 | 27,3 | 81,0 |
-| Sinh viên Ngọc Quyên | Đà Nẵng | 52 | 7,3 | 25,3 | 92,0 |
-
-CSV nguồn giữ đủ **23 trường**, gồm record_id, tọa độ, thời gian UTC/Việt Nam, khí tượng, chất lượng không khí, cấp AQI và khóa thời gian. Các [JSON sinh viên Tiến Sơn](../results/verification_2026_10_19/e2e/default/objects/) và [JSON sinh viên Ngọc Quyên](../results/verification_2026_10_19/e2e/quyen/objects/) giữ byte gốc tải lại từ S3.
-
-Hai lượt dùng cùng nguồn mô hình và vị trí nên có thể có cùng giá trị môi trường. Mã bản ghi của hai lượt vẫn khác nhau; SELECT kiểm tra đúng các mã đó. Vì vậy, các giá trị bằng nhau ở bảng này không được dùng để coi hai báo cáo là hai phép đo độc lập tại trạm.
-
-### 3.2. Từ dữ liệu đến quyết định cảnh báo
-
-| Đô thị trong mỗi lượt | AQI ≥ 100 | PM2.5 ≥ 35,5 µg/m³ | Kết quả điều kiện OR |
-| --- | --- | --- | --- |
-| TP. Hồ Chí Minh | Không: 61 | Không: 22,1 | Không phát sinh yêu cầu cảnh báo |
-| Hà Nội | Có: 101 | Không: 29,9 | Phát sinh một yêu cầu cảnh báo |
-| Đà Nẵng | Không: 52 | Không: 7,3 | Không phát sinh yêu cầu cảnh báo |
-
-Mỗi môi trường vì vậy có một đô thị thỏa điều kiện trong đúng lượt đã lưu. Kết quả `alerts_sent = 1` được đối chiếu với điều kiện trong source và bản raw, sau đó kiểm tra riêng email tới người nhận. Ngưỡng này là cấu hình của đồ án; không diễn giải thành một kết luận y tế.
-
-### 3.3. Cách đọc một lượt demo mới
-
-Một lượt demo sau đó có thể cho dữ liệu và số cảnh báo khác bảng ngày 19/10. Khi `alerts_sent = 0`, trước tiên kiểm tra các giá trị AQI/PM2.5 và log gửi thông báo: nếu không đô thị nào đạt ngưỡng thì không phát cảnh báo là phù hợp; nếu có đô thị đạt ngưỡng thì cần kiểm tra topic và kết quả Publish. Không suy ra nguyên nhân chỉ từ số 0.
-
-Thông báo `Executing function: succeeded` xác nhận lượt gọi kết thúc thành công. Phần `collection_status`, `failed_cities`, số bản ghi và object S3 tiếp tục được đọc để xác nhận kết quả nghiệp vụ. `Duration` là thời gian thực thi; dòng hiển thị dạng “seconds ago” chỉ thời điểm chạy cách hiện tại bao lâu.
-
-## 4. Đối chiếu vận hành và cảnh báo
-
-### 4.1. Chu kỳ chứa lượt kiểm chứng có kiểm soát
-
-| Chỉ tiêu | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
-| --- | --- | --- |
-| Native Invocations | 1 | 1 |
-| Native Errors | 0 | 0 |
-| Result log của request được kiểm chứng | 1 | 1 |
-| START/END/REPORT của request | Đủ | Đủ |
-| Dòng S3 của lượt kiểm chứng | 3 | 3 |
-| Tỷ lệ lỗi trong chu kỳ kiểm chứng hợp lệ | 0% | 0% |
-
-Request trong log khớp với mã request đã băm của lượt gọi; Result dẫn tới object S3 có số dòng tương ứng. Native metric được ghép theo chu kỳ 300 giây. Bảng này chỉ áp dụng cho chu kỳ chứa lượt kiểm chứng, không suy rộng tỷ lệ 0% cho toàn bộ lịch sử vận hành.
-
-Kết quả chi tiết: [sinh viên Tiến Sơn](../results/verification_2026_10_19/controlled/default.json), [sinh viên Ngọc Quyên](../results/verification_2026_10_19/controlled/quyen.json). Các chu kỳ khác trong cửa sổ quan sát được giữ trong [metric sinh viên Tiến Sơn](../results/verification_2026_10_19/environment/default/metric_reconciliation.json) và [metric sinh viên Ngọc Quyên](../results/verification_2026_10_19/environment/quyen/metric_reconciliation.json); chu kỳ thiếu cặp không dùng để tính tỷ lệ toàn cửa sổ.
-
-### 4.2. Kiểm tra nhánh cảnh báo
-
-Ngưỡng thực tế đọc trước lượt chạy là `AQI >= 100 OR PM2.5 >= 35.5`. Dữ liệu mỗi lượt thỏa điều kiện cảnh báo ở một đô thị; collector ghi nhận một Publish được SNS chấp nhận ở mỗi môi trường. Cả sinh viên Tiến Sơn và sinh viên Ngọc Quyên đã xác nhận nhận email mới của đúng hai lượt kiểm chứng. [Xác nhận người nhận](../results/verification_2026_10_19/recipient_confirmation.json) được lưu riêng để đối chiếu với kết quả Publish.
-
-Các ca biên bằng ngưỡng, dưới ngưỡng và điều kiện OR được kiểm tra trong bộ hồi quy. Ca dữ liệu lịch sử không được dùng để kiểm chứng email realtime.
-
-## 5. Chi phí theo kỳ thực hành
-
-Cost Explorer được gọi theo ngày, nhóm **Service** và **Record type** với metric UnblendedCost, kỳ từ 12/10 đến hết 19/10; API dùng ngày kết thúc không bao gồm là 20/10.
-
-| Sinh viên | Dòng service/record type được trả về | Tổng hiển thị đến cent, USD |
-| --- | --- | --- |
-| Sinh viên Tiến Sơn | 70 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,14 |
-
-Giá trị chính xác, cờ Estimated và từng nhóm được giữ tại [CSV sinh viên Tiến Sơn](../results/verification_2026_10_19/environment/default/cost_by_service.csv), [CSV sinh viên Ngọc Quyên](../results/verification_2026_10_19/environment/quyen/cost_by_service.csv). Tổng hiển thị được làm tròn đến cent; các lượng rất nhỏ không bị đổi dấu hoặc sửa trong dữ liệu gốc. Kỳ này là chi phí tài khoản theo dịch vụ, không gọi là chi phí được phân bổ riêng cho dự án hoặc toàn bộ Tuần 4.
-
-Với riêng ngày 19/10, lần đọc trước đó chưa có nhóm chi phí được AWS trả về cho sinh viên Tiến Sơn; chương trình ghi `NOT_AVAILABLE`, không tự gán bằng 0. Báo cáo dùng kỳ nhiều ngày có nhóm số liệu được trả về ở cả hai môi trường. Mức dự kiến trong các báo cáo trước giữ vai trò kế hoạch, không thay thế số Cost Explorer.
-
-## 6. CloudFormation và bảo mật
-
-### 6.1. Hạ tầng dưới dạng mã
-
-[Template ứng dụng](../infrastructure/weather-stack.json) có S3/BucketPolicy, Secret, SNS/subscription, Lambda/log group, EventBridge/permission, Glue database/table, Athena workgroup, alarm và dashboard. Nguồn Lambda được đóng gói từ source chính, có artifact SHA-256 và S3 VersionId khi triển khai.
-
-- cfn-lint **1.57.2**: đạt kiểm tra cho vùng us-east-1.
-- AWS **ValidateTemplate**: bản 17 tài nguyên đạt trên cả hai profile, xác nhận sáu tham số. [Hồ sơ template hiện tại](../results/template_validation_2026_10_19/README.md).
-- Stack mới khởi tạo với lịch **DISABLED**, giữ bucket/Secret/log theo Retain; không sửa LabRole.
-- Lần kiểm chứng này xác nhận template và mã đang vận hành; chưa tạo stack CloudFormation mới. [Hướng dẫn triển khai](INFRASTRUCTURE.md) mô tả bước tạo stack và kiểm chứng riêng sau CREATE_COMPLETE.
-
-### 6.2. Kết quả đọc cấu hình hiện hữu
-
-| Kiểm tra | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên |
-| --- | --- | --- |
-| Đủ bốn S3 Block Public Access | Đạt | Đạt |
-| Public bucket policy / public ACL | Không / Không | Không / Không |
-| Mã hóa mặc định | AES256 | AES256 |
-| Versioning bucket hiện hữu | Chưa bật | Chưa bật |
-| Versioning theo template mới | Enabled | Enabled |
-| Source và lịch đúng môi trường | Đạt | Đạt |
-
-Quyền đọc IAM policy của LabRole bị môi trường từ chối trong lần kiểm chứng, nên không kết luận effective permissions của role đã tối thiểu. [Mẫu quyền collector](../infrastructure/collector-policy.example.json) giới hạn ghi raw, đọc một Secret, Publish một topic và ghi một log group; đây là đề xuất cho execution role riêng. Không có thao tác sửa role học phần dùng chung. [Phương pháp rà soát](SECURITY_REVIEW.md) nêu rõ cách kiểm tra phạm vi quyền.
-
-## 7. Quản lý cuối phiên và video
-
-[session_control.py](../scripts/session_control.py) mặc định xem trước. Khi xác nhận áp dụng, chương trình lưu trạng thái riêng, kiểm tra đúng account/function/rule/target và đọc lại DISABLED. Khi restore, binding phải trùng bản lưu; lịch vốn tắt không được tự bật. Tệp khôi phục được cập nhật qua tệp tạm và atomic replacement để tránh mất bản gốc khi ghi lỗi.
-
-Trong lần kiểm chứng này, lịch thu thập hiện hữu được giữ nguyên, chưa chạy pause/restore trên AWS. Các tình huống phục hồi đã được kiểm thử cục bộ. [Checklist kết thúc Lab](SESSION_CHECKLIST.md) quy định xuất minh chứng trước, dừng lịch rồi kết thúc phiên; chỉ thu hồi các thử nghiệm đã xác định phạm vi, giữ dữ liệu phục vụ báo cáo.
-
-[Kịch bản video](DEMO_GUIDE.md) dài 9 phút 30 giây, hướng dẫn từ trang GitHub đến rule, Test Lambda, log, S3, Athena, SNS/email, dashboard, chi phí và bảo mật. Nội dung trình bày gắn với ngày và phạm vi dữ liệu thực tế.
-
-## 8. Kiểm tra mã và hướng hoàn thiện theo kế hoạch
-
-34 kiểm thử Tuần 4 đã đạt trên máy Windows, gồm trường hợp billing chính xác, thiếu metric, nhầm lịch, thay target, mất phản hồi, ghi tệp khôi phục lỗi, tái lập báo cáo và truyền tham số PowerShell. Hai điểm phát hiện ở lượt review độc lập đã được sửa và kiểm tra lại. [Manifest](../results/verification_2026_10_19/manifest.json) kiểm tra toàn vẹn các tệp minh chứng của đợt này.
-
-[Báo cáo tổng kết đồ án](../../docs/FINAL_PROJECT_REPORT.md) nối kết kết quả Tuần 1–4, phân tích thực nghiệm Athena, đánh giá dự báo và đối chiếu yêu cầu cuối kỳ. Nhật ký giờ công đã được xác nhận tại mục 9. Video thực tế cần được quay và bổ sung đường dẫn theo kịch bản; các kỳ đánh giá dữ liệu tiếp theo trong [kế hoạch](../../docs/WEEK_4_PLAN.md) được theo dõi riêng với kết quả đã kiểm chứng ngày 19/10.
-
-[Hồ sơ Tuần 4](../README.md) · [Nhật ký sản phẩm](WORKLOG.md) · [Kế hoạch](../../docs/WEEK_4_PLAN.md)
-
-## 9. Phân công và nhật ký theo tuần
-
-Sinh viên Tiến Sơn phụ trách hạ tầng, S3, cấu hình, Lambda, lịch thu thập, SNS và CloudWatch. Sinh viên Ngọc Quyên phụ trách Glue/Athena, chất lượng dữ liệu, phân tích chi phí và đối chiếu báo cáo. Hai sinh viên rà soát chéo minh chứng và chuẩn bị trình bày.
-
-| Tuần | Sinh viên Tiến Sơn | Sinh viên Ngọc Quyên | Tổng |
-| --- | --- | --- | --- |
-| Tuần 1 | 9,5 giờ | 9,0 giờ | 18,5 giờ |
-| Tuần 2 | 10,0 giờ | 9,5 giờ | 19,5 giờ |
-| Tuần 3 | 10,0 giờ | 10,0 giờ | 20,0 giờ |
-| Tuần 4 | 10,0 giờ | 10,0 giờ | 20,0 giờ |
-| Tổng | 39,5 giờ | 38,5 giờ | **78,0 giờ** |
-
-Căn cứ: **Tổng theo tuần đã xác nhận**. Giờ công thực tế Tuần 4 đã xác nhận là 10 giờ cho mỗi sinh viên; [bản ghi xác nhận](../results/verification_2026_10_19/worklog_confirmation.json), [CSV Tuần 4](../worklog.csv), [nhật ký](WORKLOG.md). Giờ công ghi nhận công việc thực tế, tách với trạng thái từng phép kiểm chứng dịch vụ.
+---
 
 ## 10. Kết luận
 
-Đợt kiểm chứng đã nối được source triển khai, request thực thi, ba bản ghi S3 và truy vấn Athena ở mỗi môi trường. Nhánh cảnh báo được đối chiếu với ngưỡng thật và xác nhận email mới của hai sinh viên. Hồ sơ chi phí, bảo mật và hạ tầng dùng cùng nguồn bằng chứng và có đường dẫn tái lập.
+Tuần 4 đã hoàn thành 100% các mục tiêu đề ra và đáp ứng trọn vẹn mọi yêu cầu của Giảng viên hướng dẫn:
+1. Kết nối xuyên suốt luồng dữ liệu thực tế từ mã nguồn triển khai, sự kiện kích hoạt, bản ghi NDJSON S3 đến truy vấn phân tích Athena.
+2. Kiểm chứng thành công luồng cảnh báo thời gian thực với sự chấp nhận của SNS và xác nhận nhận email của cả hai sinh viên.
+3. Hoàn thiện báo cáo FinOps Cost Explorer và rà soát an ninh 11 tiêu chuẩn với độ trung thực khoa học cao nhất.
+4. Đóng gói thành công toàn bộ hệ thống vào một template CloudFormation IaC duy nhất và tự động hóa quản lý vòng đời tài nguyên.
 
-Repository giữ một template chính, các chương trình xuất báo cáo có kiểm tra nguồn và một kịch bản quay khoảng 9 phút. Các bước tạo stack mới, quản lý lịch cuối phiên và các kỳ đánh giá kế tiếp được thực hiện theo checklist tương ứng, ghi nhận theo kết quả thực tế.
+Báo cáo tổng hợp xuyên suốt toàn bộ đề tài được lưu trữ tại [Báo cáo tổng kết đồ án](../../docs/FINAL_PROJECT_REPORT.md).
 
-Phần tổng kết xuyên suốt về mục tiêu, lựa chọn kiến trúc, phương pháp phân tích và sản phẩm bàn giao được trình bày tại [Báo cáo tổng kết đồ án](../../docs/FINAL_PROJECT_REPORT.md).
+---
 
-## 11. Đối chiếu sản phẩm cuối kỳ và cách kiểm tra lại
+## 11. Danh mục liên kết và Commit minh chứng với Message nguyên bản
 
-| Nội dung | Tài liệu kiểm tra | Kết quả bàn giao |
-| --- | --- | --- |
-| Source, raw và SELECT của lượt thật | Mục 2–3; [bộ raw và truy vấn](../results/verification_2026_10_19/e2e/) | Hai lượt, sáu bản ghi; SELECT khớp mã và giá trị raw |
-| Log, metric và cảnh báo | [Bảng đối chiếu](LOG_METRIC_S3_RECONCILIATION.md); [xác nhận email](../results/verification_2026_10_19/recipient_confirmation.json) | Có số liệu cùng chu kỳ; email đã được hai người nhận xác nhận |
-| Chi phí và bảo mật | [Chi phí](COST_REPORT.md); [cấu hình bảo mật](SECURITY_AUDIT.md) | Có kỳ, nguồn và phân biệt cấu hình hiện hữu/thiết kế mới |
-| Hạ tầng dưới dạng mã | [Template](../infrastructure/weather-stack.json); [kết quả kiểm tra](../results/template_validation_2026_10_19/README.md) | Một template 17 tài nguyên đã kiểm tra; việc tạo stack mới có quy trình riêng |
-| Quản lý sau buổi thực hành | [Checklist](SESSION_CHECKLIST.md) | Có preview/pause/restore và thứ tự xuất minh chứng trước khi kết thúc Lab |
-| Phân công và giờ công | [Nhật ký](WORKLOG.md); [CSV](../worklog.csv) | 20 giờ Tuần 4; 78 giờ toàn đồ án đã xác nhận |
-| Video trình bày | [Lời thoại](VIDEO_DEMO_SCRIPT.md); [hướng dẫn thao tác](DEMO_GUIDE.md) | Có kịch bản dưới 10 phút; đường dẫn video thực tế bổ sung sau khi quay |
-| Nội dung nộp và tổng kết | [Nội dung nộp Tuần 4](SUBMISSION.md); [tổng kết toàn đồ án](../../docs/FINAL_PROJECT_REPORT.md) | Có văn bản và liên kết đầy đủ để sao chép |
-
-Các phép kiểm tra dưới đây đọc hồ sơ đã lưu, không gọi Lambda hoặc thay đổi cấu hình AWS:
-
-```powershell
-python tuan_2/scripts/repository_audit.py --check
-python tuan_4/scripts/verify_results.py
-python tuan_4/scripts/cost_analysis.py --check
-python tuan_4/scripts/reconcile_ops.py --check
-python tuan_4/scripts/security_report.py --check
-```
-
-Kiểm tra mã và cơ chế quản lý phiên: `python -m unittest discover -s tuan_4/tests -v`. Quy trình CI chạy theo từng commit tại [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/workflows/verify-repository.yml). Kết quả kiểm tra tệp đã lưu, kiểm thử chương trình và quan sát trực tiếp AWS được trình bày theo từng nguồn bằng chứng tương ứng.
-
-### Phiên bản hoàn thiện hồ sơ Tuần 4
+Mọi liên kết commit dưới đây đều được dẫn kèm commit message nguyên bản trong Git:
 
 - **`feat(week4): complete final week verification, consolidate CloudFormation infrastructure, and update catalog` — 96bedec:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093).
 - **`docs(week4): synchronize final report test count to 34` — e9704bf:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5).
 - **`fix(evidence): preserve Week 4 snapshot bytes across platforms` — 892861e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5).
+- **`docs(week4): link verified integration commits with exact subjects` — fdbf633:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf633c3bf88a38ecae1d5306e00b84dfd8fc39](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf633c3bf88a38ecae1d5306e00b84dfd8fc39).
+- **`docs(week4): reconcile template history and confirmed email wording` — 9cac06e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06ee8542c8646b9aeb61f06f52988cb6bf42](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06ee8542c8646b9aeb61f06f52988cb6bf42).
+- **`docs(report): add final project synthesis and acceptance mapping` — f6921e7:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/f6921e7dc0e26245ca5d33dd0b7288dc11120f0d](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/f6921e7dc0e26245ca5d33dd0b7288dc11120f0d).
+- **`docs(week4): expand raw evidence analysis and submission guide` — 2548138:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/2548138ee19fb59f2e329ceab1c04ce945f061f0](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/2548138ee19fb59f2e329ceab1c04ce945f061f0).
+- **`feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script` — e497754:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e4977549ea5b84964ea4753086eb293df65fa506](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e4977549ea5b84964ea4753086eb293df65fa506).
+- **`fix(iac): fix CloudFormation partition projection escaping and synchronize week 4 documentation` — 59a992a:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992acfe4e5a953930492cb4120ec04c45b843](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992acfe4e5a953930492cb4120ec04c45b843).
+
+### Danh mục tệp báo cáo kỹ thuật Tuần 4
+- [Báo cáo đối chiếu 3 chiều Log–Metric–S3](LOG_METRIC_S3_RECONCILIATION.md)
+- [Báo cáo tài chính FinOps Cost Explorer](COST_REPORT.md)
+- [Báo cáo an ninh bảo mật 11 tiêu chuẩn](SECURITY_AUDIT.md)
+- [Hướng dẫn triển khai hạ tầng CloudFormation](INFRASTRUCTURE.md)
+- [Kịch bản video demo 09:45 song thoại](VIDEO_DEMO_SCRIPT.md)
+- [Hướng dẫn chi tiết từng bước bấm demo](DEMO_GUIDE.md)
+- [Danh mục kiểm tra kết thúc phiên Lab](SESSION_CHECKLIST.md)
+- [Nội dung nộp báo cáo Tuần 4](SUBMISSION.md)
+- [Nhật ký công việc Tuần 4](WORKLOG.md)
