@@ -1,0 +1,14 @@
+{
+  "backtest_mae.png": "e1d8c46330e40f9e8638eeac4eb85069cb6db53974f76d4198a49ec8000a8f45",
+  "backtest_pm2_5.png": "d1f43e70c7091a3cbc9feeb0bea4c16cf43674cab450f5c7b57995cd21efba44",
+  "backtest_us_aqi.png": "502635c256f2445bf0a88a8d8b49f8f29670e2510d6c39a750b465f6559abb2a",
+  "history.csv": "5f92b0790f88e5f2ba1b4d404e7c55b341b75c744086588656a367578497b791",
+  "metrics.csv": "fd1a44f2ce56c3278314b212a972b035e92addfc8119dcd3f05b312b5cd4ba17",
+  "model_source/DaNang_api.json": "12d052d7ee1908815130afebf66c92753e8fb1ec50a7c0d574f1741f9fd38e8c",
+  "model_source/HaNoi_api.json": "eeec117eec1320ebef6a97dce3d727ddb33b96d352959674b8f9533d47f4602d",
+  "model_source/HoChiMinh_api.json": "7aaa17fee0836427464b507ecef544603fae6e299c99487dddba942c63a2676d",
+  "predictions.csv": "5d44c2a512919f669a3eafabb40612bf7e91e9ff2ea99908ac6a20932f1923a4",
+  "protocol.json": "a2a86afe844dcebf8c0d40cef90968e921b78df6d83c553dbd7311731fb5c679",
+  "README.md": "f4c640b30e1910d87a46f5f15d0841744c138267a183200ace80bde24f986162",
+  "summary.json": "5a7ecb42c99ec78b982f4f246bfe533dd0fd4ad036c1dc8e762cf201bd082245"
+}

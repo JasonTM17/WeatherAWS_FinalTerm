@@ -1,5 +1,11 @@
 # CloudFormation — Stack ứng dụng thời tiết và chất lượng không khí
 
+## Trạng thái triển khai ngày 20/10/2026
+
+Hai stack `weather-w4-son` và `weather-w4-quyen` đã CREATE_COMPLETE. Mỗi Lambda mới thu ba đô thị, raw được tải lại và SELECT đối chiếu trong database/workgroup mới. Artifact đúng version/hash; hai lịch mới vẫn DISABLED. [Minh chứng triển khai thực tế](../results/advanced_live_2026_10_20/README.md) gồm Events, cấu hình, raw, truy vấn và metric.
+
+Công cụ [deploy_stack.py](../scripts/deploy_stack.py) kiểm tra chín tên tài nguyên, không nhận AccessDenied là chưa tồn tại, không tự nhận quản lý stack đã có. Nhật ký riêng phải đặt dưới output/ bị ignore; công cụ không cập nhật lại stack đã tạo. [verify_stack.py](../scripts/verify_stack.py) đọc Outputs đúng môi trường; cờ --invoke thực hiện một invocation, lưu raw và SELECT. Không dùng các tên collector/database cũ để xác minh stack mới.
+
 ## 1. Thành phần và cách thiết kế
 
 [weather-stack.json](../infrastructure/weather-stack.json) khai báo **17 tài nguyên** trong một template. Các tài nguyên mới có tên bắt đầu bằng `weather-w4-`; không nhập hoặc thay thế bucket, Lambda và lịch đang vận hành của Tuần 1–3.

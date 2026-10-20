@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "profile": "default",
+  "stack_name": "weather-w4-son",
+  "captured_at_utc": "2026-10-20T05:09:10.155952+00:00",
+  "stack_status": "CREATE_COMPLETE",
+  "function_name": "weather-w4-son-collector",
+  "database": "weather_w4_son",
+  "workgroup": "weather-w4-son",
+  "artifact_sha256": "f4ae025b35f04403de43ff5427d8dbd992f4cb7b562b3f3fe13418c0c225179c",
+  "source_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219",
+  "schedule_state": "DISABLED",
+  "storage": {
+    "status": "PASS",
+    "all_public_access_blocks": true,
+    "public_policy": false,
+    "public_acl": false,
+    "bucket_policy": "PRESENT",
+    "encryption_algorithms": [
+      "AES256"
+    ],
+    "versioning": "Enabled"
+  },
+  "projection_enabled": true,
+  "schema_data_columns": 20,
+  "schema_partition_columns": 3,
+  "subscriptions": [
+    {
+      "protocol": "email",
+      "confirmed": false
+    }
+  ],
+  "invocation_executed": true,
+  "records": 3,
+  "alerts": {
+    "status": "PASS",
+    "records": 3,
+    "expected_alerts": 0,
+    "reported_sns_acceptances": 0,
+    "threshold_aqi": 100.0,
+    "threshold_pm2_5": 35.5,
+    "email_receipt": "NOT_EXERCISED"
+  },
+  "athena": {
+    "status": "PASS",
+    "query_id": "b01c9f9a-e14a-41d4-911a-8d9f895418f3",
+    "database": "weather_w4_son",
+    "workgroup": "weather-w4-son",
+    "records": 3,
+    "result_reused": false,
+    "bytes_scanned": 1689,
+    "engine_ms": 489,
+    "total_ms": 646
+  }
+}

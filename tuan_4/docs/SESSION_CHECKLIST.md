@@ -55,3 +55,8 @@ Công cụ này dành cho `WeatherCollectionSchedule` hiện hữu. Với stack 
 - Đối với dữ liệu/bucket muốn xóa vĩnh viễn, lập danh sách đối tượng cụ thể và xác nhận phạm vi trước khi thực hiện.
 
 [Hồ sơ Tuần 4](../README.md) · [Báo cáo kiểm chứng](FINAL_REPORT.md)
+
+
+## Minh chứng thao tác ngày 20/10
+
+Hai môi trường đã được thử pause rồi restore thật, đọc lại lịch chuẩn ENABLED → DISABLED → ENABLED; account/function/rule/target giữ cùng fingerprint và không xóa dữ liệu. [Hai kết quả thao tác](../results/advanced_live_2026_10_20/session/) tách riêng với unit test và preview. Hai rule của stack mới vẫn DISABLED; công cụ session_control dành cho lịch chuẩn hiện hữu.

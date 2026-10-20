@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "query_id": "6dcf3467-22bd-49e4-be97-bc8d3b820c61",
+  "database": "weather_w4_quyen",
+  "workgroup": "weather-w4-quyen",
+  "records": 3,
+  "result_reused": false,
+  "bytes_scanned": 1689,
+  "engine_ms": 682,
+  "total_ms": 1005
+}

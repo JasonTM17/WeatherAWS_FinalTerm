@@ -1,0 +1,38 @@
+{
+  "profile": "quyen",
+  "function_name": "weather-w4-quyen-collector",
+  "captured_at_utc": "2026-10-20T05:10:48.885968+00:00",
+  "https_only_policy_observed": true,
+  "bucket_owner_enforced": true,
+  "rule_source_arn_and_account_bound": true,
+  "request_hash": "f3d5526368089e3cc640",
+  "matched_lifecycle": [
+    "END",
+    "REPORT",
+    "START"
+  ],
+  "matching_result_logs": [
+    {
+      "records": 3,
+      "alerts": 0,
+      "collection_status": "complete"
+    }
+  ],
+  "native_metrics": {
+    "Invocations": [
+      {
+        "timestamp_utc": "2026-10-20T05:05:00+00:00",
+        "sum": 1.0
+      }
+    ],
+    "Errors": [
+      {
+        "timestamp_utc": "2026-10-20T05:05:00+00:00",
+        "sum": 0.0
+      }
+    ]
+  },
+  "metric_period_seconds": 300,
+  "email_receipt": "AWAITING_NEW_TOPIC_CONFIRMATION",
+  "status": "PASS"
+}

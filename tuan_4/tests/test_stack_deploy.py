@@ -56,5 +56,16 @@ class StackDeploymentGuards(unittest.TestCase):
         s3.put_bucket_versioning.assert_not_called()
         s3.put_object.assert_not_called()
 
+    def test_multiple_confirmed_recipients_require_exact_selection(self):
+        sns=Mock()
+        sns.get_paginator.return_value.paginate.return_value=[{'Subscriptions':[
+            {'Protocol':'email','SubscriptionArn':'arn:first','Endpoint':'first@example.edu'},
+            {'Protocol':'email','SubscriptionArn':'arn:second','Endpoint':'second@example.edu'}]}]
+        with patch.object(deploy,'client',return_value=sns):
+            with self.assertRaises(ValueError):deploy.confirmed_email(Mock(),'arn:topic')
+            selected=deploy.confirmed_email(Mock(),'arn:topic',deploy.digest(b'second@example.edu')[:12])
+            self.assertEqual(selected,'second@example.edu')
+            with self.assertRaises(ValueError):deploy.confirmed_email(Mock(),'arn:topic','wrong-choice')
+
 
 if __name__=='__main__':unittest.main()

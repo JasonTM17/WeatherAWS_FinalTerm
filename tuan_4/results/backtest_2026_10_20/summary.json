@@ -1,0 +1,51 @@
+{
+  "kind": "retrospective_chronological_backtest",
+  "model": "moving_average_24h",
+  "windows": 3,
+  "training_hours_per_window": 24,
+  "target_hours_per_window": 24,
+  "cities": [
+    "HoChiMinh",
+    "HaNoi",
+    "DaNang"
+  ],
+  "variables": [
+    "us_aqi",
+    "pm2_5"
+  ],
+  "model_fixed_before_evaluation": true,
+  "operational_issued_forecasts": false,
+  "station_observations": false,
+  "status": "PASS",
+  "captured_at_utc": "2026-10-20T05:05:00.418292+00:00",
+  "shared_cutoff_exclusive_utc": "2026-10-20T05:00:00+00:00",
+  "prediction_rows": 432,
+  "metric_rows": 18,
+  "target_hours": 72,
+  "sources": [
+    {
+      "city": "HoChiMinh",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=10.8231&longitude=106.6297&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-20T05:04:55.281805+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-20T05:00:00+00:00",
+      "retained_hours": 173,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    },
+    {
+      "city": "HaNoi",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=21.0285&longitude=105.8542&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-20T05:04:56.254411+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-20T05:00:00+00:00",
+      "retained_hours": 173,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    },
+    {
+      "city": "DaNang",
+      "url": "https://air-quality-api.open-meteo.com/v1/air-quality?latitude=16.0544&longitude=108.2022&hourly=pm2_5%2Cus_aqi&past_days=7&forecast_days=1&timezone=UTC",
+      "captured_at": "2026-10-20T05:04:57.111078+00:00",
+      "historical_cutoff_exclusive_utc": "2026-10-20T05:00:00+00:00",
+      "retained_hours": 173,
+      "source_kind": "Open-Meteo CAMS model series downloaded retrospectively; not archived Lambda measurements or vintage operational forecasts"
+    }
+  ]
+}

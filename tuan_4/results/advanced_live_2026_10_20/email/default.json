@@ -1,0 +1,11 @@
+{
+  "profile": "default",
+  "topic_name": "weather-w4-son-alerts",
+  "subscription_confirmed": true,
+  "kind": "explicit_email_channel_test",
+  "not_a_threshold_alert": true,
+  "recipient_receipt": "AWAITING_USER_CONFIRMATION",
+  "captured_at_utc": "2026-10-20T05:13:23.351994+00:00",
+  "publish_status": "ACCEPTED",
+  "message_id_hash": "4bb6c1b3aaa7297922f117e2b5784ec2627025be543a7220d9456323303f1d9c"
+}

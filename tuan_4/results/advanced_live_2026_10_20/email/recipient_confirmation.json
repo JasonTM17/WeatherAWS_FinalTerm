@@ -1,0 +1,16 @@
+{
+  "confirmed_on": "2026-10-20",
+  "confirmation_source": "User explicitly confirmed both recipients received the new topic channel test",
+  "kind": "explicit_email_channel_test",
+  "not_a_threshold_alert": true,
+  "profiles": {
+    "default": {
+      "subscription_confirmed": true,
+      "recipient_receipt": "CONFIRMED_BY_RECIPIENT"
+    },
+    "quyen": {
+      "subscription_confirmed": true,
+      "recipient_receipt": "CONFIRMED_BY_RECIPIENT"
+    }
+  }
+}

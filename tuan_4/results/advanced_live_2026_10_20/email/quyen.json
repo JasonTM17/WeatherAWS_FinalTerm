@@ -1,0 +1,11 @@
+{
+  "profile": "quyen",
+  "topic_name": "weather-w4-quyen-alerts",
+  "subscription_confirmed": true,
+  "kind": "explicit_email_channel_test",
+  "not_a_threshold_alert": true,
+  "recipient_receipt": "AWAITING_USER_CONFIRMATION",
+  "captured_at_utc": "2026-10-20T05:13:29.219934+00:00",
+  "publish_status": "ACCEPTED",
+  "message_id_hash": "244e13f5e5aa625e0754e2ad4ce9594d3484a9ae63bb3abb683716290d7d7d72"
+}

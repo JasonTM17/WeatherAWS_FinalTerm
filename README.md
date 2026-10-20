@@ -4,7 +4,7 @@
 
 Đề tài thuộc lĩnh vực **Domain Apps**, tập trung vào xử lý dữ liệu môi trường của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Hồ sơ Tuần 1–4 gồm dữ liệu raw, Athena Partition Projection/Parquet, dự báo AQI/PM2.5, CloudWatch, cảnh báo SNS email, CI/CD và CloudFormation IaC. Phần tổng kết bổ sung kiểm chứng đầu-cuối, chi phí, bảo mật và quy trình quản lý cuối phiên.
 
-**Hồ sơ hoàn thiện ngày 20/10/2026; các bộ số liệu giữ ngày chốt riêng, gồm mốc kiểm chứng ngày 19/10.** [Báo cáo tổng kết đồ án](docs/FINAL_PROJECT_REPORT.md) giải thích lựa chọn kỹ thuật, phương pháp đánh giá và sản phẩm bàn giao.
+**Cập nhật ngày 20/10/2026: đã tạo và chạy hai stack CloudFormation, thực hiện 18 truy vấn Athena mới và backtest ba cửa sổ lịch sử.** [Báo cáo tổng kết đồ án](docs/FINAL_PROJECT_REPORT.md) giải thích lựa chọn kỹ thuật, phương pháp đánh giá và sản phẩm bàn giao.
 
 | Thông tin | Chi tiết |
 | --- | --- |
@@ -26,10 +26,12 @@
 | CloudWatch và kiểm chứng đầu-cuối | Tuần 4 nối source → request → log → S3 → Athena; mỗi môi trường có một lượt realtime, ba bản ghi và một Invocation/0 Errors trong đúng chu kỳ kiểm chứng | [Báo cáo Tuần 4](tuan_4/docs/FINAL_REPORT.md) · [Đối chiếu vận hành](tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md) |
 | Cảnh báo SNS email | Mỗi lượt kiểm chứng ngày 19/10 có một Publish được chấp nhận; cả hai người nhận xác nhận email mới | [Xác nhận email](tuan_4/results/verification_2026_10_19/recipient_confirmation.json) |
 | CI/CD Lambda | Có workflow kiểm tra repository, đóng gói source và triển khai có xác nhận môi trường; hai lượt CD ngày 18/10 có minh chứng đối chiếu artifact | [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) · [Minh chứng CD](tuan_3/results/cd_2026_10_18/) |
-| CloudFormation IaC | Một template **17 tài nguyên**, dùng source collector chính; đạt cfn-lint và AWS ValidateTemplate trên hai môi trường. Hồ sơ xác nhận kiểm tra template, chưa tạo stack mới trong đợt này | [Template](tuan_4/infrastructure/weather-stack.json) · [Kết quả kiểm tra](tuan_4/results/template_validation_2026_10_19/README.md) |
+| CloudFormation IaC | Một template **17 tài nguyên**; hai stack đạt **CREATE_COMPLETE**, Lambda mới thu ba đô thị, SELECT trên database/workgroup mới và gói nguồn đúng hash | [Template](tuan_4/infrastructure/weather-stack.json) · [Triển khai thực tế](tuan_4/results/advanced_live_2026_10_20/README.md) |
 | Rà soát bảo mật | Đối chiếu BPA, mã hóa và trạng thái truy cập công khai của S3; phân biệt cấu hình hiện hữu với thiết kế HTTPS/versioning và policy collector của stack mới | [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Phạm vi quyền](tuan_4/docs/SECURITY_REVIEW.md) |
 | Chi phí và quản lý phiên | Cost Explorer đúng kỳ 12–19/10, có Estimated; công cụ preview/pause/restore kèm kiểm tra target và trạng thái khôi phục | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
 | Hồ sơ bàn giao | Báo cáo Tuần 1–4, nội dung nộp có URL đầy đủ và **78 giờ công đã xác nhận** | [Nội dung nộp Tuần 4](tuan_4/docs/SUBMISSION.md) · [Worklog](docs/WORKLOG.md) |
+
+**Bổ sung nâng cao ngày 20/10:** [700 bản ghi/115 JSON gốc](tuan_4/results/advanced_live_2026_10_20/snapshot/), [18 lượt Athena mới](tuan_4/results/advanced_live_2026_10_20/benchmark/), [432 dự đoán backtest và biểu đồ](tuan_4/results/backtest_2026_10_20/README.md), [SNS topic mới và xác nhận người nhận](tuan_4/results/advanced_live_2026_10_20/email/), [pause/restore thực tế](tuan_4/results/advanced_live_2026_10_20/session/). Mỗi đầu ra giữ ngày và phương pháp riêng.
 
 Ba điểm vào để đọc hồ sơ: **[Tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md)** · **[Kiểm chứng Tuần 4](tuan_4/docs/FINAL_REPORT.md)** · **[Nội dung nộp thầy](tuan_4/docs/SUBMISSION.md)**.
 

@@ -7,3 +7,6 @@ Báo cáo chính được hợp nhất tại [FINAL_REPORT.md](FINAL_REPORT.md).
 - [Chi phí Cost Explorer](COST_REPORT.md).
 - [Rà soát bảo mật](SECURITY_AUDIT.md).
 - [Một template CloudFormation](INFRASTRUCTURE.md).
+
+- [Triển khai, vận hành và 18 truy vấn Athena mới ngày 20/10](../results/advanced_live_2026_10_20/README.md).
+- [Backtest ba cửa sổ lịch sử, 432 dự đoán](../results/backtest_2026_10_20/README.md).

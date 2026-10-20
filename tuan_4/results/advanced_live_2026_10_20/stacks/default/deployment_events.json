@@ -1,0 +1,326 @@
+[
+  {
+    "logical_id": "weather-w4-son",
+    "type": "AWS::CloudFormation::Stack",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "HourlyRule",
+    "type": "AWS::Events::Rule",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "HourlyRule",
+    "type": "AWS::Events::Rule",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "Dashboard",
+    "type": "AWS::CloudWatch::Dashboard",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ErrorsAlarm",
+    "type": "AWS::CloudWatch::Alarm",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "HourlyRule",
+    "type": "AWS::Events::Rule",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "SchedulePermission",
+    "type": "AWS::Lambda::Permission",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "Dashboard",
+    "type": "AWS::CloudWatch::Dashboard",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "SchedulePermission",
+    "type": "AWS::Lambda::Permission",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "ErrorsAlarm",
+    "type": "AWS::CloudWatch::Alarm",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "Dashboard",
+    "type": "AWS::CloudWatch::Dashboard",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "SchedulePermission",
+    "type": "AWS::Lambda::Permission",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ErrorsAlarm",
+    "type": "AWS::CloudWatch::Alarm",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "Collector",
+    "type": "AWS::Lambda::Function",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "QueryWorkgroup",
+    "type": "AWS::Athena::WorkGroup",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "BucketPolicy",
+    "type": "AWS::S3::BucketPolicy",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "RawTable",
+    "type": "AWS::Glue::Table",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "BucketPolicy",
+    "type": "AWS::S3::BucketPolicy",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "QueryWorkgroup",
+    "type": "AWS::Athena::WorkGroup",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "RawTable",
+    "type": "AWS::Glue::Table",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "Collector",
+    "type": "AWS::Lambda::Function",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "BucketPolicy",
+    "type": "AWS::S3::BucketPolicy",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "RawTable",
+    "type": "AWS::Glue::Table",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "Collector",
+    "type": "AWS::Lambda::Function",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "QueryWorkgroup",
+    "type": "AWS::Athena::WorkGroup",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "DataBucket",
+    "type": "AWS::S3::Bucket",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ResultMetricFilter",
+    "type": "AWS::Logs::MetricFilter",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ErrorMetricFilter",
+    "type": "AWS::Logs::MetricFilter",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ResultMetricFilter",
+    "type": "AWS::Logs::MetricFilter",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "ErrorMetricFilter",
+    "type": "AWS::Logs::MetricFilter",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "ResultMetricFilter",
+    "type": "AWS::Logs::MetricFilter",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ErrorMetricFilter",
+    "type": "AWS::Logs::MetricFilter",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "CollectorLogs",
+    "type": "AWS::Logs::LogGroup",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "CollectorLogs",
+    "type": "AWS::Logs::LogGroup",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "bf840ff5951af4d016ac8d1a06b7a10f7b7aa19e6ba81d951eb45be6594872e6"
+  },
+  {
+    "logical_id": "ApiConfig",
+    "type": "AWS::SecretsManager::Secret",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "EmailSubscription",
+    "type": "AWS::SNS::Subscription",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ApiConfig",
+    "type": "AWS::SecretsManager::Secret",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "Database",
+    "type": "AWS::Glue::Database",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "AlarmTopicPolicy",
+    "type": "AWS::SNS::TopicPolicy",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "EmailSubscription",
+    "type": "AWS::SNS::Subscription",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "AlarmTopicPolicy",
+    "type": "AWS::SNS::TopicPolicy",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "EmailSubscription",
+    "type": "AWS::SNS::Subscription",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "AlarmTopicPolicy",
+    "type": "AWS::SNS::TopicPolicy",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "AlertTopic",
+    "type": "AWS::SNS::Topic",
+    "status": "CREATE_COMPLETE",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "DataBucket",
+    "type": "AWS::S3::Bucket",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "Database",
+    "type": "AWS::Glue::Database",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "AlertTopic",
+    "type": "AWS::SNS::Topic",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "CollectorLogs",
+    "type": "AWS::Logs::LogGroup",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "aaa11c7b31d910b4939f5f31a0c883a64070ea47316cec806e8d70c3d889d807"
+  },
+  {
+    "logical_id": "Database",
+    "type": "AWS::Glue::Database",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "AlertTopic",
+    "type": "AWS::SNS::Topic",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "CollectorLogs",
+    "type": "AWS::Logs::LogGroup",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "DataBucket",
+    "type": "AWS::S3::Bucket",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "ApiConfig",
+    "type": "AWS::SecretsManager::Secret",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "logical_id": "weather-w4-son",
+    "type": "AWS::CloudFormation::Stack",
+    "status": "CREATE_IN_PROGRESS",
+    "reason_hash": "2e5601052c179f5395de2bde18b4737a3a118bb4bef96ae11cd8d85a2e070dc1"
+  }
+]

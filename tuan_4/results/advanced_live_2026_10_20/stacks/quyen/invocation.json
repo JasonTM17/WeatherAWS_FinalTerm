@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "records": 3,
+  "expected_alerts": 0,
+  "reported_sns_acceptances": 0,
+  "threshold_aqi": 100.0,
+  "threshold_pm2_5": 35.5,
+  "email_receipt": "NOT_EXERCISED",
+  "function_name": "weather-w4-quyen-collector",
+  "request_hash": "f3d5526368089e3cc640",
+  "saved_files": [
+    {
+      "s3_key": "raw/year=2026/month=10/day=20/data_20261020_d4c8c374.json",
+      "count": 3
+    }
+  ],
+  "source_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219"
+}

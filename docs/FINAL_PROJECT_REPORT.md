@@ -192,9 +192,16 @@ Tối ưu được đánh giá theo số liệu cụ thể: byte quét và thờ
 
 Hai bucket hiện hữu có đủ bốn thiết lập Block Public Access, mã hóa mặc định AES256 và không ghi nhận public policy/public ACL trong đợt đọc cấu hình. Versioning của bucket hiện hữu chưa bật; template mới khai báo bật versioning. Quyền đọc IAM policy của LabRole không được môi trường cấp cho lần kiểm chứng, nên [policy mẫu](../tuan_4/infrastructure/collector-policy.example.json) được trình bày như thiết kế quyền theo tài nguyên cho collector, không gọi là effective permissions đã xác nhận của LabRole.
 
-[Template CloudFormation chính](../tuan_4/infrastructure/weather-stack.json) gồm 17 tài nguyên ứng dụng, dùng artifact đóng gói từ source collector chính và execution role của Lab. Lịch mới khởi tạo ở trạng thái DISABLED; chính sách Retain giữ các tài nguyên chứa dữ liệu được chỉ định. Bản hiện tại đã qua cfn-lint và AWS ValidateTemplate ở cả hai môi trường. Hồ sơ xác nhận **kiểm tra template**; tạo stack mới và kiểm chứng sau CREATE_COMPLETE là bước thực hành riêng theo [hướng dẫn hạ tầng](../tuan_4/docs/INFRASTRUCTURE.md).
+[Template CloudFormation chính](../tuan_4/infrastructure/weather-stack.json) gồm 17 tài nguyên ứng dụng, dùng artifact đóng gói từ source collector chính và execution role của Lab. Lịch mới khởi tạo ở trạng thái DISABLED; chính sách Retain giữ các tài nguyên chứa dữ liệu được chỉ định. Bản hiện tại đã qua cfn-lint và AWS ValidateTemplate ở cả hai môi trường. Ngày 20/10, hai stack **weather-w4-son/weather-w4-quyen** đã đạt **CREATE_COMPLETE**, mã Lambda đúng source, mỗi hàm thu đủ ba đô thị và SELECT khớp bốn trường đã chọn trong database/workgroup mới. [Events, hash, raw và truy vấn](../tuan_4/results/advanced_live_2026_10_20/README.md) ghi lại triển khai thực tế sau bước ValidateTemplate.
 
-Công cụ quản lý phiên kiểm tra account/function/rule/target trước khi pause hoặc restore, lưu trạng thái khôi phục và đọc lại kết quả. Kiểm thử cục bộ bao phủ các tình huống phục hồi; đợt kiểm chứng ngày 19/10 giữ nguyên lịch hiện hữu. [Checklist kết thúc phiên](../tuan_4/docs/SESSION_CHECKLIST.md) là căn cứ thao tác sau khi hoàn tất quay demo và xuất minh chứng.
+Công cụ quản lý phiên kiểm tra account/function/rule/target trước khi pause hoặc restore, lưu trạng thái khôi phục và đọc lại kết quả. Kiểm thử cục bộ bao phủ các tình huống phục hồi; ngày 20/10 đã thực hiện pause rồi restore trên cả hai môi trường và đọc lại ENABLED → DISABLED → ENABLED, binding không đổi. [Minh chứng thao tác thật](../tuan_4/results/advanced_live_2026_10_20/session/) được lưu riêng; hai lịch của stack mới vẫn DISABLED. [Checklist kết thúc phiên](../tuan_4/docs/SESSION_CHECKLIST.md) là căn cứ thao tác sau khi hoàn tất quay demo và xuất minh chứng.
+
+### 7.3. Kết quả nâng cao bổ sung ngày 20/10
+
+- **Dữ liệu:** [snapshot mới](../tuan_4/results/advanced_live_2026_10_20/snapshot/) giữ 331/369 bản ghi, 53/62 JSON nguyên byte, tổng 700 bản ghi và 115 JSON.
+- **Athena:** [18 lượt đo mới](../tuan_4/results/advanced_live_2026_10_20/benchmark/) có parity, không result reuse; lọc ngày 20/10 với ba bản ghi mỗi sinh viên. Median JSON Projection là 1.558 byte, Parquet 302 byte (giảm 80,62%). Median tổng JSON Projection/Parquet là 647/682 ms của sinh viên Tiến Sơn và 640/647 ms của sinh viên Ngọc Quyên. Ít byte hơn không đồng nghĩa thời gian tổng nhỏ hơn.
+- **Backtest:** [ba cửa sổ lịch sử](../tuan_4/results/backtest_2026_10_20/README.md), mỗi cửa sổ dùng 24 giờ train trước gốc và 24 giờ đích; MA24 cố định, 432 dự đoán và 18 dòng sai số. Đây là hồi cứu chuỗi mô hình, tách riêng kỳ dự báo đã phát hành ở mục 5.
+- **SNS và bảo mật:** topic mới đã confirmed, cả hai người nhận xác nhận thư thử kênh; dữ liệu trong lượt E2E mới dưới ngưỡng nên 0 cảnh báo. Hai bucket mới được đọc lại BPA, AES256, versioning Enabled, ownership và HTTPS-only. [Hồ sơ stack/email](../tuan_4/results/advanced_live_2026_10_20/README.md) giữ các bằng chứng tương ứng.
 
 ## 8. Đối chiếu yêu cầu tổng kết và bàn giao
 
@@ -204,7 +211,7 @@ Công cụ quản lý phiên kiểm tra account/function/rule/target trước kh
 | Kiểm chứng tổng thể | Hai request realtime có source, log, S3, Athena, SNS và xác nhận email | Đã kiểm chứng trong phạm vi đợt ngày 19/10 |
 | Đối chiếu log–metric–S3 | Có bảng theo request và chu kỳ metric tương ứng | Đã tổng hợp |
 | Báo cáo chi phí và rà soát bảo mật | Có dữ liệu gốc, kỳ tính, kết quả đọc cấu hình và phân biệt thiết kế hạ tầng | Đã tổng hợp |
-| Một template CloudFormation | Bản 17 tài nguyên đã lint và ValidateTemplate | Đã kiểm tra template; chưa tạo stack mới trong đợt này |
+| Một template CloudFormation | Bản 17 tài nguyên đã lint và ValidateTemplate | Hai stack CREATE_COMPLETE và E2E trên tài nguyên mới ngày 20/10 |
 | Quản lý tài nguyên cuối Lab | Có công cụ preview/pause/restore, kiểm thử và checklist | Thực hiện thao tác kết thúc phiên sau demo và xuất minh chứng |
 | Video không quá 10 phút | Trình bày luồng xử lý, kết quả phân tích và kiểm chứng vận hành | Cần quay, kiểm tra thời lượng và bổ sung đường dẫn video thực tế |
 | Nhật ký công việc | Tổng theo tuần đã xác nhận: 78 giờ | Đã lưu CSV và bảng phân công |

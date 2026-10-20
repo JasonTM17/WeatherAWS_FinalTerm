@@ -1,0 +1,19 @@
+{
+  "kind": "retrospective_chronological_backtest",
+  "model": "moving_average_24h",
+  "windows": 3,
+  "training_hours_per_window": 24,
+  "target_hours_per_window": 24,
+  "cities": [
+    "HoChiMinh",
+    "HaNoi",
+    "DaNang"
+  ],
+  "variables": [
+    "us_aqi",
+    "pm2_5"
+  ],
+  "model_fixed_before_evaluation": true,
+  "operational_issued_forecasts": false,
+  "station_observations": false
+}

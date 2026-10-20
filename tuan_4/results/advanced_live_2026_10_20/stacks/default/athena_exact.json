@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "query_id": "b01c9f9a-e14a-41d4-911a-8d9f895418f3",
+  "database": "weather_w4_son",
+  "workgroup": "weather-w4-son",
+  "records": 3,
+  "result_reused": false,
+  "bytes_scanned": 1689,
+  "engine_ms": 489,
+  "total_ms": 646
+}

@@ -90,12 +90,14 @@ def ensure_names_absent(sess, account, environment, template):
     return {'status':'PASS','deterministic_names_checked':9}
 
 
-def confirmed_email(sess, topic):
+def confirmed_email(sess, topic, recipient_id=None):
     endpoints = set()
     for page in client(sess, 'sns').get_paginator('list_subscriptions_by_topic').paginate(TopicArn=topic):
         for item in page['Subscriptions']:
             if item['Protocol'] == 'email' and item['SubscriptionArn'].startswith('arn:'):
                 endpoints.add(item['Endpoint'])
+    if recipient_id:
+        endpoints={value for value in endpoints if digest(value.encode())[:12]==recipient_id}
     if len(endpoints) != 1:
         raise ValueError('Expected one existing confirmed recipient; do not guess an address')
     return endpoints.pop()
@@ -156,7 +158,7 @@ def artifact(sess, account, environment, folder, proof):
     return bucket,key,version
 
 
-def deploy(profile, output, apply=False, reuse_email=False):
+def deploy(profile, output, apply=False, reuse_email=False, recipient_id=None):
     output=output_path(output)
     output.mkdir(parents=True,exist_ok=False)
     sess=session(profile)
@@ -187,7 +189,7 @@ def deploy(profile, output, apply=False, reuse_email=False):
         write_json(output/'summary.json',result)
         return result
     bucket,key,version=artifact(sess,account,environment,output,proof)
-    email=confirmed_email(sess,cfg['Environment']['Variables']['SNS_TOPIC_ARN']) if reuse_email else ''
+    email=confirmed_email(sess,cfg['Environment']['Variables']['SNS_TOPIC_ARN'],recipient_id) if reuse_email else ''
     parameters={'EnvironmentName':environment,'LabRoleArn':role,'ArtifactBucket':bucket,
                 'ArtifactKey':key,'ArtifactVersion':version,'AlertEmail':email}
     token='weather-w4-'+uuid.uuid4().hex
@@ -239,9 +241,10 @@ if __name__=='__main__':
     parser.add_argument('--output',required=True,type=Path)
     parser.add_argument('--apply',action='store_true')
     parser.add_argument('--reuse-confirmed-email',action='store_true')
+    parser.add_argument('--recipient-id',help='SHA-256 prefix of one existing confirmed endpoint; no email in command')
     args=parser.parse_args()
     try:
-        result=deploy(args.profile,args.output,args.apply,args.reuse_confirmed_email)
+        result=deploy(args.profile,args.output,args.apply,args.reuse_confirmed_email,args.recipient_id)
         print(json.dumps(result),flush=True)
         raise SystemExit(0 if result['status'] in ('PASS','PREVIEW') else 1)
     except Exception as error:

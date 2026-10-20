@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "profile": "default",
+  "stack_name": "weather-w4-son",
+  "client_token": "weather-w4-defb7eaac4af4d39a5e367aa315773e2",
+  "template_sha256": "ae0ce4073330492137e3d8354543ef0bf71001a81897df2461d872b81bef781e",
+  "artifact_sha256": "f4ae025b35f04403de43ff5427d8dbd992f4cb7b562b3f3fe13418c0c225179c",
+  "source_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219",
+  "artifact_version": "4W81UQ3NZ6eTUspSNcq3XzsFxy3sWGfv",
+  "email_subscription_requested": true,
+  "created_at_utc": "2026-10-20T04:59:03.922047+00:00",
+  "stack_status": "CREATE_COMPLETE",
+  "stack_created": true,
+  "initial_schedule": "DISABLED",
+  "runtime_verified": false
+}

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "profile": "default",
+  "captured_at_utc": "2026-10-20T05:09:04.603733+00:00",
+  "before_state": "ENABLED",
+  "paused": {
+    "status": "PASS",
+    "action": "pause",
+    "current_state": "DISABLED",
+    "changed": true,
+    "data_deleted": false
+  },
+  "restored": {
+    "status": "PASS",
+    "action": "restore",
+    "current_state": "ENABLED",
+    "changed": true,
+    "data_deleted": false
+  },
+  "final_state": "ENABLED",
+  "binding_unchanged": true,
+  "data_deleted": false
+}

@@ -4,73 +4,81 @@
 
 **Báo cáo tổng kết Tuần 4 — Đề tài “Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên AWS”, lĩnh vực Domain Apps.**
 
-Trong Tuần 4, chúng em tập trung kiểm chứng tổng thể hệ thống và hoàn thiện hồ sơ theo góp ý của thầy sau khi báo cáo Tuần 3 được duyệt. Mốc kiểm chứng ngày 19/10/2026 được thực hiện trên môi trường của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Hồ sơ trình bày mã đang triển khai, dữ liệu raw, truy vấn, cảnh báo, giám sát, chi phí và cấu hình bảo mật; tài liệu được hoàn thiện ngày 20/10/2026.
+Kính gửi thầy, chúng em gửi báo cáo tổng kết Tuần 4, cập nhật ngày 20/10/2026, tiếp nối hồ sơ các tuần đã được duyệt và bổ sung kiểm chứng nâng cao thực tế.
 
-## 1. Thu thập và đối chiếu dữ liệu đầu-cuối
+## 1. Tổng kết và triển khai hạ tầng
 
-Mỗi môi trường có một lượt realtime bằng event `{}`, thu đủ ba bản ghi của TP. Hồ Chí Minh, Hà Nội và Đà Nẵng. Chúng em tải lại nguyên object S3, giữ CSV đủ 23 trường và thực hiện SELECT theo đúng record_id. Kết quả truy vấn khớp bản raw về mã bản ghi, đô thị và giá trị dữ liệu. Báo cáo bổ sung bảng raw trực tiếp, giúp theo dõi từ kết quả Lambda tới dữ liệu lưu trữ và Athena.
+Trong Tuần 4, chúng em hoàn thiện kiểm chứng hệ thống thời tiết và chất lượng không khí cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng, đồng thời triển khai hai stack ứng dụng độc lập bằng một template CloudFormation gồm 17 tài nguyên. Ngày 20/10/2026, `weather-w4-son` và `weather-w4-quyen` đều đạt CREATE_COMPLETE. Gói Lambda của hai stack khớp source collector trong repository qua SHA-256; artifact được lấy theo Version ID cụ thể. Lịch mới giữ DISABLED để tránh thu thập tự động song song với lịch chuẩn.
 
 - **Báo cáo Tuần 4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/FINAL_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/FINAL_REPORT.md).
-- **Raw, CSV, SQL và kết quả truy vấn của sinh viên Tiến Sơn:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19/e2e/default](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19/e2e/default).
-- **Raw, CSV, SQL và kết quả truy vấn của sinh viên Ngọc Quyên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19/e2e/quyen](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19/e2e/quyen).
+- **CloudFormation và hướng dẫn triển khai:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/INFRASTRUCTURE.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/INFRASTRUCTURE.md).
+- **Events, cấu hình và kiểm chứng stack mới:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/stacks](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/stacks).
 
-## 2. Giám sát và cảnh báo email
+## 2. Thu thập, dữ liệu raw và giám sát
 
-Trong chu kỳ chứa lượt kiểm chứng, mỗi môi trường ghi nhận một Invocation, không có Error; START/END/REPORT và Result được đối chiếu với đúng request cùng object S3. Việc tính tỷ lệ lỗi áp dụng cho chu kỳ có đủ cặp metric tương ứng.
+Mỗi Lambda mới được gọi một lần có kiểm soát bằng event `{}`, thu đủ ba bản ghi cho ba đô thị. Chúng em tải nguyên object S3, xuất CSV đủ 23 trường và SELECT theo chính xác record_id trong database/workgroup của từng stack. Bốn trường record_id, city, us_aqi và pm2_5 trong truy vấn khớp raw; không dùng lại kết quả Athena. START/END/REPORT và Result được ghép theo đúng request; mỗi function có một Invocation và 0 Errors trong chu kỳ 300 giây chứa lượt kiểm chứng.
 
-Điều kiện cảnh báo thực tế là **US AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³**. Trong mỗi lượt đã lưu, Hà Nội có AQI 101 nên phát sinh một yêu cầu cảnh báo; SNS chấp nhận một thông điệp ở mỗi môi trường. Cả sinh viên Tiến Sơn và sinh viên Ngọc Quyên đã xác nhận nhận email mới của đúng đợt kiểm chứng. Các lượt demo sau đó được đánh giá theo dữ liệu và ngưỡng của chính lượt đó.
+Snapshot tích lũy ngày 20/10 gồm **700 bản ghi và 115 JSON gốc**: sinh viên Tiến Sơn có 331 bản ghi/53 tệp; sinh viên Ngọc Quyên có 369 bản ghi/62 tệp. Mỗi object có số dòng, dung lượng và SHA-256; raw giữ các lượt lấy lặp, bảng đô thị–giờ được xuất riêng cho phân tích.
 
-- **Đối chiếu log–metric–S3:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md).
-- **Xác nhận người nhận:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/verification_2026_10_19/recipient_confirmation.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/verification_2026_10_19/recipient_confirmation.json).
+- **Bộ kiểm chứng AWS ngày 20/10:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/advanced_live_2026_10_20/README.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/advanced_live_2026_10_20/README.md).
+- **JSON gốc, CSV và inventory:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/snapshot](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/snapshot).
+- **Đối chiếu vận hành:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md).
 
-## 3. Chi phí và quản lý cuối phiên
+## 3. Kiểm chứng cảnh báo và kênh email
 
-Cost Explorer được tổng hợp cho kỳ 12–19/10/2026 theo ngày, dịch vụ và loại ghi nhận. Tổng hiển thị đến cent là **0,00 USD của sinh viên Tiến Sơn** và **0,14 USD của sinh viên Ngọc Quyên**. CSV giữ giá trị chính xác, đơn vị và Estimated. Đây là số liệu tài khoản trong kỳ, được trình bày riêng với mức dự kiến của bài thực hành.
+Quy tắc cảnh báo là **US AQI ≥ 100 hoặc PM2.5 ≥ 35,5 µg/m³**. Đợt ngày 19/10 trên hệ thống hiện hữu ghi nhận Hà Nội AQI 101; mỗi môi trường có một Publish được SNS chấp nhận và người nhận xác nhận email mới.
 
-Chúng em chuẩn bị checklist xuất raw/log/metric/chi phí trước khi tạm dừng lịch và kết thúc Learner Lab. Công cụ preview/pause/restore kiểm tra đúng môi trường, hàm, rule và target, lưu trạng thái khôi phục trước thao tác áp dụng. Việc kết thúc phiên được thực hiện sau khi lưu đủ minh chứng và hoàn tất sử dụng môi trường.
+Trong lượt thu thập ngày 20/10 trên stack mới, dữ liệu dưới ngưỡng nên kết quả 0 cảnh báo đúng với cấu hình. Sau khi xác nhận subscription của hai topic mới, chúng em gửi riêng một thư thử kênh SNS trên mỗi topic; AWS chấp nhận cả hai và cả hai sinh viên xác nhận đã nhận đúng thư. Thư thử ghi rõ mục đích kiểm chứng, được phân biệt với cảnh báo vượt ngưỡng.
 
-- **Báo cáo chi phí:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/COST_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/COST_REPORT.md).
-- **Checklist cuối phiên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SESSION_CHECKLIST.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SESSION_CHECKLIST.md).
+- **Xác nhận cảnh báo dữ liệu ngày 19/10:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/verification_2026_10_19/recipient_confirmation.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/verification_2026_10_19/recipient_confirmation.json).
+- **Publish và xác nhận email của topic mới:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/email](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/email).
 
-## 4. CloudFormation và rà soát bảo mật
+## 4. Thực nghiệm Athena và đánh giá dự báo
 
-Repository giữ một template CloudFormation chính gồm **17 tài nguyên ứng dụng**, sử dụng artifact từ source collector chính. Template đã qua cfn-lint và AWS ValidateTemplate trên cả hai môi trường; lịch mới khởi tạo DISABLED, các tài nguyên chứa dữ liệu được chỉ định giữ theo Retain. Hồ sơ phân biệt bước kiểm tra template với việc tạo và kiểm chứng stack mới.
+Chúng em thực hiện **18 truy vấn Athena mới**, gồm JSON đăng ký phân vùng, JSON Partition Projection và Parquet Partition Projection, mỗi phương án đo ba lần trên mỗi môi trường. Các phương án dùng cùng snapshot và phép tổng hợp, tắt result reuse, luân phiên thứ tự chạy. Kết quả tổng hợp tương đương; với ngày lọc 20/10 có ba bản ghi, Parquet giảm median byte quét từ 1.558 xuống 302 byte, khoảng **80,62%**. JSON Projection có tổng thời gian trung vị thấp hơn Parquet trong bộ đo này; báo cáo trình bày byte quét và độ trễ riêng.
 
-Kết quả đọc S3 hiện hữu ghi nhận đủ bốn thiết lập Block Public Access, mã hóa AES256 và không ghi nhận public policy/public ACL. Báo cáo tách cấu hình hiện hữu với versioning và chính sách HTTPS của stack mới. LabRole của học phần được giữ nguyên; mẫu quyền runtime giới hạn theo bucket, Secret, topic và log group được cung cấp để đối chiếu.
+Phần dự báo sử dụng phương án **backtest ba cửa sổ lịch sử**, mỗi cửa sổ đích 24 giờ cho ba đô thị và hai biến. MA24 đệ quy được cố định trước đánh giá, chỉ nhận 24 giờ trước từng gốc; đầu ra có **432 dự đoán và 18 dòng MAE/RMSE/Bias**. Dữ liệu mô hình, dự đoán, sai số và biểu đồ đều được lưu. Đây là backtest hồi cứu trên chuỗi mô hình Open-Meteo/CAMS; kỳ dự báo đã phát hành của Tuần 3 vẫn giữ riêng theo mốc.
 
-- **Template chính:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json).
-- **Hồ sơ kiểm tra template:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/template_validation_2026_10_19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/template_validation_2026_10_19).
+- **18 truy vấn và Statistics:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/benchmark](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/benchmark).
+- **Backtest: phương pháp, dữ liệu và hình:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/backtest_2026_10_20/README.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/backtest_2026_10_20/README.md).
+- **432 dự đoán:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/backtest_2026_10_20/predictions.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/backtest_2026_10_20/predictions.csv).
+- **MAE/RMSE/Bias:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/backtest_2026_10_20/metrics.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/backtest_2026_10_20/metrics.csv).
+
+## 5. Bảo mật, chi phí và quản lý phiên
+
+Hai bucket mới được đọc lại cấu hình: bốn thiết lập Block Public Access đều bật, AES256, versioning Enabled, BucketOwnerEnforced, không public ACL/policy và policy từ chối kết nối không qua HTTPS. Permission gọi Lambda gắn với ARN rule và SourceAccount. LabRole học phần được giữ nguyên, policy runtime giới hạn theo tài nguyên được cung cấp để tham khảo.
+
+Cost Explorer kỳ 12–19/10 có 117 nhóm ngày/dịch vụ/loại ghi nhận; tổng hiển thị đến cent là **0,00 USD của sinh viên Tiến Sơn** và **0,14 USD của sinh viên Ngọc Quyên**. CSV giữ giá trị gốc và Estimated; số liệu thuộc kỳ chi phí đã chọn.
+
+Ngày 20/10, công cụ quản lý phiên đã tạm dừng rồi khôi phục lịch chuẩn trên cả hai môi trường qua ENABLED → DISABLED → ENABLED, đối chiếu fingerprint môi trường/target không đổi và không xóa dữ liệu. Trạng thái phục hồi riêng được ghi trước thao tác.
+
 - **Rà soát bảo mật:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SECURITY_AUDIT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SECURITY_AUDIT.md).
+- **Báo cáo chi phí:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/COST_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/COST_REPORT.md).
+- **Minh chứng pause/restore thực tế:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/session](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/session).
+- **Checklist cuối Lab:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SESSION_CHECKLIST.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SESSION_CHECKLIST.md).
 
-## 5. Phân công, nhật ký và chuẩn bị trình bày
+## 6. Phân công, kiểm tra và bàn giao
 
-Sinh viên Tiến Sơn phụ trách hạ tầng, Lambda, S3, lịch, SNS và CloudWatch. Sinh viên Ngọc Quyên phụ trách Glue/Athena, dữ liệu, chi phí và phân tích. Hai sinh viên cùng tích hợp, đối chiếu và hoàn thiện hồ sơ. **Tổng theo tuần đã xác nhận** của Tuần 4 là 10 giờ mỗi sinh viên, tổng 20 giờ; toàn đồ án là **78 giờ**.
+Sinh viên Tiến Sơn phụ trách hạ tầng, Lambda, S3, Secrets Manager, SNS, EventBridge và CloudWatch. Sinh viên Ngọc Quyên phụ trách Glue/Athena, dữ liệu, phân tích, dự báo và chi phí; hai sinh viên cùng tích hợp và rà soát hồ sơ. **Tổng theo tuần đã xác nhận:** Tuần 4 là 10 giờ mỗi sinh viên, tổng 20 giờ; toàn đồ án **78 giờ**.
 
-Video trình bày dưới 10 phút bao quát kiến trúc, thu thập, lưu trữ, truy vấn, cảnh báo và quản lý hệ thống. Đường dẫn video thực tế được bổ sung sau khi quay và kiểm tra quyền xem.
+Repository có kiểm thử các ranh giới triển khai, môi trường, artifact, phục hồi lịch và tách dữ liệu huấn luyện/đích. Bộ xác minh offline kiểm tra manifest, JSON–CSV–SELECT và tính lại dự đoán/sai số. GitHub Actions kiểm tra theo đúng commit. Video trình bày dưới 10 phút được bổ sung bằng đường dẫn sau khi quay và kiểm tra quyền xem.
 
-- **Nhật ký Tuần 4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/WORKLOG.md).
+- **Worklog Tuần 4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/WORKLOG.md).
 - **CSV giờ công toàn đồ án:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv).
+- **Báo cáo tổng kết Tuần 1–4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md).
 
-## 6. Mã nguồn, phiên bản và tổng kết
+## 7. Mã nguồn và commit minh chứng
 
-Source collector tiếp tục sử dụng tệp chính của dự án. Bản tổng kết toàn đồ án nối kết kết quả Tuần 1–4, giải thích lựa chọn kiến trúc, thực nghiệm Athena, sai số dự báo và phương pháp kiểm chứng. Nội dung cạnh liên kết commit dưới đây giữ nguyên message trong Git:
+Các commit dưới đây giữ đúng message nguyên bản; mỗi liên kết dẫn đến thay đổi tương ứng trong Git:
 
-- **`docs(repo): keep video preparation guides local` — 84686c5:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/84686c51606c750d27dc9942fb2fc8968375765b](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/84686c51606c750d27dc9942fb2fc8968375765b).
-- **`docs(week4): unify master report, expand 11-control security audit, and detail dual-speaker demo script` — dd17f7f:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/dd17f7f2614256c28d2da7cdf636267276e7af84](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/dd17f7f2614256c28d2da7cdf636267276e7af84).
-- **`docs(readme): showcase advanced features and final week results` — 915e8c6:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/915e8c6f4e636628172ca4a367778c90fc93f5e6](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/915e8c6f4e636628172ca4a367778c90fc93f5e6).
-- **`docs(week4): expand raw evidence analysis and submission guide` — 2548138:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/25481381772288597af36e84093a89d41d080c64](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/25481381772288597af36e84093a89d41d080c64).
-- **`docs(report): add final project synthesis and acceptance mapping` — f6921e7:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/f6921e7dc0e26245ca5d33dd0b7288dc11120f0d](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/f6921e7dc0e26245ca5d33dd0b7288dc11120f0d).
-- **`docs(week4): reconcile template history and confirmed email wording` — 9cac06e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06e43299e25061e7cc90b11dda2017448350](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/9cac06e43299e25061e7cc90b11dda2017448350).
-- **`docs(week4): link verified integration commits with exact subjects` — fdbf633:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf63330805c676fcb23c324685cce4d8049ae4](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/fdbf63330805c676fcb23c324685cce4d8049ae4).
-- **`fix(evidence): preserve Week 4 snapshot bytes across platforms` — 892861e:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/892861ec5129d59a9c772ef20ed6d2ac053d65f5).
-- **`docs(week4): synchronize final report test count to 34` — e9704bf:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e9704bf645a11bf07a3f360770061c1cc3a8b3a5).
+- **`feat(week4): add verify_stack script for isolated stack output verification` — 62673c4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62673c4824ce9a9b333bd762c266a91794f020e3](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/62673c4824ce9a9b333bd762c266a91794f020e3).
+- **`docs(week4): synchronize verbatim commit history, add deploy_stack test suite, and finalize master report` — cb72600:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/cb72600708d2f674c2f50be8a33dbeeab8b15966](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/cb72600708d2f674c2f50be8a33dbeeab8b15966).
+- **`fix(worklog): require published evidence and exclude local demo guides` — 97cc67b:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/97cc67bda994cf3e6c04dfe3049d3a680b807470](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/97cc67bda994cf3e6c04dfe3049d3a680b807470).
 - **`feat(week4): complete final week verification, consolidate CloudFormation infrastructure, and update catalog` — 96bedec:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093).
-- **`fix(iac): fix CloudFormation partition projection escaping and synchronize week 4 documentation` — 59a992a:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992a104932a190b15eab7b44f08d89a899b11](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/59a992a104932a190b15eab7b44f08d89a899b11).
-- **`feat(week4): implement CloudFormation IaC, security audit, log-metric-S3 reconciliation, and video demo script` — e497754:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/e49775409593296fbe14ed0474e4e5cb2f930c36).
-
-Kết quả Tuần 4 kết nối được source triển khai với lượt thực thi, dữ liệu lưu trữ, truy vấn và email đã nhận. Hồ sơ chi phí, bảo mật, hạ tầng và nhật ký sử dụng cùng các nguồn minh chứng có thể kiểm tra lại. Chúng em kính gửi thầy báo cáo và hệ thống liên kết để đối chiếu kết quả.
 
 - **Source collector:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py).
-- **Tổng kết toàn đồ án:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/FINAL_PROJECT_REPORT.md).
 - **Hồ sơ Tuần 4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4).
-- **Quy trình kiểm tra CI:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/workflows/verify-repository.yml](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/workflows/verify-repository.yml).
+
+- **Kiểm tra CI:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/workflows/verify-repository.yml](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions/workflows/verify-repository.yml).
+
+Chúng em kính gửi thầy báo cáo cùng dữ liệu và các liên kết minh chứng để đối chiếu kết quả.

@@ -84,7 +84,7 @@ Dù PM2.5 của Hà Nội chưa vượt ngưỡng 35,5 µg/m³, nhưng chỉ s�
 
 Báo cáo duy trì sự trung thực và chặt chẽ về mặt khoa học:
 1. **Phạm vi tỷ lệ lỗi 0%:** Tỷ lệ lỗi 0,0% chỉ được khẳng định trong phạm vi hai chu kỳ 300 giây chứa hai lượt kiểm chứng có kiểm soát. Nhóm không suy diễn tỷ lệ 0% này cho toàn bộ lịch sử vận hành nhiều ngày của tài khoản khi có những chu kỳ thiếu cặp metric.
-2. **Không quét đối tượng mồ côi toàn bucket:** Phép kiểm toán xác nhận các tệp S3 được tạo bởi hai lượt chạy có kiểm soát; không quét toàn bộ bucket hàng triệu đối tượng để tuyên bố tuyệt đối không có object mồ côi từ các bài thực hành khác.
+2. **Không quét đối tượng mồ côi toàn bucket:** Phép kiểm toán xác nhận các tệp S3 được tạo bởi hai lượt chạy có kiểm soát; không kiểm tra mọi đối tượng khác trong bucket để tuyên bố tuyệt đối không có object mồ côi từ các bài thực hành khác.
 3. **Phân biệt Metric Filters và Native Metrics:** Metric Filters ghi nhận các dòng log khớp mẫu, trong khi Native Invocations đếm số lần container Lambda được kích hoạt. Nhóm giữ riêng hai chỉ số này, không đồng nhất chúng.
 
 ---
@@ -107,3 +107,12 @@ python tuan_4/scripts/reconcile_ops.py --output output/week4-reconciliation-audi
 - [Hồ sơ xác nhận email người nhận](../results/verification_2026_10_19/recipient_confirmation.json)
 - [Chương trình đối soát Python](../scripts/reconcile_ops.py)
 - [Báo cáo tổng kết Tuần 4](FINAL_REPORT.md)
+
+
+## Bổ sung ngày 20/10: hai collector của stack mới
+
+Mỗi collector mới có START/END/REPORT và Result của đúng request, ba bản ghi S3, một Invocation và 0 Errors trong cùng chu kỳ 300 giây. Dữ liệu dưới ngưỡng, nên kỳ vọng/thực tế SNS Publish đều là 0. Truy vấn chạy trên database/workgroup của từng stack, kiểm tra record_id, city, us_aqi, pm2_5; CSV raw giữ đủ 23 trường.
+
+[Runtime sinh viên Tiến Sơn](../results/advanced_live_2026_10_20/stacks/default/runtime_controls.json) · [Runtime sinh viên Ngọc Quyên](../results/advanced_live_2026_10_20/stacks/quyen/runtime_controls.json).
+
+Sau đó hai topic mới được xác nhận đăng ký và gửi riêng thư kiểm chứng kênh email, cả hai sinh viên xác nhận đã nhận. [Minh chứng thư thử](../results/advanced_live_2026_10_20/email/) không được tính vào số cảnh báo vượt ngưỡng của lượt E2E. Snapshot ban đầu giữ trạng thái pending theo thời điểm đọc; xác nhận sau được lưu riêng.

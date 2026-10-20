@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "profile": "quyen",
+  "stack_name": "weather-w4-quyen",
+  "captured_at_utc": "2026-10-20T05:09:16.709128+00:00",
+  "stack_status": "CREATE_COMPLETE",
+  "function_name": "weather-w4-quyen-collector",
+  "database": "weather_w4_quyen",
+  "workgroup": "weather-w4-quyen",
+  "artifact_sha256": "f4ae025b35f04403de43ff5427d8dbd992f4cb7b562b3f3fe13418c0c225179c",
+  "source_sha256": "ade29ff52bfd14accb7c470f82b923704daade8a740ed16584bf523dc04cc219",
+  "schedule_state": "DISABLED",
+  "storage": {
+    "status": "PASS",
+    "all_public_access_blocks": true,
+    "public_policy": false,
+    "public_acl": false,
+    "bucket_policy": "PRESENT",
+    "encryption_algorithms": [
+      "AES256"
+    ],
+    "versioning": "Enabled"
+  },
+  "projection_enabled": true,
+  "schema_data_columns": 20,
+  "schema_partition_columns": 3,
+  "subscriptions": [
+    {
+      "protocol": "email",
+      "confirmed": false
+    }
+  ],
+  "invocation_executed": false
+}

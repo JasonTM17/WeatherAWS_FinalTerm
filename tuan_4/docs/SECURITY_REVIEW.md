@@ -10,7 +10,7 @@
 | EventBridge → Lambda | Rule, danh sách target và resource policy | Một target đúng function; quyền gọi ràng buộc ARN của rule; không có hai lịch đang cùng chạy |
 | LabRole | Trust policy, inline policy và managed policy hiện hành | Tin cậy dịch vụ Lambda; thống kê các Allow có wildcard để quản trị viên xem phạm vi |
 | Artifact | ZIP xác định, SHA-256, key theo hash và VersionId | Truy được mã nguồn của gói; không dùng version `null` |
-| Minh chứng công khai | Chọn trường trước khi xuất | Không có token, SecretString, email, account ID, policy ARN hoặc URL tải gói có chữ ký |
+| Minh chứng công khai | Chọn trường trước khi xuất | Không có token, SecretString, email cá nhân hoặc URL tải gói có chữ ký; tên tài nguyên phục vụ đối chiếu được giữ theo phạm vi hồ sơ |
 
 `verify_environment.py` chỉ đọc các cấu hình trên. Chương trình không sửa S3 BPA, Secret hoặc IAM policy. Native metric và log được tách khỏi xác nhận email; thiếu điểm metric không chuyển thành số 0.
 

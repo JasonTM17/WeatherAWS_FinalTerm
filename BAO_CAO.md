@@ -14,21 +14,31 @@
 
 ---
 
+## Bổ sung nâng cao thực tế ngày 20/10/2026
+
+- **CloudFormation:** hai stack weather-w4-son/weather-w4-quyen CREATE_COMPLETE; cùng source/ZIP đúng hash, mỗi Lambda thu ba đô thị và SELECT đúng database/workgroup mới. [Minh chứng triển khai](tuan_4/results/advanced_live_2026_10_20/README.md).
+- **Raw và vận hành:** 700 bản ghi tích lũy/115 JSON gốc; mỗi stack mới có một Invocation/0 Errors trong chu kỳ kiểm chứng. Hai lịch chuẩn đã pause/restore thực tế; lịch mới vẫn DISABLED.
+- **SNS:** topic mới đã confirmed, mỗi topic có một thư thử được người nhận xác nhận. Lượt E2E mới dưới ngưỡng nên 0 cảnh báo; cảnh báo dữ liệu vượt ngưỡng ngày 19/10 được giữ riêng.
+- **Athena:** 18 truy vấn mới trên cùng đầu vào mỗi sinh viên; Parquet giảm byte quét 80,62% trong bộ đo ngày 20/10, JSON Projection có tổng thời gian trung vị thấp hơn Parquet. [Số đo từng lượt](tuan_4/results/advanced_live_2026_10_20/benchmark/).
+- **Dự báo:** backtest ba cửa sổ lịch sử có 432 dự đoán và 18 dòng MAE/RMSE/Bias, train luôn trước đích; đây là hồi cứu chuỗi mô hình. [Dữ liệu và biểu đồ](tuan_4/results/backtest_2026_10_20/README.md).
+
+[Báo cáo Tuần 4 cập nhật](tuan_4/docs/FINAL_REPORT.md) · [Nội dung nộp có URL đầy đủ](tuan_4/docs/SUBMISSION.md). Các phần theo mốc ngày 19/10 bên dưới giữ phạm vi lịch sử tương ứng.
+
 ## Tóm tắt tổng thể đồ án (Executive Summary)
 
 Đồ án xây dựng một giải pháp hoàn chỉnh theo mô hình **Serverless** trên nền tảng Amazon Web Services (AWS) nhằm thu thập, lưu trữ, xử lý, truy vấn phân tích dữ liệu lớn và cảnh báo chất lượng không khí thời gian thực cho ba đô thị trọng điểm của Việt Nam: **TP. Hồ Chí Minh, Hà Nội và Đà Nẵng**.
 
 Hệ thống được phát triển và kiểm chứng thực tế qua 4 tuần học phần trên môi trường AWS Academy Learner Lab tại vùng `us-east-1`:
 1. **Tuần 1 (Khởi động và Thiết kế kiến trúc):** Lựa chọn mô hình Serverless, thiết lập IAM, S3 bucket và cấu trúc khóa phân vùng.
-2. **Tuần 2 (Thu thập và Chuẩn hóa dữ liệu):** Triển khai AWS Lambda collector, tích hợp API Open-Meteo, chuẩn hóa lược đồ 23 trường theo chuẩn EPA/WMO, phân loại US AQI, cấu hình AWS Glue Data Catalog và kiểm thử truy vấn Athena ban đầu.
+2. **Tuần 2 (Thu thập và Chuẩn hóa dữ liệu):** Triển khai AWS Lambda collector, tích hợp API Open-Meteo, chuẩn hóa 23 trường theo lược đồ dự án, phân loại US AQI, cấu hình AWS Glue Data Catalog và kiểm thử truy vấn Athena ban đầu.
 3. **Tuần 3 (Tích hợp, Giám sát, Benchmark và Dự báo):** Tích hợp hoàn chỉnh hệ thống, thiết lập CloudWatch Dashboard & Metric Filters, cấu hình cảnh báo email qua Amazon SNS, thực hiện 18 lượt benchmark Athena (chứng minh Parquet Snappy giảm 80,59% – 96,50% dữ liệu quét so với NDJSON), mô hình hóa dự báo AQI/PM2.5 24 giờ tới (đối chiếu đủ 144 điểm dữ liệu), và thiết lập guarded CD pipeline. **Tuần 3 đã được GVHD chính thức đánh giá ĐẠT.**
 4. **Tuần 4 (Kiểm chứng toàn diện, IaC CloudFormation, FinOps và An ninh bảo mật):**
    - **Kiểm thử E2E có kiểm soát:** Thực hiện 2 lượt kích hoạt thời gian thực trên hai tài khoản AWS độc lập; đối chiếu nguyên vẹn byte NDJSON S3 với truy vấn Athena theo danh sách `record_id` cụ thể.
    - **Đối chiếu 3 chiều Log – Metric – S3:** Xác thực khớp 1-1 giữa nhật ký CloudWatch Logs (`START`/`END`/`REPORT`/`[INFO] Result`), chỉ số vận hành CloudWatch Metrics (Invocations, 0 Errors, tỷ lệ lỗi 0,0%), tệp lưu trữ S3, và xác nhận nhận email cảnh báo vượt ngưỡng của cả hai sinh viên.
-   - **Báo cáo tài chính đám mây FinOps (Cost Explorer):** Phân rã 117 nhóm bản ghi chi phí từ Cost Explorer API trong kỳ 12–19/10/2026; tổng chi phí hiển thị làm tròn đạt **0,00 USD** (Tiến Sơn) và **0,14 USD** (Ngọc Quyên) nhờ bù trừ tín dụng Credit của Learner Lab.
-   - **Tự động hóa vòng đời tài nguyên cuối phiên:** Xây dựng script PowerShell và công cụ Python `session_control.py` giúp tạm dừng/khôi phục EventBridge Rule, bảo toàn hạn mức credit 100 USD của học phần.
-   - **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template duy nhất ([weather-stack.json](tuan_4/infrastructure/weather-stack.json)) quản lý trọn vẹn **17 tài nguyên AWS Serverless**, vượt qua 100% kiểm tra `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai môi trường.
-   - **Rà soát an ninh bảo mật 11 tiêu chuẩn:** Thực hiện kiểm toán toàn diện ([SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md)) bao gồm S3 Block Public Access 4/4 cờ, mã hóa tĩnh SSE-S3 AES256, thực thi HTTPS bắt buộc, phân tích hạn chế SCP của `LabRole`, và cung cấp mẫu IAM Policy tối thiểu cho collector.
+   - **Báo cáo tài chính đám mây FinOps (Cost Explorer):** Phân rã 117 nhóm bản ghi chi phí từ Cost Explorer API trong kỳ 12–19/10/2026; tổng chi phí hiển thị làm tròn đạt **0,00 USD** (Tiến Sơn) và **0,14 USD** (Ngọc Quyên) theo tổng hợp tài khoản của kỳ đã chọn.
+   - **Tự động hóa vòng đời tài nguyên cuối phiên:** Xây dựng script PowerShell và công cụ Python `session_control.py` giúp tạm dừng/khôi phục EventBridge Rule, kiểm soát hoạt động thu thập theo phiên Lab.
+   - **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template duy nhất ([weather-stack.json](tuan_4/infrastructure/weather-stack.json)) quản lý trọn vẹn **17 tài nguyên AWS Serverless**, đạt kiểm tra `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai môi trường.
+   - **Rà soát an ninh bảo mật 11 tiêu chuẩn:** Thực hiện kiểm toán toàn diện ([SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md)) bao gồm S3 Block Public Access 4/4 cờ, mã hóa tĩnh SSE-S3 AES256, thực thi HTTPS bắt buộc, đối chiếu phạm vi quyền đọc policy của `LabRole`, và cung cấp mẫu IAM Policy tối thiểu cho collector.
    - **Tổng kết giờ công toàn khóa học:** Tổng thời gian thực hiện Tuần 4 là **20,0 giờ**; tổng thời gian toàn bộ đồ án đạt **78,0 giờ** đã được xác nhận đầy đủ trong [worklog.csv](worklog.csv).
 
 ---
@@ -123,7 +133,7 @@ Tại mốc kiểm chứng ngày 19/10/2026, mỗi môi trường được kích
 | **Dữ liệu thô Đà Nẵng** | AQI = 52, PM2.5 = 7,3 µg/m³, Nhiệt độ = 25,3 °C | AQI = 52, PM2.5 = 7,3 µg/m³, Nhiệt độ = 25,3 °C |
 | **Số cảnh báo vượt ngưỡng** | **1 cảnh báo** (Hà Nội AQI 101 ≥ 100) | **1 cảnh báo** (Hà Nội AQI 101 ≥ 100) |
 | **Lệnh `sns:Publish` được chấp nhận** | **1 chấp nhận** | **1 chấp nhận** |
-| **Truy vấn Athena theo `record_id`** | **Khớp 100% dữ liệu raw** | **Khớp 100% dữ liệu raw** |
+| **Truy vấn Athena theo `record_id`** | **Khớp bốn trường SELECT đã chọn** | **Khớp bốn trường SELECT đã chọn** |
 | **Dữ liệu Athena quét** | **19.683 bytes** (~19,2 KB) | **20.251 bytes** (~19,8 KB) |
 | **Thời gian Engine Athena** | **674 ms** (Total: 888 ms) | **584 ms** (Total: 747 ms) |
 
@@ -145,7 +155,7 @@ Báo cáo [LOG_METRIC_S3_RECONCILIATION.md](tuan_4/docs/LOG_METRIC_S3_RECONCILIA
 Báo cáo [COST_REPORT.md](tuan_4/docs/COST_REPORT.md) trích xuất từ AWS Cost Explorer API với metric `UnblendedCost` theo ngày, nhóm dịch vụ và loại ghi nhận:
 - **Tài khoản sinh viên Tiến Sơn:** 70 nhóm bản ghi, tổng chi phí `-3.390E-7 USD`, hiển thị làm tròn **0,00 USD**.
 - **Tài khoản sinh viên Ngọc Quyên:** 47 nhóm bản ghi, tổng chi phí `+0.13647 USD`, hiển thị làm tròn **0,14 USD**.
-- Toàn bộ dịch vụ Serverless (Lambda, S3, Athena, Glue, SNS) đều nằm trong Free Tier hoặc tiêu tốn phần nghìn cent. Các dịch vụ có phí cố định nhỏ như Secrets Manager (~0,0129 USD/ngày) và CloudWatch (~0,0032 USD/ngày) được các khoản Credit của Learner Lab bù trừ tương ứng, bảo toàn tuyệt đối ngân sách 100 USD.
+- Cost Explorer là số liệu tài khoản trong kỳ đã chọn, chưa phân bổ riêng cho dự án. Giữ Usage/Credit theo từng dòng; không kết luận mọi dịch vụ thuộc Free Tier hoặc ngân sách được bảo toàn tuyệt đối. Chi phí của các stack tạo ngày 20/10 cần theo dõi ở kỳ cập nhật tiếp theo.
 - [Bảng dữ liệu chi phí 117 dòng CSV](tuan_4/results/cost/learner_lab_cost_breakdown.csv) · [cost_summary.json](tuan_4/results/cost/cost_summary.json).
 
 ### 4. Quản lý vòng đời tài nguyên cuối phiên (FinOps Lifecycle Automation)
@@ -164,7 +174,7 @@ Hạ tầng được đặc tả toàn diện trong [weather-stack.json](tuan_4/
 - **Phân tích dữ liệu:** `GlueDatabase`, `RawTable` (Partition Projection), `AthenaWorkgroup`.
 - **Giám sát & Đo lường:** `ErrorAlarm`, `OperationalDashboard`, `ResultMetricFilter`, `ErrorMetricFilter`.
 
-Template đạt 100% kiểm tra cú pháp với `cfn-lint 1.57.2` và xác thực qua API AWS `ValidateTemplate` trên cả hai tài khoản ([hồ sơ xác thực template](tuan_4/results/template_validation_2026_10_19/README.md)). Hướng dẫn triển khai xem tại [INFRASTRUCTURE.md](tuan_4/docs/INFRASTRUCTURE.md).
+Template đạt kiểm tra cú pháp với `cfn-lint 1.57.2` và xác thực qua API AWS `ValidateTemplate` trên cả hai tài khoản ([hồ sơ xác thực template](tuan_4/results/template_validation_2026_10_19/README.md)). Hướng dẫn triển khai xem tại [INFRASTRUCTURE.md](tuan_4/docs/INFRASTRUCTURE.md).
 
 ### 6. Rà soát an ninh bảo mật theo 11 tiêu chuẩn (Security Audit)
 
@@ -176,10 +186,10 @@ Báo cáo [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md) và ma trận [secu
 5. **S3 Versioning:** Môi trường Lab ghi nhận trung thực `NOT_ENABLED` để tránh tốn credit; template chuẩn hóa khai báo `Enabled` (**DECLARED**).
 6. **S3 HTTPS-Only Transport:** Bucket policy từ chối yêu cầu không dùng HTTPS (**DECLARED**).
 7. **S3 BucketOwnerEnforced:** Vô hiệu hóa ACL, chủ bucket toàn quyền quản trị (**DECLARED**).
-8. **IAM Least Privilege Runtime:** Nhận diện trung thực việc SCP của LabRole chặn lệnh đọc chính sách (`BLOCKED_CAPABILITY`); cung cấp mẫu chính sách tối thiểu [collector-policy.example.json](tuan_4/infrastructure/collector-policy.example.json) giới hạn chỉ 4 quyền cần thiết.
+8. **IAM Least Privilege Runtime:** Nhận diện trung thực việc API đọc chính sách LabRole bị từ chối, chưa xác định lớp policy gây từ chối (`BLOCKED_CAPABILITY`); cung cấp mẫu chính sách tối thiểu [collector-policy.example.json](tuan_4/infrastructure/collector-policy.example.json) giới hạn chỉ 4 quyền cần thiết.
 9. **EventBridge Invocation Boundary:** Resource policy Lambda ràng buộc đúng Rule ARN và SourceAccount (**PASS**).
 10. **SNS Topic Publish Boundary:** Ràng buộc SourceArn từ đúng CloudWatch Alarm ARN (**DECLARED**).
-11. **Log Hygiene & Secret Redaction:** Nhật ký và tệp công khai 100% sạch thông tin nhạy cảm, credentials và email cá nhân (**PASS**).
+11. **Log Hygiene & Secret Redaction:** Rà soát các tệp minh chứng được công bố để loại credentials, SecretString, email và URL có chữ ký; không khẳng định mọi log tương lai đã được kiểm tra.
 
 ### 7. Video trình bày đồ án
 

@@ -28,4 +28,5 @@ def validate_current_template():
 
 
 if __name__ == '__main__':
-    print(json.dumps({**validate(), **validate_current_template()}))
+    from verify_advanced import validate as validate_advanced
+    print(json.dumps({**validate(), **validate_current_template(), 'advanced':validate_advanced()}))

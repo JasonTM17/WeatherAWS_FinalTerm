@@ -4,7 +4,7 @@
 
 **Sinh viên:** Nguyễn Tiến Sơn (24110054) và Trần Thị Ngọc Quyên (24110051).
 
-**Cập nhật danh mục:** 19/10/2026, UTC+7.
+**Cập nhật danh mục:** 20/10/2026, UTC+7.
 
 Danh mục liên kết báo cáo với raw, truy vấn, bảng phân tích, biểu đồ, mã nguồn và nhật ký theo từng tuần. Địa chỉ được hiển thị đầy đủ để giảng viên có thể bấm mở hoặc sao chép. Liên kết tệp dùng `blob/main`, thư mục dùng `tree/main`, commit dẫn tới đúng mốc thay đổi.
 
@@ -136,3 +136,8 @@ CI kiểm tra source, dữ liệu đã lưu và artifact; hồ sơ triển khai 
 Các đường dẫn nhánh `main` mở nội dung hiện tại; liên kết commit giữ mốc thay đổi cụ thể. Bản ghi mô hình, thời điểm Lambda thu và ngày xuất được ghi riêng trong từng bộ hồ sơ.
 
 [Báo cáo nộp LMS](../BAO_CAO.md) · [Tài liệu dự án](README.md) · [Tổng quan repository](../README.md)
+
+## Bổ sung kiểm chứng nâng cao ngày 20/10
+
+- **Hai stack, raw, 18 truy vấn, metric, email và quản lý phiên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20).
+- **Backtest ba cửa sổ lịch sử và 432 dự đoán:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/backtest_2026_10_20](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/backtest_2026_10_20).
