@@ -48,7 +48,14 @@ Phần dự báo sử dụng phương án **backtest ba cửa sổ lịch sử**
 
 Hai bucket mới được đọc lại cấu hình: bốn thiết lập Block Public Access đều bật, AES256, versioning Enabled, BucketOwnerEnforced, không public ACL/policy và policy từ chối kết nối không qua HTTPS. Permission gọi Lambda gắn với ARN rule và SourceAccount. LabRole học phần được giữ nguyên, policy runtime giới hạn theo tài nguyên được cung cấp để tham khảo.
 
-Cost Explorer kỳ 12–19/10 có 117 nhóm ngày/dịch vụ/loại ghi nhận; tổng hiển thị đến cent là **0,00 USD của sinh viên Tiến Sơn** và **0,14 USD của sinh viên Ngọc Quyên**. CSV giữ giá trị gốc và Estimated; số liệu thuộc kỳ chi phí đã chọn.
+Cost Explorer kỳ 12–19/10: Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent:
+
+| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
+| :--- | :---: | :---: | :---: |
+| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
+| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
+
+Nguồn: [cost_summary.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19/environment). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
 
 Ngày 20/10, công cụ quản lý phiên đã tạm dừng rồi khôi phục lịch chuẩn trên cả hai môi trường qua ENABLED → DISABLED → ENABLED, đối chiếu fingerprint môi trường/target không đổi và không xóa dữ liệu. Trạng thái phục hồi riêng được ghi trước thao tác.
 

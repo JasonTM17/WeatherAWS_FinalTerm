@@ -186,11 +186,18 @@ Minh chứng đầy đủ: [bộ kiểm chứng Tuần 4](../tuan_4/results/veri
 
 ### 7.1. Chi phí
 
-Kỳ Cost Explorer ngày **12–19/10** trả về 70 dòng nhóm dịch vụ/loại chi phí cho sinh viên Tiến Sơn và 47 dòng cho sinh viên Ngọc Quyên. Tổng hiển thị đến cent lần lượt là **0,00 USD** và **0,14 USD**. Dữ liệu giữ nguyên giá trị chính xác cùng cờ Estimated; việc hiển thị đến cent không thay đổi dữ liệu gốc.
+Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
 
-Đây là chi phí theo tài khoản trong kỳ đã chọn. Các mức dự kiến 0,05 USD và 0,03 USD của báo cáo Tuần 2 là số kế hoạch, được trình bày theo vai trò riêng. Không dùng số dự kiến thay cho Cost Explorer, hoặc quy kết toàn bộ chi phí tài khoản cho đồ án khi chưa có phân bổ theo tài nguyên.
+| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
+| :--- | :---: | :---: | :---: |
+| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
+| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
 
-Tối ưu được đánh giá theo số liệu cụ thể: byte quét và thời gian Athena, dung lượng object, lịch thu thập và phạm vi thử nghiệm. Checklist cuối phiên yêu cầu xuất dữ liệu, dừng đúng lịch thu thập khi kết thúc thực hành và thu hồi tài nguyên thử nghiệm theo phạm vi đã xác định. [Báo cáo chi phí](../tuan_4/docs/COST_REPORT.md) lưu CSV nguồn và cách tính.
+Nguồn: [cost_summary.json](../tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](../tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](../tuan_4/results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
+
+CSV có cả Usage và Credit. Tổng của sinh viên Tiến Sơn có trị tuyệt đối nhỏ hơn một cent nên hiển thị 0,00; giá trị gốc và các dòng âm được giữ nguyên. Không đổi âm thành số dương hoặc thay tổng API bằng mức dự kiến. Không suy ra một khoản Credit cụ thể chỉ từ dấu của tổng; xem từng nhóm để đối chiếu. Đây là chi phí tài khoản theo kỳ và nhóm dịch vụ, chưa phân bổ riêng theo tài nguyên đồ án. Chi tiết xem tại [Báo cáo chi phí](../tuan_4/docs/COST_REPORT.md).
+
+Tối ưu được đánh giá theo số liệu cụ thể: byte quét và thời gian Athena, dung lượng object, lịch thu thập và phạm vi thử nghiệm. Checklist cuối phiên yêu cầu xuất dữ liệu, dừng đúng lịch thu thập khi kết thúc thực hành và thu hồi tài nguyên thử nghiệm theo phạm vi đã xác định.
 
 ### 7.2. Bảo mật và hạ tầng
 

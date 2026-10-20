@@ -154,11 +154,16 @@ Báo cáo [LOG_METRIC_S3_RECONCILIATION.md](tuan_4/docs/LOG_METRIC_S3_RECONCILIA
 
 ### 3. Quản trị tài chính đám mây FinOps (Cost Explorer 12–19/10)
 
-Báo cáo [COST_REPORT.md](tuan_4/docs/COST_REPORT.md) trích xuất từ AWS Cost Explorer API với metric `UnblendedCost` theo ngày, nhóm dịch vụ và loại ghi nhận:
-- **Tài khoản sinh viên Tiến Sơn:** 70 nhóm bản ghi, tổng chi phí `-3.390E-7 USD`, hiển thị làm tròn **0,00 USD**.
-- **Tài khoản sinh viên Ngọc Quyên:** 47 nhóm bản ghi, tổng chi phí `+0.13647 USD`, hiển thị làm tròn **0,14 USD**.
-- Cost Explorer là số liệu tài khoản trong kỳ đã chọn, chưa phân bổ riêng cho dự án. Giữ Usage/Credit theo từng dòng; không kết luận mọi dịch vụ thuộc Free Tier hoặc ngân sách được bảo toàn tuyệt đối. Chi phí của các stack tạo ngày 20/10 cần theo dõi ở kỳ cập nhật tiếp theo.
-- [Bảng dữ liệu chi phí 117 dòng CSV](tuan_4/results/cost/learner_lab_cost_breakdown.csv) · [cost_summary.json](tuan_4/results/cost/cost_summary.json).
+Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+
+| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
+| :--- | :---: | :---: | :---: |
+| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
+| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
+
+Nguồn: [cost_summary.json](tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](tuan_4/results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
+
+CSV có cả Usage và Credit. Tổng của sinh viên Tiến Sơn có trị tuyệt đối nhỏ hơn một cent nên hiển thị 0,00; giá trị gốc và các dòng âm được giữ nguyên. Không đổi âm thành số dương hoặc thay tổng API bằng mức dự kiến. Không suy ra một khoản Credit cụ thể chỉ từ dấu của tổng; xem từng nhóm để đối chiếu. Đây là chi phí tài khoản theo kỳ và nhóm dịch vụ, chưa phân bổ riêng theo tài nguyên đồ án. Chi tiết xem tại [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md).
 
 ### 4. Quản lý vòng đời tài nguyên cuối phiên (FinOps Lifecycle Automation)
 

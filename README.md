@@ -150,7 +150,7 @@ Mốc thời gian chất lượng không khí từ API không kèm múi giờ đ
 
 ### Chi phí
 
-Mức dự kiến cho phần thực hành Tuần 2 được sinh viên xác nhận riêng: **0,05 USD** cho sinh viên Tiến Sơn và **0,03 USD** cho sinh viên Ngọc Quyên. Đây không phải kết quả do mã phân tích tự tính. Cost Explorer trả số ước tính hiển thị đến cent lần lượt **0,00 USD** và **0,03 USD**; CSV vẫn giữ giá trị gốc, đơn vị và cờ Estimated. Hai loại số liệu không được cộng gộp hay coi là cùng một nguồn. Xem [giải thích phương pháp và chi phí](docs/data-analysis.md).
+Mức dự kiến cho phần thực hành Tuần 2 được sinh viên xác nhận riêng: **0,05 USD** cho sinh viên Tiến Sơn và **0,03 USD** cho sinh viên Ngọc Quyên. Đây không phải kết quả do mã phân tích tự tính. Cost Explorer trả số ước tính hiển thị đến cent lần lượt **0,00 USD** và **0,03 USD**; CSV vẫn giữ giá trị gốc, đơn vị và cờ Estimated. Hai loại số liệu không được cộng gộp hay coi là cùng một nguồn (xem [giải thích phương pháp và chi phí](docs/data-analysis.md)). Đối với kỳ thực nghiệm toàn diện Tuần 4 (kỳ 12–19/10), Boto3 GetCostAndUsage ghi nhận 117 dòng chi tiết: Tiến Sơn 0,00 USD, Ngọc Quyên 0,14 USD (xem chi tiết tại [mục Chi phí AWS Cost Explorer (FinOps)](#chi-phí-aws-cost-explorer-finops) và [Báo cáo Chi phí](tuan_4/docs/COST_REPORT.md)).
 
 ## Kết quả theo tuần
 
@@ -264,6 +264,17 @@ CloudWatch và quy trình phát hành tiếp tục được tích hợp trong Tu
 | Nộp và bảo vệ | [Nội dung Tuần 4 có liên kết đầy đủ](tuan_4/docs/SUBMISSION.md), [tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) |
 
 Ngày 20/10, hai stack mới đạt **CREATE_COMPLETE**; mỗi Lambda mới thu đủ ba đô thị, dữ liệu S3 được đối chiếu với SELECT trong database/workgroup của chính stack. Hai lịch chuẩn đã được tạm dừng rồi khôi phục; lịch mới giữ DISABLED. Cùng đợt này có [18 truy vấn Athena mới](tuan_4/results/advanced_live_2026_10_20/benchmark/) và [backtest ba cửa sổ lịch sử](tuan_4/results/backtest_2026_10_20/README.md). Video thực tế được bổ sung sau khi quay và kiểm tra quyền xem. [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) đối chiếu các sản phẩm với yêu cầu cuối kỳ.
+
+### Chi phí AWS Cost Explorer (FinOps)
+
+Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+
+| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
+| :--- | :---: | :---: | :---: |
+| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
+| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
+
+Nguồn: [cost_summary.json](tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](tuan_4/results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau. Xem chi tiết phương pháp và đối soát tại [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md).
 
 ### Phân công và thời gian đã xác nhận
 

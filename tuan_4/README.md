@@ -24,6 +24,17 @@
 
 Backtest sử dụng chuỗi mô hình lịch sử, mỗi gốc chỉ dùng 24 giờ trước đó. Ba cửa sổ này được phân biệt với kỳ dự báo đã phát hành của Tuần 3. Các phép đo byte quét và độ trễ Athena được trình bày riêng; không quy đổi trực tiếp thành tỷ lệ giảm hóa đơn.
 
+## Chi phí AWS Cost Explorer (FinOps)
+
+Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+
+| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
+| :--- | :---: | :---: | :---: |
+| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
+| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
+
+Nguồn: [cost_summary.json](results/cost/cost_summary.json), [117 dòng chi tiết](results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau. Xem chi tiết phương pháp tại [Báo cáo chi phí](docs/COST_REPORT.md).
+
 ## Dữ liệu và hồ sơ theo ngày
 
 - [Ngày 20/10: stack, raw, Athena, metric, email và quản lý phiên](results/advanced_live_2026_10_20/README.md).
