@@ -1,0 +1,13 @@
+{
+  "started_at_utc": "2026-10-20T08:34:14.780813+00:00",
+  "completed_at_utc": "2026-10-20T08:34:18.713947+00:00",
+  "current_utc_day_partial": true,
+  "operation": "GetCostAndUsage",
+  "granularity": "DAILY",
+  "metric": "UnblendedCost",
+  "group_by": [
+    "SERVICE",
+    "RECORD_TYPE"
+  ],
+  "scope": "Account totals, not allocated project costs"
+}

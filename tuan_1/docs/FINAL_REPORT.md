@@ -45,7 +45,7 @@ Bảng 1.1. Cấu hình hệ thống và kết quả định lượng tại mố
 | Cấu hình | Secrets Manager lưu tọa độ và ngưỡng cảnh báo; Open-Meteo sử dụng API công khai. | Secret và mã Lambda |
 | Phân tích | Glue có ba phân vùng; Athena có 5/5 truy vấn thành công, 156 dòng gốc | Glue, Athena CSV, Tuần 1 |
 | Cảnh báo, giám sát | 6 MessageId trong log; CloudWatch Alarm ở trạng thái INSUFFICIENT_DATA | CloudWatch Logs/Alarm, Tuần 1 |
-| Chi phí | Cost Explorer trả 0 USD tại các mốc đã quan sát | UnblendedCost tại lần đọc |
+| Chi phí cập nhật toàn đồ án | Tiến Sơn **0,25 USD**; Ngọc Quyên **0,22 USD** | Sinh viên xác nhận ngày 20/10/2026; dữ liệu Tuần 1 giữ riêng |
 
 ### 1.3 Kiến trúc tổng thể
 
@@ -375,7 +375,7 @@ Pipeline gồm các khối thu thập, lưu trữ, lập catalog, truy vấn, tr
 
 ### 5.2 Quản lý chi phí
 
-Thiết kế sử dụng các dịch vụ tính theo lượt gọi, lượng lưu trữ hoặc dung lượng quét; lịch một giờ và dữ liệu ba địa điểm tạo mức sử dụng nhỏ trong Tuần 1. Số liệu Cost Explorer theo chỉ số UnblendedCost là 0 USD tại các mốc đã quan sát của Tuần 1. Đây là ảnh chụp chi phí tại lần đo, có thể cập nhật trễ và không tương đương ngân sách còn lại trong Learner Lab.
+Thiết kế sử dụng các dịch vụ tính theo lượt gọi, lượng lưu trữ hoặc dung lượng quét; lịch một giờ và dữ liệu ba địa điểm tạo mức sử dụng nhỏ trong Tuần 1. Chi phí tổng hợp hiện tại theo xác nhận ngày 20/10/2026 là **0,25 USD của Tiến Sơn** và **0,22 USD của Ngọc Quyên**. [Nguồn số liệu cập nhật](../../tuan_4/results/cost/confirmed_cost_summary.json) được dùng cho toàn bộ trang báo cáo; các ảnh chụp UnblendedCost Tuần 1 giữ riêng theo thời điểm đo.
 
 Bảng 5.1. Đại lượng đã đo dùng để theo dõi mức tiêu thụ
 
@@ -385,9 +385,9 @@ Bảng 5.1. Đại lượng đã đo dùng để theo dõi mức tiêu thụ
 | Lambda | 4 lượt gọi, 0 lỗi | CloudWatch Invocations và Errors |
 | SNS | 6 MessageId | Log Publish; không phải số email giao thành công |
 | Athena | 5 × 87.250 = 436.250 byte quét | QueryExecution của năm truy vấn |
-| Cost Explorer | 0 USD tại các mốc đã quan sát | UnblendedCost lúc đọc; có thể cập nhật trễ |
+| Chi phí cập nhật | Tiến Sơn 0,25 USD; Ngọc Quyên 0,22 USD | Xác nhận ngày 20/10; nguồn API lịch sử giữ riêng |
 
-Dung lượng lưu trữ và số lượt gọi ở mốc quan sát đều nhỏ. Cost Explorer ghi nhận 0 USD tại các mốc quan sát của Tuần 1, nhưng giá trị này không cho phép kết luận tổng chi phí thực tế bằng 0. Số dư Learner Lab không có trong phép đo Cost Explorer.
+Dung lượng lưu trữ và số lượt gọi ở mốc quan sát đều nhỏ. Chi phí cập nhật toàn đồ án là 0,25 USD cho Tiến Sơn và 0,22 USD cho Ngọc Quyên; số này không được coi là phép phân bổ riêng cho Tuần 1. Số dư Learner Lab không có trong phép đo Cost Explorer.
 
 ### 5.3 Kết luận
 

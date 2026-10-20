@@ -365,6 +365,8 @@
 "tuan_4/results/backtest_2026_10_20/metrics.csv","18","13","4229","fd1a44f2ce56c3278314b212a972b035e92addfc8119dcd3f05b312b5cd4ba17","saved-report-input-or-analysis"
 "tuan_4/results/backtest_2026_10_20/predictions.csv","432","13","101737","5d44c2a512919f669a3eafabb40612bf7e91e9ff2ea99908ac6a20932f1923a4","saved-report-input-or-analysis"
 "tuan_4/results/cost/learner_lab_cost_breakdown.csv","117","7","11318","a63a87eee820f3a308c5baabcf737e53973f5d45e34566f36ff776d293cb676c","saved-report-input-or-analysis"
+"tuan_4/results/cost_refresh_2026_10_20/environment/quyen/cost_by_service.csv","54","5","3280","e7e5794b59af91d5a7fc789cf8b9d8d12e510b02ff88cfc569857ab387ffdae0","saved-report-input-or-analysis"
+"tuan_4/results/cost_refresh_2026_10_20/learner_lab_cost_breakdown.csv","54","7","5190","bec9dc43295b22a9127d08bc567d63a06f1927fe5c82c6e85669b8dbbaa2078a","saved-report-input-or-analysis"
 "tuan_4/results/monitoring/log_metric_s3_reconciliation.csv","2","13","567","6f899624125085aaf4d34425bf196dd6c6027bb83ef23f92988723ef31478c43","saved-report-input-or-analysis"
 "tuan_4/results/security/security_controls_audit.csv","14","6","1964","1334faf1c957ffac11ee7feb7672db38066b95f35920ef49711f07db975d4066","saved-report-input-or-analysis"
 "tuan_4/results/verification_2026_10_19/e2e/default/athena_exact.csv","3","4","196","f349cf6ee030d62e1d67d8c3b91a3a65680cc10b07a2d2bc109ef0809b250e0d","saved-report-input-or-analysis"

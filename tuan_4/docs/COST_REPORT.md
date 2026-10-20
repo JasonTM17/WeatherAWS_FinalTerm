@@ -1,26 +1,31 @@
-# Báo cáo chi phí AWS Cost Explorer
+# Báo cáo chi phí AWS
 
 **Nguyễn Tiến Sơn (24110054) · Trần Thị Ngọc Quyên (24110051).**
-**Kỳ số liệu:** từ 12/10 đến hết 19/10/2026; truy vấn Start inclusive 12/10, End exclusive 20/10. Nguồn được lưu trong đợt kiểm chứng ngày 19/10 theo phạm vi trả về của API; ngày chi phí và thời điểm tải là hai trường riêng.
+**Cập nhật ngày 20/10/2026.**
 
 ## 1. Phương pháp tổng hợp
 
-Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+Chi phí cập nhật ngày **20/10/2026**, theo số liệu sinh viên xác nhận:
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| --- | ---: | ---: | ---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
+| Sinh viên | Chi phí (USD) |
+| --- | ---: |
+| Sinh viên Tiến Sơn | **0,25** |
+| Sinh viên Ngọc Quyên | **0,22** |
+| **Tổng cộng** | **0,47** |
 
-Nguồn: [cost_summary.json](../results/cost/cost_summary.json), [117 dòng chi tiết](../results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](../results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
+Nguồn: [số liệu chi phí đã xác nhận](../results/cost/confirmed_cost_summary.json). Các bản xuất Cost Explorer gốc được giữ riêng để đối chiếu; bảng cập nhật không lấy số nhóm bản ghi của kỳ cũ làm căn cứ cho số tiền mới.
 
-## 2. Diễn giải
+Số tiền được trình bày đến cent, đơn vị USD. Đây là mức chi phí cập nhật do sinh viên xác nhận; chưa có kỳ bắt đầu/kết thúc riêng trong lần xác nhận này.
 
-CSV có cả Usage và Credit. Tổng của sinh viên Tiến Sơn có trị tuyệt đối nhỏ hơn một cent nên hiển thị 0,00; giá trị gốc và các dòng âm được giữ nguyên. Không đổi âm thành số dương hoặc thay tổng API bằng mức dự kiến. Không suy ra một khoản Credit cụ thể chỉ từ dấu của tổng; xem từng nhóm để đối chiếu.
+## 2. Nguồn dữ liệu và đối chiếu
 
-Đây là chi phí **tài khoản** theo kỳ và nhóm dịch vụ, chưa phân bổ riêng theo tài nguyên đồ án. Không dùng bảng này để kết luận mọi dịch vụ thuộc Free Tier, chi phí tháng bằng 0 hoặc ngân sách được bảo toàn tuyệt đối. Các mức 0,05/0,03 USD của Tuần 2 là dự kiến đã được xác nhận riêng trong báo cáo tuần đó.
+[confirmed_cost_summary.json](../results/cost/confirmed_cost_summary.json) là nguồn cho số tiền hiển thị trên README, báo cáo, nội dung nộp và hướng dẫn demo.
 
-Hai stack mới tạo ngày 20/10 nằm sau kỳ chi phí này; chi phí của chúng không được suy diễn từ bảng. Theo dõi kỳ cập nhật tiếp theo và tài nguyên còn lưu giữ, gồm artifact version, Secret, log và S3.
+Các bản xuất API trước đó được giữ nguyên trong [bộ Cost Explorer lịch sử](../results/cost/cost_summary.json), [CSV lịch sử](../results/cost/learner_lab_cost_breakdown.csv) và [đợt truy vấn ngày 20/10](../results/cost_refresh_2026_10_20/README.md). Số nhóm bản ghi, kỳ truy vấn và tổng API ở các bản lưu này chỉ mô tả lần tải tương ứng.
+
+Bộ thu thập Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV nguồn giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated; phép cộng API dùng Decimal. Không sửa số gốc hoặc chi tiết dịch vụ để khớp mức xác nhận mới.
+
+Phạm vi chi phí là theo tài khoản; chưa phân bổ riêng cho tài nguyên đồ án hoặc từng stack.
 
 ## 3. Tối ưu có căn cứ
 
@@ -31,10 +36,12 @@ Hai stack mới tạo ngày 20/10 nằm sau kỳ chi phí này; chi phí của c
 
 ## 4. Kiểm tra lại
 
+Đối chiếu số tiền trên các trang với [nguồn chi phí đã xác nhận](../results/cost/confirmed_cost_summary.json). Tổng hai tài khoản: **0,25 + 0,22 = 0,47 USD**.
+
+Lệnh sau kiểm tra khả năng tái tạo bộ dữ liệu API lịch sử, được giữ riêng với số tiền hiển thị hiện tại:
+
 ```powershell
 python tuan_4/scripts/cost_analysis.py --check
 ```
 
-Công cụ tính lại tổng từ nguồn đã lưu và kiểm tra byte bảng dẫn xuất, không gọi Cost Explorer. Không giữ dữ liệu hoặc câu lệnh có thông tin xác thực trong repository.
-
-[Báo cáo Tuần 4](FINAL_REPORT.md) · [Dữ liệu chi phí](../results/cost/) · [Minh chứng ngày 20/10](../results/advanced_live_2026_10_20/README.md).
+[Báo cáo Tuần 4](FINAL_REPORT.md) · [Nguồn chi phí hiện tại](../results/cost/confirmed_cost_summary.json) · [Minh chứng ngày 20/10](../results/advanced_live_2026_10_20/README.md).

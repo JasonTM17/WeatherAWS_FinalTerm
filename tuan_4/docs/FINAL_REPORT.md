@@ -134,7 +134,15 @@ MAE AQI tại TP. Hồ Chí Minh khoảng 26,03; 9,39; 6,99 điểm qua ba cửa
 
 Đọc lại hai bucket stack mới xác nhận BPA 4/4, AES256, versioning Enabled, BucketOwnerEnforced, không public ACL/policy và policy từ chối truyền không qua HTTPS. Permission gọi Lambda ràng buộc ARN rule và SourceAccount. LabRole được giữ nguyên; policy runtime theo tài nguyên là mẫu tham khảo, không được xem là chứng nhận effective permissions của role học phần. [Báo cáo bảo mật](SECURITY_AUDIT.md) nêu từng phép kiểm tra và nguồn.
 
-Cost Explorer kỳ **12–19/10** có 117 nhóm ngày/dịch vụ/loại ghi nhận; số hiển thị đến cent là **0,00 USD** và **0,14 USD** của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. CSV giữ số gốc cùng Estimated. Đây là chi phí tài khoản của kỳ đã chọn; không dùng để ước tính chi phí các stack mới tạo ngày 20/10, và không suy diễn toàn bộ dịch vụ thuộc Free Tier. [Báo cáo chi phí](COST_REPORT.md) giữ cách tổng hợp chi tiết.
+Chi phí cập nhật ngày **20/10/2026** theo số liệu sinh viên xác nhận: **Tiến Sơn 0,25 USD**, **Ngọc Quyên 0,22 USD**, tổng **0,47 USD**. Các bản xuất Cost Explorer giữ nguyên dữ liệu gốc để đối chiếu theo kỳ; số tiền cập nhật chưa được phân bổ riêng cho từng stack. [Báo cáo chi phí](COST_REPORT.md) giữ nguồn xác nhận và phương pháp đối chiếu.
+
+| Sinh viên | Chi phí (USD) |
+| --- | ---: |
+| Sinh viên Tiến Sơn | **0,25** |
+| Sinh viên Ngọc Quyên | **0,22** |
+| **Tổng cộng** | **0,47** |
+
+Nguồn hiển thị: [confirmed_cost_summary.json](../results/cost/confirmed_cost_summary.json), sinh viên xác nhận ngày 20/10/2026. Dữ liệu Cost Explorer lịch sử giữ riêng theo kỳ; chi phí chưa phân bổ riêng cho từng stack.
 
 Ngày 20/10, mỗi lịch chuẩn đã được tạm dừng rồi khôi phục thực tế: **ENABLED → DISABLED → ENABLED**. Fingerprint account/function/rule/target không đổi; không xóa raw. Nhật ký phục hồi được ghi bền vững trước thay đổi và giữ riêng. Hai lịch mới vẫn DISABLED. [Minh chứng quản lý phiên](../results/advanced_live_2026_10_20/session/) · [Checklist cuối Lab](SESSION_CHECKLIST.md).
 

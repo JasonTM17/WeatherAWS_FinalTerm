@@ -1,0 +1,55 @@
+{
+  "status": "BLOCKED_CAPABILITY",
+  "reason": "default profile cannot refresh Cost Explorer; quyen refreshed successfully",
+  "requested_start_inclusive": "2026-10-12",
+  "requested_end_exclusive": "2026-10-21",
+  "current_utc_day_partial": true,
+  "profiles": [
+    {
+      "profile": "default",
+      "student": "Sinh viên Tiến Sơn",
+      "status": "BLOCKED_CAPABILITY",
+      "error_code": "AccessDeniedException",
+      "rows": null,
+      "total_unblended_usd": null,
+      "display_usd": null,
+      "last_verified": {
+        "profile": "default",
+        "student": "Sinh viên Tiến Sơn",
+        "rows": 70,
+        "start_inclusive": "2026-10-12",
+        "end_exclusive": "2026-10-20",
+        "total_unblended_usd": "-3.390E-7",
+        "display_usd": "0.00",
+        "scope": "Account by service and record type, not allocated project/monthly billing"
+      },
+      "last_verified_source": "../cost/cost_summary.json"
+    },
+    {
+      "profile": "quyen",
+      "student": "Sinh viên Ngọc Quyên",
+      "status": "PASS",
+      "rows": 54,
+      "start_inclusive": "2026-10-12",
+      "end_exclusive": "2026-10-21",
+      "total_unblended_usd": "0.1726431554",
+      "display_usd": "0.17",
+      "estimated_rows": 54,
+      "collection": {
+        "started_at_utc": "2026-10-20T08:34:14.780813+00:00",
+        "completed_at_utc": "2026-10-20T08:34:18.713947+00:00",
+        "current_utc_day_partial": true,
+        "operation": "GetCostAndUsage",
+        "granularity": "DAILY",
+        "metric": "UnblendedCost",
+        "group_by": [
+          "SERVICE",
+          "RECORD_TYPE"
+        ],
+        "scope": "Account totals, not allocated project costs"
+      },
+      "scope": "Account by service and record type, not allocated project/monthly billing"
+    }
+  ],
+  "source": "environment/*/cost_by_service.csv"
+}

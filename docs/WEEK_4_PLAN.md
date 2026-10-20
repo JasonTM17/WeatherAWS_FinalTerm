@@ -30,7 +30,7 @@ Lịch 26/10–01/11 ban đầu là lịch dự kiến. Các kết quả thực 
 | W4-06 | Ba backtest theo thời gian | Mỗi cửa sổ 24 giờ train trước gốc, 24 giờ đích, MA24 cố định; 432 dự đoán và 18 dòng sai số: [backtest](../tuan_4/results/backtest_2026_10_20/README.md) |
 | W4-07 | Kiểm thử, artifact và CI | Guard kiểm tra môi trường, tên tài nguyên, version, holdout và recovery; [workflow](../.github/workflows/verify-repository.yml), [bộ xác minh](../tuan_4/scripts/verify_results.py) |
 | W4-08 | Hồ sơ và trình bày | [Báo cáo](../tuan_4/docs/FINAL_REPORT.md), [nội dung nộp](../tuan_4/docs/SUBMISSION.md), worklog và URL đầy đủ; video thực tế bổ sung sau khi quay và kiểm tra quyền xem |
-| W4-09 | Chi phí có kỳ/Estimated | 117 nhóm kỳ 12–19/10; giữ số gốc, scope tài khoản: [chi phí](../tuan_4/docs/COST_REPORT.md) |
+| W4-09 | Chi phí cập nhật và nguồn đối chiếu | Xác nhận ngày 20/10: **Tiến Sơn 0,25 USD; Ngọc Quyên 0,22 USD**; giữ riêng nguồn Cost Explorer lịch sử: [chi phí](../tuan_4/docs/COST_REPORT.md) |
 | W4-10 | Pause/restore bảo toàn trạng thái | Hai lịch chuẩn ENABLED → DISABLED → ENABLED, target không đổi, không xóa dữ liệu: [thao tác thực tế](../tuan_4/results/advanced_live_2026_10_20/session/) |
 | W4-11 | Một template triển khai thật | 17 tài nguyên, hai stack CREATE_COMPLETE và E2E đúng function/database/workgroup mới: [hạ tầng](../tuan_4/docs/INFRASTRUCTURE.md) |
 | W4-12 | Kiểm tra bảo mật theo phạm vi | BPA, AES256, versioning, ownership và HTTPS mới đọc lại; giữ LabRole: [bảo mật](../tuan_4/docs/SECURITY_AUDIT.md) |
