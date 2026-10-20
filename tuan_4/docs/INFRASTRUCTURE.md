@@ -72,7 +72,7 @@ Khi kết thúc thử nghiệm: xuất dữ liệu và checksum trước, dừng
 - [S3 Block Public Access](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html).
 - [Execution role và least privilege cho Lambda](https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html).
 
-[Hồ sơ Tuần 4](../README.md) · [Hướng dẫn quay demo](DEMO_GUIDE.md)
+[Hồ sơ Tuần 4](../README.md) · [Báo cáo kiểm chứng](FINAL_REPORT.md)
 
 Tham khảo quyền gửi alarm: [CloudWatch alarm → SNS](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Notify_Users_Alarm_Changes.html).
 

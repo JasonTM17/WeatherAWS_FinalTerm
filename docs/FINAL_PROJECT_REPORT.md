@@ -29,7 +29,7 @@ Tài liệu này tổng hợp kết quả toàn đồ án và giải thích ý n
 | Giải thích hiệu quả xử lý | So sánh ba cách tổ chức dữ liệu trên cùng đầu vào, giữ kết quả truy vấn tương đương |
 | Đánh giá dự báo | Bản phát hành gốc, dữ liệu đối chiếu tải về sau, MAE/RMSE/Bias và biểu đồ |
 | Kiểm chứng vận hành | [Đối chiếu request–log–metric–S3–Athena](../tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md), chi phí và bảo mật |
-| Bàn giao và trình bày | Một template hạ tầng, hướng dẫn tái lập, worklog, checklist kết thúc Lab và kịch bản video dưới 10 phút |
+| Bàn giao và trình bày | Một template hạ tầng, hướng dẫn tái lập, worklog, checklist kết thúc Lab và yêu cầu video dưới 10 phút |
 
 ## 2. Kiến trúc và cơ sở lựa chọn
 
@@ -206,10 +206,10 @@ Công cụ quản lý phiên kiểm tra account/function/rule/target trước kh
 | Báo cáo chi phí và rà soát bảo mật | Có dữ liệu gốc, kỳ tính, kết quả đọc cấu hình và phân biệt thiết kế hạ tầng | Đã tổng hợp |
 | Một template CloudFormation | Bản 17 tài nguyên đã lint và ValidateTemplate | Đã kiểm tra template; chưa tạo stack mới trong đợt này |
 | Quản lý tài nguyên cuối Lab | Có công cụ preview/pause/restore, kiểm thử và checklist | Thực hiện thao tác kết thúc phiên sau demo và xuất minh chứng |
-| Video không quá 10 phút | Có lời thoại theo từng bước bấm và hướng dẫn chi tiết | Cần quay, kiểm tra thời lượng và bổ sung đường dẫn video thực tế |
+| Video không quá 10 phút | Trình bày luồng xử lý, kết quả phân tích và kiểm chứng vận hành | Cần quay, kiểm tra thời lượng và bổ sung đường dẫn video thực tế |
 | Nhật ký công việc | Tổng theo tuần đã xác nhận: 78 giờ | Đã lưu CSV và bảng phân công |
 
-Video thực tế là sản phẩm cần hoàn tất trước khi nộp gói cuối theo yêu cầu giảng viên. Kịch bản hướng dẫn đi từ GitHub đến EventBridge, Lambda, log, S3, Athena, SNS/email, dashboard, chi phí và bảo mật. Khi quay, dùng đúng dữ liệu của lượt được trình bày; nếu mở minh chứng đã lưu thì giới thiệu rõ đó là hồ sơ của đợt kiểm chứng ngày 19/10. [Lời thoại khoảng chín phút](../tuan_4/docs/VIDEO_DEMO_SCRIPT.md) và [hướng dẫn thao tác](../tuan_4/docs/DEMO_GUIDE.md) hỗ trợ chuẩn bị.
+Video thực tế là sản phẩm cần hoàn tất trước khi nộp gói cuối theo yêu cầu giảng viên. Nội dung trình bày sử dụng đúng dữ liệu của lượt được kiểm chứng; hồ sơ ngày 19/10 được giới thiệu theo ngày đã lưu. Đường dẫn video được bổ sung sau khi kiểm tra thời lượng và quyền xem.
 
 ## 9. Phân công và kết luận toàn đồ án
 

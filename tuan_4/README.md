@@ -20,8 +20,7 @@ Trong tuần này, nhóm đã hoàn thành xuất sắc 100% các mục tiêu c�
 4. **Hạ tầng dưới dạng mã CloudFormation (IaC 17 tài nguyên):** Đóng gói trọn vẹn 17 tài nguyên AWS vào một template duy nhất ([weather-stack.json](infrastructure/weather-stack.json)), vượt qua 100% kiểm tra cú pháp với `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai tài khoản thực hành.
 5. **Rà soát an ninh bảo mật 11 tiêu chuẩn:** Đạt chuẩn 4/4 cờ S3 Block Public Access, mã hóa tĩnh SSE-S3 AES256, thực thi HTTPS bắt buộc, phân tích hạn chế SCP đối với `LabRole`, và cung cấp mẫu IAM Policy tối thiểu cho collector.
 6. **Tự động hóa vòng đời tài nguyên cuối phiên:** Xây dựng script `cleanup_resources.ps1` (pause) và `start_resources.ps1` (restore) cùng checklist vận hành giúp tạm dừng EventBridge Rule và bảo toàn ngân sách 100 USD của học phần.
-7. **Kịch bản video demo bảo vệ đồ án 09:45:** Kịch bản song thoại chi tiết từng từ cho Nguyễn Tiến Sơn và Trần Thị Ngọc Quyên, kết nối 10 phân đoạn trình bày chuẩn mực dưới 10 phút.
-8. **Tổng kết giờ công toàn khóa học:** Hoàn thành **20,0 giờ** Tuần 4 (10,0h mỗi sinh viên); tổng thời gian toàn bộ đồ án đạt **78,0 giờ** đã xác nhận.
+7. **Tổng kết giờ công toàn khóa học:** Hoàn thành **20,0 giờ** Tuần 4 (10,0h mỗi sinh viên); tổng thời gian toàn bộ đồ án đạt **78,0 giờ** đã xác nhận.
 
 ---
 
@@ -36,11 +35,10 @@ Trong tuần này, nhóm đã hoàn thành xuất sắc 100% các mục tiêu c�
 | **05** | **Rà soát an ninh bảo mật 11 tiêu chuẩn** | [docs/SECURITY_AUDIT.md](docs/SECURITY_AUDIT.md) · [docs/SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md) | **100% HOÀN THÀNH** | `python tuan_4/scripts/security_report.py --check` |
 | **06** | **CloudFormation IaC (17 tài nguyên)** | [infrastructure/weather-stack.json](infrastructure/weather-stack.json) · [docs/INFRASTRUCTURE.md](docs/INFRASTRUCTURE.md) | **100% HOÀN THÀNH** | `cfn-lint infrastructure/weather-stack.json` |
 | **07** | **Mẫu IAM Policy tối thiểu** | [infrastructure/collector-policy.example.json](infrastructure/collector-policy.example.json) | **100% HOÀN THÀNH** | Rà soát cấu trúc JSON |
-| **08** | **Kịch bản video demo 09:45 song thoại** | [docs/VIDEO_DEMO_SCRIPT.md](docs/VIDEO_DEMO_SCRIPT.md) · [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md) | **100% HOÀN THÀNH** | Khớp timeline 9:45 |
-| **09** | **Quản lý tài nguyên cuối phiên** | [docs/SESSION_CHECKLIST.md](docs/SESSION_CHECKLIST.md) · [scripts/cleanup_resources.ps1](scripts/cleanup_resources.ps1) | **100% HOÀN THÀNH** | `python tuan_4/scripts/session_control.py pause --help` |
-| **10** | **Dữ liệu kiểm chứng trực tiếp** | [results/verification_2026_10_19/README.md](results/verification_2026_10_19/README.md) | **100% HOÀN THÀNH** | `python tuan_4/scripts/verify_results.py` |
-| **11** | **Bộ kiểm thử tự động Tuần 4** | [tests/](tests/) (34 test cases) | **PASS 100%** | `python -m unittest discover -s tuan_4/tests -v` |
-| **12** | **Nhật ký giờ công Tuần 4 & Tổng thể** | [docs/WORKLOG.md](docs/WORKLOG.md) · [worklog.csv](worklog.csv) | **78,0 giờ ĐÃ XÁC NHẬN** | `python tuan_2/scripts/repository_audit.py --check` |
+| **08** | **Quản lý tài nguyên cuối phiên** | [docs/SESSION_CHECKLIST.md](docs/SESSION_CHECKLIST.md) · [scripts/cleanup_resources.ps1](scripts/cleanup_resources.ps1) | **100% HOÀN THÀNH** | `python tuan_4/scripts/session_control.py pause --help` |
+| **09** | **Dữ liệu kiểm chứng trực tiếp** | [results/verification_2026_10_19/README.md](results/verification_2026_10_19/README.md) | **100% HOÀN THÀNH** | `python tuan_4/scripts/verify_results.py` |
+| **10** | **Bộ kiểm thử tự động Tuần 4** | [tests/](tests/) (34 test cases) | **PASS 100%** | `python -m unittest discover -s tuan_4/tests -v` |
+| **11** | **Nhật ký giờ công Tuần 4 & Tổng thể** | [docs/WORKLOG.md](docs/WORKLOG.md) · [worklog.csv](worklog.csv) | **78,0 giờ ĐÃ XÁC NHẬN** | `python tuan_2/scripts/repository_audit.py --check` |
 
 ---
 
@@ -58,8 +56,6 @@ tuan_4/
 │   ├── SECURITY_AUDIT.md                   # Báo cáo rà soát an ninh bảo mật 11 tiêu chuẩn
 │   ├── SECURITY_REVIEW.md                  # Phương pháp đánh giá quyền và an toàn dữ liệu
 │   ├── INFRASTRUCTURE.md                   # Hướng dẫn triển khai hạ tầng CloudFormation
-│   ├── VIDEO_DEMO_SCRIPT.md                # Kịch bản video demo 09:45 song thoại từng từ
-│   ├── DEMO_GUIDE.md                       # Hướng dẫn chi tiết từng bước bấm demo
 │   ├── SESSION_CHECKLIST.md                # Danh mục kiểm tra bảo toàn credit cuối phiên
 │   ├── VERIFICATION_REPORT.md              # Báo cáo tóm tắt mốc kiểm chứng 19/10
 │   └── WORKLOG.md                          # Nhật ký công việc và phân công trách nhiệm

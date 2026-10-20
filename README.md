@@ -29,7 +29,7 @@
 | CloudFormation IaC | Một template **17 tài nguyên**, dùng source collector chính; đạt cfn-lint và AWS ValidateTemplate trên hai môi trường. Hồ sơ xác nhận kiểm tra template, chưa tạo stack mới trong đợt này | [Template](tuan_4/infrastructure/weather-stack.json) · [Kết quả kiểm tra](tuan_4/results/template_validation_2026_10_19/README.md) |
 | Rà soát bảo mật | Đối chiếu BPA, mã hóa và trạng thái truy cập công khai của S3; phân biệt cấu hình hiện hữu với thiết kế HTTPS/versioning và policy collector của stack mới | [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Phạm vi quyền](tuan_4/docs/SECURITY_REVIEW.md) |
 | Chi phí và quản lý phiên | Cost Explorer đúng kỳ 12–19/10, có Estimated; công cụ preview/pause/restore kèm kiểm tra target và trạng thái khôi phục | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
-| Hồ sơ bàn giao | Báo cáo Tuần 1–4, nội dung nộp có URL đầy đủ, **78 giờ công đã xác nhận** và kịch bản video dưới 10 phút | [Nội dung nộp Tuần 4](tuan_4/docs/SUBMISSION.md) · [Worklog](docs/WORKLOG.md) · [Lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) |
+| Hồ sơ bàn giao | Báo cáo Tuần 1–4, nội dung nộp có URL đầy đủ và **78 giờ công đã xác nhận** | [Nội dung nộp Tuần 4](tuan_4/docs/SUBMISSION.md) · [Worklog](docs/WORKLOG.md) |
 
 Ba điểm vào để đọc hồ sơ: **[Tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md)** · **[Kiểm chứng Tuần 4](tuan_4/docs/FINAL_REPORT.md)** · **[Nội dung nộp thầy](tuan_4/docs/SUBMISSION.md)**.
 
@@ -39,7 +39,7 @@ Ba điểm vào để đọc hồ sơ: **[Tổng kết toàn đồ án](docs/FIN
 | --- | --- |
 | Tổng kết toàn đồ án | [Mục tiêu, kiến trúc, phân tích chuyên sâu, kết luận và đối chiếu yêu cầu cuối kỳ](docs/FINAL_PROJECT_REPORT.md) |
 | Danh mục minh chứng theo tuần | [Đầy đủ địa chỉ GitHub, dữ liệu, biểu đồ, mã nguồn và commit](docs/EVIDENCE_INDEX.md) |
-| Tổng kết và chuẩn bị bảo vệ Tuần 4 | [Trang Tuần 4](tuan_4/README.md) · [Báo cáo](tuan_4/docs/FINAL_REPORT.md) · [Lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) · [Template](tuan_4/infrastructure/weather-stack.json) · [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Chi phí](tuan_4/docs/COST_REPORT.md) |
+| Tổng kết và chuẩn bị bảo vệ Tuần 4 | [Trang Tuần 4](tuan_4/README.md) · [Báo cáo](tuan_4/docs/FINAL_REPORT.md) · [Template](tuan_4/infrastructure/weather-stack.json) · [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Chi phí](tuan_4/docs/COST_REPORT.md) |
 | Nội dung nộp Tuần 4 | [Văn bản có liên kết đầy đủ để sao chép vào hệ thống của lớp](tuan_4/docs/SUBMISSION.md) |
 | Hồ sơ Tuần 1 | [Trang Tuần 1](tuan_1/README.md) · [Markdown](tuan_1/docs/FINAL_REPORT.md) · [PDF](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.pdf) · [Word](tuan_1/docs/Bao_cao_tuan_1_Dien_toan_dam_may_24110054_24110051.docx) · [Excel](tuan_1/docs/Bao_cao_tuan_1_Du_lieu_Athena_24110054_24110051.xlsx) |
 | CSV Tuần 1 | [Sáu CSV đã dùng trong báo cáo](tuan_1/docs/Bao_cao_tuan_1_CSV_24110054_24110051/) · [Chín biểu đồ](tuan_2/results/charts/) |
@@ -259,7 +259,7 @@ CloudWatch và quy trình phát hành tiếp tục được tích hợp trong Tu
 | CloudFormation | [Template 17 tài nguyên](tuan_4/infrastructure/weather-stack.json), [ValidateTemplate](tuan_4/results/template_validation_2026_10_19/README.md), [quy trình tạo stack](tuan_4/docs/INFRASTRUCTURE.md) |
 | Bảo mật và chi phí | [Ma trận cấu hình](tuan_4/docs/SECURITY_AUDIT.md) và [Cost Explorer đúng kỳ](tuan_4/docs/COST_REPORT.md) |
 | Quản lý tài nguyên | [Preview/pause/restore và checklist kết thúc Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
-| Nộp và bảo vệ | [Nội dung Tuần 4 có liên kết đầy đủ](tuan_4/docs/SUBMISSION.md), [lời thoại demo](tuan_4/docs/VIDEO_DEMO_SCRIPT.md), [hướng dẫn từng bước bấm](tuan_4/docs/DEMO_GUIDE.md) |
+| Nộp và bảo vệ | [Nội dung Tuần 4 có liên kết đầy đủ](tuan_4/docs/SUBMISSION.md), [tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) |
 
 Template đã được kiểm tra cấu trúc và API, chưa tạo stack mới trong đợt này. Video thực tế được bổ sung sau khi quay; thao tác kết thúc phiên thực hiện sau khi xuất minh chứng và hoàn tất sử dụng Lab. [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) đối chiếu các sản phẩm này với yêu cầu cuối kỳ.
 
@@ -309,7 +309,7 @@ Trong cửa sổ metric đã truy vấn, tổng Errors lớn hơn tổng Invocat
 | [tuan_3/results/](tuan_3/results/) | Các bản raw, truy vấn thực nghiệm, dự báo, provenance và minh chứng CI/CD theo mốc |
 | [tuan_4/infrastructure/](tuan_4/infrastructure/weather-stack.json) | Một template CloudFormation chính và policy collector tham khảo |
 | [tuan_4/scripts/](tuan_4/scripts/) | Kiểm chứng môi trường, demo đầu-cuối, chuẩn bị artifact, phân tích chi phí/bảo mật và quản lý phiên |
-| [tuan_4/docs/](tuan_4/docs/FINAL_REPORT.md) | Báo cáo kiểm chứng, nội dung nộp, worklog, hạ tầng và kịch bản video |
+| [tuan_4/docs/](tuan_4/docs/FINAL_REPORT.md) | Báo cáo kiểm chứng, nội dung nộp, worklog, chi phí, bảo mật và hạ tầng |
 | [.github/workflows/](.github/workflows/verify-repository.yml) | Quy trình CI để kiểm tra tính nhất quán của repository |
 
 Điểm vào phân tích và tệp có trách nhiệm chi tiết được liệt kê trong [chỉ mục mã nguồn](docs/components.md) và [hướng dẫn đọc mã nguồn](docs/source-guide.md).
@@ -392,7 +392,7 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 | Athena và thống kê | Sinh viên Ngọc Quyên | Có 18 lượt đo Tuần 3 trên đầu vào cố định, CSV và biểu đồ |
 | Dự báo | Sinh viên Ngọc Quyên | Đã đối chiếu đủ 144 giá trị của một kỳ phát hành; mục tiêu nhiều kỳ được theo dõi riêng |
 | Hạ tầng và vận hành cuối phiên | Hai sinh viên | Template 17 tài nguyên đã kiểm tra; có checklist tạo stack và kết thúc Lab |
-| Hồ sơ nộp và video | Hai sinh viên | Có báo cáo, worklog và lời thoại; cần quay, kiểm tra và bổ sung liên kết video thực tế |
+| Hồ sơ nộp và video | Hai sinh viên | Có báo cáo và worklog; video thực tế được bổ sung sau khi quay và kiểm tra quyền xem |
 
 ## Kết luận toàn đồ án
 
@@ -413,7 +413,6 @@ Tổng thời gian làm việc đã được hai sinh viên xác nhận là **78
 - [Báo cáo Rà soát An toàn (Security Audit)](tuan_4/docs/SECURITY_AUDIT.md)
 - [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md)
 - [Đối chiếu Log – Metric – S3 Data Lake](tuan_4/docs/LOG_METRIC_S3_RECONCILIATION.md)
-- [Kịch bản Video Demo (<10 phút)](tuan_4/docs/VIDEO_DEMO_SCRIPT.md)
 - [Kiến trúc hệ thống](docs/architecture.md)
 - [Dữ liệu và phương pháp phân tích](docs/data-analysis.md)
 - [Hướng dẫn đọc mã nguồn](docs/source-guide.md)

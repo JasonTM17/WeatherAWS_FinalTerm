@@ -106,4 +106,4 @@ python tuan_4/scripts/reconcile_ops.py --output output/week4-reconciliation-audi
 - [Tệp tóm tắt phạm vi JSON](../results/monitoring/reconciliation_summary.json)
 - [Hồ sơ xác nhận email người nhận](../results/verification_2026_10_19/recipient_confirmation.json)
 - [Chương trình đối soát Python](../scripts/reconcile_ops.py)
-- [Báo cáo tổng kết Tuần 4](FINAL_REPORT.md) · [Lời thoại demo](VIDEO_DEMO_SCRIPT.md)
+- [Báo cáo tổng kết Tuần 4](FINAL_REPORT.md)

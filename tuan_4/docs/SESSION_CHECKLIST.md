@@ -54,4 +54,4 @@ Công cụ này dành cho `WeatherCollectionSchedule` hiện hữu. Với stack 
 - Giữ nguồn và minh chứng nộp thầy. Không dùng chức năng thu hồi toàn dự án làm thao tác cuối mỗi buổi.
 - Đối với dữ liệu/bucket muốn xóa vĩnh viễn, lập danh sách đối tượng cụ thể và xác nhận phạm vi trước khi thực hiện.
 
-[Hồ sơ Tuần 4](../README.md) · [Video demo](DEMO_GUIDE.md)
+[Hồ sơ Tuần 4](../README.md) · [Báo cáo kiểm chứng](FINAL_REPORT.md)

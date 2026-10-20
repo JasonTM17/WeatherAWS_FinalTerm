@@ -7,4 +7,3 @@ Báo cáo chính được hợp nhất tại [FINAL_REPORT.md](FINAL_REPORT.md).
 - [Chi phí Cost Explorer](COST_REPORT.md).
 - [Rà soát bảo mật](SECURITY_AUDIT.md).
 - [Một template CloudFormation](INFRASTRUCTURE.md).
-- [Lời thoại quay demo](VIDEO_DEMO_SCRIPT.md).

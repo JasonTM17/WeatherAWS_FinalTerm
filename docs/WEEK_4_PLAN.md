@@ -16,7 +16,7 @@ Tuần 4 tiếp tục khai thác hệ thống đã tích hợp, tập trung vào
 - Đối chiếu log, bộ đếm CloudWatch và dữ liệu S3 theo cùng thời điểm; hoàn thiện Dashboard phục vụ theo dõi.
 - Kiểm chứng luồng cảnh báo AQI/PM2.5 từ điều kiện ngưỡng đến SNS và hộp thư người nhận.
 - Tiếp tục đo NDJSON/Projection/Parquet trên bộ dữ liệu được chốt, đồng thời cập nhật thống kê và biểu đồ màu từ CSV nguồn.
-- Đánh giá thêm các kỳ dự báo có thời điểm phát hành, sau đó hoàn thiện báo cáo, nhật ký và kịch bản trình bày.
+- Đánh giá thêm các kỳ dự báo có thời điểm phát hành, sau đó hoàn thiện báo cáo, nhật ký và nội dung trình bày.
 
 **Phạm vi:** giữ kiến trúc serverless hiện có, ba đô thị và kênh email. Thực hiện trên hai môi trường của sinh viên Tiến Sơn và sinh viên Ngọc Quyên, bằng SDK và workflow đã có trong repository.
 
@@ -53,7 +53,7 @@ Các mã W4-01–W4-08 dưới đây là **đầu việc dự kiến**. Đườn
 | W4-05 | **Đo truy vấn và thống kê** — sinh viên Ngọc Quyên | Bộ SQL/CSV, query ID, ba lần đo mỗi cấu hình mỗi môi trường, thống kê và biểu đồ màu | Cùng bản chốt đầu vào cho NDJSON, NDJSON Projection và Parquet Projection; tắt dùng lại kết quả; tổng hợp median bytes, engine time và total time; hình khớp CSV |
 | W4-06 | **Đánh giá các kỳ dự báo kế tiếp** — sinh viên Ngọc Quyên | Dự báo có issued_at, phản hồi nguồn, bảng đối chiếu và MAE/RMSE/Bias theo đô thị/chỉ số | Mục tiêu ba kỳ phát hành cách nhau 24 giờ, mỗi kỳ 24 giờ đích cho ba đô thị và hai chỉ số; cố định phương pháp trước khi xem giá trị đích; lưu nguyên bản phát hành |
 | W4-07 | **Kiểm tra mã và quy trình phát hành** — sinh viên Tiến Sơn; hai sinh viên rà soát | Kết quả hồi quy, artifact xác định, CI theo commit; hồ sơ phát hành nếu có thay đổi source | Các kiểm tra liên quan đạt; source/artifact có hash; nếu triển khai, đọc lại mã và cấu hình của từng môi trường, có bản sao khôi phục riêng |
-| W4-08 | **Tổng hợp hồ sơ và trình bày** — hai sinh viên | README Tuần 4, báo cáo, worklog, chỉ mục dữ liệu/commit và kịch bản demo | Tất cả liên kết công khai mở đúng tệp; số liệu trong báo cáo khớp CSV; ghi trạng thái từng đầu việc theo minh chứng và giờ công theo xác nhận thực tế |
+| W4-08 | **Tổng hợp hồ sơ và trình bày** — hai sinh viên | README Tuần 4, báo cáo, worklog, chỉ mục dữ liệu/commit và nội dung trình bày | Tất cả liên kết công khai mở đúng tệp; số liệu trong báo cáo khớp CSV; ghi trạng thái từng đầu việc theo minh chứng và giờ công theo xác nhận thực tế |
 | W4-09 | **Báo cáo chi phí** — sinh viên Ngọc Quyên | CSV Cost Explorer theo ngày, service, record type, USD và Estimated | Giữ nguyên giá trị gốc; phân biệt chi phí tài khoản và mức dự kiến; nhóm chưa được AWS trả về không coi là chi phí 0 |
 | W4-10 | **Kết thúc phiên Lab** — sinh viên Tiến Sơn; hai sinh viên đối chiếu | Checklist xuất minh chứng, preview/pause/restore và state file riêng | Đọc lại đúng rule/target; giữ dữ liệu; không tự thu hồi toàn dự án khi kết thúc một buổi |
 | W4-11 | **Đóng gói hạ tầng** — sinh viên Tiến Sơn | Một template CloudFormation, ZIP đúng source, hash và hướng dẫn triển khai Console | Template được kiểm tra schema; stack mới có tên riêng, lịch ban đầu tắt và dữ liệu Retain; kết quả tạo stack được ghi riêng khi thực hiện |
@@ -62,7 +62,7 @@ Các mã W4-01–W4-08 dưới đây là **đầu việc dự kiến**. Đườn
 ### Bổ sung theo nhận xét duyệt Tuần 3
 
 - Cạnh mỗi link commit trong nội dung nộp ghi **đúng message gốc của Git**; phần giải thích tiếng Việt có thể đặt sau nhưng không thay message.
-- Video demo tối đa **10 phút**. [Kịch bản 9 phút 30 giây](../tuan_4/docs/DEMO_GUIDE.md) nêu tab, nút bấm, kết quả cần quan sát và lời giải thích.
+- Video demo tối đa **10 phút**, trình bày luồng xử lý, kết quả thực tế và quản lý tài nguyên; bổ sung liên kết sau khi quay và kiểm tra quyền xem.
 - [Hồ sơ Tuần 4](../tuan_4/README.md) tập hợp source kiểm chứng, một template ứng dụng và quy trình [kết thúc phiên Lab](../tuan_4/docs/SESSION_CHECKLIST.md).
 - Các lần chuẩn bị/kiểm chứng ngày 19/10 được ghi đúng ngày thực hiện; không thay thế các kỳ thu thập và dự báo dự kiến trong lịch tuần bên dưới.
 
@@ -101,7 +101,7 @@ Các mã W4-01–W4-08 dưới đây là **đầu việc dự kiến**. Đườn
 | 29/10 | W4-05; thu giá trị đích đã hoàn tất của ba kỳ | Bảng từng lượt đo Athena, kết quả truy vấn theo đô thị và dữ liệu đối chiếu dự báo |
 | 30/10 | W4-06; tổng hợp thống kê và biểu đồ | Bảng sai số theo kỳ, CSV nguồn và biểu đồ màu có đơn vị, chú giải, thời gian |
 | 31/10 | W4-07; rà soát chéo toàn bộ hồ sơ | Kiểm tra mã/dữ liệu đạt, CI theo commit; đọc lại AWS nếu có phát hành mới |
-| 01/11 | W4-08; hoàn thiện nội dung nộp và demo | README, báo cáo, worklog, liên kết commit và kịch bản trình bày thống nhất |
+| 01/11 | W4-08; hoàn thiện nội dung nộp và demo | README, báo cáo, worklog, liên kết commit và nội dung trình bày thống nhất |
 
 Các lượt thu thập theo lịch được theo dõi trong suốt các phiên Lab hoạt động của tuần, kèm thời điểm bắt đầu/kết thúc phiên trong hồ sơ kỹ thuật.
 

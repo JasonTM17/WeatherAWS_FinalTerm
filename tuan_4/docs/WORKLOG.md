@@ -20,7 +20,7 @@
 | Chi phí và bảng phân tích | Sinh viên Ngọc Quyên; hai sinh viên rà soát | [Cost Explorer](COST_REPORT.md) |
 | Hạ tầng và bảo mật | Sinh viên Tiến Sơn; hai sinh viên rà soát | [Template](../infrastructure/weather-stack.json), [ma trận](SECURITY_AUDIT.md) |
 | Kết thúc phiên Lab | Sinh viên Tiến Sơn | [Preview/pause/restore](SESSION_CHECKLIST.md) |
-| Hồ sơ và video | Hai sinh viên | [Báo cáo](FINAL_REPORT.md), [lời thoại](VIDEO_DEMO_SCRIPT.md) |
+| Hồ sơ và trình bày | Hai sinh viên | [Báo cáo](FINAL_REPORT.md), [nội dung nộp](SUBMISSION.md) |
 
 Đợt kiểm chứng ngày 19/10 có đủ hai lượt realtime, raw, SELECT và xác nhận email mới. Kiểm tra template, kiểm thử cục bộ và triển khai stack là các trạng thái riêng; không dùng giờ công để suy ra mọi phép kiểm chứng dịch vụ đã hoàn tất.
 

@@ -29,7 +29,6 @@ Hệ thống được phát triển và kiểm chứng thực tế qua 4 tuần 
    - **Tự động hóa vòng đời tài nguyên cuối phiên:** Xây dựng script PowerShell và công cụ Python `session_control.py` giúp tạm dừng/khôi phục EventBridge Rule, bảo toàn hạn mức credit 100 USD của học phần.
    - **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template duy nhất ([weather-stack.json](tuan_4/infrastructure/weather-stack.json)) quản lý trọn vẹn **17 tài nguyên AWS Serverless**, vượt qua 100% kiểm tra `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai môi trường.
    - **Rà soát an ninh bảo mật 11 tiêu chuẩn:** Thực hiện kiểm toán toàn diện ([SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md)) bao gồm S3 Block Public Access 4/4 cờ, mã hóa tĩnh SSE-S3 AES256, thực thi HTTPS bắt buộc, phân tích hạn chế SCP của `LabRole`, và cung cấp mẫu IAM Policy tối thiểu cho collector.
-   - **Kịch bản video demo bảo vệ đồ án 09:45 song thoại:** Xây dựng kịch bản chi tiết từng từ ([VIDEO_DEMO_SCRIPT.md](tuan_4/docs/VIDEO_DEMO_SCRIPT.md)) phân vai song thoại giữa hai sinh viên, hướng dẫn từng thao tác bấm console và lời giải thích trong giới hạn dưới 10 phút.
    - **Tổng kết giờ công toàn khóa học:** Tổng thời gian thực hiện Tuần 4 là **20,0 giờ**; tổng thời gian toàn bộ đồ án đạt **78,0 giờ** đã được xác nhận đầy đủ trong [worklog.csv](worklog.csv).
 
 ---
@@ -103,7 +102,6 @@ Toàn bộ hệ thống được thiết kế theo nguyên tắc **Decoupled Ser
 - Tự động hóa dọn dẹp tài nguyên và bảo toàn credit cuối phiên.
 - Đóng gói 17 tài nguyên vào template CloudFormation [weather-stack.json](tuan_4/infrastructure/weather-stack.json).
 - Rà soát an ninh bảo mật theo 11 tiêu chuẩn [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md).
-- Soạn thảo kịch bản video demo 09:45 song thoại [VIDEO_DEMO_SCRIPT.md](tuan_4/docs/VIDEO_DEMO_SCRIPT.md).
 - Thời gian thực hiện: Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 10,0 giờ. Tổng cộng: **20,0 giờ**.
 - Báo cáo chi tiết: [tuan_4/docs/FINAL_REPORT.md](tuan_4/docs/FINAL_REPORT.md).
 
@@ -183,20 +181,9 @@ Báo cáo [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md) và ma trận [secu
 10. **SNS Topic Publish Boundary:** Ràng buộc SourceArn từ đúng CloudWatch Alarm ARN (**DECLARED**).
 11. **Log Hygiene & Secret Redaction:** Nhật ký và tệp công khai 100% sạch thông tin nhạy cảm, credentials và email cá nhân (**PASS**).
 
-### 7. Kịch bản video demo bảo vệ đồ án 09:45 song thoại
+### 7. Video trình bày đồ án
 
-Tài liệu [VIDEO_DEMO_SCRIPT.md](tuan_4/docs/VIDEO_DEMO_SCRIPT.md) cung cấp lời thoại chi tiết từng từ (word-for-word) và hướng dẫn bấm console chi tiết từng giây cho hai sinh viên:
-- **00:00 – 00:45:** Giới thiệu đề tài, thành viên & Tổng quan kiến trúc (Nguyễn Tiến Sơn & Trần Thị Ngọc Quyên).
-- **00:45 – 01:30:** Lịch EventBridge & Bảo toàn Credits (Nguyễn Tiến Sơn).
-- **01:30 – 02:45:** Thực thi Lambda Test thời gian thực & Secrets Manager (Nguyễn Tiến Sơn).
-- **02:45 – 03:50:** Kiểm tra CloudWatch Logs vòng đời & Đối chiếu S3 NDJSON raw (Trần Thị Ngọc Quyên).
-- **03:50 – 05:00:** Truy vấn Athena Serverless theo `record_id` & Partition Projection (Trần Thị Ngọc Quyên).
-- **05:00 – 05:55:** Kiểm chứng cảnh báo Amazon SNS & Email vượt ngưỡng (Nguyễn Tiến Sơn).
-- **05:55 – 06:45:** Giám sát CloudWatch Dashboard & Metric Filters (Nguyễn Tiến Sơn).
-- **06:45 – 07:45:** Quản trị tài chính FinOps & Chi phí Cost Explorer (Trần Thị Ngọc Quyên).
-- **07:45 – 08:50:** CloudFormation IaC 17 tài nguyên & An ninh bảo mật (Nguyễn Tiến Sơn & Trần Thị Ngọc Quyên).
-- **08:50 – 09:45:** Quản lý tài nguyên cuối phiên, CI/CD & Kết luận (Nguyễn Tiến Sơn & Trần Thị Ngọc Quyên).
-- Hướng dẫn thao tác bổ trợ: [DEMO_GUIDE.md](tuan_4/docs/DEMO_GUIDE.md).
+Video trình bày tối đa 10 phút, thể hiện kiến trúc, luồng thu thập, truy vấn, cảnh báo và quản lý hệ thống. Đường dẫn được bổ sung sau khi quay và kiểm tra quyền xem.
 
 ---
 
@@ -256,8 +243,6 @@ Mọi liên kết commit dưới đây đều dẫn trực tiếp đến GitHub 
 - **Báo cáo an ninh bảo mật 11 tiêu chuẩn:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SECURITY_AUDIT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SECURITY_AUDIT.md).
 - **Template CloudFormation 17 tài nguyên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json).
 - **Minh chứng ValidateTemplate CloudFormation:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/template_validation_2026_10_19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/template_validation_2026_10_19).
-- **Kịch bản video demo 09:45 song thoại:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/VIDEO_DEMO_SCRIPT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/VIDEO_DEMO_SCRIPT.md).
-- **Hướng dẫn thao tác bấm demo chi tiết:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/DEMO_GUIDE.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/DEMO_GUIDE.md).
 - **Danh mục kiểm tra kết thúc phiên Lab:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SESSION_CHECKLIST.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/SESSION_CHECKLIST.md).
 - **Dữ liệu kiểm chứng trực tiếp ngày 19/10/2026:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19).
 - **Bảng tổng hợp giờ công toàn đồ án:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv).

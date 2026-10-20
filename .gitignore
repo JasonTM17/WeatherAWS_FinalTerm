@@ -52,6 +52,10 @@ ORIGINAL_REQUEST.md
 /TEST_READY.md
 /docs/testing.md
 
+# Personal narration and recording instructions stay on this machine.
+/tuan_4/docs/VIDEO_DEMO_SCRIPT.md
+/tuan_4/docs/DEMO_GUIDE.md
+
 # Superseded Week 4 templates and assumption-only tables remain local.
 /tuan_4/iac/cloudformation_stack.json
 /tuan_4/iac/cloudformation_stack.yaml

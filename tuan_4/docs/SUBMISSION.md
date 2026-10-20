@@ -46,12 +46,10 @@ Kết quả đọc S3 hiện hữu ghi nhận đủ bốn thiết lập Block Pu
 
 Sinh viên Tiến Sơn phụ trách hạ tầng, Lambda, S3, lịch, SNS và CloudWatch. Sinh viên Ngọc Quyên phụ trách Glue/Athena, dữ liệu, chi phí và phân tích. Hai sinh viên cùng tích hợp, đối chiếu và hoàn thiện hồ sơ. **Tổng theo tuần đã xác nhận** của Tuần 4 là 10 giờ mỗi sinh viên, tổng 20 giờ; toàn đồ án là **78 giờ**.
 
-Chúng em đã chuẩn bị lời thoại và hướng dẫn thao tác cho video dưới 10 phút, đi từ kiến trúc đến Test Lambda, log, S3, Athena, SNS/email, dashboard, chi phí và bảo mật. Đường dẫn video thực tế được bổ sung sau khi quay và kiểm tra quyền xem.
+Video trình bày dưới 10 phút bao quát kiến trúc, thu thập, lưu trữ, truy vấn, cảnh báo và quản lý hệ thống. Đường dẫn video thực tế được bổ sung sau khi quay và kiểm tra quyền xem.
 
 - **Nhật ký Tuần 4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/WORKLOG.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/WORKLOG.md).
 - **CSV giờ công toàn đồ án:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/worklog.csv).
-- **Lời thoại demo:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/VIDEO_DEMO_SCRIPT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/VIDEO_DEMO_SCRIPT.md).
-- **Hướng dẫn từng bước bấm:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/DEMO_GUIDE.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/DEMO_GUIDE.md).
 
 ## 6. Mã nguồn, phiên bản và tổng kết
 

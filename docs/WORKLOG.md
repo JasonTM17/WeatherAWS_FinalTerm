@@ -8,7 +8,7 @@
 | 4 | [Nhật ký Tuần 4](../tuan_4/docs/WORKLOG.md) · [CSV](../tuan_4/worklog.csv) | Nguyễn Tiến Sơn: 10,0 giờ; Trần Thị Ngọc Quyên: 10,0 giờ; tổng 20,0 giờ |
 | Toàn bộ | [CSV tổng hợp](../worklog.csv) | Tổng cộng 78,0 giờ (Tiến Sơn: 39,5 giờ; Ngọc Quyên: 38,5 giờ) |
 
-Phân công và số giờ được nhóm xác nhận và ghi nhất quán trong từng báo cáo. Tổng thời gian toàn bộ đồ án bốn tuần là 78,0 giờ. Tuần 1 giữ nguyên bộ CSV 156 bản ghi đã nộp. Phân tích bổ sung Tuần 2 dùng hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tuần 3 tích hợp đầy đủ hệ thống, Athena, Dashboard và dự báo. Tuần 4 có bộ hạ tầng CloudFormation, công cụ kiểm thử và mốc đối chiếu trực tiếp ngày 19/10; hồ sơ chi phí, bảo mật và kịch bản video dẫn tới sản phẩm tương ứng.
+Phân công và số giờ được nhóm xác nhận và ghi nhất quán trong từng báo cáo. Tổng thời gian toàn bộ đồ án bốn tuần là 78,0 giờ. Tuần 1 giữ nguyên bộ CSV 156 bản ghi đã nộp. Phân tích bổ sung Tuần 2 dùng hai bộ báo cáo dữ liệu của sinh viên Tiến Sơn và sinh viên Ngọc Quyên. Tuần 3 tích hợp đầy đủ hệ thống, Athena, Dashboard và dự báo. Tuần 4 có bộ hạ tầng CloudFormation, công cụ kiểm thử và mốc đối chiếu trực tiếp ngày 19/10; hồ sơ chi phí, bảo mật và báo cáo tổng kết dẫn tới sản phẩm tương ứng.
 
 [Minh chứng vận hành đã lưu](saved-evidence.md) tổng hợp phản hồi Lambda và năm mã truy vấn đã đối chiếu với CSV.
 
@@ -57,6 +57,5 @@ Tổng theo tuần đã xác nhận Tuần 4: **10,0 giờ cho sinh viên Nguy�
 - [Hồ sơ tổng kết Tuần 4](../tuan_4/README.md)
 - [Báo cáo chi phí](../tuan_4/docs/COST_REPORT.md)
 - [Báo cáo an toàn thông tin](../tuan_4/docs/SECURITY_AUDIT.md)
-- [Kịch bản video demo](../tuan_4/docs/VIDEO_DEMO_SCRIPT.md)
 
 **Tổng thời gian thực hiện toàn bộ đồ án 4 tuần:** **78,0 giờ** (Tiến Sơn: 39,5 giờ; Ngọc Quyên: 38,5 giờ). [CSV tổng hợp toàn đồ án](../worklog.csv).

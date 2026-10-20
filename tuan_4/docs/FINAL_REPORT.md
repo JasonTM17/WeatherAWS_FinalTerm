@@ -21,8 +21,7 @@ Các kết quả then chốt đạt được bao gồm:
 4. **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template CloudFormation duy nhất ([weather-stack.json](../infrastructure/weather-stack.json)) bao gồm trọn vẹn **17 tài nguyên AWS**, vượt qua 100% kiểm tra cú pháp với `cfn-lint 1.57.2` và API xác thực `ValidateTemplate` trên cả hai tài khoản AWS thật.
 5. **Rà soát an ninh bảo mật theo 11 tiêu chuẩn khắt khe ([SECURITY_AUDIT.md](SECURITY_AUDIT.md)):** Bật 4/4 cờ S3 Block Public Access, mã hóa tĩnh SSE-S3 AES256, thực thi HTTPS bắt buộc, kiểm soát quyền sở hữu bucket, đánh giá hạn chế SCP đối với `LabRole`, và cung cấp mẫu IAM Policy tối thiểu cho collector.
 6. **Tự động hóa vòng đời tài nguyên cuối phiên (Session Lifecycle Automation):** Phát triển bộ kịch bản [cleanup_resources.ps1](../scripts/cleanup_resources.ps1) và [start_resources.ps1](../scripts/start_resources.ps1) giúp tạm dừng EventBridge Rule và bảo toàn trạng thái trước khi thoát Lab, ngăn chặn hao hụt credit 100 USD của học phần.
-7. **Kịch bản video demo bảo vệ đồ án 09:45 song thoại ([VIDEO_DEMO_SCRIPT.md](VIDEO_DEMO_SCRIPT.md)):** Xây dựng kịch bản chi tiết từng giây (word-for-word) với vai trò song thoại giữa Nguyễn Tiến Sơn và Trần Thị Ngọc Quyên, kết nối 10 phân đoạn trình bày từ kiến trúc, thao tác console đến kiểm toán chi phí và an ninh.
-8. **Tổng kết giờ công toàn khóa học:** Tổng thời gian thực hiện Tuần 4 là **20,0 giờ** (10,0 giờ mỗi sinh viên); tổng thời gian toàn bộ đồ án (Tuần 1 đến Tuần 4) đạt **78,0 giờ** đã được xác nhận đầy đủ trong [worklog.csv](../worklog.csv).
+7. **Tổng kết giờ công toàn khóa học:** Tổng thời gian thực hiện Tuần 4 là **20,0 giờ** (10,0 giờ mỗi sinh viên); tổng thời gian toàn bộ đồ án (Tuần 1 đến Tuần 4) đạt **78,0 giờ** đã được xác nhận đầy đủ trong [worklog.csv](../worklog.csv).
 
 ---
 
@@ -61,7 +60,7 @@ Quy trình kiểm chứng đi qua toàn bộ luồng dữ liệu khép kín:
 | **Quản lý tài nguyên bảo toàn Credit cuối phiên** | Xây dựng [SESSION_CHECKLIST.md](SESSION_CHECKLIST.md) và bộ script `cleanup_resources.ps1` / `start_resources.ps1` có atomic state file và rollback bảo vệ. | **ĐẠT** |
 | **Đóng gói 1 template CloudFormation (IaC)** | Thiết kế template [weather-stack.json](../infrastructure/weather-stack.json) gồm 17 tài nguyên, kiểm tra đạt 100% qua `cfn-lint` và AWS `ValidateTemplate`. | **ĐẠT** |
 | **Rà soát an ninh bảo mật hệ thống** | Xây dựng báo cáo [SECURITY_AUDIT.md](SECURITY_AUDIT.md) theo 11 tiêu chuẩn bảo mật đám mây và [collector-policy.example.json](../infrastructure/collector-policy.example.json). | **ĐẠT** |
-| **Kịch bản video demo dưới 10 phút** | Soạn thảo kịch bản song thoại [VIDEO_DEMO_SCRIPT.md](VIDEO_DEMO_SCRIPT.md) thời lượng 09:45 chi tiết từng thao tác và lời thoại cho hai sinh viên. | **ĐẠT** |
+| **Video trình bày dưới 10 phút** | Trình bày luồng xử lý, kết quả thực tế và quản lý hệ thống; bổ sung đường dẫn sau khi quay và kiểm tra quyền xem. | **Bổ sung video thực tế** |
 
 ---
 
@@ -214,10 +213,9 @@ Trích xuất từ [SECURITY_AUDIT.md](SECURITY_AUDIT.md) và [security_controls
 
 ---
 
-## 7. Quản lý tài nguyên cuối phiên và Kịch bản video demo
+## 7. Quản lý tài nguyên cuối phiên
 
 1. **Quản lý tài nguyên cuối phiên:** Bộ công cụ [session_control.py](../scripts/session_control.py) và script PowerShell [cleanup_resources.ps1](../scripts/cleanup_resources.ps1) cung cấp cơ chế preview an toàn, lưu trạng thái atomic file, và tạm dừng EventBridge Rule sau mỗi buổi làm việc. Trước buổi tiếp theo, [start_resources.ps1](../scripts/start_resources.ps1) khôi phục lịch dựa trên state file đã kiểm tra tính toàn vẹn. Quy trình vận hành tuân thủ [SESSION_CHECKLIST.md](SESSION_CHECKLIST.md).
-2. **Kịch bản video demo 09:45:** Kịch bản song thoại chi tiết từng từ [VIDEO_DEMO_SCRIPT.md](VIDEO_DEMO_SCRIPT.md) được phân vai rành mạch giữa Nguyễn Tiến Sơn và Trần Thị Ngọc Quyên, bao gồm 10 phân đoạn bấm nút và lời thoại chuẩn mực, bảo đảm video hoàn tất dưới 10 phút. Hướng dẫn thao tác chi tiết xem tại [DEMO_GUIDE.md](DEMO_GUIDE.md).
 
 ---
 
@@ -279,8 +277,6 @@ Mọi liên kết commit dưới đây đều được dẫn kèm commit message
 - [Báo cáo tài chính FinOps Cost Explorer](COST_REPORT.md)
 - [Báo cáo an ninh bảo mật 11 tiêu chuẩn](SECURITY_AUDIT.md)
 - [Hướng dẫn triển khai hạ tầng CloudFormation](INFRASTRUCTURE.md)
-- [Kịch bản video demo 09:45 song thoại](VIDEO_DEMO_SCRIPT.md)
-- [Hướng dẫn chi tiết từng bước bấm demo](DEMO_GUIDE.md)
 - [Danh mục kiểm tra kết thúc phiên Lab](SESSION_CHECKLIST.md)
 - [Nội dung nộp báo cáo Tuần 4](SUBMISSION.md)
 - [Nhật ký công việc Tuần 4](WORKLOG.md)

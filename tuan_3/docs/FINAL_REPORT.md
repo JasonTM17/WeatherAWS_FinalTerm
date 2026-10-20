@@ -548,7 +548,7 @@ Tuần 4 tập trung vận hành, đánh giá và hoàn thiện hồ sơ, tiếp
 | W4-04: cảnh báo email | Sinh viên Tiến Sơn; sinh viên Ngọc Quyên rà soát | Kiểm tra dưới/vượt ngưỡng; minh chứng Publish, giao thông báo và xác nhận email của lượt mới |
 | W4-05: truy vấn và thống kê | Sinh viên Ngọc Quyên | 18 lượt đo Athena trên đầu vào cố định; thống kê, CSV và biểu đồ màu |
 | W4-06: các kỳ dự báo kế tiếp | Sinh viên Ngọc Quyên | Mục tiêu ba kỳ phát hành 24 giờ; đối chiếu giá trị đích và MAE/RMSE/Bias theo kỳ |
-| W4-07–W4-08: kiểm tra và hồ sơ | Hai sinh viên | CI theo commit, kiểm chứng triển khai khi có thay đổi mã, báo cáo, worklog và kịch bản demo |
+| W4-07–W4-08: kiểm tra và hồ sơ | Hai sinh viên | CI theo commit, kiểm chứng triển khai khi có thay đổi mã, báo cáo, worklog và nội dung trình bày |
 
 Đầu ra Tuần 4 được lưu theo mốc riêng và liên kết về source/commit. Nhật ký, trạng thái hoàn thành và giờ công được cập nhật theo công việc thực hiện và xác nhận của từng sinh viên. [Danh sách nghiệm thu cuối tuần](../../docs/WEEK_4_PLAN.md#72-hồ-sơ-nghiệm-thu-cuối-tuần) hướng dẫn đối chiếu từng sản phẩm trước khi nộp.
 
