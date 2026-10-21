@@ -29,7 +29,7 @@ Lịch 26/10–01/11 ban đầu là lịch dự kiến. Các kết quả thực 
 | W4-05 | 18 lượt đo cùng đầu vào | Ba phương án × ba lần × hai môi trường; không reuse, parity và median bytes/engine/total: [benchmark](../tuan_4/results/advanced_live_2026_10_20/benchmark/) |
 | W4-06 | Ba backtest theo thời gian | Mỗi cửa sổ 24 giờ train trước gốc, 24 giờ đích, MA24 cố định; 432 dự đoán và 18 dòng sai số: [backtest](../tuan_4/results/backtest_2026_10_20/README.md) |
 | W4-07 | Kiểm thử, artifact và CI | Guard kiểm tra môi trường, tên tài nguyên, version, holdout và recovery; [workflow](../.github/workflows/verify-repository.yml), [bộ xác minh](../tuan_4/scripts/verify_results.py) |
-| W4-08 | Hồ sơ và trình bày | [Báo cáo](../tuan_4/docs/FINAL_REPORT.md), [nội dung nộp](../tuan_4/docs/SUBMISSION.md), worklog, message commit nguyên bản và [video demo](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing) |
+| W4-08 | Hồ sơ và trình bày | [Báo cáo](../tuan_4/docs/FINAL_REPORT.md), [nội dung nộp](../tuan_4/docs/SUBMISSION.md), worklog, mã nguồn và [video demo](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing) |
 | W4-09 | Chi phí có nguồn xác nhận | Tiến Sơn 0,25 USD, Ngọc Quyên 0,22 USD, tổng 0,47 USD; bản xuất API lịch sử giữ riêng theo kỳ/Estimated: [chi phí](../tuan_4/docs/COST_REPORT.md) |
 | W4-10 | Pause/restore bảo toàn trạng thái | Hai lịch chuẩn ENABLED → DISABLED → ENABLED, target không đổi, không xóa dữ liệu: [thao tác thực tế](../tuan_4/results/advanced_live_2026_10_20/session/) |
 | W4-11 | Một template triển khai thật | 17 tài nguyên, hai stack CREATE_COMPLETE và E2E đúng function/database/workgroup mới: [hạ tầng](../tuan_4/docs/INFRASTRUCTURE.md) |

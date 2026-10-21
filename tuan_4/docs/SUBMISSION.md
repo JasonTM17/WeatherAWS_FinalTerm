@@ -10,7 +10,7 @@ Kính gửi thầy, chúng em gửi báo cáo tổng kết Tuần 4, cập nhậ
 
 **Repository:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm).
 
-Tiếp thu góp ý của thầy từ lần báo cáo trước, chúng em đã bổ sung kiểm thử tổng thể và đối chiếu log–metric–S3; hoàn thiện minh chứng đồng bộ mã triển khai, cảnh báo SNS đến hộp thư người nhận, chi phí và quản lý tài nguyên cuối phiên Lab. Phần nâng cao được triển khai bằng một template CloudFormation chung cho hai môi trường, kèm rà soát cấu hình bảo mật S3 và quyền truy cập. Các commit minh chứng được ghi đúng message nguyên bản bên cạnh URL; video demo được liên kết cùng báo cáo để thầy thuận tiện theo dõi và đối chiếu.
+Tiếp thu góp ý của thầy từ lần báo cáo trước, chúng em đã bổ sung kiểm thử tổng thể và đối chiếu log–metric–S3; hoàn thiện minh chứng đồng bộ mã triển khai, cảnh báo SNS đến hộp thư người nhận, chi phí và quản lý tài nguyên cuối phiên Lab. Phần nâng cao được triển khai bằng một template CloudFormation chung cho hai môi trường, kèm rà soát cấu hình bảo mật S3 và quyền truy cập. Video demo được liên kết cùng báo cáo để thầy thuận tiện theo dõi và đối chiếu.
 
 ## 1. Tổng kết và triển khai hạ tầng
 
@@ -83,7 +83,7 @@ Repository có kiểm thử các ranh giới triển khai, môi trường, artif
 
 ## 7. Mã nguồn và commit minh chứng
 
-Các commit dưới đây giữ đúng message nguyên bản; mỗi liên kết dẫn đến thay đổi tương ứng trong Git:
+Các thay đổi chính của Tuần 4 được lưu trong các commit sau:
 
 - **`feat(week4): verify live stacks and three historical backtest windows` — 58fdf22:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf).
 - **`feat(week4): complete final week verification, consolidate CloudFormation infrastructure, and update catalog` — 96bedec:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093).
