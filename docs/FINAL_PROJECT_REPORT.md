@@ -186,16 +186,9 @@ Minh chứng đầy đủ: [bộ kiểm chứng Tuần 4](../tuan_4/results/veri
 
 ### 7.1. Chi phí
 
-Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](../tuan_4/results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| :--- | :---: | :---: | :---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
-
-Nguồn: [cost_summary.json](../tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](../tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](../tuan_4/results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
-
-CSV có cả Usage và Credit. Tổng của sinh viên Tiến Sơn có trị tuyệt đối nhỏ hơn một cent nên hiển thị 0,00; giá trị gốc và các dòng âm được giữ nguyên. Không đổi âm thành số dương hoặc thay tổng API bằng mức dự kiến. Không suy ra một khoản Credit cụ thể chỉ từ dấu của tổng; xem từng nhóm để đối chiếu. Đây là chi phí tài khoản theo kỳ và nhóm dịch vụ, chưa phân bổ riêng theo tài nguyên đồ án. Chi tiết xem tại [Báo cáo chi phí](../tuan_4/docs/COST_REPORT.md).
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](../tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](../tuan_4/results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
 Tối ưu được đánh giá theo số liệu cụ thể: byte quét và thời gian Athena, dung lượng object, lịch thu thập và phạm vi thử nghiệm. Checklist cuối phiên yêu cầu xuất dữ liệu, dừng đúng lịch thu thập khi kết thúc thực hành và thu hồi tài nguyên thử nghiệm theo phạm vi đã xác định.
 

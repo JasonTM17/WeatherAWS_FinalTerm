@@ -10,17 +10,7 @@ Kính gửi thầy, chúng em gửi báo cáo tổng kết Tuần 4, cập nhậ
 
 **Repository:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm).
 
-## Tiếp thu góp ý của giảng viên
-
-| Góp ý trong lần đánh giá trước | Nội dung bổ sung trong hồ sơ Tuần 4 |
-| --- | --- |
-| Ghi đúng message thật cạnh link commit | Mục 7 đặt nguyên văn message bên cạnh từng URL commit, giúp đối chiếu trực tiếp thay đổi |
-| Kiểm thử tổng thể và đối chiếu log–metric–S3 | Mục 2 nối phiên bản source, request, START/END/REPORT, metric, object S3 và SELECT theo record_id của từng môi trường |
-| Đồng bộ mã triển khai và kiểm chứng SNS tới người nhận | Mục 1 và 3 có hash source/artifact, cảnh báo dữ liệu ngày 19/10, xác nhận subscription và email của topic mới ngày 20/10 |
-| Báo cáo chi phí và quản lý tài nguyên cuối Lab | Mục 5 có Cost Explorer theo kỳ, dữ liệu gốc/Estimated, phép thử pause–restore và checklist kết thúc phiên |
-| Tự động hóa/IaC bằng một template CloudFormation | Hai stack riêng được tạo từ cùng template 17 tài nguyên; có Events, cấu hình đọc lại và kết quả chạy trên tài nguyên mới |
-| Rà soát S3 Block Public Access và quyền truy cập | Mục 5 có kết quả đọc lại cấu hình lưu trữ, ràng buộc quyền gọi và policy collector tham khảo; giữ đúng phạm vi LabRole học phần |
-| Bổ sung video demo | Liên kết thư mục video được đặt ngay đầu nội dung nộp và trong phần bàn giao |
+Tiếp thu góp ý của thầy từ lần báo cáo trước, chúng em đã bổ sung kiểm thử tổng thể và đối chiếu log–metric–S3; hoàn thiện minh chứng đồng bộ mã triển khai, cảnh báo SNS đến hộp thư người nhận, chi phí và quản lý tài nguyên cuối phiên Lab. Phần nâng cao được triển khai bằng một template CloudFormation chung cho hai môi trường, kèm rà soát cấu hình bảo mật S3 và quyền truy cập. Các commit minh chứng được ghi đúng message nguyên bản bên cạnh URL; video demo được liên kết cùng báo cáo để thầy thuận tiện theo dõi và đối chiếu.
 
 ## 1. Tổng kết và triển khai hạ tầng
 
@@ -69,16 +59,9 @@ Phần dự báo sử dụng phương án **backtest ba cửa sổ lịch sử**
 
 Hai bucket mới được đọc lại cấu hình: bốn thiết lập Block Public Access đều bật, AES256, versioning Enabled, BucketOwnerEnforced, không public ACL/policy và policy từ chối kết nối không qua HTTPS. Permission gọi Lambda gắn với ARN rule và SourceAccount. LabRole học phần được giữ nguyên, policy runtime giới hạn theo tài nguyên được cung cấp để tham khảo.
 
-Cost Explorer kỳ 12–19/10: Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent:
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| :--- | :---: | :---: | :---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
-
-Nguồn: [cost_summary.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19/environment). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
-
-Đây là chi phí tài khoản theo kỳ và nhóm dịch vụ, chưa phân bổ riêng cho đồ án. Hai stack mới tạo ngày 20/10 nằm sau kỳ số liệu này; báo cáo giữ riêng ngày tính chi phí và ngày triển khai để đối chiếu đúng phạm vi.
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
 Ngày 20/10, công cụ quản lý phiên đã tạm dừng rồi khôi phục lịch chuẩn trên cả hai môi trường qua ENABLED → DISABLED → ENABLED, đối chiếu fingerprint môi trường/target không đổi và không xóa dữ liệu. Trạng thái phục hồi riêng được ghi trước thao tác.
 

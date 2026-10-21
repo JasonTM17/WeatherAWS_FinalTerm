@@ -136,14 +136,9 @@ MAE AQI tại TP. Hồ Chí Minh khoảng 26,03; 9,39; 6,99 điểm qua ba cửa
 
 Đọc lại hai bucket stack mới xác nhận BPA 4/4, AES256, versioning Enabled, BucketOwnerEnforced, không public ACL/policy và policy từ chối truyền không qua HTTPS. Permission gọi Lambda ràng buộc ARN rule và SourceAccount. LabRole được giữ nguyên; policy runtime theo tài nguyên là mẫu tham khảo, không được xem là chứng nhận effective permissions của role học phần. [Báo cáo bảo mật](SECURITY_AUDIT.md) nêu từng phép kiểm tra và nguồn.
 
-Cost Explorer kỳ **12–19/10** có 117 nhóm ngày/dịch vụ/loại ghi nhận; Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent:
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](../results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| :--- | :---: | :---: | :---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
-
-Nguồn: [cost_summary.json](../results/cost/cost_summary.json), [117 dòng chi tiết](../results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](../results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau. Đây là chi phí tài khoản của kỳ đã chọn; không dùng để ước tính chi phí các stack mới tạo ngày 20/10, và không suy diễn toàn bộ dịch vụ thuộc Free Tier. [Báo cáo chi phí](COST_REPORT.md) giữ cách tổng hợp và đối soát chi tiết.
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](../results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](../results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
 Ngày 20/10, mỗi lịch chuẩn đã được tạm dừng rồi khôi phục thực tế: **ENABLED → DISABLED → ENABLED**. Fingerprint account/function/rule/target không đổi; không xóa raw. Nhật ký phục hồi được ghi bền vững trước thay đổi và giữ riêng. Hai lịch mới vẫn DISABLED. [Minh chứng quản lý phiên](../results/advanced_live_2026_10_20/session/) · [Checklist cuối Lab](SESSION_CHECKLIST.md).
 

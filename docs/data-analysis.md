@@ -34,18 +34,9 @@
 
 ### Đối chiếu số liệu chi phí
 
-Chi phí Cost Explorer trong báo cáo được hiển thị đến cent; các giá trị gốc theo ngày và dịch vụ vẫn được giữ nguyên trong [CSV đối chiếu](../tuan_2/results/week2_analysis/cost_by_service_day.csv). Giá trị gốc của sinh viên Tiến Sơn có độ lớn dưới 0,000001 USD nên hiển thị 0,00 USD; dữ liệu của sinh viên Ngọc Quyên hiển thị 0,03 USD. Đây là số liệu ước tính do AWS trả về, không phải hóa đơn cuối cùng.
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](../tuan_4/results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Dự kiến nhóm đề xuất (USD) | Cost Explorer đến cent (USD) | Estimated |
-| --- | ---: | ---: | --- |
-| Sinh viên Tiến Sơn | 0,05 | 0,00 | Có |
-| Sinh viên Ngọc Quyên | 0,03 | 0,03 | Có |
-
-Hai mức dự kiến trong bảng do nhóm xác nhận cho phần thực hành Tuần 2. Bảng 5.4 của báo cáo đặt số Cost Explorer làm tròn trong một cột riêng; việc mức dự kiến của sinh viên Ngọc Quyên trùng số hiển thị Cost Explorer không làm hai loại dữ liệu trở thành một.
-
-Các dịch vụ khác trong phạm vi đã xuất có giá trị hiển thị 0,00 USD; cả hai kết quả có cờ Estimated. Phản hồi nhóm theo SERVICE và không có RECORD_TYPE, nên báo cáo không quy kết nguyên nhân cho giá trị gốc có độ lớn rất nhỏ của sinh viên Tiến Sơn. Mức 0,00 USD trong bảng là độ chính xác trình bày, không chứng minh dự án miễn phí hoặc số tiền trên hóa đơn bằng 0.
-
-AWS phân biệt số liệu Cost Explorer với hóa đơn, có thể có khác biệt do thời điểm cập nhật, độ chi tiết, làm tròn và cách phản ánh khoản hoàn tiền. Đây là mô tả chung của dịch vụ, không phải bằng chứng về nguyên nhân trong hai bộ dữ liệu này. Xem [tài liệu AWS Billing](https://docs.aws.amazon.com/us_en/awsaccountbilling/latest/aboutv2/differences-billing-data-cost-explorer-data.html) và [GetCostAndUsage về nhóm RECORD_TYPE](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html).
+Số tổng hợp toàn đồ án được tách khỏi dữ liệu từng tuần. [CSV Cost Explorer Tuần 2](../tuan_2/results/week2_analysis/cost_by_service_day.csv) và [JSON nguồn](../tuan_2/results/week2_evidence/) giữ nguyên giá trị, kỳ và Estimated của lần xuất. Mã phân tích tái tạo các bảng lịch sử từ nguồn này; số mới không được gán thành đầu ra của mã. Chi tiết tại [báo cáo chi phí](../tuan_4/docs/COST_REPORT.md).
 
 ## Hai phạm vi đối chiếu tuần
 

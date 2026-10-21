@@ -1,40 +1,31 @@
-# Báo cáo chi phí AWS Cost Explorer
+# Tổng hợp chi phí và quản lý tài nguyên AWS
 
 **Nguyễn Tiến Sơn (24110054) · Trần Thị Ngọc Quyên (24110051).**
-**Kỳ số liệu:** từ 12/10 đến hết 19/10/2026; truy vấn Start inclusive 12/10, End exclusive 20/10. Nguồn được lưu trong đợt kiểm chứng ngày 19/10 theo phạm vi trả về của API; ngày chi phí và thời điểm tải là hai trường riêng.
 
-## 1. Phương pháp tổng hợp
+## 1. Chi phí tổng hợp đã xác nhận
 
-Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](../results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| --- | ---: | ---: | ---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
+Số liệu trên được dùng thống nhất trong README, báo cáo tổng kết và nội dung nộp Tuần 4. Đây là tổng chi phí theo xác nhận của sinh viên cho phần tổng hợp toàn đồ án; không phân bổ ngược thành chi phí từng tuần, từng dịch vụ hoặc từng stack.
 
-Nguồn: [cost_summary.json](../results/cost/cost_summary.json), [117 dòng chi tiết](../results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](../results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
+## 2. Nguồn Cost Explorer lưu theo kỳ
 
-## 2. Diễn giải
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](../results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](../results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
-CSV có cả Usage và Credit. Tổng của sinh viên Tiến Sơn có trị tuyệt đối nhỏ hơn một cent nên hiển thị 0,00; giá trị gốc và các dòng âm được giữ nguyên. Không đổi âm thành số dương hoặc thay tổng API bằng mức dự kiến. Không suy ra một khoản Credit cụ thể chỉ từ dấu của tổng; xem từng nhóm để đối chiếu.
+Bản xuất lịch sử truy vấn Start inclusive 12/10, End exclusive 20/10/2026. Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV gồm 117 nhóm, giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng sử dụng Decimal để bảo toàn độ chính xác; nguồn nằm trong [snapshot môi trường](../results/verification_2026_10_19/environment/).
 
-Đây là chi phí **tài khoản** theo kỳ và nhóm dịch vụ, chưa phân bổ riêng theo tài nguyên đồ án. Không dùng bảng này để kết luận mọi dịch vụ thuộc Free Tier, chi phí tháng bằng 0 hoặc ngân sách được bảo toàn tuyệt đối. Các mức 0,05/0,03 USD của Tuần 2 là dự kiến đã được xác nhận riêng trong báo cáo tuần đó.
+Hai nguồn được quản lý độc lập: `confirmed_cost_summary.json` ghi số sinh viên xác nhận; `cost_summary.json` và `learner_lab_cost_breakdown.csv` tái tạo kết quả API đã lưu. Không cộng hai nguồn hoặc dùng số nhóm của bản xuất cũ để giải thích số tiền cập nhật.
 
-Hai stack mới tạo ngày 20/10 nằm sau kỳ chi phí này; chi phí của chúng không được suy diễn từ bảng. Theo dõi kỳ cập nhật tiếp theo và tài nguyên còn lưu giữ, gồm artifact version, Secret, log và S3.
+## 3. Quản lý và tối ưu tài nguyên
 
-## 3. Tối ưu có căn cứ
+Hiệu quả Athena được đánh giá qua [18 truy vấn ngày 20/10](../results/advanced_live_2026_10_20/benchmark/), theo byte quét và độ trễ. Mức giảm byte quét được trình bày như kết quả kỹ thuật của bộ thực nghiệm, không quy đổi trực tiếp thành tỷ lệ giảm hóa đơn.
 
-- Đo byte quét và độ trễ Athena bằng [18 truy vấn mới](../results/advanced_live_2026_10_20/benchmark/). Byte giảm không được quy đổi trực tiếp thành tỷ lệ giảm hóa đơn.
-- Giữ lịch của hai stack mới DISABLED để tránh thu thập trùng; quản lý lịch chuẩn theo [checklist phiên](SESSION_CHECKLIST.md).
-- Lưu CSV và manifest để phân tích offline, tránh gọi lại dịch vụ khi không cần dữ liệu cập nhật.
-- Kiểm kê tài nguyên có Retain và versioning trước khi kết thúc sử dụng. Tạm dừng EventBridge không xóa Secret, log hoặc S3 và không loại bỏ mọi chi phí lưu trữ.
+Hai lịch của stack mới giữ DISABLED để tránh thu thập trùng. Lịch chuẩn được quản lý theo [checklist cuối phiên](SESSION_CHECKLIST.md); phép thử tạm dừng–khôi phục ngày 20/10 giữ nguyên target và dữ liệu. CSV, manifest và kết quả phân tích được lưu để có thể kiểm tra offline.
 
-## 4. Kiểm tra lại
+Trước khi kết thúc sử dụng, cần kiểm kê tài nguyên có Retain, các phiên bản object, artifact, Secret và log. Việc tạm dừng lịch chỉ ngừng lượt thu thập tiếp theo; dữ liệu và các tài nguyên còn lưu giữ được quản lý riêng.
 
-```powershell
-python tuan_4/scripts/cost_analysis.py --check
-```
+## 4. Đối chiếu số liệu
 
-Công cụ tính lại tổng từ nguồn đã lưu và kiểm tra byte bảng dẫn xuất, không gọi Cost Explorer. Không giữ dữ liệu hoặc câu lệnh có thông tin xác thực trong repository.
+Lệnh `python tuan_4/scripts/cost_analysis.py --check` tính lại tổng của nguồn Cost Explorer lịch sử và kiểm tra byte các bảng dẫn xuất, không gọi AWS. Chi phí đã xác nhận được đọc riêng từ JSON nguồn tại mục 1 và kiểm tra tổng bằng Decimal: **0,25 + 0,22 = 0,47 USD**.
 
 [Báo cáo Tuần 4](FINAL_REPORT.md) · [Dữ liệu chi phí](../results/cost/) · [Minh chứng ngày 20/10](../results/advanced_live_2026_10_20/README.md).

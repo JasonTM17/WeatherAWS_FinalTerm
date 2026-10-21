@@ -565,20 +565,11 @@ Bảng 5.3 Lịch sử truy vấn của dự án trước đợt phân tích m�
 
 Lịch sử ghi nhận 52 lượt truy vấn trong báo cáo dữ liệu của sinh viên Tiến Sơn và 92 lượt trong báo cáo của sinh viên Ngọc Quyên, trước đợt 24 truy vấn mới. Số lượt FAILED tương ứng là 21 và 1. Lịch sử có cả truy vấn cấu hình và phân tích; các số này được trình bày riêng với kết quả của đợt truy vấn vừa xuất.
 
-### 5.4 Chi phí dự kiến và số liệu Cost Explorer
+### 5.4 Chi phí tổng hợp cập nhật và nguồn Cost Explorer
 
-Bảng 5.4 Mức dự kiến của nhóm và chi phí Cost Explorer trong phạm vi Tuần 2
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](../../tuan_4/results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Dự kiến nhóm đề xuất (USD) | Cost Explorer đến cent (USD) | Estimated |
-| --- | --- | --- | --- |
-| Sinh viên Tiến Sơn | 0,05 | 0,00 | Có |
-| Sinh viên Ngọc Quyên | 0,03 | 0,03 | Có |
-
-Nhóm dự kiến chi phí thực hành Tuần 2 là 0,05 USD cho sinh viên Tiến Sơn và 0,03 USD cho sinh viên Ngọc Quyên. Đây là mức nhóm lựa chọn để lập kế hoạch, không phải số Cost Explorer trả về. Cột Cost Explorer hiển thị số liệu AWS đã lưu đến cent: 0,00 USD và 0,03 USD tương ứng. Mức dự kiến và kết quả Cost Explorer được trình bày riêng, kể cả khi hai số của sinh viên Ngọc Quyên cùng là 0,03 USD.
-
-Giá trị Cost Explorer gốc của sinh viên Tiến Sơn có độ lớn dưới 0,000001 USD nên hiển thị 0,00 USD ở độ chính xác cent. Báo cáo không suy đoán nguyên nhân của giá trị rất nhỏ này và không coi mức hiển thị 0,00 USD là bằng chứng dự án hoàn toàn miễn phí. Các giá trị gốc trước làm tròn của hai sinh viên được giữ nguyên trong tệp CSV và phản hồi JSON để đối chiếu.
-
-Cả hai kết quả Cost Explorer đều có cờ Estimated. Chúng được tổng hợp theo dịch vụ và ngày trong môi trường AWS của từng sinh viên; chưa phải hóa đơn cuối cùng hoặc chi phí riêng của dự án được phân bổ bằng tag. Các tệp CSV lưu nguyên giá trị trước khi làm tròn, đơn vị và trạng thái ước tính để đối chiếu.
+Số cập nhật có phạm vi toàn đồ án, không phải chi phí phân bổ riêng cho Tuần 2. [CSV Cost Explorer Tuần 2](../results/week2_analysis/cost_by_service_day.csv) và [JSON nguồn](../results/week2_evidence/) giữ nguyên giá trị gốc, đơn vị, kỳ và Estimated để tái tạo kết quả phân tích của lần xuất trước.
 
 ## Chương 6 Giải thích mã nguồn và cơ sở hình thành kết quả
 
@@ -629,9 +620,9 @@ Bảng 6.1 Liên hệ lựa chọn mã nguồn với dữ liệu Tuần 2
 | NDJSON và phân vùng S3 theo ngày UTC | Lưu nguyên bản ghi, giảm dung lượng đọc ngoài phạm vi | 84 dòng gốc giữ 23 trường; thêm điều kiện phân vùng giảm 86,76% và 75,28% byte quét. |
 | Lọc timestamp sau lọc phân vùng | Cắt đúng ranh giới tuần UTC+7 | 27 và 57 dòng Tuần 2 được tách khỏi 204 và 231 dòng toàn bộ. |
 | Tính thống kê riêng cho từng sinh viên | Giữ đúng mẫu số và tránh gộp hai bộ thành một mẫu độc lập | AQI trung bình Hà Nội là 163,56 và 163,05 với cỡ mẫu 9 và 19. |
-| Dựng hình từ CSV có manifest | Giữ đường dẫn dữ liệu từ bảng số đến biểu đồ | 20 hình trong báo cáo có thể đối chiếu với CSV nguồn; 0,05 USD và 0,03 USD là mức nhóm dự kiến, không phải đầu ra của mã. |
+| Dựng hình từ CSV có manifest | Giữ đường dẫn dữ liệu từ bảng số đến biểu đồ | 20 hình trong báo cáo có thể đối chiếu với CSV nguồn; chi phí tổng hợp cập nhật là Tiến Sơn 0,25 USD và Ngọc Quyên 0,22 USD theo xác nhận ngày 21/10, tách khỏi đầu ra của mã. |
 
-Mã trong repository mô tả thiết kế và phép phân tích; trạng thái dịch vụ và chi phí được xác nhận từ bộ bằng chứng đã lưu. Một cấu hình trong mã nguồn không tự chứng minh có bao nhiêu lịch, lượt chạy, email nhận được hoặc phí phải thanh toán trong từng môi trường. Vì vậy báo cáo nêu rõ số liệu quan sát, số liệu tính từ CSV và hai mức dự kiến của nhóm ở những vị trí khác nhau.
+Mã trong repository mô tả thiết kế và phép phân tích; trạng thái dịch vụ được đối chiếu với bộ bằng chứng đã lưu. Báo cáo phân biệt số liệu quan sát trên AWS, kết quả tính từ CSV và chi phí tổng hợp do sinh viên xác nhận, với nguồn tương ứng cho từng nội dung.
 
 ## Chương 7 Tổng hợp kết quả Tuần 2
 
@@ -654,7 +645,7 @@ Trong 84 lượt ghi gốc Tuần 2 (27 của sinh viên Tiến Sơn, 57 của s
 
 So với bộ báo cáo Tuần 1 đã nộp (52 mẫu mỗi đô thị), AQI trung bình Hà Nội cao hơn lần lượt 96,00 và 95,49 điểm trong hai bộ Tuần 2. Tuy nhiên, mỗi bộ Tuần 2 chỉ bao phủ hai ngày và 9 giờ quan trắc; khác biệt này chưa chứng minh xu hướng toàn tuần. Hệ số tương quan khí tượng cũng không xác lập quan hệ nhân quả.
 
-Phụ lục giữ đủ 84 bản ghi và 23 trường để đối chiếu CSV. Cả 24 truy vấn mới thành công; lọc phân vùng giảm 86,76% và 75,28% byte quét, nhưng thời gian engine trong lần đo không giảm. Errors và Invocations chưa nhất quán, nên không suy số lần xử lý chỉ từ một chỉ số. Chi phí dự kiến của nhóm là 0,05 và 0,03 USD, tách khỏi số Cost Explorer 0,00 và 0,03 USD có cờ Estimated; số liệu sau chưa phải hóa đơn cuối cùng.
+Phụ lục giữ đủ 84 bản ghi và 23 trường để đối chiếu CSV. Cả 24 truy vấn mới thành công; lọc phân vùng giảm 86,76% và 75,28% byte quét, nhưng thời gian engine trong lần đo không giảm. Errors và Invocations chưa nhất quán, nên không suy số lần xử lý chỉ từ một chỉ số. Chi phí tổng hợp toàn đồ án cập nhật theo xác nhận ngày 21/10 là Tiến Sơn 0,25 USD, Ngọc Quyên 0,22 USD, tổng 0,47 USD; dữ liệu Cost Explorer lịch sử được lưu riêng theo kỳ.
 
 ## Phụ lục Dữ liệu gốc Tuần 2
 

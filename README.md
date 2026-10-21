@@ -28,7 +28,7 @@
 | CI/CD Lambda | Có workflow kiểm tra repository, đóng gói source và triển khai có xác nhận môi trường; hai lượt CD ngày 18/10 có minh chứng đối chiếu artifact | [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) · [Minh chứng CD](tuan_3/results/cd_2026_10_18/) |
 | CloudFormation IaC | Một template **17 tài nguyên**; hai stack đạt **CREATE_COMPLETE**, Lambda mới thu ba đô thị, SELECT trên database/workgroup mới và gói nguồn đúng hash | [Template](tuan_4/infrastructure/weather-stack.json) · [Triển khai thực tế](tuan_4/results/advanced_live_2026_10_20/README.md) |
 | Rà soát bảo mật | Hai bucket mới đã đọc lại BPA, AES256, versioning Enabled, BucketOwnerEnforced và HTTPS-only; giữ riêng kết quả cấu hình hiện hữu và mẫu quyền collector | [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Phạm vi quyền](tuan_4/docs/SECURITY_REVIEW.md) |
-| Chi phí và quản lý phiên | Cost Explorer đúng kỳ 12–19/10, có Estimated; công cụ preview/pause/restore kèm kiểm tra target và trạng thái khôi phục | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
+| Chi phí và quản lý phiên | Chi phí đã xác nhận: Tiến Sơn 0,25 USD, Ngọc Quyên 0,22 USD, tổng 0,47 USD; công cụ preview/pause/restore kèm kiểm tra target và trạng thái khôi phục | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
 | Hồ sơ bàn giao | Báo cáo Tuần 1–4, nội dung nộp có URL đầy đủ và **78 giờ công đã xác nhận** | [Nội dung nộp Tuần 4](tuan_4/docs/SUBMISSION.md) · [Worklog](docs/WORKLOG.md) |
 
 **Bổ sung nâng cao ngày 20/10:** [700 bản ghi/115 JSON gốc](tuan_4/results/advanced_live_2026_10_20/snapshot/), [18 lượt Athena mới](tuan_4/results/advanced_live_2026_10_20/benchmark/), [432 dự đoán backtest và biểu đồ](tuan_4/results/backtest_2026_10_20/README.md), [SNS topic mới và xác nhận người nhận](tuan_4/results/advanced_live_2026_10_20/email/), [pause/restore thực tế](tuan_4/results/advanced_live_2026_10_20/session/). Mỗi đầu ra giữ ngày và phương pháp riêng.
@@ -154,7 +154,7 @@ Mốc thời gian chất lượng không khí từ API không kèm múi giờ đ
 
 ### Chi phí
 
-Mức dự kiến cho phần thực hành Tuần 2 được sinh viên xác nhận riêng: **0,05 USD** cho sinh viên Tiến Sơn và **0,03 USD** cho sinh viên Ngọc Quyên. Đây không phải kết quả do mã phân tích tự tính. Cost Explorer trả số ước tính hiển thị đến cent lần lượt **0,00 USD** và **0,03 USD**; CSV vẫn giữ giá trị gốc, đơn vị và cờ Estimated. Hai loại số liệu không được cộng gộp hay coi là cùng một nguồn (xem [giải thích phương pháp và chi phí](docs/data-analysis.md)). Đối với kỳ thực nghiệm toàn diện Tuần 4 (kỳ 12–19/10), Boto3 GetCostAndUsage ghi nhận 117 dòng chi tiết: Tiến Sơn 0,00 USD, Ngọc Quyên 0,14 USD (xem chi tiết tại [mục Chi phí AWS Cost Explorer (FinOps)](#chi-phí-aws-cost-explorer-finops) và [Báo cáo Chi phí](tuan_4/docs/COST_REPORT.md)).
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](tuan_4/results/cost/confirmed_cost_summary.json). Các nguồn Cost Explorer lịch sử của từng tuần được giữ riêng theo kỳ; số tổng hợp hiện tại không được chia ngược thành chi phí riêng của từng tuần. Xem [báo cáo chi phí](tuan_4/docs/COST_REPORT.md) và [phương pháp đối chiếu](docs/data-analysis.md).
 
 ## Kết quả theo tuần
 
@@ -263,7 +263,7 @@ CloudWatch và quy trình phát hành tiếp tục được tích hợp trong Tu
 | --- | --- |
 | Dữ liệu và vận hành | [Sáu bản ghi raw, điều kiện cảnh báo, SELECT và log–metric–S3](tuan_4/docs/FINAL_REPORT.md) |
 | CloudFormation | [Template 17 tài nguyên](tuan_4/infrastructure/weather-stack.json), [hai stack CREATE_COMPLETE và kiểm chứng tài nguyên mới ngày 20/10](tuan_4/results/advanced_live_2026_10_20/README.md), [quy trình triển khai](tuan_4/docs/INFRASTRUCTURE.md) |
-| Bảo mật và chi phí | [Ma trận cấu hình](tuan_4/docs/SECURITY_AUDIT.md) và [Cost Explorer đúng kỳ](tuan_4/docs/COST_REPORT.md) |
+| Bảo mật và chi phí | [Ma trận cấu hình](tuan_4/docs/SECURITY_AUDIT.md) và [chi phí đã xác nhận và dữ liệu API theo kỳ](tuan_4/docs/COST_REPORT.md) |
 | Quản lý tài nguyên | [Preview/pause/restore và checklist kết thúc Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
 | Nộp và bảo vệ | [Nội dung Tuần 4 có liên kết đầy đủ](tuan_4/docs/SUBMISSION.md), [tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) |
 
@@ -271,14 +271,9 @@ Ngày 20/10, hai stack mới đạt **CREATE_COMPLETE**; mỗi Lambda mới thu 
 
 ### Chi phí AWS Cost Explorer (FinOps)
 
-Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](tuan_4/results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| :--- | :---: | :---: | :---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
-
-Nguồn: [cost_summary.json](tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](tuan_4/results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau. Xem chi tiết phương pháp và đối soát tại [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md).
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](tuan_4/results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
 ### Phân công và thời gian đã xác nhận
 
@@ -393,7 +388,7 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 - Thống kê được trình bày theo bản chốt dữ liệu, đô thị và tập giờ tương ứng. Bộ Tuần 2 có dữ liệu ở hai ngày, chín khung giờ; bản cập nhật ngày 19/10 thống kê cùng 14 giờ hoàn tất cho mỗi sinh viên.
 - Cảnh báo dùng ngưỡng cấu hình của đồ án. Hồ sơ theo dõi riêng dữ liệu vượt ngưỡng, SNS Publish, giao thông báo và xác nhận người nhận; [các lượt ngày 16/10](docs/scheduled-run-verification.md) đã có xác nhận email.
 - Phiên bản triển khai, trạng thái dịch vụ và metric gắn với timestamp của từng lượt kiểm chứng. [Phương pháp vận hành](tuan_3/docs/operation.md) giải thích cách ghép bộ đếm và đối chiếu log–S3.
-- Cost Explorer được báo kèm cờ Estimated, đơn vị và thời điểm truy vấn; mức dự kiến do sinh viên xác nhận có cột riêng.
+- Chi phí tổng hợp hiện tại có nguồn xác nhận riêng; dữ liệu Cost Explorer lịch sử giữ nguyên kỳ truy vấn, đơn vị và cờ Estimated.
 - Bảng chất lượng ghi rõ giá trị thiếu và quy tắc chuẩn hóa; tương quan Pearson/Spearman mô tả liên hệ trong tập phân tích. Chi tiết nằm trong [tài liệu phương pháp](docs/data-analysis.md).
 
 ## Kế hoạch tiếp theo

@@ -1,0 +1,21 @@
+{
+  "source": "user_confirmation",
+  "confirmed_on": "2026-10-21",
+  "currency": "USD",
+  "scope": "Current project report totals confirmed by the students; separate from historical Cost Explorer exports and weekly allocations",
+  "profiles": [
+    {
+      "profile": "default",
+      "student": "Nguyễn Tiến Sơn",
+      "student_id": "24110054",
+      "amount_usd": "0.25"
+    },
+    {
+      "profile": "quyen",
+      "student": "Trần Thị Ngọc Quyên",
+      "student_id": "24110051",
+      "amount_usd": "0.22"
+    }
+  ],
+  "total_usd": "0.47"
+}

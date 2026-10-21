@@ -17,7 +17,7 @@
 | Dự báo | Backtest ba cửa sổ lịch sử: 432 dự đoán, 18 dòng MAE/RMSE/Bias | [Phương pháp và biểu đồ](results/backtest_2026_10_20/README.md) |
 | Quản lý phiên | Hai lịch chuẩn đã qua ENABLED → DISABLED → ENABLED; lịch mới vẫn tắt | [Pause và restore thực tế](results/advanced_live_2026_10_20/session/) |
 | Bảo mật | BPA, AES256, versioning, ownership và HTTPS của hai bucket mới được đọc lại | [Rà soát theo phạm vi](docs/SECURITY_AUDIT.md) |
-| Chi phí | Cost Explorer kỳ 12–19/10: 0,00/0,14 USD đến cent, giữ số gốc và Estimated | [Báo cáo chi phí](docs/COST_REPORT.md) |
+| Chi phí | Đã xác nhận: Tiến Sơn 0,25 USD, Ngọc Quyên 0,22 USD, tổng 0,47 USD; dữ liệu API lịch sử lưu riêng | [Báo cáo chi phí](docs/COST_REPORT.md) |
 | Nhật ký | Tuần 4: 20 giờ; tổng theo tuần đã xác nhận: 78 giờ | [Worklog](docs/WORKLOG.md) |
 
 **[Báo cáo chi tiết](docs/FINAL_REPORT.md)** · **[Nội dung nộp có đầy đủ URL](docs/SUBMISSION.md)** · **[Tổng kết toàn đồ án](../docs/FINAL_PROJECT_REPORT.md)**.
@@ -30,14 +30,9 @@ Backtest sử dụng chuỗi mô hình lịch sử, mỗi gốc chỉ dùng 24 g
 
 ## Chi phí AWS Cost Explorer (FinOps)
 
-Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| :--- | :---: | :---: | :---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
-
-Nguồn: [cost_summary.json](results/cost/cost_summary.json), [117 dòng chi tiết](results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau. Xem chi tiết phương pháp tại [Báo cáo chi phí](docs/COST_REPORT.md).
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
 ## Dữ liệu và hồ sơ theo ngày
 

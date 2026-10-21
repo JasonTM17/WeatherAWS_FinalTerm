@@ -39,7 +39,7 @@ Hệ thống được phát triển và kiểm chứng thực tế qua 4 tuần 
 4. **Tuần 4 (Kiểm chứng toàn diện, IaC CloudFormation, FinOps và An ninh bảo mật):**
    - **Kiểm thử E2E có kiểm soát:** Thực hiện hai lượt realtime ngày 19/10 trên hai môi trường độc lập; lưu nguyên byte object NDJSON từ S3, kiểm tra CSV raw và đối chiếu các trường đã chọn bằng Athena theo đúng `record_id`. Ngày 20/10 thực hiện thêm một lượt trên mỗi collector của stack mới.
    - **Đối chiếu 3 chiều Log – Metric – S3:** Xác thực khớp 1-1 giữa nhật ký CloudWatch Logs (`START`/`END`/`REPORT`/`[INFO] Result`), chỉ số vận hành CloudWatch Metrics (Invocations, 0 Errors, tỷ lệ lỗi 0,0%), tệp lưu trữ S3, và xác nhận nhận email cảnh báo vượt ngưỡng của cả hai sinh viên.
-   - **Báo cáo tài chính đám mây FinOps (Cost Explorer):** Phân rã 117 nhóm bản ghi chi phí từ Cost Explorer API trong kỳ 12–19/10/2026; tổng chi phí hiển thị làm tròn đạt **0,00 USD** (Tiến Sơn) và **0,14 USD** (Ngọc Quyên) theo tổng hợp tài khoản của kỳ đã chọn.
+   - **Tổng hợp chi phí và quản lý tài nguyên (FinOps):** Chi phí do hai sinh viên xác nhận ngày 21/10/2026 là **0,25 USD** của sinh viên Tiến Sơn và **0,22 USD** của sinh viên Ngọc Quyên, tổng **0,47 USD**. Bản xuất Cost Explorer lịch sử được lưu riêng theo kỳ để đối chiếu.
    - **Tự động hóa vòng đời tài nguyên cuối phiên:** Xây dựng script PowerShell và công cụ Python `session_control.py` giúp tạm dừng/khôi phục EventBridge Rule, kiểm soát hoạt động thu thập theo phiên Lab.
    - **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template duy nhất ([weather-stack.json](tuan_4/infrastructure/weather-stack.json)) quản lý trọn vẹn **17 tài nguyên AWS Serverless**, đạt kiểm tra `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai môi trường.
    - **Rà soát bảo mật:** Đối chiếu 11 nội dung trong phạm vi đồ án ([SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md)), gồm BPA, AES256, versioning, HTTPS, ownership, quyền gọi Lambda và mẫu policy collector. Kết quả đọc cấu hình và thiết kế quyền được ghi riêng theo nguồn.
@@ -112,7 +112,7 @@ Hệ thống phân tách lịch kích hoạt, xử lý, lưu trữ, truy vấn v
 ### 4. Tuần 4: Kiểm chứng toàn diện, Hạ tầng IaC, FinOps và An ninh bảo mật (20,0 giờ)
 - Thực hiện kiểm chứng có kiểm soát đầu-cuối (E2E) trên 2 môi trường.
 - Đối chiếu 3 chiều Log – Metric – S3 – Alert.
-- Lập báo cáo tài chính đám mây FinOps (Cost Explorer 12–19/10).
+- Lập báo cáo FinOps với chi phí đã xác nhận và bản xuất Cost Explorer theo kỳ.
 - Tự động hóa dọn dẹp tài nguyên và bảo toàn credit cuối phiên.
 - Đóng gói 17 tài nguyên vào template CloudFormation [weather-stack.json](tuan_4/infrastructure/weather-stack.json).
 - Rà soát 11 nội dung bảo mật trong phạm vi đồ án tại [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md).
@@ -154,18 +154,11 @@ Báo cáo [LOG_METRIC_S3_RECONCILIATION.md](tuan_4/docs/LOG_METRIC_S3_RECONCILIA
 | **3. Lưu trữ Amazon S3** | 1 tệp NDJSON, 3 dòng dữ liệu, khớp byte JSON tải lại | 1 tệp NDJSON, 3 dòng dữ liệu, khớp byte JSON tải lại | Toàn vẹn dữ liệu |
 | **4. Cảnh báo Amazon SNS** | 1 Publish chấp nhận; email đã xác nhận tại hộp thư | 1 Publish chấp nhận; email đã xác nhận tại hộp thư | [Xác nhận email](tuan_4/results/verification_2026_10_19/recipient_confirmation.json) |
 
-### 3. Quản trị tài chính đám mây FinOps (Cost Explorer 12–19/10)
+### 3. Tổng hợp chi phí và quản lý tài nguyên (FinOps)
 
-Boto3 gọi GetCostAndUsage, Granularity DAILY, Metric UnblendedCost, GroupBy SERVICE và RECORD_TYPE. CSV giữ ngày UTC, dịch vụ, loại ghi nhận, số gốc USD và Estimated. Phép cộng dùng Decimal; bản hiển thị làm tròn đến cent.
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](tuan_4/results/cost/confirmed_cost_summary.json).
 
-| Sinh viên | Nhóm ngày/dịch vụ/loại ghi nhận | Tổng UnblendedCost gốc (USD) | Hiển thị đến cent (USD) |
-| :--- | :---: | :---: | :---: |
-| Sinh viên Tiến Sơn | 70 | -0,000000339 | 0,00 |
-| Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
-
-Nguồn: [cost_summary.json](tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](tuan_4/results/verification_2026_10_19/environment/). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
-
-CSV có cả Usage và Credit. Tổng của sinh viên Tiến Sơn có trị tuyệt đối nhỏ hơn một cent nên hiển thị 0,00; giá trị gốc và các dòng âm được giữ nguyên. Không đổi âm thành số dương hoặc thay tổng API bằng mức dự kiến. Không suy ra một khoản Credit cụ thể chỉ từ dấu của tổng; xem từng nhóm để đối chiếu. Đây là chi phí tài khoản theo kỳ và nhóm dịch vụ, chưa phân bổ riêng theo tài nguyên đồ án. Chi tiết xem tại [Báo cáo Chi phí AWS Cost Explorer](tuan_4/docs/COST_REPORT.md).
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](tuan_4/results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
 ### 4. Quản lý vòng đời tài nguyên cuối phiên (FinOps Lifecycle Automation)
 
