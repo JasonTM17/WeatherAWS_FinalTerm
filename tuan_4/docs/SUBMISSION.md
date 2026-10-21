@@ -27,6 +27,7 @@ Kính gửi thầy, chúng em gửi báo cáo tổng kết Tuần 4, cập nhậ
 Trong Tuần 4, chúng em hoàn thiện kiểm chứng hệ thống thời tiết và chất lượng không khí cho TP. Hồ Chí Minh, Hà Nội và Đà Nẵng, đồng thời triển khai hai stack ứng dụng độc lập bằng một template CloudFormation gồm 17 tài nguyên. Ngày 20/10/2026, `weather-w4-son` và `weather-w4-quyen` đều đạt CREATE_COMPLETE. Gói Lambda của hai stack khớp source collector trong repository qua SHA-256; artifact được lấy theo Version ID cụ thể. Lịch mới giữ DISABLED để tránh thu thập tự động song song với lịch chuẩn.
 
 - **Báo cáo Tuần 4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/FINAL_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/FINAL_REPORT.md).
+- **Template CloudFormation 17 tài nguyên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json).
 - **CloudFormation và hướng dẫn triển khai:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/INFRASTRUCTURE.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/INFRASTRUCTURE.md).
 - **Events, cấu hình và kiểm chứng stack mới:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/stacks](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/stacks).
 - **GitHub Deployments của sinh viên Tiến Sơn:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son).
@@ -36,7 +37,7 @@ Hai deployment record được bổ sung trên GitHub ngày 21/10 để liên k�
 
 ## 2. Thu thập, dữ liệu raw và giám sát
 
-Mỗi Lambda mới được gọi một lần có kiểm soát bằng event `{}`, thu đủ ba bản ghi cho ba đô thị. Chúng em tải nguyên object S3, xuất CSV đủ 23 trường và SELECT theo chính xác record_id trong database/workgroup của từng stack. Bốn trường record_id, city, us_aqi và pm2_5 trong truy vấn khớp raw; không dùng lại kết quả Athena. START/END/REPORT và Result được ghép theo đúng request; mỗi function có một Invocation và 0 Errors trong chu kỳ 300 giây chứa lượt kiểm chứng.
+Trong đợt kiểm chứng ngày 20/10, mỗi Lambda mới được gọi một lần có kiểm soát bằng event `{}`, thu đủ ba bản ghi cho ba đô thị. Chúng em tải nguyên object S3, xuất CSV đủ 23 trường và SELECT theo chính xác record_id trong database/workgroup của từng stack. Bốn trường record_id, city, us_aqi và pm2_5 trong truy vấn khớp raw; không dùng lại kết quả Athena. START/END/REPORT và Result được ghép theo đúng request; mỗi function có một Invocation và 0 Errors trong chu kỳ 300 giây chứa lượt kiểm chứng.
 
 Snapshot tích lũy ngày 20/10 gồm **700 bản ghi và 115 JSON gốc**: sinh viên Tiến Sơn có 331 bản ghi/53 tệp; sinh viên Ngọc Quyên có 369 bản ghi/62 tệp. Mỗi object có số dòng, dung lượng và SHA-256; raw giữ các lượt lấy lặp, bảng đô thị–giờ được xuất riêng cho phân tích.
 
@@ -76,6 +77,8 @@ Cost Explorer kỳ 12–19/10: Boto3 gọi GetCostAndUsage, Granularity DAILY, M
 | Sinh viên Ngọc Quyên | 47 | 0,1364702401 | 0,14 |
 
 Nguồn: [cost_summary.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/cost_summary.json), [117 dòng chi tiết](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/learner_lab_cost_breakdown.csv), [snapshot môi trường](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/verification_2026_10_19/environment). Kỳ chính xác trong cost_summary.json/cost.json là căn cứ của bảng; số liệu Estimated có thể được AWS cập nhật sau.
+
+Đây là chi phí tài khoản theo kỳ và nhóm dịch vụ, chưa phân bổ riêng cho đồ án. Hai stack mới tạo ngày 20/10 nằm sau kỳ số liệu này; báo cáo giữ riêng ngày tính chi phí và ngày triển khai để đối chiếu đúng phạm vi.
 
 Ngày 20/10, công cụ quản lý phiên đã tạm dừng rồi khôi phục lịch chuẩn trên cả hai môi trường qua ENABLED → DISABLED → ENABLED, đối chiếu fingerprint môi trường/target không đổi và không xóa dữ liệu. Trạng thái phục hồi riêng được ghi trước thao tác.
 
