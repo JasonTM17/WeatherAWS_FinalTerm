@@ -1,7 +1,9 @@
 # Tuần 4 — Hoàn thiện hệ thống và kiểm chứng nâng cao
 
 **Nguyễn Tiến Sơn (24110054) · Trần Thị Ngọc Quyên (24110051)**
-Điện toán đám mây · GVHD: ThS. Huỳnh Xuân Phụng · Cập nhật ngày 20/10/2026.
+Điện toán đám mây · GVHD: ThS. Huỳnh Xuân Phụng · Cập nhật hồ sơ ngày 21/10/2026.
+
+**[Video demo đồ án — 24110054_24110051.mp4](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing)**.
 
 ## Kết quả
 

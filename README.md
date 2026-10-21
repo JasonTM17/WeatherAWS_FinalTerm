@@ -35,6 +35,8 @@
 
 Ba điểm vào để đọc hồ sơ: **[Tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md)** · **[Kiểm chứng Tuần 4](tuan_4/docs/FINAL_REPORT.md)** · **[Nội dung nộp thầy](tuan_4/docs/SUBMISSION.md)**.
 
+**[Video demo đồ án — 24110054_24110051.mp4](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing)**.
+
 **Deployments Tuần 4:** [sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son) · [sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen). Hai record [ghi nhận ngày 21/10](tuan_4/results/github_deployments_2026_10_21/README.md) liên kết tới commit và hồ sơ triển khai AWS đã kiểm chứng ngày 20/10.
 
 ## Điều hướng nhanh
@@ -265,7 +267,7 @@ CloudWatch và quy trình phát hành tiếp tục được tích hợp trong Tu
 | Quản lý tài nguyên | [Preview/pause/restore và checklist kết thúc Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
 | Nộp và bảo vệ | [Nội dung Tuần 4 có liên kết đầy đủ](tuan_4/docs/SUBMISSION.md), [tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) |
 
-Ngày 20/10, hai stack mới đạt **CREATE_COMPLETE**; mỗi Lambda mới thu đủ ba đô thị, dữ liệu S3 được đối chiếu với SELECT trong database/workgroup của chính stack. Hai lịch chuẩn đã được tạm dừng rồi khôi phục; lịch mới giữ DISABLED. Cùng đợt này có [18 truy vấn Athena mới](tuan_4/results/advanced_live_2026_10_20/benchmark/) và [backtest ba cửa sổ lịch sử](tuan_4/results/backtest_2026_10_20/README.md). Video thực tế được bổ sung sau khi quay và kiểm tra quyền xem. [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) đối chiếu các sản phẩm với yêu cầu cuối kỳ.
+Ngày 20/10, hai stack mới đạt **CREATE_COMPLETE**; mỗi Lambda mới thu đủ ba đô thị, dữ liệu S3 được đối chiếu với SELECT trong database/workgroup của chính stack. Hai lịch chuẩn đã được tạm dừng rồi khôi phục; lịch mới giữ DISABLED. Cùng đợt này có [18 truy vấn Athena mới](tuan_4/results/advanced_live_2026_10_20/benchmark/) và [backtest ba cửa sổ lịch sử](tuan_4/results/backtest_2026_10_20/README.md). [Video demo](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing) được liên kết cùng hồ sơ. [Báo cáo tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md) đối chiếu các sản phẩm với yêu cầu cuối kỳ.
 
 ### Chi phí AWS Cost Explorer (FinOps)
 
@@ -407,11 +409,11 @@ Xuất lại dữ liệu từ các CSV đã lưu trong chế độ offline vào 
 | Athena và thống kê | Sinh viên Ngọc Quyên | Có 18 lượt đo mới Tuần 4 trên đầu vào cố định, bên cạnh bộ đo Tuần 3; lưu query ID, Statistics, CSV và kết quả tương đương |
 | Dự báo | Sinh viên Ngọc Quyên | Giữ kỳ phát hành đã đối chiếu 144 giá trị; bổ sung backtest ba cửa sổ lịch sử, 432 dự đoán và 18 dòng sai số |
 | Hạ tầng và vận hành cuối phiên | Hai sinh viên | Hai stack CREATE_COMPLETE từ template 17 tài nguyên, kiểm chứng Lambda/S3/Athena mới; pause/restore lịch chuẩn thực tế, lịch mới vẫn DISABLED |
-| Hồ sơ nộp và video | Hai sinh viên | Có báo cáo và worklog; video thực tế được bổ sung sau khi quay và kiểm tra quyền xem |
+| Hồ sơ nộp và video | Hai sinh viên | Có báo cáo, worklog, [nội dung tiếp thu góp ý](tuan_4/docs/SUBMISSION.md) và [liên kết video demo](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing) |
 
 ## Kết luận toàn đồ án
 
-Hồ sơ Tuần 1–4 kết nối dữ liệu gốc, truy vấn, bảng phân tích, biểu đồ và bằng chứng vận hành trên GitHub. Ngày 19/10 xác nhận luồng source–Lambda–S3–Athena và cảnh báo email của hệ thống hiện hữu; ngày 20/10 bổ sung triển khai và kiểm chứng hai stack mới, xác nhận email topic mới, benchmark và backtest lịch sử. Báo cáo tổng kết giải thích lựa chọn kiến trúc, kết quả thực nghiệm và sản phẩm bàn giao. Video thực tế được bổ sung sau khi quay.
+Hồ sơ Tuần 1–4 kết nối dữ liệu gốc, truy vấn, bảng phân tích, biểu đồ và bằng chứng vận hành trên GitHub. Ngày 19/10 xác nhận luồng source–Lambda–S3–Athena và cảnh báo email của hệ thống hiện hữu; ngày 20/10 bổ sung triển khai và kiểm chứng hai stack mới, xác nhận email topic mới, benchmark và backtest lịch sử. Báo cáo tổng kết giải thích lựa chọn kiến trúc, kết quả thực nghiệm và sản phẩm bàn giao. [Video demo đồ án](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing) được bổ sung trong hồ sơ bàn giao ngày 21/10.
 
 Tổng thời gian làm việc đã được hai sinh viên xác nhận là **78,0 giờ** (Tuần 1: 18,5 giờ; Tuần 2: 19,5 giờ; Tuần 3: 20,0 giờ; Tuần 4: 20,0 giờ). Nhật ký liên kết các tổng giờ với phân công và sản phẩm theo tuần.
 

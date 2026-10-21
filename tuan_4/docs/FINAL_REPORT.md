@@ -2,7 +2,9 @@
 
 **Nguyễn Tiến Sơn — MSSV 24110054; Trần Thị Ngọc Quyên — MSSV 24110051.**
 **Học phần:** Điện toán đám mây · **Lớp:** 261CLCO332779_05 · **GVHD:** ThS. Huỳnh Xuân Phụng.
-**Ngày cập nhật:** 20/10/2026. Số liệu giữ riêng theo từng đợt kiểm chứng.
+**Ngày cập nhật hồ sơ:** 21/10/2026. Số liệu giữ riêng theo từng đợt kiểm chứng ngày 19–20/10.
+
+**Video demo:** [Thư mục video — 24110054_24110051.mp4](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing).
 
 ## 1. Mục tiêu và kết quả tổng hợp
 
@@ -163,6 +165,6 @@ Bộ kiểm tra bao phủ ranh giới môi trường, tên tài nguyên đã t�
 
 Sinh viên Tiến Sơn phụ trách Lambda, S3, Secrets Manager, SNS, EventBridge, CloudWatch và hạ tầng. Sinh viên Ngọc Quyên phụ trách Glue/Athena, xuất dữ liệu, phân tích, dự báo và chi phí. Hai sinh viên cùng tích hợp và đối chiếu hồ sơ. **Tổng theo tuần đã xác nhận:** Tuần 4 là 20 giờ, toàn đồ án 78 giờ (sinh viên Tiến Sơn 39,5 giờ; sinh viên Ngọc Quyên 38,5 giờ). [Worklog](WORKLOG.md) · [CSV](../worklog.csv).
 
-Kết quả Tuần 4 nối được source triển khai với tài nguyên CloudFormation, request thực thi, log/metric, dữ liệu S3, kết quả Athena và xác nhận email. Phần phân tích bổ sung phép đo Athena mới và đánh giá lịch sử có tách dữ liệu huấn luyện/đích. Các bộ dữ liệu, hash và phương pháp được giữ cùng mốc để có thể kiểm tra lại. Video trình bày dưới 10 phút được bổ sung bằng liên kết sau khi sinh viên quay và kiểm tra quyền xem.
+Kết quả Tuần 4 nối được source triển khai với tài nguyên CloudFormation, request thực thi, log/metric, dữ liệu S3, kết quả Athena và xác nhận email. Phần phân tích bổ sung phép đo Athena mới và đánh giá lịch sử có tách dữ liệu huấn luyện/đích. Các bộ dữ liệu, hash và phương pháp được giữ cùng mốc để có thể kiểm tra lại. [Video demo](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing) được liên kết cùng hồ sơ; [nội dung nộp](SUBMISSION.md) đối chiếu từng góp ý của giảng viên với minh chứng và message commit nguyên bản. [GitHub Deployments Tuần 4](../results/github_deployments_2026_10_21/README.md) ghi riêng ngày bổ sung record và ngày triển khai AWS.
 
 [Báo cáo tổng kết đồ án](../../docs/FINAL_PROJECT_REPORT.md) · [Nội dung nộp có URL đầy đủ](SUBMISSION.md) · [Danh mục minh chứng](../../docs/EVIDENCE_INDEX.md).

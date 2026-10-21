@@ -8,7 +8,7 @@
 
 **Sinh viên thực hiện:** Nguyễn Tiến Sơn — 24110054; Trần Thị Ngọc Quyên — 24110051.
 
-**Ngày cập nhật:** 20/10/2026. Các bộ số liệu giữ riêng ngày chốt và phạm vi kiểm chứng.
+**Ngày cập nhật hồ sơ:** 21/10/2026. Các bộ số liệu giữ riêng ngày chốt và phạm vi kiểm chứng.
 
 ## Tóm tắt
 
@@ -224,10 +224,10 @@ Công cụ quản lý phiên kiểm tra account/function/rule/target trước kh
 | Báo cáo chi phí và rà soát bảo mật | Có dữ liệu gốc, kỳ tính, kết quả đọc cấu hình và phân biệt thiết kế hạ tầng | Đã tổng hợp |
 | Một template CloudFormation | Bản 17 tài nguyên, artifact đúng version/hash | Hai stack CREATE_COMPLETE và E2E trên tài nguyên mới ngày 20/10 |
 | Quản lý tài nguyên cuối Lab | Có công cụ preview/pause/restore, kiểm thử và checklist | Thực hiện thao tác kết thúc phiên sau demo và xuất minh chứng |
-| Video không quá 10 phút | Trình bày luồng xử lý, kết quả phân tích và kiểm chứng vận hành | Cần quay, kiểm tra thời lượng và bổ sung đường dẫn video thực tế |
+| Video không quá 10 phút | Trình bày luồng xử lý, kết quả phân tích và kiểm chứng vận hành | Đã bổ sung [liên kết video demo](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing) |
 | Nhật ký công việc | Tổng theo tuần đã xác nhận: 78 giờ | Đã lưu CSV và bảng phân công |
 
-Video thực tế là sản phẩm cần hoàn tất trước khi nộp gói cuối theo yêu cầu giảng viên. Nội dung trình bày sử dụng đúng dữ liệu của lượt được kiểm chứng; hồ sơ ngày 19/10 được giới thiệu theo ngày đã lưu. Đường dẫn video được bổ sung sau khi kiểm tra thời lượng và quyền xem.
+**Video demo đồ án:** [Thư mục video — tệp 24110054_24110051.mp4](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing). Các minh chứng AWS và bộ phân tích tiếp tục được đối chiếu theo ngày đã lưu; phần tiếp thu góp ý và các URL bàn giao nằm tại [nội dung nộp Tuần 4](../tuan_4/docs/SUBMISSION.md).
 
 ## 9. Phân công và kết luận toàn đồ án
 

@@ -10,6 +10,7 @@
 
 **Đề tài:** Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên nền tảng AWS (Domain Apps).  
 **Mốc hoàn thiện tổng kết:** 20/10/2026.  
+**Cập nhật hồ sơ và liên kết video:** 21/10/2026.  
 **Kho lưu trữ chính:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm).
 
 ---
@@ -200,7 +201,7 @@ Báo cáo [SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md) tổng hợp 11 n�
 
 ### 7. Video trình bày đồ án
 
-Video trình bày tối đa 10 phút, thể hiện kiến trúc, luồng thu thập, truy vấn, cảnh báo và quản lý hệ thống. Đường dẫn được bổ sung sau khi quay và kiểm tra quyền xem.
+**Video demo đồ án — tệp 24110054_24110051.mp4:** [https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing).
 
 ---
 
