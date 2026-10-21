@@ -20,10 +20,10 @@ Trong Tuần 4, chúng em hoàn thiện kiểm chứng hệ thống thời tiế
 - **Template CloudFormation 17 tài nguyên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/infrastructure/weather-stack.json).
 - **CloudFormation và hướng dẫn triển khai:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/INFRASTRUCTURE.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/INFRASTRUCTURE.md).
 - **Events, cấu hình và kiểm chứng stack mới:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/stacks](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4/results/advanced_live_2026_10_20/stacks).
-- **GitHub Deployments của sinh viên Tiến Sơn:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son).
-- **GitHub Deployments của sinh viên Ngọc Quyên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen).
+- **Minh chứng triển khai AWS của sinh viên Tiến Sơn:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default).
+- **Minh chứng triển khai AWS của sinh viên Ngọc Quyên:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen).
 
-Hai deployment record được bổ sung trên GitHub ngày 21/10 để liên kết đúng commit và hồ sơ AWS đã kiểm chứng ngày 20/10. Ngày đăng ký record và ngày triển khai được ghi riêng, giúp thầy theo dõi lịch sử từng môi trường.
+Hai liên kết trên dẫn trực tiếp đến hồ sơ của từng stack tại phiên bản đã lưu, gồm CloudFormation Events, cấu hình triển khai và kết quả kiểm chứng ngày 20/10. Đây là căn cứ để đối chiếu phần triển khai hạ tầng của hai môi trường.
 
 ## 2. Thu thập, dữ liệu raw và giám sát
 
@@ -88,6 +88,8 @@ Các thay đổi chính của Tuần 4 được lưu trong các commit sau:
 - **`feat(week4): verify live stacks and three historical backtest windows` — 58fdf22:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf).
 - **`feat(week4): complete final week verification, consolidate CloudFormation infrastructure, and update catalog` — 96bedec:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/96bedec19f4c208a179581039b5ebc42a526b093).
 - **`docs(week4): record verified AWS stacks in GitHub Deployments` — 616f15c:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/616f15c71c1c6ec9c0f8bf098ecdc2e15d371486](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/616f15c71c1c6ec9c0f8bf098ecdc2e15d371486).
+
+Commit `616f15c` bổ sung tài liệu và bản tổng hợp trong repository; bản thân commit không thực hiện triển khai AWS hoặc chứng minh thao tác tạo GitHub deployment. Hồ sơ triển khai AWS được dẫn tại mục 1; kết quả đọc lại API GitHub được lưu tại [hồ sơ đối chiếu ngày 21/10](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/github_deployment_readback_2026_10_21/README.md).
 
 - **Source collector:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_2/lambda/lambda_function.py).
 - **Hồ sơ Tuần 4:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/main/tuan_4).

@@ -1,22 +1,25 @@
-# GitHub Deployments — Tuần 4
+# Đối chiếu bản tổng hợp GitHub Deployments — Tuần 4
 
-Ngày 21/10/2026, GitHub được bổ sung hai deployment record cho các stack CloudFormation đã triển khai và kiểm chứng ngày **20/10/2026**. Hai record có trạng thái `success`, gắn với commit chứa source và minh chứng: [`58fdf22 — feat(week4): verify live stacks and three historical backtest windows`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/58fdf22da9b048e457aa88e823606cf424ec5caf).
+## Đính chính liên kết và phạm vi minh chứng
 
-| Sinh viên | GitHub environment | Stack AWS | Deployment ID |
-| --- | --- | --- | --- |
-| Sinh viên Tiến Sơn | [week4-tien-son](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son) | `weather-w4-son` | `7215849195` |
-| Sinh viên Ngọc Quyên | [week4-ngoc-quyen](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen) | `weather-w4-quyen` | `7215850093` |
+Hai liên kết trang môi trường Deployments từng đặt trong báo cáo trả **HTTP 404 khi truy cập không đăng nhập** ở lần kiểm tra ngày 21/10/2026. Vì vậy, chúng đã được thay bằng liên kết trực tiếp đến hồ sơ triển khai AWS cố định theo commit. Bản nộp không còn yêu cầu người đọc mở hai trang môi trường đó.
 
-## Căn cứ ghi nhận
+Trong lần đọc lại cùng ngày, API GitHub công khai trả **HTTP 200** cho danh sách deployment, từng record `7215849195` / `7215850093` và trạng thái của chúng. ID, environment, commit, ngày tạo và trạng thái `success` khớp bản tổng hợp. Phản hồi được lấy bằng GET không dùng token hoặc cookie, lưu các trường công khai cùng request ID tại [hồ sơ đọc lại](../github_deployment_readback_2026_10_21/README.md).
 
-- [Events, hash source/artifact/template và kết quả sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default).
-- [Events, hash source/artifact/template và kết quả sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen).
-- Hai stack `CREATE_COMPLETE`; mỗi collector có ba bản ghi, raw và SELECT đúng database/workgroup; truy vấn kiểm chứng không tái sử dụng kết quả.
-- Hash source và template tại commit tham chiếu khớp hồ sơ triển khai. Bộ xác minh ngoại tuyến Tuần 4 đã chạy lại thành công trước khi tạo record.
-- [Thông tin đăng ký và trạng thái đọc lại từ GitHub](registration.json).
+Kết quả này chứng minh các record tồn tại tại thời điểm đọc lại; không cho phép kết luận điều kiện truy cập của người đánh giá trước đó. Việc API đọc được và trang môi trường trả 404 được ghi riêng, không gộp thành một trạng thái thành công chung.
 
-**Ngày tạo record GitHub là 21/10; ngày triển khai và kiểm chứng AWS là 20/10.** Đây là bổ sung lịch sử triển khai đã có minh chứng. Không thực hiện lại CreateStack, cập nhật Lambda, gọi AWS hoặc chạy CD trong lần ghi nhận này. Trạng thái `success` mô tả kết quả triển khai đã lưu; việc xác nhận dịch vụ đang hoạt động ở thời điểm mới cần kiểm chứng AWS riêng.
+## Phân biệt các nguồn
 
-Các deployment Tuần 3 được giữ nguyên. Mỗi record Tuần 4 liên kết tới hồ sơ cố định theo commit để đối chiếu với phiên bản đã ghi nhận.
+- [registration.json](registration.json) giữ nguyên byte của bản tổng hợp đã công bố. Đây là bản tổng hợp, không phải phản hồi API nguyên gốc hay log thực thi thao tác tạo record.
+- Commit [`616f15c — docs(week4): record verified AWS stacks in GitHub Deployments`](https://github.com/JasonTM17/WeatherAWS_FinalTerm/commit/616f15c71c1c6ec9c0f8bf098ecdc2e15d371486) chỉ sửa bốn tệp trong repository. Không dùng commit này để chứng minh có thao tác tạo GitHub deployment, chạy CD hay triển khai AWS.
+- [public_readback.json](../github_deployment_readback_2026_10_21/public_readback.json) lưu các trường được chọn từ phản hồi API thực tế ngày 21/10, tách khỏi bản tổng hợp cũ.
+- Cả hai record có payload `registration_only=true`, `fresh_aws_verification=false`: ghi nhận hồ sơ triển khai đã có, không gọi lại AWS.
 
-[Trang Tuần 4](../../README.md) · [Hồ sơ triển khai AWS ngày 20/10](../advanced_live_2026_10_20/README.md) · [GitHub Deployments](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments)
+## Minh chứng triển khai AWS
+
+Hai stack được đối chiếu bằng Events, hash source/artifact/template và kết quả thực thi ngày 20/10 tại commit `58fdf22da9b048e457aa88e823606cf424ec5caf`:
+
+- [Sinh viên Tiến Sơn — stack weather-w4-son](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default).
+- [Sinh viên Ngọc Quyên — stack weather-w4-quyen](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen).
+
+[Trang Tuần 4](../../README.md) · [Hồ sơ AWS ngày 20/10](../advanced_live_2026_10_20/README.md) · [Đọc lại API và kiểm tra truy cập công khai](../github_deployment_readback_2026_10_21/README.md).

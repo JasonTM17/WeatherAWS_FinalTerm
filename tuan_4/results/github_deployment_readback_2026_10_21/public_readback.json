@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "repository": "JasonTM17/WeatherAWS_FinalTerm",
+  "checked_at_utc": "2026-10-21T04:55:09.644341+00:00",
+  "access_mode": "anonymous_without_token_or_cookies",
+  "read_only": true,
+  "aws_calls": false,
+  "response_scope": "Selected public API fields and HTTP metadata; no response body for HTML pages",
+  "registration_sha256": "8362d233280351a3697eb65198e5dbb5bcf6e4a549c2fee121e92e53db92d057",
+  "list_response": {
+    "url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments?per_page=100",
+    "http_status": 200,
+    "final_url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments?per_page=100",
+    "github_request_id": "0CAE:18C08:CF6E6E:130DBB3:6AD845AA",
+    "response_date": "Wed, 21 Oct 2026 04:55:07 GMT",
+    "records": [
+      {
+        "id": 7215850093,
+        "environment": "week4-ngoc-quyen",
+        "sha": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+        "ref": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+        "task": "deploy:cloudformation",
+        "created_at": "2026-10-21T02:09:16Z",
+        "updated_at": "2026-10-21T02:09:17Z"
+      },
+      {
+        "id": 7215849195,
+        "environment": "week4-tien-son",
+        "sha": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+        "ref": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+        "task": "deploy:cloudformation",
+        "created_at": "2026-10-21T02:09:12Z",
+        "updated_at": "2026-10-21T02:09:13Z"
+      },
+      {
+        "id": 7150599576,
+        "environment": "week3-ngoc-quyen",
+        "sha": "c28da19568a7bbe4b5be60d844574ad2853bf356",
+        "ref": "main",
+        "task": "deploy",
+        "created_at": "2026-10-18T05:50:29Z",
+        "updated_at": "2026-10-18T05:50:59Z"
+      },
+      {
+        "id": 7150599022,
+        "environment": "week3-tien-son",
+        "sha": "c28da19568a7bbe4b5be60d844574ad2853bf356",
+        "ref": "main",
+        "task": "deploy",
+        "created_at": "2026-10-18T05:50:25Z",
+        "updated_at": "2026-10-18T05:51:00Z"
+      },
+      {
+        "id": 7150569621,
+        "environment": "week3-ngoc-quyen",
+        "sha": "0b2685883c92eba1f31e27c735fdc48c94a8a12e",
+        "ref": "main",
+        "task": "deploy",
+        "created_at": "2026-10-18T05:46:50Z",
+        "updated_at": "2026-10-18T05:47:22Z"
+      },
+      {
+        "id": 7150569045,
+        "environment": "week3-tien-son",
+        "sha": "0b2685883c92eba1f31e27c735fdc48c94a8a12e",
+        "ref": "main",
+        "task": "deploy",
+        "created_at": "2026-10-18T05:46:46Z",
+        "updated_at": "2026-10-18T05:47:18Z"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "environment": "week4-tien-son",
+      "deployment_id": 7215849195,
+      "deployment": {
+        "url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215849195",
+        "http_status": 200,
+        "final_url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215849195",
+        "github_request_id": "7FC5:399BD0:D12629:1329D15:6AD845AB",
+        "response_date": "Wed, 21 Oct 2026 04:55:07 GMT",
+        "fields": {
+          "id": 7215849195,
+          "environment": "week4-tien-son",
+          "sha": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+          "ref": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+          "task": "deploy:cloudformation",
+          "created_at": "2026-10-21T02:09:12Z",
+          "updated_at": "2026-10-21T02:09:13Z"
+        },
+        "payload": {
+          "registration_only": true,
+          "fresh_aws_verification": false,
+          "evidence_commit": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+          "stack_name": "weather-w4-son",
+          "evidence_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default"
+        }
+      },
+      "statuses": {
+        "url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215849195/statuses",
+        "http_status": 200,
+        "final_url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215849195/statuses",
+        "github_request_id": "0F14:744AF:CF0651:13090F9:6AD845AC",
+        "response_date": "Wed, 21 Oct 2026 04:55:08 GMT",
+        "records": [
+          {
+            "id": 20128509835,
+            "state": "success",
+            "created_at": "2026-10-21T02:09:13Z",
+            "environment": "week4-tien-son",
+            "environment_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/README.md",
+            "log_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default"
+          }
+        ]
+      },
+      "public_environment_page": {
+        "url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son",
+        "http_status": 404,
+        "final_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son",
+        "github_request_id": "7445:3C20C6:A212F4:F72406:6AD845AC",
+        "response_date": "Wed, 21 Oct 2026 04:55:08 GMT"
+      }
+    },
+    {
+      "environment": "week4-ngoc-quyen",
+      "deployment_id": 7215850093,
+      "deployment": {
+        "url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215850093",
+        "http_status": 200,
+        "final_url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215850093",
+        "github_request_id": "501E:13162D:CF63A8:130C760:6AD845AD",
+        "response_date": "Wed, 21 Oct 2026 04:55:09 GMT",
+        "fields": {
+          "id": 7215850093,
+          "environment": "week4-ngoc-quyen",
+          "sha": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+          "ref": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+          "task": "deploy:cloudformation",
+          "created_at": "2026-10-21T02:09:16Z",
+          "updated_at": "2026-10-21T02:09:17Z"
+        },
+        "payload": {
+          "registration_only": true,
+          "fresh_aws_verification": false,
+          "evidence_commit": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+          "stack_name": "weather-w4-quyen",
+          "evidence_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen"
+        }
+      },
+      "statuses": {
+        "url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215850093/statuses",
+        "http_status": 200,
+        "final_url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215850093/statuses",
+        "github_request_id": "1F7A:3E7AE:D3FA3B:1358923:6AD845AD",
+        "response_date": "Wed, 21 Oct 2026 04:55:09 GMT",
+        "records": [
+          {
+            "id": 20128511929,
+            "state": "success",
+            "created_at": "2026-10-21T02:09:17Z",
+            "environment": "week4-ngoc-quyen",
+            "environment_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/README.md",
+            "log_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen"
+          }
+        ]
+      },
+      "public_environment_page": {
+        "url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen",
+        "http_status": 404,
+        "final_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen",
+        "github_request_id": "0CBA:3FCBD7:A3029F:F7DA1D:6AD845AE",
+        "response_date": "Wed, 21 Oct 2026 04:55:10 GMT"
+      }
+    }
+  ]
+}

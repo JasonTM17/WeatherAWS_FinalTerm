@@ -22,7 +22,7 @@
 
 **[Báo cáo chi tiết](docs/FINAL_REPORT.md)** · **[Nội dung nộp có đầy đủ URL](docs/SUBMISSION.md)** · **[Tổng kết toàn đồ án](../docs/FINAL_PROJECT_REPORT.md)**.
 
-**GitHub Deployments Tuần 4:** [week4-tien-son](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son) · [week4-ngoc-quyen](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen). [Hồ sơ ghi nhận](results/github_deployments_2026_10_21/README.md) bổ sung ngày 21/10 cho hai stack đã triển khai và kiểm chứng ngày 20/10; mỗi record gắn đúng commit và minh chứng AWS.
+**Minh chứng triển khai AWS:** [stack của sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default) · [stack của sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen). Hồ sơ cố định theo commit chứa Events, cấu hình và kết quả thực thi ngày 20/10. [Kết quả đọc lại API GitHub](results/github_deployment_readback_2026_10_21/README.md) ghi riêng trạng thái API và khả năng truy cập trang môi trường khi không đăng nhập.
 
 ![Sai số backtest ba cửa sổ](results/backtest_2026_10_20/backtest_mae.png)
 
