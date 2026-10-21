@@ -37,7 +37,7 @@ Ba điểm vào để đọc hồ sơ: **[Tổng kết toàn đồ án](docs/FIN
 
 **[Video demo đồ án — 24110054_24110051.mp4](https://drive.google.com/drive/folders/1G50ZYK7QFGoftLx3hYglw4SRTwr3TvAR?usp=sharing)**.
 
-**Minh chứng triển khai AWS Tuần 4:** [sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default) · [sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen). Hai liên kết dẫn tới Events, cấu hình và kết quả thực thi đã lưu theo commit. [Đối chiếu API GitHub ngày 21/10](tuan_4/results/github_deployment_readback_2026_10_21/README.md) được lưu riêng; các trang môi trường Deployments trả HTTP 404 khi truy cập không đăng nhập nên không dùng làm liên kết minh chứng trong báo cáo.
+**Minh chứng triển khai AWS Tuần 4:** [sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default) · [sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen). Hồ sơ gồm Events, cấu hình và kết quả thực thi cố định theo commit. [Kết quả đối chiếu bản ghi GitHub ngày 21/10](tuan_4/results/github_deployment_readback_2026_10_21/README.md) trình bày riêng phương pháp kiểm tra và phạm vi truy cập công khai.
 
 ## Điều hướng nhanh
 
