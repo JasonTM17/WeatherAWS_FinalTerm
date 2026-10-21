@@ -35,6 +35,8 @@
 
 Ba điểm vào để đọc hồ sơ: **[Tổng kết toàn đồ án](docs/FINAL_PROJECT_REPORT.md)** · **[Kiểm chứng Tuần 4](tuan_4/docs/FINAL_REPORT.md)** · **[Nội dung nộp thầy](tuan_4/docs/SUBMISSION.md)**.
 
+**Deployments Tuần 4:** [sinh viên Tiến Sơn](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son) · [sinh viên Ngọc Quyên](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen). Hai record [ghi nhận ngày 21/10](tuan_4/results/github_deployments_2026_10_21/README.md) liên kết tới commit và hồ sơ triển khai AWS đã kiểm chứng ngày 20/10.
+
 ## Điều hướng nhanh
 
 | Nội dung | Tài liệu hoặc dữ liệu |

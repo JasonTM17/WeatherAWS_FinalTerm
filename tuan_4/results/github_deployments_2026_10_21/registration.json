@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "scope": "GitHub record of existing verified AWS stacks",
+  "evidence_commit": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+  "records": [
+    {
+      "environment": "week4-tien-son",
+      "deployment_id": 7215849195,
+      "github_record_created_at": "2026-10-21T02:09:12Z",
+      "evidence_commit": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+      "state": "success",
+      "aws_deployed_at_utc": "2026-10-20T04:59:03.922047+00:00",
+      "aws_verified_at_utc": "2026-10-20T05:09:10.155952+00:00",
+      "stack_name": "weather-w4-son",
+      "evidence_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/default",
+      "environment_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/README.md",
+      "deployment_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son",
+      "api_url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215849195",
+      "registration_only": true,
+      "fresh_aws_verification": false
+    },
+    {
+      "environment": "week4-ngoc-quyen",
+      "deployment_id": 7215850093,
+      "github_record_created_at": "2026-10-21T02:09:16Z",
+      "evidence_commit": "58fdf22da9b048e457aa88e823606cf424ec5caf",
+      "state": "success",
+      "aws_deployed_at_utc": "2026-10-20T05:03:58.799922+00:00",
+      "aws_verified_at_utc": "2026-10-20T05:09:16.709128+00:00",
+      "stack_name": "weather-w4-quyen",
+      "evidence_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/tree/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/stacks/quyen",
+      "environment_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/58fdf22da9b048e457aa88e823606cf424ec5caf/tuan_4/results/advanced_live_2026_10_20/README.md",
+      "deployment_url": "https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen",
+      "api_url": "https://api.github.com/repos/JasonTM17/WeatherAWS_FinalTerm/deployments/7215850093",
+      "registration_only": true,
+      "fresh_aws_verification": false
+    }
+  ],
+  "aws_calls": false
+}

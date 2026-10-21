@@ -20,6 +20,8 @@
 
 **[Báo cáo chi tiết](docs/FINAL_REPORT.md)** · **[Nội dung nộp có đầy đủ URL](docs/SUBMISSION.md)** · **[Tổng kết toàn đồ án](../docs/FINAL_PROJECT_REPORT.md)**.
 
+**GitHub Deployments Tuần 4:** [week4-tien-son](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-tien-son) · [week4-ngoc-quyen](https://github.com/JasonTM17/WeatherAWS_FinalTerm/deployments/week4-ngoc-quyen). [Hồ sơ ghi nhận](results/github_deployments_2026_10_21/README.md) bổ sung ngày 21/10 cho hai stack đã triển khai và kiểm chứng ngày 20/10; mỗi record gắn đúng commit và minh chứng AWS.
+
 ![Sai số backtest ba cửa sổ](results/backtest_2026_10_20/backtest_mae.png)
 
 Backtest sử dụng chuỗi mô hình lịch sử, mỗi gốc chỉ dùng 24 giờ trước đó. Ba cửa sổ này được phân biệt với kỳ dự báo đã phát hành của Tuần 3. Các phép đo byte quét và độ trễ Athena được trình bày riêng; không quy đổi trực tiếp thành tỷ lệ giảm hóa đơn.
