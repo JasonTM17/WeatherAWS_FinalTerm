@@ -10,7 +10,8 @@
 
 **Đề tài:** Hệ thống thu thập và phân tích dữ liệu thời tiết, chất lượng không khí trên nền tảng AWS (Domain Apps).  
 **Mốc hoàn thiện tổng kết:** 20/10/2026.  
-**Cập nhật hồ sơ và liên kết video:** 21/10/2026.  
+**Cập nhật hồ sơ và liên kết video:** 21/10/2026.
+
 **Kho lưu trữ chính:** [https://github.com/JasonTM17/WeatherAWS_FinalTerm](https://github.com/JasonTM17/WeatherAWS_FinalTerm).
 
 ---
