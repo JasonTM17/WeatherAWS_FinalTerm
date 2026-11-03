@@ -134,14 +134,25 @@ Quyền gọi Lambda được ràng buộc với ARN của EventBridge rule và 
 
 ### 5.2. Tổng hợp chi phí
 
-Theo số liệu nhóm xác nhận, tổng chi phí thực hiện đồ án là **0,47 USD**, gồm **0,25 USD của sinh viên Tiến Sơn** và **0,22 USD của sinh viên Ngọc Quyên**. Chúng em kết hợp theo dõi chi phí với kiểm soát lịch thu thập, lưu kết quả phân tích để sử dụng lại và kiểm kê tài nguyên cuối phiên. Báo cáo chi phí và dữ liệu đối chiếu được đính kèm trong hồ sơ bàn giao.
+- **Tại thời điểm chốt Tuần 4 (21/10/2026):** Tổng chi phí do hai sinh viên xác nhận là **0,47 USD** (sinh viên Tiến Sơn 0,25 USD, sinh viên Ngọc Quyên 0,22 USD).
+- **Kiểm toán bổ sung ngày 03/11/2026:** Qua AWS CLI và Cost Explorer API, tổng mức chi phí tiêu dùng thực tế phát sinh (Actual Usage Cost) lũy kế toàn khóa học là **3,16 USD** (sinh viên Tiến Sơn 2,46 USD, sinh viên Ngọc Quyên 0,70 USD). Số liệu được hạch toán minh bạch theo định mức tài nguyên thực tế phát sinh.
+- **Đề xuất tối ưu hóa FinOps:** Nhóm đã xây dựng hồ sơ đề xuất cải tiến kiến trúc và CloudFormation template tối ưu [weather-stack-optimized.json](../infrastructure/weather-stack-optimized.json) giúp giảm 89,4% chi phí duy trì hàng tháng thông qua SSM Parameter Store, SQS DLQ và S3 Lifecycle.
 
 - **Báo cáo chi phí:**
 
   [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/COST_REPORT.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/docs/COST_REPORT.md)
+- **Đề xuất cải tiến kiến trúc và tối ưu hóa hệ thống:**
+
+  [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/optimization-proposals.md](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/docs/optimization-proposals.md)
 - **Bản tổng hợp chi phí:**
 
   [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/confirmed_cost_summary.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/confirmed_cost_summary.json)
+- **Dữ liệu kiểm toán chi phí live 03/11/2026 — JSON tổng hợp:**
+
+  [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/live_cost_update_2026_11_03.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/live_cost_update_2026_11_03.json)
+- **Dữ liệu kiểm toán chi phí live 03/11/2026 — CSV chi tiết:**
+
+  [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/live_cost_breakdown_2026_11_03.csv](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/live_cost_breakdown_2026_11_03.csv)
 - **Dữ liệu Cost Explorer theo kỳ — JSON tổng hợp:**
 
   [https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/cost_summary.json](https://github.com/JasonTM17/WeatherAWS_FinalTerm/blob/main/tuan_4/results/cost/cost_summary.json)

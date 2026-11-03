@@ -190,7 +190,7 @@ Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày 
 
 Ngày **03/11/2026**, hệ thống được kiểm toán lũy kế trực tiếp qua AWS CLI / Boto3 Cost Explorer API cho toàn bộ chu kỳ từ 01/10 đến 03/11/2026:
 - **Chi phí thực tế toàn đồ án (Actual Usage Cost):** **3,16 USD** (sinh viên Tiến Sơn 2,46 USD; sinh viên Ngọc Quyên 0,70 USD).
-- **Quy ước kế toán:** Toàn bộ số liệu là chi phí thực tế phát sinh (Actual Usage Cost, tuyệt đối không ghi số âm).
+- **Quy ước hạch toán:** Báo cáo ghi nhận theo chi phí tiêu dùng thực tế phát sinh (Actual Usage Cost) nhằm phản ánh chính xác toàn bộ định mức tài nguyên đã huy động trên hệ thống.
 - **Cơ cấu chi phí thô:** Amazon CloudWatch (2,02 USD, chiếm 63,8%), AWS Secrets Manager (1,03 USD, chiếm 32,7%), AWS Cost Explorer API (0,09 USD), Amazon S3 & Athena (< 0,02 USD).
 - Nguồn số liệu kiểm toán trực tiếp được lưu tại [JSON kiểm toán 03/11](../tuan_4/results/cost/live_cost_update_2026_11_03.json) và [CSV phân rã chi tiết](../tuan_4/results/cost/live_cost_breakdown_2026_11_03.csv).
 

@@ -30,7 +30,7 @@ Lệnh `python tuan_4/scripts/cost_analysis.py --check` tính lại tổng của
 
 ## 5. Cập nhật đối soát chi phí thực tế qua AWS CLI / Boto3 (Kỳ kiểm toán 03/11/2026)
 
-Ngày **03/11/2026**, hệ thống được truy vấn trực tiếp qua AWS CLI / Cost Explorer API (`GetCostAndUsage`) trên cả hai profile để kiểm toán chi phí thực tế tiêu dùng lũy kế toàn bộ chu kỳ từ ngày 01/10 đến 03/11/2026. Toàn bộ số liệu ghi nhận dưới đây là chi phí thực tế phát sinh (Actual Usage Cost), tuyệt đối không ghi số âm:
+Ngày **03/11/2026**, hệ thống được truy vấn trực tiếp qua AWS CLI / Cost Explorer API (`GetCostAndUsage`) trên cả hai profile để kiểm toán chi phí thực tế tiêu dùng lũy kế toàn bộ chu kỳ từ ngày 01/10 đến 03/11/2026. Toàn bộ số liệu ghi nhận dưới đây phản ánh chi phí tiêu dùng thực tế phát sinh (Actual Usage Cost), được chuẩn hóa theo giá trị số dương nhằm phản ánh chính xác khối lượng tài nguyên đã cấp phát trên hệ thống:
 
 | Dịch vụ AWS | Profile `default` (Nguyễn Tiến Sơn - 24110054) | Profile `quyen` (Trần Thị Ngọc Quyên - 24110051) | Tổng chi phí thực tế toàn đồ án |
 | :--- | :---: | :---: | :---: |

@@ -11,7 +11,7 @@
 
 Sau khi hoàn thành đợt kiểm chứng Tuần 4 và tiến hành rà soát thực tế qua AWS CLI và Cost Explorer API vào ngày **03/11/2026**, hệ thống đã ghi nhận các chỉ số vận hành và chi phí sau 1 tháng hoạt động:
 - **Chi phí thực tế tích lũy (Actual Usage Cost):** 3,16 USD (Tài khoản Tiến Sơn: 2,46 USD; Tài khoản Ngọc Quyên: 0,70 USD).
-- **Quy ước kế toán:** Toàn bộ số liệu là chi phí thực tế tiêu dùng (Actual Usage Cost, tuyệt đối không ghi số âm).
+- **Quy ước hạch toán:** Báo cáo ghi nhận theo chi phí tiêu dùng thực tế phát sinh (Actual Usage Cost) nhằm phản ánh chính xác toàn bộ định mức tài nguyên đã huy động trên hệ thống.
 - **Nguyên nhân chính phát sinh chi phí thô:** Dịch vụ Amazon CloudWatch (2,02 USD, chiếm 63,8%) và AWS Secrets Manager (1,03 USD, chiếm 32,7%). Chi phí tính toán Lambda và truy vấn Athena chỉ chiếm dưới 1,0% tổng chi phí.
 
 Mục tiêu của tài liệu này là xây dựng phương án cải tiến kiến trúc toàn diện theo tiêu chuẩn AWS Well-Architected Framework, tối ưu chi phí (FinOps), nâng cao độ tin cậy (Reliability), tối ưu hóa dữ liệu (Performance Efficiency) và hoàn thiện bảo mật đặc quyền tối thiểu (Security).

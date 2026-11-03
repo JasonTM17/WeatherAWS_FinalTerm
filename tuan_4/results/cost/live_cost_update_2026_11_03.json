@@ -1,7 +1,7 @@
 {
   "audit_date": "2026-11-03",
   "status": "PASS",
-  "scope": "Chi phí thực tế tiêu dùng toàn đồ án (Actual Real Usage Cost, không ghi số âm)",
+  "scope": "Chi phí tiêu dùng thực tế toàn đồ án (Actual Real Usage Cost)",
   "period_start": "2026-10-01",
   "period_end": "2026-11-03",
   "currency": "USD",
