@@ -39,7 +39,7 @@ Hệ thống được phát triển và kiểm chứng thực tế qua 4 tuần 
 4. **Tuần 4 (Kiểm chứng toàn diện, IaC CloudFormation, FinOps và An ninh bảo mật):**
    - **Kiểm thử E2E có kiểm soát:** Thực hiện hai lượt realtime ngày 19/10 trên hai môi trường độc lập; lưu nguyên byte object NDJSON từ S3, kiểm tra CSV raw và đối chiếu các trường đã chọn bằng Athena theo đúng `record_id`. Ngày 20/10 thực hiện thêm một lượt trên mỗi collector của stack mới.
    - **Đối chiếu 3 chiều Log – Metric – S3:** Xác thực khớp 1-1 giữa nhật ký CloudWatch Logs (`START`/`END`/`REPORT`/`[INFO] Result`), chỉ số vận hành CloudWatch Metrics (Invocations, 0 Errors, tỷ lệ lỗi 0,0%), tệp lưu trữ S3, và xác nhận nhận email cảnh báo vượt ngưỡng của cả hai sinh viên.
-   - **Tổng hợp chi phí và quản lý tài nguyên (FinOps):** Chi phí do hai sinh viên xác nhận ngày 21/10/2026 là **0,25 USD** của sinh viên Tiến Sơn và **0,22 USD** của sinh viên Ngọc Quyên, tổng **0,47 USD**. Kỳ kiểm toán trực tiếp ngày 03/11/2026 qua AWS Cost Explorer API ghi nhận tổng tiêu dùng thô (Gross Usage) lũy kế là **3,16 USD** (Sơn 2,46 USD, Quyên 0,70 USD), thực trả **0,00 USD** nhờ tín dụng học tập bù trừ 100%. Toàn bộ lịch thu thập ngầm giữ trạng thái `DISABLED`.
+   - **Tổng hợp chi phí và quản lý tài nguyên (FinOps):** Chi phí do hai sinh viên xác nhận ngày 21/10/2026 là **0,25 USD** của sinh viên Tiến Sơn và **0,22 USD** của sinh viên Ngọc Quyên, tổng **0,47 USD**. Kỳ kiểm toán trực tiếp ngày 03/11/2026 qua AWS Cost Explorer API ghi nhận tổng tiêu dùng thô (Gross Usage) lũy kế là **3,16 USD** (Sơn 2,46 USD, Quyên 0,70 USD), toàn bộ là chi phí thực tế tiêu dùng (Actual Usage Cost, không ghi số âm). Toàn bộ lịch thu thập ngầm giữ trạng thái `DISABLED`.
    - **Tự động hóa vòng đời tài nguyên cuối phiên:** Xây dựng script PowerShell và công cụ Python `session_control.py` giúp tạm dừng/khôi phục EventBridge Rule, kiểm soát hoạt động thu thập theo phiên Lab.
    - **Đóng gói toàn bộ hạ tầng dưới dạng mã (CloudFormation IaC):** Xây dựng một template duy nhất ([weather-stack.json](tuan_4/infrastructure/weather-stack.json)) quản lý trọn vẹn **17 tài nguyên AWS Serverless**, đạt kiểm tra `cfn-lint 1.57.2` và API AWS `ValidateTemplate` trên cả hai môi trường.
    - **Rà soát bảo mật:** Đối chiếu 11 nội dung trong phạm vi đồ án ([SECURITY_AUDIT.md](tuan_4/docs/SECURITY_AUDIT.md)), gồm BPA, AES256, versioning, HTTPS, ownership, quyền gọi Lambda và mẫu policy collector. Kết quả đọc cấu hình và thiết kế quyền được ghi riêng theo nguồn.
@@ -161,7 +161,7 @@ Báo cáo [LOG_METRIC_S3_RECONCILIATION.md](tuan_4/docs/LOG_METRIC_S3_RECONCILIA
 - **Kỳ kiểm toán trực tiếp qua AWS CLI / Cost Explorer API (03/11/2026):**
   - **Profile `default` (Nguyễn Tiến Sơn):** Tiêu dùng thô **2,46 USD**, bù trừ tín dụng -2,46 USD, thực trả **0,00 USD**.
   - **Profile `quyen` (Trần Thị Ngọc Quyên):** Tiêu dùng thô **0,70 USD**, bù trừ tín dụng -0,70 USD, thực trả **0,00 USD**.
-  - **Tổng tiêu dùng thô toàn đồ án (Gross Usage):** **3,16 USD** (thực trả Net Unblended: **0,00 USD**).
+  - **Tổng tiêu dùng thô toàn đồ án (Gross Usage):** **3,16 USD** (chính xác: 3,1607 USD).
   - Nguồn số liệu kiểm toán live lưu tại [JSON tổng hợp kiểm toán 03/11](tuan_4/results/cost/live_cost_update_2026_11_03.json) và [CSV phân rã từng ngày](tuan_4/results/cost/live_cost_breakdown_2026_11_03.csv).
 
 #### 3.2. Phân rã nguyên nhân phát sinh chi phí thô theo dịch vụ (Gross Spend Drivers)

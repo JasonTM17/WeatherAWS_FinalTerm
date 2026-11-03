@@ -30,20 +30,29 @@ Lệnh `python tuan_4/scripts/cost_analysis.py --check` tính lại tổng của
 
 ## 5. Cập nhật đối soát chi phí thực tế qua AWS CLI / Boto3 (Kỳ kiểm toán 03/11/2026)
 
-Ngày **03/11/2026**, hệ thống được truy vấn trực tiếp qua AWS CLI / Cost Explorer API (GetCostAndUsage) trên cả hai profile để kiểm toán chi phí lũy kế toàn bộ chu kỳ từ ngày 01/10 đến 03/11/2026:
+Ngày **03/11/2026**, hệ thống được truy vấn trực tiếp qua AWS CLI / Cost Explorer API (`GetCostAndUsage`) trên cả hai profile để kiểm toán chi phí thực tế tiêu dùng lũy kế toàn bộ chu kỳ từ ngày 01/10 đến 03/11/2026. Toàn bộ số liệu ghi nhận dưới đây là chi phí thực tế phát sinh (Actual Usage Cost), tuyệt đối không ghi số âm:
 
-| Chỉ số / Tài khoản | Profile default (Nguyễn Tiến Sơn - 24110054) | Profile quyen (Trần Thị Ngọc Quyên - 24110051) | Tổng toàn đồ án |
-| :--- | :--- | :--- | :--- |
-| **Gross Usage (Tiêu dùng thô)** | **2,46 USD** | **0,70 USD** | **3,16 USD** |
-| **Credit AWS Learner Lab** | -2,46 USD | -0,70 USD | -3,16 USD |
-| **Net Unblended Cost (Thực trả)** | **0,00 USD** | **0,00 USD** | **0,00 USD** |
-| **Trạng thái tài nguyên chạy ngầm** | Đã tắt lịch thu thập (DISABLED) | Đã tắt lịch thu thập (DISABLED) | Không phát sinh thu thập mới |
+| Dịch vụ AWS | Profile `default` (Nguyễn Tiến Sơn - 24110054) | Profile `quyen` (Trần Thị Ngọc Quyên - 24110051) | Tổng chi phí thực tế toàn đồ án |
+| :--- | :---: | :---: | :---: |
+| **Amazon CloudWatch** | **1,8902 USD** | **0,1273 USD** | **2,0175 USD** |
+| **AWS Secrets Manager** | **0,5211 USD** | **0,5122 USD** | **1,0332 USD** |
+| **AWS Cost Explorer API** | **0,0400 USD** | **0,0500 USD** | **0,0900 USD** |
+| **Amazon Athena** | **0,0038 USD** | **0,0064 USD** | **0,0102 USD** |
+| **Amazon Simple Storage Service (S3)** | **0,0042 USD** | **0,0056 USD** | **0,0098 USD** |
+| **AWS Key Management Service (KMS)** | **0,000003 USD** | **0,0000 USD** | **0,000003 USD** |
+| **AWS Lambda** | **0,0000 USD** | **0,0000 USD** | **0,0000 USD** |
+| **AWS Glue** | **0,0000 USD** | **0,0000 USD** | **0,0000 USD** |
+| **Amazon Simple Notification Service (SNS)** | **0,0000 USD** | **0,0000 USD** | **0,0000 USD** |
+| **AWS CloudFormation** | **0,0000 USD** | **0,0000 USD** | **0,0000 USD** |
+| **TỔNG CHI PHÍ THỰC TẾ (USD)** | **2,4592 USD** | **0,7015 USD** | **3,1607 USD** |
+| **LÀM TRÒN BÁO CÁO (USD)** | **2,46 USD** | **0,70 USD** | **3,16 USD** |
 
-### Phân rã chi phí tiêu dùng thực tế (Gross) theo dịch vụ:
-- **Amazon CloudWatch:** Tổng cộng **2,02 USD** (Sơn: 1,89 USD, Quyên: 0,13 USD) do cảnh báo CloudWatch Alarms (0,10 USD/alarm/tháng) và nạp log Lambda.
-- **AWS Secrets Manager:** Tổng cộng **1,03 USD** (Sơn: 0,52 USD, Quyên: 0,51 USD) do tồn tại song song 2 secret/tài khoản (0,40 USD/secret/tháng).
-- **AWS Cost Explorer API:** Tổng cộng **0,09 USD** (9 lượt truy vấn qua API, 0,01 USD/request).
-- **Amazon Athena & S3:** Tổng cộng **< 0,02 USD** (nhờ áp dụng Parquet và Partition Projection tối ưu truy vấn chỉ quét byte nhỏ).
+### Đánh giá nguyên nhân phát sinh chi phí thực tế:
+- **Amazon CloudWatch (2,02 USD):** Chiếm tỷ trọng lớn nhất (63,8%) do duy trì 2 CloudWatch Alarms (0,10 USD/alarm/tháng) và nạp log từ các hàm Lambda.
+- **AWS Secrets Manager (1,03 USD):** Chiếm 32,7% do tồn tại đồng thời 2 secret trên mỗi tài khoản (0,40 USD/secret/tháng pro-rated).
+- **AWS Cost Explorer API (0,09 USD):** Chiếm 2,8% từ 9 lượt truy vấn qua API phục vụ kiểm toán chi phí (0,01 USD/request).
+- **Amazon Athena & S3 (0,02 USD):** Chiếm dưới 1,0% nhờ tối ưu hóa định dạng Parquet Snappy và Partition Projection.
+- **Trạng thái tài nguyên:** Toàn bộ lịch kích hoạt EventBridge (`WeatherCollectionSchedule`, `weather-w4-*-hourly`) trên cả hai tài khoản đều ở trạng thái `DISABLED`, đảm bảo không phát sinh chi phí thu thập ngoài ý muốn.
 
 Chi tiết đối soát từng ngày và từng dịch vụ được lưu trữ tại:
 - [JSON tổng hợp kiểm toán 03/11/2026](../results/cost/live_cost_update_2026_11_03.json)

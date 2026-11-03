@@ -1,472 +1,294 @@
 profile,student,student_id,date_utc,service,record_type,amount_usd,estimated
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS CloudFormation,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Cost Explorer,Credit,-0.01,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Cost Explorer,Usage,0.01,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Secrets Manager,Credit,-0.004792572,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Secrets Manager,Usage,0.0047925592,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Athena,Credit,-0.0006,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Athena,Usage,0.0006,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Simple Storage Service,Credit,-0.0005436,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Simple Storage Service,Usage,0.0005436,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AmazonCloudWatch,Credit,-0.00024,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-06,AmazonCloudWatch,Usage,0.00024,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,AWS Secrets Manager,Credit,-0.012923264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,AWS Secrets Manager,Usage,0.0129232256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,Amazon Simple Storage Service,Credit,-0.0000658775,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,Amazon Simple Storage Service,Usage,0.0000658775,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,AmazonCloudWatch,Credit,-0.00024,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-07,AmazonCloudWatch,Usage,0.00024,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-08,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-08,AWS Secrets Manager,Credit,-0.012903264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-08,AWS Secrets Manager,Usage,0.0129032256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-08,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-08,Amazon Simple Storage Service,Credit,-7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-08,Amazon Simple Storage Service,Usage,7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-08,AmazonCloudWatch,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-09,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-09,AWS Secrets Manager,Credit,-0.012903264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-09,AWS Secrets Manager,Usage,0.0129032256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-09,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-09,Amazon Simple Storage Service,Credit,-7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-09,Amazon Simple Storage Service,Usage,7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-09,AmazonCloudWatch,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,AWS Secrets Manager,Credit,-0.012903264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,AWS Secrets Manager,Usage,0.0129032256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,Amazon Simple Storage Service,Credit,-7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,Amazon Simple Storage Service,Usage,7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,AmazonCloudWatch,Credit,-0.003225816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-10,AmazonCloudWatch,Usage,0.0032258064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,AWS Secrets Manager,Credit,-0.012903264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,AWS Secrets Manager,Usage,0.0129032256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,Amazon Simple Storage Service,Credit,-7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,Amazon Simple Storage Service,Usage,7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,AmazonCloudWatch,Credit,-0.003225816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-11,AmazonCloudWatch,Usage,0.0032258064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,AWS Secrets Manager,Credit,-0.012903264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,AWS Secrets Manager,Usage,0.0129032256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,Amazon Simple Storage Service,Credit,-7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,Amazon Simple Storage Service,Usage,7.75E-8,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,AmazonCloudWatch,Credit,-0.003225816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-12,AmazonCloudWatch,Usage,0.0032258064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,AWS Secrets Manager,Credit,-0.012953264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,AWS Secrets Manager,Usage,0.0129532256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Athena,Credit,-0.0005,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Athena,Usage,0.0005,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Simple Storage Service,Credit,-0.0004926775,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Simple Storage Service,Usage,0.0004926775,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,AmazonCloudWatch,Credit,-0.003705816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-13,AmazonCloudWatch,Usage,0.0037058064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Cost Explorer,Credit,-0.01,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Cost Explorer,Usage,0.01,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Secrets Manager,Credit,-0.012933264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Secrets Manager,Usage,0.0129332256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Athena,Credit,-0.00065,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Athena,Usage,0.00065,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Simple Storage Service,Credit,-0.00057441,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Simple Storage Service,Usage,0.00057441,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AmazonCloudWatch,Credit,-0.003465816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-14,AmazonCloudWatch,Usage,0.0034658064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,AWS Secrets Manager,Credit,-0.012903264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,AWS Secrets Manager,Usage,0.0129032256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,Amazon Simple Storage Service,Credit,-2.1E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,Amazon Simple Storage Service,Usage,2.1E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,AmazonCloudWatch,Credit,-0.003225816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-15,AmazonCloudWatch,Usage,0.0032258064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,AWS Secrets Manager,Credit,-0.012933264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,AWS Secrets Manager,Usage,0.0129332256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Athena,Credit,-0.0008,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Athena,Usage,0.0008,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Simple Storage Service,Credit,-0.00059761,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Simple Storage Service,Usage,0.00059761,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,AmazonCloudWatch,Credit,-0.003465816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-16,AmazonCloudWatch,Usage,0.0034658064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,AWS Secrets Manager,Credit,-0.012903264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,AWS Secrets Manager,Usage,0.0129032256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,Amazon Simple Storage Service,Credit,-3.19E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,Amazon Simple Storage Service,Usage,3.19E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,AmazonCloudWatch,Credit,-0.003225816,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-17,AmazonCloudWatch,Usage,0.0032258064,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,AWS Secrets Manager,Credit,-0.012978264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,AWS Secrets Manager,Usage,0.0129782256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Athena,Credit,-0.00045,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Athena,Usage,0.00045,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Simple Storage Service,Credit,-0.000380519,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Simple Storage Service,Usage,0.000380519,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,AmazonCloudWatch,Credit,-0.008101629,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-18,AmazonCloudWatch,Usage,0.0081016128,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Cost Explorer,Credit,-0.02,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Cost Explorer,Usage,0.02,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Secrets Manager,Credit,-0.012968264,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Secrets Manager,Usage,0.0129682256,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Athena,Credit,-0.0001,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Athena,Usage,0.0001,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Simple Storage Service,Credit,-0.0002122704,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Simple Storage Service,Usage,0.0002122704,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AmazonCloudWatch,Credit,-0.007334856,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-19,AmazonCloudWatch,Usage,0.0073348386,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS CloudFormation,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Key Management Service,Credit,-0.000003,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Key Management Service,Usage,0.000003,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Lambda,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Secrets Manager,Credit,-0.023274396,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Secrets Manager,Usage,0.023274396,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Athena,Credit,-0.0007,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Athena,Usage,0.0007,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Simple Storage Service,Credit,-0.0012796969,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Simple Storage Service,Usage,0.0012796968,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AmazonCloudWatch,Credit,-0.014194421,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-20,AmazonCloudWatch,Usage,0.0141944066,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,AmazonCloudWatch,Credit,-0.006451608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-21,AmazonCloudWatch,Usage,0.006451608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,AmazonCloudWatch,Credit,-0.006451608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-22,AmazonCloudWatch,Usage,0.006451608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,Amazon Simple Notification Service,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,AmazonCloudWatch,Credit,-0.006691608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-23,AmazonCloudWatch,Usage,0.006691608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-24,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-24,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-24,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-24,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-24,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-24,AmazonCloudWatch,Credit,-0.006451608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-24,AmazonCloudWatch,Usage,0.006451608,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-25,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-25,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-25,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-25,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-25,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-25,AmazonCloudWatch,Credit,-0.026622228,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-25,AmazonCloudWatch,Usage,0.0266220888,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-26,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-26,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-26,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-26,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-26,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-26,AmazonCloudWatch,Credit,-0.296774328,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-26,AmazonCloudWatch,Usage,0.2967741912,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-27,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-27,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-27,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-27,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-27,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-27,AmazonCloudWatch,Credit,-0.296774328,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-27,AmazonCloudWatch,Usage,0.2967741912,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-28,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-28,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-28,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-28,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-28,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-28,AmazonCloudWatch,Credit,-0.296774328,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-28,AmazonCloudWatch,Usage,0.2967741912,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-29,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-29,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-29,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-29,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-29,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-29,AmazonCloudWatch,Credit,-0.296774328,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-29,AmazonCloudWatch,Usage,0.2967741912,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-30,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-30,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-30,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-30,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-30,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-30,AmazonCloudWatch,Credit,-0.296774328,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-30,AmazonCloudWatch,Usage,0.2967741912,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-31,AWS Glue,Usage,0,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-31,AWS Secrets Manager,Credit,-0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-31,AWS Secrets Manager,Usage,0.025806432,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-31,Amazon Simple Storage Service,Credit,-7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-31,Amazon Simple Storage Service,Usage,7.286E-7,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-31,AmazonCloudWatch,Credit,-0.296774328,False
-default,Nguyễn Tiến Sơn,24110054,2026-10-31,AmazonCloudWatch,Usage,0.2967741912,False
-default,Nguyễn Tiến Sơn,24110054,2026-11-01,AWS Glue,Usage,0,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-01,AWS Secrets Manager,Credit,-0.026666688,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-01,AWS Secrets Manager,Usage,0.0266666688,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-01,Amazon Simple Storage Service,Credit,-7.528E-7,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-01,Amazon Simple Storage Service,Usage,7.528E-7,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-01,AmazonCloudWatch,Usage,0,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-02,AWS Glue,Usage,0,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-02,AWS Secrets Manager,Credit,-0.014444456,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-02,AWS Secrets Manager,Usage,0.0144444456,True
-default,Nguyễn Tiến Sơn,24110054,2026-11-02,AmazonCloudWatch,Usage,0,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS CloudFormation,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Cost Explorer,Credit,-0.01,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Cost Explorer,Usage,0.01,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Lambda,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Secrets Manager,Credit,-0.006668348,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Secrets Manager,Usage,0.0066683268,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Athena,Credit,-0.00375,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Athena,Usage,0.00375,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Simple Storage Service,Credit,-0.0025744,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Simple Storage Service,Usage,0.0025744,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AmazonCloudWatch,Credit,-0.00024,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AmazonCloudWatch,Usage,0.00024,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AWS Secrets Manager,Credit,-0.012903264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AWS Secrets Manager,Usage,0.0129032256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,Amazon Simple Storage Service,Credit,-5.511E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,Amazon Simple Storage Service,Usage,5.51E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AmazonCloudWatch,Credit,-0.003225816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AmazonCloudWatch,Usage,0.0032258064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AWS Secrets Manager,Credit,-0.012903264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AWS Secrets Manager,Usage,0.0129032256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,Amazon Simple Storage Service,Credit,-5.511E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,Amazon Simple Storage Service,Usage,5.51E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AmazonCloudWatch,Credit,-0.003225816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AmazonCloudWatch,Usage,0.0032258064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AWS Secrets Manager,Credit,-0.012903264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AWS Secrets Manager,Usage,0.0129032256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,Amazon Simple Storage Service,Credit,-5.511E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,Amazon Simple Storage Service,Usage,5.51E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AmazonCloudWatch,Credit,-0.003225816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AmazonCloudWatch,Usage,0.0032258064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AWS Secrets Manager,Credit,-0.012903264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AWS Secrets Manager,Usage,0.0129032256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,Amazon Simple Storage Service,Credit,-5.511E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,Amazon Simple Storage Service,Usage,5.51E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AmazonCloudWatch,Credit,-0.003225816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AmazonCloudWatch,Usage,0.0032258064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AWS Secrets Manager,Credit,-0.012903264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AWS Secrets Manager,Usage,0.0129032256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,Amazon Simple Storage Service,Credit,-5.511E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,Amazon Simple Storage Service,Usage,5.51E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AmazonCloudWatch,Credit,-0.003225816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AmazonCloudWatch,Usage,0.0032258064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AWS Lambda,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AWS Secrets Manager,Credit,-0.012988264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AWS Secrets Manager,Usage,0.0129882256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,Amazon Simple Storage Service,Credit,-0.0001055511,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,Amazon Simple Storage Service,Usage,0.000105551,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AmazonCloudWatch,Credit,-0.003705816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AmazonCloudWatch,Usage,0.0037058064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Cost Explorer,Credit,-0.01,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Cost Explorer,Usage,0.01,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Lambda,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Secrets Manager,Credit,-0.012953264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Secrets Manager,Usage,0.0129532256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Athena,Credit,-0.00065,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Athena,Usage,0.00065,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Simple Storage Service,Credit,-0.0006434396,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Simple Storage Service,Usage,0.0006434395,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AmazonCloudWatch,Credit,-0.003465816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AmazonCloudWatch,Usage,0.0034658064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AWS Secrets Manager,Credit,-0.012903264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AWS Secrets Manager,Usage,0.0129032256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,Amazon Simple Storage Service,Credit,-6.396E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,Amazon Simple Storage Service,Usage,6.395E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AmazonCloudWatch,Credit,-0.003225816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AmazonCloudWatch,Usage,0.0032258064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AWS Lambda,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AWS Secrets Manager,Credit,-0.012943264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AWS Secrets Manager,Usage,0.0129432256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Athena,Credit,-0.0008,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Athena,Usage,0.0008,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Simple Storage Service,Credit,-0.0006660396,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Simple Storage Service,Usage,0.0006660395,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AmazonCloudWatch,Credit,-0.003465816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AmazonCloudWatch,Usage,0.0034658064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AWS Secrets Manager,Credit,-0.012903264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AWS Secrets Manager,Usage,0.0129032256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,Amazon Simple Storage Service,Credit,-7.742E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,Amazon Simple Storage Service,Usage,7.742E-7,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AmazonCloudWatch,Credit,-0.003225816,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AmazonCloudWatch,Usage,0.0032258064,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AWS Lambda,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AWS Secrets Manager,Credit,-0.012993264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AWS Secrets Manager,Usage,0.0129932256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Athena,Credit,-0.00045,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Athena,Usage,0.00045,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Simple Storage Service,Credit,-0.0003857742,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Simple Storage Service,Usage,0.0003857742,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AmazonCloudWatch,Credit,-0.007698405,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AmazonCloudWatch,Usage,0.007698387,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Cost Explorer,Credit,-0.02,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Cost Explorer,Usage,0.02,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Lambda,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Secrets Manager,Credit,-0.012963264,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Secrets Manager,Usage,0.0129632256,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Athena,Credit,-0.0001,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Athena,Usage,0.0001,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Simple Storage Service,Credit,-0.000210335,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Simple Storage Service,Usage,0.0002103349,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AmazonCloudWatch,Credit,-0.006931632,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AmazonCloudWatch,Usage,0.0069316128,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS CloudFormation,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Cost Explorer,Credit,-0.01,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Cost Explorer,Usage,0.01,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Lambda,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Secrets Manager,Credit,-0.02313736,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Secrets Manager,Usage,0.02313736,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Athena,Credit,-0.0006,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Athena,Usage,0.0006,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Simple Storage Service,Credit,-0.0010283742,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Simple Storage Service,Usage,0.0010283742,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AmazonCloudWatch,Credit,-0.008024502,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AmazonCloudWatch,Usage,0.008024496,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,Amazon Simple Notification Service,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AmazonCloudWatch,Credit,-0.006691608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AmazonCloudWatch,Usage,0.006691608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AWS Glue,Usage,0,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AWS Secrets Manager,Credit,-0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AWS Secrets Manager,Usage,0.025806432,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,Amazon Simple Storage Service,Credit,-0.0000011903,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,Amazon Simple Storage Service,Usage,0.0000011902,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AmazonCloudWatch,Credit,-0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AmazonCloudWatch,Usage,0.006451608,False
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,AWS Glue,Usage,0,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,AWS Secrets Manager,Credit,-0.026666688,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,AWS Secrets Manager,Usage,0.0266666688,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,Amazon Simple Storage Service,Credit,-0.00000123,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,Amazon Simple Storage Service,Usage,0.00000123,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,AmazonCloudWatch,Usage,0,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-02,AWS Glue,Usage,0,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-02,AWS Secrets Manager,Credit,-0.01666668,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-02,AWS Secrets Manager,Usage,0.016666668,True
-quyen,Trần Thị Ngọc Quyên,24110051,2026-11-02,AmazonCloudWatch,Usage,0,True
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS CloudFormation,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Cost Explorer,ActualUsage,0.01000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,AWS Secrets Manager,ActualUsage,0.00479256,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Athena,ActualUsage,0.00060000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,Amazon Simple Storage Service,ActualUsage,0.00054360,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-06,AmazonCloudWatch,ActualUsage,0.00024000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-07,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-07,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-07,AWS Secrets Manager,ActualUsage,0.01292323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-07,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-07,Amazon Simple Storage Service,ActualUsage,0.00006588,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-07,AmazonCloudWatch,ActualUsage,0.00024000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-08,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-08,AWS Secrets Manager,ActualUsage,0.01290323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-08,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-08,Amazon Simple Storage Service,ActualUsage,0.00000008,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-08,AmazonCloudWatch,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-09,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-09,AWS Secrets Manager,ActualUsage,0.01290323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-09,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-09,Amazon Simple Storage Service,ActualUsage,0.00000008,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-09,AmazonCloudWatch,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-10,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-10,AWS Secrets Manager,ActualUsage,0.01290323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-10,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-10,Amazon Simple Storage Service,ActualUsage,0.00000008,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-10,AmazonCloudWatch,ActualUsage,0.00322581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-11,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-11,AWS Secrets Manager,ActualUsage,0.01290323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-11,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-11,Amazon Simple Storage Service,ActualUsage,0.00000008,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-11,AmazonCloudWatch,ActualUsage,0.00322581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-12,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-12,AWS Secrets Manager,ActualUsage,0.01290323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-12,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-12,Amazon Simple Storage Service,ActualUsage,0.00000008,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-12,AmazonCloudWatch,ActualUsage,0.00322581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-13,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-13,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-13,AWS Secrets Manager,ActualUsage,0.01295323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Athena,ActualUsage,0.00050000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-13,Amazon Simple Storage Service,ActualUsage,0.00049268,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-13,AmazonCloudWatch,ActualUsage,0.00370581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Cost Explorer,ActualUsage,0.01000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,AWS Secrets Manager,ActualUsage,0.01293323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Athena,ActualUsage,0.00065000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,Amazon Simple Storage Service,ActualUsage,0.00057441,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-14,AmazonCloudWatch,ActualUsage,0.00346581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-15,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-15,AWS Secrets Manager,ActualUsage,0.01290323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-15,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-15,Amazon Simple Storage Service,ActualUsage,0.00000021,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-15,AmazonCloudWatch,ActualUsage,0.00322581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-16,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-16,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-16,AWS Secrets Manager,ActualUsage,0.01293323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Athena,ActualUsage,0.00080000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-16,Amazon Simple Storage Service,ActualUsage,0.00059761,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-16,AmazonCloudWatch,ActualUsage,0.00346581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-17,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-17,AWS Secrets Manager,ActualUsage,0.01290323,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-17,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-17,Amazon Simple Storage Service,ActualUsage,0.00000032,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-17,AmazonCloudWatch,ActualUsage,0.00322581,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-18,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-18,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-18,AWS Secrets Manager,ActualUsage,0.01297823,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Athena,ActualUsage,0.00045000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-18,Amazon Simple Storage Service,ActualUsage,0.00038052,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-18,AmazonCloudWatch,ActualUsage,0.00810161,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Cost Explorer,ActualUsage,0.02000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,AWS Secrets Manager,ActualUsage,0.01296823,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Athena,ActualUsage,0.00010000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,Amazon Simple Storage Service,ActualUsage,0.00021227,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-19,AmazonCloudWatch,ActualUsage,0.00733484,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS CloudFormation,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Key Management Service,ActualUsage,0.00000300,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Lambda,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,AWS Secrets Manager,ActualUsage,0.02327440,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Athena,ActualUsage,0.00070000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,Amazon Simple Storage Service,ActualUsage,0.00127970,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-20,AmazonCloudWatch,ActualUsage,0.01419441,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-21,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-21,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-21,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-21,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-21,AmazonCloudWatch,ActualUsage,0.00645161,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-22,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-22,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-22,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-22,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-22,AmazonCloudWatch,ActualUsage,0.00645161,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-23,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-23,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-23,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-23,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-23,AmazonCloudWatch,ActualUsage,0.00669161,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-24,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-24,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-24,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-24,AmazonCloudWatch,ActualUsage,0.00645161,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-25,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-25,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-25,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-25,AmazonCloudWatch,ActualUsage,0.02662209,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-26,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-26,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-26,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-26,AmazonCloudWatch,ActualUsage,0.29677419,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-27,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-27,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-27,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-27,AmazonCloudWatch,ActualUsage,0.29677419,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-28,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-28,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-28,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-28,AmazonCloudWatch,ActualUsage,0.29677419,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-29,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-29,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-29,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-29,AmazonCloudWatch,ActualUsage,0.29677419,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-30,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-30,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-30,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-30,AmazonCloudWatch,ActualUsage,0.29677419,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-31,AWS Glue,ActualUsage,0.00000000,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-31,AWS Secrets Manager,ActualUsage,0.02580643,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-31,Amazon Simple Storage Service,ActualUsage,0.00000073,False
+default,Nguyễn Tiến Sơn,24110054,2026-10-31,AmazonCloudWatch,ActualUsage,0.29677419,False
+default,Nguyễn Tiến Sơn,24110054,2026-11-01,AWS Glue,ActualUsage,0.00000000,True
+default,Nguyễn Tiến Sơn,24110054,2026-11-01,AWS Secrets Manager,ActualUsage,0.02666667,True
+default,Nguyễn Tiến Sơn,24110054,2026-11-01,Amazon Simple Storage Service,ActualUsage,0.00000075,True
+default,Nguyễn Tiến Sơn,24110054,2026-11-01,AmazonCloudWatch,ActualUsage,0.00000000,True
+default,Nguyễn Tiến Sơn,24110054,2026-11-02,AWS Glue,ActualUsage,0.00000000,True
+default,Nguyễn Tiến Sơn,24110054,2026-11-02,AWS Secrets Manager,ActualUsage,0.01444445,True
+default,Nguyễn Tiến Sơn,24110054,2026-11-02,AmazonCloudWatch,ActualUsage,0.00000000,True
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS CloudFormation,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Cost Explorer,ActualUsage,0.01000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Lambda,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AWS Secrets Manager,ActualUsage,0.00666833,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Athena,ActualUsage,0.00375000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,Amazon Simple Storage Service,ActualUsage,0.00257440,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-07,AmazonCloudWatch,ActualUsage,0.00024000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AWS Secrets Manager,ActualUsage,0.01290323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,Amazon Simple Storage Service,ActualUsage,0.00000055,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-08,AmazonCloudWatch,ActualUsage,0.00322581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AWS Secrets Manager,ActualUsage,0.01290323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,Amazon Simple Storage Service,ActualUsage,0.00000055,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-09,AmazonCloudWatch,ActualUsage,0.00322581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AWS Secrets Manager,ActualUsage,0.01290323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,Amazon Simple Storage Service,ActualUsage,0.00000055,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-10,AmazonCloudWatch,ActualUsage,0.00322581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AWS Secrets Manager,ActualUsage,0.01290323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,Amazon Simple Storage Service,ActualUsage,0.00000055,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-11,AmazonCloudWatch,ActualUsage,0.00322581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AWS Secrets Manager,ActualUsage,0.01290323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,Amazon Simple Storage Service,ActualUsage,0.00000055,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-12,AmazonCloudWatch,ActualUsage,0.00322581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AWS Lambda,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AWS Secrets Manager,ActualUsage,0.01298823,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,Amazon Simple Storage Service,ActualUsage,0.00010555,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-13,AmazonCloudWatch,ActualUsage,0.00370581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Cost Explorer,ActualUsage,0.01000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Lambda,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AWS Secrets Manager,ActualUsage,0.01295323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Athena,ActualUsage,0.00065000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,Amazon Simple Storage Service,ActualUsage,0.00064344,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-14,AmazonCloudWatch,ActualUsage,0.00346581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AWS Secrets Manager,ActualUsage,0.01290323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,Amazon Simple Storage Service,ActualUsage,0.00000064,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-15,AmazonCloudWatch,ActualUsage,0.00322581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AWS Lambda,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AWS Secrets Manager,ActualUsage,0.01294323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Athena,ActualUsage,0.00080000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,Amazon Simple Storage Service,ActualUsage,0.00066604,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-16,AmazonCloudWatch,ActualUsage,0.00346581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AWS Secrets Manager,ActualUsage,0.01290323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,Amazon Simple Storage Service,ActualUsage,0.00000077,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-17,AmazonCloudWatch,ActualUsage,0.00322581,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AWS Lambda,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AWS Secrets Manager,ActualUsage,0.01299323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Athena,ActualUsage,0.00045000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,Amazon Simple Storage Service,ActualUsage,0.00038577,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-18,AmazonCloudWatch,ActualUsage,0.00769839,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Cost Explorer,ActualUsage,0.02000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Lambda,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AWS Secrets Manager,ActualUsage,0.01296323,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Athena,ActualUsage,0.00010000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,Amazon Simple Storage Service,ActualUsage,0.00021033,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-19,AmazonCloudWatch,ActualUsage,0.00693161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS CloudFormation,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Cost Explorer,ActualUsage,0.01000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Lambda,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AWS Secrets Manager,ActualUsage,0.02313736,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Athena,ActualUsage,0.00060000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,Amazon Simple Storage Service,ActualUsage,0.00102837,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-20,AmazonCloudWatch,ActualUsage,0.00802450,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-21,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-22,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,Amazon Simple Notification Service,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-23,AmazonCloudWatch,ActualUsage,0.00669161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-24,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-25,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-26,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-27,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-28,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-29,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-30,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AWS Glue,ActualUsage,0.00000000,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AWS Secrets Manager,ActualUsage,0.02580643,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,Amazon Simple Storage Service,ActualUsage,0.00000119,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-10-31,AmazonCloudWatch,ActualUsage,0.00645161,False
+quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,AWS Glue,ActualUsage,0.00000000,True
+quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,AWS Secrets Manager,ActualUsage,0.02666667,True
+quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,Amazon Simple Storage Service,ActualUsage,0.00000123,True
+quyen,Trần Thị Ngọc Quyên,24110051,2026-11-01,AmazonCloudWatch,ActualUsage,0.00000000,True
+quyen,Trần Thị Ngọc Quyên,24110051,2026-11-02,AWS Glue,ActualUsage,0.00000000,True
+quyen,Trần Thị Ngọc Quyên,24110051,2026-11-02,AWS Secrets Manager,ActualUsage,0.01666667,True
+quyen,Trần Thị Ngọc Quyên,24110051,2026-11-02,AmazonCloudWatch,ActualUsage,0.00000000,True

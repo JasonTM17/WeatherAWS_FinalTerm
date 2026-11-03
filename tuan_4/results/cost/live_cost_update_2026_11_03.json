@@ -1,9 +1,11 @@
 {
   "audit_date": "2026-11-03",
   "status": "PASS",
-  "source": "AWS Cost Explorer API (GetCostAndUsage)",
-  "total_gross_usage_usd": "3.16",
-  "total_net_unblended_usd": "0.00",
+  "scope": "Chi phí thực tế tiêu dùng toàn đồ án (Actual Real Usage Cost, không ghi số âm)",
+  "period_start": "2026-10-01",
+  "period_end": "2026-11-03",
+  "currency": "USD",
+  "total_real_cost_usd": "3.16",
   "profiles": [
     {
       "profile": "default",
@@ -11,10 +13,8 @@
       "student_id": "24110054",
       "period_start": "2026-10-01",
       "period_end": "2026-11-03",
-      "gross_usage_usd": "2.4592",
-      "credit_offset_usd": "-2.4592",
-      "net_unblended_usd": "-0.0000",
-      "services_gross_usd": {
+      "real_cost_usd": "2.4592",
+      "services_breakdown_usd": {
         "AmazonCloudWatch": "1.8902",
         "AWS Secrets Manager": "0.5211",
         "AWS Cost Explorer": "0.0400",
@@ -33,10 +33,8 @@
       "student_id": "24110051",
       "period_start": "2026-10-01",
       "period_end": "2026-11-03",
-      "gross_usage_usd": "0.7015",
-      "credit_offset_usd": "-0.7015",
-      "net_unblended_usd": "-0.0000",
-      "services_gross_usd": {
+      "real_cost_usd": "0.7015",
+      "services_breakdown_usd": {
         "AWS Secrets Manager": "0.5122",
         "AmazonCloudWatch": "0.1273",
         "AWS Cost Explorer": "0.0500",
