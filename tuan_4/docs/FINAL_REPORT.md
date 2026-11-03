@@ -138,6 +138,8 @@ MAE AQI tại TP. Hồ Chí Minh khoảng 26,03; 9,39; 6,99 điểm qua ba cửa
 
 Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](../results/cost/confirmed_cost_summary.json).
 
+Kỳ kiểm toán trực tiếp ngày **03/11/2026** qua AWS CLI / Boto3 Cost Explorer API ghi nhận tổng tiêu dùng thô (Gross Usage) lũy kế toàn bộ chu kỳ đạt **3,16 USD** (sinh viên Tiến Sơn 2,46 USD; sinh viên Ngọc Quyên 0,70 USD), thực trả **0,00 USD** nhờ gói tín dụng AWS Learner Lab bù trừ 100%. Nguồn số liệu lưu tại [JSON kiểm toán 03/11](../results/cost/live_cost_update_2026_11_03.json) và [CSV chi tiết](../results/cost/live_cost_breakdown_2026_11_03.csv). Xem phân tích chi tiết tại [Báo cáo chi phí](COST_REPORT.md) và [Đề xuất cải tiến kiến trúc](../../docs/optimization-proposals.md).
+
 Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](../results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](../results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
 
 Ngày 20/10, mỗi lịch chuẩn đã được tạm dừng rồi khôi phục thực tế: **ENABLED → DISABLED → ENABLED**. Fingerprint account/function/rule/target không đổi; không xóa raw. Nhật ký phục hồi được ghi bền vững trước thay đổi và giữ riêng. Hai lịch mới vẫn DISABLED. [Minh chứng quản lý phiên](../results/advanced_live_2026_10_20/session/) · [Checklist cuối Lab](SESSION_CHECKLIST.md).

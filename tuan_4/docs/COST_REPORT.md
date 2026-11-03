@@ -28,4 +28,25 @@ Trước khi kết thúc sử dụng, cần kiểm kê tài nguyên có Retain, 
 
 Lệnh `python tuan_4/scripts/cost_analysis.py --check` tính lại tổng của nguồn Cost Explorer lịch sử và kiểm tra byte các bảng dẫn xuất, không gọi AWS. Chi phí đã xác nhận được đọc riêng từ JSON nguồn tại mục 1 và kiểm tra tổng bằng Decimal: **0,25 + 0,22 = 0,47 USD**.
 
+## 5. Cập nhật đối soát chi phí thực tế qua AWS CLI / Boto3 (Kỳ kiểm toán 03/11/2026)
+
+Ngày **03/11/2026**, hệ thống được truy vấn trực tiếp qua AWS CLI / Cost Explorer API (GetCostAndUsage) trên cả hai profile để kiểm toán chi phí lũy kế toàn bộ chu kỳ từ ngày 01/10 đến 03/11/2026:
+
+| Chỉ số / Tài khoản | Profile default (Nguyễn Tiến Sơn - 24110054) | Profile quyen (Trần Thị Ngọc Quyên - 24110051) | Tổng toàn đồ án |
+| :--- | :--- | :--- | :--- |
+| **Gross Usage (Tiêu dùng thô)** | **2,46 USD** | **0,70 USD** | **3,16 USD** |
+| **Credit AWS Learner Lab** | -2,46 USD | -0,70 USD | -3,16 USD |
+| **Net Unblended Cost (Thực trả)** | **0,00 USD** | **0,00 USD** | **0,00 USD** |
+| **Trạng thái tài nguyên chạy ngầm** | Đã tắt lịch thu thập (DISABLED) | Đã tắt lịch thu thập (DISABLED) | Không phát sinh thu thập mới |
+
+### Phân rã chi phí tiêu dùng thực tế (Gross) theo dịch vụ:
+- **Amazon CloudWatch:** Tổng cộng **2,02 USD** (Sơn: 1,89 USD, Quyên: 0,13 USD) do cảnh báo CloudWatch Alarms (0,10 USD/alarm/tháng) và nạp log Lambda.
+- **AWS Secrets Manager:** Tổng cộng **1,03 USD** (Sơn: 0,52 USD, Quyên: 0,51 USD) do tồn tại song song 2 secret/tài khoản (0,40 USD/secret/tháng).
+- **AWS Cost Explorer API:** Tổng cộng **0,09 USD** (9 lượt truy vấn qua API, 0,01 USD/request).
+- **Amazon Athena & S3:** Tổng cộng **< 0,02 USD** (nhờ áp dụng Parquet và Partition Projection tối ưu truy vấn chỉ quét byte nhỏ).
+
+Chi tiết đối soát từng ngày và từng dịch vụ được lưu trữ tại:
+- [JSON tổng hợp kiểm toán 03/11/2026](../results/cost/live_cost_update_2026_11_03.json)
+- [CSV phân rã chi tiết từng ngày 01/10 - 03/11/2026](../results/cost/live_cost_breakdown_2026_11_03.csv)
+
 [Báo cáo Tuần 4](FINAL_REPORT.md) · [Dữ liệu chi phí](../results/cost/) · [Minh chứng ngày 20/10](../results/advanced_live_2026_10_20/README.md).

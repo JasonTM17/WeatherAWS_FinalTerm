@@ -188,7 +188,14 @@ Minh chứng đầy đủ: [bộ kiểm chứng Tuần 4](../tuan_4/results/veri
 
 Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](../tuan_4/results/cost/confirmed_cost_summary.json).
 
-Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](../tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](../tuan_4/results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
+Ngày **03/11/2026**, hệ thống được kiểm toán lũy kế trực tiếp qua AWS CLI / Boto3 Cost Explorer API cho toàn bộ chu kỳ từ 01/10 đến 03/11/2026:
+- **Tiêu dùng thô toàn đồ án (Gross Usage):** **3,16 USD** (sinh viên Tiến Sơn 2,46 USD; sinh viên Ngọc Quyên 0,70 USD).
+- **Credit AWS Learner Lab bù trừ:** -3,16 USD.
+- **Thực trả (Net Unblended Cost):** **0,00 USD**.
+- **Cơ cấu chi phí thô:** Amazon CloudWatch (2,02 USD, chiếm 63,8%), AWS Secrets Manager (1,03 USD, chiếm 32,7%), AWS Cost Explorer API (0,09 USD), Amazon S3 & Athena (< 0,02 USD).
+- Nguồn số liệu kiểm toán trực tiếp được lưu tại [JSON kiểm toán 03/11](../tuan_4/results/cost/live_cost_update_2026_11_03.json) và [CSV phân rã chi tiết](../tuan_4/results/cost/live_cost_breakdown_2026_11_03.csv).
+
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](../tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](../tuan_4/results/cost/learner_lab_cost_breakdown.csv). Các phương án tối ưu hóa chi phí (chuyển sang SSM Parameter Store, hạn lưu log 14 ngày, S3 Lifecycle) được đề xuất chi tiết tại [Đề xuất cải tiến kiến trúc](optimization-proposals.md).
 
 Tối ưu được đánh giá theo số liệu cụ thể: byte quét và thời gian Athena, dung lượng object, lịch thu thập và phạm vi thử nghiệm. Checklist cuối phiên yêu cầu xuất dữ liệu, dừng đúng lịch thu thập khi kết thúc thực hành và thu hồi tài nguyên thử nghiệm theo phạm vi đã xác định.
 
@@ -231,6 +238,10 @@ Sinh viên Tiến Sơn phụ trách S3, Secrets Manager, Lambda, SNS, lịch thu
 Về phân tích, thực nghiệm Athena chỉ ra lợi ích giảm byte quét của Parquet, đồng thời cho thấy cần đo thêm thời gian để lựa chọn phương án phù hợp. Phần dự báo hình thành được quy trình phát hành, giữ nguyên dự báo và đánh giá đủ kỳ bằng nhiều thước đo. Về vận hành, hồ sơ kết nối log–metric–S3–Athena và tách việc SNS chấp nhận thông điệp với email người nhận đã xác nhận.
 
 Các nội dung có thể phát triển sau đồ án gồm đánh giá nhiều kỳ dự báo trên dữ liệu mới, phân bổ chi phí theo tài nguyên và bổ sung cơ chế kiểm soát sự kiện gọi lại khi mở rộng vận hành. Đây là hướng phát triển tiếp từ kết quả hiện có. Hồ sơ bàn giao hiện tại tập trung vào source, dữ liệu, phép kiểm chứng và quy trình trình bày có thể đối chiếu.
+
+## 9. Đề xuất cải tiến và tối ưu hóa hệ thống
+
+Toàn bộ phương án nâng cấp theo chuẩn AWS Well-Architected Framework (tối ưu 89,4% chi phí duy trì qua SSM Parameter Store, bổ sung SQS Dead-Letter Queue cho Lambda, S3 Lifecycle cho kết quả Athena, và thiết kế IAM Least Privilege) được tổng hợp tại [Đề xuất cải tiến kiến trúc và tối ưu hóa](optimization-proposals.md), đi kèm template CloudFormation tối ưu [weather-stack-optimized.json](../tuan_4/infrastructure/weather-stack-optimized.json).
 
 ## 10. Liên kết đọc và sao chép
 

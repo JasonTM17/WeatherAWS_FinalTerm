@@ -28,7 +28,7 @@
 | CI/CD Lambda | Có workflow kiểm tra repository, đóng gói source và triển khai có xác nhận môi trường; hai lượt CD ngày 18/10 có minh chứng đối chiếu artifact | [GitHub Actions](https://github.com/JasonTM17/WeatherAWS_FinalTerm/actions) · [Minh chứng CD](tuan_3/results/cd_2026_10_18/) |
 | CloudFormation IaC | Một template **17 tài nguyên**; hai stack đạt **CREATE_COMPLETE**, Lambda mới thu ba đô thị, SELECT trên database/workgroup mới và gói nguồn đúng hash | [Template](tuan_4/infrastructure/weather-stack.json) · [Triển khai thực tế](tuan_4/results/advanced_live_2026_10_20/README.md) |
 | Rà soát bảo mật | Hai bucket mới đã đọc lại BPA, AES256, versioning Enabled, BucketOwnerEnforced và HTTPS-only; giữ riêng kết quả cấu hình hiện hữu và mẫu quyền collector | [Bảo mật](tuan_4/docs/SECURITY_AUDIT.md) · [Phạm vi quyền](tuan_4/docs/SECURITY_REVIEW.md) |
-| Chi phí và quản lý phiên | Chi phí đã xác nhận: Tiến Sơn 0,25 USD, Ngọc Quyên 0,22 USD, tổng 0,47 USD; công cụ preview/pause/restore kèm kiểm tra target và trạng thái khôi phục | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
+| Chi phí và quản lý phiên | Chi phí đã xác nhận 21/10: 0,47 USD; kiểm toán live 03/11: 3,16 USD tiêu dùng thô (0,00 USD thực trả sau credit); đề xuất tối ưu FinOps | [Chi phí](tuan_4/docs/COST_REPORT.md) · [Đề xuất tối ưu](docs/optimization-proposals.md) · [Checklist cuối Lab](tuan_4/docs/SESSION_CHECKLIST.md) |
 | Hồ sơ bàn giao | Báo cáo Tuần 1–4, nội dung nộp có URL đầy đủ và **78 giờ công đã xác nhận** | [Nội dung nộp Tuần 4](tuan_4/docs/SUBMISSION.md) · [Worklog](docs/WORKLOG.md) |
 
 **Bổ sung nâng cao ngày 20/10:** [700 bản ghi/115 JSON gốc](tuan_4/results/advanced_live_2026_10_20/snapshot/), [18 lượt Athena mới](tuan_4/results/advanced_live_2026_10_20/benchmark/), [432 dự đoán backtest và biểu đồ](tuan_4/results/backtest_2026_10_20/README.md), [SNS topic mới và xác nhận người nhận](tuan_4/results/advanced_live_2026_10_20/email/), [pause/restore thực tế](tuan_4/results/advanced_live_2026_10_20/session/). Mỗi đầu ra giữ ngày và phương pháp riêng.
@@ -154,7 +154,9 @@ Mốc thời gian chất lượng không khí từ API không kèm múi giờ đ
 
 ### Chi phí
 
-Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](tuan_4/results/cost/confirmed_cost_summary.json). Các nguồn Cost Explorer lịch sử của từng tuần được giữ riêng theo kỳ; số tổng hợp hiện tại không được chia ngược thành chi phí riêng của từng tuần. Xem [báo cáo chi phí](tuan_4/docs/COST_REPORT.md) và [phương pháp đối chiếu](docs/data-analysis.md).
+Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](tuan_4/results/cost/confirmed_cost_summary.json).
+
+Đến kỳ kiểm toán bổ sung ngày **03/11/2026** qua AWS CLI và Cost Explorer API, tổng tiêu dùng thô (Gross Usage) lũy kế toàn bộ dự án từ 01/10 đến 03/11/2026 là **3,16 USD** (sinh viên Tiến Sơn 2,46 USD, sinh viên Ngọc Quyên 0,70 USD), thực trả **0,00 USD** nhờ gói tín dụng AWS Learner Lab bù trừ 100%. Nguồn chi tiết lưu tại [JSON kiểm toán live](tuan_4/results/cost/live_cost_update_2026_11_03.json) và [CSV phân rã từng ngày](tuan_4/results/cost/live_cost_breakdown_2026_11_03.csv). Xem [báo cáo chi phí](tuan_4/docs/COST_REPORT.md) và [đề xuất tối ưu hóa hệ thống](docs/optimization-proposals.md).
 
 ## Kết quả theo tuần
 
@@ -273,7 +275,9 @@ Ngày 20/10, hai stack mới đạt **CREATE_COMPLETE**; mỗi Lambda mới thu 
 
 Chi phí tổng hợp toàn đồ án được hai sinh viên xác nhận ngày **21/10/2026**: **sinh viên Tiến Sơn 0,25 USD**, **sinh viên Ngọc Quyên 0,22 USD**, **tổng cộng 0,47 USD**. Nguồn số liệu được lưu tại [bản tổng hợp chi phí đã xác nhận](tuan_4/results/cost/confirmed_cost_summary.json).
 
-Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](tuan_4/results/cost/learner_lab_cost_breakdown.csv). Các bản xuất lưu nguyên giá trị UnblendedCost, đơn vị và cờ Estimated để đối chiếu theo kỳ. Báo cáo tổng hợp hiện tại sử dụng số liệu do hai sinh viên xác nhận tại nguồn riêng nêu trên.
+Kỳ kiểm toán trực tiếp ngày **03/11/2026** qua AWS CLI / Boto3 Cost Explorer API ghi nhận tổng mức tiêu dùng thô (Gross Usage) lũy kế toàn bộ chu kỳ đạt **3,16 USD** (sinh viên Tiến Sơn 2,46 USD; sinh viên Ngọc Quyên 0,70 USD), thực trả **0,00 USD** nhờ gói tín dụng học tập bù trừ 100%. Chi phí thô tập trung chủ yếu ở CloudWatch Alarms (2,02 USD) và Secrets Manager (1,03 USD). Dữ liệu đối soát chi tiết được lưu tại [JSON kiểm toán 03/11](tuan_4/results/cost/live_cost_update_2026_11_03.json) và [CSV chi tiết](tuan_4/results/cost/live_cost_breakdown_2026_11_03.csv).
+
+Các bản xuất Cost Explorer kỳ **12–19/10/2026** được lưu riêng tại [JSON tổng hợp API](tuan_4/results/cost/cost_summary.json) và [CSV chi tiết theo ngày, dịch vụ và loại ghi nhận](tuan_4/results/cost/learner_lab_cost_breakdown.csv). Xem phương án tối ưu hóa chi phí và hạ tầng tại [Đề xuất cải tiến kiến trúc](docs/optimization-proposals.md).
 
 ### Phân công và thời gian đã xác nhận
 
